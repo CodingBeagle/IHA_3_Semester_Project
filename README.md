@@ -1,2 +1,4 @@
-# IHA_3_Semester_Project
-This is the git repository for project group 3 of third semester IHA
+# IHA 3. Semester Project
+
+Having a hard time today? Have a David:
+![CutePug](https://i.ytimg.com/vi/pzPxhaYQQK8/maxresdefault.jpg)
