@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/W32TeX) (preloaded format=pdflatex 2015.12.2)  11 FEB 2016 18:30
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/W32TeX) (preloaded format=pdflatex 2015.12.2)  11 FEB 2016 19:09
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -718,23 +718,36 @@ File: lstlang1.sty 2015/06/04 1.6 listings language file
 (e:/texlive/2015/texmf-dist/tex/latex/listings/lstmisc.sty
 File: lstmisc.sty 2015/06/04 1.6 (Carsten Heinz)
 )
+(e:/texlive/2015/texmf-dist/tex/latex/oberdiek/transparent.sty
+Package: transparent 2007/01/08 v1.0 Transparency via pdfTeX's color stack (HO)
+
+
+(e:/texlive/2015/texmf-dist/tex/latex/oberdiek/auxhook.sty
+Package: auxhook 2011/03/04 v1.3 Hooks for auxiliary files (HO)
+))
+(e:/texlive/2015/texmf-dist/tex/latex/eso-pic/eso-pic.sty
+Package: eso-pic 2015/07/21 v2.0g eso-pic (RN)
+
+(e:/texlive/2015/texmf-dist/tex/generic/oberdiek/atbegshi.sty
+Package: atbegshi 2011/10/05 v1.16 At begin shipout hook (HO)
+))
 (./Projektrapport template.aux
 (./Afsnit/Projektformulering/projektformulering.aux))
 \openout1 = `"Projektrapport template.aux"'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 69.
-LaTeX Font Info:    ... okay on input line 69.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 69.
-LaTeX Font Info:    ... okay on input line 69.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 69.
-LaTeX Font Info:    ... okay on input line 69.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 69.
-LaTeX Font Info:    ... okay on input line 69.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 69.
-LaTeX Font Info:    ... okay on input line 69.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 69.
-LaTeX Font Info:    ... okay on input line 69.
-LaTeX Font Info:    Try loading font information for T1+lmr on input line 69.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 83.
+LaTeX Font Info:    ... okay on input line 83.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 83.
+LaTeX Font Info:    ... okay on input line 83.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 83.
+LaTeX Font Info:    ... okay on input line 83.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 83.
+LaTeX Font Info:    ... okay on input line 83.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 83.
+LaTeX Font Info:    ... okay on input line 83.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 83.
+LaTeX Font Info:    ... okay on input line 83.
+LaTeX Font Info:    Try loading font information for T1+lmr on input line 83.
 
 (e:/texlive/2015/texmf-dist/tex/latex/lm/t1lmr.fd
 File: t1lmr.fd 2009/10/30 v1.6 Font defs for Latin Modern
@@ -792,6 +805,7 @@ File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
 e
 ))
 \c@lstlisting=\count155
+\AtBeginShipoutBox=\box35
 \openout2 = `Afsnit/Projektformulering/projektformulering.aux'.
 
 
@@ -826,41 +840,84 @@ LaTeX Font Info:    Try loading font information for T1+lmtt on input line 2.
 
 (e:/texlive/2015/texmf-dist/tex/latex/lm/t1lmtt.fd
 File: t1lmtt.fd 2009/10/30 v1.6 Font defs for Latin Modern
-) [1
+)
+<Afsnit/background.jpg, id=1, 1606.0pt x 1204.5pt>
+File: Afsnit/background.jpg Graphic file (type jpg)
+ <use Afsnit/background.jpg>
+Package pdftex.def Info: Afsnit/background.jpg used on input line 6.
+(pdftex.def)             Requested size: 597.51897pt x 845.07408pt.
+
+[1
 
 
 
-{e:/texlive/2015/texmf-var/fonts/map/pdftex/updmap/pdftex.map}] (./Projektrappo
-rt template.toc
+{e:/texlive/2015/texmf-var/fonts/map/pdftex/updmap/pdftex.map} <./Afsnit/backgr
+ound.jpg>] (./Projektrapport template.toc
 LaTeX Font Info:    External font `lmex10' loaded for size
 (Font)              <10> on input line 1.
 LaTeX Font Info:    External font `lmex10' loaded for size
 (Font)              <7> on input line 1.
 LaTeX Font Info:    External font `lmex10' loaded for size
 (Font)              <5> on input line 1.
-) [2]
-(./Projektrapport template.lof) [3]
-<Afsnit//Projektformulering/Images/goofy.png, id=17, 319.1925pt x 376.40625pt>
+)
+<Afsnit//Projektformulering/Images/goofy-study.jpg, id=10, 518.93875pt x 513.92
+pt>
+File: Afsnit//Projektformulering/Images/goofy-study.jpg Graphic file (type jpg)
+
+ <use Afsnit//Projektformulering/Images/goofy-study.jpg>
+Package pdftex.def Info: Afsnit//Projektformulering/Images/goofy-study.jpg used
+ on input line 11.
+(pdftex.def)             Requested size: 341.0pt x 337.72183pt.
+ [2 <./Afsnit//Projektformulering/Images/goofy-study.jpg>] (./Projektrapport te
+mplate.lof) [3]
+<Afsnit//Projektformulering/Images/goofy.png, id=19, 319.1925pt x 376.40625pt>
 File: Afsnit//Projektformulering/Images/goofy.png Graphic file (type png)
 
 <use Afsnit//Projektformulering/Images/goofy.png>
 Package pdftex.def Info: Afsnit//Projektformulering/Images/goofy.png used on in
-put line 17.
+put line 27.
 (pdftex.def)             Requested size: 68.19896pt x 80.42033pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 15--18
+Underfull \hbox (badness 10000) in paragraph at lines 25--28
 \T1/lmr/m/n/10 dene er op-brugt er vin-de-ren den spil-ler med flest po-int.
  []
 
-LaTeX Font Info:    Try loading font information for OMS+lmr on input line 22.
+LaTeX Font Info:    Try loading font information for OMS+lmr on input line 32.
 (e:/texlive/2015/texmf-dist/tex/latex/lm/omslmr.fd
 File: omslmr.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
 LaTeX Font Info:    Font shape `OMS/lmr/m/n' in size <10> not available
-(Font)              Font shape `OMS/lmsy/m/n' tried instead on input line 22.
+(Font)              Font shape `OMS/lmsy/m/n' tried instead on input line 32.
  [1
 
- <./Afsnit//Projektformulering/Images/goofy.png>]) [2]
+ <./Afsnit//Projektformulering/Images/goofy.png>]
+<Afsnit//Projektformulering/Images/goofy-write.jpg, id=27, 364.36125pt x 501.87
+5pt>
+File: Afsnit//Projektformulering/Images/goofy-write.jpg Graphic file (type jpg)
+
+ <use Afsnit//Projektformulering/Images/goofy-write.jpg>
+Package pdftex.def Info: Afsnit//Projektformulering/Images/goofy-write.jpg used
+ on input line 67.
+(pdftex.def)             Requested size: 68.19896pt x 93.93285pt.
+
+! Dimension too large.
+<argument> \wd \@tempboxa 
+                          
+l.76 ...th]{/Projektformulering/Images/goofy-cool}
+                                                  
+I can't work with sizes bigger than about 19 feet.
+Continue and I'll use the largest value I can.
+
+
+<Afsnit//Projektformulering/Images/goofy-cool.jpg, id=28, 21681.0pt x 14417.865
+pt>
+File: Afsnit//Projektformulering/Images/goofy-cool.jpg Graphic file (type jpg)
+ <use Afsnit//Projektformulering/Images/goofy-cool.jpg>
+Package pdftex.def Info: Afsnit//Projektformulering/Images/goofy-cool.jpg used 
+on input line 76.
+(pdftex.def)             Requested size: 341.0pt x 300.07813pt.
+) [2 <./Afsnit//Projektformulering/Images/goofy-write.jpg> <./Afsnit//Projektfo
+rmulering/Images/goofy-cool.jpg>]
 \tf@toc=\write4
 \openout4 = `"Projektrapport template.toc"'.
 
@@ -870,13 +927,13 @@ LaTeX Font Info:    Font shape `OMS/lmr/m/n' in size <10> not available
  (./Projektrapport template.aux
 (./Afsnit/Projektformulering/projektformulering.aux)) ) 
 Here is how much of TeX's memory you used:
- 7482 strings out of 493054
- 102730 string characters out of 6138327
- 215713 words of memory out of 5000000
- 10879 multiletter control sequences out of 15000+600000
+ 7721 strings out of 493054
+ 107406 string characters out of 6138327
+ 216713 words of memory out of 5000000
+ 11099 multiletter control sequences out of 15000+600000
  51118 words of font info for 45 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 42i,11n,58p,433b,349s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 42i,13n,58p,563b,351s stack positions out of 5000i,500n,10000p,200000b,80000s
 {e:/texlive/2015/texmf-d
 ist/fonts/enc/dvips/lm/lm-mathsy.enc}{e:/texlive/2015/texmf-dist/fonts/enc/dvip
 s/lm/lm-ec.enc}<e:/texlive/2015/texmf-dist/fonts/type1/public/lm/lmbx10.pfb><e:
@@ -885,10 +942,10 @@ f-dist/fonts/type1/public/lm/lmr10.pfb><e:/texlive/2015/texmf-dist/fonts/type1/
 public/lm/lmr12.pfb><e:/texlive/2015/texmf-dist/fonts/type1/public/lm/lmro10.pf
 b><e:/texlive/2015/texmf-dist/fonts/type1/public/lm/lmsy10.pfb><e:/texlive/2015
 /texmf-dist/fonts/type1/public/lm/lmtt10.pfb>
-Output written on "Projektrapport template.pdf" (5 pages, 194843 bytes).
+Output written on "Projektrapport template.pdf" (5 pages, 791050 bytes).
 PDF statistics:
- 53 PDF objects out of 1000 (max. 8388607)
+ 57 PDF objects out of 1000 (max. 8388607)
  36 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
- 6 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 26 words of extra memory for PDF output out of 10000 (max. 10000000)
 
