@@ -1,4 +1,7 @@
 \contentsline {chapter}{Indhold}{ii}
 \contentsline {chapter}{Figurer}{iii}
 \contentsline {chapter}{\chapternumberline {1}Projektformulering}{1}
+\contentsline {subsection}{Indledning}{1}
+\contentsline {subsection}{MoSCoW}{1}
+\contentsline {subsection}{Opdeling af gruppen}{2}
 \select@language {danish}
