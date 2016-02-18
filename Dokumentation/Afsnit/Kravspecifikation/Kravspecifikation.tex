@@ -33,7 +33,6 @@ I 'Goofy CandyGun 3000' systemet er der kun 1 primær aktør, nemlig brugeren. D
 	\textbf{Postkondition} &  Brugeren har færdiggjort spillet \\ \hline
 	\textbf{Hovedscenarie} & \begin{enumerate}
 		\item Bruger vælger spiltype på brugergrænsefladen
-		\subitem [Extension 1: Brugeren vælger 2 player mode] 
 		\item Brugeren vælger antal skud til runden
 		\item Brugeren fylder magasin med slik tilsvarende antal skud
 		\item Brugeren indstiller kanon med analog stick på Wii-nunchuck
@@ -41,13 +40,13 @@ I 'Goofy CandyGun 3000' systemet er der kun 1 primær aktør, nemlig brugeren. D
 		\item Systemet lader et nyt skud
 		\item Brugergrænsefladen opdateres med spillets statistikker
 		\item Punkt 4 til 6 gentages indtil skuddene er opbrugt 
+		\subitem [Extension 1: Brugeren vælger 2 player mode] 
 		\subitem[Extension 2: Bruger afslutter det igangværende spil]
 		\item Brugergrænseflade viser afslutningsinfo for runden
 		\item Brugeren afslutter runden
 		\item Brugergrænsefladen vender tilbage til starttilstanden
 	\end{enumerate}\\ \hline
 	\textbf{Udvidelser/ undtagelser} & \textbf{[Extension 1: Brugeren vælger 2 player mode]} \newline \begin{enumerate} 
-		\item Punkt 4 til 7 i hovedscenariet gennemføres
 		\item Brugeren overdrager Wii-nunchuck til den anden bruger
 		\item Punkt 1 til 2 gentages indtil skuddene er opbrugt
 		\item Use casen genoptages fra punkt 8
@@ -59,14 +58,14 @@ I 'Goofy CandyGun 3000' systemet er der kun 1 primær aktør, nemlig brugeren. D
 \end{tabular}
 
 \section{Ikke funktionelle krav}
-\begin{itemize}
-	\item Kanonen drejes 0-70 grader vertikalt (+- 5 grader)
-	\item Kanonen kan drejes +-45 grader horizontalt
-	\item Kanonen kan afyre slik af typen M\&M's, Skittles eller Pinnochio kugler (Eller andre kugler af X mm i diameter +- Y mm)
-	
+\begin{enumerate}
+	\item Kanonen skal kunne drejes med en nøjagtighed på \(\pm\) 5 \(\degree\)
+	\subitem Vertikalt gælder dette for intervallet fra \(0-70\degree\)
+	\subitem Horizontalt gælder dette for intervallet fra \(- 45 - 45\(\degree\) 
+	\item Kanonen kan affyres slik af typen M\&M's, Skittles eller Pinnochio kugler (Eller andre kugler af X mm i diameter (\(\pm\) Y mm)
 	\item Brugerfladen er en grafiskbrugergrænseflade (Ikke terminalbaseret)
-	\item Kanonen skal kunne afyre sit projektil minimum 1 meter.
-	\item Kanonen må max være 40cm høj, bred og 'dyb'
-	
-	\item 
-\end{itemize}
+	\item Kanonen skal kunne affyre sit projektil minimum 1 meter.
+	\item Kanonen må maksimalt være 40cm høj, bred og 'dyb'
+	\item Fra trigger til affyring må der maksimalt gå ti sekunder
+	\item Det skal være muligt at affyre kanonen mindst tre gange på et minut
+\end{enumerate}
