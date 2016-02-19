@@ -1,24 +1,24 @@
-
+\renewcommand{\labelenumii}{\theenumii}
+\renewcommand{\theenumii}{\theenumi.\arabic{enumii}.}
 \chapter{Kravspecifikation}
-\section{Use case diagram}
-\begin{figure}[H]
-	\centering
-	\includegraphics[]{Kravspecifikation/images/usecaseDiagram}
-	\caption{Use case diagram for produktet}
-	\label{ref:usecaseDiagram}
-\end{figure}
-
-
 \section{Aktør kontekst diagram}
 \begin{figure}[H]
 	\centering
 	\includegraphics[]{Kravspecifikation/images/kontekstDiagram}
-	\caption{Kontekst diagram for produktet}
+	\caption{Kontekst diagram for slikkanonen}
 	\label{ref:kontekstDiagram}
 \end{figure}
 
+\section{Use case diagram}
+\begin{figure}[H]
+	\centering
+	\includegraphics[]{Kravspecifikation/images/usecaseDiagram}
+	\caption{Use case diagram for slikkanonen}
+	\label{ref:usecaseDiagram}
+\end{figure}
+
 \section{Aktør beskrivelse}
-I 'Goofy CandyGun 3000' systemet er der kun 1 primær aktør, nemlig brugeren. Det er brugeren der initierer systemet, ved at vælge spiltype på brugerinterfacet, og brugeren har også mulighed for at stoppe spillet igen fra samme brugerinterface. Brugeren vil under spillet interagere med systemet vha. Wii-Nunchucken. 
+I dette system er der en aktør, nemlig brugeren. Brugeren initierer systemet, ved at vælge spiltype på brugergrænsefladen. Derudover har brugeren mulighed for at stoppe spillet igennem brugergrænsefladen. Brugeren vil under spillet interagere med systemet gennem Wii-Nunchucken. 
 
 
 \section{Fully dressed use case}
@@ -60,12 +60,20 @@ I 'Goofy CandyGun 3000' systemet er der kun 1 primær aktør, nemlig brugeren. D
 \section{Ikke funktionelle krav}
 \begin{enumerate}
 	\item Kanonen skal kunne drejes med en nøjagtighed på \(\pm\) 5 \(\degree\)
-	\subitem Vertikalt gælder dette for intervallet fra \(0-70\degree\)
-	\subitem Horizontalt gælder dette for intervallet fra \(- 45 - 45\(\degree\) 
-	\item Kanonen kan affyres slik af typen M\&M's, Skittles eller Pinnochio kugler (Eller andre kugler af X mm i diameter (\(\pm\) Y mm)
-	\item Brugerfladen er en grafiskbrugergrænseflade (Ikke terminalbaseret)
-	\item Kanonen skal kunne affyre sit projektil minimum 1 meter.
-	\item Kanonen må maksimalt være 40cm høj, bred og 'dyb'
-	\item Fra trigger til affyring må der maksimalt gå ti sekunder
-	\item Det skal være muligt at affyre kanonen mindst tre gange på et minut
+		\begin{enumerate}
+			\item Vertikalt gælder dette for intervallet fra 0 til \(70\degree\)
+			\item Horizontalt gælder dette for intervallet fra -45 til \(45\(\degree\)
+		\end{enumerate} 
+	\item Kanonen skal kunne affyre projektiler med en diameter på 1,25 cm \(\pm\) 2 mm
+	\item Kanonen skal kunne affyre sit projektil minimum 1 meter
+	\item Kanonens størrelse må maksimalt være 40cm høj, bred og dyb
+	\item Fra aftryk på trigger til affyring må der maksimalt gå ti sekunder
+	\item Affyring af kanonen skal kunne afvikles tre gange pr. minut
+	\item Figur \ref{ref:brugergraesefladeskitse}  viser en skitse af hvordan den grafiskbrugergrænseflade kommer til at se ud
+		\begin{figure}[h]
+			\centering
+			\includegraphics[width=\textwidth]{Kravspecifikation/images/brugergraensefladeskitse}
+			\caption{Skitse af brugergrænsefladen}
+			\label{ref:brugergraesefladeskitse}
+		\end{figure}
 \end{enumerate}
