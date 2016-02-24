@@ -29,7 +29,7 @@ I dette system er der en aktør, nemlig brugeren. Brugeren initierer systemet, v
 	\textbf{Initiering} & Bruger\\ \hline
 	\textbf{Aktører} & Bruger\\ \hline
 	\textbf{Antal samtidige forekomster} & Ingen \\ \hline
-	\textbf{Prækondition} & Spillet og kanonen er operationel \\ \hline
+	\textbf{Prækondition} & Spillet og kanonen er operationel. UC2 Test kommunikationsprotokoller er udført \\ \hline
 	\textbf{Postkondition} &  Brugeren har færdiggjort spillet \\ \hline
 	\textbf{Hovedscenarie} & \begin{enumerate}
 		\item Bruger vælger spiltype på brugergrænseflade
@@ -57,12 +57,59 @@ I dette system er der en aktør, nemlig brugeren. Brugeren initierer systemet, v
 		\end{enumerate}\\ \hline
 \end{tabular}
 
+\section{Fully dressed use case}
+\begin{tabular}{|>{\hspace{0pt}}p{3cm}  |>{\hspace{0pt}}p{9cm}|}
+	\hline
+	\textbf{Navn} & Test kommunikationsprotokoller\\ \hline
+	\textbf{Mål} & At teste kommunikations protokoller \\ \hline
+	\textbf{Initiering} & Bruger\\ \hline
+	\textbf{Aktører} & Bruger\\ \hline
+	\textbf{Antal samtidige forekomster} & Ingen \\ \hline
+	\textbf{Prækondition} & Systemet er tændt \\ \hline
+	\textbf{Postkondition} &  Systemet er gennemgået testen og resultaterne er vist \\ \hline
+	\textbf{Hovedscenarie} & \begin{enumerate}
+		\item Bruger vælger test system på brugergrænseflade
+		\item Devkit sender startbesked til PSoC0 via SPI
+		\item PSoC0 sender acknowledge til Devkit via SPI
+		\subitem[Exception 1: PSoC0 sender ikke acknowledge]
+		\item Brugergrænseflade meddeler om gennemført SPI test
+		\item PSoC0 sender startbesked til PSoC slaver via I2C
+		\item PSoC slaver sender acknowledge til PSoC0 via I2C
+		\subitem[Exception 2: PSoC slaver sender ikke acknowledge]
+		\item PSoC0 meddeler om gennemført I2C test til Devkit via SPI
+		\item Brugergrænseflade meddeler om gennemført I2C test
+		\item Brugergrænseflade anmoder bruger om at trykke på knap 'Z' på Wii-nunchuck
+		\item Wii-nunchuck sender besked "Knap Z trykket" til PSoC2 via I2C
+		\subitem[Exception 3: Wii-nunchuck sender ikke "Knap Z trykket"]
+		\item PSoC2 sender besked om "Knap Z trykket" til Psoc0 via I2C
+		\item PSoC0 videresender besked om "Knap Z trykket" til Devkit via SPI
+		\item Brugergrænseflade meddeler om gennemført Wii-nunchuck test
+		\item Brugergrænseflade meddeler at test af kommunikationsprotokoller er gennemført 
+		
+	\end{enumerate}\\ \hline
+	\textbf{Udvidelser/ undtagelser} & \textbf{[Exception 1: PSoC0 sender ikke acknowledge]} \newline \begin{enumerate} 
+		\item Brugergrænseflade meddeler fejl i SPI kommunikation
+		\item UC2 afsluttes
+	\end{enumerate}
+	\textbf{[Exception 2: PSoC slaver sender ikke acknowledge]} \newline \begin{enumerate}
+		\item PSoC0 sender fejlmeddelse til Devkit
+		\item Brugergrænseflade meddeler fejl i I2C kommunikation
+		\item UC2 afsluttes
+	\end{enumerate}
+	\textbf{[Exception 3: Wii-nunchuck sender ikke "Knap Z trykket"]} \newline \begin{enumerate}
+		\item PSoC2 sender fejlmeddelse til PSoC0
+		\item PSoC0 videresender fejlmeddelse til Devkit
+		\item Brugergrænseflade meddeler fejl i I2C kommunikation med Wii-nunchuck
+		\item UC2 afsluttes
+	\end{enumerate}\\ \hline
+\end{tabular}
+
 \section{Ikke funktionelle krav}
 \begin{enumerate}
 	\item Kanonen skal kunne drejes med en nøjagtighed på \(\pm\) 5 \(\degree\)
 		\begin{enumerate}
 			\item Vertikalt gælder dette for intervallet fra 0 til \(70\degree\)
-			\item Horizontalt gælder dette for intervallet fra -45 til \(45\(\degree\)
+			\item Horizontalt gælder dette for intervallet fra -45 til \(45\degree\)
 		\end{enumerate} 
 	\item Kanonen skal kunne affyre projektiler med en diameter på 1,25 cm \(\pm\) 2 mm
 	\item Kanonen skal kunne affyre sit projektil minimum 1 meter
