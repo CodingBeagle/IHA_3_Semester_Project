@@ -1,4 +1,4 @@
 # IHA 3. Semester Project
 
-Having a hard time today? Have a David:
-![CutePug](http://1funny.com/wp-content/uploads/2012/07/sweethoots_22.jpg)
+Having a hard time today? Have a brownie:
+![CutePug](https://c1.staticflickr.com/5/4042/4455834116_80f96e10a6_b.jpg)
