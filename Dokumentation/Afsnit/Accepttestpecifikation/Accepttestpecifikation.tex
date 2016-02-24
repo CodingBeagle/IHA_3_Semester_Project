@@ -1,0 +1,54 @@
+Accepttest for hovedscenarie \newline
+\begin{tabular}{|>{\hspace{0pt}}p{0.6cm} |  >{\hspace{0pt}}p{3.5cm} | >{\hspace{0pt}}p{2.5cm} | p{2.5cm} | p{2cm} |}
+		\hline
+		Step & Handling & Forventet observation/resultat& Faktisk observation/resultat & Vurdering (OK/FAIL)\\ \hline
+		1 & Tryk start test på brugergrænseflade & Brugergrænsefladen udskriver at SPI og I2C testen er godkendt. Brugergrænsefladen anmoder bruger om tryk på Z på Wii-nunchuck & & \\ \hline
+		
+		2 & Tryk Z på Wii- nunchuck & Brugergrænsefladen udskriver at Wii-testen er godkendt & & \\ \hline
+		
+\end{tabular}
+
+Accepttest for Exception 1 \newline
+\begin{tabular}{|>{\hspace{0pt}}p{0.6cm} |  >{\hspace{0pt}}p{3.5cm} | >{\hspace{0pt}}p{2.5cm} | p{2.5cm} | p{2cm} |}
+	\hline
+	Step & Handling & Forventet observation/resultat& Faktisk observation/resultat & Vurdering (OK/FAIL)\\ \hline
+	1 & Fjern SPI-kablet fra DevKittet. & & & \\ \hline
+	
+	2 & Tryk på start test på brugergrænseflade & Brugergrænsefladen udskriver SPI forbindelses fejlmeddelelse. & & \\ \hline
+	
+\end{tabular}
+
+
+Accepttest for Exception 2 \newline
+\begin{tabular}{|>{\hspace{0pt}}p{0.6cm} |  >{\hspace{0pt}}p{3.5cm} | >{\hspace{0pt}}p{2.5cm} | p{2.5cm} | p{2cm} |}
+	\hline
+	Step & Handling & Forventet observation/resultat& Faktisk observation/resultat & Vurdering (OK/FAIL)\\ \hline
+	1 & Fjern I2C-kabler fra alle I2C slaver. & & & \\ \hline
+	
+	2 & Tryk på start test på brugergrænseflade & Brugergrænsefladen udskriver I2C forbindelses fejlmeddelelse. & & \\ \hline
+	
+\end{tabular}
+
+Accepttest for Exception 3 \newline
+\begin{tabular}{|>{\hspace{0pt}}p{0.6cm} |  >{\hspace{0pt}}p{3.5cm} | >{\hspace{0pt}}p{2.5cm} | p{2.5cm} | p{2cm} |}
+	\hline
+	Step & Handling & Forventet observation/resultat& Faktisk observation/resultat & Vurdering (OK/FAIL)\\ \hline
+	1 & Disconnect Wii nun-chucken fra systemet. & & & \\ \hline
+	
+	2 & Tryk på start test på brugergrænseflade & & & \\ \hline
+	
+	3 & Vent på timeout. & Brugergrænsefladen udskriver Wii Nunchuck forbindelses fejlmeddelelse& & \\ \hline
+\end{tabular}
+
+\newpage
+Test af ikke-funktionelle krav \newline
+\begin{tabular}{|>{\hspace{0pt}}p{0.6cm} |  >{\hspace{0pt}}p{3.5cm} | >{\hspace{0pt}}p{2.5cm} | p{2.5cm} | p{2cm} |}
+	\hline
+	Krav & Test & Forventet observation/resultat& Faktisk observation/resultat & Vurdering (OK/FAIL)\\ \hline
+	
+	1.1 & Bruger styrer kanon fra "top" position til "bund" posiion, og måler vinkelforskellen. & Den afmålte vinkelforskel må være 70 \degree  \(\pm\) 5 \degree & & \\ \hline
+	
+	1.2 & Bruger drejer kanonen fra længst til højre til længst til venstre og måler vinkelforskellen. &Den afmålte vinkelforskel ligger indenfor 70 \degree \(\pm\) 5 \degree & & \\ \hline
+	
+	3 & Vent på timeout. & Brugergrænsefladen udskriver Wii Nunchuck forbindelses fejlmeddelelse& & \\ \hline
+\end{tabular}
