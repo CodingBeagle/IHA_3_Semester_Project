@@ -1,17 +1,28 @@
 \chapter{Systemarkitektur}
 
 \section{Signalbeskrivelse}
-	\begin{tabular}{|>{\hspace{0pt}}p{1.5cm}  >{\hspace{0pt}}p{3cm} | p{2.5cm} | p{2.5cm} | p{2.5cm} |}
+	\begin{tabular}{|>{\hspace{0pt}}p{3cm} | >{\hspace{0pt}}p{3cm} | p{3cm} | p{3cm} |}
 		\hline
-		\textbf{Blok-navn} & \textbf{Funktionsbeskrivelse} & \textbf{Signaler} & \textbf{Kommentar} & 3\\ \hline
-		Mål & & Klarhed om projekt idé, samt de vigtigste krav bla bla bla bla & blabla & blabla\\ \hline
-		Længde & & 1 uge & 3 uger & 3 uger\\ \hline
-		Disciplin & Artefakt & Inception 1 & ... & ...\\ \hline
-		\textbf{Projekt Formulering} & hey hey hey hey & Udled projektformulering. Anvend MosCoW til at bla bla bla & & \\ \hline
-		\textbf{\hspace{0pt}Specifikation} & Kravspecifikation \& Accepttest & ... & ... & ... \\ \hline
-		\textbf{Arkitektur} & Systemarkitektur & Ingen & bla bla & bla bla \\ \hline
-		\textbf{Design} & Design dokumentation & Ingen & bla bla & bla bla\\ \hline
-		\textbf{Implementering og modul test} & HW/SW/Mekanik & Ingen & bla bla & bla bla \\ \hline
-		\textbf{Projekt styring} & Projekt plan & bla bla & bla bla & bla bla \\ \hline
+		\textbf{Blok-navn} & \textbf{Funktionsbeskrivelse} & \textbf{Signaler} & \textbf{Signalbeskrivelse} \\ \hline
+		Devkit8000 & Fungerer som grænsflade mellem bruger og systemet & masterSPI & Type: SPI \\ \cline{3-4}
+		 & & touch & Type: touch \\ \hline
+		 PSoC0 & Master of I2C, SPI slave & slaveSPI & Type: SPI \\ \cline{3-4}
+		 & & masterI2C & Type: I2C\\ \hline
+		Motorstyring & Doing stuf with things & motorSlave & Type: I2C  \\ \cline{3-4}
+		 & & pwm & Type: PWM  \\ \cline{3-4}
+		 & & power & Type: CMOS \\ \hline
+		Wii-nunchuck styring & stuuf & wiiSlave & Type: I2C \\ \cline{3-4}
+		 & & nunchuckSlave & Type: I2C \\ \hline
+		PSoC1 & dumdum & motorSlave & Type: I2C \\ \hline
+		Motor & movings & pwm & Type: PWM \\ \cline{3-4}
+		 & & power & Type: CMOS \\ \hline
+		PSoC2 & stuff & wiiSlave & Type: I2C \\ \hline
+		Wii-nunchuck & wiiiiiii & nunchuckSlave & Type: I2C \\ \hline
+		SPI & spiderman & MOSI & Type: SPI \\ \cline{3-4}
+		 & & MISO & Type: SPI \\ \cline{3-4}
+		 & & SCLK & Type: SPI \\ \cline{3-4}
+		 & & SS & Type: SPI \\ \hline
+		 I2C & jsjjjas & SDA & Type: I2C \\ \cline{3-4}
+		 & & SCL & Type: I2C \\ \hline
 		\end{tabular}
 \subsection{Specifikation og Analyse}
