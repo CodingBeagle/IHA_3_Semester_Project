@@ -4,16 +4,14 @@
 	\begin{tabular}{|>{\hspace{0pt}}p{3cm} | >{\hspace{0pt}}p{3cm} | p{3cm} | p{3cm} |}
 		\hline
 		\textbf{Blok-navn} & \textbf{Funktionsbeskrivelse} & \textbf{Signaler} & \textbf{Signalbeskrivelse} \\ \hline
-		Devkit8000 & Fungerer som grænsflade mellem bruger og systemet & masterSPI & Type: SPI \\ \cline{3-4}
-		 & & touch & Type: touch \\ \hline
-		 PSoC0 & Master of I2C, SPI slave & slaveSPI & Type: SPI \\ \cline{3-4}
+		Devkit8000 & Fungerer som grænsflade mellem bruger og systemet. & masterSPI & Type: SPI \\ \cline{3-4}
+		 & & touch & Type: touch \newline Tryk på DevKit8000 display \\ \hline
+		 PSoC0 & Fungerer som I2C master for systemet samt SPI slave til DevKit8000. & slaveSPI & Type: SPI \\ \cline{3-4}
 		 & & masterI2C & Type: I2C\\ \hline
-		Motorstyring & Doing stuf with things & motorSlave & Type: I2C  \\ \cline{3-4}
-		 & & pwm & Type: PWM  \\ \cline{3-4}
-		 & & power & Type: CMOS \\ \hline
-		Wii-nunchuck styring & stuuf & wiiSlave & Type: I2C \\ \cline{3-4}
-		 & & nunchuckSlave & Type: I2C \\ \hline
-		PSoC1 & dumdum & motorSlave & Type: I2C \\ \hline
+		Motorstyring & Modtager input fra Wii-Nunchuck og omsætter det til PWM signaler. & motorSlave & Type: I2C \newline Indeholder Wii-Nunchuck data der skal bruges til motorstyring  \\ \cline{3-4}
+		 & & power & Type: \(V_{CC}\) \newline Strømforsyning til motorstyringen \\ \hline
+		PSoC1 & Modtager input fra Wii-Nunchuck og omsætter det til PWM signaler. & MotorI2C & Type: I2C \\ \cline{3-4} 
+		& & PWM & Type: PWM \newline PWM signal til styring af moternes hastighed. \\ \hline
 		Motor & movings & pwm & Type: PWM \\ \cline{3-4}
 		 & & power & Type: CMOS \\ \hline
 		PSoC2 & stuff & wiiSlave & Type: I2C \\ \hline
