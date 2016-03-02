@@ -1,26 +1,28 @@
 \chapter{Systemarkitektur}
 
 \section{Signalbeskrivelse}
-	\begin{tabular}{|>{\hspace{0pt}}p{3cm} | >{\hspace{0pt}}p{3cm} | p{3cm} | p{3cm} |}
+	\begin{longtable}{|>{\hspace{0pt}}p{3cm} | >{\hspace{0pt}}p{3cm} | p{3cm} | p{3cm} |}
 		\hline
 		\textbf{Blok-navn} & \textbf{Funktionsbeskrivelse} & \textbf{Signaler} & \textbf{Signalbeskrivelse} \\ \hline
-		Devkit8000 & Fungerer som grænsflade mellem bruger og systemet. & masterSPI & Type: SPI \\ \cline{3-4}
-		 & & touch & Type: touch \newline Tryk på DevKit8000 display \\ \hline
+		Devkit8000 & Fungerer som grænseflade mellem bruger og systemet. & masterSPI & Type: SPI \\ \cline{3-4}
+		 & & touch & Type: touch \newline Tryk på DevKit8000 display. \\ \hline
 		 PSoC0 & Fungerer som I2C master for systemet samt SPI slave til DevKit8000. & slaveSPI & Type: SPI \\ \cline{3-4}
 		 & & masterI2C & Type: I2C\\ \hline
-		Motorstyring & Modtager input fra Wii-Nunchuck og omsætter det til PWM signaler. & motorSlave & Type: I2C \newline Indeholder Wii-Nunchuck data der skal bruges til motorstyring  \\ \cline{3-4}
-		 & & power & Type: \(V_{CC}\) \newline Strømforsyning til motorstyringen \\ \hline
+		Motorstyring & Modtager input fra Wii-Nunchuck og omsætter det til PWM signaler. & motorSlave & Type: I2C \newline Indeholder Wii-Nunchuck data der skal bruges til motorstyring.  \\ \cline{3-4}
+		 & & power & Type: \(V_{CC}\) \newline Strømforsyning til motorstyringen. \\ \hline
 		PSoC1 & Modtager input fra Wii-Nunchuck og omsætter det til PWM signaler. & MotorI2C & Type: I2C \\ \cline{3-4} 
-		& & PWM & Type: PWM \newline PWM signal til styring af moternes hastighed. \\ \hline
-		Motor & movings & pwm & Type: PWM \\ \cline{3-4}
-		 & & power & Type: CMOS \\ \hline
-		PSoC2 & stuff & wiiSlave & Type: I2C \\ \hline
-		Wii-nunchuck & wiiiiiii & nunchuckSlave & Type: I2C \\ \hline
-		SPI & spiderman & MOSI & Type: SPI \\ \cline{3-4}
-		 & & MISO & Type: SPI \\ \cline{3-4}
-		 & & SCLK & Type: SPI \\ \cline{3-4}
-		 & & SS & Type: SPI \\ \hline
-		 I2C & jsjjjas & SDA & Type: I2C \\ \cline{3-4}
-		 & & SCL & Type: I2C \\ \hline
-		\end{tabular}
+		& & PWM & Type: PWM \newline PWM signal til styring af motorens hastighed. \\ \hline
+		Motor & Motorerne der skal styre kanonen & PWM & Type: PWM \newline PWM signal til styring af motorens hastighed. \\ \cline{3-4}
+		 & & power & Type: \(V_{CC}\) \newline Strømforsyning til motorstyringen  \\ \hline
+		PSoC2 & Modtager input data fra Wii-Nunchuk og videresender det i behandlet format. & wiiSlave & Type: I2C \newline Sender input data fra Wii-Nunchuck til PSoC2. \\ \cline{3-4}
+		 & & WiiI2C & Type: I2C \newline Videresender behandlet Wii-Nunchuk data til andre dele af systemet. \\ \hline
+		Wii-nunchuck & Den fysiske controller som brugeren styrer kanonen med. & WiiSlave & Type: I2C \\ \cline{3-4}
+		& & buttonPress & Type: I2C \newline Det fysiske tryk når brugeren trykker på Wii-Nunchuck knapper. \\ \hline
+		SPI & Denne blok beskriver den ikke-atomiske SPI forbindelse. & MOSI & Type: CMOS \newline Binært data som sendes fra master til slave. \\ \cline{3-4}
+		 & & MISO & Type: CMOS \newline Binært data som sendes fra slave til master. \\ \cline{3-4}
+		 & & SCLK & Type: CMOS \newline Clock signalet fra master til slave, som bruges til at synkronisere den serielle kommunikation. \\ \cline{3-4}
+		 & & SS & Type: SPI \newline Slave-Select, som bruges til at vælge slaven der skal modtage og sende data. \\ \hline
+		 I2C & Denne blok beskriver den ikke-atomiske I2C forbindelse. & SDA & Type: CMOS \newline Databussen mellem I2C masteren og I2C slaver. \\ \cline{3-4}
+		 & & SCL & Type: CMOS \newline Clock signalet fra master til lyttende I2C slaver, som bruges til at synkronisere den serielle kommunikation. \\ \hline
+		\end{longtable}
 \subsection{Specifikation og Analyse}
