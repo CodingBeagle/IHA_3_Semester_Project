@@ -1,0 +1,63 @@
+\documentclass{article}
+
+% -- PREAMBLE START --
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern} % load a font with all the characters
+
+\usepackage{parskip}
+
+\usepackage[danish]{isodate}
+
+% Create front page info
+\title{Referat af Vejledermøde \#3}
+\author{Gruppe 3}
+\date{01.03.2016 - kl. 09:15}
+% -- PREAMBLE END --
+
+\begin{document}
+	\maketitle
+	
+	\section{Fremmødte}
+	\begin{itemize}
+		\item Michael, Kasper, Mia, Mikkel, Pernille
+	\end{itemize}
+	
+	\section{Udeblevet med afbud}
+	\begin{itemize}
+		\item 
+	\end{itemize}
+	
+	\section{Udeblevet uden afbud}
+	\begin{itemize}
+		\item Tenna
+	\end{itemize}
+	
+	\section{Dagsorden}
+	\begin{itemize}
+		\item Valg af mødeleder
+		\subitem Kasper
+		\item Valg af referent
+		\subitem Pernille
+		\item Godkendelse af referat fra forrige møde 
+		\item Opfølgning på aktionspunkter fra forrige møde
+		\item Gennemgang af arbejde indtil videre (use cases og accepttest specifikation)
+		\begin{itemize}
+			\item Pivotaltracker. Screenshots. 
+			\item Struktur over hvordan afleveringen skal se ud. Dokumentationen er bilag. 
+			\item Fully dressed use case. 
+			\subitem Motor - visuel test. 
+			\subitem Beskrive grænseflader korrekt. 
+			\subitem I2C, logiske niveauer, hvorfra og hvortil forbindelsen går. Hvad ser vi hvis vi sætter et oscilloskop på. SPI. Hvor kan vi aflæse logisk høj og logisk lav. 
+			\subitem BDD, atomic port. 
+			\subitem Hellere for meget end for lidt ved grænseflader. 
+		\end{itemize}
+		\item Vejledning til de næste user stories
+		\item Aktionspunkter til næste møde. Hvem gør hvad? 
+		\subitem Grænseflader skal beskrives.
+		\subitem Arkitektur: applikationsmodeller, BDD, IBD skal være gennemarbejdet. Grænsefladeblok for sig selv med atomare og komplekse porte i BDD. 
+		\subitem Den 10. marts skal der være forbindelse igennem systemet. Koden til dette skal ikke skrives fra bunden men findes på nettet et sted. HW skal snart i gang. 
+		\item Tidspunkt for næste møde: 
+		\subitem Tirsdag den 8. marts kl. 8.15. 
+	\end{itemize}
+\end{document}
