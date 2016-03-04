@@ -69,11 +69,12 @@ I dette system er der en aktør, nemlig brugeren. Brugeren initierer systemet, v
 	\textbf{Postkondition} &  Systemet er gennemgået testen og resultaterne er vist \\ \hline
 	\textbf{Hovedscenarie} & \begin{enumerate}
 		\item Bruger vælger test system på brugergrænseflade
-		\item Devkit sender startbesked til PSoC0 via SPI
+		\item Devkit sender start SPI test til PSoC0 via SPI
 		\item PSoC0 sender acknowledge til Devkit via SPI
 		\subitem[Exception 1: PSoC0 sender ikke acknowledge]
 		\item Brugergrænseflade meddeler om gennemført SPI test
-		\item PSoC0 sender startbesked til PSoC slaver via I2C
+		\item Devkit sender start I2C test til PSoC0 via SPI
+		\item PSoC0 sender start I2C test til PSoC slaver via I2C
 		\item PSoC slaver sender acknowledge til PSoC0 via I2C
 		\subitem[Exception 2: PSoC slaver sender ikke acknowledge]
 		\item PSoC0 meddeler om gennemført I2C test til Devkit via SPI
