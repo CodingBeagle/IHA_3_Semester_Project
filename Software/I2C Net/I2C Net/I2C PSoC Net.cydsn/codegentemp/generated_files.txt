@@ -28,6 +28,14 @@
   <file name="C:\Users\Daniel\Documents\Semesterprojekt3\Software\I2C Net\I2C Net\I2C PSoC Net.cydsn\codegentemp\I2C_1_I2C_PVT.h" value="NONE;I2C_1" />
   <file name="C:\Users\Daniel\Documents\Semesterprojekt3\Software\I2C Net\I2C Net\I2C PSoC Net.cydsn\codegentemp\I2C_1_PVT.h" value="NONE;I2C_1" />
   <file name="C:\Users\Daniel\Documents\Semesterprojekt3\Software\I2C Net\I2C Net\I2C PSoC Net.cydsn\codegentemp\I2C_1_BOOT.h" value="NONE;I2C_1" />
+  <file name="C:\Users\Daniel\Documents\Semesterprojekt3\Software\I2C Net\I2C Net\I2C PSoC Net.cydsn\codegentemp\DebugLedGreen.c" value="ARM_C_FILE;DebugLedGreen" />
+  <file name="C:\Users\Daniel\Documents\Semesterprojekt3\Software\I2C Net\I2C Net\I2C PSoC Net.cydsn\codegentemp\DebugLedGreen.h" value="NONE;DebugLedGreen" />
+  <file name="C:\Users\Daniel\Documents\Semesterprojekt3\Software\I2C Net\I2C Net\I2C PSoC Net.cydsn\codegentemp\DebugLedGreen_aliases.h" value="NONE;DebugLedGreen" />
+  <file name="C:\Users\Daniel\Documents\Semesterprojekt3\Software\I2C Net\I2C Net\I2C PSoC Net.cydsn\codegentemp\DebugLedGreen_PM.c" value="ARM_C_FILE;DebugLedGreen" />
+  <file name="C:\Users\Daniel\Documents\Semesterprojekt3\Software\I2C Net\I2C Net\I2C PSoC Net.cydsn\codegentemp\DebugLedRed.c" value="ARM_C_FILE;DebugLedRed" />
+  <file name="C:\Users\Daniel\Documents\Semesterprojekt3\Software\I2C Net\I2C Net\I2C PSoC Net.cydsn\codegentemp\DebugLedRed.h" value="NONE;DebugLedRed" />
+  <file name="C:\Users\Daniel\Documents\Semesterprojekt3\Software\I2C Net\I2C Net\I2C PSoC Net.cydsn\codegentemp\DebugLedRed_aliases.h" value="NONE;DebugLedRed" />
+  <file name="C:\Users\Daniel\Documents\Semesterprojekt3\Software\I2C Net\I2C Net\I2C PSoC Net.cydsn\codegentemp\DebugLedRed_PM.c" value="ARM_C_FILE;DebugLedRed" />
   <file name="C:\Users\Daniel\Documents\Semesterprojekt3\Software\I2C Net\I2C Net\I2C PSoC Net.cydsn\codegentemp\I2C_1_SCBCLK.c" value="ARM_C_FILE;I2C_1_SCBCLK" />
   <file name="C:\Users\Daniel\Documents\Semesterprojekt3\Software\I2C Net\I2C Net\I2C PSoC Net.cydsn\codegentemp\I2C_1_SCBCLK.h" value="NONE;I2C_1_SCBCLK" />
   <file name="C:\Users\Daniel\Documents\Semesterprojekt3\Software\I2C Net\I2C Net\I2C PSoC Net.cydsn\codegentemp\I2C_1_sda.c" value="ARM_C_FILE;I2C_1_sda" />

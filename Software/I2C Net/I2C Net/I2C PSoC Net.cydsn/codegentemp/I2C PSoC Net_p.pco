@@ -5,4 +5,6 @@ set_location "ClockGenBlock" m0s8clockgenblockcell -1 -1 0
 set_io "\I2C_1:scl(0)\" iocell 4 0
 set_io "\I2C_1:sda(0)\" iocell 4 1
 set_location "\I2C_1:SCB_IRQ\" interrupt -1 -1 10
+set_io "DebugLedGreen(0)" iocell 0 2
+set_io "DebugLedRed(0)" iocell 1 6
 set_location "\I2C_1:SCB\" m0s8scbcell -1 -1 0
