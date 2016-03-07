@@ -1,0 +1,7 @@
+DC-motor
+- brug H-bro fra GFV til at starte med. Senere lav vores egen. 
+- variabel der tæller op, så der kan siges stop, når den kommer ud i de yderste vinkler. 
+- til at starte med skal motoren bare kunne køre. Senere laver vi sådan, at den kan skifte retning. 
+- Definere grænseflade mellem PSoC og motor. 
+- Affyringsmekanisme. 
+- 
