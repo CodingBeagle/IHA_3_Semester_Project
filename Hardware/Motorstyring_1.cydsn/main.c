@@ -14,12 +14,17 @@
 int main()
 {
     CyGlobalIntEnable; /* Enable global interrupts. */
-
+    PWM_1_Start(); 
+    Clock_PWM_Start(); 
+     
     /* Place your initialization/startup code here (e.g. MyInst_Start()) */
-
+    PWM_1_WriteCompare(0); 
+    
     for(;;)
     {
-        Pin_1_Write(1);
+        PWM_1_WriteCompare(50); 
+        CyDelay(300); 
+        PWM_1_WriteCompare(0); 
         
         /* Place your application code here. */
         /*if(Pin_2_Read()==1)

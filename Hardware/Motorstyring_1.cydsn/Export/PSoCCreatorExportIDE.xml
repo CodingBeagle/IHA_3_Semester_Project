@@ -54,19 +54,12 @@
           <File BuildType="BUILD" Toolchain="">.\Generated_Source\PSoC4\cyfitteriar.inc</File>
           <File BuildType="BUILD" Toolchain="">.\Generated_Source\PSoC4\cyfitter.h</File>
           <File BuildType="BUILD" Toolchain="">.\Generated_Source\PSoC4\cydisabledsheets.h</File>
-          <File BuildType="BUILD" Toolchain="">.\Generated_Source\PSoC4\LED_CONTROL.c</File>
-          <File BuildType="BUILD" Toolchain="">.\Generated_Source\PSoC4\LED_CONTROL.h</File>
-          <File BuildType="BUILD" Toolchain="">.\Generated_Source\PSoC4\LED_CONTROL_PM.c</File>
           <File BuildType="BUILD" Toolchain="">.\Generated_Source\PSoC4\Clock_PWM.c</File>
           <File BuildType="BUILD" Toolchain="">.\Generated_Source\PSoC4\Clock_PWM.h</File>
           <File BuildType="BUILD" Toolchain="">.\Generated_Source\PSoC4\Pin_1.c</File>
           <File BuildType="BUILD" Toolchain="">.\Generated_Source\PSoC4\Pin_1.h</File>
           <File BuildType="BUILD" Toolchain="">.\Generated_Source\PSoC4\Pin_1_aliases.h</File>
           <File BuildType="BUILD" Toolchain="">.\Generated_Source\PSoC4\Pin_1_PM.c</File>
-          <File BuildType="BUILD" Toolchain="">.\Generated_Source\PSoC4\Pin_2.c</File>
-          <File BuildType="BUILD" Toolchain="">.\Generated_Source\PSoC4\Pin_2.h</File>
-          <File BuildType="BUILD" Toolchain="">.\Generated_Source\PSoC4\Pin_2_aliases.h</File>
-          <File BuildType="BUILD" Toolchain="">.\Generated_Source\PSoC4\Pin_2_PM.c</File>
           <File BuildType="BUILD" Toolchain="">.\Generated_Source\PSoC4\cycodeshareimport.ld</File>
           <File BuildType="BUILD" Toolchain="">.\Generated_Source\PSoC4\cycodeshareexport.ld</File>
           <File BuildType="BUILD" Toolchain="">.\Generated_Source\PSoC4\cycodeshareimport.scat</File>
@@ -93,6 +86,9 @@
           <File BuildType="BUILD" Toolchain="">.\Generated_Source\PSoC4\CyLFClk.c</File>
           <File BuildType="BUILD" Toolchain="">.\Generated_Source\PSoC4\CyLFClk.h</File>
           <File BuildType="BUILD" Toolchain="">.\Generated_Source\PSoC4\project.h</File>
+          <File BuildType="BUILD" Toolchain="">.\Generated_Source\PSoC4\PWM_1.c</File>
+          <File BuildType="BUILD" Toolchain="">.\Generated_Source\PSoC4\PWM_1.h</File>
+          <File BuildType="BUILD" Toolchain="">.\Generated_Source\PSoC4\PWM_1_PM.c</File>
         </Files>
       </Folder>
       <Folder BuildType="STRICT" Path="C:\Users\PernilleLouise\Documents\Elektro\3. semester\E3PRJ3\Hardware\Motorstyring_1.cydsn\Export\ARM_GCC_Generic">

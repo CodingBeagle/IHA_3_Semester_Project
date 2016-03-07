@@ -14,19 +14,15 @@
   <file name="C:\Users\PernilleLouise\Documents\Elektro\3. semester\E3PRJ3\Hardware\Motorstyring_1.cydsn\codegentemp\cyfitteriar.inc" value="NONE;" />
   <file name="C:\Users\PernilleLouise\Documents\Elektro\3. semester\E3PRJ3\Hardware\Motorstyring_1.cydsn\codegentemp\cyfitter.h" value="NONE;" />
   <file name="C:\Users\PernilleLouise\Documents\Elektro\3. semester\E3PRJ3\Hardware\Motorstyring_1.cydsn\codegentemp\cydisabledsheets.h" value="NONE;" />
-  <file name="C:\Users\PernilleLouise\Documents\Elektro\3. semester\E3PRJ3\Hardware\Motorstyring_1.cydsn\codegentemp\LED_CONTROL.c" value="ARM_C_FILE;LED_CONTROL" />
-  <file name="C:\Users\PernilleLouise\Documents\Elektro\3. semester\E3PRJ3\Hardware\Motorstyring_1.cydsn\codegentemp\LED_CONTROL.h" value="NONE;LED_CONTROL" />
-  <file name="C:\Users\PernilleLouise\Documents\Elektro\3. semester\E3PRJ3\Hardware\Motorstyring_1.cydsn\codegentemp\LED_CONTROL_PM.c" value="ARM_C_FILE;LED_CONTROL" />
   <file name="C:\Users\PernilleLouise\Documents\Elektro\3. semester\E3PRJ3\Hardware\Motorstyring_1.cydsn\codegentemp\Clock_PWM.c" value="ARM_C_FILE;Clock_PWM" />
   <file name="C:\Users\PernilleLouise\Documents\Elektro\3. semester\E3PRJ3\Hardware\Motorstyring_1.cydsn\codegentemp\Clock_PWM.h" value="NONE;Clock_PWM" />
   <file name="C:\Users\PernilleLouise\Documents\Elektro\3. semester\E3PRJ3\Hardware\Motorstyring_1.cydsn\codegentemp\Pin_1.c" value="ARM_C_FILE;Pin_1" />
   <file name="C:\Users\PernilleLouise\Documents\Elektro\3. semester\E3PRJ3\Hardware\Motorstyring_1.cydsn\codegentemp\Pin_1.h" value="NONE;Pin_1" />
   <file name="C:\Users\PernilleLouise\Documents\Elektro\3. semester\E3PRJ3\Hardware\Motorstyring_1.cydsn\codegentemp\Pin_1_aliases.h" value="NONE;Pin_1" />
   <file name="C:\Users\PernilleLouise\Documents\Elektro\3. semester\E3PRJ3\Hardware\Motorstyring_1.cydsn\codegentemp\Pin_1_PM.c" value="ARM_C_FILE;Pin_1" />
-  <file name="C:\Users\PernilleLouise\Documents\Elektro\3. semester\E3PRJ3\Hardware\Motorstyring_1.cydsn\codegentemp\Pin_2.c" value="ARM_C_FILE;Pin_2" />
-  <file name="C:\Users\PernilleLouise\Documents\Elektro\3. semester\E3PRJ3\Hardware\Motorstyring_1.cydsn\codegentemp\Pin_2.h" value="NONE;Pin_2" />
-  <file name="C:\Users\PernilleLouise\Documents\Elektro\3. semester\E3PRJ3\Hardware\Motorstyring_1.cydsn\codegentemp\Pin_2_aliases.h" value="NONE;Pin_2" />
-  <file name="C:\Users\PernilleLouise\Documents\Elektro\3. semester\E3PRJ3\Hardware\Motorstyring_1.cydsn\codegentemp\Pin_2_PM.c" value="ARM_C_FILE;Pin_2" />
+  <file name="C:\Users\PernilleLouise\Documents\Elektro\3. semester\E3PRJ3\Hardware\Motorstyring_1.cydsn\codegentemp\PWM_1.c" value="ARM_C_FILE;PWM_1" />
+  <file name="C:\Users\PernilleLouise\Documents\Elektro\3. semester\E3PRJ3\Hardware\Motorstyring_1.cydsn\codegentemp\PWM_1.h" value="NONE;PWM_1" />
+  <file name="C:\Users\PernilleLouise\Documents\Elektro\3. semester\E3PRJ3\Hardware\Motorstyring_1.cydsn\codegentemp\PWM_1_PM.c" value="ARM_C_FILE;PWM_1" />
   <file name="C:\Users\PernilleLouise\Documents\Elektro\3. semester\E3PRJ3\Hardware\Motorstyring_1.cydsn\codegentemp\cycodeshareimport.ld" value="NONE;" />
   <file name="C:\Users\PernilleLouise\Documents\Elektro\3. semester\E3PRJ3\Hardware\Motorstyring_1.cydsn\codegentemp\cycodeshareexport.ld" value="NONE;" />
   <file name="C:\Users\PernilleLouise\Documents\Elektro\3. semester\E3PRJ3\Hardware\Motorstyring_1.cydsn\codegentemp\cycodeshareimport.scat" value="NONE;" />
