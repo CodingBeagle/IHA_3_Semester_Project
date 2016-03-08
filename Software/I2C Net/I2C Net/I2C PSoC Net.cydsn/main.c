@@ -23,6 +23,8 @@ uint8 transferErrorStatus;
 uint8 slaveWritebuffer[1];
 uint8 slaveReadBuffer[1];
 
+uint8 isMaster = 1;
+
 int main()
 {
     CyGlobalIntEnable; /* Enable global interrupts. */
@@ -38,22 +40,47 @@ int main()
     
     //Turn off LEDS
     DebugLedGreen_Write(1);
-    DebugLedRed_Write(0);
+    DebugLedRed_Write(1);
     
     for(;;)
     {
-       I2C_1_I2CMasterClearStatus();
-       transferErrorStatus = I2C_1_I2CMasterSendStart(PSoC2UnitAdress, I2C_1_I2C_WRITE_XFER_MODE);
-        if(transferErrorStatus == I2C_1_I2C_MSTR_NO_ERROR)
+        if(isMaster == 1)
         {
-            //Turn on Green LED while sending
-            DebugLedRed_Write(1);
-            DebugLedGreen_Write(0);
+           //I2C_1_I2CMasterClearStatus();
+           transferErrorStatus = I2C_1_I2CMasterSendStart(PSoC2UnitAdress, I2C_1_I2C_WRITE_XFER_MODE);
+           if(transferErrorStatus == I2C_1_I2C_MSTR_NO_ERROR)
+           {
+                if(I2C_1_I2CMasterWriteByte(12) == I2C_1_I2C_MSTR_NO_ERROR)
+                {
+                    //Turn on Green LED while sending
+                    DebugLedRed_Write(1);
+                    DebugLedGreen_Write(0);
+                    isMaster = 0;
+                }
+            }
             
-            I2C_1_I2CMasterWriteByte(12);
+            I2C_1_I2CMasterSendStop();
+            I2C_1_I2CMasterClearStatus();
+            CyDelay(1000);
+            
         }
-        I2C_1_I2CMasterSendStop();
-        CyDelay(1000);
+        else if(isMaster == 0)
+        {
+            if (I2C_1_I2CSlaveStatus() == I2C_1_I2C_SSTAT_WR_CMPLT)
+            {
+                 if ((int)slaveWritebuffer[0] == 12)
+                 {
+                    //Turn on red Led.
+                    DebugLedGreen_Write(1);
+                    DebugLedRed_Write(0);
+                    
+                    I2C_1_I2CSlaveClearReadStatus();
+                    I2C_1_I2CSlaveClearWriteBuf();
+                    isMaster = 1;
+                    CyDelay(1000);
+                 }
+            }
+        }
     }
 }
 
