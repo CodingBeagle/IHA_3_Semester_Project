@@ -32,6 +32,7 @@ int main()
     //Starts the I2C component on the PSoC.
     I2C_1_Start();
     
+    //Init slave buffers.
     //Set slave write buffer
     I2C_1_I2CSlaveInitWriteBuf(slaveWritebuffer, 1);
     //Set slave read buffer
@@ -46,39 +47,36 @@ int main()
     {
         if(isMaster == 1)
         {
-           //I2C_1_I2CMasterClearStatus();
+        
            transferErrorStatus = I2C_1_I2CMasterSendStart(PSoC2UnitAdress, I2C_1_I2C_WRITE_XFER_MODE);
            if(transferErrorStatus == I2C_1_I2C_MSTR_NO_ERROR)
            {
                 if(I2C_1_I2CMasterWriteByte(12) == I2C_1_I2C_MSTR_NO_ERROR)
                 {
-                    //Turn on Green LED while sending
-                    DebugLedRed_Write(1);
-                    DebugLedGreen_Write(0);
                     isMaster = 0;
                 }
             }
             
             I2C_1_I2CMasterSendStop();
             I2C_1_I2CMasterClearStatus();
-            CyDelay(1000);
+            
+            CyDelay(500);
             
         }
         else if(isMaster == 0)
         {
+           
             if (I2C_1_I2CSlaveStatus() == I2C_1_I2C_SSTAT_WR_CMPLT)
             {
                  if ((int)slaveWritebuffer[0] == 12)
                  {
-                    //Turn on red Led.
-                    DebugLedGreen_Write(1);
-                    DebugLedRed_Write(0);
-                    
-                    I2C_1_I2CSlaveClearReadStatus();
                     I2C_1_I2CSlaveClearWriteBuf();
                     isMaster = 1;
-                    CyDelay(1000);
+                    DebugLedGreen_Write(!DebugLedGreen_Read());
+                    CyDelay(500);
+                    
                  }
+                I2C_1_I2CSlaveClearReadStatus();
             }
         }
     }
