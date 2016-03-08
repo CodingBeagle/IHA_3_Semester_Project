@@ -31,9 +31,9 @@ int main()
     I2C_1_Start();
     
     //Set slave write buffer
-    //I2C_1_I2CSlaveInitWriteBuf(slaveWritebuffer, 1);
+    I2C_1_I2CSlaveInitWriteBuf(slaveWritebuffer, 1);
     //Set slave read buffer
-   // I2C_1_I2CSlaveInitReadBuf(slaveReadBuffer, 1);
+    I2C_1_I2CSlaveInitReadBuf(slaveReadBuffer, 1);
     
     
     //Turn off LEDS
