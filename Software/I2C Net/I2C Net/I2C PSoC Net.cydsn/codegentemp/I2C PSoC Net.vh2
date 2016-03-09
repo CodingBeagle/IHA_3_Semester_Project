@@ -2,7 +2,7 @@
 --	Conversion of I2C PSoC Net.v to vh2:
 --
 --	Cypress Semiconductor - WARP Version 6.3 IR 41
---	Tue Mar 08 09:05:13 2016
+--	Wed Mar 09 08:51:29 2016
 --
 
 USE cypress.cypress.all;

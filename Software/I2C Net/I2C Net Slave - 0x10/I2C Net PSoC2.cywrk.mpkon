@@ -13,7 +13,7 @@
 <v>Output</v>
 </TreeKeys>
 <TreeStates>
-<CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237 type_name="CyDesigner.Common.Base.Controls.CyTreeViewState" version="1" SelectedNodeId="I2C Net PSoC2">
+<CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237 type_name="CyDesigner.Common.Base.Controls.CyTreeViewState" version="1" SelectedNodeId="I2C Net PSoC2\PSoC2\Source Files\main.c">
 <ExpandedNodeIds>
 <v>I2C Net PSoC2</v>
 <v>I2C Net PSoC2\PSoC2</v>
@@ -295,7 +295,12 @@
 </userData>
 </CyGuid_fdba8dfd-b15b-4469-9bbb-9e40c3e70997>
 <Unloaded />
-<OpenDocs />
+<OpenDocs>
+<name v=".\PSoC2.cydsn\main.c" />
+<name v=".\PSoC2.cydsn\TopDesign\TopDesign.cysch" />
+<name v=".\PSoC2.cydsn\cyapicallbacks.h" />
+<name v=".\PSoC2.cydsn\PSoC2.cydwr" />
+</OpenDocs>
 <config v="" />
 <AutoUpdate v="true" />
 </CyGuid_843a90a4-0c4b-4e44-991d-05e7fb117a21>
