@@ -2,7 +2,7 @@
 --	Conversion of wiinunchuck.v to vh2:
 --
 --	Cypress Semiconductor - WARP Version 6.3 IR 41
---	Wed Mar 09 08:55:24 2016
+--	Fri Mar 11 09:54:01 2016
 --
 
 USE cypress.cypress.all;
