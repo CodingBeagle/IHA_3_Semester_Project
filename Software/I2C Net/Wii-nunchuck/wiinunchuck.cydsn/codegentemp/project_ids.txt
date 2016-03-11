@@ -1,0 +1,5 @@
+C:\Users\mpkon\Documents\IKT - 3. semester\GFV\Exercise3-DCmotor\Wii-nunchuck\wiinunchuck.cydsn\wiinunchuck.cyprj|d32b16d5-8172-462f-9d79-b7c7e8f97648
+C:\Program Files (x86)\Cypress\PSoC Creator\3.3\PSoC Creator\psoc\content\default\CyAnnotationLibrary\CyAnnotationLibrary.cylib\CyAnnotationLibrary.cyprj|c4637929-754e-4019-ad5b-f34ef71376ac
+C:\Program Files (x86)\Cypress\PSoC Creator\3.3\PSoC Creator\psoc\content\cycomponentlibraryupdates\CyComponentLibraryUpdates.cylib\CyComponentLibraryUpdates.cyprj|833cb792-4f72-417b-8d49-73bf66908b89
+C:\Program Files (x86)\Cypress\PSoC Creator\3.3\PSoC Creator\psoc\content\cycomponentlibrary\CyComponentLibrary.cylib\CyComponentLibrary.cyprj|ce16271d-f5a9-41ec-b40a-4f4306b5841a
+C:\Program Files (x86)\Cypress\PSoC Creator\3.3\PSoC Creator\psoc\content\cyprimitives\CyPrimitives.cylib\CyPrimitives.cyprj|ca73e97a-5d44-4ef7-92e4-0784b5458e17
