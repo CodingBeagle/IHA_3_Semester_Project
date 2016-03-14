@@ -25,4 +25,113 @@
 		 I2C & Denne blok beskriver den ikke-atomiske I2C forbindelse. & SDA & Type: CMOS \newline Databussen mellem I2C masteren og I2C slaver. \\ \cline{3-4}
 		 & & SCL & Type: CMOS \newline Clock signalet fra master til lyttende I2C slaver, som bruges til at synkronisere den serielle kommunikation. \\ \hline
 		\end{longtable}
+<<<<<<< 9e9002ba7447c759616952ec03b26a631587e8e5
 \subsection{Specifikation og Analyse}
+=======
+\subsection{Hardware Arkitektur}
+I hardwarearkitekturen brydes systemet ned i dele, som senere gør det muligt at uddele arbejdsopgaver, og specificere grænseflader. Hardwarearkitekturen består at BDD og IBD for systemet.
+
+% ---------------BDD--------------------------------------------------
+\subsubsection{BDD for Candygun 3000}
+I BDD-diagrammet på figur \ref{fig:BDD} er Candygun 3000 brudt ned i blokkene PSoC0, PSoC1, PSoC2 og Devkit 8000. Devkit 8000 er brugergrænsefladen, som brugeren kan interagere med via touchskærmen. Den er forbundet via SPI til PSoC0, som er SPI-slave. PSoC0 er desuden også I2C-master. PSoC0 kommunikerer via I2C til PSoC1 og PSoC2. PSoC1 står for motorstyring, som via et PWM-signal styrer de 3 motorer. PSoC2 har til opgave at aflæse brugerinput fra Wii-nunchucken, som også kommunikerer via I2C. På figur \ref{fig:BDD} ses de forskellige blokke og deres porte. Desuden er der en flowspecification for I2C og SPI, hvor forbindelserne er beskrevet mere detaljeret (set fra master-synspunkt). 
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[trim = {1.8cm 14.6cm 1.8cm 1cm}, clip = true, width = \textwidth]{Systemarkitektur/images/BDD_overordnet.pdf}
+	\caption{Overordnet BDD for Candygun 3000.}
+	\label{fig:BDD}
+\end{figure}
+
+% ---------------IBD--------------------------------------------------
+\subsubsection{IBD for Candygun 3000}
+I IBD'et på figur \ref{fig:IBD} er forbindelserne mellem de forskellige blokke overskueliggjort. Det er dermed let at få et overblik over, hvilke grænseflader der skal tages højde for i den videre udvikling. 
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\textwidth]{Systemarkitektur/images/GoofycandygunIBD.png}
+	\caption{IBD for Candygun 3000.}
+	\label{fig:IBD}
+\end{figure}
+
+\subsection{Software Arkitektur}
+I softwarearkitekturen udarbejdes der applikationsmodeller bestående af sekvensdiagrammer og klassediagrammer for hvert delsystem med udgangspunkt i use case 2. Denne arkitektur overskueliggøre kravene til de boundaryklasser, der muliggør kommunikation mellem delsystemerne. Desuden bliver der gennem analyse af use case og sekvensdiagrammer udledt grundlæggende metoder i klasserne.  
+
+% ---------------Devkit Applikationsmodel-----------------------------
+\subsubsection{Applikationsmodel for Devkit 8000}
+Sekvensdiagrammet for Devkit 8000 ses på figur \ref{fig:sekvensDevkit}. Det tager udgangspunkt i use case 2. Der er to boundaryklasser, da brugergrænsefladen skal kommunikere med brugeren og PSoC0. Ud til brugeren er der en GUI. Boundaryklassen ComProtocol, skal kunne håndtere SPI-kommunikationen til PSoC0. Som det ses af diagrammet initieres testen af brugeren via GUI'en, og derfra er det controlklassen på Devkittet, der sørger for, at de forskellige tests bliver sat i gang, og melder resultatet ud til brugeren via GUI'en.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[trim = {3.6cm 2.7cm 4cm 2.7cm}, clip = true, width=\textwidth] {Systemarkitektur/images/SekvensdiagramDevkit.pdf}
+	\caption{Sekvensdiagram for Devkit 8000.}
+	\label{fig:sekvensDevkit}
+\end{figure}
+Ud fra sekvensdiagrammet for Devkit 8000 er der udledt foreløbige metoder til klasserne. De ses i klassediagrammet på figur \ref{fig:klasseDevkit}. 
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[trim = {3.2cm 16.1cm 3.2cm 3.5cm}, clip = true, width=\textwidth] {Systemarkitektur/images/klassediagramDevkit.pdf}
+	\caption{Klassediagram for Devkit 8000}
+	\label{fig:klasseDevkit}
+\end{figure}
+
+% ---------------PSoC0 Applikationsmodel-----------------------------
+\subsubsection{Applikationsmodel for PSoC0}
+På figur \ref{fig:sekvensPSoC0} ses et sekvensdiagram for PSoC0 med udgangspunkt i vores test use case - usecase 2. Controlklassen, som er opkaldt efter use case navnet, hedder Test of Protocols. Hvilket på figur \ref{fig:sekvensPSoC0} er forkortet til TOP. Desuden er der tre boundaryklasser, da PSoC0 skal kommunikere både med Devkit 8000 og de to andre PSoC'er. Som det ses på sekvensdiagrammet, står TOP-klassen og tjekker på boundaryklassen med SPI-forbindelse til Devkit 8000, for at holde øje med om en test bliver startet. Derudover sørger controlklassen for at kommunikere videre ud til de andre PSoC'er, der styrer henholdsvis motorerne og Wii-nunchucken. 
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[trim = {3.2cm 2.6cm 3.3cm 2.7cm}, clip = true, width=\textwidth] {Systemarkitektur/images/SekvensdiagramPSoC0.pdf}
+	\caption{Sekvensdiagram for PSoC0.}
+	\label{fig:sekvensPSoC0}
+\end{figure}
+
+I klassediagrammet på figur \ref{fig:klassePSoC0} ses controlklassen og de tre boundaryklasser, som hører til PSoC0. I klasserne er der tilføjet metoder, som er udledt ud fra sekvensdiagrammet på figur \ref{fig:sekvensPSoC0}. Det giver en god struktur at starte ud fra, når der skal designes og implementes. 
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[trim = {1.2cm 8.2cm 1.8cm 7.7cm}, clip = true, width=\textwidth] {Systemarkitektur/images/klassediagramPSoC0.pdf}
+	\caption{Klassediagram for PSoC0.}
+	\label{fig:klassePSoC0}
+\end{figure}
+
+% ---------------PSoC1 Applikationsmodel-----------------------------
+\subsubsection{Applikationsmodel for PSoC1}
+Sekvensdiagrammet for PSoC1 med udgangspunkt i use case 2 ses på figur \ref{fig:sekvensPSoC1}. Også her er controlklassen opkaldt efter use case navnet "Test of Protocols" og i diagrammet forkortet til TOP. Her er der kun én boundaryklasse, da PSoC1, som ellers står for motorstyring, i use case 2, kun anvendes til test af I2C. Dermed skal den kommunikere med PSoC, men har ikke behov for at have andre boundaryklasser. I sekvensdiagrammet ses det, at controlklassen tjekker boundary klassen, for at se om der bliver kommunikeret fra PSoC0. 
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[trim = {3.4cm 15cm 3.2cm 3.7cm}, clip = true, width=\textwidth] {Systemarkitektur/images/SekvensdiagramPSoC1.pdf}
+	\caption{Sekvensdiagram for PSoC1.}
+	\label{fig:sekvensPSoC1}
+\end{figure}
+
+Fra det simple sekvensdiagram på figur \ref{fig:sekvensPSoC1}, er der også udledt et simpelt klassediagram, som kan håndtere de få funktioner, som ses af det tilhørende sekvensdiagram. 
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[trim = {1cm 7.6cm 1.8cm 3.4cm}, clip = true, width=\textwidth] {Systemarkitektur/images/klassediagramPSoC1.pdf}
+	\caption{Klassediagram for PSoC1.}
+	\label{fig:klassePSoC1}
+\end{figure}
+
+% ---------------PSoC1 Applikationsmodel-----------------------------
+\subsubsection{Applikationsmodel for PSoC2}
+Af sekvensdiagrammet på figur \ref{fig:sekvensPSoC2} ses kommunikationen mellem klasserne for PSoC2 - også her med udgangspunkt i use case 2. Controlklassen hedder, som i de andre diagrammer TOP, og delsystemet har to boundaryklasser. PSoC2 skal kommunikere med PSoC0, som fortæller, når der skal testes. Den kommunikation foregår gennem "MasterI2C: ComProtocol"-klassen, og så skal PSoC2 også aflæse brugerinput fra Wii-nunchucken, hvilket også foregår via I2C, dog gennem den anden boundaryklasse.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[trim = {3cm 0cm 3.8cm 4.4cm}, clip = true, width=\textwidth] {Systemarkitektur/images/SekvensdiagramPSoC2.pdf}
+	\caption{Sekvensdiagram for PSoC2.}
+	\label{fig:sekvensPSoC2}
+\end{figure}
+
+Ud fra sekvensdiagrammet på figur \ref{fig:sekvensPSoC2} er der udledt metoder til et klassediagram, som ses på figur \ref{fig:klassePSoC2}. Her ses controlklassen og de to boundaryklasser med deres foreløbige metoder, der skal anvendes, som et udgangspunkt til design og implementering af softwaren på PSoC2. 
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[trim = {3.8cm 13.8cm 3.3cm 4.5cm}, clip = true, width=\textwidth] {Systemarkitektur/images/klassediagramPSoC2.pdf}
+	\caption{Klassediagram for PSoC2.}
+	\label{fig:klassePSoC2}
+\end{figure}
+>>>>>>> 1642f087d41d6a5acb1d946d53adff3ca7b3436a
