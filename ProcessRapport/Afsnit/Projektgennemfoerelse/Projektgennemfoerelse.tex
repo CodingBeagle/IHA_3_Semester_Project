@@ -3,7 +3,7 @@
 Under dette afsnit skal vi have underafsnit om følgende emner.
 
 \section{Gruppedannelse}
-
+	Gruppedannelsen skete på baggrund af personligt kendskab mellem gruppens medlemmer og samarbejde i tidligere semesterprojekter. Mikkel \& Daniel og Kasper \& Mia har arbejdet sammen i de tidligere semesterprojekter. Da vi har personligt kendskab til hinanden og har før givet udtryk for at vi ville arbejde sammen, forekom det os naturligt at danne en gruppe. Michael kender vi personligt og tog ham med i gruppen da han spurgte om han kunne være med. Da vi mærkede en ubalance i forholdet mellem IKT'er og E'er spurgte vi Pernille om hun ville være med i gruppen. Til sidst kom Tenna og spurgte om hun kunne være med i gruppe. Da gruppen ikke havde nået den øvregrænse, blev hun en del af gruppen. 
 \section{Samarbejdsaftale}
 
 \section{Arbejdsfordeling}
@@ -15,6 +15,31 @@ Under dette afsnit skal vi have underafsnit om følgende emner.
 \section{Projektadministration}
 
 \section{Udviklingsforløb}
+	\subsection{Sprint 1}
+	\textbf{19/2/16 - 10/4/16}\newline
+	\textbf{Varighed:} 3 uger\newline
+	Formålet med det første sprint var at dokumentere, implementere og teste use case 2, Test Kommunikationsprotokoller.
+	Sprintet startede ud med at lave en backlog i Pivotal Tracker. Der blev lavet userstories på baggrund af brugerønsker samt userstories til de dokumenter, der udgør de tre færdige rapporter. Herefter blev to userstories udvalgt til sprint backloggen, der skulle arbejdes på i dette sprint. Disse userstories består af underopgaver, der hørte til implementeringen af hardware og software. Når en underopgave blev færdiggjort, blev den krydset af i userstory'en. Da vi ikke færdiggjorde nogen af disse userstories til fulde, medførte det at vi tilsyneladende ikke har opnået nogen resultater i dette sprint. På burndown chartet kan man ikke se at vi har lavet noget, selvom vi har fået I2C kommunikation til at lykkedes, en fungerende H-bro til motorstyring og en test GUI. \newline
+	
+	I kravspecifikationen blev det bestemt der skulle anvendes tre PSoC til I2C kommunikationen mellem GUI, motor og nunchuck. Under arkitektur dannelsen så vi at PSoC2 forbundet til nunchucken kun pollede for information og videredesendte det. Ved at fjerne PSoC2 forbundet til nunchuck'en og forbinde den til PSoC1 forbundet til motoren. Dermed overtager PSoC1 funktionaliteten af PSoC2 og vi undgår unødig kommunikation. \newline
+	
+	Under sprintet udførte vi diverse opgaver, der ikke stod i sprint backloggen. Dette blev gjort da vi havde glemt at definere dem som userstories da vi udvalgt opgaver til sprintbackloggen. Dermed er der blevet udført meget mere under sprintet end der kan ses på Pivotal Tracker. \newline
+	
+	Under dette sprint har vi anvendt logbøger, i stedet for daglig stand up møder. Der blev hver morgen noteret det, som man egentligt ville have nævnt til de daglige møder. Det gav en del arbejde til scrum masteren, der skulle tjekke hver dag om alle havde lavet dagens indlæg. Derudover forsvandt kommunikationen mellem gruppensmedlemmer i perioder, da der ikke var nogen andre end scrum masteren, der kiggede logbøgerne igennem. Dette gav anledning til en del miskommunikation omkring arbejdsdage og arbejdsopgaver. For at undgå dette vil vi forsøge os med daglige stand up møder, med vejlederen, i næste sprint. \newline
+	
+	\textbf{Under dette sprint har vi lært:}
+	\begin{itemize}
+		\item At user stories skal være mere findelt, for at kunne vise udviklingen af projektet
+		\item At strukturen for PSoC opsætningen ikke var hensigtsmæssig, da PSoC1 kunne overtage funktionaliteten af PSoC2
+		\item At vi skal holde os til sprint backloggen og kun arbejde på de opgaver vi har defineret for sprintet
+		\item At der skal bruges mere tid til at opdatere gruppens status
+	\end{itemize}
+	
+	Da sprintet var færdig er vi gået tilbage og ændret på sprint backloggen for både at findele de userstories vi havde inkluderet og for at dokumentere de ting der er blevet udført i dette sprint, som ikke var inkluderet. Derudover tager den erfaring vi har fået med arkitekturen med til et af de næste sprint hvor use case 1 skal implementeres. Da vi ikke havde så meget erfaring med scrum og denne form for udviklingsmetode mistede vi under sprintet overblikket og dermed kom vi for langsomt i gang med implementeringen. Dette skyldes både vores uerfarenhed med scrum og dårlig tidsestimering. Vi opnåede meget i dette sprint, dog opnåede vi ikke det ønskede mål, som var en færdig implementeret use case 2. 
+	
+	
+	
+	\subsection{Sprint 2}
 
 \section{Møder}
 
