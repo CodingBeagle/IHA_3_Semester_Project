@@ -1,7 +1,10 @@
 \renewcommand{\labelenumii}{\theenumii}
 \renewcommand{\theenumii}{\theenumi.\arabic{enumii}.}
 \chapter{Kravspecifikation}
+Det følgende afsnit udpensler projektet ved specifikation af aktører, use cases, samt ikke-funktionelle krav.
+
 \section{Aktør kontekst diagram}
+Figur \ref{ref:kontekstDiagram} viser et kontekst diagram for Goofy Candygun 3000.
 \begin{figure}[H]
 	\centering
 	\includegraphics[]{Kravspecifikation/images/kontekstDiagram}
@@ -9,7 +12,8 @@
 	\label{ref:kontekstDiagram}
 \end{figure}
 
-\section{Use case diagram}
+\section{Use Case Diagram}
+Figur \ref{ref:usecaseDiagram} viser et use case diagram for Goofy Candygun 3000.
 \begin{figure}[H]
 	\centering
 	\includegraphics[width = \textwidth]{Kravspecifikation/images/usecaseDiagram}
@@ -18,10 +22,28 @@
 \end{figure}
 
 \section{Aktør beskrivelse}
-I dette system er der en aktør, nemlig brugeren. Brugeren initierer systemet, ved at vælge spiltype på brugergrænsefladen. Derudover har brugeren mulighed for at stoppe spillet igennem brugergrænsefladen. Brugeren vil under spillet interagere med systemet gennem Wii-Nunchucken. 
+Det følgende afsnit beskriver de identificerede aktører for Goofy Candygun 3000.
 
+\subsection{Aktør - Bruger}
 
-\section{Fully dressed use case}
+\begin{tabularx}{\textwidth}{| p{2cm} | p{9.1cm} |}
+	\hline
+	Aktørens Navn: & Bruger \\ 
+	\hline
+	Alternativ Navn: & Spiller \\
+	\hline
+	Type: & Primær \\
+	\hline
+	Beskrivelse: & Brugeren initierer Goofy Candy Gun, ved at vælge spiltype på brugergrænsefladen. Derudover har brugeren mulighed for at stoppe spillet igennem brugergrænsefladen. Brugeren vil under spillet interagere med Goofy Candy Gun gennem Wii-Nunchucken. \newline
+	Brugeren starter også Goofy Candy Gun system-testen for at verificere om det er operationelt. \\
+	\hline
+\end{tabularx}
+
+\section{Fully Dressed Use Cases}
+
+Det følgende afsnit indeholder de \textit{fully dressed use cases} for Goofy Candy Gun, som kan findes under afsnittet \textbf{Use Case Diagram}.
+
+\subsection{Use Case 1 - Spil Goofy Candy Gun 3000}
 \begin{tabular}{|>{\hspace{0pt}}p{3cm}  |>{\hspace{0pt}}p{9cm}|}
 	\hline
 	\textbf{Navn} & Spil Goofy Candygun 3000\\ \hline
@@ -57,7 +79,7 @@ I dette system er der en aktør, nemlig brugeren. Brugeren initierer systemet, v
 		\end{enumerate}\\ \hline
 \end{tabular}
 
-\section{Fully dressed use case}
+\subsection{Use Case 2 - Test Kommunikationsprotokoller}
 \begin{longtable}{|>{\hspace{0pt}}p{3cm}  |>{\hspace{0pt}}p{9cm}|}
 	\hline
 	\textbf{Navn} & Test kommunikationsprotokoller\\ \hline
