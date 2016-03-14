@@ -1,4 +1,4 @@
 # IHA 3. Semester Project
 
 Having a hard time today? Have a fluffy: <br/>
-![CutePug](http://hellogiggles.com/wp-content/uploads/2015/03/17/53451-Cute-Dog.jpg)
+![CuteDog](http://7-themes.com/data_images/out/73/7023200-sausage-dog-puppy.jpg)
