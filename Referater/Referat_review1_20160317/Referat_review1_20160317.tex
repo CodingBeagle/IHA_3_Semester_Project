@@ -1,0 +1,85 @@
+\documentclass{article}
+
+% -- PREAMBLE START --
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern} % load a font with all the characters
+
+\usepackage{parskip}
+
+\usepackage[danish]{isodate}
+
+% Create front page info
+\title{Referat af Vejledermøde \#...}
+\author{Gruppe 3}
+\date{12.02.2016 - kl. 12:00}
+% -- PREAMBLE END --
+
+\begin{document}
+	\maketitle
+	
+	\section{Fremmødte}
+	\begin{itemize}
+		\item ...
+		\item ...
+	\end{itemize}
+	
+	\section{Udeblevet med afbud}
+	\begin{itemize}
+		\item ...
+		\item ...
+	\end{itemize}
+	
+	\section{Udeblevet uden afbud}
+	\begin{itemize}
+		\item ...
+		\item ...
+	\end{itemize}
+	
+	\section{Dagsorden}
+	\begin{itemize}
+		\item Side 3
+		\subitem Kluntet, slikkanon til Goofy Candygun. Husk fodnoter! (youtube-link) 
+		Spilstatistikker. 
+		\item Controller i første halvdel af indledning, lige plidselig blvier det til wii-nunchuck. 
+		\subitem Hvorfor slik? I det rige billede ser det lidt meningsløst ud, at man skyder slik op på en væg. 
+		\item Skriv hvorfor den skal have en motor. Den skal kunne dreje frem og tilbage. 
+		\item Det er meget specifikt, at vi skriver Devkit. Start med at skrive, at det skal være en indlejret linux-platform. 
+		\item Horeunger. 
+		\item Meget hårdt opdelt i HW og SW. Lyder som om, at vi har to grupper der arbejder. Iterativ proces, det behøver ikke være således. 
+		\item Systembeskrivelse
+		\subitem PSoC0, PSoC1, PSoC2 - PSoC-kittet har to chips, der hedder PSoC4 og PSoC5. 
+		\subitem Det er upraktisk og dyrt, at have tre PSoC'er. 
+		\subitem Sensoren er ikke med på figur 2. 
+		\subitem Sensorer: Kim siger, at sensorer er aktører. Men kun hvis de kan starte en use case. Måske. 
+		\item Dokumentation 
+		\begin{itemize}
+			\item Use case 1
+			\subitem Hvorfor skal man selv fylde slik i og hvorfor skal det være præcist så mange skud. 
+			\subitem Kunne være en god ide, at have sensor, der holder øje med slik. 
+			\subitem At man skal fylde slik i og kan afslutte spil strider mod hinanden. 
+			\subitem Husk termliste. 
+			\item Use case 2
+			\subitem Der står ikke noget om at PsoC'en finder ud af at nunchucken ikke er der. 
+			\subitem Bedre navne til PSoC-blokke. 
+			\subitem Det ville være smart, hvis use casen ikke stopper første gang den støder på en fejl. Hvis det er PSoC2 der stopper kan den stadig godt teste PSoC1. 
+			\item Accepttest
+			\subitem I use casen ser det ud som om man vælger to spillere midt i use casen. i accepttesten gør man det som det første. 
+			\item Blokbeskrivelse skal komme efter diagrammer. 
+			\subitem Vær konsekvent med skrifttype og kursiv! og stavemåder! 
+			\item Signalbeskrivelse
+			\subitem Beskriv hvad 0 volt er, referencespænding til stel. 
+			\subitem Beskriv hvad høj og lav er (høj kan godt gå fra 3,3 til 5 volt)
+			\item BDD
+			\subitem Strømforsyning
+			\item IBD 
+			\subitem Strømforsyning, specificerer kun de porte hvor der sker en datatransmission. Så sætter en blok, hvor dette står. 
+			\item side 20
+			\subitem Al information sendes med strenge. Brug evt. enum i stedet.
+			\subitem Brugergrænseflade. Nu er vi i denne state, så skal jeg se sådan ud. State machines. Sekvensdiagrammer er måske lidt for detaljeret til dette. 
+			\subitem Klassediagram, ComProtocol. 
+		\end{itemize}
+		\subitem Spil spillet er en stor use case. Dele op i flere use cases. 
+		\subitem 
+	\end{itemize}
+\end{document}

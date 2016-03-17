@@ -1,0 +1,2 @@
+20160315
+Vi har brændt MOSFET'en zvp3306a af, så vi skal finde noget andet at sætte ind i stedet for. Vi prøver at finde en anden MOSFET i stedet for denne, men dem værkstedet har findes ikke i multisim. 
