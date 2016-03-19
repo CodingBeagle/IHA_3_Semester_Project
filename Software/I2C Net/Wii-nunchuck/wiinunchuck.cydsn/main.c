@@ -14,6 +14,9 @@
 
 // Define unit address for nunchuck
 #define nunchuckUnitAddress 0x52
+#define PSoC0 0x08
+
+#define NunchuckDataCommand 0b00101010
 
 // Create buffer for decoded data
 uint8 dataBuffer[3];
@@ -33,10 +36,10 @@ int main()
     DebugLEDRed_Write(1);
     
     int sendHandshake = 0;
-
+    int sendNunchuckData = 0;
+    
     for(;;)
     {
-        I2C_1_I2CMasterClearStatus();
         if (!sendHandshake)
         {
             if (NunchuckSendHandshake() == 0)
@@ -51,16 +54,19 @@ int main()
         }
         else
         {   
+            I2C_1_I2CMasterClearStatus();
             DebugLEDGreen_Write(0);
          
             if (NunchuckRequestData() == 0)
             {
                 DebugLEDGreen_Write(1);
                 DebugLEDRed_Write(0);
+                sendHandshake = 0;
             }
             else 
             {
                 DebugLEDGreen_Write(0);
+                DebugLEDRed_Write(1);
             }
             
             // Delay between requesting and reading
@@ -70,13 +76,41 @@ int main()
             {
                 DebugLEDGreen_Write(1);
                 DebugLEDRed_Write(0);
+                sendHandshake = 0;
             }
             else
             {
-             DebugLEDGreen_Write(0);   
+                DebugLEDGreen_Write(0);
+                DebugLEDRed_Write(1);
+                
+                sendNunchuckData = 1;
             }
         }
         I2C_1_I2CMasterSendStop();
+        
+        CyDelay(200);
+        
+        // Send nunchuck data
+        if (sendNunchuckData)
+        {
+            int readError = 0;
+            
+            I2C_1_I2CMasterClearStatus();
+            readError = I2C_1_I2CMasterSendStart(PSoC0, I2C_1_I2C_READ_XFER_MODE);
+            
+            // Send command type
+            I2C_1_I2CMasterWriteByte(NunchuckDataCommand);
+            
+            // Send Nunchuck data
+            I2C_1_I2CMasterWriteByte(dataBuffer[0]);
+            I2C_1_I2CMasterWriteByte(dataBuffer[1]);
+            I2C_1_I2CMasterWriteByte(dataBuffer[2]);
+            
+            I2C_1_I2CMasterSendStop();
+            
+            sendNunchuckData = 0;
+        }
+        
         CyDelay(200);
     }
     
