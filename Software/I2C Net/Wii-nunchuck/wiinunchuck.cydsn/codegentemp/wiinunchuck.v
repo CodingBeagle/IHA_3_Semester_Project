@@ -1,6 +1,6 @@
 // ======================================================================
 // wiinunchuck.v generated from TopDesign.cysch
-// 03/11/2016 at 09:54
+// 03/19/2016 at 11:05
 // This file is auto generated. ANY EDITS YOU MAKE MAY BE LOST WHEN THIS FILE IS REGENERATED!!!
 // ======================================================================
 
