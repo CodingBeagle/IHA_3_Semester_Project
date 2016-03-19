@@ -110,7 +110,7 @@ int NunchuckReadData(uint8* buffer)
         // XAxisValue
         buffer[0] = exactData0;
         // YAxisValue
-        buffer[1] = exactData2;
+        buffer[1] = exactData1;
         // ButtonStates
         buffer[2] = exactData2;
         
