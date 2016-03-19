@@ -70,13 +70,11 @@ Generelt for signalbeskrivelsen gælder, at når et signal beskrives som 'højt'
 		 & & SCL & Type: CMOS \newline Spændingsniveau: 0-5V \newline Hastighed: ?? \newline Beskrivelse: Clock signalet fra master til lyttende I2C slaver, som bruges til at synkronisere den serielle kommunikation. \\ \hline
 		\end{longtable}
 
-\subsection{Specifikation og Analyse}
-
-\subsection{Hardware Arkitektur}
+\section{Hardware Arkitektur}
 I hardwarearkitekturen brydes systemet ned i dele, som senere gør det muligt at uddele arbejdsopgaver, og specificere grænseflader. Hardwarearkitekturen består at BDD og IBD for systemet.
 
 % ---------------BDD--------------------------------------------------
-\subsubsection{BDD for Candygun 3000}
+\subsection{BDD for Candygun 3000}
 I BDD-diagrammet på figur \ref{fig:BDD} er Candygun 3000 brudt ned i blokkene PSoC0, PSoC1, PSoC2 og Devkit 8000. Devkit 8000 er brugergrænsefladen, som brugeren kan interagere med via touchskærmen. Den er forbundet via SPI til PSoC0, som er SPI-slave. PSoC0 er desuden også I2C-master. PSoC0 kommunikerer via I2C til PSoC1 og PSoC2. PSoC1 står for motorstyring, som via et PWM-signal styrer de 3 motorer. PSoC2 har til opgave at aflæse brugerinput fra Wii-nunchucken, som også kommunikerer via I2C. På figur \ref{fig:BDD} ses de forskellige blokke og deres porte. Desuden er der en flowspecification for I2C og SPI, hvor forbindelserne er beskrevet mere detaljeret (set fra master-synspunkt). 
 
 \begin{figure}[H]
@@ -87,7 +85,7 @@ I BDD-diagrammet på figur \ref{fig:BDD} er Candygun 3000 brudt ned i blokkene P
 \end{figure}
 
 % ---------------IBD--------------------------------------------------
-\subsubsection{IBD for Candygun 3000}
+\subsection{IBD for Candygun 3000}
 I IBD'et på figur \ref{fig:IBD} er forbindelserne mellem de forskellige blokke overskueliggjort. Det er dermed let at få et overblik over, hvilke grænseflader der skal tages højde for i den videre udvikling. 
 
 \begin{figure}[H]
@@ -97,11 +95,11 @@ I IBD'et på figur \ref{fig:IBD} er forbindelserne mellem de forskellige blokke 
 	\label{fig:IBD}
 \end{figure}
 
-\subsection{Software Arkitektur}
+\section{Software Arkitektur}
 I softwarearkitekturen udarbejdes der applikationsmodeller bestående af sekvensdiagrammer og klassediagrammer for hvert delsystem med udgangspunkt i use case 2. Denne arkitektur overskueliggøre kravene til de boundaryklasser, der muliggør kommunikation mellem delsystemerne. Desuden bliver der gennem analyse af use case og sekvensdiagrammer udledt grundlæggende metoder i klasserne.  
 
 % ---------------Devkit Applikationsmodel-----------------------------
-\subsubsection{Applikationsmodel for Devkit 8000}
+\subsection{Applikationsmodel for Devkit 8000}
 Sekvensdiagrammet for Devkit 8000 ses på figur \ref{fig:sekvensDevkit}. Det tager udgangspunkt i use case 2. Der er to boundaryklasser, da brugergrænsefladen skal kommunikere med brugeren og PSoC0. Ud til brugeren er der en GUI. Boundaryklassen ComProtocol, skal kunne håndtere SPI-kommunikationen til PSoC0. Som det ses af diagrammet initieres testen af brugeren via GUI'en, og derfra er det controlklassen på Devkittet, der sørger for, at de forskellige tests bliver sat i gang, og melder resultatet ud til brugeren via GUI'en.
 
 \begin{figure}[H]
@@ -120,7 +118,7 @@ Ud fra sekvensdiagrammet for Devkit 8000 er der udledt foreløbige metoder til k
 \end{figure}
 
 % ---------------PSoC0 Applikationsmodel-----------------------------
-\subsubsection{Applikationsmodel for PSoC0}
+\subsection{Applikationsmodel for PSoC0}
 På figur \ref{fig:sekvensPSoC0} ses et sekvensdiagram for PSoC0 med udgangspunkt i vores test use case - usecase 2. Controlklassen, som er opkaldt efter use case navnet, hedder Test of Protocols. Hvilket på figur \ref{fig:sekvensPSoC0} er forkortet til TOP. Desuden er der tre boundaryklasser, da PSoC0 skal kommunikere både med Devkit 8000 og de to andre PSoC'er. Som det ses på sekvensdiagrammet, står TOP-klassen og tjekker på boundaryklassen med SPI-forbindelse til Devkit 8000, for at holde øje med om en test bliver startet. Derudover sørger controlklassen for at kommunikere videre ud til de andre PSoC'er, der styrer henholdsvis motorerne og Wii-nunchucken. 
 
 \begin{figure}[H]
@@ -140,7 +138,7 @@ I klassediagrammet på figur \ref{fig:klassePSoC0} ses controlklassen og de tre 
 \end{figure}
 
 % ---------------PSoC1 Applikationsmodel-----------------------------
-\subsubsection{Applikationsmodel for PSoC1}
+\subsection{Applikationsmodel for PSoC1}
 Sekvensdiagrammet for PSoC1 med udgangspunkt i use case 2 ses på figur \ref{fig:sekvensPSoC1}. Også her er controlklassen opkaldt efter use case navnet "Test of Protocols" og i diagrammet forkortet til TOP. Her er der kun én boundaryklasse, da PSoC1, som ellers står for motorstyring, i use case 2, kun anvendes til test af I2C. Dermed skal den kommunikere med PSoC, men har ikke behov for at have andre boundaryklasser. I sekvensdiagrammet ses det, at controlklassen tjekker boundary klassen, for at se om der bliver kommunikeret fra PSoC0. 
 
 \begin{figure}[H]
@@ -160,7 +158,7 @@ Fra det simple sekvensdiagram på figur \ref{fig:sekvensPSoC1}, er der også udl
 \end{figure}
 
 % ---------------PSoC1 Applikationsmodel-----------------------------
-\subsubsection{Applikationsmodel for PSoC2}
+\subsection{Applikationsmodel for PSoC2}
 Af sekvensdiagrammet på figur \ref{fig:sekvensPSoC2} ses kommunikationen mellem klasserne for PSoC2 - også her med udgangspunkt i use case 2. Controlklassen hedder, som i de andre diagrammer TOP, og delsystemet har to boundaryklasser. PSoC2 skal kommunikere med PSoC0, som fortæller, når der skal testes. Den kommunikation foregår gennem "MasterI2C: ComProtocol"-klassen, og så skal PSoC2 også aflæse brugerinput fra Wii-nunchucken, hvilket også foregår via I2C, dog gennem den anden boundaryklasse.
 
 \begin{figure}[H]
@@ -178,4 +176,60 @@ Ud fra sekvensdiagrammet på figur \ref{fig:sekvensPSoC2} er der udledt metoder 
 	\caption{Klassediagram for PSoC2.}
 	\label{fig:klassePSoC2}
 \end{figure}
->>>>>>> 1642f087d41d6a5acb1d946d53adff3ca7b3436a
+
+\subsection{Kommunikationsprotokoller}
+
+Dette afsnit beskriver de kommunikationsprotokoller som bruges til at sende data mellem systemets komponenter på de brugte bustyper - I2C og SPI.
+
+På figur \ref{fig:kommunikationsOverblik} gives et overblik over systemets forbindelser mellem dets embedded linux platform og microcontrollers. For hver forbindelse ses typen af bus der bruges.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\textwidth] {Systemarkitektur/images/overordnetstruktur}
+	\caption{Forbindelser mellem systemets komponenter}
+	\label{fig:kommunikationsOverblik}
+\end{figure}
+
+\subsubsection{SPI Protokol}
+
+\subsubsection{I2C Protokol}
+
+I2C\cite{I2C} er en bus bestående af to ledninger. Den ene ledning bruges som databus og navngives \textit{Serial Data Line} (SDA). Den anden ledning bruges til clock signalet, for at synkronisere kommunikationen, og navngives \textit{Serial Clock Line} (SCL). Enheder på I2C bussen gør brug af et master-slave forhold til at sende og læse data. En fordel ved I2C bussen er at netværket kan bestå af multiple masters og slaver.
+
+I2C gør brug af en indbygget protokol der anvender adressering af hardware-enheder for at identificere hvilken enhed der kommunikeres med. På tabel \ref{table:I2CAdress} ses addresserne tildelt systemets PSoCs.
+
+\begin{table}[H]
+	\centering
+	\begin{tabular}{l|lllllll|l}
+		\hline
+		I2C Adresse bits & 7 & 6 & 5 & 4 & 3 & 2 & 1 & LSB er read/write indikator \\ \hline
+		PSoC0        & 0 & 0 & 0 & 1 & 0 & 0 & 0 & 0/1                        \\
+		PSoC1        & 0 & 0 & 0 & 1 & 0 & 0 & 1 & 0/1                        \\
+		PSoC2        & 0 & 0 & 1 & 0 & 0 & 0 & 0 & 0/1                        \\ \hline
+	\end{tabular}
+	\caption{Adresser brugt på systemets I2C bus}
+	\label{table:I2CAdress}
+\end{table}
+
+Den indbyggede I2C protokol sender data serielt i pakker af 8-bit (1 byte). På figur \ref{fig:I2CTimingDiagram} ses et timing-diagram for aflæsning af 1 byte. Her ses at processen  begynder med en addresse-byte, efterfulgt af en data-byte. 
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\textwidth] {Systemarkitektur/images/I2CTimingDiagram}
+	\caption{Timing Diagram af 1-byte I2C aflæsning}
+	\label{fig:I2CTimingDiagram}
+\end{figure}
+
+Da I2C data udveksling sker bytevist, er I2C protokollen opbygget ved at første modtagede byte indikerer typen af kommando, hvorefter \textit{N} efterfølgende bytes er tilhørende data payload. På denne måde ved modtagere hvordan dataen skal fortolkes.
+
+For at formatere den data der bliver sendt over I2C bussen, bliver der gjort brug af følgende protokol.
+
+For at sende data:
+Først sendes en kommando type. For denne use case er der kun brug for en enkelt kommando type, nemlig Nunchuck\_Data. Derefter afsendes dataen for kommandotypen, som i Nunchuck\_Data vil bestå af 3 bytes: xAxis, yAxis og buttonsPressed. Når kommandotypens data er sendt, senderen færdig. 
+
+Modtageren skal følge følgende protokol:
+Først skal den modtagne kommando type aftolkes, og alt efter hvilken type der er modtaget, skal resten af dataen gemmes i bestemte buffere. Når alle dataen er modtaget, skal modtageren ud fra kommando typen bestemme hvilken kommando den skal udføre. 
+
+
+
+
