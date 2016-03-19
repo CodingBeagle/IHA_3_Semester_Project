@@ -70,7 +70,7 @@ int main()
             }
             
             // Delay between requesting and reading
-            CyDelay(200);
+            CyDelay(1);
             
             if (NunchuckReadData(dataBuffer) == 0)
             {
@@ -86,9 +86,8 @@ int main()
                 sendNunchuckData = 1;
             }
         }
-        I2C_1_I2CMasterSendStop();
         
-        CyDelay(200);
+        CyDelay(1);
         
         // Send nunchuck data
         if (sendNunchuckData)
@@ -96,22 +95,29 @@ int main()
             int readError = 0;
             
             I2C_1_I2CMasterClearStatus();
-            readError = I2C_1_I2CMasterSendStart(PSoC0, I2C_1_I2C_READ_XFER_MODE);
+            readError = I2C_1_I2CMasterSendStart(PSoC0, I2C_1_I2C_WRITE_XFER_MODE);
             
-            // Send command type
-            I2C_1_I2CMasterWriteByte(NunchuckDataCommand);
-            
-            // Send Nunchuck data
-            I2C_1_I2CMasterWriteByte(dataBuffer[0]);
-            I2C_1_I2CMasterWriteByte(dataBuffer[1]);
-            I2C_1_I2CMasterWriteByte(dataBuffer[2]);
+            if (readError == I2C_1_I2C_MSTR_NO_ERROR)
+            {
+                // Send command type
+                I2C_1_I2CMasterWriteByte(NunchuckDataCommand);
+                
+                // Send Nunchuck data
+                I2C_1_I2CMasterWriteByte(dataBuffer[0]);
+                I2C_1_I2CMasterWriteByte(dataBuffer[1]);
+                I2C_1_I2CMasterWriteByte(dataBuffer[2]);
+                
+                DebugLEDRed_Write(0);
+                DebugLEDGreen_Write(1);
+                
+                sendNunchuckData = 0;
+            }
             
             I2C_1_I2CMasterSendStop();
-            
-            sendNunchuckData = 0;
         }
         
-        CyDelay(200);
+        CyDelay(1);
+        DebugLEDRed_Write(1);
     }
     
     return 0;

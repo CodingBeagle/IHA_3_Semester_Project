@@ -31,6 +31,7 @@ int NunchuckSendHandshake()
         // Error happened while sending byte
         if(I2C_1_I2CMasterWriteByte(0x40) != I2C_1_I2C_MSTR_NO_ERROR)
         {
+            I2C_1_I2CMasterSendStop();
             return 0;
         }
         // No error occurred while sending byte
@@ -39,17 +40,22 @@ int NunchuckSendHandshake()
             // Error happens while sending byte
             if (I2C_1_I2CMasterWriteByte(0x00) != I2C_1_I2C_MSTR_NO_ERROR)
             {
+                I2C_1_I2CMasterSendStop();
                 return 0;
             }
             // No error occurred while sending byte
             else
             {
+                I2C_1_I2CMasterSendStop();
                 return 1;
             }
         }
+        
+        I2C_1_I2CMasterSendStop();
     }
     else
     {
+        I2C_1_I2CMasterSendStop();
         return 0;
     }
 }
@@ -69,11 +75,15 @@ int NunchuckRequestData()
         // Error happens while sending byte
         if(I2C_1_I2CMasterWriteByte(0x00)!= I2C_1_I2C_MSTR_NO_ERROR)
         {
+            I2C_1_I2CMasterSendStop();
             return 0;
         }
+        
+        I2C_1_I2CMasterSendStop();
     }
     else 
     {
+        I2C_1_I2CMasterSendStop();
         return 0;
     }
     
@@ -114,13 +124,17 @@ int NunchuckReadData(uint8* buffer)
         // ButtonStates
         buffer[2] = exactData2;
         
+        I2C_1_I2CMasterSendStop();
         return 1;
     }
     // Error has occurred while reading data
     else
     {
+        I2C_1_I2CMasterSendStop();
         return 0;
     }
+    
+    I2C_1_I2CMasterSendStop();
 }
     
 
