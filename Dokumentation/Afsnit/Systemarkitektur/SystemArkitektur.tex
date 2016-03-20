@@ -194,9 +194,9 @@ På figur \ref{fig:kommunikationsOverblik} gives et overblik over systemets forb
 
 \subsubsection{I2C Protokol}
 
-I2C\cite{I2C} er en bus bestående af to ledninger. Den ene ledning bruges som databus og navngives \textit{Serial Data Line} (SDA). Den anden ledning bruges til clock signalet, for at synkronisere kommunikationen, og navngives \textit{Serial Clock Line} (SCL). Enheder på I2C bussen gør brug af et master-slave forhold til at sende og læse data. En fordel ved I2C bussen er at netværket kan bestå af multiple masters og slaver.
+I2C\cite{I2C} er en bus bestående af to ledninger. Den ene ledning bruges som databus og navngives \textit{Serial Data Line} (SDA). Den anden ledning bruges til clock signalet, for at synkronisere kommunikationen, og navngives \textit{Serial Clock Line} (SCL). Enheder på I2C bussen gør brug af et master-slave forhold til at sende og læse data. En fordel ved I2C bussen er at netværket kan bestå af multiple masters og slaver, hvilket gavner sig godt for dette system da fire I2C komponenter skal sende data mellem hinanden.
 
-I2C gør brug af en indbygget protokol der anvender adressering af hardware-enheder for at identificere hvilken enhed der kommunikeres med. På tabel \ref{table:I2CAdress} ses addresserne tildelt systemets PSoCs.
+I2C gør brug af en integreret protokol der anvender adressering af hardware-enheder for at identificere hvilken enhed der kommunikeres med. På tabel \ref{table:I2CAdress} ses addresserne tildelt systemets PSoCs.
 
 \begin{table}[H]
 	\centering
@@ -211,7 +211,7 @@ I2C gør brug af en indbygget protokol der anvender adressering af hardware-enhe
 	\label{table:I2CAdress}
 \end{table}
 
-Den indbyggede I2C protokol sender data serielt i pakker af 8-bit (1 byte). På figur \ref{fig:I2CTimingDiagram} ses et timing-diagram for aflæsning af 1 byte. Her ses at processen  begynder med en addresse-byte, efterfulgt af en data-byte. 
+Den integrerede I2C protokol sender data serielt i pakker af 8-bit (1 byte). På figur \ref{fig:I2CTimingDiagram} ses et timing-diagram for aflæsning af 1 byte. Her ses at processen  begynder med en addresse-byte, efterfulgt af en data-byte. 
 
 \begin{figure}[H]
 	\centering
@@ -220,15 +220,38 @@ Den indbyggede I2C protokol sender data serielt i pakker af 8-bit (1 byte). På 
 	\label{fig:I2CTimingDiagram}
 \end{figure}
 
-Da I2C data udveksling sker bytevist, er I2C protokollen opbygget ved at første modtagede byte indikerer typen af kommando, hvorefter \textit{N} efterfølgende bytes er tilhørende data payload. På denne måde ved modtagere hvordan dataen skal fortolkes.
+Systemet gør brug af denne integrerede I2C protokol via en højere abstraheret \textit{Application Programming Interface} (API). Ved brug af denne API er en brugerdefineret protokol udviklet, som gør det muligt at sende kommandoer og data mellem systemets PSoC's.
 
-For at formatere den data der bliver sendt over I2C bussen, bliver der gjort brug af følgende protokol.
+Da I2C data udveksling - som beskrevet før - underliggende sker bytevist, er den brugerdefinerede I2C protokol opbygget ved at første modtagede byte indikerer typen af kommando. Herefter følger \textit{N} bytes som kommandoens tilhørende data. \textit{N} er et vilkårligt heltal og bruges i dette afsnit når der refereres til en mængde data-bytes der sendes med en kommandotype.
 
-For at sende data:
-Først sendes en kommando type. For denne use case er der kun brug for en enkelt kommando type, nemlig Nunchuck\_Data. Derefter afsendes dataen for kommandotypen, som i Nunchuck\_Data vil bestå af 3 bytes: xAxis, yAxis og buttonsPressed. Når kommandotypens data er sendt, senderen færdig. 
+Modtagere bruger kommandoens type til at vide hvordan de efterfølgende data-bytes fortolkes. På figur \ref{fig:I2CProtokolEksempel} ses et sekvensdiagram der demonstrerer forløbet mellem en I2C afsender og modtager ved brug af I2C protokollen via pseudo-kommandoer.
 
-Modtageren skal følge følgende protokol:
-Først skal den modtagne kommando type aftolkes, og alt efter hvilken type der er modtaget, skal resten af dataen gemmes i bestemte buffere. Når alle dataen er modtaget, skal modtageren ud fra kommando typen bestemme hvilken kommando den skal udføre. 
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\textwidth] {Systemarkitektur/images/I2CProtocol}
+	\caption{Eksempel af I2C Protokol Forløb}
+	\label{fig:I2CProtokolEksempel}
+\end{figure}
+
+Det kan på figur \ref{fig:I2CProtokolEksempel} ses at afsenderen først starter en I2C transaktion, hvorefter typen af kommando sendes som den første byte. Efterfølgende sendes \textit{N} antal bytes, afhængig af hvor meget data den givne kommandotype har brug for at sende. Efter afsluttet I2C transaktion læser I2C modtageren typen af kommando, hvor den herefter frit kan fortolke \textit{N} antal modtagne bytes afhængig af den modtagne kommandotype.
+
+På tabel \ref{table:I2CKommandoer} ses de definerede kommandoer der gøres brug af.
+
+\begin{table}[H]
+	\centering
+	\resizebox{\textwidth}{!}{%
+		\begin{tabular}{l|l|l|l|l}
+			\textbf{Kommandotype} & \textbf{Beskrivelse} & \textbf{Binær Værdi} & \textbf{Hex Værdi} & \multicolumn{1}{l|}{\textbf{Data Bytes}} \\ \hline
+			NunchuckData & \begin{tabular}[c]{@{}l@{}}Indeholder aflæst input data\\ fra Wii-Nunchuck Controlleren\end{tabular} & 00101010 & 2A & \begin{tabular}[c]{@{}l@{}}Byte \#1:\\ Analog Stick Y værdi\\ \\ Byte \#2:\\ Analog stick X værdi\\ \\ Byte \#3:\\ Knap tryk\end{tabular} \\
+			&  &  &  &  \\
+			&  &  &  &  \\ \hline
+		\end{tabular}%
+	}
+	\caption{I2C Protokol Kommandotyper}
+	\label{table:I2CKommandoer}
+\end{table}
+
+Kolonnerne "Binær Værdi" og "Hex Værdi" i tabel \ref{table:I2CKommandoer} viser kommandotypens unikke tal-ID i både binær- og hexadecimalform. Det er denne værdi der sendes som den første byte, for at identificere kommandotypen. 
 
 
 
