@@ -1,0 +1,8 @@
+# Design01
+# 2016-03-21 10:53:18Z
+
+# IO_6@[IOP=(0)][IoId=(6)] is reserved: SWDDebugEnabled
+dont_use_io iocell 0 6
+# IO_7@[IOP=(0)][IoId=(7)] is reserved: SWDDebugEnabled
+dont_use_io iocell 0 7
+set_location "ClockGenBlock" m0s8clockgenblockcell -1 -1 0
