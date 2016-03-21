@@ -2,7 +2,11 @@
 --	Conversion of PSoC0.v to vh2:
 --
 --	Cypress Semiconductor - WARP Version 6.3 IR 41
+<<<<<<< b4941186a0a74edf4afc90a756b3ad3ad49db06f
 --	Mon Mar 21 10:02:50 2016
+=======
+--	Mon Mar 21 15:09:42 2016
+>>>>>>> f3af0a9001b06ff338250faa437d1de9d7f4bd7f
 --
 
 USE cypress.cypress.all;

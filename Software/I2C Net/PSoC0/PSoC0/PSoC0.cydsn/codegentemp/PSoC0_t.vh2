@@ -1,5 +1,10 @@
+<<<<<<< b4941186a0a74edf4afc90a756b3ad3ad49db06f
 -- Project:   C:\Users\Daniel\Documents\Semesterprojekt3\Software\I2C Net\PSoC0\PSoC0\PSoC0.cydsn\PSoC0.cyprj
 -- Generated: 03/21/2016 10:02:54
+=======
+-- Project:   C:\Users\Bitious\Documents\Engineering\IHA_3_Semester_Project\Software\I2C Net\PSoC0\PSoC0\PSoC0.cydsn\PSoC0.cyprj
+-- Generated: 03/21/2016 15:09:47
+>>>>>>> f3af0a9001b06ff338250faa437d1de9d7f4bd7f
 -- PSoC Creator  3.3 SP1
 
 ENTITY PSoC0 IS

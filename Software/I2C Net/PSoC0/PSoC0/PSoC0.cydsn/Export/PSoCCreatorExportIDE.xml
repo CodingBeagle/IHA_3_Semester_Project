@@ -6,8 +6,8 @@
     <Toolchain Name="ARM GCC Generic" Selected="True">
       <Tool Name="prebuild" Command="" Options="" />
       <Tool Name="assembler" Command="arm-none-eabi-as.exe" Options="-mcpu=cortex-m0 -mthumb -I. -IGenerated_Source\PSoC4 -alh=${OutputDir}/${CompileFile}.lst -g -W" />
-      <Tool Name="compiler" Command="arm-none-eabi-gcc.exe" Options="-mcpu=cortex-m0 -mthumb -Wno-main -I. -IGenerated_Source\PSoC4 -Wa,-alh=${OutputDir}/${CompileFile}.lst -g -D DEBUG -Wall -ffunction-sections -Og -ffat-lto-objects" />
-      <Tool Name="linker" Command="arm-none-eabi-gcc.exe" Options="-mcpu=cortex-m0 -mthumb -g -ffunction-sections -Og -L Generated_Source\PSoC4 -Wl,-Map,${OutputDir}/${ProjectShortName}.map -T Generated_Source\PSoC4\cm0gcc.ld -specs=nano.specs -Wl,--gc-sections" />
+      <Tool Name="compiler" Command="arm-none-eabi-gcc.exe" Options="-mcpu=cortex-m0 -mthumb -Wno-main -I. -IGenerated_Source\PSoC4 -Wa,-alh=${OutputDir}/${CompileFile}.lst -g -D DEBUG -Wall -ffunction-sections -O0 -ffat-lto-objects" />
+      <Tool Name="linker" Command="arm-none-eabi-gcc.exe" Options="-mcpu=cortex-m0 -mthumb -g -ffunction-sections -O0 -L Generated_Source\PSoC4 -Wl,-Map,${OutputDir}/${ProjectShortName}.map -T Generated_Source\PSoC4\cm0gcc.ld -specs=nano.specs -Wl,--gc-sections" />
       <Tool Name="postbuild" Command="" Options="" />
     </Toolchain>
     <Toolchain Name="ARM MDK Generic" Selected="False">
@@ -25,7 +25,7 @@
       <Tool Name="postbuild" Command="" Options="" />
     </Toolchain>
   </Toolchains>
-  <Project Name="PSoC0" Path="C:\Users\Daniel\Documents\Semesterprojekt3\Software\I2C Net\PSoC0\PSoC0\PSoC0.cydsn" Version="5.30" Type="Normal">
+  <Project Name="PSoC0" Path="C:\Users\Bitious\Documents\Engineering\IHA_3_Semester_Project\Software\I2C Net\PSoC0\PSoC0\PSoC0.cydsn" Version="5.30" Type="Normal">
     <CMSIS_SVD_File>PSoC0.svd</CMSIS_SVD_File>
     <Datasheet />
     <LinkerFiles>
@@ -34,14 +34,14 @@
       <LinkerFile Toolchain="ARM IAR Generic">.\Generated_Source\PSoC4\Cm0Iar.icf</LinkerFile>
     </LinkerFiles>
     <Folders>
-      <Folder BuildType="BUILD" Path="C:\Users\Daniel\Documents\Semesterprojekt3\Software\I2C Net\PSoC0\PSoC0\PSoC0.cydsn">
-        <Files Root="C:\Users\Daniel\Documents\Semesterprojekt3\Software\I2C Net\PSoC0\PSoC0\PSoC0.cydsn">
+      <Folder BuildType="BUILD" Path="C:\Users\Bitious\Documents\Engineering\IHA_3_Semester_Project\Software\I2C Net\PSoC0\PSoC0\PSoC0.cydsn">
+        <Files Root="C:\Users\Bitious\Documents\Engineering\IHA_3_Semester_Project\Software\I2C Net\PSoC0\PSoC0\PSoC0.cydsn">
           <File BuildType="BUILD" Toolchain="">.\main.c</File>
           <File BuildType="BUILD" Toolchain="">.\cyapicallbacks.h</File>
         </Files>
       </Folder>
-      <Folder BuildType="STRICT" Path="C:\Users\Daniel\Documents\Semesterprojekt3\Software\I2C Net\PSoC0\PSoC0\PSoC0.cydsn\Generated_Source\PSoC4">
-        <Files Root="C:\Users\Daniel\Documents\Semesterprojekt3\Software\I2C Net\PSoC0\PSoC0\PSoC0.cydsn">
+      <Folder BuildType="STRICT" Path="C:\Users\Bitious\Documents\Engineering\IHA_3_Semester_Project\Software\I2C Net\PSoC0\PSoC0\PSoC0.cydsn\Generated_Source\PSoC4">
+        <Files Root="C:\Users\Bitious\Documents\Engineering\IHA_3_Semester_Project\Software\I2C Net\PSoC0\PSoC0\PSoC0.cydsn">
           <File BuildType="BUILD" Toolchain="">.\Generated_Source\PSoC4\cyfitter_cfg.h</File>
           <File BuildType="BUILD" Toolchain="">.\Generated_Source\PSoC4\cyfitter_cfg.c</File>
           <File BuildType="BUILD" Toolchain="">.\Generated_Source\PSoC4\cymetadata.c</File>
@@ -60,7 +60,6 @@
           <File BuildType="BUILD" Toolchain="">.\Generated_Source\PSoC4\I2C_1_I2C_INT.c</File>
           <File BuildType="BUILD" Toolchain="">.\Generated_Source\PSoC4\I2C_1_I2C.c</File>
           <File BuildType="BUILD" Toolchain="">.\Generated_Source\PSoC4\I2C_1_I2C_BOOT.c</File>
-          <File BuildType="BUILD" Toolchain="">.\Generated_Source\PSoC4\I2C_1_I2C_MASTER.c</File>
           <File BuildType="BUILD" Toolchain="">.\Generated_Source\PSoC4\I2C_1_I2C_SLAVE.c</File>
           <File BuildType="BUILD" Toolchain="">.\Generated_Source\PSoC4\I2C_1_PM.c</File>
           <File BuildType="BUILD" Toolchain="">.\Generated_Source\PSoC4\I2C_1_BOOT.c</File>
@@ -120,47 +119,47 @@
           <File BuildType="BUILD" Toolchain="">.\Generated_Source\PSoC4\debugLEDBlue_PM.c</File>
         </Files>
       </Folder>
-      <Folder BuildType="STRICT" Path="C:\Users\Daniel\Documents\Semesterprojekt3\Software\I2C Net\PSoC0\PSoC0\PSoC0.cydsn\Export\ARM_GCC_Generic">
-        <Files Root="C:\Users\Daniel\Documents\Semesterprojekt3\Software\I2C Net\PSoC0\PSoC0\PSoC0.cydsn">
+      <Folder BuildType="STRICT" Path="C:\Users\Bitious\Documents\Engineering\IHA_3_Semester_Project\Software\I2C Net\PSoC0\PSoC0\PSoC0.cydsn\Export\ARM_GCC_Generic">
+        <Files Root="C:\Users\Bitious\Documents\Engineering\IHA_3_Semester_Project\Software\I2C Net\PSoC0\PSoC0\PSoC0.cydsn">
           <File BuildType="BUILD" Toolchain="ARM GCC Generic">.\Export\ARM_GCC_Generic\CyComponentLibrary.a</File>
         </Files>
       </Folder>
-      <Folder BuildType="STRICT" Path="C:\Users\Daniel\Documents\Semesterprojekt3\Software\I2C Net\PSoC0\PSoC0\PSoC0.cydsn\Export\ARM_MDK_Generic">
-        <Files Root="C:\Users\Daniel\Documents\Semesterprojekt3\Software\I2C Net\PSoC0\PSoC0\PSoC0.cydsn">
+      <Folder BuildType="STRICT" Path="C:\Users\Bitious\Documents\Engineering\IHA_3_Semester_Project\Software\I2C Net\PSoC0\PSoC0\PSoC0.cydsn\Export\ARM_MDK_Generic">
+        <Files Root="C:\Users\Bitious\Documents\Engineering\IHA_3_Semester_Project\Software\I2C Net\PSoC0\PSoC0\PSoC0.cydsn">
           <File BuildType="BUILD" Toolchain="ARM MDK Generic">.\Export\ARM_MDK_Generic\CyComponentLibrary.a</File>
         </Files>
       </Folder>
-      <Folder BuildType="STRICT" Path="C:\Users\Daniel\Documents\Semesterprojekt3\Software\I2C Net\PSoC0\PSoC0\PSoC0.cydsn\Export\ARM_IAR_Generic">
-        <Files Root="C:\Users\Daniel\Documents\Semesterprojekt3\Software\I2C Net\PSoC0\PSoC0\PSoC0.cydsn">
+      <Folder BuildType="STRICT" Path="C:\Users\Bitious\Documents\Engineering\IHA_3_Semester_Project\Software\I2C Net\PSoC0\PSoC0\PSoC0.cydsn\Export\ARM_IAR_Generic">
+        <Files Root="C:\Users\Bitious\Documents\Engineering\IHA_3_Semester_Project\Software\I2C Net\PSoC0\PSoC0\PSoC0.cydsn">
           <File BuildType="BUILD" Toolchain="ARM IAR Generic">.\Export\ARM_IAR_Generic\CyComponentLibrary.a</File>
         </Files>
       </Folder>
       <Folder BuildType="EXCLUDE" Path=".\codegentemp">
-        <Files Root="C:\Users\Daniel\Documents\Semesterprojekt3\Software\I2C Net\PSoC0\PSoC0\PSoC0.cydsn" />
+        <Files Root="C:\Users\Bitious\Documents\Engineering\IHA_3_Semester_Project\Software\I2C Net\PSoC0\PSoC0\PSoC0.cydsn" />
       </Folder>
       <Folder BuildType="EXCLUDE" Path=".\ARM_GCC_441">
-        <Files Root="C:\Users\Daniel\Documents\Semesterprojekt3\Software\I2C Net\PSoC0\PSoC0\PSoC0.cydsn" />
+        <Files Root="C:\Users\Bitious\Documents\Engineering\IHA_3_Semester_Project\Software\I2C Net\PSoC0\PSoC0\PSoC0.cydsn" />
       </Folder>
       <Folder BuildType="EXCLUDE" Path=".\ARM_GCC_473">
-        <Files Root="C:\Users\Daniel\Documents\Semesterprojekt3\Software\I2C Net\PSoC0\PSoC0\PSoC0.cydsn" />
+        <Files Root="C:\Users\Bitious\Documents\Engineering\IHA_3_Semester_Project\Software\I2C Net\PSoC0\PSoC0\PSoC0.cydsn" />
       </Folder>
       <Folder BuildType="EXCLUDE" Path=".\DP8051_Keil_952">
-        <Files Root="C:\Users\Daniel\Documents\Semesterprojekt3\Software\I2C Net\PSoC0\PSoC0\PSoC0.cydsn" />
+        <Files Root="C:\Users\Bitious\Documents\Engineering\IHA_3_Semester_Project\Software\I2C Net\PSoC0\PSoC0\PSoC0.cydsn" />
       </Folder>
       <Folder BuildType="EXCLUDE" Path=".\DP8051">
-        <Files Root="C:\Users\Daniel\Documents\Semesterprojekt3\Software\I2C Net\PSoC0\PSoC0\PSoC0.cydsn" />
+        <Files Root="C:\Users\Bitious\Documents\Engineering\IHA_3_Semester_Project\Software\I2C Net\PSoC0\PSoC0\PSoC0.cydsn" />
       </Folder>
       <Folder BuildType="EXCLUDE" Path=".\CortexM0">
-        <Files Root="C:\Users\Daniel\Documents\Semesterprojekt3\Software\I2C Net\PSoC0\PSoC0\PSoC0.cydsn" />
+        <Files Root="C:\Users\Bitious\Documents\Engineering\IHA_3_Semester_Project\Software\I2C Net\PSoC0\PSoC0\PSoC0.cydsn" />
       </Folder>
       <Folder BuildType="EXCLUDE" Path=".\CortexM3">
-        <Files Root="C:\Users\Daniel\Documents\Semesterprojekt3\Software\I2C Net\PSoC0\PSoC0\PSoC0.cydsn" />
+        <Files Root="C:\Users\Bitious\Documents\Engineering\IHA_3_Semester_Project\Software\I2C Net\PSoC0\PSoC0\PSoC0.cydsn" />
       </Folder>
       <Folder BuildType="EXCLUDE" Path=".\Generated_Source\PSoC3">
-        <Files Root="C:\Users\Daniel\Documents\Semesterprojekt3\Software\I2C Net\PSoC0\PSoC0\PSoC0.cydsn" />
+        <Files Root="C:\Users\Bitious\Documents\Engineering\IHA_3_Semester_Project\Software\I2C Net\PSoC0\PSoC0\PSoC0.cydsn" />
       </Folder>
       <Folder BuildType="EXCLUDE" Path=".\Generated_Source\PSoC5">
-        <Files Root="C:\Users\Daniel\Documents\Semesterprojekt3\Software\I2C Net\PSoC0\PSoC0\PSoC0.cydsn" />
+        <Files Root="C:\Users\Bitious\Documents\Engineering\IHA_3_Semester_Project\Software\I2C Net\PSoC0\PSoC0\PSoC0.cydsn" />
       </Folder>
     </Folders>
   </Project>
