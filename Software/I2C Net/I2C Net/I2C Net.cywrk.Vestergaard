@@ -158,41 +158,6 @@
 <ExpandedNodeIds>
 <v>I2C Net</v>
 <v>I2C Net\I2C PSoC Net</v>
-<v>I2C Net\I2C PSoC Net\CortexM0</v>
-<v>I2C Net\I2C PSoC Net\CortexM0\ARM_GCC_493</v>
-<v>I2C Net\I2C PSoC Net\CortexM0\ARM_GCC_493\Debug</v>
-<v>I2C Net\I2C PSoC Net\CortexM0\ARM_GCC_493\Debug\Listing Files</v>
-<v>I2C Net\I2C PSoC Net\CortexM0\ARM_GCC_493\Debug\Listing Files\Cm0Start.lst</v>
-<v>I2C Net\I2C PSoC Net\CortexM0\ARM_GCC_493\Debug\Listing Files\CyBootAsmGnu.lst</v>
-<v>I2C Net\I2C PSoC Net\CortexM0\ARM_GCC_493\Debug\Listing Files\cyfitter_cfg.lst</v>
-<v>I2C Net\I2C PSoC Net\CortexM0\ARM_GCC_493\Debug\Listing Files\CyFlash.lst</v>
-<v>I2C Net\I2C PSoC Net\CortexM0\ARM_GCC_493\Debug\Listing Files\CyLFClk.lst</v>
-<v>I2C Net\I2C PSoC Net\CortexM0\ARM_GCC_493\Debug\Listing Files\CyLib.lst</v>
-<v>I2C Net\I2C PSoC Net\CortexM0\ARM_GCC_493\Debug\Listing Files\cymetadata.lst</v>
-<v>I2C Net\I2C PSoC Net\CortexM0\ARM_GCC_493\Debug\Listing Files\cyPm.lst</v>
-<v>I2C Net\I2C PSoC Net\CortexM0\ARM_GCC_493\Debug\Listing Files\cyutils.lst</v>
-<v>I2C Net\I2C PSoC Net\CortexM0\ARM_GCC_493\Debug\Listing Files\DebugLedGreen.lst</v>
-<v>I2C Net\I2C PSoC Net\CortexM0\ARM_GCC_493\Debug\Listing Files\DebugLedGreen_PM.lst</v>
-<v>I2C Net\I2C PSoC Net\CortexM0\ARM_GCC_493\Debug\Listing Files\DebugLedRed.lst</v>
-<v>I2C Net\I2C PSoC Net\CortexM0\ARM_GCC_493\Debug\Listing Files\DebugLedRed_PM.lst</v>
-<v>I2C Net\I2C PSoC Net\CortexM0\ARM_GCC_493\Debug\Listing Files\I2C_1.lst</v>
-<v>I2C Net\I2C PSoC Net\CortexM0\ARM_GCC_493\Debug\Listing Files\I2C_1_BOOT.lst</v>
-<v>I2C Net\I2C PSoC Net\CortexM0\ARM_GCC_493\Debug\Listing Files\I2C_1_I2C.lst</v>
-<v>I2C Net\I2C PSoC Net\CortexM0\ARM_GCC_493\Debug\Listing Files\I2C_1_I2C_BOOT.lst</v>
-<v>I2C Net\I2C PSoC Net\CortexM0\ARM_GCC_493\Debug\Listing Files\I2C_1_I2C_INT.lst</v>
-<v>I2C Net\I2C PSoC Net\CortexM0\ARM_GCC_493\Debug\Listing Files\I2C_1_I2C_MASTER.lst</v>
-<v>I2C Net\I2C PSoC Net\CortexM0\ARM_GCC_493\Debug\Listing Files\I2C_1_I2C_SLAVE.lst</v>
-<v>I2C Net\I2C PSoC Net\CortexM0\ARM_GCC_493\Debug\Listing Files\I2C_1_PM.lst</v>
-<v>I2C Net\I2C PSoC Net\CortexM0\ARM_GCC_493\Debug\Listing Files\I2C_1_SCB_IRQ.lst</v>
-<v>I2C Net\I2C PSoC Net\CortexM0\ARM_GCC_493\Debug\Listing Files\I2C_1_SCBCLK.lst</v>
-<v>I2C Net\I2C PSoC Net\CortexM0\ARM_GCC_493\Debug\Listing Files\I2C_1_scl.lst</v>
-<v>I2C Net\I2C PSoC Net\CortexM0\ARM_GCC_493\Debug\Listing Files\I2C_1_scl_PM.lst</v>
-<v>I2C Net\I2C PSoC Net\CortexM0\ARM_GCC_493\Debug\Listing Files\I2C_1_sda.lst</v>
-<v>I2C Net\I2C PSoC Net\CortexM0\ARM_GCC_493\Debug\Listing Files\I2C_1_sda_PM.lst</v>
-<v>I2C Net\I2C PSoC Net\CortexM0\ARM_GCC_493\Debug\Listing Files\main.lst</v>
-<v>I2C Net\I2C PSoC Net\CortexM0\ARM_GCC_493\Debug\I2C PSoC Net.elf</v>
-<v>I2C Net\I2C PSoC Net\CortexM0\ARM_GCC_493\Debug\I2C PSoC Net.hex</v>
-<v>I2C Net\I2C PSoC Net\CortexM0\ARM_GCC_493\Debug\I2C PSoC Net.map</v>
 <v>I2C Net\I2C PSoC Net\I2C PSoC Net.gpdsc</v>
 <v>I2C Net\I2C PSoC Net\I2C PSoC Net.rpt</v>
 <v>I2C Net\I2C PSoC Net\I2C PSoC Net_timing.html</v>
@@ -200,34 +165,9 @@
 <VisibleNodeIds>
 <v>I2C Net</v>
 <v>I2C Net\I2C PSoC Net</v>
-<v>I2C Net\I2C PSoC Net\CortexM0</v>
-<v>I2C Net\I2C PSoC Net\CortexM0\ARM_GCC_493</v>
-<v>I2C Net\I2C PSoC Net\CortexM0\ARM_GCC_493\Debug</v>
-<v>I2C Net\I2C PSoC Net\CortexM0\ARM_GCC_493\Debug\Listing Files</v>
-<v>I2C Net\I2C PSoC Net\CortexM0\ARM_GCC_493\Debug\Listing Files\Cm0Start.lst</v>
-<v>I2C Net\I2C PSoC Net\CortexM0\ARM_GCC_493\Debug\Listing Files\CyBootAsmGnu.lst</v>
-<v>I2C Net\I2C PSoC Net\CortexM0\ARM_GCC_493\Debug\Listing Files\cyfitter_cfg.lst</v>
-<v>I2C Net\I2C PSoC Net\CortexM0\ARM_GCC_493\Debug\Listing Files\CyFlash.lst</v>
-<v>I2C Net\I2C PSoC Net\CortexM0\ARM_GCC_493\Debug\Listing Files\CyLFClk.lst</v>
-<v>I2C Net\I2C PSoC Net\CortexM0\ARM_GCC_493\Debug\Listing Files\CyLib.lst</v>
-<v>I2C Net\I2C PSoC Net\CortexM0\ARM_GCC_493\Debug\Listing Files\cymetadata.lst</v>
-<v>I2C Net\I2C PSoC Net\CortexM0\ARM_GCC_493\Debug\Listing Files\cyPm.lst</v>
-<v>I2C Net\I2C PSoC Net\CortexM0\ARM_GCC_493\Debug\Listing Files\cyutils.lst</v>
-<v>I2C Net\I2C PSoC Net\CortexM0\ARM_GCC_493\Debug\Listing Files\DebugLedGreen.lst</v>
-<v>I2C Net\I2C PSoC Net\CortexM0\ARM_GCC_493\Debug\Listing Files\DebugLedGreen_PM.lst</v>
-<v>I2C Net\I2C PSoC Net\CortexM0\ARM_GCC_493\Debug\Listing Files\DebugLedRed.lst</v>
-<v>I2C Net\I2C PSoC Net\CortexM0\ARM_GCC_493\Debug\Listing Files\DebugLedRed_PM.lst</v>
-<v>I2C Net\I2C PSoC Net\CortexM0\ARM_GCC_493\Debug\Listing Files\I2C_1.lst</v>
-<v>I2C Net\I2C PSoC Net\CortexM0\ARM_GCC_493\Debug\Listing Files\I2C_1_BOOT.lst</v>
-<v>I2C Net\I2C PSoC Net\CortexM0\ARM_GCC_493\Debug\Listing Files\I2C_1_I2C.lst</v>
-<v>I2C Net\I2C PSoC Net\CortexM0\ARM_GCC_493\Debug\Listing Files\I2C_1_I2C_BOOT.lst</v>
-<v>I2C Net\I2C PSoC Net\CortexM0\ARM_GCC_493\Debug\Listing Files\I2C_1_I2C_INT.lst</v>
-<v>I2C Net\I2C PSoC Net\CortexM0\ARM_GCC_493\Debug\Listing Files\I2C_1_I2C_MASTER.lst</v>
-<v>I2C Net\I2C PSoC Net\CortexM0\ARM_GCC_493\Debug\Listing Files\I2C_1_I2C_SLAVE.lst</v>
-<v>I2C Net\I2C PSoC Net\CortexM0\ARM_GCC_493\Debug\Listing Files\I2C_1_PM.lst</v>
-<v>I2C Net\I2C PSoC Net\CortexM0\ARM_GCC_493\Debug\Listing Files\I2C_1_SCB_IRQ.lst</v>
-<v>I2C Net\I2C PSoC Net\CortexM0\ARM_GCC_493\Debug\Listing Files\I2C_1_SCBCLK.lst</v>
-<v>I2C Net\I2C PSoC Net\CortexM0\ARM_GCC_493\Debug\Listing Files\I2C_1_scl.lst</v>
+<v>I2C Net\I2C PSoC Net\I2C PSoC Net.gpdsc</v>
+<v>I2C Net\I2C PSoC Net\I2C PSoC Net.rpt</v>
+<v>I2C Net\I2C PSoC Net\I2C PSoC Net_timing.html</v>
 </VisibleNodeIds>
 </CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237>
 </TreeStates>

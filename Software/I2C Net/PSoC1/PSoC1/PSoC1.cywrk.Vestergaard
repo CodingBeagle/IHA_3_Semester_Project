@@ -13,7 +13,7 @@
 <v>Output</v>
 </TreeKeys>
 <TreeStates>
-<CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237 type_name="CyDesigner.Common.Base.Controls.CyTreeViewState" version="1" SelectedNodeId="PSoC1\PSoC1\Source Files\main.c">
+<CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237 type_name="CyDesigner.Common.Base.Controls.CyTreeViewState" version="1" SelectedNodeId="PSoC1">
 <ExpandedNodeIds>
 <v>PSoC1</v>
 <v>PSoC1\PSoC1</v>
@@ -23,6 +23,7 @@
 <v>PSoC1\PSoC1\Header Files\cyapicallbacks.h</v>
 <v>PSoC1\PSoC1\Source Files</v>
 <v>PSoC1\PSoC1\Source Files\main.c</v>
+<v>PSoC1\PSoC1\Generated_Source</v>
 <v>PSoC1\PSoC1\Generated_Source\PSoC4</v>
 <v>PSoC1\PSoC1\Generated_Source\PSoC4\cy_boot</v>
 <v>PSoC1\PSoC1\Generated_Source\PSoC4\cy_boot\cm0gcc.ld</v>
@@ -72,7 +73,6 @@
 <v>PSoC1\PSoC1\Generated_Source\PSoC4\I2C_1\I2C_1_I2C.h</v>
 <v>PSoC1\PSoC1\Generated_Source\PSoC4\I2C_1\I2C_1_I2C_BOOT.c</v>
 <v>PSoC1\PSoC1\Generated_Source\PSoC4\I2C_1\I2C_1_I2C_INT.c</v>
-<v>PSoC1\PSoC1\Generated_Source\PSoC4\I2C_1\I2C_1_I2C_MASTER.c</v>
 <v>PSoC1\PSoC1\Generated_Source\PSoC4\I2C_1\I2C_1_I2C_PVT.h</v>
 <v>PSoC1\PSoC1\Generated_Source\PSoC4\I2C_1\I2C_1_I2C_SLAVE.c</v>
 <v>PSoC1\PSoC1\Generated_Source\PSoC4\I2C_1\I2C_1_PINS.h</v>
@@ -121,6 +121,27 @@
 <v>PSoC1\PSoC1\Source Files</v>
 <v>PSoC1\PSoC1\Source Files\main.c</v>
 <v>PSoC1\PSoC1\Generated_Source</v>
+<v>PSoC1\PSoC1\Generated_Source\PSoC4</v>
+<v>PSoC1\PSoC1\Generated_Source\PSoC4\cy_boot</v>
+<v>PSoC1\PSoC1\Generated_Source\PSoC4\cy_boot\cm0gcc.ld</v>
+<v>PSoC1\PSoC1\Generated_Source\PSoC4\cy_boot\Cm0Iar.icf</v>
+<v>PSoC1\PSoC1\Generated_Source\PSoC4\cy_boot\Cm0RealView.scat</v>
+<v>PSoC1\PSoC1\Generated_Source\PSoC4\cy_boot\Cm0Start.c</v>
+<v>PSoC1\PSoC1\Generated_Source\PSoC4\cy_boot\core_cm0.h</v>
+<v>PSoC1\PSoC1\Generated_Source\PSoC4\cy_boot\core_cm0_psoc4.h</v>
+<v>PSoC1\PSoC1\Generated_Source\PSoC4\cy_boot\core_cmFunc.h</v>
+<v>PSoC1\PSoC1\Generated_Source\PSoC4\cy_boot\core_cmInstr.h</v>
+<v>PSoC1\PSoC1\Generated_Source\PSoC4\cy_boot\CyBootAsmGnu.s</v>
+<v>PSoC1\PSoC1\Generated_Source\PSoC4\cy_boot\CyBootAsmIar.s</v>
+<v>PSoC1\PSoC1\Generated_Source\PSoC4\cy_boot\CyBootAsmRv.s</v>
+<v>PSoC1\PSoC1\Generated_Source\PSoC4\cy_boot\CyFlash.c</v>
+<v>PSoC1\PSoC1\Generated_Source\PSoC4\cy_boot\CyFlash.h</v>
+<v>PSoC1\PSoC1\Generated_Source\PSoC4\cy_boot\CyLib.c</v>
+<v>PSoC1\PSoC1\Generated_Source\PSoC4\cy_boot\CyLib.h</v>
+<v>PSoC1\PSoC1\Generated_Source\PSoC4\cy_boot\cypins.h</v>
+<v>PSoC1\PSoC1\Generated_Source\PSoC4\cy_boot\cyPm.c</v>
+<v>PSoC1\PSoC1\Generated_Source\PSoC4\cy_boot\cyPm.h</v>
+<v>PSoC1\PSoC1\Generated_Source\PSoC4\cy_boot\cytypes.h</v>
 </VisibleNodeIds>
 </CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237>
 <CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237 type_name="CyDesigner.Common.Base.Controls.CyTreeViewState" version="1" SelectedNodeId="">
@@ -165,7 +186,6 @@
 <v>PSoC1\PSoC1\CortexM0\ARM_GCC_493\Debug\Listing Files\I2C_1_I2C.lst</v>
 <v>PSoC1\PSoC1\CortexM0\ARM_GCC_493\Debug\Listing Files\I2C_1_I2C_BOOT.lst</v>
 <v>PSoC1\PSoC1\CortexM0\ARM_GCC_493\Debug\Listing Files\I2C_1_I2C_INT.lst</v>
-<v>PSoC1\PSoC1\CortexM0\ARM_GCC_493\Debug\Listing Files\I2C_1_I2C_MASTER.lst</v>
 <v>PSoC1\PSoC1\CortexM0\ARM_GCC_493\Debug\Listing Files\I2C_1_I2C_SLAVE.lst</v>
 <v>PSoC1\PSoC1\CortexM0\ARM_GCC_493\Debug\Listing Files\I2C_1_PM.lst</v>
 <v>PSoC1\PSoC1\CortexM0\ARM_GCC_493\Debug\Listing Files\I2C_1_SCB_IRQ.lst</v>
@@ -209,10 +229,10 @@
 <v>PSoC1\PSoC1\CortexM0\ARM_GCC_493\Debug\Listing Files\I2C_1_I2C.lst</v>
 <v>PSoC1\PSoC1\CortexM0\ARM_GCC_493\Debug\Listing Files\I2C_1_I2C_BOOT.lst</v>
 <v>PSoC1\PSoC1\CortexM0\ARM_GCC_493\Debug\Listing Files\I2C_1_I2C_INT.lst</v>
-<v>PSoC1\PSoC1\CortexM0\ARM_GCC_493\Debug\Listing Files\I2C_1_I2C_MASTER.lst</v>
 <v>PSoC1\PSoC1\CortexM0\ARM_GCC_493\Debug\Listing Files\I2C_1_I2C_SLAVE.lst</v>
 <v>PSoC1\PSoC1\CortexM0\ARM_GCC_493\Debug\Listing Files\I2C_1_PM.lst</v>
 <v>PSoC1\PSoC1\CortexM0\ARM_GCC_493\Debug\Listing Files\I2C_1_SCB_IRQ.lst</v>
+<v>PSoC1\PSoC1\CortexM0\ARM_GCC_493\Debug\Listing Files\I2C_1_SCBCLK.lst</v>
 </VisibleNodeIds>
 </CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237>
 </TreeStates>

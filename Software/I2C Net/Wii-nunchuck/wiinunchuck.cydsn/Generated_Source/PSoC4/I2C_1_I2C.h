@@ -29,7 +29,7 @@
 #define I2C_1_I2C_OVS_FACTOR_LOW         (8u)
 #define I2C_1_I2C_OVS_FACTOR_HIGH        (8u)
 #define I2C_1_I2C_MEDIAN_FILTER_ENABLE   (1u)
-#define I2C_1_I2C_SLAVE_ADDRESS          (8u)
+#define I2C_1_I2C_SLAVE_ADDRESS          (16u)
 #define I2C_1_I2C_SLAVE_ADDRESS_MASK     (254u)
 #define I2C_1_I2C_ACCEPT_ADDRESS         (0u)
 #define I2C_1_I2C_ACCEPT_GENERAL_CALL    (0u)

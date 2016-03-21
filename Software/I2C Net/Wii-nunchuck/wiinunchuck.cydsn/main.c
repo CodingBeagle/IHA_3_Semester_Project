@@ -17,9 +17,19 @@
 #define PSoC0 0x08
 
 #define NunchuckDataCommand 0b00101010
+#define WakeupBitchDataCommand 41
 
 // Create buffer for decoded data
 uint8 dataBuffer[3];
+
+uint8 slaveDataReadBuffer[1];
+uint8 slaveDataBuffer[1];
+int isMaster = 1;
+
+void workingNunchuckRead();
+
+int sendHandshake = 0;
+int sendNunchuckData = 0;
 
 int main()
 {
@@ -29,44 +39,39 @@ int main()
     I2C_1_Start();
     
     // Set slave buffers for write and read
-    //I2C_1_I2CSlaveInitReadBuf(slaveReadBuffer,6);
+    //I2C_1_I2CSlaveInitReadBuf(slaveDataReadBuffer,1);
+    //I2C_1_I2CSlaveInitWriteBuf(slaveDataBuffer, 1);
     
     // Initialize debug 
     DebugLEDGreen_Write(1);
     DebugLEDRed_Write(1);
-    
-    int sendHandshake = 0;
-    int sendNunchuckData = 0;
-    
+
     for(;;)
     {
-        if (!sendHandshake)
+       if (!sendHandshake)
         {
             if (NunchuckSendHandshake() == 0)
             {
-                DebugLEDGreen_Write(1);
+                int dummy = 2;
                 DebugLEDRed_Write(0);
             }
             else
             {
+                DebugLEDRed_Write(1);
                 sendHandshake = 1;
             }
         }
         else
         {   
             I2C_1_I2CMasterClearStatus();
-            DebugLEDGreen_Write(0);
          
             if (NunchuckRequestData() == 0)
             {
-                DebugLEDGreen_Write(1);
-                DebugLEDRed_Write(0);
                 sendHandshake = 0;
             }
             else 
             {
-                DebugLEDGreen_Write(0);
-                DebugLEDRed_Write(1);
+                
             }
             
             // Delay between requesting and reading
@@ -74,15 +79,11 @@ int main()
             
             if (NunchuckReadData(dataBuffer) == 0)
             {
-                DebugLEDGreen_Write(1);
-                DebugLEDRed_Write(0);
+                
                 sendHandshake = 0;
             }
             else
-            {
-                DebugLEDGreen_Write(0);
-                DebugLEDRed_Write(1);
-                
+            {                
                 sendNunchuckData = 1;
             }
         }
@@ -106,21 +107,50 @@ int main()
                 I2C_1_I2CMasterWriteByte(dataBuffer[0]);
                 I2C_1_I2CMasterWriteByte(dataBuffer[1]);
                 I2C_1_I2CMasterWriteByte(dataBuffer[2]);
-                
-                DebugLEDRed_Write(0);
-                DebugLEDGreen_Write(1);
+
+                DebugLEDGreen_Write(0);
                 
                 sendNunchuckData = 0;
+                
+            }
+            else
+            {
+                int dummy = 0;
+                DebugLEDGreen_Write(1);
             }
             
             I2C_1_I2CMasterSendStop();
+            I2C_1_I2CMasterClearStatus();
+            CyDelay(1);
+            //sendHandshake = 0;
         }
-        
-        CyDelay(1);
-        DebugLEDRed_Write(1);
+    
     }
     
     return 0;
 }
 
+void workingNunchuckRead()
+{
+
+}
+
+
+/*
+       else
+       {
+            int errorStatus = I2C_1_I2CSlaveStatus();
+            if (errorStatus == I2C_1_I2C_SSTAT_WR_CMPLT)
+            {
+                 if ((int)slaveDataBuffer[0] == WakeupBitchDataCommand)
+                 {
+                    I2C_1_I2CSlaveClearWriteBuf();
+                    isMaster = 1;
+                    //CyDelay(500);
+                    
+                 }
+                I2C_1_I2CSlaveClearReadStatus();
+            }
+       }
+*/
 /* [] END OF FILE */

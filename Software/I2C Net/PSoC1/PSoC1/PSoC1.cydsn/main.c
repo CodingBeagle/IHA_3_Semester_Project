@@ -25,7 +25,6 @@ uint8 transferErrorStatus;
 uint8 slaveWritebuffer[4];
 uint8 slaveReadBuffer[1];
 
-uint8 isMaster = 1;
 
 int x = 127;
 int y = 127;
@@ -51,8 +50,6 @@ int main()
     debugLEDBlue_Write(1);
     
     CyGlobalIntEnable; /* Enable global interrupts. */
-
-    /* Place your initialization/startup code here (e.g. MyInst_Start()) */
 
     for(;;)
     {
@@ -95,8 +92,6 @@ int main()
         }
         else
         {
-            debugLEDGreen_Write(1);
-            debugLEDRed_Write(1);
             debugLEDBlue_Write(1);
         }
         
