@@ -25,7 +25,7 @@ uint8 transferErrorStatus;
 uint8 slaveWritebuffer[4];
 uint8 slaveReadBuffer[1];
 
-uint8 isMaster = 1;
+uint8 isMaster = 0;
 
 int x, y, z;
 
@@ -50,58 +50,50 @@ int main()
     
     CyGlobalIntEnable; /* Enable global interrupts. */
 
-    /* Place your initialization/startup code here (e.g. MyInst_Start()) */
-
     for(;;)
     {
         x = 127;
         y = 127;
         z = 127;
-        if (I2C_1_I2CSlaveStatus() == I2C_1_I2C_SSTAT_WR_CMPLT)
+        
+        if(isMaster == 0)
         {
-             if ((int)slaveWritebuffer[0] == NunchuckDataCommand)
-             {
-                //debugLEDRed_Write(!debugLEDRed_Read());
-                x = (int)slaveWritebuffer[1];
-                y = (int)slaveWritebuffer[2];
-                z = (int)slaveWritebuffer[3];
+            if (I2C_1_I2CSlaveStatus() == I2C_1_I2C_SSTAT_WR_CMPLT)
+            {
+                 if ((int)slaveWritebuffer[0] == NunchuckDataCommand)
+                 {
+                    //debugLEDRed_Write(!debugLEDRed_Read());
+                    x = (int)slaveWritebuffer[1];
+                    y = (int)slaveWritebuffer[2];
+                    z = (int)slaveWritebuffer[3];
+                    isMaster = 1;
+                    
+                    I2C_1_I2CSlaveClearWriteBuf();
+                 }
+                I2C_1_I2CSlaveClearReadStatus();
+            }
+        }
+        else if(isMaster == 1)
+        {
+            I2C_1_I2CMasterClearStatus();
+            transferErrorStatus = I2C_1_I2CMasterSendStart(PSoC1UnitAdress, I2C_1_I2C_WRITE_XFER_MODE);
+            if(transferErrorStatus == I2C_1_I2C_MSTR_NO_ERROR)
+            {
+                //Send command type
+                I2C_1_I2CMasterWriteByte(NunchuckDataCommand);
                 
-                I2C_1_I2CSlaveClearWriteBuf();
-             }
-            I2C_1_I2CSlaveClearReadStatus();
+                //Send commandtype data
+                I2C_1_I2CMasterWriteByte(x);
+                I2C_1_I2CMasterWriteByte(y);
+                I2C_1_I2CMasterWriteByte(z);
+                isMaster = 0;
+                
+            }
+           I2C_1_I2CMasterSendStop();
+           
         }
         
-        if (x < 100)
-        {
-            debugLEDRed_Write(0);
-        }
-        else if(x > 150)
-        {
-            debugLEDGreen_Write(0);   
-        }
-        else
-        {
-            debugLEDRed_Write(1);
-            debugLEDGreen_Write(1);
-        }
-        
-        if(y < 100)
-        {
-           debugLEDBlue_Write(0); 
-        }
-        else if( y > 150)
-        {
-            debugLEDGreen_Write(0);
-            debugLEDRed_Write(0);
-        }
-        else
-        {
-            debugLEDGreen_Write(1);
-            debugLEDRed_Write(1);
-            debugLEDBlue_Write(1);
-        }
-        
-        //CyDelay(200);
+
     }
 }
 
