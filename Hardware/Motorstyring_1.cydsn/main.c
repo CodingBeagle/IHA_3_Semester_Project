@@ -22,9 +22,14 @@ int main()
     
     for(;;)
     {
-        PWM_1_WriteCompare(50); 
-        CyDelay(300); 
-        PWM_1_WriteCompare(0); 
+        int a=1;
+        if(a<=3)
+        {
+        PWM_1_WriteCompare(20); 
+        CyDelay(6); 
+        PWM_1_WriteCompare(0);
+        CyDelay(300);
+        }
         
         /* Place your application code here. */
         /*if(Pin_2_Read()==1)
