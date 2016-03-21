@@ -1,0 +1,1 @@
+cmd_/home/stud/HAL/halSPI/hal/ads7870/cmpc.ko := arm-poky-linux-gnueabi-ld -EL -r  -T ./scripts/module-common.lds --build-id  -o /home/stud/HAL/halSPI/hal/ads7870/cmpc.ko /home/stud/HAL/halSPI/hal/ads7870/cmpc.o /home/stud/HAL/halSPI/hal/ads7870/cmpc.mod.o

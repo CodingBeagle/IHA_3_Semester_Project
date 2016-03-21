@@ -1,0 +1,1 @@
+cmd_/home/stud/HAL/halSPI/hal/ads7870/ads7870mod.ko := arm-poky-linux-gnueabi-ld -EL -r  -T ./scripts/module-common.lds --build-id  -o /home/stud/HAL/halSPI/hal/ads7870/ads7870mod.ko /home/stud/HAL/halSPI/hal/ads7870/ads7870mod.o /home/stud/HAL/halSPI/hal/ads7870/ads7870mod.mod.o

@@ -1,0 +1,1 @@
+cmd_/home/stud/HAL/halSPI/hal/ads7870/ads7870mod.o := arm-poky-linux-gnueabi-ld -EL    -r -o /home/stud/HAL/halSPI/hal/ads7870/ads7870mod.o /home/stud/HAL/halSPI/hal/ads7870/ads7870.o /home/stud/HAL/halSPI/hal/ads7870/ads7870-spi.o 

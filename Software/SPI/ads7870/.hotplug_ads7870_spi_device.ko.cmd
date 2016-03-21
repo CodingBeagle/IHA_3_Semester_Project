@@ -1,0 +1,1 @@
+cmd_/home/stud/HAL/halSPI/hal/ads7870/hotplug_ads7870_spi_device.ko := arm-poky-linux-gnueabi-ld -EL -r  -T ./scripts/module-common.lds --build-id  -o /home/stud/HAL/halSPI/hal/ads7870/hotplug_ads7870_spi_device.ko /home/stud/HAL/halSPI/hal/ads7870/hotplug_ads7870_spi_device.o /home/stud/HAL/halSPI/hal/ads7870/hotplug_ads7870_spi_device.mod.o
