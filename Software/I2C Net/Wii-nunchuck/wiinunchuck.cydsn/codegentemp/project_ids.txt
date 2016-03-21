@@ -1,5 +1,0 @@
-C:\Users\Daniel\Documents\Semesterprojekt3\Software\I2C Net\Wii-nunchuck\wiinunchuck.cydsn\wiinunchuck.cyprj|8bb9c4b0-bb18-4092-9af5-a4e987174065
-C:\Program Files (x86)\Cypress\PSoC Creator\3.3\PSoC Creator\psoc\content\default\CyAnnotationLibrary\CyAnnotationLibrary.cylib\CyAnnotationLibrary.cyprj|e800dbb1-f43d-44b6-a6ec-5e632e1782ec
-C:\Program Files (x86)\Cypress\PSoC Creator\3.3\PSoC Creator\psoc\content\cycomponentlibraryupdates\CyComponentLibraryUpdates.cylib\CyComponentLibraryUpdates.cyprj|53bca351-36ab-42e6-a3fc-e2eb72dc5898
-C:\Program Files (x86)\Cypress\PSoC Creator\3.3\PSoC Creator\psoc\content\cycomponentlibrary\CyComponentLibrary.cylib\CyComponentLibrary.cyprj|241cb867-1cfd-4117-bfbd-a158f4ebb014
-C:\Program Files (x86)\Cypress\PSoC Creator\3.3\PSoC Creator\psoc\content\cyprimitives\CyPrimitives.cylib\CyPrimitives.cyprj|e90972c1-e74d-4bd7-848f-d8322c47f9cf

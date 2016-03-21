@@ -281,7 +281,11 @@
 </userData>
 </CyGuid_fdba8dfd-b15b-4469-9bbb-9e40c3e70997>
 <Unloaded />
-<OpenDocs />
+<OpenDocs>
+<name v=".\RealPSoC1.cydsn\TopDesign\TopDesign.cysch" />
+<name v=".\RealPSoC1.cydsn\main.c" />
+<name v=".\RealPSoC1.cydsn\RealPSoC1.cydwr" />
+</OpenDocs>
 <config v="" />
 <AutoUpdate v="true" />
 </CyGuid_843a90a4-0c4b-4e44-991d-05e7fb117a21>
