@@ -13,13 +13,10 @@
 #include "nunchuck.h"
 #include "CommunicationProtocol.h"
 
-// Define unit address for nunchuck
-#define nunchuckUnitAddress 0x52
+// Define unit address for PSoC1
 #define PSoC1 0x09
 
-
-
-// Create buffer for decoded data
+// Create buffer for read data
 uint8 dataBuffer[3];
 
 
@@ -30,7 +27,7 @@ int main()
 {
     CyGlobalIntEnable; /* Enable global interrupts. */
     
-    //Starts the I2C component on the PSoC.
+    //Starts the I2C component on the PSoC
     I2C_1_Start();
     
     
@@ -59,12 +56,12 @@ int main()
             CyDelay(1);
             
             //Request Data from Nunchuck
-            //If nunchuckreadData returns 0 it means an error occured.
+            //If NunchuckReadData returns 0, an error occured
             if (NunchuckReadData(dataBuffer) == 0)
             {
                 sendHandshake = 0;
             }
-            //If the return data is different from 0, we want to send it to the next PSoC.
+            //If return is different from 0, the read data will be sent to PSoC1
             else
             {                
                 sendNunchuckData = 1;
@@ -76,11 +73,11 @@ int main()
         // Send nunchuck data
         if (sendNunchuckData)
         {
-            // Sends the databuffer data to PSoC1.
+            // Sends the data in dataBuffer to PSoC1
             sendData(PSoC1, NunchuckDataCommand, dataBuffer, 3);
             
             // Tells the program that the data has been sent 
-            // and we need new data from the Nunchuck
+            // and to start new data request from the Nunchuck
             sendNunchuckData = 0;
         }    
     }    

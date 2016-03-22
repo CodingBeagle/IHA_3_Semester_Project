@@ -1,12 +1,12 @@
 #include "CommunicationProtocol.h"
 #include "Project.h"
 
-void sendData(uint32 Adress, uint8 CommandType, uint8* buffer, uint8 bufferSize)
+void sendData(uint32 Address, uint8 CommandType, uint8* buffer, uint8 bufferSize)
 {
     int readError = 0;
     int i;
     I2C_1_I2CMasterClearStatus();
-    readError = I2C_1_I2CMasterSendStart(Adress, I2C_1_I2C_WRITE_XFER_MODE);
+    readError = I2C_1_I2CMasterSendStart(Address, I2C_1_I2C_WRITE_XFER_MODE);
     if (readError == I2C_1_I2C_MSTR_NO_ERROR)
     {
         // Send command type
