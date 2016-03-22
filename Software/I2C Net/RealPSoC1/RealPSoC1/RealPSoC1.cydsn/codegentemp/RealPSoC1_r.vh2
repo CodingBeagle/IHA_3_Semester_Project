@@ -1,14 +1,14 @@
 -- Project:   RealPSoC1
--- Generated: 03/21/2016 15:46:21
+-- Generated: 03/22/2016 10:01:46
 -- PSoC Creator  3.3 SP1
 
 ENTITY RealPSoC1 IS
     PORT(
         \I2C_1:sda(0)_PAD\ : INOUT std_ulogic;
         \I2C_1:scl(0)_PAD\ : INOUT std_ulogic;
-        debugLEDGreen(0)_PAD : OUT std_ulogic;
-        debugLEDRed(0)_PAD : OUT std_ulogic;
-        debugLEDBlue(0)_PAD : OUT std_ulogic);
+        DebugLEDGreen(0)_PAD : OUT std_ulogic;
+        DebugLEDRed(0)_PAD : OUT std_ulogic;
+        DebugLEDBlue(0)_PAD : OUT std_ulogic);
     ATTRIBUTE voltage_VDDA OF __DEFAULT__ : ENTITY IS 3.3e0;
     ATTRIBUTE voltage_VDDD OF __DEFAULT__ : ENTITY IS 3.3e0;
 END RealPSoC1;
@@ -22,6 +22,9 @@ ARCHITECTURE __DEFAULT__ OF RealPSoC1 IS
     SIGNAL ClockBlock_LFCLK : bit;
     SIGNAL ClockBlock_Routed1 : bit;
     SIGNAL ClockBlock_SYSCLK : bit;
+    SIGNAL DebugLEDBlue(0)__PA : bit;
+    SIGNAL DebugLEDGreen(0)__PA : bit;
+    SIGNAL DebugLEDRed(0)__PA : bit;
     SIGNAL Net_5 : bit;
     SIGNAL Net_7 : bit;
     SIGNAL Net_8 : bit;
@@ -44,9 +47,6 @@ ARCHITECTURE __DEFAULT__ OF RealPSoC1 IS
     ATTRIBUTE POWER OF __ONE__ : SIGNAL IS true;
     SIGNAL __ZERO__ : bit;
     ATTRIBUTE GROUND OF __ZERO__ : SIGNAL IS true;
-    SIGNAL debugLEDBlue(0)__PA : bit;
-    SIGNAL debugLEDGreen(0)__PA : bit;
-    SIGNAL debugLEDRed(0)__PA : bit;
     SIGNAL one : bit;
     ATTRIBUTE POWER OF one : SIGNAL IS true;
     SIGNAL zero : bit;
@@ -57,12 +57,12 @@ ARCHITECTURE __DEFAULT__ OF RealPSoC1 IS
     ATTRIBUTE Location OF \I2C_1:sda(0)\ : LABEL IS "P4[1]";
     ATTRIBUTE lib_model OF \I2C_1:scl(0)\ : LABEL IS "iocell2";
     ATTRIBUTE Location OF \I2C_1:scl(0)\ : LABEL IS "P4[0]";
-    ATTRIBUTE lib_model OF debugLEDGreen(0) : LABEL IS "iocell3";
-    ATTRIBUTE Location OF debugLEDGreen(0) : LABEL IS "P0[2]";
-    ATTRIBUTE lib_model OF debugLEDRed(0) : LABEL IS "iocell4";
-    ATTRIBUTE Location OF debugLEDRed(0) : LABEL IS "P1[6]";
-    ATTRIBUTE lib_model OF debugLEDBlue(0) : LABEL IS "iocell5";
-    ATTRIBUTE Location OF debugLEDBlue(0) : LABEL IS "P0[3]";
+    ATTRIBUTE lib_model OF DebugLEDGreen(0) : LABEL IS "iocell3";
+    ATTRIBUTE Location OF DebugLEDGreen(0) : LABEL IS "P0[2]";
+    ATTRIBUTE lib_model OF DebugLEDRed(0) : LABEL IS "iocell4";
+    ATTRIBUTE Location OF DebugLEDRed(0) : LABEL IS "P1[6]";
+    ATTRIBUTE lib_model OF DebugLEDBlue(0) : LABEL IS "iocell5";
+    ATTRIBUTE Location OF DebugLEDBlue(0) : LABEL IS "P0[3]";
     ATTRIBUTE Location OF \I2C_1:SCB_IRQ\ : LABEL IS "[IntrContainer=(0)][IntrId=(10)]";
     ATTRIBUTE Location OF \I2C_1:SCB\ : LABEL IS "F(SCB,0)";
     COMPONENT interrupt
@@ -447,7 +447,7 @@ BEGIN
             out_clock_en => '1',
             out_reset => '0');
 
-    debugLEDGreen:logicalport
+    DebugLEDGreen:logicalport
         GENERIC MAP(
             drive_mode => "110",
             ibuf_enabled => "1",
@@ -518,18 +518,18 @@ BEGIN
             out_clock_en => open,
             out_reset => open);
 
-    debugLEDGreen(0):iocell
+    DebugLEDGreen(0):iocell
         GENERIC MAP(
             in_sync_mode => 0,
             out_sync_mode => 0,
             oe_sync_mode => 0,
-            logicalport => "debugLEDGreen",
+            logicalport => "DebugLEDGreen",
             logicalport_pin_id => 0,
             io_capabilities => "0000000000000000000000000000000000000000000000000000000000000001")
         PORT MAP(
-            pa_out => debugLEDGreen(0)__PA,
+            pa_out => DebugLEDGreen(0)__PA,
             oe => open,
-            pad_in => debugLEDGreen(0)_PAD,
+            pad_in => DebugLEDGreen(0)_PAD,
             in_clock => open,
             in_clock_en => '1',
             in_reset => '0',
@@ -537,7 +537,7 @@ BEGIN
             out_clock_en => '1',
             out_reset => '0');
 
-    debugLEDRed:logicalport
+    DebugLEDRed:logicalport
         GENERIC MAP(
             drive_mode => "110",
             ibuf_enabled => "1",
@@ -608,18 +608,18 @@ BEGIN
             out_clock_en => open,
             out_reset => open);
 
-    debugLEDRed(0):iocell
+    DebugLEDRed(0):iocell
         GENERIC MAP(
             in_sync_mode => 0,
             out_sync_mode => 0,
             oe_sync_mode => 0,
-            logicalport => "debugLEDRed",
+            logicalport => "DebugLEDRed",
             logicalport_pin_id => 0,
             io_capabilities => "0000000000000000000000000000000000000000000000000000000000000001")
         PORT MAP(
-            pa_out => debugLEDRed(0)__PA,
+            pa_out => DebugLEDRed(0)__PA,
             oe => open,
-            pad_in => debugLEDRed(0)_PAD,
+            pad_in => DebugLEDRed(0)_PAD,
             in_clock => open,
             in_clock_en => '1',
             in_reset => '0',
@@ -627,7 +627,7 @@ BEGIN
             out_clock_en => '1',
             out_reset => '0');
 
-    debugLEDBlue:logicalport
+    DebugLEDBlue:logicalport
         GENERIC MAP(
             drive_mode => "110",
             ibuf_enabled => "1",
@@ -698,18 +698,18 @@ BEGIN
             out_clock_en => open,
             out_reset => open);
 
-    debugLEDBlue(0):iocell
+    DebugLEDBlue(0):iocell
         GENERIC MAP(
             in_sync_mode => 0,
             out_sync_mode => 0,
             oe_sync_mode => 0,
-            logicalport => "debugLEDBlue",
+            logicalport => "DebugLEDBlue",
             logicalport_pin_id => 0,
             io_capabilities => "0000000000000000000000000000000000000000000000000000000000000001")
         PORT MAP(
-            pa_out => debugLEDBlue(0)__PA,
+            pa_out => DebugLEDBlue(0)__PA,
             oe => open,
-            pad_in => debugLEDBlue(0)_PAD,
+            pad_in => DebugLEDBlue(0)_PAD,
             in_clock => open,
             in_clock_en => '1',
             in_reset => '0',

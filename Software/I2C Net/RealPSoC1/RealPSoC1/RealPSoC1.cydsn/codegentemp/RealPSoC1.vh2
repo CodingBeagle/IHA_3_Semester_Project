@@ -2,7 +2,7 @@
 --	Conversion of RealPSoC1.v to vh2:
 --
 --	Cypress Semiconductor - WARP Version 6.3 IR 41
---	Mon Mar 21 15:46:20 2016
+--	Tue Mar 22 10:01:43 2016
 --
 
 USE cypress.cypress.all;
@@ -63,21 +63,21 @@ SIGNAL \I2C_1:Net_1087\ : bit;
 SIGNAL \I2C_1:Net_899\ : bit;
 SIGNAL \I2C_1:Net_915\ : bit;
 SIGNAL \I2C_1:Net_1028\ : bit;
-SIGNAL tmpOE__debugLEDGreen_net_0 : bit;
-SIGNAL tmpFB_0__debugLEDGreen_net_0 : bit;
-SIGNAL tmpIO_0__debugLEDGreen_net_0 : bit;
-TERMINAL tmpSIOVREF__debugLEDGreen_net_0 : bit;
-SIGNAL tmpINTERRUPT_0__debugLEDGreen_net_0 : bit;
-SIGNAL tmpOE__debugLEDRed_net_0 : bit;
-SIGNAL tmpFB_0__debugLEDRed_net_0 : bit;
-SIGNAL tmpIO_0__debugLEDRed_net_0 : bit;
-TERMINAL tmpSIOVREF__debugLEDRed_net_0 : bit;
-SIGNAL tmpINTERRUPT_0__debugLEDRed_net_0 : bit;
-SIGNAL tmpOE__debugLEDBlue_net_0 : bit;
-SIGNAL tmpFB_0__debugLEDBlue_net_0 : bit;
-SIGNAL tmpIO_0__debugLEDBlue_net_0 : bit;
-TERMINAL tmpSIOVREF__debugLEDBlue_net_0 : bit;
-SIGNAL tmpINTERRUPT_0__debugLEDBlue_net_0 : bit;
+SIGNAL tmpOE__DebugLEDGreen_net_0 : bit;
+SIGNAL tmpFB_0__DebugLEDGreen_net_0 : bit;
+SIGNAL tmpIO_0__DebugLEDGreen_net_0 : bit;
+TERMINAL tmpSIOVREF__DebugLEDGreen_net_0 : bit;
+SIGNAL tmpINTERRUPT_0__DebugLEDGreen_net_0 : bit;
+SIGNAL tmpOE__DebugLEDRed_net_0 : bit;
+SIGNAL tmpFB_0__DebugLEDRed_net_0 : bit;
+SIGNAL tmpIO_0__DebugLEDRed_net_0 : bit;
+TERMINAL tmpSIOVREF__DebugLEDRed_net_0 : bit;
+SIGNAL tmpINTERRUPT_0__DebugLEDRed_net_0 : bit;
+SIGNAL tmpOE__DebugLEDBlue_net_0 : bit;
+SIGNAL tmpFB_0__DebugLEDBlue_net_0 : bit;
+SIGNAL tmpIO_0__DebugLEDBlue_net_0 : bit;
+TERMINAL tmpSIOVREF__DebugLEDBlue_net_0 : bit;
+SIGNAL tmpINTERRUPT_0__DebugLEDBlue_net_0 : bit;
 BEGIN
 
 zero <=  ('0') ;
@@ -258,7 +258,7 @@ one <=  ('1') ;
 		sda=>\I2C_1:Net_581\,
 		tx_req=>Net_8,
 		rx_req=>Net_7);
-debugLEDGreen:cy_psoc3_pins_v1_10
+DebugLEDGreen:cy_psoc3_pins_v1_10
 	GENERIC MAP(id=>"e851a3b9-efb8-48be-bbb8-b303b216c393",
 		drive_mode=>"110",
 		ibuf_enabled=>"1",
@@ -316,10 +316,10 @@ debugLEDGreen:cy_psoc3_pins_v1_10
 		input_buffer_sel=>"00")
 	PORT MAP(oe=>(one),
 		y=>(zero),
-		fb=>(tmpFB_0__debugLEDGreen_net_0),
+		fb=>(tmpFB_0__DebugLEDGreen_net_0),
 		analog=>(open),
-		io=>(tmpIO_0__debugLEDGreen_net_0),
-		siovref=>(tmpSIOVREF__debugLEDGreen_net_0),
+		io=>(tmpIO_0__DebugLEDGreen_net_0),
+		siovref=>(tmpSIOVREF__DebugLEDGreen_net_0),
 		annotation=>(open),
 		in_clock=>zero,
 		in_clock_en=>one,
@@ -327,8 +327,8 @@ debugLEDGreen:cy_psoc3_pins_v1_10
 		out_clock=>zero,
 		out_clock_en=>one,
 		out_reset=>zero,
-		interrupt=>tmpINTERRUPT_0__debugLEDGreen_net_0);
-debugLEDRed:cy_psoc3_pins_v1_10
+		interrupt=>tmpINTERRUPT_0__DebugLEDGreen_net_0);
+DebugLEDRed:cy_psoc3_pins_v1_10
 	GENERIC MAP(id=>"d913c166-7fa5-4a1d-b108-90895ec09193",
 		drive_mode=>"110",
 		ibuf_enabled=>"1",
@@ -386,10 +386,10 @@ debugLEDRed:cy_psoc3_pins_v1_10
 		input_buffer_sel=>"00")
 	PORT MAP(oe=>(one),
 		y=>(zero),
-		fb=>(tmpFB_0__debugLEDRed_net_0),
+		fb=>(tmpFB_0__DebugLEDRed_net_0),
 		analog=>(open),
-		io=>(tmpIO_0__debugLEDRed_net_0),
-		siovref=>(tmpSIOVREF__debugLEDRed_net_0),
+		io=>(tmpIO_0__DebugLEDRed_net_0),
+		siovref=>(tmpSIOVREF__DebugLEDRed_net_0),
 		annotation=>(open),
 		in_clock=>zero,
 		in_clock_en=>one,
@@ -397,8 +397,8 @@ debugLEDRed:cy_psoc3_pins_v1_10
 		out_clock=>zero,
 		out_clock_en=>one,
 		out_reset=>zero,
-		interrupt=>tmpINTERRUPT_0__debugLEDRed_net_0);
-debugLEDBlue:cy_psoc3_pins_v1_10
+		interrupt=>tmpINTERRUPT_0__DebugLEDRed_net_0);
+DebugLEDBlue:cy_psoc3_pins_v1_10
 	GENERIC MAP(id=>"ed8b769a-68c8-4683-976e-7fc38d0c97d3",
 		drive_mode=>"110",
 		ibuf_enabled=>"1",
@@ -456,10 +456,10 @@ debugLEDBlue:cy_psoc3_pins_v1_10
 		input_buffer_sel=>"00")
 	PORT MAP(oe=>(one),
 		y=>(zero),
-		fb=>(tmpFB_0__debugLEDBlue_net_0),
+		fb=>(tmpFB_0__DebugLEDBlue_net_0),
 		analog=>(open),
-		io=>(tmpIO_0__debugLEDBlue_net_0),
-		siovref=>(tmpSIOVREF__debugLEDBlue_net_0),
+		io=>(tmpIO_0__DebugLEDBlue_net_0),
+		siovref=>(tmpSIOVREF__DebugLEDBlue_net_0),
 		annotation=>(open),
 		in_clock=>zero,
 		in_clock_en=>one,
@@ -467,6 +467,6 @@ debugLEDBlue:cy_psoc3_pins_v1_10
 		out_clock=>zero,
 		out_clock_en=>one,
 		out_reset=>zero,
-		interrupt=>tmpINTERRUPT_0__debugLEDBlue_net_0);
+		interrupt=>tmpINTERRUPT_0__DebugLEDBlue_net_0);
 
 END R_T_L;

@@ -1,5 +1,5 @@
 /*******************************************************************************
-* File Name: debugLEDRed.c  
+* File Name: DebugLEDRed.c  
 * Version 2.20
 *
 * Description:
@@ -15,13 +15,13 @@
 *******************************************************************************/
 
 #include "cytypes.h"
-#include "debugLEDRed.h"
+#include "DebugLEDRed.h"
 
-static debugLEDRed_BACKUP_STRUCT  debugLEDRed_backup = {0u, 0u, 0u};
+static DebugLEDRed_BACKUP_STRUCT  DebugLEDRed_backup = {0u, 0u, 0u};
 
 
 /*******************************************************************************
-* Function Name: debugLEDRed_Sleep
+* Function Name: DebugLEDRed_Sleep
 ****************************************************************************//**
 *
 * \brief Stores the pin configuration and prepares the pin for entering chip 
@@ -39,30 +39,30 @@ static debugLEDRed_BACKUP_STRUCT  debugLEDRed_backup = {0u, 0u, 0u};
 *  deep-sleep/hibernate modes.
 *
 * \funcusage
-*  \snippet debugLEDRed_SUT.c usage_debugLEDRed_Sleep_Wakeup
+*  \snippet DebugLEDRed_SUT.c usage_DebugLEDRed_Sleep_Wakeup
 *******************************************************************************/
-void debugLEDRed_Sleep(void)
+void DebugLEDRed_Sleep(void)
 {
-    #if defined(debugLEDRed__PC)
-        debugLEDRed_backup.pcState = debugLEDRed_PC;
+    #if defined(DebugLEDRed__PC)
+        DebugLEDRed_backup.pcState = DebugLEDRed_PC;
     #else
         #if (CY_PSOC4_4200L)
             /* Save the regulator state and put the PHY into suspend mode */
-            debugLEDRed_backup.usbState = debugLEDRed_CR1_REG;
-            debugLEDRed_USB_POWER_REG |= debugLEDRed_USBIO_ENTER_SLEEP;
-            debugLEDRed_CR1_REG &= debugLEDRed_USBIO_CR1_OFF;
+            DebugLEDRed_backup.usbState = DebugLEDRed_CR1_REG;
+            DebugLEDRed_USB_POWER_REG |= DebugLEDRed_USBIO_ENTER_SLEEP;
+            DebugLEDRed_CR1_REG &= DebugLEDRed_USBIO_CR1_OFF;
         #endif
     #endif
-    #if defined(CYIPBLOCK_m0s8ioss_VERSION) && defined(debugLEDRed__SIO)
-        debugLEDRed_backup.sioState = debugLEDRed_SIO_REG;
+    #if defined(CYIPBLOCK_m0s8ioss_VERSION) && defined(DebugLEDRed__SIO)
+        DebugLEDRed_backup.sioState = DebugLEDRed_SIO_REG;
         /* SIO requires unregulated output buffer and single ended input buffer */
-        debugLEDRed_SIO_REG &= (uint32)(~debugLEDRed_SIO_LPM_MASK);
+        DebugLEDRed_SIO_REG &= (uint32)(~DebugLEDRed_SIO_LPM_MASK);
     #endif  
 }
 
 
 /*******************************************************************************
-* Function Name: debugLEDRed_Wakeup
+* Function Name: DebugLEDRed_Wakeup
 ****************************************************************************//**
 *
 * \brief Restores the pin configuration that was saved during Pin_Sleep().
@@ -75,22 +75,22 @@ void debugLEDRed_Sleep(void)
 *  None
 *  
 * \funcusage
-*  Refer to debugLEDRed_Sleep() for an example usage.
+*  Refer to DebugLEDRed_Sleep() for an example usage.
 *******************************************************************************/
-void debugLEDRed_Wakeup(void)
+void DebugLEDRed_Wakeup(void)
 {
-    #if defined(debugLEDRed__PC)
-        debugLEDRed_PC = debugLEDRed_backup.pcState;
+    #if defined(DebugLEDRed__PC)
+        DebugLEDRed_PC = DebugLEDRed_backup.pcState;
     #else
         #if (CY_PSOC4_4200L)
             /* Restore the regulator state and come out of suspend mode */
-            debugLEDRed_USB_POWER_REG &= debugLEDRed_USBIO_EXIT_SLEEP_PH1;
-            debugLEDRed_CR1_REG = debugLEDRed_backup.usbState;
-            debugLEDRed_USB_POWER_REG &= debugLEDRed_USBIO_EXIT_SLEEP_PH2;
+            DebugLEDRed_USB_POWER_REG &= DebugLEDRed_USBIO_EXIT_SLEEP_PH1;
+            DebugLEDRed_CR1_REG = DebugLEDRed_backup.usbState;
+            DebugLEDRed_USB_POWER_REG &= DebugLEDRed_USBIO_EXIT_SLEEP_PH2;
         #endif
     #endif
-    #if defined(CYIPBLOCK_m0s8ioss_VERSION) && defined(debugLEDRed__SIO)
-        debugLEDRed_SIO_REG = debugLEDRed_backup.sioState;
+    #if defined(CYIPBLOCK_m0s8ioss_VERSION) && defined(DebugLEDRed__SIO)
+        DebugLEDRed_SIO_REG = DebugLEDRed_backup.sioState;
     #endif
 }
 

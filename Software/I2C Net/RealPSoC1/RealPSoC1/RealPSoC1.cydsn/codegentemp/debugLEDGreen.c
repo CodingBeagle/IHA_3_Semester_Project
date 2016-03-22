@@ -1,5 +1,5 @@
 /*******************************************************************************
-* File Name: debugLEDGreen.c  
+* File Name: DebugLEDGreen.c  
 * Version 2.20
 *
 * Description:
@@ -13,35 +13,35 @@
 *******************************************************************************/
 
 #include "cytypes.h"
-#include "debugLEDGreen.h"
+#include "DebugLEDGreen.h"
 
 
-#if defined(debugLEDGreen__PC)
-    #define debugLEDGreen_SetP4PinDriveMode(shift, mode)  \
+#if defined(DebugLEDGreen__PC)
+    #define DebugLEDGreen_SetP4PinDriveMode(shift, mode)  \
     do { \
-        debugLEDGreen_PC =   (debugLEDGreen_PC & \
-                                (uint32)(~(uint32)(debugLEDGreen_DRIVE_MODE_IND_MASK << \
-                                (debugLEDGreen_DRIVE_MODE_BITS * (shift))))) | \
+        DebugLEDGreen_PC =   (DebugLEDGreen_PC & \
+                                (uint32)(~(uint32)(DebugLEDGreen_DRIVE_MODE_IND_MASK << \
+                                (DebugLEDGreen_DRIVE_MODE_BITS * (shift))))) | \
                                 (uint32)((uint32)(mode) << \
-                                (debugLEDGreen_DRIVE_MODE_BITS * (shift))); \
+                                (DebugLEDGreen_DRIVE_MODE_BITS * (shift))); \
     } while (0)
 #else
     #if (CY_PSOC4_4200L)
-        #define debugLEDGreen_SetP4PinDriveMode(shift, mode)  \
+        #define DebugLEDGreen_SetP4PinDriveMode(shift, mode)  \
         do { \
-            debugLEDGreen_USBIO_CTRL_REG = (debugLEDGreen_USBIO_CTRL_REG & \
-                                    (uint32)(~(uint32)(debugLEDGreen_DRIVE_MODE_IND_MASK << \
-                                    (debugLEDGreen_DRIVE_MODE_BITS * (shift))))) | \
+            DebugLEDGreen_USBIO_CTRL_REG = (DebugLEDGreen_USBIO_CTRL_REG & \
+                                    (uint32)(~(uint32)(DebugLEDGreen_DRIVE_MODE_IND_MASK << \
+                                    (DebugLEDGreen_DRIVE_MODE_BITS * (shift))))) | \
                                     (uint32)((uint32)(mode) << \
-                                    (debugLEDGreen_DRIVE_MODE_BITS * (shift))); \
+                                    (DebugLEDGreen_DRIVE_MODE_BITS * (shift))); \
         } while (0)
     #endif
 #endif
   
 
-#if defined(debugLEDGreen__PC) || (CY_PSOC4_4200L) 
+#if defined(DebugLEDGreen__PC) || (CY_PSOC4_4200L) 
     /*******************************************************************************
-    * Function Name: debugLEDGreen_SetDriveMode
+    * Function Name: DebugLEDGreen_SetDriveMode
     ****************************************************************************//**
     *
     * \brief Sets the drive mode for each of the Pins component's pins.
@@ -67,17 +67,17 @@
     *  APIs (primary method) or disable interrupts around this function.
     *
     * \funcusage
-    *  \snippet debugLEDGreen_SUT.c usage_debugLEDGreen_SetDriveMode
+    *  \snippet DebugLEDGreen_SUT.c usage_DebugLEDGreen_SetDriveMode
     *******************************************************************************/
-    void debugLEDGreen_SetDriveMode(uint8 mode)
+    void DebugLEDGreen_SetDriveMode(uint8 mode)
     {
-		debugLEDGreen_SetP4PinDriveMode(debugLEDGreen__0__SHIFT, mode);
+		DebugLEDGreen_SetP4PinDriveMode(DebugLEDGreen__0__SHIFT, mode);
     }
 #endif
 
 
 /*******************************************************************************
-* Function Name: debugLEDGreen_Write
+* Function Name: DebugLEDGreen_Write
 ****************************************************************************//**
 *
 * \brief Writes the value to the physical port (data output register), masking
@@ -106,18 +106,18 @@
 *  this function.
 *
 * \funcusage
-*  \snippet debugLEDGreen_SUT.c usage_debugLEDGreen_Write
+*  \snippet DebugLEDGreen_SUT.c usage_DebugLEDGreen_Write
 *******************************************************************************/
-void debugLEDGreen_Write(uint8 value)
+void DebugLEDGreen_Write(uint8 value)
 {
-    uint8 drVal = (uint8)(debugLEDGreen_DR & (uint8)(~debugLEDGreen_MASK));
-    drVal = (drVal | ((uint8)(value << debugLEDGreen_SHIFT) & debugLEDGreen_MASK));
-    debugLEDGreen_DR = (uint32)drVal;
+    uint8 drVal = (uint8)(DebugLEDGreen_DR & (uint8)(~DebugLEDGreen_MASK));
+    drVal = (drVal | ((uint8)(value << DebugLEDGreen_SHIFT) & DebugLEDGreen_MASK));
+    DebugLEDGreen_DR = (uint32)drVal;
 }
 
 
 /*******************************************************************************
-* Function Name: debugLEDGreen_Read
+* Function Name: DebugLEDGreen_Read
 ****************************************************************************//**
 *
 * \brief Reads the associated physical port (pin status register) and masks 
@@ -131,16 +131,16 @@ void debugLEDGreen_Write(uint8 value)
 *  The current value for the pins in the component as a right justified number.
 *
 * \funcusage
-*  \snippet debugLEDGreen_SUT.c usage_debugLEDGreen_Read  
+*  \snippet DebugLEDGreen_SUT.c usage_DebugLEDGreen_Read  
 *******************************************************************************/
-uint8 debugLEDGreen_Read(void)
+uint8 DebugLEDGreen_Read(void)
 {
-    return (uint8)((debugLEDGreen_PS & debugLEDGreen_MASK) >> debugLEDGreen_SHIFT);
+    return (uint8)((DebugLEDGreen_PS & DebugLEDGreen_MASK) >> DebugLEDGreen_SHIFT);
 }
 
 
 /*******************************************************************************
-* Function Name: debugLEDGreen_ReadDataReg
+* Function Name: DebugLEDGreen_ReadDataReg
 ****************************************************************************//**
 *
 * \brief Reads the associated physical port's data output register and masks 
@@ -149,8 +149,8 @@ uint8 debugLEDGreen_Read(void)
 *
 * The data output register controls the signal applied to the physical pin in 
 * conjunction with the drive mode parameter. This is not the same as the 
-* preferred debugLEDGreen_Read() API because the 
-* debugLEDGreen_ReadDataReg() reads the data register instead of the status 
+* preferred DebugLEDGreen_Read() API because the 
+* DebugLEDGreen_ReadDataReg() reads the data register instead of the status 
 * register. For output pins this is a useful function to determine the value 
 * just written to the pin.
 *
@@ -159,16 +159,16 @@ uint8 debugLEDGreen_Read(void)
 *  justified number for the component instance.
 *
 * \funcusage
-*  \snippet debugLEDGreen_SUT.c usage_debugLEDGreen_ReadDataReg 
+*  \snippet DebugLEDGreen_SUT.c usage_DebugLEDGreen_ReadDataReg 
 *******************************************************************************/
-uint8 debugLEDGreen_ReadDataReg(void)
+uint8 DebugLEDGreen_ReadDataReg(void)
 {
-    return (uint8)((debugLEDGreen_DR & debugLEDGreen_MASK) >> debugLEDGreen_SHIFT);
+    return (uint8)((DebugLEDGreen_DR & DebugLEDGreen_MASK) >> DebugLEDGreen_SHIFT);
 }
 
 
 /*******************************************************************************
-* Function Name: debugLEDGreen_SetInterruptMode
+* Function Name: DebugLEDGreen_SetInterruptMode
 ****************************************************************************//**
 *
 * \brief Configures the interrupt mode for each of the Pins component's
@@ -181,12 +181,12 @@ uint8 debugLEDGreen_ReadDataReg(void)
 * \param position
 *  The pin position as listed in the Pins component. You may OR these to be 
 *  able to configure the interrupt mode of multiple pins within a Pins 
-*  component. Or you may use debugLEDGreen_INTR_ALL to configure the
+*  component. Or you may use DebugLEDGreen_INTR_ALL to configure the
 *  interrupt mode of all the pins in the Pins component.       
-*  - debugLEDGreen_0_INTR       (First pin in the list)
-*  - debugLEDGreen_1_INTR       (Second pin in the list)
+*  - DebugLEDGreen_0_INTR       (First pin in the list)
+*  - DebugLEDGreen_1_INTR       (Second pin in the list)
 *  - ...
-*  - debugLEDGreen_INTR_ALL     (All pins in Pins component)
+*  - DebugLEDGreen_INTR_ALL     (All pins in Pins component)
 *
 * \param mode
 *  Interrupt mode for the selected pins. Valid options are documented in
@@ -202,19 +202,19 @@ uint8 debugLEDGreen_ReadDataReg(void)
 *  port.
 *
 * \funcusage
-*  \snippet debugLEDGreen_SUT.c usage_debugLEDGreen_SetInterruptMode
+*  \snippet DebugLEDGreen_SUT.c usage_DebugLEDGreen_SetInterruptMode
 *******************************************************************************/
-void debugLEDGreen_SetInterruptMode(uint16 position, uint16 mode)
+void DebugLEDGreen_SetInterruptMode(uint16 position, uint16 mode)
 {
     uint32 intrCfg;
     
-    intrCfg =  debugLEDGreen_INTCFG & (uint32)(~(uint32)position);
-    debugLEDGreen_INTCFG = intrCfg | ((uint32)position & (uint32)mode);
+    intrCfg =  DebugLEDGreen_INTCFG & (uint32)(~(uint32)position);
+    DebugLEDGreen_INTCFG = intrCfg | ((uint32)position & (uint32)mode);
 }
 
 
 /*******************************************************************************
-* Function Name: debugLEDGreen_ClearInterrupt
+* Function Name: DebugLEDGreen_ClearInterrupt
 ****************************************************************************//**
 *
 * \brief Clears any active interrupts attached with the component and returns 
@@ -231,13 +231,13 @@ void debugLEDGreen_SetInterruptMode(uint16 position, uint16 mode)
 *  those associated with the Pins component.
 *
 * \funcusage
-*  \snippet debugLEDGreen_SUT.c usage_debugLEDGreen_ClearInterrupt
+*  \snippet DebugLEDGreen_SUT.c usage_DebugLEDGreen_ClearInterrupt
 *******************************************************************************/
-uint8 debugLEDGreen_ClearInterrupt(void)
+uint8 DebugLEDGreen_ClearInterrupt(void)
 {
-	uint8 maskedStatus = (uint8)(debugLEDGreen_INTSTAT & debugLEDGreen_MASK);
-	debugLEDGreen_INTSTAT = maskedStatus;
-    return maskedStatus >> debugLEDGreen_SHIFT;
+	uint8 maskedStatus = (uint8)(DebugLEDGreen_INTSTAT & DebugLEDGreen_MASK);
+	DebugLEDGreen_INTSTAT = maskedStatus;
+    return maskedStatus >> DebugLEDGreen_SHIFT;
 }
 
 

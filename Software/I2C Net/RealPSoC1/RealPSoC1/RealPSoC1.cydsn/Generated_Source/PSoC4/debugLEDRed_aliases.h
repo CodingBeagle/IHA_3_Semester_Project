@@ -1,5 +1,5 @@
 /*******************************************************************************
-* File Name: debugLEDRed.h  
+* File Name: DebugLEDRed.h  
 * Version 2.20
 *
 * Description:
@@ -15,8 +15,8 @@
 * the software package with which this file was provided.
 *******************************************************************************/
 
-#if !defined(CY_PINS_debugLEDRed_ALIASES_H) /* Pins debugLEDRed_ALIASES_H */
-#define CY_PINS_debugLEDRed_ALIASES_H
+#if !defined(CY_PINS_DebugLEDRed_ALIASES_H) /* Pins DebugLEDRed_ALIASES_H */
+#define CY_PINS_DebugLEDRed_ALIASES_H
 
 #include "cytypes.h"
 #include "cyfitter.h"
@@ -26,17 +26,17 @@
 /***************************************
 *              Constants        
 ***************************************/
-#define debugLEDRed_0			(debugLEDRed__0__PC)
-#define debugLEDRed_0_PS		(debugLEDRed__0__PS)
-#define debugLEDRed_0_PC		(debugLEDRed__0__PC)
-#define debugLEDRed_0_DR		(debugLEDRed__0__DR)
-#define debugLEDRed_0_SHIFT	(debugLEDRed__0__SHIFT)
-#define debugLEDRed_0_INTR	((uint16)((uint16)0x0003u << (debugLEDRed__0__SHIFT*2u)))
+#define DebugLEDRed_0			(DebugLEDRed__0__PC)
+#define DebugLEDRed_0_PS		(DebugLEDRed__0__PS)
+#define DebugLEDRed_0_PC		(DebugLEDRed__0__PC)
+#define DebugLEDRed_0_DR		(DebugLEDRed__0__DR)
+#define DebugLEDRed_0_SHIFT	(DebugLEDRed__0__SHIFT)
+#define DebugLEDRed_0_INTR	((uint16)((uint16)0x0003u << (DebugLEDRed__0__SHIFT*2u)))
 
-#define debugLEDRed_INTR_ALL	 ((uint16)(debugLEDRed_0_INTR))
+#define DebugLEDRed_INTR_ALL	 ((uint16)(DebugLEDRed_0_INTR))
 
 
-#endif /* End Pins debugLEDRed_ALIASES_H */
+#endif /* End Pins DebugLEDRed_ALIASES_H */
 
 
 /* [] END OF FILE */

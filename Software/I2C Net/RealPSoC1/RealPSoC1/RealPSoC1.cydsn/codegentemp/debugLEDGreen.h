@@ -1,5 +1,5 @@
 /*******************************************************************************
-* File Name: debugLEDGreen.h  
+* File Name: DebugLEDGreen.h  
 * Version 2.20
 *
 * Description:
@@ -12,12 +12,12 @@
 * the software package with which this file was provided.
 *******************************************************************************/
 
-#if !defined(CY_PINS_debugLEDGreen_H) /* Pins debugLEDGreen_H */
-#define CY_PINS_debugLEDGreen_H
+#if !defined(CY_PINS_DebugLEDGreen_H) /* Pins DebugLEDGreen_H */
+#define CY_PINS_DebugLEDGreen_H
 
 #include "cytypes.h"
 #include "cyfitter.h"
-#include "debugLEDGreen_aliases.h"
+#include "DebugLEDGreen_aliases.h"
 
 
 /***************************************
@@ -35,7 +35,7 @@ typedef struct
     uint32 pcState; /**< State of the port control register */
     uint32 sioState; /**< State of the SIO configuration */
     uint32 usbState; /**< State of the USBIO regulator */
-} debugLEDGreen_BACKUP_STRUCT;
+} DebugLEDGreen_BACKUP_STRUCT;
 
 /** @} structures */
 
@@ -47,89 +47,89 @@ typedef struct
 * \addtogroup group_general
 * @{
 */
-uint8   debugLEDGreen_Read(void);
-void    debugLEDGreen_Write(uint8 value);
-uint8   debugLEDGreen_ReadDataReg(void);
-#if defined(debugLEDGreen__PC) || (CY_PSOC4_4200L) 
-    void    debugLEDGreen_SetDriveMode(uint8 mode);
+uint8   DebugLEDGreen_Read(void);
+void    DebugLEDGreen_Write(uint8 value);
+uint8   DebugLEDGreen_ReadDataReg(void);
+#if defined(DebugLEDGreen__PC) || (CY_PSOC4_4200L) 
+    void    DebugLEDGreen_SetDriveMode(uint8 mode);
 #endif
-void    debugLEDGreen_SetInterruptMode(uint16 position, uint16 mode);
-uint8   debugLEDGreen_ClearInterrupt(void);
+void    DebugLEDGreen_SetInterruptMode(uint16 position, uint16 mode);
+uint8   DebugLEDGreen_ClearInterrupt(void);
 /** @} general */
 
 /**
 * \addtogroup group_power
 * @{
 */
-void debugLEDGreen_Sleep(void); 
-void debugLEDGreen_Wakeup(void);
+void DebugLEDGreen_Sleep(void); 
+void DebugLEDGreen_Wakeup(void);
 /** @} power */
 
 
 /***************************************
 *           API Constants        
 ***************************************/
-#if defined(debugLEDGreen__PC) || (CY_PSOC4_4200L) 
+#if defined(DebugLEDGreen__PC) || (CY_PSOC4_4200L) 
     /* Drive Modes */
-    #define debugLEDGreen_DRIVE_MODE_BITS        (3)
-    #define debugLEDGreen_DRIVE_MODE_IND_MASK    (0xFFFFFFFFu >> (32 - debugLEDGreen_DRIVE_MODE_BITS))
+    #define DebugLEDGreen_DRIVE_MODE_BITS        (3)
+    #define DebugLEDGreen_DRIVE_MODE_IND_MASK    (0xFFFFFFFFu >> (32 - DebugLEDGreen_DRIVE_MODE_BITS))
 
     /**
     * \addtogroup group_constants
     * @{
     */
         /** \addtogroup driveMode Drive mode constants
-         * \brief Constants to be passed as "mode" parameter in the debugLEDGreen_SetDriveMode() function.
+         * \brief Constants to be passed as "mode" parameter in the DebugLEDGreen_SetDriveMode() function.
          *  @{
          */
-        #define debugLEDGreen_DM_ALG_HIZ         (0x00u) /**< \brief High Impedance Analog   */
-        #define debugLEDGreen_DM_DIG_HIZ         (0x01u) /**< \brief High Impedance Digital  */
-        #define debugLEDGreen_DM_RES_UP          (0x02u) /**< \brief Resistive Pull Up       */
-        #define debugLEDGreen_DM_RES_DWN         (0x03u) /**< \brief Resistive Pull Down     */
-        #define debugLEDGreen_DM_OD_LO           (0x04u) /**< \brief Open Drain, Drives Low  */
-        #define debugLEDGreen_DM_OD_HI           (0x05u) /**< \brief Open Drain, Drives High */
-        #define debugLEDGreen_DM_STRONG          (0x06u) /**< \brief Strong Drive            */
-        #define debugLEDGreen_DM_RES_UPDWN       (0x07u) /**< \brief Resistive Pull Up/Down  */
+        #define DebugLEDGreen_DM_ALG_HIZ         (0x00u) /**< \brief High Impedance Analog   */
+        #define DebugLEDGreen_DM_DIG_HIZ         (0x01u) /**< \brief High Impedance Digital  */
+        #define DebugLEDGreen_DM_RES_UP          (0x02u) /**< \brief Resistive Pull Up       */
+        #define DebugLEDGreen_DM_RES_DWN         (0x03u) /**< \brief Resistive Pull Down     */
+        #define DebugLEDGreen_DM_OD_LO           (0x04u) /**< \brief Open Drain, Drives Low  */
+        #define DebugLEDGreen_DM_OD_HI           (0x05u) /**< \brief Open Drain, Drives High */
+        #define DebugLEDGreen_DM_STRONG          (0x06u) /**< \brief Strong Drive            */
+        #define DebugLEDGreen_DM_RES_UPDWN       (0x07u) /**< \brief Resistive Pull Up/Down  */
         /** @} driveMode */
     /** @} group_constants */
 #endif
 
 /* Digital Port Constants */
-#define debugLEDGreen_MASK               debugLEDGreen__MASK
-#define debugLEDGreen_SHIFT              debugLEDGreen__SHIFT
-#define debugLEDGreen_WIDTH              1u
+#define DebugLEDGreen_MASK               DebugLEDGreen__MASK
+#define DebugLEDGreen_SHIFT              DebugLEDGreen__SHIFT
+#define DebugLEDGreen_WIDTH              1u
 
 /**
 * \addtogroup group_constants
 * @{
 */
     /** \addtogroup intrMode Interrupt constants
-     * \brief Constants to be passed as "mode" parameter in debugLEDGreen_SetInterruptMode() function.
+     * \brief Constants to be passed as "mode" parameter in DebugLEDGreen_SetInterruptMode() function.
      *  @{
      */
-        #define debugLEDGreen_INTR_NONE      ((uint16)(0x0000u)) /**< \brief Disabled             */
-        #define debugLEDGreen_INTR_RISING    ((uint16)(0x5555u)) /**< \brief Rising edge trigger  */
-        #define debugLEDGreen_INTR_FALLING   ((uint16)(0xaaaau)) /**< \brief Falling edge trigger */
-        #define debugLEDGreen_INTR_BOTH      ((uint16)(0xffffu)) /**< \brief Both edge trigger    */
+        #define DebugLEDGreen_INTR_NONE      ((uint16)(0x0000u)) /**< \brief Disabled             */
+        #define DebugLEDGreen_INTR_RISING    ((uint16)(0x5555u)) /**< \brief Rising edge trigger  */
+        #define DebugLEDGreen_INTR_FALLING   ((uint16)(0xaaaau)) /**< \brief Falling edge trigger */
+        #define DebugLEDGreen_INTR_BOTH      ((uint16)(0xffffu)) /**< \brief Both edge trigger    */
     /** @} intrMode */
 /** @} group_constants */
 
 /* SIO LPM definition */
-#if defined(debugLEDGreen__SIO)
-    #define debugLEDGreen_SIO_LPM_MASK       (0x03u)
+#if defined(DebugLEDGreen__SIO)
+    #define DebugLEDGreen_SIO_LPM_MASK       (0x03u)
 #endif
 
 /* USBIO definitions */
-#if !defined(debugLEDGreen__PC) && (CY_PSOC4_4200L)
-    #define debugLEDGreen_USBIO_ENABLE               ((uint32)0x80000000u)
-    #define debugLEDGreen_USBIO_DISABLE              ((uint32)(~debugLEDGreen_USBIO_ENABLE))
-    #define debugLEDGreen_USBIO_SUSPEND_SHIFT        CYFLD_USBDEVv2_USB_SUSPEND__OFFSET
-    #define debugLEDGreen_USBIO_SUSPEND_DEL_SHIFT    CYFLD_USBDEVv2_USB_SUSPEND_DEL__OFFSET
-    #define debugLEDGreen_USBIO_ENTER_SLEEP          ((uint32)((1u << debugLEDGreen_USBIO_SUSPEND_SHIFT) \
-                                                        | (1u << debugLEDGreen_USBIO_SUSPEND_DEL_SHIFT)))
-    #define debugLEDGreen_USBIO_EXIT_SLEEP_PH1       ((uint32)~((uint32)(1u << debugLEDGreen_USBIO_SUSPEND_SHIFT)))
-    #define debugLEDGreen_USBIO_EXIT_SLEEP_PH2       ((uint32)~((uint32)(1u << debugLEDGreen_USBIO_SUSPEND_DEL_SHIFT)))
-    #define debugLEDGreen_USBIO_CR1_OFF              ((uint32)0xfffffffeu)
+#if !defined(DebugLEDGreen__PC) && (CY_PSOC4_4200L)
+    #define DebugLEDGreen_USBIO_ENABLE               ((uint32)0x80000000u)
+    #define DebugLEDGreen_USBIO_DISABLE              ((uint32)(~DebugLEDGreen_USBIO_ENABLE))
+    #define DebugLEDGreen_USBIO_SUSPEND_SHIFT        CYFLD_USBDEVv2_USB_SUSPEND__OFFSET
+    #define DebugLEDGreen_USBIO_SUSPEND_DEL_SHIFT    CYFLD_USBDEVv2_USB_SUSPEND_DEL__OFFSET
+    #define DebugLEDGreen_USBIO_ENTER_SLEEP          ((uint32)((1u << DebugLEDGreen_USBIO_SUSPEND_SHIFT) \
+                                                        | (1u << DebugLEDGreen_USBIO_SUSPEND_DEL_SHIFT)))
+    #define DebugLEDGreen_USBIO_EXIT_SLEEP_PH1       ((uint32)~((uint32)(1u << DebugLEDGreen_USBIO_SUSPEND_SHIFT)))
+    #define DebugLEDGreen_USBIO_EXIT_SLEEP_PH2       ((uint32)~((uint32)(1u << DebugLEDGreen_USBIO_SUSPEND_DEL_SHIFT)))
+    #define DebugLEDGreen_USBIO_CR1_OFF              ((uint32)0xfffffffeu)
 #endif
 
 
@@ -137,36 +137,36 @@ void debugLEDGreen_Wakeup(void);
 *             Registers        
 ***************************************/
 /* Main Port Registers */
-#if defined(debugLEDGreen__PC)
+#if defined(DebugLEDGreen__PC)
     /* Port Configuration */
-    #define debugLEDGreen_PC                 (* (reg32 *) debugLEDGreen__PC)
+    #define DebugLEDGreen_PC                 (* (reg32 *) DebugLEDGreen__PC)
 #endif
 /* Pin State */
-#define debugLEDGreen_PS                     (* (reg32 *) debugLEDGreen__PS)
+#define DebugLEDGreen_PS                     (* (reg32 *) DebugLEDGreen__PS)
 /* Data Register */
-#define debugLEDGreen_DR                     (* (reg32 *) debugLEDGreen__DR)
+#define DebugLEDGreen_DR                     (* (reg32 *) DebugLEDGreen__DR)
 /* Input Buffer Disable Override */
-#define debugLEDGreen_INP_DIS                (* (reg32 *) debugLEDGreen__PC2)
+#define DebugLEDGreen_INP_DIS                (* (reg32 *) DebugLEDGreen__PC2)
 
 /* Interrupt configuration Registers */
-#define debugLEDGreen_INTCFG                 (* (reg32 *) debugLEDGreen__INTCFG)
-#define debugLEDGreen_INTSTAT                (* (reg32 *) debugLEDGreen__INTSTAT)
+#define DebugLEDGreen_INTCFG                 (* (reg32 *) DebugLEDGreen__INTCFG)
+#define DebugLEDGreen_INTSTAT                (* (reg32 *) DebugLEDGreen__INTSTAT)
 
 /* "Interrupt cause" register for Combined Port Interrupt (AllPortInt) in GSRef component */
 #if defined (CYREG_GPIO_INTR_CAUSE)
-    #define debugLEDGreen_INTR_CAUSE         (* (reg32 *) CYREG_GPIO_INTR_CAUSE)
+    #define DebugLEDGreen_INTR_CAUSE         (* (reg32 *) CYREG_GPIO_INTR_CAUSE)
 #endif
 
 /* SIO register */
-#if defined(debugLEDGreen__SIO)
-    #define debugLEDGreen_SIO_REG            (* (reg32 *) debugLEDGreen__SIO)
-#endif /* (debugLEDGreen__SIO_CFG) */
+#if defined(DebugLEDGreen__SIO)
+    #define DebugLEDGreen_SIO_REG            (* (reg32 *) DebugLEDGreen__SIO)
+#endif /* (DebugLEDGreen__SIO_CFG) */
 
 /* USBIO registers */
-#if !defined(debugLEDGreen__PC) && (CY_PSOC4_4200L)
-    #define debugLEDGreen_USB_POWER_REG       (* (reg32 *) CYREG_USBDEVv2_USB_POWER_CTRL)
-    #define debugLEDGreen_CR1_REG             (* (reg32 *) CYREG_USBDEVv2_CR1)
-    #define debugLEDGreen_USBIO_CTRL_REG      (* (reg32 *) CYREG_USBDEVv2_USB_USBIO_CTRL)
+#if !defined(DebugLEDGreen__PC) && (CY_PSOC4_4200L)
+    #define DebugLEDGreen_USB_POWER_REG       (* (reg32 *) CYREG_USBDEVv2_USB_POWER_CTRL)
+    #define DebugLEDGreen_CR1_REG             (* (reg32 *) CYREG_USBDEVv2_CR1)
+    #define DebugLEDGreen_USBIO_CTRL_REG      (* (reg32 *) CYREG_USBDEVv2_USB_USBIO_CTRL)
 #endif    
     
     
@@ -178,11 +178,11 @@ void debugLEDGreen_Wakeup(void);
 * \addtogroup group_deprecated
 * @{
 */
-#define debugLEDGreen_DRIVE_MODE_SHIFT       (0x00u)
-#define debugLEDGreen_DRIVE_MODE_MASK        (0x07u << debugLEDGreen_DRIVE_MODE_SHIFT)
+#define DebugLEDGreen_DRIVE_MODE_SHIFT       (0x00u)
+#define DebugLEDGreen_DRIVE_MODE_MASK        (0x07u << DebugLEDGreen_DRIVE_MODE_SHIFT)
 /** @} deprecated */
 
-#endif /* End Pins debugLEDGreen_H */
+#endif /* End Pins DebugLEDGreen_H */
 
 
 /* [] END OF FILE */

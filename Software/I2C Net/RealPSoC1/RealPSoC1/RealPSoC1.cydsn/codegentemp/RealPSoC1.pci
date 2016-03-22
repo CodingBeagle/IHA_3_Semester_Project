@@ -1,5 +1,5 @@
 # RealPSoC1
-# 2016-03-21 14:46:20Z
+# 2016-03-22 09:01:45Z
 
 # IO_2@[IOP=(3)][IoId=(2)] is reserved: SWDDebugEnabled
 dont_use_io iocell 3 2
@@ -8,6 +8,6 @@ dont_use_io iocell 3 3
 set_location "ClockGenBlock" m0s8clockgenblockcell -1 -1 0
 set_io "\I2C_1:sda(0)\" iocell 4 1
 set_io "\I2C_1:scl(0)\" iocell 4 0
-set_io "debugLEDGreen(0)" iocell 0 2
-set_io "debugLEDRed(0)" iocell 1 6
-set_io "debugLEDBlue(0)" iocell 0 3
+set_io "DebugLEDGreen(0)" iocell 0 2
+set_io "DebugLEDRed(0)" iocell 1 6
+set_io "DebugLEDBlue(0)" iocell 0 3

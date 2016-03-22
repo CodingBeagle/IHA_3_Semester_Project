@@ -1,5 +1,5 @@
 /*******************************************************************************
-* File Name: debugLEDBlue.c  
+* File Name: DebugLEDBlue.c  
 * Version 2.20
 *
 * Description:
@@ -15,13 +15,13 @@
 *******************************************************************************/
 
 #include "cytypes.h"
-#include "debugLEDBlue.h"
+#include "DebugLEDBlue.h"
 
-static debugLEDBlue_BACKUP_STRUCT  debugLEDBlue_backup = {0u, 0u, 0u};
+static DebugLEDBlue_BACKUP_STRUCT  DebugLEDBlue_backup = {0u, 0u, 0u};
 
 
 /*******************************************************************************
-* Function Name: debugLEDBlue_Sleep
+* Function Name: DebugLEDBlue_Sleep
 ****************************************************************************//**
 *
 * \brief Stores the pin configuration and prepares the pin for entering chip 
@@ -39,30 +39,30 @@ static debugLEDBlue_BACKUP_STRUCT  debugLEDBlue_backup = {0u, 0u, 0u};
 *  deep-sleep/hibernate modes.
 *
 * \funcusage
-*  \snippet debugLEDBlue_SUT.c usage_debugLEDBlue_Sleep_Wakeup
+*  \snippet DebugLEDBlue_SUT.c usage_DebugLEDBlue_Sleep_Wakeup
 *******************************************************************************/
-void debugLEDBlue_Sleep(void)
+void DebugLEDBlue_Sleep(void)
 {
-    #if defined(debugLEDBlue__PC)
-        debugLEDBlue_backup.pcState = debugLEDBlue_PC;
+    #if defined(DebugLEDBlue__PC)
+        DebugLEDBlue_backup.pcState = DebugLEDBlue_PC;
     #else
         #if (CY_PSOC4_4200L)
             /* Save the regulator state and put the PHY into suspend mode */
-            debugLEDBlue_backup.usbState = debugLEDBlue_CR1_REG;
-            debugLEDBlue_USB_POWER_REG |= debugLEDBlue_USBIO_ENTER_SLEEP;
-            debugLEDBlue_CR1_REG &= debugLEDBlue_USBIO_CR1_OFF;
+            DebugLEDBlue_backup.usbState = DebugLEDBlue_CR1_REG;
+            DebugLEDBlue_USB_POWER_REG |= DebugLEDBlue_USBIO_ENTER_SLEEP;
+            DebugLEDBlue_CR1_REG &= DebugLEDBlue_USBIO_CR1_OFF;
         #endif
     #endif
-    #if defined(CYIPBLOCK_m0s8ioss_VERSION) && defined(debugLEDBlue__SIO)
-        debugLEDBlue_backup.sioState = debugLEDBlue_SIO_REG;
+    #if defined(CYIPBLOCK_m0s8ioss_VERSION) && defined(DebugLEDBlue__SIO)
+        DebugLEDBlue_backup.sioState = DebugLEDBlue_SIO_REG;
         /* SIO requires unregulated output buffer and single ended input buffer */
-        debugLEDBlue_SIO_REG &= (uint32)(~debugLEDBlue_SIO_LPM_MASK);
+        DebugLEDBlue_SIO_REG &= (uint32)(~DebugLEDBlue_SIO_LPM_MASK);
     #endif  
 }
 
 
 /*******************************************************************************
-* Function Name: debugLEDBlue_Wakeup
+* Function Name: DebugLEDBlue_Wakeup
 ****************************************************************************//**
 *
 * \brief Restores the pin configuration that was saved during Pin_Sleep().
@@ -75,22 +75,22 @@ void debugLEDBlue_Sleep(void)
 *  None
 *  
 * \funcusage
-*  Refer to debugLEDBlue_Sleep() for an example usage.
+*  Refer to DebugLEDBlue_Sleep() for an example usage.
 *******************************************************************************/
-void debugLEDBlue_Wakeup(void)
+void DebugLEDBlue_Wakeup(void)
 {
-    #if defined(debugLEDBlue__PC)
-        debugLEDBlue_PC = debugLEDBlue_backup.pcState;
+    #if defined(DebugLEDBlue__PC)
+        DebugLEDBlue_PC = DebugLEDBlue_backup.pcState;
     #else
         #if (CY_PSOC4_4200L)
             /* Restore the regulator state and come out of suspend mode */
-            debugLEDBlue_USB_POWER_REG &= debugLEDBlue_USBIO_EXIT_SLEEP_PH1;
-            debugLEDBlue_CR1_REG = debugLEDBlue_backup.usbState;
-            debugLEDBlue_USB_POWER_REG &= debugLEDBlue_USBIO_EXIT_SLEEP_PH2;
+            DebugLEDBlue_USB_POWER_REG &= DebugLEDBlue_USBIO_EXIT_SLEEP_PH1;
+            DebugLEDBlue_CR1_REG = DebugLEDBlue_backup.usbState;
+            DebugLEDBlue_USB_POWER_REG &= DebugLEDBlue_USBIO_EXIT_SLEEP_PH2;
         #endif
     #endif
-    #if defined(CYIPBLOCK_m0s8ioss_VERSION) && defined(debugLEDBlue__SIO)
-        debugLEDBlue_SIO_REG = debugLEDBlue_backup.sioState;
+    #if defined(CYIPBLOCK_m0s8ioss_VERSION) && defined(DebugLEDBlue__SIO)
+        DebugLEDBlue_SIO_REG = DebugLEDBlue_backup.sioState;
     #endif
 }
 

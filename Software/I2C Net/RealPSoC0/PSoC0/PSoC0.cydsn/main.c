@@ -17,7 +17,6 @@
 #define nunchuckUnitAddress 0x52
 #define PSoC1 0x09
 
-#define NunchuckDataCommand 0b00101010
 
 
 // Create buffer for decoded data
@@ -38,6 +37,7 @@ int main()
     // Initialize debug 
     DebugLEDGreen_Write(1);
     DebugLEDRed_Write(1);
+    DebugLEDBlue_Write(1);
 
     for(;;)
     {

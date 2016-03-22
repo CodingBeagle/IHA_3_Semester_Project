@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <blockRegMap version="1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://cypress.com/xsd/cyblockregmap cyblockregmap.xsd" xmlns="http://cypress.com/xsd/cyblockregmap">
-  <block name="debugLEDBlue" BASE="0x0" SIZE="0x0" desc="" visible="true" hidden="false" />
+  <block name="DebugLEDBlue" BASE="0x0" SIZE="0x0" desc="" visible="true" hidden="false" />
   <block name="cy_boot" BASE="0x0" SIZE="0x0" desc="" visible="true" hidden="false" />
   <block name="cy_lfclk" BASE="0x0" SIZE="0x0" desc="" visible="true" hidden="false" />
   <block name="I2C_1" BASE="0x0" SIZE="0x0" desc="Serial Communication Block" visible="true" hidden="false">
@@ -353,6 +353,6 @@
       <field name="BREAK_DETECT" from="11" to="11" access="RW" resetVal="" desc="Logical and of corresponding request and mask bits" />
     </register>
   </block>
-  <block name="debugLEDGreen" BASE="0x0" SIZE="0x0" desc="" visible="true" hidden="false" />
-  <block name="debugLEDRed" BASE="0x0" SIZE="0x0" desc="" visible="true" hidden="false" />
+  <block name="DebugLEDGreen" BASE="0x0" SIZE="0x0" desc="" visible="true" hidden="false" />
+  <block name="DebugLEDRed" BASE="0x0" SIZE="0x0" desc="" visible="true" hidden="false" />
 </blockRegMap>

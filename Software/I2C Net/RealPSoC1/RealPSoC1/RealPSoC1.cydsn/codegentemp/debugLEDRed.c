@@ -1,5 +1,5 @@
 /*******************************************************************************
-* File Name: debugLEDRed.c  
+* File Name: DebugLEDRed.c  
 * Version 2.20
 *
 * Description:
@@ -13,35 +13,35 @@
 *******************************************************************************/
 
 #include "cytypes.h"
-#include "debugLEDRed.h"
+#include "DebugLEDRed.h"
 
 
-#if defined(debugLEDRed__PC)
-    #define debugLEDRed_SetP4PinDriveMode(shift, mode)  \
+#if defined(DebugLEDRed__PC)
+    #define DebugLEDRed_SetP4PinDriveMode(shift, mode)  \
     do { \
-        debugLEDRed_PC =   (debugLEDRed_PC & \
-                                (uint32)(~(uint32)(debugLEDRed_DRIVE_MODE_IND_MASK << \
-                                (debugLEDRed_DRIVE_MODE_BITS * (shift))))) | \
+        DebugLEDRed_PC =   (DebugLEDRed_PC & \
+                                (uint32)(~(uint32)(DebugLEDRed_DRIVE_MODE_IND_MASK << \
+                                (DebugLEDRed_DRIVE_MODE_BITS * (shift))))) | \
                                 (uint32)((uint32)(mode) << \
-                                (debugLEDRed_DRIVE_MODE_BITS * (shift))); \
+                                (DebugLEDRed_DRIVE_MODE_BITS * (shift))); \
     } while (0)
 #else
     #if (CY_PSOC4_4200L)
-        #define debugLEDRed_SetP4PinDriveMode(shift, mode)  \
+        #define DebugLEDRed_SetP4PinDriveMode(shift, mode)  \
         do { \
-            debugLEDRed_USBIO_CTRL_REG = (debugLEDRed_USBIO_CTRL_REG & \
-                                    (uint32)(~(uint32)(debugLEDRed_DRIVE_MODE_IND_MASK << \
-                                    (debugLEDRed_DRIVE_MODE_BITS * (shift))))) | \
+            DebugLEDRed_USBIO_CTRL_REG = (DebugLEDRed_USBIO_CTRL_REG & \
+                                    (uint32)(~(uint32)(DebugLEDRed_DRIVE_MODE_IND_MASK << \
+                                    (DebugLEDRed_DRIVE_MODE_BITS * (shift))))) | \
                                     (uint32)((uint32)(mode) << \
-                                    (debugLEDRed_DRIVE_MODE_BITS * (shift))); \
+                                    (DebugLEDRed_DRIVE_MODE_BITS * (shift))); \
         } while (0)
     #endif
 #endif
   
 
-#if defined(debugLEDRed__PC) || (CY_PSOC4_4200L) 
+#if defined(DebugLEDRed__PC) || (CY_PSOC4_4200L) 
     /*******************************************************************************
-    * Function Name: debugLEDRed_SetDriveMode
+    * Function Name: DebugLEDRed_SetDriveMode
     ****************************************************************************//**
     *
     * \brief Sets the drive mode for each of the Pins component's pins.
@@ -67,17 +67,17 @@
     *  APIs (primary method) or disable interrupts around this function.
     *
     * \funcusage
-    *  \snippet debugLEDRed_SUT.c usage_debugLEDRed_SetDriveMode
+    *  \snippet DebugLEDRed_SUT.c usage_DebugLEDRed_SetDriveMode
     *******************************************************************************/
-    void debugLEDRed_SetDriveMode(uint8 mode)
+    void DebugLEDRed_SetDriveMode(uint8 mode)
     {
-		debugLEDRed_SetP4PinDriveMode(debugLEDRed__0__SHIFT, mode);
+		DebugLEDRed_SetP4PinDriveMode(DebugLEDRed__0__SHIFT, mode);
     }
 #endif
 
 
 /*******************************************************************************
-* Function Name: debugLEDRed_Write
+* Function Name: DebugLEDRed_Write
 ****************************************************************************//**
 *
 * \brief Writes the value to the physical port (data output register), masking
@@ -106,18 +106,18 @@
 *  this function.
 *
 * \funcusage
-*  \snippet debugLEDRed_SUT.c usage_debugLEDRed_Write
+*  \snippet DebugLEDRed_SUT.c usage_DebugLEDRed_Write
 *******************************************************************************/
-void debugLEDRed_Write(uint8 value)
+void DebugLEDRed_Write(uint8 value)
 {
-    uint8 drVal = (uint8)(debugLEDRed_DR & (uint8)(~debugLEDRed_MASK));
-    drVal = (drVal | ((uint8)(value << debugLEDRed_SHIFT) & debugLEDRed_MASK));
-    debugLEDRed_DR = (uint32)drVal;
+    uint8 drVal = (uint8)(DebugLEDRed_DR & (uint8)(~DebugLEDRed_MASK));
+    drVal = (drVal | ((uint8)(value << DebugLEDRed_SHIFT) & DebugLEDRed_MASK));
+    DebugLEDRed_DR = (uint32)drVal;
 }
 
 
 /*******************************************************************************
-* Function Name: debugLEDRed_Read
+* Function Name: DebugLEDRed_Read
 ****************************************************************************//**
 *
 * \brief Reads the associated physical port (pin status register) and masks 
@@ -131,16 +131,16 @@ void debugLEDRed_Write(uint8 value)
 *  The current value for the pins in the component as a right justified number.
 *
 * \funcusage
-*  \snippet debugLEDRed_SUT.c usage_debugLEDRed_Read  
+*  \snippet DebugLEDRed_SUT.c usage_DebugLEDRed_Read  
 *******************************************************************************/
-uint8 debugLEDRed_Read(void)
+uint8 DebugLEDRed_Read(void)
 {
-    return (uint8)((debugLEDRed_PS & debugLEDRed_MASK) >> debugLEDRed_SHIFT);
+    return (uint8)((DebugLEDRed_PS & DebugLEDRed_MASK) >> DebugLEDRed_SHIFT);
 }
 
 
 /*******************************************************************************
-* Function Name: debugLEDRed_ReadDataReg
+* Function Name: DebugLEDRed_ReadDataReg
 ****************************************************************************//**
 *
 * \brief Reads the associated physical port's data output register and masks 
@@ -149,8 +149,8 @@ uint8 debugLEDRed_Read(void)
 *
 * The data output register controls the signal applied to the physical pin in 
 * conjunction with the drive mode parameter. This is not the same as the 
-* preferred debugLEDRed_Read() API because the 
-* debugLEDRed_ReadDataReg() reads the data register instead of the status 
+* preferred DebugLEDRed_Read() API because the 
+* DebugLEDRed_ReadDataReg() reads the data register instead of the status 
 * register. For output pins this is a useful function to determine the value 
 * just written to the pin.
 *
@@ -159,16 +159,16 @@ uint8 debugLEDRed_Read(void)
 *  justified number for the component instance.
 *
 * \funcusage
-*  \snippet debugLEDRed_SUT.c usage_debugLEDRed_ReadDataReg 
+*  \snippet DebugLEDRed_SUT.c usage_DebugLEDRed_ReadDataReg 
 *******************************************************************************/
-uint8 debugLEDRed_ReadDataReg(void)
+uint8 DebugLEDRed_ReadDataReg(void)
 {
-    return (uint8)((debugLEDRed_DR & debugLEDRed_MASK) >> debugLEDRed_SHIFT);
+    return (uint8)((DebugLEDRed_DR & DebugLEDRed_MASK) >> DebugLEDRed_SHIFT);
 }
 
 
 /*******************************************************************************
-* Function Name: debugLEDRed_SetInterruptMode
+* Function Name: DebugLEDRed_SetInterruptMode
 ****************************************************************************//**
 *
 * \brief Configures the interrupt mode for each of the Pins component's
@@ -181,12 +181,12 @@ uint8 debugLEDRed_ReadDataReg(void)
 * \param position
 *  The pin position as listed in the Pins component. You may OR these to be 
 *  able to configure the interrupt mode of multiple pins within a Pins 
-*  component. Or you may use debugLEDRed_INTR_ALL to configure the
+*  component. Or you may use DebugLEDRed_INTR_ALL to configure the
 *  interrupt mode of all the pins in the Pins component.       
-*  - debugLEDRed_0_INTR       (First pin in the list)
-*  - debugLEDRed_1_INTR       (Second pin in the list)
+*  - DebugLEDRed_0_INTR       (First pin in the list)
+*  - DebugLEDRed_1_INTR       (Second pin in the list)
 *  - ...
-*  - debugLEDRed_INTR_ALL     (All pins in Pins component)
+*  - DebugLEDRed_INTR_ALL     (All pins in Pins component)
 *
 * \param mode
 *  Interrupt mode for the selected pins. Valid options are documented in
@@ -202,19 +202,19 @@ uint8 debugLEDRed_ReadDataReg(void)
 *  port.
 *
 * \funcusage
-*  \snippet debugLEDRed_SUT.c usage_debugLEDRed_SetInterruptMode
+*  \snippet DebugLEDRed_SUT.c usage_DebugLEDRed_SetInterruptMode
 *******************************************************************************/
-void debugLEDRed_SetInterruptMode(uint16 position, uint16 mode)
+void DebugLEDRed_SetInterruptMode(uint16 position, uint16 mode)
 {
     uint32 intrCfg;
     
-    intrCfg =  debugLEDRed_INTCFG & (uint32)(~(uint32)position);
-    debugLEDRed_INTCFG = intrCfg | ((uint32)position & (uint32)mode);
+    intrCfg =  DebugLEDRed_INTCFG & (uint32)(~(uint32)position);
+    DebugLEDRed_INTCFG = intrCfg | ((uint32)position & (uint32)mode);
 }
 
 
 /*******************************************************************************
-* Function Name: debugLEDRed_ClearInterrupt
+* Function Name: DebugLEDRed_ClearInterrupt
 ****************************************************************************//**
 *
 * \brief Clears any active interrupts attached with the component and returns 
@@ -231,13 +231,13 @@ void debugLEDRed_SetInterruptMode(uint16 position, uint16 mode)
 *  those associated with the Pins component.
 *
 * \funcusage
-*  \snippet debugLEDRed_SUT.c usage_debugLEDRed_ClearInterrupt
+*  \snippet DebugLEDRed_SUT.c usage_DebugLEDRed_ClearInterrupt
 *******************************************************************************/
-uint8 debugLEDRed_ClearInterrupt(void)
+uint8 DebugLEDRed_ClearInterrupt(void)
 {
-	uint8 maskedStatus = (uint8)(debugLEDRed_INTSTAT & debugLEDRed_MASK);
-	debugLEDRed_INTSTAT = maskedStatus;
-    return maskedStatus >> debugLEDRed_SHIFT;
+	uint8 maskedStatus = (uint8)(DebugLEDRed_INTSTAT & DebugLEDRed_MASK);
+	DebugLEDRed_INTSTAT = maskedStatus;
+    return maskedStatus >> DebugLEDRed_SHIFT;
 }
 
 

@@ -1,5 +1,5 @@
 /*******************************************************************************
-* File Name: debugLEDGreen.h  
+* File Name: DebugLEDGreen.h  
 * Version 2.20
 *
 * Description:
@@ -15,8 +15,8 @@
 * the software package with which this file was provided.
 *******************************************************************************/
 
-#if !defined(CY_PINS_debugLEDGreen_ALIASES_H) /* Pins debugLEDGreen_ALIASES_H */
-#define CY_PINS_debugLEDGreen_ALIASES_H
+#if !defined(CY_PINS_DebugLEDGreen_ALIASES_H) /* Pins DebugLEDGreen_ALIASES_H */
+#define CY_PINS_DebugLEDGreen_ALIASES_H
 
 #include "cytypes.h"
 #include "cyfitter.h"
@@ -26,17 +26,17 @@
 /***************************************
 *              Constants        
 ***************************************/
-#define debugLEDGreen_0			(debugLEDGreen__0__PC)
-#define debugLEDGreen_0_PS		(debugLEDGreen__0__PS)
-#define debugLEDGreen_0_PC		(debugLEDGreen__0__PC)
-#define debugLEDGreen_0_DR		(debugLEDGreen__0__DR)
-#define debugLEDGreen_0_SHIFT	(debugLEDGreen__0__SHIFT)
-#define debugLEDGreen_0_INTR	((uint16)((uint16)0x0003u << (debugLEDGreen__0__SHIFT*2u)))
+#define DebugLEDGreen_0			(DebugLEDGreen__0__PC)
+#define DebugLEDGreen_0_PS		(DebugLEDGreen__0__PS)
+#define DebugLEDGreen_0_PC		(DebugLEDGreen__0__PC)
+#define DebugLEDGreen_0_DR		(DebugLEDGreen__0__DR)
+#define DebugLEDGreen_0_SHIFT	(DebugLEDGreen__0__SHIFT)
+#define DebugLEDGreen_0_INTR	((uint16)((uint16)0x0003u << (DebugLEDGreen__0__SHIFT*2u)))
 
-#define debugLEDGreen_INTR_ALL	 ((uint16)(debugLEDGreen_0_INTR))
+#define DebugLEDGreen_INTR_ALL	 ((uint16)(DebugLEDGreen_0_INTR))
 
 
-#endif /* End Pins debugLEDGreen_ALIASES_H */
+#endif /* End Pins DebugLEDGreen_ALIASES_H */
 
 
 /* [] END OF FILE */
