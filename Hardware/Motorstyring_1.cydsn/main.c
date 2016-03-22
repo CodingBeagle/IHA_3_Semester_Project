@@ -19,16 +19,17 @@ int main()
      
     /* Place your initialization/startup code here (e.g. MyInst_Start()) */
     PWM_1_WriteCompare(0); 
-    
+     int a=1;
     for(;;)
     {
-        int a=1;
+       
         if(a<=3)
         {
         PWM_1_WriteCompare(20); 
-        CyDelay(6); 
+        CyDelay(5); 
         PWM_1_WriteCompare(0);
         CyDelay(300);
+        a++;
         }
         
         /* Place your application code here. */
