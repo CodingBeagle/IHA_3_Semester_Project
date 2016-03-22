@@ -11,7 +11,7 @@
 <CyGuid_f44455c5-3770-4452-b988-0a7a7ff46256 type_name="CyDesigner.Common.ProjMgmt.Model.CyConfigDependencies" version="1">
 <dependency_info name="c9323d49-d323-40b8-9b59-cc008d68a989@Debug@CortexM0" xml_contents_version="2">
 <CyGuid_1173175f-1b9b-4ad4-a065-754a48a27021 type_name="CyDesigner.Common.Base.CyFileDeps" version="1">
-<file name=".\CortexM0\ARM_GCC_493\Debug\main.o">
+<file name=".\CortexM0\ARM_GCC_493\Debug\CommunicationProtocol.o">
 <dep name=".\Generated_Source\PSoC4\CyFlash.h" />
 <dep name=".\Generated_Source\PSoC4\CyLFClk.h" />
 <dep name=".\Generated_Source\PSoC4\CyLib.h" />
@@ -33,6 +33,7 @@
 <dep name=".\Generated_Source\PSoC4\I2C_1_scl_aliases.h" />
 <dep name=".\Generated_Source\PSoC4\I2C_1_sda.h" />
 <dep name=".\Generated_Source\PSoC4\I2C_1_sda_aliases.h" />
+<dep name=".\Generated_Source\PSoC4\Project.h" />
 <dep name=".\Generated_Source\PSoC4\core_cm0.h" />
 <dep name=".\Generated_Source\PSoC4\core_cm0_psoc4.h" />
 <dep name=".\Generated_Source\PSoC4\core_cmFunc.h" />
@@ -44,9 +45,8 @@
 <dep name=".\Generated_Source\PSoC4\cyfitter_cfg.h" />
 <dep name=".\Generated_Source\PSoC4\cypins.h" />
 <dep name=".\Generated_Source\PSoC4\cytypes.h" />
-<dep name=".\Generated_Source\PSoC4\project.h" />
-<dep name=".\main.c" />
-<dep name=".\nunchuck.h" />
+<dep name=".\CommunicationProtocol.c" />
+<dep name=".\CommunicationProtocol.h" />
 </file>
 <file name=".\Generated_Source\PSoC4\CyFlash.h" />
 <file name=".\Generated_Source\PSoC4\CyLFClk.h" />
@@ -69,6 +69,7 @@
 <file name=".\Generated_Source\PSoC4\I2C_1_scl_aliases.h" />
 <file name=".\Generated_Source\PSoC4\I2C_1_sda.h" />
 <file name=".\Generated_Source\PSoC4\I2C_1_sda_aliases.h" />
+<file name=".\Generated_Source\PSoC4\Project.h" />
 <file name=".\Generated_Source\PSoC4\core_cm0.h" />
 <file name=".\Generated_Source\PSoC4\core_cm0_psoc4.h" />
 <file name=".\Generated_Source\PSoC4\core_cmFunc.h" />
@@ -80,47 +81,8 @@
 <file name=".\Generated_Source\PSoC4\cyfitter_cfg.h" />
 <file name=".\Generated_Source\PSoC4\cypins.h" />
 <file name=".\Generated_Source\PSoC4\cytypes.h" />
-<file name=".\Generated_Source\PSoC4\project.h" />
-<file name=".\main.c" />
-<file name=".\nunchuck.h" />
-<file name=".\CortexM0\ARM_GCC_493\Debug\nunchuck.o">
-<dep name=".\Generated_Source\PSoC4\CyFlash.h" />
-<dep name=".\Generated_Source\PSoC4\CyLFClk.h" />
-<dep name=".\Generated_Source\PSoC4\CyLib.h" />
-<dep name=".\Generated_Source\PSoC4\DebugLEDBlue.h" />
-<dep name=".\Generated_Source\PSoC4\DebugLEDBlue_aliases.h" />
-<dep name=".\Generated_Source\PSoC4\DebugLEDGreen.h" />
-<dep name=".\Generated_Source\PSoC4\DebugLEDGreen_aliases.h" />
-<dep name=".\Generated_Source\PSoC4\DebugLEDRed.h" />
-<dep name=".\Generated_Source\PSoC4\DebugLEDRed_aliases.h" />
-<dep name=".\Generated_Source\PSoC4\I2C_1.h" />
-<dep name=".\Generated_Source\PSoC4\I2C_1_BOOT.h" />
-<dep name=".\Generated_Source\PSoC4\I2C_1_I2C.h" />
-<dep name=".\Generated_Source\PSoC4\I2C_1_I2C_PVT.h" />
-<dep name=".\Generated_Source\PSoC4\I2C_1_PINS.h" />
-<dep name=".\Generated_Source\PSoC4\I2C_1_PVT.h" />
-<dep name=".\Generated_Source\PSoC4\I2C_1_SCBCLK.h" />
-<dep name=".\Generated_Source\PSoC4\I2C_1_SCB_IRQ.h" />
-<dep name=".\Generated_Source\PSoC4\I2C_1_scl.h" />
-<dep name=".\Generated_Source\PSoC4\I2C_1_scl_aliases.h" />
-<dep name=".\Generated_Source\PSoC4\I2C_1_sda.h" />
-<dep name=".\Generated_Source\PSoC4\I2C_1_sda_aliases.h" />
-<dep name=".\Generated_Source\PSoC4\core_cm0.h" />
-<dep name=".\Generated_Source\PSoC4\core_cm0_psoc4.h" />
-<dep name=".\Generated_Source\PSoC4\core_cmFunc.h" />
-<dep name=".\Generated_Source\PSoC4\core_cmInstr.h" />
-<dep name=".\Generated_Source\PSoC4\cyPm.h" />
-<dep name=".\Generated_Source\PSoC4\cydevice_trm.h" />
-<dep name=".\Generated_Source\PSoC4\cydisabledsheets.h" />
-<dep name=".\Generated_Source\PSoC4\cyfitter.h" />
-<dep name=".\Generated_Source\PSoC4\cyfitter_cfg.h" />
-<dep name=".\Generated_Source\PSoC4\cypins.h" />
-<dep name=".\Generated_Source\PSoC4\cytypes.h" />
-<dep name=".\Generated_Source\PSoC4\project.h" />
-<dep name=".\nunchuck.c" />
-<dep name=".\nunchuck.h" />
-</file>
-<file name=".\nunchuck.c" />
+<file name=".\CommunicationProtocol.c" />
+<file name=".\CommunicationProtocol.h" />
 <file name=".\CortexM0\ARM_GCC_493\Debug\Cm0Start.o">
 <dep name=".\Generated_Source\PSoC4\Cm0Start.c" />
 <dep name=".\Generated_Source\PSoC4\CyLFClk.h" />
@@ -284,6 +246,25 @@
 <dep name=".\Generated_Source\PSoC4\cytypes.h" />
 </file>
 <file name=".\Generated_Source\PSoC4\I2C_1_I2C_MASTER.c" />
+<file name=".\CortexM0\ARM_GCC_493\Debug\I2C_1_I2C_SLAVE.o">
+<dep name=".\Generated_Source\PSoC4\CyLFClk.h" />
+<dep name=".\Generated_Source\PSoC4\CyLib.h" />
+<dep name=".\Generated_Source\PSoC4\I2C_1.h" />
+<dep name=".\Generated_Source\PSoC4\I2C_1_I2C.h" />
+<dep name=".\Generated_Source\PSoC4\I2C_1_I2C_PVT.h" />
+<dep name=".\Generated_Source\PSoC4\I2C_1_I2C_SLAVE.c" />
+<dep name=".\Generated_Source\PSoC4\I2C_1_PINS.h" />
+<dep name=".\Generated_Source\PSoC4\I2C_1_SCBCLK.h" />
+<dep name=".\Generated_Source\PSoC4\I2C_1_scl.h" />
+<dep name=".\Generated_Source\PSoC4\I2C_1_scl_aliases.h" />
+<dep name=".\Generated_Source\PSoC4\I2C_1_sda.h" />
+<dep name=".\Generated_Source\PSoC4\I2C_1_sda_aliases.h" />
+<dep name=".\Generated_Source\PSoC4\cydevice_trm.h" />
+<dep name=".\Generated_Source\PSoC4\cyfitter.h" />
+<dep name=".\Generated_Source\PSoC4\cypins.h" />
+<dep name=".\Generated_Source\PSoC4\cytypes.h" />
+</file>
+<file name=".\Generated_Source\PSoC4\I2C_1_I2C_SLAVE.c" />
 <file name=".\CortexM0\ARM_GCC_493\Debug\I2C_1_PM.o">
 <dep name=".\Generated_Source\PSoC4\CyLFClk.h" />
 <dep name=".\Generated_Source\PSoC4\CyLib.h" />
@@ -466,6 +447,83 @@
 <file name=".\Generated_Source\PSoC4\CyBootAsmGnu.s" />
 <file name=".\Generated_Source\PSoC4\cydevicegnu_trm.inc" />
 <file name=".\Generated_Source\PSoC4\cyfittergnu.inc" />
+<file name=".\CortexM0\ARM_GCC_493\Debug\main.o">
+<dep name=".\Generated_Source\PSoC4\CyFlash.h" />
+<dep name=".\Generated_Source\PSoC4\CyLFClk.h" />
+<dep name=".\Generated_Source\PSoC4\CyLib.h" />
+<dep name=".\Generated_Source\PSoC4\DebugLEDBlue.h" />
+<dep name=".\Generated_Source\PSoC4\DebugLEDBlue_aliases.h" />
+<dep name=".\Generated_Source\PSoC4\DebugLEDGreen.h" />
+<dep name=".\Generated_Source\PSoC4\DebugLEDGreen_aliases.h" />
+<dep name=".\Generated_Source\PSoC4\DebugLEDRed.h" />
+<dep name=".\Generated_Source\PSoC4\DebugLEDRed_aliases.h" />
+<dep name=".\Generated_Source\PSoC4\I2C_1.h" />
+<dep name=".\Generated_Source\PSoC4\I2C_1_BOOT.h" />
+<dep name=".\Generated_Source\PSoC4\I2C_1_I2C.h" />
+<dep name=".\Generated_Source\PSoC4\I2C_1_I2C_PVT.h" />
+<dep name=".\Generated_Source\PSoC4\I2C_1_PINS.h" />
+<dep name=".\Generated_Source\PSoC4\I2C_1_PVT.h" />
+<dep name=".\Generated_Source\PSoC4\I2C_1_SCBCLK.h" />
+<dep name=".\Generated_Source\PSoC4\I2C_1_SCB_IRQ.h" />
+<dep name=".\Generated_Source\PSoC4\I2C_1_scl.h" />
+<dep name=".\Generated_Source\PSoC4\I2C_1_scl_aliases.h" />
+<dep name=".\Generated_Source\PSoC4\I2C_1_sda.h" />
+<dep name=".\Generated_Source\PSoC4\I2C_1_sda_aliases.h" />
+<dep name=".\Generated_Source\PSoC4\core_cm0.h" />
+<dep name=".\Generated_Source\PSoC4\core_cm0_psoc4.h" />
+<dep name=".\Generated_Source\PSoC4\core_cmFunc.h" />
+<dep name=".\Generated_Source\PSoC4\core_cmInstr.h" />
+<dep name=".\Generated_Source\PSoC4\cyPm.h" />
+<dep name=".\Generated_Source\PSoC4\cydevice_trm.h" />
+<dep name=".\Generated_Source\PSoC4\cydisabledsheets.h" />
+<dep name=".\Generated_Source\PSoC4\cyfitter.h" />
+<dep name=".\Generated_Source\PSoC4\cyfitter_cfg.h" />
+<dep name=".\Generated_Source\PSoC4\cypins.h" />
+<dep name=".\Generated_Source\PSoC4\cytypes.h" />
+<dep name=".\Generated_Source\PSoC4\project.h" />
+<dep name=".\main.c" />
+<dep name=".\nunchuck.h" />
+</file>
+<file name=".\main.c" />
+<file name=".\nunchuck.h" />
+<file name=".\CortexM0\ARM_GCC_493\Debug\nunchuck.o">
+<dep name=".\Generated_Source\PSoC4\CyFlash.h" />
+<dep name=".\Generated_Source\PSoC4\CyLFClk.h" />
+<dep name=".\Generated_Source\PSoC4\CyLib.h" />
+<dep name=".\Generated_Source\PSoC4\DebugLEDBlue.h" />
+<dep name=".\Generated_Source\PSoC4\DebugLEDBlue_aliases.h" />
+<dep name=".\Generated_Source\PSoC4\DebugLEDGreen.h" />
+<dep name=".\Generated_Source\PSoC4\DebugLEDGreen_aliases.h" />
+<dep name=".\Generated_Source\PSoC4\DebugLEDRed.h" />
+<dep name=".\Generated_Source\PSoC4\DebugLEDRed_aliases.h" />
+<dep name=".\Generated_Source\PSoC4\I2C_1.h" />
+<dep name=".\Generated_Source\PSoC4\I2C_1_BOOT.h" />
+<dep name=".\Generated_Source\PSoC4\I2C_1_I2C.h" />
+<dep name=".\Generated_Source\PSoC4\I2C_1_I2C_PVT.h" />
+<dep name=".\Generated_Source\PSoC4\I2C_1_PINS.h" />
+<dep name=".\Generated_Source\PSoC4\I2C_1_PVT.h" />
+<dep name=".\Generated_Source\PSoC4\I2C_1_SCBCLK.h" />
+<dep name=".\Generated_Source\PSoC4\I2C_1_SCB_IRQ.h" />
+<dep name=".\Generated_Source\PSoC4\I2C_1_scl.h" />
+<dep name=".\Generated_Source\PSoC4\I2C_1_scl_aliases.h" />
+<dep name=".\Generated_Source\PSoC4\I2C_1_sda.h" />
+<dep name=".\Generated_Source\PSoC4\I2C_1_sda_aliases.h" />
+<dep name=".\Generated_Source\PSoC4\core_cm0.h" />
+<dep name=".\Generated_Source\PSoC4\core_cm0_psoc4.h" />
+<dep name=".\Generated_Source\PSoC4\core_cmFunc.h" />
+<dep name=".\Generated_Source\PSoC4\core_cmInstr.h" />
+<dep name=".\Generated_Source\PSoC4\cyPm.h" />
+<dep name=".\Generated_Source\PSoC4\cydevice_trm.h" />
+<dep name=".\Generated_Source\PSoC4\cydisabledsheets.h" />
+<dep name=".\Generated_Source\PSoC4\cyfitter.h" />
+<dep name=".\Generated_Source\PSoC4\cyfitter_cfg.h" />
+<dep name=".\Generated_Source\PSoC4\cypins.h" />
+<dep name=".\Generated_Source\PSoC4\cytypes.h" />
+<dep name=".\Generated_Source\PSoC4\project.h" />
+<dep name=".\nunchuck.c" />
+<dep name=".\nunchuck.h" />
+</file>
+<file name=".\nunchuck.c" />
 </CyGuid_1173175f-1b9b-4ad4-a065-754a48a27021>
 </dependency_info>
 </CyGuid_f44455c5-3770-4452-b988-0a7a7ff46256>
@@ -477,6 +535,7 @@
 <file name=".\CortexM0\ARM_GCC_493\Debug\PSoC0.hex">
 <dep name=".\CortexM0\ARM_GCC_493\Debug\main.o" />
 <dep name=".\CortexM0\ARM_GCC_493\Debug\nunchuck.o" />
+<dep name=".\CortexM0\ARM_GCC_493\Debug\CommunicationProtocol.o" />
 <dep name=".\CortexM0\ARM_GCC_493\Debug\cyfitter_cfg.o" />
 <dep name=".\CortexM0\ARM_GCC_493\Debug\cymetadata.o" />
 <dep name=".\CortexM0\ARM_GCC_493\Debug\I2C_1.o" />
@@ -486,6 +545,7 @@
 <dep name=".\CortexM0\ARM_GCC_493\Debug\I2C_1_I2C_MASTER.o" />
 <dep name=".\CortexM0\ARM_GCC_493\Debug\I2C_1_PM.o" />
 <dep name=".\CortexM0\ARM_GCC_493\Debug\I2C_1_BOOT.o" />
+<dep name=".\CortexM0\ARM_GCC_493\Debug\I2C_1_I2C_SLAVE.o" />
 <dep name=".\CortexM0\ARM_GCC_493\Debug\debugLEDRed.o" />
 <dep name=".\CortexM0\ARM_GCC_493\Debug\debugLEDRed_PM.o" />
 <dep name=".\CortexM0\ARM_GCC_493\Debug\debugLEDGreen.o" />
@@ -549,6 +609,8 @@
 <name_val_pair name=".\Generated_Source\PSoC4\cyutils.c" v="-mcpu=cortex-m0 -mthumb -Wno-main -I. -IGenerated_Source\PSoC4 -Wa,-alh=${OutputDir}/${CompileFile}.lst -g -D DEBUG -Wall -ffunction-sections -Og -ffat-lto-objects" />
 <name_val_pair name=".\Generated_Source\PSoC4\CyLFClk.c" v="-mcpu=cortex-m0 -mthumb -Wno-main -I. -IGenerated_Source\PSoC4 -Wa,-alh=${OutputDir}/${CompileFile}.lst -g -D DEBUG -Wall -ffunction-sections -Og -ffat-lto-objects" />
 <name_val_pair name="C:\Users\Daniel\Documents\Semesterprojekt3\Software\I2C Net\RealPSoC0\PSoC0\PSoC0.cydsn\CortexM0\ARM_GCC_493\Debug\PSoC0.hex" v="-mcpu=cortex-m0 -mthumb -g -ffunction-sections -Og -L Generated_Source\PSoC4 -Wl,-Map,${OutputDir}/${ProjectShortName}.map -T Generated_Source\PSoC4\cm0gcc.ld -specs=nano.specs -Wl,--gc-sections" />
+<name_val_pair name=".\CommunicationProtocol.c" v="-mcpu=cortex-m0 -mthumb -Wno-main -I. -IGenerated_Source\PSoC4 -Wa,-alh=${OutputDir}/${CompileFile}.lst -g -D DEBUG -Wall -ffunction-sections -Og -ffat-lto-objects" />
+<name_val_pair name=".\Generated_Source\PSoC4\I2C_1_I2C_SLAVE.c" v="-mcpu=cortex-m0 -mthumb -Wno-main -I. -IGenerated_Source\PSoC4 -Wa,-alh=${OutputDir}/${CompileFile}.lst -g -D DEBUG -Wall -ffunction-sections -Og -ffat-lto-objects" />
 </name>
 </genericCmdLineData>
 <codeGenCmdLineTag v="-.appdatapath &quot;C:\Users\Daniel\AppData\Local\Cypress Semiconductor\PSoC Creator\3.3&quot; -.fdsnotice -.fdswarpdepfile=warp_dependencies.txt -.fdselabdepfile=elab_dependencies.txt -.fdsbldfile=generated_files.txt -p &quot;C:\Users\Daniel\Documents\Semesterprojekt3\Software\I2C Net\RealPSoC0\PSoC0\PSoC0.cydsn\PSoC0.cyprj&quot; -d CY8C4245AXI-483 -s &quot;C:\Users\Daniel\Documents\Semesterprojekt3\Software\I2C Net\RealPSoC0\PSoC0\PSoC0.cydsn\Generated_Source\PSoC4&quot; -- -yv2 -q10 -ygs -o2 -v3 -.fftcfgtype=LE" />
@@ -1030,6 +1092,7 @@
 <v>.\Generated_Source\PSoC4\I2C_1_I2C_PVT.h</v>
 <v>.\Generated_Source\PSoC4\I2C_1_PVT.h</v>
 <v>.\Generated_Source\PSoC4\I2C_1_BOOT.h</v>
+<v>.\Generated_Source\PSoC4\I2C_1_I2C_SLAVE.c</v>
 <v>.\Generated_Source\PSoC4\debugLEDRed.c</v>
 <v>.\Generated_Source\PSoC4\debugLEDRed.h</v>
 <v>.\Generated_Source\PSoC4\debugLEDRed_aliases.h</v>
@@ -1086,14 +1149,14 @@
 <v>C:\Program Files (x86)\Cypress\PSoC Creator\3.3\PSoC Creator\warp\lib\common\stdlogic\mod_genv.vif</v>
 <v>C:\Program Files (x86)\Cypress\PSoC Creator\3.3\PSoC Creator\warp\lib\common\stdlogic\rtlpkg.vif</v>
 </warp_dep>
-<deps_time v="131030442134003478" />
+<deps_time v="131031082751324648" />
 <top_block v="TopDesign" />
 <last_generation v="0" />
 </CyGuid_925cc1e1-309e-4e08-b0a1-09a83c35b157>
 </dataGuid>
 <dataGuid v="769d31ea-68b1-4f0c-b90a-7c10a43ee563">
 <CyGuid_769d31ea-68b1-4f0c-b90a-7c10a43ee563 type_name="CyDesigner.Common.ProjMgmt.Model.CyLinkCustomData" version="1">
-<deps_time v="131030443171700907" />
+<deps_time v="131031083495114159" />
 </CyGuid_769d31ea-68b1-4f0c-b90a-7c10a43ee563>
 </dataGuid>
 </userData>

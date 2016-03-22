@@ -10,14 +10,15 @@
  * ========================================
 */
 #include <project.h>
-#include <nunchuck.h>
+#include "nunchuck.h"
+#include "CommunicationProtocol.h"
 
 // Define unit address for nunchuck
 #define nunchuckUnitAddress 0x52
 #define PSoC1 0x09
 
 #define NunchuckDataCommand 0b00101010
-#define WakeupBitchDataCommand 41
+
 
 // Create buffer for decoded data
 uint8 dataBuffer[3];
@@ -61,19 +62,17 @@ int main()
             {
                 sendHandshake = 0;
             }
-            else 
-            {
-                
-            }
             
             // Delay between requesting and reading
             CyDelay(1);
             
+            //Request Data from Nunchuck
+            //If nunchuckreadData returns 0 it means an error occured.
             if (NunchuckReadData(dataBuffer) == 0)
             {
-                
                 sendHandshake = 0;
             }
+            //If the return data is different from 0, we want to send it to the next PSoC.
             else
             {                
                 sendNunchuckData = 1;
@@ -85,41 +84,16 @@ int main()
         // Send nunchuck data
         if (sendNunchuckData)
         {
-            int readError = 0;
+            // Sends the databuffer data to PSoC1.
+            sendData(PSoC1, NunchuckDataCommand, dataBuffer, 3);
             
-            I2C_1_I2CMasterClearStatus();
-            readError = I2C_1_I2CMasterSendStart(PSoC1, I2C_1_I2C_WRITE_XFER_MODE);
+            // Tells the program that the data has been sent 
+            // and we need new data from the Nunchuck
+            sendNunchuckData = 0;
             
-            if (readError == I2C_1_I2C_MSTR_NO_ERROR)
-            {
-                // Send command type
-                I2C_1_I2CMasterWriteByte(NunchuckDataCommand);
-                
-                // Send Nunchuck data
-                I2C_1_I2CMasterWriteByte(dataBuffer[0]);
-                I2C_1_I2CMasterWriteByte(dataBuffer[1]);
-                I2C_1_I2CMasterWriteByte(dataBuffer[2]);
-
-                DebugLEDGreen_Write(0);
-                
-                sendNunchuckData = 0;
-                
-            }
-            else
-            {
-                int dummy = 0;
-                DebugLEDGreen_Write(1);
-            }
-            
-            I2C_1_I2CMasterSendStop();
-            I2C_1_I2CMasterClearStatus();
+            // Adds a minor delay between sending data, and reading from Nunchuck.
             CyDelay(1);
-        }
-    
-    }
-    
+        }    
+    }    
     return 0;
 }
-
-
-/* [] END OF FILE */

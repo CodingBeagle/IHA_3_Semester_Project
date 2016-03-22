@@ -1,6 +1,6 @@
 -- ======================================================================
 -- PSoC0.ctl generated from PSoC0
--- 03/21/2016 at 15:30
+-- 03/22/2016 at 09:17
 -- This file is auto generated. ANY EDITS YOU MAKE MAY BE LOST WHEN THIS FILE IS REGENERATED!!!
 -- ======================================================================
 

@@ -25,7 +25,7 @@
 *   Initial Parameter Constants
 ****************************************/
 
-#define I2C_1_I2C_MODE                   (2u)
+#define I2C_1_I2C_MODE                   (7u)
 #define I2C_1_I2C_OVS_FACTOR_LOW         (8u)
 #define I2C_1_I2C_OVS_FACTOR_HIGH        (8u)
 #define I2C_1_I2C_MEDIAN_FILTER_ENABLE   (1u)
