@@ -13,7 +13,7 @@
 <v>Output</v>
 </TreeKeys>
 <TreeStates>
-<CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237 type_name="CyDesigner.Common.Base.Controls.CyTreeViewState" version="1" SelectedNodeId="RealPSoC1\RealPSoC1\Source Files\main.c">
+<CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237 type_name="CyDesigner.Common.Base.Controls.CyTreeViewState" version="1" SelectedNodeId="RealPSoC1\RealPSoC1\Source Files\CommunicationProtocol.c">
 <ExpandedNodeIds>
 <v>RealPSoC1</v>
 <v>RealPSoC1\RealPSoC1</v>
@@ -49,21 +49,6 @@
 <v>RealPSoC1\RealPSoC1\Generated_Source\PSoC4\cy_lfclk</v>
 <v>RealPSoC1\RealPSoC1\Generated_Source\PSoC4\cy_lfclk\CyLFClk.c</v>
 <v>RealPSoC1\RealPSoC1\Generated_Source\PSoC4\cy_lfclk\CyLFClk.h</v>
-<v>RealPSoC1\RealPSoC1\Generated_Source\PSoC4\debugLEDBlue</v>
-<v>RealPSoC1\RealPSoC1\Generated_Source\PSoC4\debugLEDBlue\debugLEDBlue.c</v>
-<v>RealPSoC1\RealPSoC1\Generated_Source\PSoC4\debugLEDBlue\debugLEDBlue.h</v>
-<v>RealPSoC1\RealPSoC1\Generated_Source\PSoC4\debugLEDBlue\debugLEDBlue_aliases.h</v>
-<v>RealPSoC1\RealPSoC1\Generated_Source\PSoC4\debugLEDBlue\debugLEDBlue_PM.c</v>
-<v>RealPSoC1\RealPSoC1\Generated_Source\PSoC4\debugLEDGreen</v>
-<v>RealPSoC1\RealPSoC1\Generated_Source\PSoC4\debugLEDGreen\debugLEDGreen.c</v>
-<v>RealPSoC1\RealPSoC1\Generated_Source\PSoC4\debugLEDGreen\debugLEDGreen.h</v>
-<v>RealPSoC1\RealPSoC1\Generated_Source\PSoC4\debugLEDGreen\debugLEDGreen_aliases.h</v>
-<v>RealPSoC1\RealPSoC1\Generated_Source\PSoC4\debugLEDGreen\debugLEDGreen_PM.c</v>
-<v>RealPSoC1\RealPSoC1\Generated_Source\PSoC4\debugLEDRed</v>
-<v>RealPSoC1\RealPSoC1\Generated_Source\PSoC4\debugLEDRed\debugLEDRed.c</v>
-<v>RealPSoC1\RealPSoC1\Generated_Source\PSoC4\debugLEDRed\debugLEDRed.h</v>
-<v>RealPSoC1\RealPSoC1\Generated_Source\PSoC4\debugLEDRed\debugLEDRed_aliases.h</v>
-<v>RealPSoC1\RealPSoC1\Generated_Source\PSoC4\debugLEDRed\debugLEDRed_PM.c</v>
 <v>RealPSoC1\RealPSoC1\Generated_Source\PSoC4\I2C_1</v>
 <v>RealPSoC1\RealPSoC1\Generated_Source\PSoC4\I2C_1\I2C_1.c</v>
 <v>RealPSoC1\RealPSoC1\Generated_Source\PSoC4\I2C_1\I2C_1.h</v>
@@ -117,8 +102,10 @@
 <v>RealPSoC1\RealPSoC1\TopDesign</v>
 <v>RealPSoC1\RealPSoC1\RealPSoC1.cydwr</v>
 <v>RealPSoC1\RealPSoC1\Header Files</v>
+<v>RealPSoC1\RealPSoC1\Header Files\CommunicationProtocol.h</v>
 <v>RealPSoC1\RealPSoC1\Header Files\cyapicallbacks.h</v>
 <v>RealPSoC1\RealPSoC1\Source Files</v>
+<v>RealPSoC1\RealPSoC1\Source Files\CommunicationProtocol.c</v>
 <v>RealPSoC1\RealPSoC1\Source Files\main.c</v>
 <v>RealPSoC1\RealPSoC1\Generated_Source</v>
 <v>RealPSoC1\RealPSoC1\Generated_Source\PSoC4</v>
@@ -142,8 +129,6 @@
 <v>RealPSoC1\RealPSoC1\Generated_Source\PSoC4\cy_boot\cyPm.c</v>
 <v>RealPSoC1\RealPSoC1\Generated_Source\PSoC4\cy_boot\cyPm.h</v>
 <v>RealPSoC1\RealPSoC1\Generated_Source\PSoC4\cy_boot\cytypes.h</v>
-<v>RealPSoC1\RealPSoC1\Generated_Source\PSoC4\cy_boot\cyutils.c</v>
-<v>RealPSoC1\RealPSoC1\Generated_Source\PSoC4\cy_lfclk</v>
 </VisibleNodeIds>
 </CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237>
 <CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237 type_name="CyDesigner.Common.Base.Controls.CyTreeViewState" version="1" SelectedNodeId="">
@@ -169,6 +154,7 @@
 <v>RealPSoC1\RealPSoC1\CortexM0\ARM_GCC_493\Debug</v>
 <v>RealPSoC1\RealPSoC1\CortexM0\ARM_GCC_493\Debug\Listing Files</v>
 <v>RealPSoC1\RealPSoC1\CortexM0\ARM_GCC_493\Debug\Listing Files\Cm0Start.lst</v>
+<v>RealPSoC1\RealPSoC1\CortexM0\ARM_GCC_493\Debug\Listing Files\CommunicationProtocol.lst</v>
 <v>RealPSoC1\RealPSoC1\CortexM0\ARM_GCC_493\Debug\Listing Files\CyBootAsmGnu.lst</v>
 <v>RealPSoC1\RealPSoC1\CortexM0\ARM_GCC_493\Debug\Listing Files\cyfitter_cfg.lst</v>
 <v>RealPSoC1\RealPSoC1\CortexM0\ARM_GCC_493\Debug\Listing Files\CyFlash.lst</v>
@@ -188,6 +174,7 @@
 <v>RealPSoC1\RealPSoC1\CortexM0\ARM_GCC_493\Debug\Listing Files\I2C_1_I2C.lst</v>
 <v>RealPSoC1\RealPSoC1\CortexM0\ARM_GCC_493\Debug\Listing Files\I2C_1_I2C_BOOT.lst</v>
 <v>RealPSoC1\RealPSoC1\CortexM0\ARM_GCC_493\Debug\Listing Files\I2C_1_I2C_INT.lst</v>
+<v>RealPSoC1\RealPSoC1\CortexM0\ARM_GCC_493\Debug\Listing Files\I2C_1_I2C_MASTER.lst</v>
 <v>RealPSoC1\RealPSoC1\CortexM0\ARM_GCC_493\Debug\Listing Files\I2C_1_I2C_SLAVE.lst</v>
 <v>RealPSoC1\RealPSoC1\CortexM0\ARM_GCC_493\Debug\Listing Files\I2C_1_PM.lst</v>
 <v>RealPSoC1\RealPSoC1\CortexM0\ARM_GCC_493\Debug\Listing Files\I2C_1_SCB_IRQ.lst</v>
@@ -212,6 +199,7 @@
 <v>RealPSoC1\RealPSoC1\CortexM0\ARM_GCC_493\Debug</v>
 <v>RealPSoC1\RealPSoC1\CortexM0\ARM_GCC_493\Debug\Listing Files</v>
 <v>RealPSoC1\RealPSoC1\CortexM0\ARM_GCC_493\Debug\Listing Files\Cm0Start.lst</v>
+<v>RealPSoC1\RealPSoC1\CortexM0\ARM_GCC_493\Debug\Listing Files\CommunicationProtocol.lst</v>
 <v>RealPSoC1\RealPSoC1\CortexM0\ARM_GCC_493\Debug\Listing Files\CyBootAsmGnu.lst</v>
 <v>RealPSoC1\RealPSoC1\CortexM0\ARM_GCC_493\Debug\Listing Files\cyfitter_cfg.lst</v>
 <v>RealPSoC1\RealPSoC1\CortexM0\ARM_GCC_493\Debug\Listing Files\CyFlash.lst</v>
@@ -231,12 +219,11 @@
 <v>RealPSoC1\RealPSoC1\CortexM0\ARM_GCC_493\Debug\Listing Files\I2C_1_I2C.lst</v>
 <v>RealPSoC1\RealPSoC1\CortexM0\ARM_GCC_493\Debug\Listing Files\I2C_1_I2C_BOOT.lst</v>
 <v>RealPSoC1\RealPSoC1\CortexM0\ARM_GCC_493\Debug\Listing Files\I2C_1_I2C_INT.lst</v>
+<v>RealPSoC1\RealPSoC1\CortexM0\ARM_GCC_493\Debug\Listing Files\I2C_1_I2C_MASTER.lst</v>
 <v>RealPSoC1\RealPSoC1\CortexM0\ARM_GCC_493\Debug\Listing Files\I2C_1_I2C_SLAVE.lst</v>
 <v>RealPSoC1\RealPSoC1\CortexM0\ARM_GCC_493\Debug\Listing Files\I2C_1_PM.lst</v>
 <v>RealPSoC1\RealPSoC1\CortexM0\ARM_GCC_493\Debug\Listing Files\I2C_1_SCB_IRQ.lst</v>
 <v>RealPSoC1\RealPSoC1\CortexM0\ARM_GCC_493\Debug\Listing Files\I2C_1_SCBCLK.lst</v>
-<v>RealPSoC1\RealPSoC1\CortexM0\ARM_GCC_493\Debug\Listing Files\I2C_1_scl.lst</v>
-<v>RealPSoC1\RealPSoC1\CortexM0\ARM_GCC_493\Debug\Listing Files\I2C_1_scl_PM.lst</v>
 </VisibleNodeIds>
 </CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237>
 </TreeStates>
