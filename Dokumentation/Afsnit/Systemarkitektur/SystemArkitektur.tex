@@ -119,14 +119,34 @@ Ud fra sekvensdiagrammet for Devkit 8000 er der udledt foreløbige metoder til k
 
 % ---------------PSoC0 Applikationsmodel-----------------------------
 \subsection{Applikationsmodel for PSoC0}
-På figur \ref{fig:sekvensPSoC0} ses et sekvensdiagram for PSoC0 med udgangspunkt i vores test use case - usecase 2. Controlklassen, som er opkaldt efter use case navnet, hedder Test of Protocols. Hvilket på figur \ref{fig:sekvensPSoC0} er forkortet til TOP. Desuden er der tre boundaryklasser, da PSoC0 skal kommunikere både med Devkit 8000 og de to andre PSoC'er. Som det ses på sekvensdiagrammet, står TOP-klassen og tjekker på boundaryklassen med SPI-forbindelse til Devkit 8000, for at holde øje med om en test bliver startet. Derudover sørger controlklassen for at kommunikere videre ud til de andre PSoC'er, der styrer henholdsvis motorerne og Wii-nunchucken. 
+På figur \ref{fig:sekvensPSoC0SPITest}, \ref{fig:sekvensPSoC0I2CTest} og \ref{fig:sekvensPSoC0NunchuckTest} ses sekvensdiagrammer for PSoC0 med udgangspunkt i vores test use case - usecase 2. Denne er blevet opdelt i de 3 tests der skal gennemføres - nemlig I2C, Nunchuck og SPI kommunikations tests. Kontrolklassen, som er opkaldt efter use case navnet, hedder Test Communication Protocol. Hvilket på figurerne er forkortet til TCP. Desuden er der tre boundaryklasser, da PSoC0 skal kommunikere både med Devkit 8000, Nunchucken og PSoC1.
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[trim = {3.2cm 2.6cm 3.3cm 2.7cm}, clip = true, width=\textwidth] {Systemarkitektur/images/SekvensdiagramPSoC0.pdf}
-	\caption{Sekvensdiagram for PSoC0.}
-	\label{fig:sekvensPSoC0}
+	\includegraphics[width=.8\textwidth] {Systemarkitektur/images/SDPSoC0SPITest}
+	\caption{Sekvensdiagram for PSoC0 SPI test.}
+	\label{fig:sekvensPSoC0SPITest}
 \end{figure}
+
+På figur \ref{fig:sekvensPSoC0SPITest} ses det, at Devkittet starter SPI testen ved at sende en besked til kontroller klassen. Denne svarer derefter en SPI OK tilbage, og derved er SPI testen gennemført.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\textwidth] {Systemarkitektur/images/SDPSoC0I2CTest}
+	\caption{Sekvensdiagram for PSoC0 I2C test.}
+	\label{fig:sekvensPSoC0I2CTest}
+\end{figure}
+
+På figur \ref{fig:sekvensPSoC0I2CTest} ses det, at Devkittet starter I2C testen, ved at sende en besked til kontroller klassen. Kontroller klassen tester alle enhederne på I2C nettet, og svarer derefter tilbage til Devkittet med en I2C Test OK besked.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\textwidth] {Systemarkitektur/images/SDPSoC0NunchuckTest}
+	\caption{Sekvensdiagram for PSoC0 Nunchuck test.}
+	\label{fig:sekvensPSoC0NunchuckTest}
+\end{figure}
+
+På figur \ref{fig:sekvensPSoC0NunchuckTest} ses det, at Nunchucken sender 'Z' knappens status (tryket eller ikke-trykket) til kontroller klassen. Denne videresender knappens status til Devkittet, og derved er testen færdig.
 
 I klassediagrammet på figur \ref{fig:klassePSoC0} ses controlklassen og de tre boundaryklasser, som hører til PSoC0. I klasserne er der tilføjet metoder, som er udledt ud fra sekvensdiagrammet på figur \ref{fig:sekvensPSoC0}. Det giver en god struktur at starte ud fra, når der skal designes og implementes. 
 
@@ -139,16 +159,16 @@ I klassediagrammet på figur \ref{fig:klassePSoC0} ses controlklassen og de tre 
 
 % ---------------PSoC1 Applikationsmodel-----------------------------
 \subsection{Applikationsmodel for PSoC1}
-Sekvensdiagrammet for PSoC1 med udgangspunkt i use case 2 ses på figur \ref{fig:sekvensPSoC1}. Også her er controlklassen opkaldt efter use case navnet "Test of Protocols" og i diagrammet forkortet til TOP. Her er der kun én boundaryklasse, da PSoC1, som ellers står for motorstyring, i use case 2, kun anvendes til test af I2C. Dermed skal den kommunikere med PSoC, men har ikke behov for at have andre boundaryklasser. I sekvensdiagrammet ses det, at controlklassen tjekker boundary klassen, for at se om der bliver kommunikeret fra PSoC0. 
+Sekvensdiagrammet for PSoC1 med udgangspunkt i use case 2 ses på figur \ref{fig:sekvensPSoC1I2CTest}. Også her er kontrolklassen opkaldt efter use case navnet "Test Communication Protocols", hvilket i diagrammet er forkortet til TCP. Her er der kun én boundaryklasse, da PSoC1, som ellers står for motorstyring, i use case 2, kun anvendes til test af I2C, og derfor kun skal den kommunikere med PSoC0. 
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[trim = {3.4cm 15cm 3.2cm 3.7cm}, clip = true, width=\textwidth] {Systemarkitektur/images/SekvensdiagramPSoC1.pdf}
+	\includegraphics[width=.8\textwidth] {Systemarkitektur/images/SDPSoC1I2CTest}
 	\caption{Sekvensdiagram for PSoC1.}
-	\label{fig:sekvensPSoC1}
+	\label{fig:sekvensPSoC1I2CTest}
 \end{figure}
 
-Fra det simple sekvensdiagram på figur \ref{fig:sekvensPSoC1}, er der også udledt et simpelt klassediagram, som kan håndtere de få funktioner, som ses af det tilhørende sekvensdiagram. 
+Fra det simple sekvensdiagram på figur \ref{fig:sekvensPSoC1I2CTest}, er der også udledt et simpelt klassediagram, som kan håndtere de få funktioner, som ses af det tilhørende sekvensdiagram. 
 
 \begin{figure}[H]
 	\centering
@@ -157,25 +177,7 @@ Fra det simple sekvensdiagram på figur \ref{fig:sekvensPSoC1}, er der også udl
 	\label{fig:klassePSoC1}
 \end{figure}
 
-% ---------------PSoC1 Applikationsmodel-----------------------------
-\subsection{Applikationsmodel for PSoC2}
-Af sekvensdiagrammet på figur \ref{fig:sekvensPSoC2} ses kommunikationen mellem klasserne for PSoC2 - også her med udgangspunkt i use case 2. Controlklassen hedder, som i de andre diagrammer TOP, og delsystemet har to boundaryklasser. PSoC2 skal kommunikere med PSoC0, som fortæller, når der skal testes. Den kommunikation foregår gennem "MasterI2C: ComProtocol"-klassen, og så skal PSoC2 også aflæse brugerinput fra Wii-nunchucken, hvilket også foregår via I2C, dog gennem den anden boundaryklasse.
 
-\begin{figure}[H]
-	\centering
-	\includegraphics[trim = {3cm 0cm 3.8cm 4.4cm}, clip = true, width=\textwidth] {Systemarkitektur/images/SekvensdiagramPSoC2.pdf}
-	\caption{Sekvensdiagram for PSoC2.}
-	\label{fig:sekvensPSoC2}
-\end{figure}
-
-Ud fra sekvensdiagrammet på figur \ref{fig:sekvensPSoC2} er der udledt metoder til et klassediagram, som ses på figur \ref{fig:klassePSoC2}. Her ses controlklassen og de to boundaryklasser med deres foreløbige metoder, der skal anvendes, som et udgangspunkt til design og implementering af softwaren på PSoC2. 
-
-\begin{figure}[H]
-	\centering
-	\includegraphics[trim = {3.8cm 13.8cm 3.3cm 4.5cm}, clip = true, width=\textwidth] {Systemarkitektur/images/klassediagramPSoC2.pdf}
-	\caption{Klassediagram for PSoC2.}
-	\label{fig:klassePSoC2}
-\end{figure}
 
 \subsection{Kommunikationsprotokoller}
 
@@ -237,17 +239,20 @@ Det kan på figur \ref{fig:I2CProtokolEksempel} ses at afsenderen først starter
 
 På tabel \ref{table:I2CKommandoer} ses de definerede kommandoer der gøres brug af.
 
+% Please add the following required packages to your document preamble:
+% \usepackage{graphicx}
 \begin{table}[H]
 	\centering
 	\resizebox{\textwidth}{!}{%
-		\begin{tabular}{l|l|l|l|l}
-			\textbf{Kommandotype} & \textbf{Beskrivelse} & \textbf{Binær Værdi} & \textbf{Hex Værdi} & \multicolumn{1}{l|}{\textbf{Data Bytes}} \\ \hline
-			NunchuckData & \begin{tabular}[c]{@{}l@{}}Indeholder aflæst input data\\ fra Wii-Nunchuck Controlleren\end{tabular} & 00101010 & 2A & \begin{tabular}[c]{@{}l@{}}Byte \#1:\\ Analog Stick Y værdi\\ \\ Byte \#2:\\ Analog stick X værdi\\ \\ Byte \#3:\\ Knap tryk\end{tabular} \\
-			&  &  &  &  \\
-			&  &  &  &  \\ \hline
+		\begin{tabular}{|l|l|l|l|l|}
+			\hline
+			Kommando Type  & Beskrivelse                                           & Binær værdi & Hex værdi & Data bytes                                                                                                              \\ \hline
+			NunchuckData   & Indeholder aflæst data fra Wii Nunchuck controlleren  & 0010 1010   & 0xA2      & \begin{tabular}[c]{@{}l@{}}Byte \#1 Analog X-værdi\\ Byte \#2 Analog Y-værdi\\ Byte \#3 Analog ButtonState\end{tabular} \\ \hline
+			I2CTestRequest & Beder PSoC om at starte en I2C kommunikations test    & 0010 1001   & 0x29      & \newline Ingen Databytes                                                                                                         \\ \hline
+			I2CTestACK     & Beder om at få en I2C OK besked tilbage fra I2C enhed & 0010 1000   & 0x28      & \newline Ingen Databytes                                                                                                         \\ \hline
 		\end{tabular}%
 	}
-	\caption{I2C Protokol Kommandotyper}
+	\caption{De forskellige I2C Kommandoer der bruges}
 	\label{table:I2CKommandoer}
 \end{table}
 
