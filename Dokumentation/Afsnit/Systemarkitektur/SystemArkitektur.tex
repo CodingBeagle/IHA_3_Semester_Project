@@ -1,7 +1,30 @@
 \chapter{Systemarkitektur}
 
-\section{Blokbeskrivelse}
+\subsection{Domæne model}
+På figur \ref{fig:DomainModel} ses domæne modellen for systemet. Denne er udarbejdet ved at lave en navneordsanalyse fra de use cases der er specificerede i afsnit \ref{afsnit:kravspecifikation}.
 
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\textwidth]{Systemarkitektur/images/DomainModel}
+	\caption{Domæne model for systemet}
+	\label{fig:DomainModel}
+\end{figure}
+
+I domæne modellen ses det, at brugeren interagerer med både Wii-nunchucken og med brugergrænsefladen. Brugergrænsefladen er en grænseflade til devkittet. Devkittet kommunikerer med PSoC0, som læser den analoge data der kommer fra Wii-nunchucken. Denne data bliver derefter afkodet og videresendt til PSoC1, som ud fra denne data styrer de forskellige motorer.
+
+% ---------------BDD--------------------------------------------------
+\subsection{BDD for Candygun 3000}
+I BDD-diagrammet på figur \ref{fig:BDD} er Candygun 3000 brudt ned i blokkene PSoC0, PSoC1, PSoC2 og Devkit 8000. Devkit 8000 er brugergrænsefladen, som brugeren kan interagere med via touchskærmen. Den er forbundet via SPI til PSoC0, som er SPI-slave. PSoC0 er desuden også I2C-master. PSoC0 kommunikerer via I2C til PSoC1 og PSoC2. PSoC1 står for motorstyring, som via et PWM-signal styrer de 3 motorer. PSoC2 har til opgave at aflæse brugerinput fra Wii-nunchucken, som også kommunikerer via I2C. På figur \ref{fig:BDD} ses de forskellige blokke og deres porte. Desuden er der en flowspecification for I2C og SPI, hvor forbindelserne er beskrevet mere detaljeret (set fra master-synspunkt). 
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[trim = {1.8cm 14.6cm 1.8cm 1cm}, clip = true, width = \textwidth]{Systemarkitektur/images/BDD_overordnet.pdf}
+	\caption{Overordnet BDD for Candygun 3000.}
+	\label{fig:BDD}
+\end{figure}
+
+
+\subsubsection{Blokbeskrivelse}
 \textbf{DevKit 8000}
 \newline
 \textit{DevKit 8000} er en embedded Linux platform med touch-skærm der bruges til brugergrænsefladen for produktet. Det er her hvor brugeren interagerer med systemet og ser status for spillet.
@@ -41,49 +64,6 @@
 \textbf{I2C (FlowSpecification)}
 
 \textit{I2C (FlowSpecification)} beskriver signalerne der indgår i \textit{I2C} kommunikation.
-
-
-\section{Signalbeskrivelse}
-Generelt for signalbeskrivelsen gælder, at når et signal beskrives som 'højt' menes der i et spændingsområde på 3.5V til 5 V, som er defineret for CMOS kredse (Kilde allaboutcircuits.com/textbook/digitall/chpt-3/logic-signal-voltage-levels/). På samme måde er signaler beskrevet som 'lav' defineret som spændinger indenfor 0 V til 1.5 V.
-	\begin{longtable}{|>{\hspace{0pt}}p{3cm} | >{\hspace{0pt}}p{3cm} | p{2cm} | p{3cm} |}
-		\hline
-		\textbf{Blok-navn} & \textbf{Funktionsbeskrivelse} & \textbf{Signaler} & \textbf{Signalbeskrivelse} \\ \hline
-		Devkit8000 & Fungerer som grænseflade mellem bruger og systemet. & masterSPI & Type: SPI \newline Spændingsniveau: 0-5V \newline Hastighed: ?? \\ \cline{3-4}
-		 & & touch & Type: touch \newline Tryk på DevKit8000 display. \\ \hline
-		 PSoC0 & Fungerer som I2C master for systemet samt SPI slave til DevKit8000. & slaveSPI & Type: SPI \newline Spændingsniveau: 0-5V \newline Hastighed: ?? \\ \cline{3-4}
-		 & & masterI2C & Type: I2C \newline Spændingsniveau: 0-5V \newline Hastighed: 100kbit/sekund \\ \hline
-		Motorstyring & Modtager input fra Wii-Nunchuck og omsætter det til PWM signaler. & motorSlave & Type: I2C \newline Spændingsniveau: 0-5V \newline Hastighed: 100kbit/sekund \newline Beskrivelse: Indeholder Wii-Nunchuck data der skal bruges til motorstyring.  \\ \cline{3-4}
-		 & & power & Type: \(V_{CC}\) \newline Spændingsniveau: 5V \newline Beskrivelse: Strømforsyning til motorstyringen. \\ \hline
-		PSoC1 & Modtager input fra Wii-Nunchuck og omsætter det til PWM signaler. & MotorI2C & Type: I2C \newline Spændingsniveau: 0-5V \newline Hastighed: 100kbit/sekund \newline Beskrivelse: Indeholder formatteret Wii-Nunchuck data som skal bruges til styring af motorens PWM signal. \\ \cline{3-4} 
-		& & PWM & Type: PWM \newline Frekvens: 22kHz \newline PWM \%: 0-100\% \newline Spændingsniveau: 0-5V \newline Beskrivelse: PWM signal til styring af motorens hastighed. Udregnet ud fra MotorI2C signalet. \\ \hline
-		Motor & Motorerne der skal styre kanonen & PWM & Type: PWM \newline Frekvens: 22kHz \newline PWM\%: 0-100\% \newline Spædingsniveau: 0-5V \newline Beskrivelse: PWM signal til styring af motorens hastighed. \\ \cline{3-4}
-		 & & power & Type: \(V_{CC}\) \newline Spændingsniveau: 12V \newline Beskrivelse: Strømforsyning til motorstyringen  \\ \hline
-		PSoC2 & Modtager input data fra Wii-Nunchuk og videresender det i behandlet format. & wiiSlave & Type: I2C \newline Spændingsniveau: 0-5V \newline Hastighed: 100kbit/sekund \newline Beskrivelse: Sender input data fra Wii-Nunchuck til PSoC2. \\ \cline{3-4}
-		 & & WiiI2C & Type: I2C \newline Spændingsniveau: 0-5V \newline Hastighed: 100kbit/sekund \newline Beskrivelse: Videresender behandlet Wii-Nunchuk data til andre dele af systemet. \\ \hline
-		Wii-nunchuck & Den fysiske controller som brugeren styrer kanonen med. & WiiSlave & Type: I2C \newline Spændingsniveau: 0-5V \newline Hastighed: 100kbit/sekund \newline Beskrivelse: Denne I2C linje bruges til kommunikation mellem PSoC 2 og Wii-Nunchuck. \\ \cline{3-4}
-		& & buttonPress & Type: I2C \newline Det fysiske tryk når brugeren trykker på Wii-Nunchuck knapper. \\ \hline
-		SPI & Denne blok beskriver den ikke-atomiske SPI forbindelse. & MOSI & Type: CMOS \ Spændingsniveau: 0-5V \newline Hastighed: ?? \newline Beskrivelse: Binært data som sendes fra master til slave. \\ \cline{3-4}
-		 & & MISO & Type: CMOS \newline Spændingsniveau: 0-5V \newline Hastighed: ?? \newline Beskrivelse: Binært data som sendes fra slave til master. \\ \cline{3-4}
-		 & & SCLK & Type: CMOS \newline Spændingsniveau: 0-5V \newline Hastighed: ?? \newline Beskrivelse: Clock signalet fra master til slave, som bruges til at synkronisere den serielle kommunikation. \\ \cline{3-4}
-		 & & SS & Type: CMOS \newline Spændingsniveau: 0-5V \newline Hastighed: ?? \newline  Beskrivelse: Slave-Select, som bruges til at vælge slaven der skal modtage og sende data. \\ \hline
-		 I2C & Denne blok beskriver den ikke-atomiske I2C forbindelse. & SDA & Type: CMOS \newline Spændingsniveau: 0-5V \newline Hastighed: ?? \newline Beskrivelse: Databussen mellem I2C masteren og I2C slaver. \\ \cline{3-4}
-		 & & SCL & Type: CMOS \newline Spændingsniveau: 0-5V \newline Hastighed: ?? \newline Beskrivelse: Clock signalet fra master til lyttende I2C slaver, som bruges til at synkronisere den serielle kommunikation. \\ \hline
-		\end{longtable}
-
-\section{Hardware Arkitektur}
-I hardwarearkitekturen brydes systemet ned i dele, som senere gør det muligt at uddele arbejdsopgaver, og specificere grænseflader. Hardwarearkitekturen består at BDD og IBD for systemet.
-
-% ---------------BDD--------------------------------------------------
-\subsection{BDD for Candygun 3000}
-I BDD-diagrammet på figur \ref{fig:BDD} er Candygun 3000 brudt ned i blokkene PSoC0, PSoC1, PSoC2 og Devkit 8000. Devkit 8000 er brugergrænsefladen, som brugeren kan interagere med via touchskærmen. Den er forbundet via SPI til PSoC0, som er SPI-slave. PSoC0 er desuden også I2C-master. PSoC0 kommunikerer via I2C til PSoC1 og PSoC2. PSoC1 står for motorstyring, som via et PWM-signal styrer de 3 motorer. PSoC2 har til opgave at aflæse brugerinput fra Wii-nunchucken, som også kommunikerer via I2C. På figur \ref{fig:BDD} ses de forskellige blokke og deres porte. Desuden er der en flowspecification for I2C og SPI, hvor forbindelserne er beskrevet mere detaljeret (set fra master-synspunkt). 
-
-\begin{figure}[H]
-	\centering
-	\includegraphics[trim = {1.8cm 14.6cm 1.8cm 1cm}, clip = true, width = \textwidth]{Systemarkitektur/images/BDD_overordnet.pdf}
-	\caption{Overordnet BDD for Candygun 3000.}
-	\label{fig:BDD}
-\end{figure}
-
 % ---------------IBD--------------------------------------------------
 \subsection{IBD for Candygun 3000}
 I IBD'et på figur \ref{fig:IBD} er forbindelserne mellem de forskellige blokke overskueliggjort. Det er dermed let at få et overblik over, hvilke grænseflader der skal tages højde for i den videre udvikling. 
@@ -94,6 +74,36 @@ I IBD'et på figur \ref{fig:IBD} er forbindelserne mellem de forskellige blokke 
 	\caption{IBD for Candygun 3000.}
 	\label{fig:IBD}
 \end{figure}
+
+\subsubsection{Signalbeskrivelse}
+Generelt for signalbeskrivelsen gælder, at når et signal beskrives som 'højt' menes der i et spændingsområde på 3.5V til 5 V, som er defineret for CMOS kredse \cite{cmosStandard}. På samme måde er signaler beskrevet som 'lav' defineret som spændinger indenfor 0 V til 1.5 V.
+\begin{longtable}{|>{\hspace{0pt}}p{3cm} | >{\hspace{0pt}}p{3cm} | p{2cm} | p{3cm} |}
+	\hline
+	\textbf{Blok-navn} & \textbf{Funktionsbeskrivelse} & \textbf{Signaler} & \textbf{Signalbeskrivelse} \\ \hline
+	Devkit8000 & Fungerer som grænseflade mellem bruger og systemet. & masterSPI & Type: SPI \newline Spændingsniveau: 0-5V \newline Hastighed: ?? \\ \cline{3-4}
+	& & touch & Type: touch \newline Tryk på DevKit8000 display. \\ \hline
+	PSoC0 & Fungerer som I2C master for systemet samt SPI slave til DevKit8000. & slaveSPI & Type: SPI \newline Spændingsniveau: 0-5V \newline Hastighed: ?? \\ \cline{3-4}
+	& & masterI2C & Type: I2C \newline Spændingsniveau: 0-5V \newline Hastighed: 100kbit/sekund \\ \hline
+	Motorstyring & Modtager input fra Wii-Nunchuck og omsætter det til PWM signaler. & motorSlave & Type: I2C \newline Spændingsniveau: 0-5V \newline Hastighed: 100kbit/sekund \newline Beskrivelse: Indeholder Wii-Nunchuck data der skal bruges til motorstyring.  \\ \cline{3-4}
+	& & power & Type: \(V_{CC}\) \newline Spændingsniveau: 5V \newline Beskrivelse: Strømforsyning til motorstyringen. \\ \hline
+	PSoC1 & Modtager input fra Wii-Nunchuck og omsætter det til PWM signaler. & MotorI2C & Type: I2C \newline Spændingsniveau: 0-5V \newline Hastighed: 100kbit/sekund \newline Beskrivelse: Indeholder formatteret Wii-Nunchuck data som skal bruges til styring af motorens PWM signal. \\ \cline{3-4} 
+	& & PWM & Type: PWM \newline Frekvens: 22kHz \newline PWM \%: 0-100\% \newline Spændingsniveau: 0-5V \newline Beskrivelse: PWM signal til styring af motorens hastighed. Udregnet ud fra MotorI2C signalet. \\ \hline
+	Motor & Motorerne der skal styre kanonen & PWM & Type: PWM \newline Frekvens: 22kHz \newline PWM\%: 0-100\% \newline Spædingsniveau: 0-5V \newline Beskrivelse: PWM signal til styring af motorens hastighed. \\ \cline{3-4}
+	& & power & Type: \(V_{CC}\) \newline Spændingsniveau: 12V \newline Beskrivelse: Strømforsyning til motorstyringen  \\ \hline
+	PSoC2 & Modtager input data fra Wii-Nunchuk og videresender det i behandlet format. & wiiSlave & Type: I2C \newline Spændingsniveau: 0-5V \newline Hastighed: 100kbit/sekund \newline Beskrivelse: Sender input data fra Wii-Nunchuck til PSoC2. \\ \cline{3-4}
+	& & WiiI2C & Type: I2C \newline Spændingsniveau: 0-5V \newline Hastighed: 100kbit/sekund \newline Beskrivelse: Videresender behandlet Wii-Nunchuk data til andre dele af systemet. \\ \hline
+	Wii-nunchuck & Den fysiske controller som brugeren styrer kanonen med. & WiiSlave & Type: I2C \newline Spændingsniveau: 0-5V \newline Hastighed: 100kbit/sekund \newline Beskrivelse: Denne I2C linje bruges til kommunikation mellem PSoC 2 og Wii-Nunchuck. \\ \cline{3-4}
+	& & buttonPress & Type: I2C \newline Det fysiske tryk når brugeren trykker på Wii-Nunchuck knapper. \\ \hline
+	SPI & Denne blok beskriver den ikke-atomiske SPI forbindelse. & MOSI & Type: CMOS \ Spændingsniveau: 0-5V \newline Hastighed: ?? \newline Beskrivelse: Binært data som sendes fra master til slave. \\ \cline{3-4}
+	& & MISO & Type: CMOS \newline Spændingsniveau: 0-5V \newline Hastighed: ?? \newline Beskrivelse: Binært data som sendes fra slave til master. \\ \cline{3-4}
+	& & SCLK & Type: CMOS \newline Spændingsniveau: 0-5V \newline Hastighed: ?? \newline Beskrivelse: Clock signalet fra master til slave, som bruges til at synkronisere den serielle kommunikation. \\ \cline{3-4}
+	& & SS & Type: CMOS \newline Spændingsniveau: 0-5V \newline Hastighed: ?? \newline  Beskrivelse: Slave-Select, som bruges til at vælge slaven der skal modtage og sende data. \\ \hline
+	I2C & Denne blok beskriver den ikke-atomiske I2C forbindelse. & SDA & Type: CMOS \newline Spændingsniveau: 0-5V \newline Hastighed: ?? \newline Beskrivelse: Databussen mellem I2C masteren og I2C slaver. \\ \cline{3-4}
+	& & SCL & Type: CMOS \newline Spændingsniveau: 0-5V \newline Hastighed: ?? \newline Beskrivelse: Clock signalet fra master til lyttende I2C slaver, som bruges til at synkronisere den serielle kommunikation. \\ \hline
+\end{longtable}
+
+\section{Hardware Arkitektur}
+I hardwarearkitekturen brydes systemet ned i dele, som senere gør det muligt at uddele arbejdsopgaver, og specificere grænseflader. Hardwarearkitekturen består at BDD og IBD for systemet.
 
 \section{Software Arkitektur}
 I softwarearkitekturen udarbejdes der applikationsmodeller bestående af sekvensdiagrammer og klassediagrammer for hvert delsystem med udgangspunkt i use case 2. Denne arkitektur overskueliggøre kravene til de boundaryklasser, der muliggør kommunikation mellem delsystemerne. Desuden bliver der gennem analyse af use case og sekvensdiagrammer udledt grundlæggende metoder i klasserne.  
@@ -146,16 +156,17 @@ På figur \ref{fig:sekvensPSoC0I2CTest} ses det, at Devkittet starter I2C testen
 	\label{fig:sekvensPSoC0NunchuckTest}
 \end{figure}
 
-På figur \ref{fig:sekvensPSoC0NunchuckTest} ses det, at Nunchucken sender 'Z' knappens status (tryket eller ikke-trykket) til kontroller klassen. Denne videresender knappens status til Devkittet, og derved er testen færdig.
+På figur \ref{fig:sekvensPSoC0NunchuckTest} ses det, at Nunchucken sender 'Z' knappens status (tryket eller ikke-trykket) til kontroller klassen. Denne videresender knappens status til Devkittet, og derved er testen færdig.\newline
 
-I klassediagrammet på figur \ref{fig:klassePSoC0} ses controlklassen og de tre boundaryklasser, som hører til PSoC0. I klasserne er der tilføjet metoder, som er udledt ud fra sekvensdiagrammet på figur \ref{fig:sekvensPSoC0}. Det giver en god struktur at starte ud fra, når der skal designes og implementes. 
+I klassediagrammet på figur \ref{fig:klassePSoC0} ses kontrolklassen og de tre boundaryklasser, som hører til PSoC0. I klasserne er der tilføjet metoder, som er udledt ud fra sekvensdiagrammerne. 
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[trim = {1.2cm 8.2cm 1.8cm 7.7cm}, clip = true, width=\textwidth] {Systemarkitektur/images/klassediagramPSoC0.pdf}
+	\includegraphics[width=\textwidth]{Systemarkitektur/images/klassediagramPSoC0}
 	\caption{Klassediagram for PSoC0.}
 	\label{fig:klassePSoC0}
 \end{figure}
+
 
 % ---------------PSoC1 Applikationsmodel-----------------------------
 \subsection{Applikationsmodel for PSoC1}
@@ -164,7 +175,7 @@ Sekvensdiagrammet for PSoC1 med udgangspunkt i use case 2 ses på figur \ref{fig
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=.8\textwidth] {Systemarkitektur/images/SDPSoC1I2CTest}
-	\caption{Sekvensdiagram for PSoC1.}
+	\caption{Sekvensdiagram for PSoC1}
 	\label{fig:sekvensPSoC1I2CTest}
 \end{figure}
 
@@ -172,7 +183,7 @@ Fra det simple sekvensdiagram på figur \ref{fig:sekvensPSoC1I2CTest}, er der og
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[trim = {1cm 7.6cm 1.8cm 3.4cm}, clip = true, width=\textwidth] {Systemarkitektur/images/klassediagramPSoC1.pdf}
+	\includegraphics[width=.5\textwidth]{Systemarkitektur/images/klassediagramPSoC1}
 	\caption{Klassediagram for PSoC1.}
 	\label{fig:klassePSoC1}
 \end{figure}
@@ -239,17 +250,17 @@ Det kan på figur \ref{fig:I2CProtokolEksempel} ses at afsenderen først starter
 
 På tabel \ref{table:I2CKommandoer} ses de definerede kommandoer der gøres brug af.
 
-% Please add the following required packages to your document preamble:
-% \usepackage{graphicx}
 \begin{table}[H]
 	\centering
 	\resizebox{\textwidth}{!}{%
-		\begin{tabular}{|l|l|l|l|l|}
+		\begin{tabular}{lllll}
 			\hline
 			Kommando Type  & Beskrivelse                                           & Binær værdi & Hex værdi & Data bytes                                                                                                              \\ \hline
+			\rowcolor[HTML]{EFEFEF} 
 			NunchuckData   & Indeholder aflæst data fra Wii Nunchuck controlleren  & 0010 1010   & 0xA2      & \begin{tabular}[c]{@{}l@{}}Byte \#1 Analog X-værdi\\ Byte \#2 Analog Y-værdi\\ Byte \#3 Analog ButtonState\end{tabular} \\ \hline
-			I2CTestRequest & Beder PSoC om at starte en I2C kommunikations test    & 0010 1001   & 0x29      & \newline Ingen Databytes                                                                                                         \\ \hline
-			I2CTestACK     & Beder om at få en I2C OK besked tilbage fra I2C enhed & 0010 1000   & 0x28      & \newline Ingen Databytes                                                                                                         \\ \hline
+			I2CTestRequest & Beder PSoC om at starte en I2C kommunikations test    & 0010 1001   & 0x29      & Ingen Databytes                                                                                                         \\ \hline
+			\rowcolor[HTML]{EFEFEF} 
+			I2CTestACK     & Beder om at få en I2C OK besked tilbage fra I2C enhed & 0010 1000   & 0x28      & Ingen Databytes                                                                                                         \\ \hline
 		\end{tabular}%
 	}
 	\caption{De forskellige I2C Kommandoer der bruges}
