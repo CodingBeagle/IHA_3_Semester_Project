@@ -44,7 +44,7 @@ void receiveData(uint8* receivedDataBuffer)
     if (I2C_1_I2CSlaveStatus() == I2C_1_I2C_SSTAT_WR_CMPLT)
     {
         int i;
-        for(i = 1; i<slaveBufferMaxSize; i++)
+        for(i = 0; i<slaveBufferMaxSize; i++)
         {
             receivedDataBuffer[i] = (int)slaveWriteBuffer[i];
         }

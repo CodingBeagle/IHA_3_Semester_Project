@@ -43,21 +43,13 @@ int main()
     {
        if (!sendHandshake)
         {
-            if (NunchuckSendHandshake() == 0)
+            if(NunchuckSendHandshake() != 0)
             {
-                int dummy = 2;
-                DebugLEDRed_Write(0);
-            }
-            else
-            {
-                DebugLEDRed_Write(1);
                 sendHandshake = 1;
             }
         }
         else
         {   
-            I2C_1_I2CMasterClearStatus();
-         
             if (NunchuckRequestData() == 0)
             {
                 sendHandshake = 0;
@@ -90,9 +82,6 @@ int main()
             // Tells the program that the data has been sent 
             // and we need new data from the Nunchuck
             sendNunchuckData = 0;
-            
-            // Adds a minor delay between sending data, and reading from Nunchuck.
-            CyDelay(1);
         }    
     }    
     return 0;
