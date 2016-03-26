@@ -17,36 +17,39 @@ På baggrund af BDD'et er der fundet følgende hardwareblokke, der skal udarbejd
 \subsection{Motorstyring}
 Til at styre de tre motorer er der bygget en H-bro, der skal bruges i tre eksemplarer. To af disse motorer skal kunne styre kanonen, så den kan køre op og ned og frem og tilbage. Den tredje skal bruges til at styre affyringsekanismen. 
 
+\subsubsection{H-bro}
+Først blev der designet en H-bro, som bestod af to N-MOSFET's af typen IRLZ44 og to P-MOSFET's af typen ZVP3306. Denne kan ses på figur... Det viste sig dog, at den P-MOSFET der var brugt, var for svag til at kunne trække den strøm, som motoren skulle bruge, hvilket betød, at den blev brændt af. 
+
 \begin{table}[]
 	\centering
-	\caption{My caption}
+	\caption{Komponentbetegnelser på H-bro}
 	\label{my-label}
 	\begin{tabular}{|l|l|l}
 		\cline{1-2}
-		navn & hvad de er                 &  \\ \cline{1-2}
-		VCC  & 5V                         &  \\ \cline{1-2}
-		Q1   & IRLZ44(mosfet N-Channel)   &  \\ \cline{1-2}
-		Q2   & IRLZ44(mosfet N-Channel)   &  \\ \cline{1-2}
-		Q3   & IRLZ44(mosfet N-Channel)   &  \\ \cline{1-2}
-		Q4   & IRLZ44(mosfet N-Channel)   &  \\ \cline{1-2}
-		Q5   & BC547                      &  \\ \cline{1-2}
-		Q6   & BC557                      &  \\ \cline{1-2}
-		Q7   & BC547                      &  \\ \cline{1-2}
-		Q8   & BC557                      &  \\ \cline{1-2}
-		Q9   & IRF9Z34N(mosfet P-Channel) &  \\ \cline{1-2}
-		Q10  & IRF9Z34N(mosfet P-Channel) &  \\ \cline{1-2}
-		R1   & 10k$\Omega$                &  \\ \cline{1-2}
-		R2   & 10k$\Omega$                &  \\ \cline{1-2}
-		R3   & 10k$\Omega$                &  \\ \cline{1-2}
-		R4   & 10k$\Omega$                &  \\ \cline{1-2}
-		R5   & 10k$\Omega$                &  \\ \cline{1-2}
-		R6   & 100$\Omega$                &  \\ \cline{1-2}
-		R7   & 100$\Omega$                &  \\ \cline{1-2}
-		R8   & 10k$\Omega$                &  \\ \cline{1-2}
-		D1   & IN5819                     &  \\ \cline{1-2}
-		D2   & IN5819                     &  \\ \cline{1-2}
-		D3   & IN5819                     &  \\ \cline{1-2}
-		D4   & IN5819                     &  \\ \cline{1-2}
+		Betegnelse 	& Komponent 	          	 &  \\ \cline{1-2}
+		VCC        	& 5V                         &  \\ \cline{1-2}
+		Q1   		& IRLZ44(mosfet N-Channel)   &  \\ \cline{1-2}
+		Q2   		& IRLZ44(mosfet N-Channel)   &  \\ \cline{1-2}
+		Q3   		& IRLZ44(mosfet N-Channel)   &  \\ \cline{1-2}
+		Q4   		& IRLZ44(mosfet N-Channel)   &  \\ \cline{1-2}
+		Q5   		& BC547                      &  \\ \cline{1-2}
+		Q6   		& BC557                      &  \\ \cline{1-2}
+		Q7   		& BC547                      &  \\ \cline{1-2}
+		Q8   		& BC557                      &  \\ \cline{1-2}
+		Q9   		& IRF9Z34N(mosfet P-Channel) &  \\ \cline{1-2}
+		Q10  		& IRF9Z34N(mosfet P-Channel) &  \\ \cline{1-2}
+		R1   		& 10k$\Omega$                &  \\ \cline{1-2}
+		R2   		& 10k$\Omega$                &  \\ \cline{1-2}
+		R3   		& 10k$\Omega$                &  \\ \cline{1-2}
+		R4   		& 10k$\Omega$                &  \\ \cline{1-2}
+		R5   		& 10k$\Omega$                &  \\ \cline{1-2}
+		R6   		& 100$\Omega$                &  \\ \cline{1-2}
+		R7   		& 100$\Omega$                &  \\ \cline{1-2}
+		R8   		& 10k$\Omega$                &  \\ \cline{1-2}
+		D1   		& IN5819                     &  \\ \cline{1-2}
+		D2   		& IN5819                     &  \\ \cline{1-2}
+		D3   		& IN5819                     &  \\ \cline{1-2}
+		D4   		& IN5819                     &  \\ \cline{1-2}
 	\end{tabular}
 \end{table}
 
