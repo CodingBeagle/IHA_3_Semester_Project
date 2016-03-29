@@ -219,7 +219,7 @@ ssize_t ads7870_cdrv_read(struct file *filep, char __user *ubuf,
   /* Perform A/D Conversion */
   //ads7870_spi_read_reg16(....)
 
-    //err = ads7870_convert((minor & 0xff), &result);
+    err = ads7870_convert((minor & 0xff), &result);
   if(err)
     return -EFAULT;
   

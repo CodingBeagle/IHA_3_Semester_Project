@@ -15,20 +15,20 @@ static struct spi_device *slave_spi_device;
  */
 static struct omap2_mcspi_device_config mcspi_config = {
   .turbo_mode	    = 0,
-  //  .single_channel   = 1,  /* 0: slave, 1: master */
+  .single_channel   = 1,  /* 0: slave, 1: master */
 };
 
 /* 
  * Slave Device Config
  */
-static struct spi_board_info slave_spi_board_info = {
-  .modalias	    = "devkit8000_spi",
-  .bus_num	    = 1,         // SPI bus number = SPI1
-  .chip_select	    = 0,         // SPI1_CS0_CMOS
-  .max_speed_hz	    = 1000000,   // 1 MHz to be super safe (20MHz er maks)
-  .controller_data  = &mcspi_config,    
-  .mode             = SPI_MODE_3, // Clock polarity // CPOL/CPHA = 11 
-};                                // Clock starts high/ active on rising edge
+statgic struct spi_board_info slave_spi_board_info = {
+  .modalias	    = "ads7870", /*must be the same in driver and device*/
+  .bus_num	    = 1, /*SPI1 from the OMAP*/
+  .chip_select	    = 0, /*SPI1_CS0_CMOS*/
+  .max_speed_hz	    = 15000000, /*max 20 MHz - 15 MHz to be safe*/
+  .controller_data  = &mcspi_config,
+  .mode             = SPI_MODE_3, /* Clock polarity - CPOL/CPHA = 11 */
+};
 
 static int hotplug_spi_init(void)
 {

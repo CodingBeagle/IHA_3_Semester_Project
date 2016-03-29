@@ -183,7 +183,7 @@ static int ads7870_spi_probe(struct spi_device *spi)
   
   spi->bits_per_word = 8;  // skal gøres i probe, sæt til 16 for psoc
   spi_setup(spi);
-
+#if 0
   /* In this case we assume just one device */ 
   ads7870_spi_device = spi;  
  
@@ -205,7 +205,7 @@ static int ads7870_spi_probe(struct spi_device *spi)
     return -ENOMEM;
   adsdev->revision = value;
   spi_set_drvdata(spi, adsdev);  
-  
+#endif  
   return err;
 }
 
@@ -221,9 +221,9 @@ static int ads7870_remove(struct spi_device *spi)
   
   printk (KERN_ALERT "Removing SPI device %s revision %i on chip select %i\n", 
 	  spi->modalias, adsdev->revision, spi->chip_select);
-
+#if 0
   kfree(adsdev); /* Free kernel memory */
-
+#endif
   return 0;
 }
 
