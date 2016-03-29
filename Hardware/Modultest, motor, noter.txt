@@ -1,0 +1,4 @@
+Modultest H-bro: 
+Man kan se på billedet at der er to spikes, hvor den ene er blå og den anden er orange. 
+Det betyder, at H-broen virker til at man kan skifte retning. 
+Der er nogle små spikes ved den modsatte farve af den der skifter retning. Det er fordi bla bla bla - Tore ved det. 
