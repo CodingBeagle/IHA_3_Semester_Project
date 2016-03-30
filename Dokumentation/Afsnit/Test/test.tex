@@ -48,6 +48,32 @@ På figur \ref{fig:NunchuckReadValues} ses I2C beskederne der bliver udvekslet m
 \end{figure}
 
 \subsubsection{I2C Protokol}
+PSoC0 og PSoC1 kommunikerer over en I2C bus via I2C protokollen beskrevet i afsnit \ref{afsnit:I2CProtokol}. Dette afsnit beskriver test af denne protokol. Følgende test tager udgangspunkt i kommandotypen \textit{NunchuckData} beskrevet i tabel \ref{table:I2CKommandoer}).
+
+\textbf{Test af NunchuckData kommandotype} 
+
+Testen blev udført i to dele. I første del måles I2C bussen ved brug af Analog Discovery's Logic Analyzer; for at verificere at den forventede kommandotype bliver overført via bussen. Anden del verificerer at den overførte data er modtaget korrekt via PSoC Creator's debugger.
+
+\textbf{Del 1}
+
+I testen afsendes, som nævnt i afsnittets indledning, kommandotypen NunchuckData. Som vist i tabel \ref{table:I2CKommandoer} har denne kommandotype ID'et 0xA2, hvor de efterfølgende 3 data bytes indeholder input dataen fra Wii-Nunchuck.
+
+Det forventede resultat af målingen er at første byte er kommandoentypens ID, som har værdien 0x2A. Kommandoens data - de efterfølgende bytes - verificeres først i anden del, disse indgår altså ikke i følgende måling. 
+
+Målingen ses på figur \ref{fig:NunchuckDataCommand}.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=1.2\textwidth]{Test/images/ShowsNunchuckDataCommand.png}
+	\caption{Tidslinje af målt I2C kommandotype}
+	\label{fig:NunchuckDataCommand}
+\end{figure}
+
+Det kan ses på figur \ref{fig:NunchuckDataCommand} at I2C overførslen starter med en I2C \textit{write}, som får et successfuldt acknowledge fra slaven PSoC1. Herefter kan det ses at den næste byte der sendes har værdien 0x2A. Denne byte er kommandoentypens ID, og er altså om forventet 0x2A.
+
+Det kan altså verificeres at kommandoen overføres via I2C bussen. Dataens integritet er dog inkluderet i denne del, og testes i del 2.
+
+\textbf{Del 2}
 
 \subsection{Hardware}
 

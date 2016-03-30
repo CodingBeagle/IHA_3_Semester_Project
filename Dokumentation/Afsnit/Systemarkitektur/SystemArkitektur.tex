@@ -206,6 +206,7 @@ På figur \ref{fig:kommunikationsOverblik} gives et overblik over systemets forb
 \subsubsection{SPI Protokol}
 
 \subsubsection{I2C Protokol}
+\label{afsnit:I2CProtokol}
 
 I2C\cite{I2C} er en bus bestående af to ledninger. Den ene ledning bruges som databus og navngives \textit{Serial Data Line} (SDA). Den anden ledning bruges til clock signalet, for at synkronisere kommunikationen, og navngives \textit{Serial Clock Line} (SCL). Enheder på I2C bussen gør brug af et master-slave forhold til at sende og læse data. En fordel ved I2C bussen er at netværket kan bestå af multiple masters og slaver, hvilket gavner sig godt for dette system da fire I2C komponenter skal sende data mellem hinanden.
 
