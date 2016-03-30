@@ -30,7 +30,7 @@ static struct spi_driver devkit8000_spi_driver = {
     .driver{
         .name = "devkit8000_spi",   //must be the same as modalias in hotplug
         .bus = &spi_bus_type,       //???
-        .owner THIS_MODULE,
+        .owner = THIS_MODULE,
     },
     .probe = devkit8000_spi_probe,
     .remove = devkit8000_spi_remove
