@@ -1,0 +1,1 @@
+cmd_/home/stud/Semesterprojekt3/Software/SPI/candydriver/candygunmod.o := arm-poky-linux-gnueabi-ld -EL    -r -o /home/stud/Semesterprojekt3/Software/SPI/candydriver/candygunmod.o /home/stud/Semesterprojekt3/Software/SPI/candydriver/candygun.o /home/stud/Semesterprojekt3/Software/SPI/candydriver/candygun-spi.o 

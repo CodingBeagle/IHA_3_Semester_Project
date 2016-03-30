@@ -4,12 +4,14 @@
 #include <linux/device.h>
 #include <asm/uaccess.h>        //copy_to_user
 #include <linux/module.h>
+#include <linux/err.h>
+#include <linux/spi/spi.h>
 
 // SPI driver til semesterprojekt 3 //
 
 MODULE_LICENSE("GPL");
 MODULE_DESCRIPTION("Driver for Devkit8000 SPI");
-MODULE_AUTHOR("E3PRJ3 - group3 - TR);
+MODULE_AUTHOR("E3PRJ3 - group3 - TR");
 
 #define SPI_MAJOR_NUMBER 97    //driver reference
 #define SPI_MINOR_NUMBER 0     //device reference
@@ -27,7 +29,7 @@ dev_t devno = 0;
 // spi_driver (global)
 //******************************************************************
 static struct spi_driver devkit8000_spi_driver = {
-    .driver{
+    .driver = {
         .name = "devkit8000_spi",   //must be the same as modalias in hotplug
         .bus = &spi_bus_type,       //???
         .owner = THIS_MODULE,

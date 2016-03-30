@@ -22,7 +22,7 @@ static struct omap2_mcspi_device_config mcspi_config = {
  * Slave Device Config
  */
 static struct spi_board_info slave_spi_board_info = {
-  .modalias	    = "devkit8000_spi",
+  .modalias	    = "candygun",
   .bus_num	    = 1,         // SPI bus number = SPI1
   .chip_select	    = 0,         // SPI1_CS0_CMOS
   .max_speed_hz	    = 1000000,   // 1 MHz to be super safe (20MHz er maks)
