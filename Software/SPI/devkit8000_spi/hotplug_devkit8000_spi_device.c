@@ -5,7 +5,7 @@
 #include <asm/uaccess.h>
 #include <linux/spi/spi.h>
 
-MODULE_AUTHOR("PHM@IHA");
+MODULE_AUTHOR("PHM@IHA");	//Edited by TR
 MODULE_LICENSE("Dual BSD/GPL");
 
 static struct spi_device *slave_spi_device;
