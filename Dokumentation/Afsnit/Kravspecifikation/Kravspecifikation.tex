@@ -103,9 +103,8 @@ Det følgende afsnit indeholder de \textit{fully dressed use cases} for Goofy Ca
 		\item PSoC0 meddeler om gennemført I2C test til Devkit via SPI
 		\item Brugergrænseflade meddeler om gennemført I2C test
 		\item Brugergrænseflade anmoder bruger om at trykke på knap 'Z' på Wii-nunchuck
-		\item Wii-nunchuck sender besked "Knap Z trykket" til PSoC2 via I2C
+		\item Wii-nunchuck sender besked "Knap Z trykket" til PSoC0 via I2C
 		\subitem[Exception 3: Wii-nunchuck sender ikke "Knap Z trykket"]
-		\item PSoC2 sender besked om "Knap Z trykket" til Psoc0 via I2C
 		\item PSoC0 videresender besked om "Knap Z trykket" til Devkit via SPI
 		\item Brugergrænseflade meddeler om gennemført Wii-nunchuck test
 		\item Brugergrænseflade meddeler at test af kommunikationsprotokoller er gennemført 
@@ -121,8 +120,7 @@ Det følgende afsnit indeholder de \textit{fully dressed use cases} for Goofy Ca
 		\item UC2 afsluttes
 	\end{enumerate}
 	\textbf{[Exception 3: Wii-nunchuck sender ikke "Knap Z trykket"]} \newline \begin{enumerate}
-		\item PSoC2 sender fejlmeddelse til PSoC0
-		\item PSoC0 videresender fejlmeddelse til Devkit
+		\item PSoC0 sender fejlmeddelse til Devkit
 		\item Brugergrænseflade meddeler fejl i I2C kommunikation med Wii-nunchuck
 		\item UC2 afsluttes
 	\end{enumerate}\\ \hline
