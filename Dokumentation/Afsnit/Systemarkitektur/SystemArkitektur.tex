@@ -71,7 +71,7 @@ I IBD'et på figur \ref{fig:IBD} er forbindelserne mellem de forskellige blokke 
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=\textwidth]{Systemarkitektur/images/GoofycandygunIBD.png}
-	\caption{IBD for Candygun 3000.}
+	\caption{IBD for Candygun 3000}
 	\label{fig:IBD}
 \end{figure}
 
@@ -106,19 +106,19 @@ Generelt for signalbeskrivelsen gælder, at når et signal beskrives som 'højt'
 I hardwarearkitekturen brydes systemet ned i dele, som senere gør det muligt at uddele arbejdsopgaver, og specificere grænseflader. Hardwarearkitekturen består at BDD og IBD for systemet.
 
 \section{Software Arkitektur}
-I softwarearkitekturen udarbejdes der applikationsmodeller bestående af sekvensdiagrammer og klassediagrammer for hvert delsystem med udgangspunkt i use case 2. Denne arkitektur overskueliggøre kravene til de boundaryklasser, der muliggør kommunikation mellem delsystemerne. Desuden bliver der gennem analyse af use case og sekvensdiagrammer udledt grundlæggende metoder i klasserne.  
+I softwarearkitekturen udarbejdes der applikationsmodeller bestående af sekvensdiagrammer og klassediagrammer for hvert delsystem. Denne arkitektur overskueliggører kravene til de boundaryklasser, der muliggør kommunikation mellem delsystemerne. Derudover bliver der gennem analyse af use case og sekvensdiagrammer udledt grundlæggende metoder i klasserne.  
 
 % ---------------Devkit Applikationsmodel-----------------------------
 \subsection{Applikationsmodel for Devkit 8000}
-Sekvensdiagrammet for Devkit 8000 ses på figur \ref{fig:sekvensDevkit}. Det tager udgangspunkt i use case 2. Der er to boundaryklasser, da brugergrænsefladen skal kommunikere med brugeren og PSoC0. Ud til brugeren er der en GUI. Boundaryklassen ComProtocol, skal kunne håndtere SPI-kommunikationen til PSoC0. Som det ses af diagrammet initieres testen af brugeren via GUI'en, og derfra er det controlklassen på Devkittet, der sørger for, at de forskellige tests bliver sat i gang, og melder resultatet ud til brugeren via GUI'en.
+Sekvensdiagrammet for Devkit 8000 ses på figur \ref{fig:sekvensDevkit}. Der tages udgangspunkt i use case 2. Der er to boundaryklasser, da brugergrænsefladen skal håndtere kommunikationen mellem brugeren og PSoC0. Brugeren interagerer via en grafisk brugergrænseflade (GUI). Boundaryklassen ComProtocol, skal håndtere SPI-kommunikationen til PSoC0. Som det ses af diagrammet initieres testen af brugeren og derefter er det kontrolklassen, der sørger for, at de forskellige tests bliver sat i gang. Når en test er færdiggjort meldes resultatet ud til brugeren via GUI'en.
 
 \begin{figure}[H]
 	\centering
 	\includegraphics[trim = {3.6cm 2.7cm 4cm 2.7cm}, clip = true, width=\textwidth] {Systemarkitektur/images/SekvensdiagramDevkit.pdf}
-	\caption{Sekvensdiagram for Devkit 8000.}
+	\caption{Sekvensdiagram for Devkit 8000}
 	\label{fig:sekvensDevkit}
 \end{figure}
-Ud fra sekvensdiagrammet for Devkit 8000 er der udledt foreløbige metoder til klasserne. De ses i klassediagrammet på figur \ref{fig:klasseDevkit}. 
+Ud fra sekvensdiagrammet for Devkit 8000 er der udledt disse metoder til klasserne. De ses i klassediagrammet på figur \ref{fig:klasseDevkit}. 
 
 \begin{figure}[H]
 	\centering
@@ -129,36 +129,34 @@ Ud fra sekvensdiagrammet for Devkit 8000 er der udledt foreløbige metoder til k
 
 % ---------------PSoC0 Applikationsmodel-----------------------------
 \subsection{Applikationsmodel for PSoC0}
-På figur \ref{fig:sekvensPSoC0SPITest}, \ref{fig:sekvensPSoC0I2CTest} og \ref{fig:sekvensPSoC0NunchuckTest} ses sekvensdiagrammer for PSoC0 med udgangspunkt i vores test use case - usecase 2. Denne er blevet opdelt i de 3 tests der skal gennemføres - nemlig I2C, Nunchuck og SPI kommunikations tests. Kontrolklassen, som er opkaldt efter use case navnet, hedder Test Communication Protocol. Hvilket på figurerne er forkortet til TCP. Desuden er der tre boundaryklasser, da PSoC0 skal kommunikere både med Devkit 8000, Nunchucken og PSoC1.
+På figur \ref{fig:sekvensPSoC0SPITest}, \ref{fig:sekvensPSoC0I2CTest} og \ref{fig:sekvensPSoC0NunchuckTest} ses sekvensdiagrammer for PSoC0 med udgangspunkt i use case 2. Sekvensdiagrammerne er blevet opdelt i de 3 tests der gennemføres i use casen - nemlig I2C, Nunchuck og SPI kommunikations tests. Kontrolklassen er Test Communication Protocol, hvilket på figurerne er forkortet til TCP. Derudover er der tre boundaryklasser, da PSoC0 skal kommunikere både med Devkit 8000, Nunchucken og PSoC1. På figur \ref{fig:klassePSoC0} ses klasse diagrammet for PSoC0, der udledes af de tre sekvensdiagrammer.
 
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=.8\textwidth] {Systemarkitektur/images/SDPSoC0SPITest}
-	\caption{Sekvensdiagram for PSoC0 SPI test.}
+	\caption{Sekvensdiagram for PSoC0 SPI test}
 	\label{fig:sekvensPSoC0SPITest}
 \end{figure}
 
-På figur \ref{fig:sekvensPSoC0SPITest} ses det, at Devkittet starter SPI testen ved at sende en besked til kontroller klassen. Denne svarer derefter en SPI OK tilbage, og derved er SPI testen gennemført.
+På figur \ref{fig:sekvensPSoC0SPITest} ses, at Devkittet sender en besked til kontrolklassen for at påbegynde SPI testen. Når testen er udført, svarer denne med en SPI OK og derved er SPI testen gennemført.
 
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=\textwidth] {Systemarkitektur/images/SDPSoC0I2CTest}
-	\caption{Sekvensdiagram for PSoC0 I2C test.}
+	\caption{Sekvensdiagram for PSoC0 I2C test}
 	\label{fig:sekvensPSoC0I2CTest}
 \end{figure}
 
-På figur \ref{fig:sekvensPSoC0I2CTest} ses det, at Devkittet starter I2C testen, ved at sende en besked til kontroller klassen. Kontroller klassen tester alle enhederne på I2C nettet, og svarer derefter tilbage til Devkittet med en I2C Test OK besked.
+På figur \ref{fig:sekvensPSoC0I2CTest} ses, at Devkittet starter I2C testen, ved at sende en besked til kontroller klassen. Kontrolklassen anmoder herefter om svar via I2C nettet fra Nuchucken og PSoC1. Når disse enheder har svaret med et I2C OK er testen gennemført og der sendes besked til Devkittet med en I2C Test OK.
 
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=\textwidth] {Systemarkitektur/images/SDPSoC0NunchuckTest}
-	\caption{Sekvensdiagram for PSoC0 Nunchuck test.}
+	\caption{Sekvensdiagram for PSoC0 Nunchuck test}
 	\label{fig:sekvensPSoC0NunchuckTest}
 \end{figure}
 
-På figur \ref{fig:sekvensPSoC0NunchuckTest} ses det, at Nunchucken sender 'Z' knappens status (tryket eller ikke-trykket) til kontroller klassen. Denne videresender knappens status til Devkittet, og derved er testen færdig.\newline
-
-I klassediagrammet på figur \ref{fig:klassePSoC0} ses kontrolklassen og de tre boundaryklasser, som hører til PSoC0. I klasserne er der tilføjet metoder, som er udledt ud fra sekvensdiagrammerne. 
+På figur \ref{fig:sekvensPSoC0NunchuckTest} ses, at Nunchucken sender 'Z' knappens status (tryket eller ikke-trykket) til kontroller klassen. Denne videresender knappens status til Devkittet, og derved er testen færdig. \textbf{Devkit skal anmode om knaptryk på display. Ændres når SPI inkluderes}\newline
 
 \begin{figure}[H]
 	\centering
@@ -167,10 +165,11 @@ I klassediagrammet på figur \ref{fig:klassePSoC0} ses kontrolklassen og de tre 
 	\label{fig:klassePSoC0}
 \end{figure}
 
+I klassediagrammet på figur \ref{fig:klassePSoC0} ses kontrolklassen og de tre boundaryklasser, som hører til PSoC0. I klasserne er der tilføjet metoder, som er udledt ud fra sekvensdiagrammerne. 
 
 % ---------------PSoC1 Applikationsmodel-----------------------------
 \subsection{Applikationsmodel for PSoC1}
-Sekvensdiagrammet for PSoC1 med udgangspunkt i use case 2 ses på figur \ref{fig:sekvensPSoC1I2CTest}. Også her er kontrolklassen opkaldt efter use case navnet "Test Communication Protocols", hvilket i diagrammet er forkortet til TCP. Her er der kun én boundaryklasse, da PSoC1, som ellers står for motorstyring, i use case 2, kun anvendes til test af I2C, og derfor kun skal den kommunikere med PSoC0. 
+Sekvensdiagrammet for PSoC1 ses på figur \ref{fig:sekvensPSoC1I2CTest}. Som forrig afsnit er kontrolklassen Test Communication Protocols, hvilket i diagrammet er forkortet til TCP. I dette tilfælde er der kun én boundaryklasse, da PSoC1, i denne use case, kun anvendes til I2C testen og derfor kun skal den kommunikere med PSoC0. 
 
 \begin{figure}[H]
 	\centering
@@ -179,22 +178,22 @@ Sekvensdiagrammet for PSoC1 med udgangspunkt i use case 2 ses på figur \ref{fig
 	\label{fig:sekvensPSoC1I2CTest}
 \end{figure}
 
-Fra det simple sekvensdiagram på figur \ref{fig:sekvensPSoC1I2CTest}, er der også udledt et simpelt klassediagram, som kan håndtere de få funktioner, som ses af det tilhørende sekvensdiagram. 
+På figur \ref{fig:sekvensPSoC1I2CTest} ses, at boundaryklassen anmoder om respons fra kontrolklassen til at bekræfte om at I2C slaven kan kommunikeres med. Hvis dette er tilfældet sendes der I2C OK tilbage til boundaryklassen.  
 
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=.5\textwidth]{Systemarkitektur/images/klassediagramPSoC1}
-	\caption{Klassediagram for PSoC1.}
+	\caption{Klassediagram for PSoC1}
 	\label{fig:klassePSoC1}
 \end{figure}
 
-
+Fra sekvensdiagrammet på figur \ref{fig:sekvensPSoC1I2CTest} udledes et klassediagram som ses foroven i figur \ref{fig:klassePSoC1}.
 
 \subsection{Kommunikationsprotokoller}
 
-Dette afsnit beskriver de kommunikationsprotokoller som bruges til at sende data mellem systemets komponenter på de brugte bustyper - I2C og SPI.
+I dette afsnit beskrives de kommunikationsprotokoller der anvendes til at sende data mellem systemets komponenter på de brugte bustyper - I2C og SPI.
 
-På figur \ref{fig:kommunikationsOverblik} gives et overblik over systemets forbindelser mellem dets embedded linux platform og microcontrollers. For hver forbindelse ses typen af bus der bruges.
+På figur \ref{fig:kommunikationsOverblik} gives et overblik over forbindelserne mellem dets embedded linux platform og microcontrollers. Ved hver forbindelse ses typen af bus der bruges.
 
 \begin{figure}[H]
 	\centering
@@ -208,7 +207,7 @@ På figur \ref{fig:kommunikationsOverblik} gives et overblik over systemets forb
 \subsubsection{I2C Protokol}
 \label{afsnit:I2CProtokol}
 
-I2C\cite{I2C} er en bus bestående af to ledninger. Den ene ledning bruges som databus og navngives \textit{Serial Data Line} (SDA). Den anden ledning bruges til clock signalet, for at synkronisere kommunikationen, og navngives \textit{Serial Clock Line} (SCL). Enheder på I2C bussen gør brug af et master-slave forhold til at sende og læse data. En fordel ved I2C bussen er at netværket kan bestå af multiple masters og slaver, hvilket gavner sig godt for dette system da fire I2C komponenter skal sende data mellem hinanden.
+I2C\cite{I2C} er en bus bestående af to ledninger. Den ene ledning bruges som databus og navngives \textit{Serial Data Line} (SDA). Den anden ledning bruges til clock signalet, til synkronisering kommunikationen, og navngives \textit{Serial Clock Line} (SCL). Enheder på I2C bussen gør brug af et master-slave forhold til at sende og læse data. En fordel ved I2C bussen er at netværket kan bestå af multiple masters og slaver, hvilket gavner sig godt for dette system da fire I2C komponenter skal sende data mellem hinanden.
 
 I2C gør brug af en integreret protokol der anvender adressering af hardware-enheder for at identificere hvilken enhed der kommunikeres med. På tabel \ref{table:I2CAdress} ses addresserne tildelt systemets PSoCs.
 
