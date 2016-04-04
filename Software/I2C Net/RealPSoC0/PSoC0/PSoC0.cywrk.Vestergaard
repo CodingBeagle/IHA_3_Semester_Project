@@ -285,6 +285,7 @@
 <name v=".\PSoC0.cydsn\CommunicationProtocol.c" />
 <name v=".\PSoC0.cydsn\CommunicationProtocol.h" />
 <name v=".\PSoC0.cydsn\TopDesign\TopDesign.cysch" />
+<name v=".\PSoC0.cydsn\nunchuck.c" />
 </OpenDocs>
 <config v="" />
 <AutoUpdate v="true" />
