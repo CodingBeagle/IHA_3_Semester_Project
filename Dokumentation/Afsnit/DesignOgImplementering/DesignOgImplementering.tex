@@ -15,7 +15,9 @@ På figur \ref{figure:PSoC0KlasseDiagram} ses klassediagrammet indeholdende klas
 	\label{figure:PSoC0KlasseDiagram}
 \end{figure}
 
-På figur \ref{figure:PSoC0KlasseDiagram} kan det ses at softwaren på PSoC0 CPU'en gør brug af klasserne \textit{CommunicationProtocol} samt \textit{Nunchuck}
+På figur \ref{figure:PSoC0KlasseDiagram} kan det ses at softwaren på PSoC0 CPU'en gør brug af klasserne \textit{CommunicationProtocol} samt \textit{Nunchuck}.
+
+Klassebeskrivelser kan findes i \textbf{!INDSÆT BILAG TIL DOXYGEN!}
 
 \subsection{Afkodning af Wii-Nunchuck Data Bytes}
 Aflæste bytes fra Wii-Nunchuck - indeholdende tilstanden af knapperne og det analoge stick - er kodet når de oprindeligt modtages via I2C bussen. Disse bytes skal altså afkodes før deres værdier er brugbare. Afkodningen af hver byte sker ved brug af følgende formel:
@@ -64,7 +66,7 @@ Først blev der designet en H-bro, som bestod af to N-MOSFET's af typen IRLZ44 o
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[]{DesignOgImplementering/images/motorkreds}
+	\includegraphics[width=\textwidth]{DesignOgImplementering/images/motorkreds}
 	\caption{H-bro kredsløb}
 	\end{figure}
 
