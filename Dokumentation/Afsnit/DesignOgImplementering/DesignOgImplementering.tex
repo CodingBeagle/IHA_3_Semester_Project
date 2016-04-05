@@ -3,9 +3,36 @@
 
 \section{Software Design}
 
-\subsection{Modultest}
+\subsection{Afkodning af Wii-Nunchuck Data Bytes}
+Aflæste bytes fra Wii-Nunchuck - indeholdende tilstanden af knapperne og det analoge stick - er kodet når de oprindeligt modtages via I2C bussen. Disse bytes skal altså afkodes før deres værdier er brugbare. Afkodningen af hver byte sker ved brug af følgende formel:
 
+\textit{AfkodetByte = (AflæstByte XOR 0x17) + 0x17}
 
+Fra formlen kan det ses at den aflæste byte skal \textit{XOR}'s (Exclusive Or) med værdien 0x17, hvorefter dette resultat skal adderes med værdien 0x17.
+
+\subsection{Kalibrering af Wii-Nunchuck Analog Stick}
+De afkodede bytes for Wii-Nunchuck's analoge stick har definerede standardværdier for dets forskellige fysiske positioner. Disse værdier findes i tabel \ref{tabel:WiiNunchuckStickPositioner}
+
+\begin{table}[H]
+	\centering
+	\begin{tabular}{|l|l|}
+		\hline
+		X-akse helt til venstre & 0x1E \\ \hline
+		X-akse helt til højre   & 0xE1 \\ \hline
+		X-akse centreret        & 0x7E \\ \hline
+		Y-akse centreret        & 0x7B \\ \hline
+		Y-akse helt frem        & 0x1D \\ \hline
+		Y-akse helt tilbage     & 0xDF \\ \hline
+	\end{tabular}
+	\caption{Standardværdier for fysiske positioner af Wii-Nunchuck's analoge stick}
+	\label{tabel:WiiNunchuckStickPositioner}
+\end{table}
+
+I praksis skal de afkodede værdier for det analoge stick kalibreres, da slør pga. brug gør at de ideale værdier ikke rammes. 
+
+I projektet er de afkodede værdier for det analoge stick kalibreret med værdien -15 (0x0F i hexadecimal), altså ser den endelige formel for afkodning samt kalibrering således ud:
+
+\textit{AfkodetByte = (AflæstByte XOR 0x17) + 0x17 - 0x0F}
 
 \section{Hardware Design}
 På baggrund af BDD'et er der fundet følgende hardwareblokke, der skal udarbejdes: 
