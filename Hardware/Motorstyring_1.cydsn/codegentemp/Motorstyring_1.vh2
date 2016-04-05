@@ -2,7 +2,7 @@
 --	Conversion of Motorstyring_1.v to vh2:
 --
 --	Cypress Semiconductor - WARP Version 6.3 IR 41
---	Tue Mar 22 08:56:09 2016
+--	Tue Apr 05 11:16:46 2016
 --
 
 USE cypress.cypress.all;
@@ -416,7 +416,7 @@ Clock_PWM:cy_clock_v1_0
 		id=>"bded6784-be67-4985-b3f5-c9d64207a569",
 		source_clock_id=>"",
 		divisor=>0,
-		period=>"333333333.333333",
+		period=>"2000000000000",
 		is_direct=>'0',
 		is_digital=>'1')
 	PORT MAP(clock_out=>Net_12,
