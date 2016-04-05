@@ -3,6 +3,20 @@
 
 \section{Software Design}
 
+\subsection{Klassediagrammer}
+
+\subsubsection{PSoC0}
+På figur \ref{figure:PSoC0KlasseDiagram} ses klassediagrammet indeholdende klasserne som bruges af softwaren allokeret på CPU'en PSoC0.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\textwidth]{DesignOgImplementering/images/PSoC0KlasseDiagram}
+	\caption{Klassediagram for CPU'en PSoC0}
+	\label{figure:PSoC0KlasseDiagram}
+\end{figure}
+
+På figur \ref{figure:PSoC0KlasseDiagram} kan det ses at softwaren på PSoC0 CPU'en gør brug af klasserne \textit{CommunicationProtocol} samt \textit{Nunchuck}
+
 \subsection{Afkodning af Wii-Nunchuck Data Bytes}
 Aflæste bytes fra Wii-Nunchuck - indeholdende tilstanden af knapperne og det analoge stick - er kodet når de oprindeligt modtages via I2C bussen. Disse bytes skal altså afkodes før deres værdier er brugbare. Afkodningen af hver byte sker ved brug af følgende formel:
 
