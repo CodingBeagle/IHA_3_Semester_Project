@@ -1,0 +1,90 @@
+\documentclass{article}
+
+% -- PREAMBLE START --
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern} % load a font with all the characters
+
+\usepackage{parskip}
+
+\usepackage[danish]{isodate}
+
+% Create front page info
+\title{Referat af Vejledermøde \#...}
+\author{Gruppe 3}
+\date{12.02.2016 - kl. 12:00}
+% -- PREAMBLE END --
+
+\begin{document}
+	\maketitle
+	
+	\section{Fremmødte}
+	\begin{itemize}
+		\item Mikkel
+		\item Tenna
+		\item Daniel
+		\item Mia
+	\end{itemize}
+	
+	\section{Udeblevet med afbud}
+	\begin{itemize}
+		\item Kasper
+		\item Michael
+		\item Pernille
+	\end{itemize}
+	
+	\section{Udeblevet uden afbud}
+	\begin{itemize}
+		\item ...
+		\item ...
+	\end{itemize}
+	
+	\section{Dagsorden}
+	\begin{itemize}
+		\item Review
+		\item Retrospective
+	\end{itemize}
+	
+	\begin{itemize}
+	\item Sprintplanning laver vi uden Gunvor. Sætter det op uden Gunvor.
+	
+	\item \textbf{Software: }I2C er blevet færdig i sprintet. Der er blevet dokumenteret, implementeret og alt det der skal til.
+	\item SPI er påbegyndt. Der skal optimeres og lave API'er til brugergrænsefladen. Alt dokumentation mangler.
+	\item GUI har funktionalitet, men ikke noget at sætte sammen med. Mangler interngrænseflade beskrivelse.
+	\item \textbf{Hardware: }H-broen kører og der er blevet undersøgt omkring affyringsmekanismen. Der anvendes en fjeder med rør til affrying. Der skal snakkes med Rasmus omkring drejeplade og rør til affyringsmekanisme.
+	\item  H-broen loddes i næste sprint. Der skal spørges Heidi omkring Ultiboard. Vise at man har gennemtænkt design og produkt virker mere færdigt til eksamen
+	\item \textbf{Dokumentation: }Dokumenter til I2C dokumentation har Gunvor ikke set på.
+	\item Klasse diagram til PSoC. Lavet object orienteret, men implementeret i C. Beskrives hvorfor vi har valgt at dokumenteret på denne måde. Indpakning som "objekter", men stadig i C. Private variable er globale variable (Små farligt sigenvor hvis de ikke er statiske)(Ikke fejl men valg vi træffer). Vi skal beskrive ordenligt så man ikke forventer C++ kode og får C.
+	\item H-bro tegning skal forstørres. 
+	\item Der skal tages test print af billeder så vi kan se om billederne kan ses
+	\item \textbf{Parskip: } Gunvor ser hvad hun kan gøre, ellers bruge backslash no indent.
+	\item Block beskrivelse se underlig ud med indent (noindent) da det er et loka problem.
+	
+	
+	\item \textbf{Næste Review: } Der skal afleveres Implementering og process.
+	\item \textbf{Processrapport afsnit }Sprint. Scrum. Brug af fælles fildeling. Møde struktur. Konflikthåndtering. 
+	\subitem Vi behøver ikke have fluffafsnit. Men vi sletter dem ikke før vi er sikre på at vi ikke behøver dem.
+	\subitem Vores version af scrum. Kurset i systematic. Anvendes til projektet. Afsnit omkring vores scrum. Hvilke elementer af scrum der giver mening og hvad vi har taget med fra kurset. 
+	
+	
+	{\large Retrospective}
+	\item Ståopmøde: Tenna synes at det var fint, men kun hvis vi laver noget hvert for sig. DEt var en dårlig uge vi lavede det på. DEt var en uge hvor der ikke var noget der kunne sige noget forkert. HVorfor virkede det ikke, pros \& con omkring. DEt er en del af vores produkt at vi har lavet stand up møder. 
+	Sprint planning: 
+	\item Pros: Det hjalp at gunvor var det til at se hvad vi havde sat op. Sørgede for at vi ikke havde for meget.
+	\item Cons: Tog lang tid. Der var forvirring omkring Pivotal Tracker. Det giver en masse problemer at vi ikke har et grupperum og overblik over hinanden.
+	\item Planlægning med hensyn til ferien: Der var ikke lagt det antal timer der var ønsket. Vi nåede meget men kunne have nået mere hvis vi havde mere tid.
+	\item Scrum: Vi har "to" måneder tilbage. Vi kunne have taget tingene fra et hjørne af i stedet for at tackle det hele på en gang. Man kunne have samle folk lidt mere over forskellige dele af projektet. Vi er forvirret over om vi er færdige eller ej.
+	\item Proof of concept: Test use case. Skrabet udgave af vores produkt. Vi har bevist at vi kan kommunikere via SPI og I2C.
+	\item textbf{Hvis vi laver hoved use casen}: Vi henviser til test use casens dokumentation. Der skal dokumenteres mere omkring de ting der laves. 
+	
+	\item Kun software på linux der gjalt: Kun embedded software er det der tæller. PSoC software tæller. Højniveausoftware der er til windows eller OS vil ikke tælle.
+	
+	\item \textbf{Scrummaster: } HAr ikke lavet så meget som scrummaster. Der skal være ny scrum master. Scrummaster underviser de andre i scrum. Det har været fint at prøve. Brugt kun til indkaldelse af møder. 
+	\item \textbf{Ny scrummaster: } Mia.
+	\item Hvis der sprøges omkring proces, drag perspektiver til scrum og hvordan gruppen har anvendt det.
+	
+	\item \textit{Næste møde:} Fredag d. 15. kl 12:15. 
+	\subitem Detaljeret feedback omkring de dokumenter der er blevet sendt.
+	
+	\end{itemize}
+\end{document}
