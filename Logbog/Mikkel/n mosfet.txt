@@ -1,0 +1,41 @@
+den kan klar en strøm på 30A ????ifølge databladet. Det vil altså ikke
+komme til at påvirke motoren, som kan trække en strøm på 0,35A.
+
+I IRLZ44(mosfet N-Channel), for at der kan løbe spændingen i gennem 
+den, så skal den have postiv spænding for at åbne og 0V for at lukke igen. 
+man kan se på grafen 
+(indsæt graf)
+
+hvor man kan se ved en Gate-to-Source voltage på 5v, vil der kunne 
+løbe en strøm på omkring 100A(tjek lige med en anden) så det er mere end nok til at
+få motoren til at funger
+
+så når mosfet får 5V på ben(gate), vil den tillade at der kan løbe strøm
+igennem den og derved vil hele kredsløbet for en forbindelse til jord.
+
+
+p mosfet 
+""""ændre det til 19 A???? tjek med en anden hvad der passer""""""
+hvor man kan se ved en Gate-to-Source voltage på 5v, vil der kunne 
+løbe en strøm på omkring 5A så det er mere end nok til at
+få motoren til at funger
+
+så når mosfet får en negativ spædnding på ben(gate), vil den tillade at der kan løbe strøm/spænding
+igennem den og derved vil den ene del af kredsløbet blive aktiv, så motoren begynder at køre.
+så det er derfor at der er blevet sat to transistor og en N mosfet foran hver af P mosfetene.
+
+
+
+Q5, Q6, Q7 og Q8
+de hjælp med at oplade P mosfet hurtigere, for der er en kondensator effekt 
+imellem benene på mosfet'en. 
+(indsæt billeder) som den normalt vil oplade og aflade en mosfet
+
+
+Da vi gerne hurtig vil kunne åbene og lukke
+for en mosfet, så for at den rigtige mængde strøm kommer ind og oplader den hurtigt og 
+lige så hurtig aflades igen. er det her at transitorene kommer ind, for (indsæt detsom er skrevet)
+
+(indsæt billeder)
+efter der er blevet sat de ting ind før P mosfet, kan man nu se at den bliver 
+opladet hurtiger og afladet hurtigere. 
