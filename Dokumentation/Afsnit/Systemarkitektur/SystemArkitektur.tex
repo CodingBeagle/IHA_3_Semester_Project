@@ -107,11 +107,22 @@ Generelt for signalbeskrivelsen gælder, at når et signal beskrives som 'højt'
 \end{longtable}
 
 \section{Software Arkitektur}
-I softwarearkitekturen udarbejdes der applikationsmodeller bestående af sekvensdiagrammer og klassediagrammer for hvert delsystem. Denne arkitektur overskueliggører kravene til de boundaryklasser, der muliggør kommunikation mellem delsystemerne. Derudover bliver der gennem analyse af use case og sekvensdiagrammer udledt grundlæggende metoder i klasserne.  
+I softwarearkitekturen udarbejdes der applikationsmodeller bestående af sekvensdiagrammer og klassediagrammer for hver use case, opdelt mellem hver CPU i systemet. Applikationsmodellerne har til formål at danne et overblik af de krav der stilles til softwaren for produktets forskellige uses cases. På denne måde kan de bruges som inspirerende grundlæg for softwarets design og implementering. De kan også med fordel bruges til at få en overfladisk forståelse af CPU'ernes interaktioner.
+
+De følgende delafsnit præsenterer systemets applikationsmodeller for hver CPU. For hver applikationsmodel vil der først præsenteres et eller flere sekvensdiagrammer med forklarende tekst, efterfulgt af et klassediagram udledt fra sekvensdiagrammerne.
+
+På figur \ref{fig:softwareAllocation} ses et software allokations diagram. Dette danner et overblik over produktets CPU'er, og hvilket software der allokeres på hver af dem. Følgende applikationsmodeller tager udgangspunkt i softwaren der allokeres her.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\textwidth]{Systemarkitektur/images/SoftwareAllocation.png}
+	\caption{Software allokations diagram}
+	\label{fig:softwareAllocation}
+\end{figure}
 
 % ---------------Devkit Applikationsmodel-----------------------------
 \subsection{Applikationsmodel for Devkit 8000}
-Sekvensdiagrammet for Devkit 8000 ses på figur \ref{fig:sekvensDevkit}. Der tages udgangspunkt i use case 2. Der er to boundaryklasser, da brugergrænsefladen skal håndtere kommunikationen mellem brugeren og PSoC0. Brugeren interagerer via en grafisk brugergrænseflade (GUI). Boundaryklassen ComProtocol, skal håndtere SPI-kommunikationen til PSoC0. Som det ses af diagrammet initieres testen af brugeren og derefter er det kontrolklassen, der sørger for, at de forskellige tests bliver sat i gang. Når en test er færdiggjort meldes resultatet ud til brugeren via GUI'en.
+Sekvensdiagrammet for Devkit 8000 ses på figur \ref{fig:sekvensDevkit}. Der tages udgangspunkt i use case 2. Der er to boundaryklasser, da DevKit 8000 skal håndtere kommunikationen mellem brugeren og PSoC0. Brugeren interagerer via en grafisk brugergrænseflade (GUI). Som det ses af diagrammet initieres testen af brugeren via brugergrænsefladen og derefter er det kontrolklassen, der sørger for, at de forskellige tests bliver sat i gang ved at kommunikere med PSoC0. Når en test er færdiggjort meldes resultatet ud til brugeren via GUI'en.
 
 \begin{figure}[H]
 	\centering
