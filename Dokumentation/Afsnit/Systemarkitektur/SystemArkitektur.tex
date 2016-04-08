@@ -12,6 +12,9 @@ På figur \ref{fig:DomainModel} ses domæne modellen for systemet. Denne er udar
 
 I domæne modellen ses det, at brugeren interagerer med både Wii-nunchucken og med brugergrænsefladen. Brugergrænsefladen er en grænseflade til devkittet. Devkittet kommunikerer med PSoC0, som læser den analoge data der kommer fra Wii-nunchucken. Denne data bliver derefter afkodet og videresendt til PSoC1, som ud fra denne data styrer de forskellige motorer.
 
+\section{Hardware Arkitektur}
+I hardwarearkitekturen brydes systemet ned i dele, som senere gør det muligt at uddele arbejdsopgaver, og specificere grænseflader. Hardwarearkitekturen består at BDD og IBD for systemet.
+
 % ---------------BDD--------------------------------------------------
 \subsection{BDD for Candygun 3000}
 I BDD-diagrammet på figur \ref{fig:BDD} er Candygun 3000 brudt ned i blokkene PSoC0, PSoC1, PSoC2 og Devkit 8000. Devkit 8000 er brugergrænsefladen, som brugeren kan interagere med via touchskærmen. Den er forbundet via SPI til PSoC0, som er SPI-slave. PSoC0 er desuden også I2C-master. PSoC0 kommunikerer via I2C til PSoC1 og PSoC2. PSoC1 står for motorstyring, som via et PWM-signal styrer de 3 motorer. PSoC2 har til opgave at aflæse brugerinput fra Wii-nunchucken, som også kommunikerer via I2C. På figur \ref{fig:BDD} ses de forskellige blokke og deres porte. Desuden er der en flowspecification for I2C og SPI, hvor forbindelserne er beskrevet mere detaljeret (set fra master-synspunkt). 
@@ -71,7 +74,7 @@ I IBD'et på figur \ref{fig:IBD} er forbindelserne mellem de forskellige blokke 
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=\textwidth]{Systemarkitektur/images/GoofycandygunIBD.png}
+	\includegraphics[width=\textwidth]{Systemarkitektur/images/GoofyCandyIBDImageRev2.png}
 	\caption{IBD for Candygun 3000}
 	\label{fig:IBD}
 \end{figure}
@@ -103,9 +106,6 @@ Generelt for signalbeskrivelsen gælder, at når et signal beskrives som 'højt'
 	& & SCL & Type: CMOS \newline Spændingsniveau: 0-5V \newline Hastighed: ?? \newline Beskrivelse: Clock signalet fra master til lyttende I2C slaver, som bruges til at synkronisere den serielle kommunikation. \\ \hline
 \end{longtable}
 
-\section{Hardware Arkitektur}
-I hardwarearkitekturen brydes systemet ned i dele, som senere gør det muligt at uddele arbejdsopgaver, og specificere grænseflader. Hardwarearkitekturen består at BDD og IBD for systemet.
-
 \section{Software Arkitektur}
 I softwarearkitekturen udarbejdes der applikationsmodeller bestående af sekvensdiagrammer og klassediagrammer for hvert delsystem. Denne arkitektur overskueliggører kravene til de boundaryklasser, der muliggør kommunikation mellem delsystemerne. Derudover bliver der gennem analyse af use case og sekvensdiagrammer udledt grundlæggende metoder i klasserne.  
 
@@ -115,7 +115,7 @@ Sekvensdiagrammet for Devkit 8000 ses på figur \ref{fig:sekvensDevkit}. Der tag
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[trim = {3.6cm 2.7cm 4cm 2.7cm}, clip = true, width=\textwidth] {Systemarkitektur/images/SekvensdiagramDevkit.pdf}
+	\includegraphics[]{Systemarkitektur/images/DevKit8000SequenceDiagram.png}
 	\caption{Sekvensdiagram for Devkit 8000}
 	\label{fig:sekvensDevkit}
 \end{figure}
@@ -123,7 +123,7 @@ Ud fra sekvensdiagrammet for Devkit 8000 er der udledt disse metoder til klasser
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[trim = {3.2cm 16.1cm 3.2cm 3.5cm}, clip = true, width=\textwidth] {Systemarkitektur/images/klassediagramDevkit.pdf}
+	\includegraphics[] {Systemarkitektur/images/DevKit8000ClassDiagram}
 	\caption{Klassediagram for Devkit 8000}
 	\label{fig:klasseDevkit}
 \end{figure}
