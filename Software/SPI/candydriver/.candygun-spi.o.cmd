@@ -1,8 +1,8 @@
-cmd_/home/stud/Semesterprojekt3/Software/SPI/candydriver/candygun-spi.o := arm-poky-linux-gnueabi-gcc -Wp,-MD,/home/stud/Semesterprojekt3/Software/SPI/candydriver/.candygun-spi.o.d  -nostdinc -isystem /opt/poky/1.8/sysroots/i686-pokysdk-linux/usr/lib/arm-poky-linux-gnueabi/gcc/arm-poky-linux-gnueabi/4.9.2/include -I./arch/arm/include -Iarch/arm/include/generated/uapi -Iarch/arm/include/generated  -Iinclude -I./arch/arm/include/uapi -Iarch/arm/include/generated/uapi -I./include/uapi -Iinclude/generated/uapi -include ./include/linux/kconfig.h -D__KERNEL__ -mlittle-endian -Wall -Wundef -Wstrict-prototypes -Wno-trigraphs -fno-strict-aliasing -fno-common -Werror-implicit-function-declaration -Wno-format-security -std=gnu89 -fno-dwarf2-cfi-asm -mabi=aapcs-linux -mno-thumb-interwork -mfpu=vfp -funwind-tables -marm -D__LINUX_ARM_ARCH__=6 -march=armv6k -mtune=arm1136j-s -msoft-float -Uarm -fno-delete-null-pointer-checks -O2 --param=allow-store-data-races=0 -Wframe-larger-than=1024 -fno-stack-protector -Wno-unused-but-set-variable -fomit-frame-pointer -fno-var-tracking-assignments -g -Wdeclaration-after-statement -Wno-pointer-sign -fno-strict-overflow -fconserve-stack -Werror=implicit-int -Werror=strict-prototypes -Werror=date-time -DCC_HAVE_ASM_GOTO  -DMODULE  -D"KBUILD_STR(s)=\#s" -D"KBUILD_BASENAME=KBUILD_STR(candygun_spi)"  -D"KBUILD_MODNAME=KBUILD_STR(candygunmod)" -c -o /home/stud/Semesterprojekt3/Software/SPI/candydriver/.tmp_candygun-spi.o /home/stud/Semesterprojekt3/Software/SPI/candydriver/candygun-spi.c
+cmd_/home/stud/Documents/IHA_3_Semester_Project/Software/SPI/candydriver/candygun-spi.o := arm-poky-linux-gnueabi-gcc -Wp,-MD,/home/stud/Documents/IHA_3_Semester_Project/Software/SPI/candydriver/.candygun-spi.o.d  -nostdinc -isystem /opt/poky/1.8/sysroots/i686-pokysdk-linux/usr/lib/arm-poky-linux-gnueabi/gcc/arm-poky-linux-gnueabi/4.9.2/include -I./arch/arm/include -Iarch/arm/include/generated/uapi -Iarch/arm/include/generated  -Iinclude -I./arch/arm/include/uapi -Iarch/arm/include/generated/uapi -I./include/uapi -Iinclude/generated/uapi -include ./include/linux/kconfig.h -D__KERNEL__ -mlittle-endian -Wall -Wundef -Wstrict-prototypes -Wno-trigraphs -fno-strict-aliasing -fno-common -Werror-implicit-function-declaration -Wno-format-security -std=gnu89 -fno-dwarf2-cfi-asm -mabi=aapcs-linux -mno-thumb-interwork -mfpu=vfp -funwind-tables -marm -D__LINUX_ARM_ARCH__=6 -march=armv6k -mtune=arm1136j-s -msoft-float -Uarm -fno-delete-null-pointer-checks -O2 --param=allow-store-data-races=0 -Wframe-larger-than=1024 -fno-stack-protector -Wno-unused-but-set-variable -fomit-frame-pointer -fno-var-tracking-assignments -g -Wdeclaration-after-statement -Wno-pointer-sign -fno-strict-overflow -fconserve-stack -Werror=implicit-int -Werror=strict-prototypes -Werror=date-time -DCC_HAVE_ASM_GOTO  -DMODULE  -D"KBUILD_STR(s)=\#s" -D"KBUILD_BASENAME=KBUILD_STR(candygun_spi)"  -D"KBUILD_MODNAME=KBUILD_STR(candygunmod)" -c -o /home/stud/Documents/IHA_3_Semester_Project/Software/SPI/candydriver/.tmp_candygun-spi.o /home/stud/Documents/IHA_3_Semester_Project/Software/SPI/candydriver/candygun-spi.c
 
-source_/home/stud/Semesterprojekt3/Software/SPI/candydriver/candygun-spi.o := /home/stud/Semesterprojekt3/Software/SPI/candydriver/candygun-spi.c
+source_/home/stud/Documents/IHA_3_Semester_Project/Software/SPI/candydriver/candygun-spi.o := /home/stud/Documents/IHA_3_Semester_Project/Software/SPI/candydriver/candygun-spi.c
 
-deps_/home/stud/Semesterprojekt3/Software/SPI/candydriver/candygun-spi.o := \
+deps_/home/stud/Documents/IHA_3_Semester_Project/Software/SPI/candydriver/candygun-spi.o := \
   include/linux/err.h \
   include/linux/compiler.h \
     $(wildcard include/config/sparse/rcu/pointer.h) \
@@ -711,8 +711,8 @@ deps_/home/stud/Semesterprojekt3/Software/SPI/candydriver/candygun-spi.o := \
     $(wildcard include/config/have/mod/arch/specific.h) \
     $(wildcard include/config/modules/use/elf/rel.h) \
     $(wildcard include/config/modules/use/elf/rela.h) \
-  /home/stud/Semesterprojekt3/Software/SPI/candydriver/candygun.h \
+  /home/stud/Documents/IHA_3_Semester_Project/Software/SPI/candydriver/candygun.h \
 
-/home/stud/Semesterprojekt3/Software/SPI/candydriver/candygun-spi.o: $(deps_/home/stud/Semesterprojekt3/Software/SPI/candydriver/candygun-spi.o)
+/home/stud/Documents/IHA_3_Semester_Project/Software/SPI/candydriver/candygun-spi.o: $(deps_/home/stud/Documents/IHA_3_Semester_Project/Software/SPI/candydriver/candygun-spi.o)
 
-$(deps_/home/stud/Semesterprojekt3/Software/SPI/candydriver/candygun-spi.o):
+$(deps_/home/stud/Documents/IHA_3_Semester_Project/Software/SPI/candydriver/candygun-spi.o):

@@ -165,7 +165,7 @@ ssize_t candygun_cdrv_read(struct file *filep, char __user *ubuf,
 {
   int minor, len;
   char resultBuf[MAXLEN];
-  s16 result = 0;
+  u8 result = 0;
   //int err ;
     
   minor = iminor(filep->f_inode);
@@ -174,7 +174,7 @@ ssize_t candygun_cdrv_read(struct file *filep, char __user *ubuf,
     printk(KERN_ALERT "Reading from candygun [Minor] %i \n", minor);
     
   /* Perform A/D Conversion */
-  //ads7870_spi_read_reg16(....)
+  candygun_spi_read_reg8(candygun_spi_device, 0xF1, &result);
 
     //err = ads7870_convert((minor & 0xff), &result);
   //if(err)
@@ -190,6 +190,8 @@ ssize_t candygun_cdrv_read(struct file *filep, char __user *ubuf,
   /* Copy data to user space */
   if(copy_to_user(ubuf, resultBuf, len))
     return -EFAULT;
+
+	
 
   /* Move fileptr */
   *f_pos += len;
