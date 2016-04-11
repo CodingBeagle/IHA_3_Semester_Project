@@ -216,6 +216,36 @@ På figur \ref{fig:kommunikationsOverblik} gives et overblik over forbindelserne
 
 \subsubsection{SPI Protokol}
 
+\textbf{Her skrives en kort indledning til SPI's egen protokol. Duplex og alt det jazz}
+
+For at 
+
+\begin{table}[H]
+	\centering
+	\resizebox{\textwidth}{!}{%
+	\begin{tabular}{llll}
+		\hline
+		Kommando Type                                                                            & Beskrivelse                                                                    & Binær Værdi                      & Hex Værdi                   \\ \hline
+		\rowcolor[HTML]{CBCEFB} 
+		{\color[HTML]{000000} START\_SPI\_TEST}                                                  & {\color[HTML]{000000} Sætter PSoC0 i 'SPI-TEST' mode}                          & {\color[HTML]{000000} 1111 0001} & {\color[HTML]{000000} 0xF1} \\
+		START\_I2C\_TEST                                                                         & Sætter PSoC0 i 'I2C-TEST' mode                                                 & 1111 0010                        & 0xF2                        \\
+		\rowcolor[HTML]{CBCEFB} 
+		{\color[HTML]{000000} \begin{tabular}[c]{@{}l@{}}START\_NUN-\\ CHUCK\_TEST\end{tabular}} & {\color[HTML]{000000} Sætter PSoC0 i 'NUNCHUCK-TEST' mode}                     & {\color[HTML]{000000} 1111 0011} & {\color[HTML]{000000} 0xF3} \\
+		SPI\_OK                                                                                  & Signalerer at SPI-testen blev gennemført uden fejl                             & 1101 0001                        & 0xD1                        \\
+		\rowcolor[HTML]{CBCEFB} 
+		{\color[HTML]{000000} I2C\_OK}                                                           & {\color[HTML]{000000} Signalerer at I2C-testen blev gennemført uden fejl}      & {\color[HTML]{000000} 1101 0010} & {\color[HTML]{000000} 0xD2} \\
+		I2C\_FAIL                                                                                & Signalerer at der skete fejl under I2C-testen                                  & 1100 0010                        & 0xC2                        \\
+		\rowcolor[HTML]{CBCEFB} 
+		{\color[HTML]{000000} NUNCHUCK\_OK}                                                      & {\color[HTML]{000000} Signalerer at NUNCHUCK-testen blev gennemført uden fejl} & {\color[HTML]{000000} 1101 0011} & {\color[HTML]{000000} 0xD3} \\
+		NUNCHUCK\_FAIL                                                                           & Signalerer at der skete fejl under NUNCHUCK-testen                             & 1100 0011                        & 0xC3                        \\ \hline
+	\end{tabular}
+	}
+		\caption{Tabel over de brugte kommandotyper for SPI kommunikationen}
+		\label{tabel:spiKommandoType}
+\end{table}
+
+
+
 \subsubsection{I2C Protokol}
 \label{afsnit:I2CProtokol}
 
