@@ -4,7 +4,7 @@
 #include <linux/module.h>
 #include "candygun.h"
 
-#define MODULE_DEBUG 0
+#define MODULE_DEBUG 1
 
 /* Candy Gun Device Data */
 struct candygun {
@@ -19,54 +19,6 @@ struct spi_device* candygun_get_device(void){
   return candygun_spi_device;
 }
 
-/*
- * ADS7870 SPI Read 8-bit Register
- * Reads 8-bit content of register at 
- * the provided ADS7870 address
- */
-int ads7870_spi_read_reg8(struct spi_device *spi, u8 addr, u8* value)
-{
-	struct spi_transfer t[2];
-	struct spi_message m;
-	u8 cmd;
-	u8 data = 0;
-
-    /* Check for valid spi device */
-    if(!spi)
-      return -ENODEV;
-    
-	/* Create Cmd byte:
-	 *
-	 * | 0|RD| 8|     ADDR     |
-	 *   7  6  5  4  3  2  1  0
-     */	 
-	cmd = (0<<7) | (1<<6) | (0<<5) | (addr & 0x1f);
-
-	/* Init Message */
-	memset(t, 0, sizeof(t));
-	spi_message_init(&m);
-	m.spi = spi;
-
-	/* Configure tx/rx buffers */
-	t[0].tx_buf = &cmd;
-	t[0].rx_buf = NULL;
-	t[0].len = 1; // one byte
-	spi_message_add_tail(&t[0], &m);
-
-	t[1].tx_buf = NULL;
-	t[1].rx_buf = &data;
-	t[1].len = 1;
-	spi_message_add_tail(&t[1], &m);
-
-	/* Transmit SPI Data (blocking) */
-	spi_sync(m.spi, &m);
-
-	if(MODULE_DEBUG)
-	  printk(KERN_DEBUG "ADS7870: Read Reg8 Addr 0x%02x Data: 0x%02x\n", cmd, data);
-
-    *value = data;
-	return 0;
-}
 
 /*
  * ADS7870 SPI Read 16-bit Register
@@ -89,7 +41,7 @@ int ads7870_spi_read_reg16(struct spi_device *spi, u8 addr, u16* value)
 	 * | 0|RD|16|     ADDR     |
 	 *   7  6  5  4  3  2  1  0
      */	 
-	cmd = addr;
+	cmd = (0<<14) || (0x3f & addr) << 8 || data;
 
 	/* Init Message */
 	memset(t, 0, sizeof(t));
@@ -99,7 +51,8 @@ int ads7870_spi_read_reg16(struct spi_device *spi, u8 addr, u16* value)
 	/* Configure tx/rx buffers */
 	t[0].tx_buf = &cmd;
 	t[0].rx_buf = NULL;
-	t[0].len = 1;
+	t[0].len = 2;
+        t[0].delay_usecs = 150;
 	if(MODULE_DEBUG)
 	  printk("requesting data from addr 0x%x\n", cmd);
 	spi_message_add_tail(&t[0], &m);
@@ -113,7 +66,7 @@ int ads7870_spi_read_reg16(struct spi_device *spi, u8 addr, u16* value)
 	spi_sync(m.spi, &m);
 
 	if(MODULE_DEBUG)
-	  printk(KERN_DEBUG "ADS7870: Read Reg16 Addr 0x%02x Data: 0x%04x\n", cmd, data);
+	  printk(KERN_DEBUG "Canygun: Read Reg16 Addr 0x%02x Data: 0x%04x\n", cmd, data);
 
     *value = data;
 	return 0;
@@ -128,7 +81,7 @@ int candygun_spi_write_reg8(struct spi_device *spi, u8 addr, u8 data)
 {
   struct spi_transfer t[2];
   struct spi_message m;
-  u8 cmd;
+  u16 cmd;
 
   /* Check for valid spi device */
     if(!spi)
@@ -140,7 +93,7 @@ int candygun_spi_write_reg8(struct spi_device *spi, u8 addr, u8 data)
    * | 0|WR| 8|     ADDR     |
    *   7  6  5  4  3  2  1  0
    */ 
-  cmd =  addr;
+  cmd = (1<<14) | (0x3f & addr) << 8 | data;
 
   /* Init Message */
   memset(&t, 0, sizeof(t)); 
@@ -152,13 +105,14 @@ int candygun_spi_write_reg8(struct spi_device *spi, u8 addr, u8 data)
   /* Configure tx/rx buffers */
   t[0].tx_buf = &cmd;
   t[0].rx_buf = NULL;
-  t[0].len = 1;
+  t[0].len = 2;     //Tranfers size in bytes
+//  t[0].delay_usecs = 150; //
   spi_message_add_tail(&t[0], &m);
 
-  t[1].tx_buf = &data;
-  t[1].rx_buf = NULL;
-  t[1].len = 1;
-  spi_message_add_tail(&t[1], &m);
+//  t[1].tx_buf = &data;
+//  t[1].rx_buf = NULL;
+//  t[1].len = 1;
+//  spi_message_add_tail(&t[1], &m);
 
   /* Transmit SPI Data (blocking) */
   spi_sync(m.spi, &m);
@@ -172,13 +126,8 @@ int candygun_spi_write_reg8(struct spi_device *spi, u8 addr, u8 data)
  * Used by the SPI Master to probe the device
  * when an SPI device is registered.
  */
-//static int __devinit ads7870_spi_probe(struct spi_device *spi)
 static int candygun_spi_probe(struct spi_device *spi)
-{
-  int err;
-  u16 value;
-  struct candygun *candydev;
-  
+{  
   printk(KERN_DEBUG "New SPI device: %s using chip select: %i\n",
 	 spi->modalias, spi->chip_select);
   
@@ -189,41 +138,21 @@ static int candygun_spi_probe(struct spi_device *spi)
   candygun_spi_device = spi;  
  
   //err = candygun_spi_read_reg8(spi, ADS7870_ID, &value);
-  printk(KERN_DEBUG "Probing candy gun, Revision %i\n", 
-         value);
+  printk(KERN_DEBUG "Probing candy gun\n");
 
-  /* Configure ADS7870 according to data sheet */
-/*  ads7870_spi_write_reg8(spi, ADS7870_REFOSC, 
-                         ADS7870_REFOSC_OSCR |
-                         ADS7870_REFOSC_OSCE |
-                         ADS7870_REFOSC_REFE |
-                         ADS7870_REFOSC_BUFE |
-                         ADS7870_REFOSC_R2V); 		 
-		 
-  /* Allocate memory for driver's per-chip state */
-  candydev = kzalloc(sizeof *candydev, GFP_KERNEL);
-  if (!candydev)
-    return -ENOMEM;
-  candydev->revision = value;
-  spi_set_drvdata(spi, candydev);  
-  
-  return err;
+  return 0;
 }
 
 /*
- * ADS7870 Remove
+ * Candygun Remove
  * Called when the SPI device is removed
  */
 static int candygun_remove(struct spi_device *spi)
-{
-  struct candygun *candydev = dev_get_drvdata(&spi->dev);
-  
+{  
   candygun_spi_device = 0;
   
-  printk (KERN_ALERT "Removing SPI device %s revision %i on chip select %i\n", 
-	  spi->modalias, candydev->revision, spi->chip_select);
-
-  kfree(candydev); /* Free kernel memory */
+  printk (KERN_ALERT "Removing SPI device %s on chip select %i\n", 
+	  spi->modalias, spi->chip_select);
 
   return 0;
 }

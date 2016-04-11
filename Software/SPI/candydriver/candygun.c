@@ -13,7 +13,7 @@
 
 #define MAXLEN              64
 #define COMPLIMENTARY_BIT   11
-#define MODULE_DEBUG 0
+#define MODULE_DEBUG 1
 
 /* Char Driver Globals */
 static struct cdev candygunDev;
@@ -30,12 +30,6 @@ static struct spi_device *candygun_spi_device = NULL;
   goto label;                                   \
   } while(0)
 
-/* 
- * LOCAL METHODS
- */
-int candygun_convert(u8 channel, s16* value)
-{
-}
 
 /*
  * PUBLIC METHODS
@@ -152,7 +146,7 @@ ssize_t candygun_cdrv_write(struct file *filep, const char __user *ubuf,
    */
 
 
-    candygun_spi_write_reg8(candygun_spi_device, 0xFF, 0xF0);
+    candygun_spi_write_reg8(candygun_spi_device, 0x01, value);
 
 
   
@@ -171,8 +165,8 @@ ssize_t candygun_cdrv_read(struct file *filep, char __user *ubuf,
 {
   int minor, len;
   char resultBuf[MAXLEN];
-  s16 result;
-  int err;
+  s16 result = 0;
+  //int err ;
     
   minor = iminor(filep->f_inode);
 
@@ -183,8 +177,8 @@ ssize_t candygun_cdrv_read(struct file *filep, char __user *ubuf,
   //ads7870_spi_read_reg16(....)
 
     //err = ads7870_convert((minor & 0xff), &result);
-  if(err)
-    return -EFAULT;
+  //if(err)
+  //  return -EFAULT;
   
   /* Convert to string and copy to user space */
   //  len = snprintf(resultBuf, sizeof resultBuf, "%d\n", result);
@@ -205,7 +199,7 @@ ssize_t candygun_cdrv_read(struct file *filep, char __user *ubuf,
 
 
 
-struct file_operations ads7870_Fops = 
+struct file_operations candygun_Fops = 
 {
   .owner   = THIS_MODULE,
   .open    = candygun_cdrv_open,
