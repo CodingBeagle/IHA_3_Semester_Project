@@ -157,7 +157,8 @@ Over fire af mosfetene (Q9, Q10, Q3 og Q4) er der sat en diode af typen IN5819. 
 	\begin{itemize}
 		\item R6 og R7
 		
-		\item R5 og R8
+		\item R5 og R8\\
+		Grunden til at vi skal have R8 og R5 er for at der ikke løbe en alt for stor strøm igennem  den n mosfet, for i følge databladet kan den kun klare en strøm på omkring 30 A, når Vgs er på 10V og da vores Vgs er sat til 5V så vil den ikke kunne klar en alt for stor strøm. Så derfor er R5 og R8 sat ind for at forhindre at n mosfet brænder af.
 	\end{itemize}
 	
 	
