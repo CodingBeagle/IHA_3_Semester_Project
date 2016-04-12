@@ -108,11 +108,42 @@ Til at styre motoren er der bygget en H-bro, som består af fire mosfet, hvor to
 
 \begin{itemize}
 	\item Mosfet N-channel:\\
+	den kan klar en strøm på 30A (tjek lige med en anden) ifølge databladet. Det vil altså ikke
+	komme til at påvirke motoren, som kan trække en strøm på 0,35A.
+	
+	I IRLZ44(mosfet N-Channel), for at der kan løbe spændingen i gennem 
+	den, så skal den have postiv spænding for at åbne og 0V for at lukke igen. 
+	man kan se på grafen 
+	
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=\textwidth]{DesignOgImplementering/images/grafn}
+		\caption{Gate-to-Source Voltag}
+	\end{figure}
+	
+	Hvor man kan se ved en Gate-to-Source voltage på 5v, vil der kunne 
+	løbe en strøm på omkring 100A(tjek lige med en anden) så det er mere end nok til at
+	få motoren til at funger
+	
+	så når mosfet får 5V på ben(gate), vil den tillade at der kan løbe strøm
+	igennem den og derved vil hele kredsløbet for en forbindelse til jord.
 	\item 
 	Mosfet P-channel: \\
 	Den kan klare en strøm på 6,7A ifølge databladet. Det vil altså ikke komme til at påvirke motoren, som kan trække en strøm på 0,35A. 
 	
 	For at der kan løbe spænding igennem IRF9Z34N(mosfet P-channel), så skal den have en negativ spænding for at åbne og en spænding på over 0V for at lukke. 
+	hvor man kan se ved en Gate-to-Source voltage på 5v, vil der kunne 
+	løbe en strøm på omkring 5A så det er mere end nok til at
+	få motoren til at funger
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=\textwidth]{DesignOgImplementering/images/grafp}
+		\caption{Gate-to-Source Voltag}
+	\end{figure}
+	så når mosfet får en negativ spædnding på ben(gate), vil den tillade at der kan løbe strøm/spænding
+	igennem den og derved vil den ene del af kredsløbet blive aktiv, så motoren begynder at køre.
+	så det er derfor at der er blevet sat to transistor og en N mosfet foran hver af P mosfetene.
+	
 	
 \end{itemize}
 \subsubsection{Diode}

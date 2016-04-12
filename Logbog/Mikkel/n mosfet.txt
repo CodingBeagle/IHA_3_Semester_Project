@@ -1,4 +1,4 @@
-den kan klar en strøm på 30A ????ifølge databladet. Det vil altså ikke
+den kan klar en strøm på 30A (tjek lige med en anden) ifølge databladet. Det vil altså ikke
 komme til at påvirke motoren, som kan trække en strøm på 0,35A.
 
 I IRLZ44(mosfet N-Channel), for at der kan løbe spændingen i gennem 
