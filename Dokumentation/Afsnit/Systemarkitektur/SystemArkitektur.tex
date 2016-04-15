@@ -6,7 +6,7 @@ På figur \ref{fig:DomainModel} ses domæne modellen for systemet. Denne er udar
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=\textwidth]{Systemarkitektur/images/DomainModel}
-	\caption{Domæne model for systemet}
+	\caption{Domæne model for Candygun 3000}
 	\label{fig:DomainModel}
 \end{figure}
 
@@ -22,7 +22,7 @@ På figur \ref{fig:BDD} ses et \textit{Block Definition Diagram (BDD)} hvor Cand
 	\centering
 	%trim = {1.8cm 14.6cm 1.8cm 1cm}, clip = true, %
 	\includegraphics[width= \textwidth]{Systemarkitektur/images/BDD_overordnet.png}
-	\caption{Overordnet BDD for Candygun 3000.}
+	\caption{BDD for Candygun 3000}
 	\label{fig:BDD}
 \end{figure}
 
@@ -44,7 +44,7 @@ Følgende afsnit indeholder en blokbeskrivelse samt en flowspecifikation for I2C
 
 \noindent \textbf{PSoC1} \par
 \noindent \textit{PSoC1} er PSoC hardware der indeholder software til I2C kommunikatioon og styring af Candy Gun 3000's motorer. PSoC1 fungerer som I2C slave.
-	
+
 
 \noindent \textbf{SPI (FlowSpecification)} \par
 \noindent \textit{SPI (FlowSpecification)} beskriver signalerne der indgår i \textit{SPI} kommunikation.
@@ -84,14 +84,15 @@ I signalbeskrivelsen gælder det, at når et signal beskrives som 'højt' operer
 	& & SS & Type: CMOS \newline Spændingsniveau: 0-5V \newline Hastighed: ?? \newline  Beskrivelse: Slave-Select, som bruges til at bestemme hvilken slave der skal kommunikeres med. \\ \hline
 	I2C & Denne blok beskriver den ikke-atomiske I2C forbindelse. & SDA & Type: CMOS \newline Spændingsniveau: 0-5V \newline Hastighed: ?? \newline Beskrivelse: Databussen mellem I2C masteren og I2C slaver. \\ \cline{3-4}
 	& & SCL & Type: CMOS \newline Spændingsniveau: 0-5V \newline Hastighed: ?? \newline Beskrivelse: Clock signalet fra master til lyttende I2C slaver, som bruges til at synkronisere den serielle kommunikation. \\ \hline
+	\caption{Tabel med signalbeskrivelse}
 \end{longtable}
 
 \section{Software Arkitektur}
-I softwarearkitekturen udarbejdes der applikationsmodeller bestående af sekvensdiagrammer og klassediagrammer for hver use case, opdelt mellem hver CPU i systemet. Applikationsmodellerne har til formål at danne et overblik af de krav der stilles til softwaren for produktets forskellige uses cases. På denne måde kan de bruges som inspirerende grundlæg for softwarets design og implementering. De kan også med fordel bruges til at få en overfladisk forståelse af CPU'ernes interaktioner.
+I softwarearkitekturen udarbejdes der applikationsmodeller bestående af sekvensdiagrammer og klassediagrammer for hver use case, opdelt for hver CPU i systemet. Applikationsmodellerne har til formål at danne et overblik af de krav der stilles til softwaren for produktets uses cases. På denne måde kan de bruges som inspirerende grundlæg for software design og implementering. Applikationsmodellerne giver en overfladisk beskrivelse af CPU'ernes interaktioner.
 
 De følgende delafsnit præsenterer systemets applikationsmodeller for hver CPU. For hver applikationsmodel vil der først præsenteres et eller flere sekvensdiagrammer med forklarende tekst, efterfulgt af et klassediagram udledt fra sekvensdiagrammerne.
 
-På figur \ref{fig:softwareAllocation} ses et software allokations diagram. Dette danner et overblik over produktets CPU'er, og hvilket software der allokeres på hver af dem. Følgende applikationsmodeller tager udgangspunkt i softwaren der allokeres her.
+På figur \ref{fig:softwareAllocation} ses et software allokations diagram. Dette danner et overblik for systemets CPU'er og hvilket software der allokeres på hver software block. Følgende applikationsmodeller tager udgangspunkt i softwaren der allokeres i figuren.
 
 \begin{figure}[H]
 	\centering
@@ -101,8 +102,8 @@ På figur \ref{fig:softwareAllocation} ses et software allokations diagram. Dett
 \end{figure}
 
 % ---------------Devkit Applikationsmodel-----------------------------
-\subsection{Applikationsmodel for Devkit 8000}
-Sekvensdiagrammet for Devkit 8000 ses på figur \ref{fig:sekvensDevkit}. Der tages udgangspunkt i use case 2. Der er to boundaryklasser, da DevKit 8000 skal håndtere kommunikationen mellem brugeren og PSoC0. Brugeren interagerer via en grafisk brugergrænseflade (GUI). Som det ses af diagrammet initieres testen af brugeren via brugergrænsefladen og derefter er det kontrolklassen, der sørger for, at de forskellige tests bliver sat i gang ved at kommunikere med PSoC0. Når en test er færdiggjort meldes resultatet ud til brugeren via GUI'en.
+\subsection{Applikationsmodel for Devkit 8000 Software}
+Sekvensdiagrammet for Devkit 8000 ses på figur \ref{fig:sekvensDevkit}. Kontrolklassen er Test Communication Protocol, er på figurerne er forkortet til TCP. Der er to boundaryklasser, da DevKit 8000 skal håndtere kommunikationen mellem brugeren og PSoC0. Brugeren interagerer via en grafisk brugergrænseflade (GUI). Som det ses af diagrammet initieres testen af brugeren via brugergrænsefladen og derefter er det kontrolklassen, der sørger for, at de forskellige tests bliver sat i gang ved at kommunikere med PSoC0. Når en test er færdiggjort meldes resultatet ud til brugeren via GUI'en.
 
 \begin{figure}[H]
 	\centering
@@ -110,7 +111,8 @@ Sekvensdiagrammet for Devkit 8000 ses på figur \ref{fig:sekvensDevkit}. Der tag
 	\caption{Sekvensdiagram for Devkit 8000}
 	\label{fig:sekvensDevkit}
 \end{figure}
-Ud fra sekvensdiagrammet for Devkit 8000 er der udledt disse metoder til klasserne. De ses i klassediagrammet på figur \ref{fig:klasseDevkit}. 
+
+Ud fra sekvensdiagrammet for Devkit 8000 er der udledt metoder til klasserne. De udledte metoder ses i klassediagrammet på figur \ref{fig:klasseDevkit}. 
 
 \begin{figure}[H]
 	\centering
@@ -121,7 +123,7 @@ Ud fra sekvensdiagrammet for Devkit 8000 er der udledt disse metoder til klasser
 
 % ---------------PSoC0 Applikationsmodel-----------------------------
 \subsection{Applikationsmodel for PSoC0}
-På figur \ref{fig:sekvensPSoC0SPITest}, \ref{fig:sekvensPSoC0I2CTest} og \ref{fig:sekvensPSoC0NunchuckTest} ses sekvensdiagrammer for PSoC0 med udgangspunkt i use case 2. Sekvensdiagrammerne er blevet opdelt i de 3 tests der gennemføres i use casen - nemlig I2C, Nunchuck og SPI kommunikations tests. Kontrolklassen er Test Communication Protocol, hvilket på figurerne er forkortet til TCP. Derudover er der tre boundaryklasser, da PSoC0 skal kommunikere både med Devkit 8000, Nunchucken og PSoC1. På figur \ref{fig:klassePSoC0} ses klasse diagrammet for PSoC0, der udledes af de tre sekvensdiagrammer.
+På figur \ref{fig:sekvensPSoC0SPITest}, \ref{fig:sekvensPSoC0I2CTest} og \ref{fig:sekvensPSoC0NunchuckTest} ses sekvensdiagrammer for PSoC0. Sekvensdiagrammerne er blevet opdelt i de 3 tests der gennemføres i use casen; SPI, I2C og Nunchuck kommunikations tests. Kontrolklassen er Test Communication Protocol, hvilket på figurerne er forkortet til TCP. Derudover er der tre boundaryklasser, da PSoC0 skal kommunikere både med Devkit 8000, Nunchucken og PSoC1.
 
 \begin{figure}[H]
 	\centering
@@ -139,7 +141,7 @@ På figur \ref{fig:sekvensPSoC0SPITest} ses, at Devkittet sender en besked til k
 	\label{fig:sekvensPSoC0I2CTest}
 \end{figure}
 
-På figur \ref{fig:sekvensPSoC0I2CTest} ses, at Devkittet starter I2C testen, ved at sende en besked til kontroller klassen. Kontrolklassen anmoder herefter om svar via I2C nettet fra Nuchucken og PSoC1. Når disse enheder har svaret med et I2C OK er testen gennemført og der sendes besked til Devkittet med en I2C Test OK.
+På figur \ref{fig:sekvensPSoC0I2CTest} ses, at Devkittet starter I2C testen, ved at sende en besked til kontrolklassen. Kontrolklassen anmoder herefter om svar via I2C nettet fra Nuchucken og PSoC1. Når disse enheder har svaret med et I2C OK er testen gennemført og der sendes besked til Devkittet med en I2C Test OK.
 
 \begin{figure}[H]
 	\centering
@@ -148,12 +150,12 @@ På figur \ref{fig:sekvensPSoC0I2CTest} ses, at Devkittet starter I2C testen, ve
 	\label{fig:sekvensPSoC0NunchuckTest}
 \end{figure}
 
-På figur \ref{fig:sekvensPSoC0NunchuckTest} ses, at Nunchucken sender 'Z' knappens status (tryket eller ikke-trykket) til kontroller klassen. Denne videresender knappens status til Devkittet, og derved er testen færdig. \textbf{Devkit skal anmode om knaptryk på display. Ændres når SPI inkluderes}\newline
+På figur \ref{fig:sekvensPSoC0NunchuckTest} ses sekvensdiagrammet for Wii-Nunchuck testen. Når der sker et tryk sender Nunchucken 'Z' knappens status til kontrolklassen. Herefter videresender kontrolklassen knappens status til Devkittet og derved er testen færdig.\newline
 
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=\textwidth]{Systemarkitektur/images/klassediagramPSoC0}
-	\caption{Klassediagram for PSoC0.}
+	\caption{Klassediagram for PSoC0}
 	\label{fig:klassePSoC0}
 \end{figure}
 
@@ -161,7 +163,7 @@ I klassediagrammet på figur \ref{fig:klassePSoC0} ses kontrolklassen og de tre 
 
 % ---------------PSoC1 Applikationsmodel-----------------------------
 \subsection{Applikationsmodel for PSoC1}
-Sekvensdiagrammet for PSoC1 ses på figur \ref{fig:sekvensPSoC1I2CTest}. Som forrig afsnit er kontrolklassen Test Communication Protocols, hvilket i diagrammet er forkortet til TCP. I dette tilfælde er der kun én boundaryklasse, da PSoC1, i denne use case, kun anvendes til I2C testen og derfor kun skal den kommunikere med PSoC0. 
+Sekvensdiagrammet for PSoC1 ses på figur \ref{fig:sekvensPSoC1I2CTest}. Som forrig afsnit er kontrolklassen Test Communication Protocols, hvilket i diagrammet er forkortet til TCP. I dette tilfælde er der kun én boundaryklasse, da PSoC1, i denne use case, kun anvendes til I2C testen og derfor kun skal kommunikere med PSoC0. 
 
 \begin{figure}[H]
 	\centering
@@ -170,7 +172,7 @@ Sekvensdiagrammet for PSoC1 ses på figur \ref{fig:sekvensPSoC1I2CTest}. Som for
 	\label{fig:sekvensPSoC1I2CTest}
 \end{figure}
 
-På figur \ref{fig:sekvensPSoC1I2CTest} ses, at boundaryklassen anmoder om respons fra kontrolklassen til at bekræfte om at I2C slaven kan kommunikeres med. Hvis dette er tilfældet sendes der I2C OK tilbage til boundaryklassen.  
+På figur \ref{fig:sekvensPSoC1I2CTest} ses, at boundaryklassen, PSoC0, anmoder om respons fra kontrolklassen til at bekræfte om at I2C slaven kan kommunikeres med. Hvis dette er tilfældet sendes der I2C OK tilbage til boundaryklassen.  
 
 \begin{figure}[H]
 	\centering
@@ -183,45 +185,44 @@ Fra sekvensdiagrammet på figur \ref{fig:sekvensPSoC1I2CTest} udledes et klassed
 
 \subsection{Kommunikationsprotokoller}
 
-I dette afsnit beskrives de kommunikationsprotokoller der anvendes til at sende data mellem systemets komponenter på de brugte bustyper - I2C og SPI.
-
-På figur \ref{fig:kommunikationsOverblik} gives et overblik over forbindelserne mellem dets embedded linux platform og microcontrollers. Ved hver forbindelse ses typen af bus der bruges.
+I dette afsnit beskrives de kommunikationsprotokoller der anvendes til at sende data mellem systemets komponenter på de anvendte bustyper - I2C og SPI. På figur \ref{fig:kommunikationsOverblik} ses hvilke bustyper der anvendes mellem systemets komponenter. 
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=\textwidth] {Systemarkitektur/images/overordnetstruktur}
+	\includegraphics[width=\textwidth] {Systemarkitektur/images/anvendtebustyper}
 	\caption{Forbindelser mellem systemets komponenter}
 	\label{fig:kommunikationsOverblik}
 \end{figure}
 
 \subsubsection{SPI Protokol}
 
-\textbf{Her skrives en kort indledning til SPI's egen protokol. Duplex og alt det jazz}
+Til kommunikation mellem Devkittet og PSoC0 anvendes der \textit{Serial Parallel Interface (SPI)}. SPI-forbindelsen består af fire signaler. Et af signalerne er \textit{slave select} (SS). Det muliggør kommunikation med flere slaver. Selve dataen sendes via signalerne \textit{Master Out Slave In} (MOSI) og \textit{Master In Slave Out} (MISO). Det foregår ved \textit{Full Duplex}, hvor der altid sendes i begge retninger på én gang. Hvis der kun ønskes at sende i én retning, kan der sendes 0'er i den anden retning. Derudover er der en \textit{Clock} (SCLK), som sørger for at kommunikationen er synkron. I forhold til timing er det vigtigt, at både master og slave anvender samme \textit{Timing Mode}, som styres af to bit, \textit{SPI Clock Polarity Bit} (CPOL), som bestemmer om clock'en starter højt eller lavt, og \textit{SPI Clock Phase Bit} (CPHA), som afgør om data samples på clock'ens rising- eller falling edge. I dette projekt anvendes \textit{Timing Mode 3}, hvor clock'en starter høj og sampler på rising edge. \\
+De kommandoer, der i projektet sendes via SPI, består af 8 bit, hvilket også passer med, at SPI-forbindelsen er sat op til at sende én byte ad gangen. \\
+På tabel \ref{tabel:spiKommandoType} ses SPI-protokollen. Til venstre på tabellen ses navnet på de kommandoer, der sendes. Alle kommandoer med "TEST" i navnet sendes fra Devkit8000 til PSoC0 via MOSI. De resterende kommandoer er svar på de forskellige tests, som sendes via MISO fra PSoC0 til Devkit8000. Det er værd at lægge mærke til, at det er bevidst, at der ikke er en kommando for SPI\_FAIL. Da SPI-forbindelsen ikke testes på PSoC0, men ved at PSoC0 sender \textit{SPI\_OK} tilbage til Devkit8000 via SPI-forbindelsen. Dermed kan det først afgøres om SPI-forbindelsen fungerer korrekt, når Devkit8000, modtager (eller ikke modtager) succes-beskeden fra PSoC0. \\
 
-For at 
 
 \begin{table}[H]
 	\centering
 	\resizebox{\textwidth}{!}{%
-	\begin{tabular}{llll}
-		\hline
-		Kommando Type                                                                            & Beskrivelse                                                                    & Binær Værdi                      & Hex Værdi                   \\ \hline
-		\rowcolor[HTML]{CBCEFB} 
-		{\color[HTML]{000000} START\_SPI\_TEST}                                                  & {\color[HTML]{000000} Sætter PSoC0 i 'SPI-TEST' mode}                          & {\color[HTML]{000000} 1111 0001} & {\color[HTML]{000000} 0xF1} \\
-		START\_I2C\_TEST                                                                         & Sætter PSoC0 i 'I2C-TEST' mode                                                 & 1111 0010                        & 0xF2                        \\
-		\rowcolor[HTML]{CBCEFB} 
-		{\color[HTML]{000000} \begin{tabular}[c]{@{}l@{}}START\_NUN-\\ CHUCK\_TEST\end{tabular}} & {\color[HTML]{000000} Sætter PSoC0 i 'NUNCHUCK-TEST' mode}                     & {\color[HTML]{000000} 1111 0011} & {\color[HTML]{000000} 0xF3} \\
-		SPI\_OK                                                                                  & Signalerer at SPI-testen blev gennemført uden fejl                             & 1101 0001                        & 0xD1                        \\
-		\rowcolor[HTML]{CBCEFB} 
-		{\color[HTML]{000000} I2C\_OK}                                                           & {\color[HTML]{000000} Signalerer at I2C-testen blev gennemført uden fejl}      & {\color[HTML]{000000} 1101 0010} & {\color[HTML]{000000} 0xD2} \\
-		I2C\_FAIL                                                                                & Signalerer at der skete fejl under I2C-testen                                  & 1100 0010                        & 0xC2                        \\
-		\rowcolor[HTML]{CBCEFB} 
-		{\color[HTML]{000000} NUNCHUCK\_OK}                                                      & {\color[HTML]{000000} Signalerer at NUNCHUCK-testen blev gennemført uden fejl} & {\color[HTML]{000000} 1101 0011} & {\color[HTML]{000000} 0xD3} \\
-		NUNCHUCK\_FAIL                                                                           & Signalerer at der skete fejl under NUNCHUCK-testen                             & 1100 0011                        & 0xC3                        \\ \hline
-	\end{tabular}
+		\begin{tabular}{llll}
+			\hline
+			Kommando Type                                                                            & Beskrivelse                                                                    & Binær Værdi                      & Hex Værdi                   \\ \hline
+			\rowcolor[HTML]{CBCEFB} 
+			{\color[HTML]{000000} START\_SPI\_TEST}                                                  & {\color[HTML]{000000} Sætter PSoC0 i 'SPI-TEST' mode}                          & {\color[HTML]{000000} 1111 0001} & {\color[HTML]{000000} 0xF1} \\
+			START\_I2C\_TEST                                                                         & Sætter PSoC0 i 'I2C-TEST' mode                                                 & 1111 0010                        & 0xF2                        \\
+			\rowcolor[HTML]{CBCEFB} 
+			{\color[HTML]{000000} \begin{tabular}[c]{@{}l@{}}START\_NUN-\\ CHUCK\_TEST\end{tabular}} & {\color[HTML]{000000} Sætter PSoC0 i 'NUNCHUCK-TEST' mode}                     & {\color[HTML]{000000} 1111 0011} & {\color[HTML]{000000} 0xF3} \\
+			SPI\_OK                                                                                  & Signalerer at SPI-testen blev gennemført uden fejl                             & 1101 0001                        & 0xD1                        \\
+			\rowcolor[HTML]{CBCEFB} 
+			{\color[HTML]{000000} I2C\_OK}                                                           & {\color[HTML]{000000} Signalerer at I2C-testen blev gennemført uden fejl}      & {\color[HTML]{000000} 1101 0010} & {\color[HTML]{000000} 0xD2} \\
+			I2C\_FAIL                                                                                & Signalerer at der skete fejl under I2C-testen                                  & 1100 0010                        & 0xC2                        \\
+			\rowcolor[HTML]{CBCEFB} 
+			{\color[HTML]{000000} NUNCHUCK\_OK}                                                      & {\color[HTML]{000000} Signalerer at NUNCHUCK-testen blev gennemført uden fejl} & {\color[HTML]{000000} 1101 0011} & {\color[HTML]{000000} 0xD3} \\
+			NUNCHUCK\_FAIL                                                                           & Signalerer at der skete fejl under NUNCHUCK-testen                             & 1100 0011                        & 0xC3                        \\ \hline
+		\end{tabular}
 	}
-		\caption{Tabel over de brugte kommandotyper for SPI kommunikationen}
-		\label{tabel:spiKommandoType}
+	\caption{Kommandotyper der anvendes ved SPI kommunikation}
+	\label{tabel:spiKommandoType}
 \end{table}
 
 
@@ -229,24 +230,23 @@ For at
 \subsubsection{I2C Protokol}
 \label{afsnit:I2CProtokol}
 
-I2C\cite{I2C} er en bus bestående af to ledninger. Den ene ledning bruges som databus og navngives \textit{Serial Data Line} (SDA). Den anden ledning bruges til clock signalet, til synkronisering kommunikationen, og navngives \textit{Serial Clock Line} (SCL). Enheder på I2C bussen gør brug af et master-slave forhold til at sende og læse data. En fordel ved I2C bussen er at netværket kan bestå af multiple masters og slaver, hvilket gavner sig godt for dette system da fire I2C komponenter skal sende data mellem hinanden.
+I2C\cite{I2C} er en bus bestående af to ledninger. Den ene ledning bruges som databus og navngives \textit{Serial Data Line} (SDA). Den anden ledning bruges til clock signalet, der synkroniserer kommunikationen, og navngives \textit{Serial Clock Line} (SCL). Enheder på I2C bussen gør brug af et master-slave forhold til at sende og læse data. En fordel ved I2C bussen er at netværket kan bestå af multiple masters og slaver, hvilket udnyttes i dette system da fire I2C komponenter skal sende data mellem hinanden.
 
-I2C gør brug af en integreret protokol der anvender adressering af hardware-enheder for at identificere hvilken enhed der kommunikeres med. På tabel \ref{table:I2CAdress} ses addresserne tildelt systemets PSoCs.
+I2C gør brug af en integreret protokol der anvender adressering af hardware-enheder for at identificere hvilken enhed der kommunikeres med. På tabel \ref{table:I2CAddress} ses addresserne tildelt systemets PSoCs.
 
 \begin{table}[H]
 	\centering
 	\begin{tabular}{l|lllllll|l}
 		\hline
-		I2C Adresse bits & 7 & 6 & 5 & 4 & 3 & 2 & 1 & LSB er read/write indikator \\ \hline
+		I2C Adresse bits & 7 & 6 & 5 & 4 & 3 & 2 & 1 & 0 R/W\\ \hline
 		PSoC0        & 0 & 0 & 0 & 1 & 0 & 0 & 0 & 0/1                        \\
-		PSoC1        & 0 & 0 & 0 & 1 & 0 & 0 & 1 & 0/1                        \\
-		PSoC2        & 0 & 0 & 1 & 0 & 0 & 0 & 0 & 0/1                        \\ \hline
+		PSoC1        & 0 & 0 & 0 & 1 & 0 & 0 & 1 & 0/1                        \\ \hline
 	\end{tabular}
-	\caption{Adresser brugt på systemets I2C bus}
-	\label{table:I2CAdress}
+	\caption{Adresser der anvendes på I2C bussen}
+	\label{table:I2CAddress}
 \end{table}
 
-Den integrerede I2C protokol sender data serielt i pakker af 8-bit (1 byte). På figur \ref{fig:I2CTimingDiagram} ses et timing-diagram for aflæsning af 1 byte. Her ses at processen  begynder med en addresse-byte, efterfulgt af en data-byte. 
+Den integrerede I2C protokol sender data serielt i pakker af 8-bit (1 byte). På figur \ref{fig:I2CTimingDiagram} ses et timing diagram for aflæsning af 1 byte. Figuren er et udsnit fra databladet for en LM75, der anvender fire faste addressebits, tre vilkårlige bit og en read/write bit. Her ses at transmissionen af data begynder med en addresse-byte til slaven efterfulgt en acknowledge til masteren og herefter sendes en data-byte. 
 
 \begin{figure}[H]
 	\centering
@@ -255,11 +255,12 @@ Den integrerede I2C protokol sender data serielt i pakker af 8-bit (1 byte). På
 	\label{fig:I2CTimingDiagram}
 \end{figure}
 
-Systemet gør brug af denne integrerede I2C protokol via en højere abstraheret \textit{Application Programming Interface} (API). Ved brug af denne API er en brugerdefineret protokol udviklet, som gør det muligt at sende kommandoer og data mellem systemets PSoC's.
+\section{Kasper and David look here and fix this hoebag}
+Systemet gør brug af den integrerede I2C protokol via en højere abstraheret \textit{Application Programming Interface} (API). Ved brug af denne API er en brugerdefineret protokol udviklet, som gør det muligt at sende kommandoer og data mellem systemets PSoCs.
 
-Da I2C data udveksling - som beskrevet før - underliggende sker bytevist, er den brugerdefinerede I2C protokol opbygget ved at første modtagede byte indikerer typen af kommando. Herefter følger \textit{N} bytes som kommandoens tilhørende data. \textit{N} er et vilkårligt heltal og bruges i dette afsnit når der refereres til en mængde data-bytes der sendes med en kommandotype.
+Da I2C dataudveksling sker bytevist, er den brugerdefinerede I2C protokol opbygget ved at typen af kommando indikeres af den første modtagede byte. Herefter følger \textit{N}-antal bytes som kommandoens tilhørende data. \textit{N} er et vilkårligt heltal og bruges i dette afsnit når der refereres til en mængde data-bytes der sendes med en kommandotype.
 
-Modtagere bruger kommandoens type til at vide hvordan de efterfølgende data-bytes fortolkes. På figur \ref{fig:I2CProtokolEksempel} ses et sekvensdiagram der demonstrerer forløbet mellem en I2C afsender og modtager ved brug af I2C protokollen via pseudo-kommandoer.
+Kommandoens type definerer antallet af databytes modtageren skal forvente og hvordan disse skal fortolkes. På figur \ref{fig:I2CProtokolEksempel} ses et sekvensdiagram der, med pseudo-kommandoer, demonstrerer forløbet mellem en I2C afsender og modtager ved brug af I2C protokollen.
 
 \begin{figure}[H]
 	\centering
@@ -268,9 +269,9 @@ Modtagere bruger kommandoens type til at vide hvordan de efterfølgende data-byt
 	\label{fig:I2CProtokolEksempel}
 \end{figure}
 
-Det kan på figur \ref{fig:I2CProtokolEksempel} ses at afsenderen først starter en I2C transaktion, hvorefter typen af kommando sendes som den første byte. Efterfølgende sendes \textit{N} antal bytes, afhængig af hvor meget data den givne kommandotype har brug for at sende. Efter afsluttet I2C transaktion læser I2C modtageren typen af kommando, hvor den herefter frit kan fortolke \textit{N} antal modtagne bytes afhængig af den modtagne kommandotype.
+På figur \ref{fig:I2CProtokolEksempel} ses at afsenderen først starter en I2C transaktion, hvorefter typen af kommando sendes som den første byte. Efterfølgende sendes \textit{N} antal bytes, afhængig af hvor meget data den givne kommandotype har brug for at sende. Efter afsluttet I2C transaktion læser I2C modtageren typen af kommando, hvor den herefter kan fortolke \textit{N} antal modtagne bytes afhængig af den modtagne kommandotype.
 
-På tabel \ref{table:I2CKommandoer} ses de definerede kommandoer der gøres brug af.
+På tabel \ref{table:I2CKommandoer} ses de definerede kommandotyper og det tilsvarende antal af bits der sendes ved dataveksling.
 
 \begin{table}[H]
 	\centering
@@ -280,16 +281,16 @@ På tabel \ref{table:I2CKommandoer} ses de definerede kommandoer der gøres brug
 			Kommando Type  & Beskrivelse                                           & Binær værdi & Hex værdi & Data bytes                                                                                                              \\ \hline
 			\rowcolor[HTML]{EFEFEF} 
 			NunchuckData   & Indeholder aflæst data fra Wii Nunchuck controlleren  & 0010 1010   & 0xA2      & \begin{tabular}[c]{@{}l@{}}Byte \#1 Analog X-værdi\\ Byte \#2 Analog Y-værdi\\ Byte \#3 Analog ButtonState\end{tabular} \\ \hline
-			I2CTestRequest & Beder PSoC om at starte en I2C kommunikations test    & 0010 1001   & 0x29      & Ingen Databytes                                                                                                         \\ \hline
+			I2CTestRequest & Anmoder PSoC0 om at starte en I2C kommunikations test    & 0010 1001   & 0x29      & Ingen Databytes                                                                                                         \\ \hline
 			\rowcolor[HTML]{EFEFEF} 
-			I2CTestACK     & Beder om at få en I2C OK besked tilbage fra I2C enhed & 0010 1000   & 0x28      & Ingen Databytes                                                                                                         \\ \hline
+			I2CTestACK     & Anmodning om at få en I2C OK besked fra I2C enhed & 0010 1000   & 0x28      & Ingen Databytes                                                                                                         \\ \hline
 		\end{tabular}%
 	}
-	\caption{De forskellige I2C Kommandoer der bruges}
+	\caption{Kommandotyper der anvendes ved I2C kommunikation}
 	\label{table:I2CKommandoer}
 \end{table}
 
-Kolonnerne "Binær Værdi" og "Hex Værdi" i tabel \ref{table:I2CKommandoer} viser kommandotypens unikke tal-ID i både binær- og hexadecimalform. Det er denne værdi der sendes som den første byte, for at identificere kommandotypen. 
+Kolonnerne "Binær Værdi" og "Hex Værdi" i tabel \ref{table:I2CKommandoer} viser kommandotypens unikke tal-ID i både binær- og hexadecimalform. Denne værdi sendes som den første byte, for at identificere kommandotypen. 
 
 
 
