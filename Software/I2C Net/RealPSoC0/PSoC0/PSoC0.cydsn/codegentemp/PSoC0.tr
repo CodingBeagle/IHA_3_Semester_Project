@@ -16,7 +16,7 @@
 ##################################################################### 
                     1::Clock Frequency Summary
 ===================================================================== 
-Number of clocks: 10
+Number of clocks: 8
 Clock: CyHFCLK            | N/A  | Target: 24.00 MHz  | 
 Clock: CyILO              | N/A  | Target: 0.03 MHz   | 
 Clock: CyIMO              | N/A  | Target: 24.00 MHz  | 
@@ -25,8 +25,6 @@ Clock: CyRouted1          | N/A  | Target: 24.00 MHz  |
 Clock: CySYSCLK           | N/A  | Target: 24.00 MHz  | 
 Clock: I2C_1_SCBCLK       | N/A  | Target: 1.60 MHz   | 
 Clock: I2C_1_SCBCLK(FFB)  | N/A  | Target: 1.60 MHz   | 
-Clock: SPI_1_SCBCLK       | N/A  | Target: 24.00 MHz  | 
-Clock: SPI_1_SCBCLK(FFB)  | N/A  | Target: 24.00 MHz  | 
 
  =====================================================================
                     End of Clock Frequency Summary
