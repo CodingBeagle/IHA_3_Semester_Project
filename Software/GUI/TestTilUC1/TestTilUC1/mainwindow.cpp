@@ -1,7 +1,8 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include <QTime>
-
+#include "ICandyGun.hpp"
+#include "SimulCandyGun.hpp"
 
 //Delay function
 void delay( int mSecsToWait )
@@ -16,6 +17,8 @@ void delay( int mSecsToWait )
 
 //Integers for conditions
 int sTest,iTest,wTest = 0;
+
+SimulCandyGun testCase;
 
 
 MainWindow::MainWindow(QWidget *parent) :
@@ -35,7 +38,6 @@ MainWindow::~MainWindow()
 
 //Function to indicate the completion of the test UC
 //Implemented as a private slot in the MainWindow class, since it accesses the Ui
-//Unlike the delay function.
 void MainWindow::fullTest()
 {
     if(sTest && iTest && wTest == 1)
@@ -52,36 +54,37 @@ void MainWindow::fullTest()
 }
 void MainWindow::on_SPITestBut_clicked()
 {
- //startSPITest();
- //if(SpiTestReturnValue = True)
-    //{
+
+ testCase.SPITest();
+ if(testCase.SPITest() == 1)
+    {
         ui->systemText->append("SPI Test lykkedes.");
         sTest = 1;
-    //}
- /*else
+    }
+ else
     {
         ui->systemText->append("SPI Test mislykkedes.");
-        delay(5000);
-        ui->systemText->clear();
-    }*/
+    }
   if(wTest && iTest == 1)
        fullTest();
 }
 
+
+
+
 void MainWindow::on_I2CTestBut_clicked()
 {
-  //startI2CTest();
-  //if(I2CTestReturnValue = True)
-      //{
+  testCase.I2CTest();
+  if(testCase.I2CTest() == 1)
+      {
             ui->systemText->append("I2C Test lykkedes.");
             iTest = 1;
-      //}
-    /*else
-        {
+      }
+  else
+      {
             ui->systemText->append("I2C Test mislykkedes");
-            delay(5000);
-            ui->systemText->clear();
-        }*/
+
+      }
 
   if(sTest && wTest == 1)
         fullTest();
@@ -89,18 +92,17 @@ void MainWindow::on_I2CTestBut_clicked()
 
 void MainWindow::on_WiiTestBut_clicked()
 {
-  //startWiiTest();
-  //if(WiiTestReturnValue = True)
-    //{
-       ui->systemText->append("Wii Test lykkedes.");
-       wTest = 1;
-    //}
-    /*else
-        {
+  testCase.NunchuckTest();
+  if(testCase.NunchuckTest() == 1)
+    {
+            ui->systemText->append("Wii Test lykkedes.");
+            wTest = 1;
+    }
+  else
+    {
             ui->systemText->append("Wii Test mislykkedes.");
-            delay(5000);
-            ui->systemText->clear();
-        }*/
+
+    }
 
   if(sTest && iTest == 1)
         fullTest();
@@ -110,4 +112,9 @@ void MainWindow::on_WiiTestBut_clicked()
 void MainWindow::on_ExitBut_clicked()
 {
    QWidget::close(); //Closes the widget.
+}
+
+void MainWindow::on_ClearBut_clicked()
+{
+    ui->systemText->clear();
 }

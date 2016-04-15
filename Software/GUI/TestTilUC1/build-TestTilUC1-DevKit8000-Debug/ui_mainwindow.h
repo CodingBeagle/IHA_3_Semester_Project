@@ -33,6 +33,7 @@ public:
     QPushButton *WiiTestBut;
     QTextBrowser *systemText;
     QPushButton *ExitBut;
+    QPushButton *ClearBut;
     QMenuBar *menuBar;
     QToolBar *mainToolBar;
     QStatusBar *statusBar;
@@ -56,10 +57,13 @@ public:
         WiiTestBut->setGeometry(QRect(10, 110, 80, 31));
         systemText = new QTextBrowser(centralWidget);
         systemText->setObjectName(QString::fromUtf8("systemText"));
-        systemText->setGeometry(QRect(100, 10, 371, 201));
+        systemText->setGeometry(QRect(100, 10, 371, 191));
         ExitBut = new QPushButton(centralWidget);
         ExitBut->setObjectName(QString::fromUtf8("ExitBut"));
-        ExitBut->setGeometry(QRect(10, 190, 80, 23));
+        ExitBut->setGeometry(QRect(10, 180, 80, 23));
+        ClearBut = new QPushButton(centralWidget);
+        ClearBut->setObjectName(QString::fromUtf8("ClearBut"));
+        ClearBut->setGeometry(QRect(10, 150, 80, 23));
         MainWindow->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(MainWindow);
         menuBar->setObjectName(QString::fromUtf8("menuBar"));
@@ -85,6 +89,7 @@ public:
         I2CTestBut->setText(QApplication::translate("MainWindow", "Test I2C", 0, QApplication::UnicodeUTF8));
         WiiTestBut->setText(QApplication::translate("MainWindow", "Test Wii", 0, QApplication::UnicodeUTF8));
         ExitBut->setText(QApplication::translate("MainWindow", "Exit", 0, QApplication::UnicodeUTF8));
+        ClearBut->setText(QApplication::translate("MainWindow", "Clear", 0, QApplication::UnicodeUTF8));
     } // retranslateUi
 
 };

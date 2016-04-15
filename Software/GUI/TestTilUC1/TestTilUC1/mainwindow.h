@@ -2,6 +2,7 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include "SimulCandyGun.hpp"
 
 namespace Ui {
 class MainWindow;
@@ -26,6 +27,8 @@ private slots:
 
     void on_ExitBut_clicked();
 
+
+    void on_ClearBut_clicked();
 
 private:
     Ui::MainWindow *ui;
