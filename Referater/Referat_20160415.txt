@@ -1,0 +1,16 @@
+- Spi test er påbegyndt og virker
+	Der skal bare laves API til dette
+- I2C test virker ikke men der arbejdes på det
+- Det er ikke helt forkert hvis vi i
+	problem stillinger
+	træk figurer ind i PP, kommenter lidt
+	Lad som man har brugt meget tid på det
+- Brugt meget tid på dokumentation
+	Godt i gang og bruge til på rapport
+- Begynd at samle alt hardware til en applikation
+- Scrum kursus
+	Virker lærerigt, men vi vil prøve at tage det næste kursus sammen som gruppe så vi kan arbejde som en gruppe
+- Vi sender dokumenter igen til gunvor for hun glemte at kigge på dokumenterne og kan ikke længere finde dem
+
+Næste møde
+Onsdag d. 20. kl 8
