@@ -19,12 +19,12 @@ void sendData(uint32 Address, uint8 CommandType, uint8* buffer, uint8 bufferSize
         }
         
         //Debug LED. Lights up if no error.
-        DebugLEDGreen_Write(0);
+        //DebugLEDGreen_Write(0);
     }
     else
     {
         // Debug LED. Turns off if error occurs.
-        DebugLEDGreen_Write(1);
+        //DebugLEDGreen_Write(1);
     }
     I2C_1_I2CMasterSendStop();
     I2C_1_I2CMasterClearStatus();

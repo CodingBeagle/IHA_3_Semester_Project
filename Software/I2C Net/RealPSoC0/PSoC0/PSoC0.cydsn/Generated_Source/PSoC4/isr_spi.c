@@ -156,17 +156,18 @@ void isr_spi_Stop(void)
 *   None
 *
 *******************************************************************************/
-CY_ISR(isr_spi_Interrupt)
-{
-    #ifdef isr_spi_INTERRUPT_INTERRUPT_CALLBACK
-        isr_spi_Interrupt_InterruptCallback();
-    #endif /* isr_spi_INTERRUPT_INTERRUPT_CALLBACK */ 
-
-    /*  Place your Interrupt code here. */
-    /* `#START isr_spi_Interrupt` */
-
-    /* `#END` */
-}
+//CY_ISR(isr_spi_Interrupt)
+//{
+//    #ifdef isr_spi_INTERRUPT_INTERRUPT_CALLBACK
+//        isr_spi_Interrupt_InterruptCallback();
+//    #endif /* isr_spi_INTERRUPT_INTERRUPT_CALLBACK */ 
+//
+//
+//    /*  Place your Interrupt code here. */
+//    /* `#START isr_spi_Interrupt` */
+//
+//    /* `#END` */
+//}
 
 
 /*******************************************************************************

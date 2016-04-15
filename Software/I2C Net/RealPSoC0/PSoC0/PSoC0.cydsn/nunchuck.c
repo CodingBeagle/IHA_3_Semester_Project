@@ -12,10 +12,6 @@
 #include <project.h>
 #include <nunchuck.h>
 
-// Define unit address for nunchuck
-#define nunchuckUnitAddress 0x52
-
-
 // Function sends handshake to nunchuck to initiate communication
 // Returns 0 if an error occurs
 int NunchuckSendHandshake()

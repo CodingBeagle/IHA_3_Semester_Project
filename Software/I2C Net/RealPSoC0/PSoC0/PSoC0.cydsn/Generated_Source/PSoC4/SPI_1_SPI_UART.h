@@ -42,7 +42,7 @@
 
 #define SPI_1_SPI_INTERRUPT_MODE         (2u)
 
-#define SPI_1_SPI_INTR_RX_MASK           (0u)
+#define SPI_1_SPI_INTR_RX_MASK           (4u)
 #define SPI_1_SPI_INTR_TX_MASK           (0u)
 
 #define SPI_1_SPI_RX_TRIGGER_LEVEL       (7u)
