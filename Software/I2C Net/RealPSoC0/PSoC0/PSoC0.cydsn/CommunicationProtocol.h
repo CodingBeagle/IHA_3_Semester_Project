@@ -7,7 +7,7 @@
 #define PSoC1UnitAddress 0x09
 #define PSoC2UnitAddress 0x10
 
-#define NunchuckDataCommand 0xA2
+#define NunchuckDataCommand 0x2A
 #define I2CTestRequest 0x29
 #define I2CTestACK 0x28
 #define slaveBufferMaxSize 4

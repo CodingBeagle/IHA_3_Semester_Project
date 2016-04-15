@@ -10,16 +10,23 @@ void sendData(uint32 Address, uint8 CommandType, uint8* buffer, uint8 bufferSize
     if (readError == I2C_1_I2C_MSTR_NO_ERROR)
     {
         // Send command type
-        I2C_1_I2CMasterWriteByte(CommandType);
+        int err = I2C_1_I2CMasterWriteByte(CommandType);
+        
+        if (err == I2C_1_I2C_MSTR_NO_ERROR)
+        {
+            //Debug LED. Lights up if no error.
+            DebugLEDGreen_Write(0);            
+        }
+        else
+        {
+            DebugLEDGreen_Write(1); 
+        }
         
         // Send Nunchuck data from the buffer.
         for(i = 0; i < bufferSize; i++)
         {
             I2C_1_I2CMasterWriteByte(buffer[i]);
         }
-        
-        //Debug LED. Lights up if no error.
-        DebugLEDGreen_Write(0);
     }
     else
     {
