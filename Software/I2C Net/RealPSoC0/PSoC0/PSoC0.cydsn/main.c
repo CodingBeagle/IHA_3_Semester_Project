@@ -74,7 +74,7 @@ int main()
         if (sendNunchuckData)
         {
             // Sends the data in dataBuffer to PSoC1
-            sendData(PSoC1, NunchuckDataCommand, dataBuffer, 3);
+            sendData(PSoC1, NunchuckData, dataBuffer, 3);
             
             // Tells the program that the data has been sent 
             // and to start new data request from the Nunchuck
