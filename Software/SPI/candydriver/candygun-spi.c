@@ -70,7 +70,7 @@ int candygun_spi_read_reg8(struct spi_device *spi, u8 addr, u8* value)
 	if(MODULE_DEBUG)
 	  printk(KERN_DEBUG "Canygun: Read Reg16 Addr 0x%02x Data: 0x%x\n", cmd, receivedData);
 
-    *value = data;
+    *value = receivedData;
 	return 0;
 }
 
