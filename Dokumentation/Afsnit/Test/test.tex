@@ -105,9 +105,14 @@ På figur \ref{fig:I2CProtocolReadUpAnalog} ses afmålingen af modtager-bufferen
 
 På figur \ref{fig:I2CProtocolReadNoInput} ses afmålingen af modtager-bufferen når der ikke er noget brugerinput på nunchuckens analoge stick. ReceivedDataBuffer[1] blev aflæst til 0x7F, hvor det forventede resultat var 0x7E. Denne afvigelse kan skyldes at det analoge stick ikke stod helt i midten under målingen (Det analoge stick er lidt "løs" og kan defor godt finde hvile i en position der ikke er fuldt centreret). ReceivedDataBuffer[2] blev aflæst til 0x7D, hvor det forventede resultat var 0x7B. Igen kan denne afvigelse skyldes at det analoge stick ikke var i centrum under målingen.
 
-Ud fra testen kan vi konkludere at implementeringen af I2C protokollen fungerer efter hensigten.
+Ud fra testen kan vi konkludere at implementeringen af I2C-protokollen fungerer efter hensigten.
 
 \subsection{Hardware}
+\subsubsection{H-bro} 
+Det ses på figur..., at den blå kanal går høj, når der trykkes på to samhørende switches. Derved bliver der åbnet for den ene side af H-broen, hvorved at al spænding trækkes ned gennem denne side af H-broen. Det betyder, at den anden side ikke har lige så meget spænding, som der var før, hvilket gør, at den orange kanal ligger lidt lavere end den gjorde inden der blev trykket. 
+Det ses også, at når der trykkes, går spændingen går høj lige med det samme. Den laver altså ikke den samme bue, som den normalt ville gøre, hvis der kun var en MOSFET i kredsløbet. Grunden til dette er, at der i H-broen er indsat to transistorer, som beskrevet ovenfor, som hjælper til med at oplade og aflade kondensatoren i MOSFET'en hurtigere. 
+Det samme sker på den anden side af H-broen. Det ses ved, at det her er den orange kanal, der går høj, og den blå der går lidt lavere. 
+Det er også testet, at motoren kan køre begge veje. Dette er også dokumenteret ved, at det er begge kanaler, der kan gå høj. 
 
 \section{Integration}
 
