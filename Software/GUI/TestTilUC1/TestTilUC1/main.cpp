@@ -2,6 +2,7 @@
 #include <QApplication>
 #include "ICandyGun.hpp"
 #include "SimulCandyGun.hpp"
+#include "realCandyGun.hpp"
 
 
 

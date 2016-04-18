@@ -1,14 +1,15 @@
 #include "realCandyGun.hpp"
+#include <QFile>
 
-#define BUFSIZEREAD = 4
-#define BUFSIZEWRITE = 3
+#define BUFSIZEREAD 4
+#define BUFSIZEWRITE 3
 
 using namespace std;
 
-bool ICandyGunSPI::SPITest()
+bool CandyGun::SPITest()
 {
 	int fd;		//file handler
-	char* spiResult[BUFSIZE];
+    char spiResult[BUFSIZEREAD];
 
 	//open candygun file
 	fd = open("dev/candygun", O_RDWR);
@@ -38,16 +39,16 @@ bool ICandyGunSPI::SPITest()
 
 	close(fd);
 
-	if (spiResult == "209") // SPI-test SUCCES
-		return 1;
+    if (strncmp(spiResult, "209", 3) == 0) // SPI-test SUCCES
+        return 1;
 	else // SPI-test FAIL
 		return 0;
 }
 
-bool ICandyGunSPI::I2CTest()
+bool CandyGun::I2CTest()
 {
 	int fd;		//file handler
-    char* i2cResult[BUFSIZEREAD];
+    char i2cResult[BUFSIZEREAD];
 
 	//open candygun file
 	fd = open("dev/candygun", O_RDWR);
@@ -77,16 +78,17 @@ bool ICandyGunSPI::I2CTest()
 
 	close(fd);
 
-	if (i2cResult == "210") // I2C-test SUCCES
+    if (strncmp(i2cResult, "210", 3) == 0) // I2C-test SUCCES
 		return 1;
 	else //if i2cResult == 194 - I2C-test FAIL
 		return 0;
 }
 
-bool ICandyGunSPI::NunchuckTest()
+bool CandyGun::NunchuckTest()
 {
 	int fd;		//file handler
-	char* nunchuckResult[BUFSIZEREAD];
+    char nunchuckResult[BUFSIZEREAD];
+    int i = 0;
 
 	//open candygun file
 	fd = open("dev/candygun", O_RDWR);
@@ -106,17 +108,20 @@ bool ICandyGunSPI::NunchuckTest()
 
 		sleep(1);
 
-		//Read Nunchuck-test result from PSoC
-		read(fd, nunchuckResult, BUFSIZEREAD);
-		if (fd == -1)
-		{
-			return 0;
-		}
+        while ((strncmp(nunchuckResult, "211", 3) != 0) && i < 15)
+            {
+                sleep(1);
+
+                //Read Nunchuck-test result from PSoC
+                read(fd, nunchuckResult, BUFSIZEREAD);
+
+                i++;
+            }
 	}
 
 	close(fd);
 
-	if (nunchuckResult == "211") // Nunchuck-test SUCCES
+    if (strncmp(nunchuckResult, "211", 3) == 0) // Nunchuck-test SUCCES
 		return 1;
 	else //if nunchuckRsult == 195 - Nunchuck-test FAIL
 		return 0;
