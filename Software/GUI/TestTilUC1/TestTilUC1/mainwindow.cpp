@@ -3,6 +3,7 @@
 #include <QTime>
 #include "ICandyGun.hpp"
 #include "SimulCandyGun.hpp"
+#include "realCandyGun.hpp"
 
 //Delay function
 void delay( int mSecsToWait )
@@ -18,7 +19,8 @@ void delay( int mSecsToWait )
 //Integers for conditions
 int sTest,iTest,wTest = 0;
 
-SimulCandyGun testCase;
+//Constructor for testRunGun
+CandyGun testRunGun;
 
 
 MainWindow::MainWindow(QWidget *parent) :
@@ -55,8 +57,9 @@ void MainWindow::fullTest()
 void MainWindow::on_SPITestBut_clicked()
 {
 
- testCase.SPITest();
- if(testCase.SPITest() == 1)
+
+ testRunGun.SPITest();
+ if(testRunGun.SPITest() == 1)
     {
         ui->systemText->append("SPI Test lykkedes.");
         sTest = 1;
@@ -74,8 +77,8 @@ void MainWindow::on_SPITestBut_clicked()
 
 void MainWindow::on_I2CTestBut_clicked()
 {
-  testCase.I2CTest();
-  if(testCase.I2CTest() == 1)
+  testRunGun.I2CTest();
+  if(testRunGun.I2CTest() == 1)
       {
             ui->systemText->append("I2C Test lykkedes.");
             iTest = 1;
@@ -92,8 +95,8 @@ void MainWindow::on_I2CTestBut_clicked()
 
 void MainWindow::on_WiiTestBut_clicked()
 {
-  testCase.NunchuckTest();
-  if(testCase.NunchuckTest() == 1)
+  testRunGun.NunchuckTest();
+  if(testRunGun.NunchuckTest() == 1)
     {
             ui->systemText->append("Wii Test lykkedes.");
             wTest = 1;

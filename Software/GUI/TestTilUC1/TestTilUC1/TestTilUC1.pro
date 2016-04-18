@@ -14,12 +14,14 @@ TEMPLATE = app
 
 SOURCES += main.cpp\
         mainwindow.cpp \
-    SimulCandyGun.cpp
+    SimulCandyGun.cpp \
+    realCandyGun.cpp
 
 HEADERS  += mainwindow.h \
     secondwindow.h \
     form.h \
     SimulCandyGun.hpp \
-    ICandyGun.hpp
+    ICandyGun.hpp \
+    realCandyGun.hpp
 
 FORMS    += mainwindow.ui
