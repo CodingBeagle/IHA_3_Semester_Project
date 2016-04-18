@@ -87,6 +87,7 @@ bool ICandyGunSPI::NunchuckTest()
 {
 	int fd;		//file handler
 	char* nunchuckResult[BUFSIZEREAD];
+	int i = 0;
 
 	//open candygun file
 	fd = open("dev/candygun", O_RDWR);
@@ -104,13 +105,14 @@ bool ICandyGunSPI::NunchuckTest()
 			return 0;
 		}
 
-		sleep(1);
-
-		//Read Nunchuck-test result from PSoC
-		read(fd, nunchuckResult, BUFSIZEREAD);
-		if (fd == -1)
+		while (nunchuckResult != "211" && i < 15)
 		{
-			return 0;
+			sleep(1);
+
+			//Read Nunchuck-test result from PSoC
+			read(fd, nunchuckResult, BUFSIZEREAD);
+			
+			i++;
 		}
 	}
 
