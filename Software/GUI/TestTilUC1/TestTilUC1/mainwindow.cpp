@@ -2,7 +2,6 @@
 #include "ui_mainwindow.h"
 #include <QTime>
 #include "ICandyGun.hpp"
-#include "SimulCandyGun.hpp"
 #include "realCandyGun.hpp"
 
 //Delay function
@@ -57,8 +56,6 @@ void MainWindow::fullTest()
 void MainWindow::on_SPITestBut_clicked()
 {
 
-
- testRunGun.SPITest();
  if(testRunGun.SPITest() == 1)
     {
         ui->systemText->append("SPI Test lykkedes.");
@@ -77,7 +74,6 @@ void MainWindow::on_SPITestBut_clicked()
 
 void MainWindow::on_I2CTestBut_clicked()
 {
-  testRunGun.I2CTest();
   if(testRunGun.I2CTest() == 1)
       {
             ui->systemText->append("I2C Test lykkedes.");
@@ -95,7 +91,6 @@ void MainWindow::on_I2CTestBut_clicked()
 
 void MainWindow::on_WiiTestBut_clicked()
 {
-  testRunGun.NunchuckTest();
   if(testRunGun.NunchuckTest() == 1)
     {
             ui->systemText->append("Wii Test lykkedes.");
