@@ -7,8 +7,8 @@
 #include "candygun.h"
 #include "candygun-spi.h"
 
-#define CANDYGUN_MAJOR_NUMBER 97    //driver reference
-#define CANDYGUN_MINOR_NUMBER 0     //device reference
+//#define CANDYGUN_MAJOR_NUMBER 97    //driver reference
+//#define CANDYGUN_MINOR_NUMBER 0     //device reference
 #define NUM_OF_MINORS 1        //We will only have one SPI device
 
 #define MAXLEN              64
@@ -18,7 +18,10 @@
 /* Char Driver Globals */
 static struct cdev candygunDev;
 struct file_operations candygun_Fops;
-static int devno;
+dev_t devno;
+
+struct class* my_SPI_Device;   
+struct device* candygun; 
 
 /* Pointer to SPI Device */
 static struct spi_device *candygun_spi_device = NULL;
@@ -47,17 +50,39 @@ static int __init candygun_cdrv_init(void)
     ERRGOTO(error, "Failed SPI Initialization\n");
   
   /* Allocate chrdev region */
-  devno = MKDEV(CANDYGUN_MAJOR_NUMBER, CANDYGUN_MINOR_NUMBER);
-  err = register_chrdev_region(devno, NUM_OF_MINORS, "candygun");  
-  if(err)
-    ERRGOTO(err_spi_init, "Failed registering char region (%d,%d) +%d, error %d\n",
-            CANDYGUN_MAJOR_NUMBER, CANDYGUN_MINOR_NUMBER, NUM_OF_MINORS, err);
+  if(alloc_chrdev_region(&devno, 0, NUM_OF_MINORS, "my_Spi_Device") < 0)
+  {
+    printk(KERN_DEBUG"Failed to allocate major and minor number");
+
+    ERRGOTO(err_spi_init, "Failed registering char region error %d\n", err);
+  }
+
   
   /* Register Char Device */
   cdev_init(&candygunDev, &candygun_Fops);
-  err = cdev_add(&candygunDev, devno, NUM_OF_MINORS);
-  if (err)
+  candygunDev.owner = THIS_MODULE;
+  err = cdev_add(&candygunDev, devno, 1);
+  if (err != 0)
+  {
+    printk(KERN_ALERT "Failed to add cdev...\n");
     ERRGOTO(err_register, "Error %d adding candy gun device\n", err);
+  }
+
+  my_SPI_Device = class_create(THIS_MODULE, "my_SPI_Device");
+  if(my_SPI_Device == NULL)
+  {
+    printk(KERN_DEBUG"Failed to create class...\n");
+    ERRGOTO(err_spi_init, "Failed registering char region error %d\n", err);
+  }    
+
+  candygun = device_create(my_SPI_Device, NULL, devno, NULL, "candygun");
+  if(IS_ERR(candygun))
+  {
+    printk(KERN_DEBUG"Failed to create device...\n");
+    ERRGOTO(err_spi_init, "Failed registering char region error %d\n", err);
+  }
+
+    
   
   return 0;
   
@@ -74,6 +99,10 @@ static int __init candygun_cdrv_init(void)
 static void __exit candygun_cdrv_exit(void)
 {
   printk("Candy gun driver Exit\n");
+
+  device_destroy(my_SPI_Device, devno);
+  class_destroy(my_SPI_Device);
+
   cdev_del(&candygunDev);
 
   unregister_chrdev_region(devno, NUM_OF_MINORS);

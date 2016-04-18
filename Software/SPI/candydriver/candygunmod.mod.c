@@ -22,19 +22,23 @@ __attribute__((section("__versions"))) = {
 	{ 0x16c549e4, __VMLINUX_SYMBOL_STR(cdev_init) },
 	{ 0xfbc74f64, __VMLINUX_SYMBOL_STR(__copy_from_user) },
 	{ 0x67c2fa54, __VMLINUX_SYMBOL_STR(__copy_to_user) },
-	{ 0xd8e484f0, __VMLINUX_SYMBOL_STR(register_chrdev_region) },
+	{ 0x5fb08567, __VMLINUX_SYMBOL_STR(device_destroy) },
 	{ 0x7485e15e, __VMLINUX_SYMBOL_STR(unregister_chrdev_region) },
 	{ 0xad71faa8, __VMLINUX_SYMBOL_STR(spi_setup) },
 	{ 0xfa2a45e, __VMLINUX_SYMBOL_STR(__memzero) },
 	{ 0x27e1a049, __VMLINUX_SYMBOL_STR(printk) },
 	{ 0x20c55ae0, __VMLINUX_SYMBOL_STR(sscanf) },
 	{ 0x96cb78f4, __VMLINUX_SYMBOL_STR(driver_unregister) },
+	{ 0xfc8af0ea, __VMLINUX_SYMBOL_STR(device_create) },
 	{ 0x53c7ab95, __VMLINUX_SYMBOL_STR(spi_bus_type) },
 	{ 0x9d2a998f, __VMLINUX_SYMBOL_STR(spi_sync) },
 	{ 0xf1f8f312, __VMLINUX_SYMBOL_STR(cdev_add) },
+	{ 0xf606617a, __VMLINUX_SYMBOL_STR(class_destroy) },
 	{ 0xefd6cf06, __VMLINUX_SYMBOL_STR(__aeabi_unwind_cpp_pr0) },
 	{ 0xb81960ca, __VMLINUX_SYMBOL_STR(snprintf) },
 	{ 0x6a204038, __VMLINUX_SYMBOL_STR(spi_register_driver) },
+	{ 0xec678710, __VMLINUX_SYMBOL_STR(__class_create) },
+	{ 0x29537c9e, __VMLINUX_SYMBOL_STR(alloc_chrdev_region) },
 };
 
 static const char __module_depends[]
@@ -43,4 +47,4 @@ __attribute__((section(".modinfo"))) =
 "depends=";
 
 
-MODULE_INFO(srcversion, "8E96F6344765F4CD103D58E");
+MODULE_INFO(srcversion, "12EC2597D618A715DE0CEC3");
