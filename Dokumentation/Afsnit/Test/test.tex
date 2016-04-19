@@ -109,10 +109,18 @@ Ud fra testen kan vi konkludere at implementeringen af I2C-protokollen fungerer 
 
 \subsection{Hardware}
 \subsubsection{H-bro} 
-Det ses på figur..., at den blå kanal går høj, når der trykkes på to samhørende switches. Derved bliver der åbnet for den ene side af H-broen, hvorved at al spænding trækkes ned gennem denne side af H-broen. Det betyder, at den anden side ikke har lige så meget spænding, som der var før, hvilket gør, at den orange kanal ligger lidt lavere end den gjorde inden der blev trykket. 
-Det ses også, at når der trykkes, går spændingen går høj lige med det samme. Den laver altså ikke den samme bue, som den normalt ville gøre, hvis der kun var en MOSFET i kredsløbet. Grunden til dette er, at der i H-broen er indsat to transistorer, som beskrevet ovenfor, som hjælper til med at oplade og aflade kondensatoren i MOSFET'en hurtigere. 
-Det samme sker på den anden side af H-broen. Det ses ved, at det her er den orange kanal, der går høj, og den blå der går lidt lavere. 
-Det er også testet, at motoren kan køre begge veje. Dette er også dokumenteret ved, at det er begge kanaler, der kan gå høj. 
+Der er blevet en modul test af selv H-broen, der blevet test om den kunne køre, som det fremgår på figuren, kan man se at, i det der bliver åbenet for at motor kan køre i den ene retning, så stiger den blå op til 12V fordi nu har den fået forbindelse til ground og fået forbindelse til  de 12V. Hvor samtidigt at blå går højt, så går den orange lavere, for nu trækker den blå alt spændingen. Det samme sker når man åbner op for at den kan løbe spændingen kan løbe den anden vej, i stedet for at det er den blå som går høj, er det den orange som går høj. Med det kan man se at motor kan køre i begge retninger uden problemer. Der er blevet valgt at der ikke tages billede af at motoren køre, for man ikke se på et billede hvilken vej den køre og overhovedet den køre. Der ses også på figuren at der noget støj, når orange/blå går højt, men det er ikke noget som kommer til at påvirker vores styring af motoren
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\textwidth]{test/images/motormodultest}
+	\caption{modultest for H-bro}
+\end{figure}
+
+Man kan også på figuren se at når den orange/blå går høj, så stiger den meget hurtig, grunden til den gør det var på grund af at, der er blevet sat de to transistor ind, får p mosfet, som gør at den bliver opladt hurtigere, end den ellers ville på grund af der sidder en form for kondensatorer inde i den mosfet, som skal have hjælp med at bliv opladt. Det hjælp kommer fra de transistor som er blevet sat ind før Mosfeten.  
+
+
+
 
 \section{Integration}
 

@@ -155,8 +155,8 @@ Over fire af mosfetene (Q9, Q10, Q3 og Q4) er der sat en diode af typen IN5819. 
 	Der er blevet brugt fire modstande (R1, R2, R3 og R4), som pull down modstande, som sørger for, at signalet vil blive holdt lavt, når der ikke er trykket, så det ben ikke står og flyver, så det kan komme til at åbne en mosfet, ved fejl og derved kommer til at brænde en mosfet eller motoren af. Der er valgt en modstand på 10kOhm, som er lille nok til at trække de små spændinger ned, når der ikke er trykket og den stor nok til at spændingen ikke løber der ned, når der er trykket.
 	\item modstande
 	\begin{itemize}
-		\item R6 og R7
-		
+		\item R6 og R7\\
+			Grunden til at vi skal have R6 og R7 er for at sikker at transistorernes Absolute Maximum Ratings omkring strømmen som ikke må over stige 100mA i følge datablad.(tjek lige om det er rigtig)
 		\item R5 og R8\\
 		Grunden til at vi skal have R8 og R5 er for at der ikke løbe en alt for stor strøm igennem  den n mosfet, for i følge databladet kan den kun klare en strøm på omkring 30 A, når Vgs er på 10V og da vores Vgs er sat til 5V så vil den ikke kunne klar en alt for stor strøm. Så derfor er R5 og R8 sat ind for at forhindre at n mosfet brænder af.
 	\end{itemize}
