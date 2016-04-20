@@ -1,0 +1,91 @@
+- Domæne model er OK
+- BDD og IBD give mening lægges i rapporten
+- Vigtige ting fra dokumentationen lægges i rapporten
+- Rapport er beskrivelse af projektet
+	- Dokumentatione er ikke en sammenhængende fil, nu er det er samling af information
+	- Kravspec er bilag, uddrag i rapporten
+	- Arkitekturen er det vigtigste i rapporten og grænseflader (Desgin overvejelser)
+	- Design og implementering ses sjældent på
+- Bilag
+	- Indstillinger og hvordan man har gjort
+	- Uddybning af ting der ikke er rigtige for de store linjer
+	- Bruge til at reproducere resultater
+	- Pas på at ikke holde for meget fokus på dokumentation og også fokusere på rapporten og process
+- Gunvor ville skrive rapporten og hvis noget nedprioriteres skal det lægges i bilag
+- Der mangler dokumentation for arkitekturen af software, skyldes udvikles først også dokumenteres (Proces rapport beskrivelse)
+	- Event baseret i qt creator
+		Der er en klasse der kører testen. Klassediagram og sekvensdiagram
+		Der spørges ind til dette til eksamen, væsentligt del
+		Beskrives i arkitektur, coupling og event baseret (Ikke nævn tråde)
+		Kunne det have været gjort anderledes/ bedre måde og hvorfor vi ikke har gjort det på denne måde
+		Skulle SPI have kørt på en anderledes måde? Overvej dette
+	- Hvad er FR mellem gui og resten af systemet
+	- Coupling skal være lav 
+- SPI setup
+	Sende besked ud til PSoC. Sleeper indtil PSoC er færdig også læses der på bufferen
+		Fejler når der sker timeout. Design valg (Beskrives) Hvorfor og hvorfor ikke andre
+		Tråd programmering vs. ikke tråd programmering
+		Kort og præcist (Vi har truffet dette valg pga ...., det har følgende konsekvenser for ...
+		Ikke dokumenteret endnu
+- Figur 11 og 12 er skaleret anderledes
+	- Påvirker ikke så meget med anbefales for 
+	- Der skal luft omkring figur 12 eller print for at se om 11 skal blive større
+		Udskriv side 22
+	- Flyt billeder ud over tekstkanten, hvis det ser bedre ud
+	- Tekst i figurer skal måske forstørres hvis der er fare for at der ikke kan læses
+		Kun i rapport, ligemeget med dokumentation
+		LAV UDSKRIFT TEST
+	- Figur 18: Vektorgrafik fjerne streger på Tennas PC
+		Det er nok ikke dokumentet
+- Ekstra bruger til UCD
+	- Admin bruger: Samme person, men anden funktion
+	- Bruger som starter test og tjekker frunktionalieten; arbejder med TCP
+	- Giver mening i forhold til test usecasen, kvalitetskontrol
+	- Forklaring omkring det er den samme person, men det vises grafisk som flere personer
+	- Der er forskellige mål for aktørene
+- Der kan laves "fake" diagrammer der fører til reele løsninger i procesrapporten
+- Tidsplan
+	- dette sprints mål er færdiggørelse af UC2
+		Der er problemer med interrupt, forskellige prioriteter med interrupts
+	- Tenna mener at der ikke noget problem og SW skal hjælpe med HW.
+	- Kasper og Daniel mener at der vil opstå problemer og der skal laves noget nyt dokumentation
+	- Hvis vi kun har UC2 og proof of concept
+		Der er mulighed for at 7 eller 10
+		Der skal findes noget der kan affyre, 
+		Eksamener går bedre hvis der er et produkt der gør noget
+		To fritstående motorer der viser hvordan man kan styre med nunchuck
+		Stadig gøre det præsentabelt
+			Evt plade med alle dele, fine ledninger
+			Hvis der skrives rapport på 10 får man 10
+		Vi skal bedømme hvad der bruges ressourcer
+	- Ingen på holdet står til at dumpe
+		Arbejder jævnt og er god til rapport
+		Der er forskellig ambitionsniveauer i gruppen
+		Vi ligger på den pæne side af gennemsnittet
+	- Fokusere på rapporten, mindre fokus på dokumentation
+	Test som journal
+		Formål, fremgangsmåde, resultat, konklusion
+		Lettere at læse og skrive 
+- Rapportskrivning deles op
+	- Sæt navne på afsnit
+	- Vigtige dele: Indledning (flere afsnit)
+		- Hvad sker der i verden med vores produkt, hvad er forrmålet med produktet, er der konkurrenter
+		Ligesom projektformulering
+Skrives nu:
+	Indledning, forord, konklusion
+- Mia er ny referent. 	
+
+- Næste møde: Onsdag d. 20. 8.15 
+- Det sker næste gang:  
+	- Færdiggørelse af UC2
+		Indebærer stabil fungerer og ser pænt ud plat form
+	- Motorstyring
+		Ifølge ikke funktionelle krav
+	- Rapport 
+		Deles op i ansvarsområder så der kan arbejdes selvstændigt
+		Bilag lægges på til sidst som supplering
+	- Affyringsmekanisme
+		Står ved siden af fritstående motorer
+		Hvis der er en struktur skal den monteres på pladen
+	
+
