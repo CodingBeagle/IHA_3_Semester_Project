@@ -1,5 +1,5 @@
-C:\Users\Bitious\Documents\Engineerin\IHA_3_Semester_Project\Software\I2C Net\RealPSoC0\PSoC0\PSoC0.cydsn\PSoC0.cyprj|2ac6bbd5-8faa-47ec-9a17-fdfb53c51b69
-C:\Program Files (x86)\Cypress\PSoC Creator\3.3\PSoC Creator\psoc\content\default\CyAnnotationLibrary\CyAnnotationLibrary.cylib\CyAnnotationLibrary.cyprj|6564b847-63e4-49d9-b1ff-5034b9f855c6
-C:\Program Files (x86)\Cypress\PSoC Creator\3.3\PSoC Creator\psoc\content\cycomponentlibraryupdates\CyComponentLibraryUpdates.cylib\CyComponentLibraryUpdates.cyprj|7cbb6197-d3af-4fab-a0c6-5d692fab943c
-C:\Program Files (x86)\Cypress\PSoC Creator\3.3\PSoC Creator\psoc\content\cycomponentlibrary\CyComponentLibrary.cylib\CyComponentLibrary.cyprj|11aef266-589b-4879-97f0-a61e6ca821b0
-C:\Program Files (x86)\Cypress\PSoC Creator\3.3\PSoC Creator\psoc\content\cyprimitives\CyPrimitives.cylib\CyPrimitives.cyprj|f2afc06f-543b-4494-a7e1-319bf4380368
+C:\Users\Bitious\Documents\Engineerin\IHA_3_Semester_Project\Software\I2C Net\RealPSoC0\PSoC0\PSoC0.cydsn\PSoC0.cyprj|952fc114-80ef-4c46-8e47-ed14b3de510d
+C:\Program Files (x86)\Cypress\PSoC Creator\3.3\PSoC Creator\psoc\content\default\CyAnnotationLibrary\CyAnnotationLibrary.cylib\CyAnnotationLibrary.cyprj|27c9abb8-1cf5-4ebf-9ccc-4b1b0f39c554
+C:\Program Files (x86)\Cypress\PSoC Creator\3.3\PSoC Creator\psoc\content\cycomponentlibraryupdates\CyComponentLibraryUpdates.cylib\CyComponentLibraryUpdates.cyprj|f4e5f8b1-c7f7-482a-85e0-a275e99c54f6
+C:\Program Files (x86)\Cypress\PSoC Creator\3.3\PSoC Creator\psoc\content\cycomponentlibrary\CyComponentLibrary.cylib\CyComponentLibrary.cyprj|b2d582fc-f26c-4181-9e5f-4943db3a0dff
+C:\Program Files (x86)\Cypress\PSoC Creator\3.3\PSoC Creator\psoc\content\cyprimitives\CyPrimitives.cylib\CyPrimitives.cyprj|035171ec-6163-4827-bde9-fd36d2214788

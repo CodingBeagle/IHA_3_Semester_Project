@@ -164,7 +164,7 @@ CY_ISR(isr_spi_Interrupt)
 
     /*  Place your Interrupt code here. */
     /* `#START isr_spi_Interrupt` */
-
+//
     /* `#END` */
 }
 

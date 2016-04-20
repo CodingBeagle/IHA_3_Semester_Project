@@ -161,12 +161,11 @@ void isr_spi_Stop(void)
 //    #ifdef isr_spi_INTERRUPT_INTERRUPT_CALLBACK
 //        isr_spi_Interrupt_InterruptCallback();
 //    #endif /* isr_spi_INTERRUPT_INTERRUPT_CALLBACK */ 
+
+    /*  Place your Interrupt code here. */
+    /* `#START isr_spi_Interrupt` */
 //
-//
-//    /*  Place your Interrupt code here. */
-//    /* `#START isr_spi_Interrupt` */
-//
-//    /* `#END` */
+    /* `#END` */
 //}
 
 

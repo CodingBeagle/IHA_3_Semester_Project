@@ -1,0 +1,3 @@
+-Integration af GUI og SPI (interrupt misser nogle gange)
+-Feedback fra dokumentation (hvilke dele er mere til rapport?)
+-Snak om tidsplan til næste sprint (Hvad skal der fokuseres på?)

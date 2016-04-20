@@ -72,6 +72,7 @@ CY_ISR(isr_spi_Interrupt)
             case START_I2C_TEST:
        
             testI2C = 1;
+            SPI_1_SpiUartClearTxBuffer();
             
             DebugLEDRed_Write(1);
             DebugLEDBlue_Write(!DebugLEDBlue_Read());
@@ -79,7 +80,7 @@ CY_ISR(isr_spi_Interrupt)
             break;
             
             case START_NUNCHUCK_TEST:
-            
+            SPI_1_SpiUartClearTxBuffer();
             testNunchuck = 1;
             testNunchuckTimer = clock();
             SPI_1_SpiUartWriteTxData(NUNCHUCK_FAIL);
@@ -156,6 +157,7 @@ int main()
         // Send nunchuck data
         if (sendNunchuckData)
         {
+
             if (testNunchuck)
             {
                 diff = clock() - testNunchuckTimer;
@@ -164,16 +166,18 @@ int main()
                 if ((dataBuffer[2] & 0b00000011) == 2)
                 {
                     SPI_1_SpiUartClearTxBuffer();
+                    SPI_1_SpiUartClearTxBuffer();
                     SPI_1_SpiUartWriteTxData(NUNCHUCK_OK);
                     testNunchuck = 0;
                 }
                 
                 if (diff >= 5000)
                 {
+                    SPI_1_SpiUartClearTxBuffer();
                     testNunchuck = 0;
                 }
             }
-            
+
             // Sends the data in dataBuffer to PSoC1
             sendData(PSoC1, NunchuckData, dataBuffer, 3);
             
@@ -216,7 +220,6 @@ int main()
                 SPI_1_SpiUartWriteTxData(I2C_FAIL);
             }
         }
-        
         
     }    
     return 0;
