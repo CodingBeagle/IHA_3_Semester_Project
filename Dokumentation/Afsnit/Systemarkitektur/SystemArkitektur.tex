@@ -206,19 +206,19 @@ På tabel \ref{tabel:spiKommandoType} ses SPI-protokollen. Til venstre på tabel
 	\resizebox{\textwidth}{!}{%
 		\begin{tabular}{llll}
 			\hline
-			Kommando Type                                                                            & Beskrivelse                                                                    & Binær Værdi                      & Hex Værdi                   \\ \hline
+			\multicolumn{1}{|l|}{Kommandotype}                                & \multicolumn{1}{l|}{Beskrivelse}                        & \multicolumn{1}{l|}{Binær Værdi} & \multicolumn{1}{l|}{Hex Værdi} \\ \hline
 			\rowcolor[HTML]{CBCEFB} 
-			{\color[HTML]{000000} START\_SPI\_TEST}                                                  & {\color[HTML]{000000} Sætter PSoC0 i 'SPI-TEST' mode}                          & {\color[HTML]{000000} 1111 0001} & {\color[HTML]{000000} 0xF1} \\
-			START\_I2C\_TEST                                                                         & Sætter PSoC0 i 'I2C-TEST' mode                                                 & 1111 0010                        & 0xF2                        \\
+			{\color[HTML]{000000} START\_SPI\_TEST}                           & {\color[HTML]{000000} Sætter PSoC0 i 'SPI-TEST' mode}   & 1111 0001                        & 0xF1                           \\
+			START\_I2C\_TEST                                                  & Sætter PSoC0 i 'I2C-TEST' mode                          & 1111 0010                        & 0xF2                           \\
 			\rowcolor[HTML]{CBCEFB} 
-			{\color[HTML]{000000} \begin{tabular}[c]{@{}l@{}}START\_NUN-\\ CHUCK\_TEST\end{tabular}} & {\color[HTML]{000000} Sætter PSoC0 i 'NUNCHUCK-TEST' mode}                     & {\color[HTML]{000000} 1111 0011} & {\color[HTML]{000000} 0xF3} \\
-			SPI\_OK                                                                                  & Signalerer at SPI-testen blev gennemført uden fejl                             & 1101 0001                        & 0xD1                        \\
+			\begin{tabular}[c]{@{}l@{}}START\_NUN-\\ CHUCK\_TEST\end{tabular} & Sætter PSoC0 i 'NUNCHUCK-TEST' mode                     & 1111 0011                        & 0xF3                           \\
+			SPI\_OK                                                           & Signalerer at SPI-testen blev gennemført uden fejl      & 1101 0001                        & 0xD1                           \\
 			\rowcolor[HTML]{CBCEFB} 
-			{\color[HTML]{000000} I2C\_OK}                                                           & {\color[HTML]{000000} Signalerer at I2C-testen blev gennemført uden fejl}      & {\color[HTML]{000000} 1101 0010} & {\color[HTML]{000000} 0xD2} \\
-			I2C\_FAIL                                                                                & Signalerer at der skete fejl under I2C-testen                                  & 1100 0010                        & 0xC2                        \\
+			I2C\_OK                                                           & Signalerer at I2C-testen blev gennemført uden fejl      & 1101 0010                        & 0xD2                           \\
+			I2C\_FAIL                                                         & Signalerer at der skete fejl under I2C-testen           & 1100 0010                        & 0xC2                           \\
 			\rowcolor[HTML]{CBCEFB} 
-			{\color[HTML]{000000} NUNCHUCK\_OK}                                                      & {\color[HTML]{000000} Signalerer at NUNCHUCK-testen blev gennemført uden fejl} & {\color[HTML]{000000} 1101 0011} & {\color[HTML]{000000} 0xD3} \\
-			NUNCHUCK\_FAIL                                                                           & Signalerer at der skete fejl under NUNCHUCK-testen                             & 1100 0011                        & 0xC3                        \\ \hline
+			NUNCHUCK\_OK                                                      & Signalerer at NUNCHUCK-testen blev gennemført uden fejl & 1101 0011                        & 0xD3                           \\
+			NUNCHUCK\_FAIL                                                    & Signalerer at der skete fejl under NUNCHUCK-testen      & 1100 0011                        & 0xC3                          
 		\end{tabular}
 	}
 	\caption{Kommandotyper der anvendes ved SPI kommunikation}
@@ -236,11 +236,12 @@ I2C gør brug af en integreret protokol der anvender adressering af hardware-enh
 
 \begin{table}[H]
 	\centering
-	\begin{tabular}{l|lllllll|l}
+	\begin{tabular}{lllllllll}
 		\hline
-		I2C Adresse bits & 7 & 6 & 5 & 4 & 3 & 2 & 1 & 0 R/W\\ \hline
-		PSoC0        & 0 & 0 & 0 & 1 & 0 & 0 & 0 & 0/1                        \\
-		PSoC1        & 0 & 0 & 0 & 1 & 0 & 0 & 1 & 0/1                        \\ \hline
+		\multicolumn{1}{|l|}{I2C Adresse bits} & 7                        & 6                        & 5                        & 4 & 3 & 2 & \multicolumn{1}{l|}{1} & \multicolumn{1}{l|}{0 (R/W)} \\ \hline
+		\rowcolor[HTML]{CBCEFB} 
+		{\color[HTML]{000000} PSoC0}           & {\color[HTML]{000000} 0} & {\color[HTML]{000000} 0} & {\color[HTML]{000000} 0} & 1 & 0 & 0 & 0                      & 0/1                          \\
+		PSoC1                                  & 0                        & 0                        & 0                        & 1 & 0 & 0 & 1                      & 0/1                         
 	\end{tabular}
 	\caption{Adresser der anvendes på I2C bussen}
 	\label{table:I2CAddress}
@@ -275,16 +276,16 @@ På tabel \ref{table:I2CKommandoer} ses de definerede kommandotyper og det tilsv
 
 \begin{table}[H]
 	\centering
-	\resizebox{\textwidth}{!}{%
+	\resizebox{\textwidth}{!}{
 		\begin{tabular}{lllll}
 			\hline
-			Kommando Type  & Beskrivelse                                           & Binær værdi & Hex værdi & Data bytes                                                                                                              \\ \hline
-			\rowcolor[HTML]{EFEFEF} 
-			NunchuckData   & Indeholder aflæst data fra Wii Nunchuck controlleren  & 0010 1010   & 0xA2      & \begin{tabular}[c]{@{}l@{}}Byte \#1 Analog X-værdi\\ Byte \#2 Analog Y-værdi\\ Byte \#3 Analog ButtonState\end{tabular} \\ \hline
-			I2CTestRequest & Anmoder PSoC0 om at starte en I2C kommunikations test    & 0010 1001   & 0x29      & Ingen Databytes                                                                                                         \\ \hline
-			\rowcolor[HTML]{EFEFEF} 
-			I2CTestACK     & Anmodning om at få en I2C OK besked fra I2C enhed & 0010 1000   & 0x28      & Ingen Databytes                                                                                                         \\ \hline
-		\end{tabular}%
+			\multicolumn{1}{|l|}{Kommandotype}    & \multicolumn{1}{l|}{Beskrivelse}                                            & \multicolumn{1}{l|}{Binær Værdi} & \multicolumn{1}{l|}{Hex Værdi} & \multicolumn{1}{l|}{Data Bytes}                                                                                         \\ \hline
+			\rowcolor[HTML]{CBCEFB} 
+			{\color[HTML]{000000} NunchchuckData} & {\color[HTML]{000000} Indeholder aflæst data fra Wii Nunchuck controlleren} & 0010 1010                        & 0xA2                           & \begin{tabular}[c]{@{}l@{}}Byte \#1 Analog X-værdi\\ Byte \#2 Analog Y-værdi\\ Byte \#3 Analog Buttonstate\end{tabular} \\
+			I2CTestRequest                        & Anmoder PSoC0 om at starte I2C-kommunikations test                          & 0010 1001                        & 0x29                           & Ingen databyte                                                                                                          \\
+			\rowcolor[HTML]{CBCEFB} 
+			I2CTestAck                            & Anmodning om at få en I2C OK besked fra I2C enhed                           & 0010 1000                        & 0x28                           & Ingen databyte                                                                                                         
+		\end{tabular}
 	}
 	\caption{Kommandotyper der anvendes ved I2C kommunikation}
 	\label{table:I2CKommandoer}
