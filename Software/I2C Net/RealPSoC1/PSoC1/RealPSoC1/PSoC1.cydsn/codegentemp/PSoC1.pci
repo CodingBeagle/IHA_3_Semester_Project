@@ -1,5 +1,5 @@
 # PSoC1
-# 2016-04-15 11:15:04Z
+# 2016-04-21 07:28:55Z
 
 # IO_2@[IOP=(3)][IoId=(2)] is reserved: SWDDebugEnabled
 dont_use_io iocell 3 2
@@ -11,3 +11,5 @@ set_io "\I2C_1:scl(0)\" iocell 4 0
 set_io "DebugLEDRed(0)" iocell 1 6
 set_io "DebugLEDGreen(0)" iocell 0 2
 set_io "DebugLEDBlue(0)" iocell 0 3
+set_io "MotorXAxisDirectionLeft(0)" iocell 2 7
+set_io "MotorXAxisDirectionRight(0)" iocell 1 0

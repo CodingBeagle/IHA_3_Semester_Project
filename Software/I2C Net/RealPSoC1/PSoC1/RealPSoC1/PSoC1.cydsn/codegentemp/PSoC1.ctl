@@ -1,6 +1,6 @@
 -- ======================================================================
 -- PSoC1.ctl generated from PSoC1
--- 04/15/2016 at 13:15
+-- 04/21/2016 at 09:28
 -- This file is auto generated. ANY EDITS YOU MAKE MAY BE LOST WHEN THIS FILE IS REGENERATED!!!
 -- ======================================================================
 

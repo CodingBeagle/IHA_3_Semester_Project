@@ -30,11 +30,29 @@ int main()
     
     CyGlobalIntEnable; /* Enable global interrupts. */
 
+    // Turn off motor x axis left direction
+    //MotorXAxisDirectionLeft_Write(0);
+    
+    // Initialize PWM signals
+    PWM_X_RIGHT_Start();
+    Clock_PWM_2_Start();
+    
+    PWM_X_LEFT_Start();
+    Clock_PWM_1_Start();
+    
+    PWM_X_RIGHT_WriteCompare(0);
+    PWM_X_LEFT_WriteCompare(0);
+    
     for(;;)
     {
         receiveData(recievedDataBuffer);
 
         debugNunchuckData(recievedDataBuffer);
+        
+        //CyDelay(5);
+        //PWM_X_RIGHT_WriteCompare(20);
+        //CyDelay(20);
+        //PWM_X_RIGHT_WriteCompare(0);
     }
 }
 
@@ -42,15 +60,33 @@ void debugNunchuckData(uint8* receivedDataBuffer)
 {
     if(receivedDataBuffer[0] == NunchuckData)
     {
+        
+        
         //Handle debug LEDs for the X-Axis.
         if(receivedDataBuffer[1] < 100)
+        {
             DebugLEDRed_Write(0);
+            PWM_X_LEFT_WriteCompare(30);
+        }
         else if(receivedDataBuffer[1] > 150)
+        {
             DebugLEDGreen_Write(0);
+            PWM_X_RIGHT_WriteCompare(30);
+        }
         else
         {
             DebugLEDGreen_Write(1);
             DebugLEDRed_Write(1);
+        }
+        
+        if (receivedDataBuffer[1] < 150)
+        {
+           PWM_X_RIGHT_WriteCompare(0);
+        }
+
+        if (receivedDataBuffer[1] > 100)
+        {
+           PWM_X_LEFT_WriteCompare(0);
         }
         
         //Handle debug LEDs for the Y-Axis.
