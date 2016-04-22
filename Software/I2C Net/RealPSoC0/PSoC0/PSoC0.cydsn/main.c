@@ -39,6 +39,7 @@ clock_t testNunchuckTimer, diff;
 
 CY_ISR(isr_spi_Interrupt)
 {
+    INT_PIN_Write(0);
     uint8 i, j, buf[8];
     uint32 source = 0u;
 
@@ -57,10 +58,10 @@ CY_ISR(isr_spi_Interrupt)
     {
         int commandType = buf[0];
         int readError = 0;
-        
         switch (commandType)
         {
             case START_SPI_TEST:
+            testNunchuck = 0;
             SPI_1_SpiUartClearTxBuffer();
             SPI_1_SpiUartWriteTxData(SPI_OK);
             
@@ -70,7 +71,7 @@ CY_ISR(isr_spi_Interrupt)
             break;
             
             case START_I2C_TEST:
-       
+            testNunchuck = 0;
             testI2C = 1;
             SPI_1_SpiUartClearTxBuffer();
             
@@ -91,10 +92,7 @@ CY_ISR(isr_spi_Interrupt)
             break;
         }
         
-        // Send last command back to master at next transaction!
-        // Places a data entry into the transmit buffer to be sent
-        //SPI_1_SpiUartWriteTxData(buf[j-1]);
-        
+        INT_PIN_Write(1);
     }
 
     //Pin_LED_Write(!Pin_LED_Read()); // Debug -> Toggle LED!
@@ -160,7 +158,7 @@ int main()
 
             if (testNunchuck)
             {
-                diff = clock() - testNunchuckTimer;
+                double cpuTime = (double) (clock() - testNunchuckTimer) / CLOCKS_PER_SEC;
                 
                 // Z button pressed
                 if ((dataBuffer[2] & 0b00000011) == 2)
@@ -168,12 +166,6 @@ int main()
                     SPI_1_SpiUartClearTxBuffer();
                     SPI_1_SpiUartClearTxBuffer();
                     SPI_1_SpiUartWriteTxData(NUNCHUCK_OK);
-                    testNunchuck = 0;
-                }
-                
-                if (diff >= 5000)
-                {
-                    SPI_1_SpiUartClearTxBuffer();
                     testNunchuck = 0;
                 }
             }

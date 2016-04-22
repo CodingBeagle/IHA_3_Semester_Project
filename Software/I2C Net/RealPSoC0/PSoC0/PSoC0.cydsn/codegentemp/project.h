@@ -37,6 +37,8 @@
 #include "SPI_1_PVT.h"
 #include "SPI_1_BOOT.h"
 #include "isr_spi.h"
+#include "INT_PIN.h"
+#include "INT_PIN_aliases.h"
 #include "I2C_1_SCBCLK.h"
 #include "I2C_1_sda.h"
 #include "I2C_1_sda_aliases.h"

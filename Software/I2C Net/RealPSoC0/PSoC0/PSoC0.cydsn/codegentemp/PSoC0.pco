@@ -1,5 +1,5 @@
 # PSoC0
-# 2016-04-18 12:38:04Z
+# 2016-04-22 09:04:33Z
 
 # IO_2@[IOP=(3)][IoId=(2)] is reserved: SWDDebugEnabled
 dont_use_io iocell 3 2
@@ -16,6 +16,7 @@ set_io "\SPI_1:ss_s(0)\" iocell 0 7
 set_io "\SPI_1:miso_s(0)\" iocell 3 1
 set_io "\SPI_1:sclk_s(0)\" iocell 0 6
 set_io "\SPI_1:mosi_s(0)\" iocell 3 0
+set_io "INT_PIN(0)" iocell 2 6
 set_location "\I2C_1:SCB_IRQ\" interrupt -1 -1 10
 set_location "\I2C_1:SCB\" m0s8scbcell -1 -1 0
 set_location "\SPI_1:SCB\" m0s8scbcell -1 -1 1
