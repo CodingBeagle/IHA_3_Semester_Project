@@ -1,4 +1,4 @@
-\chapter{Design og implementering}
+  \chapter{Design og implementering}
 
 
 \section{Software Design}
@@ -55,19 +55,22 @@ På baggrund af BDD'et er der fundet følgende hardwareblokke, der skal udarbejd
 \begin{itemize}
 	\item Motorstyring
 	\item Tre motorer
+	\item Affyringsmekanisme 
 \end{itemize}
 
+\subsubsection{Motor}
+Der er truffet et valg om at bruge en DC-motor i alle tre tilfælde. De to motorer skal bruges til at styre kanonen i to retninger, og den sidste skal bruges i affyringsmekanismen. 
+
 \subsection{Motorstyring}
-Til at styre de tre motorer er der bygget en H-bro, der skal bruges i tre eksemplarer. To af disse motorer skal kunne styre kanonen, så den kan køre op og ned og frem og tilbage. Den tredje skal bruges til at styre affyringsekanismen. 
+Til at styre de tre motorer er der bygget en H-bro, der skal bruges i tre eksemplarer. To af disse motorer skal kunne styre kanonen, så den ene gør at den kan køre op og ned, og den anden gør, at den kan køre fra side til side. Den tredje skal bruges til at styre affyringsmekanismen. 
 
 \subsubsection{H-bro}
-Først blev der designet en H-bro, som bestod af to N-MOSFET's af typen IRLZ44 og to P-MOSFET's af typen ZVP3306. Denne kan ses på figur... Det viste sig dog, at den P-MOSFET der var brugt, var for svag til at kunne trække den strøm, som motoren skulle bruge, hvilket betød, at den blev brændt af. 
-
+Der blev først designet en H-bro, som bestod af to N-MOSFET's af typen IRLZ44 og to P-MOSFET's af typen ZVP3306. Denne kan ses i bilaget. Det viste sig dog, at den P-MOSFET, der var brugt, var for svag til at kunne trække den strøm, som motoren skulle bruge, hvilket betød, at den blev brændt af. Derfor blev denne H-bro modificeret, så de to P-MOSFET's blev udskiftet med to MOSFET's af typen IRF9Z34N, der kan trække en større strøm. 
 
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=\textwidth]{DesignOgImplementering/images/motorkreds}
-	\caption{H-bro kredsløb}
+	\caption{Kredsløb for H-bro}
 	\end{figure}
 
 \begin{table}[]
@@ -103,13 +106,12 @@ Først blev der designet en H-bro, som bestod af to N-MOSFET's af typen IRLZ44 o
 	\end{tabular}
 \end{table}
 
-\subsubsection{Mosfet}
+\subsubsection{MOSFET'er}
 Til at styre motoren er der bygget en H-bro, som består af fire mosfet, hvor to af dem er af typen IRF9Z34N (mosfet P-channel, som er Q9 og Q10 på kredsløbstegningen) og de to andre mosfet er af typen IRLZ44 (mosfet N-Channel, som er Q3 og Q4 kredsløbstegningen). Det er valgt at bruge mosfet for at kunne styre H-broen, da det ved denne er muligt at lukke og åbne for spændingen, og de bliver styret af spænding, i forhold til transistorer, som bliver styret af strøm. 
 
 \begin{itemize}
-	\item Mosfet N-channel:\\
-	den kan klar en strøm på 30A (tjek lige med en anden) ifølge databladet. Det vil altså ikke
-	komme til at påvirke motoren, som kan trække en strøm på 0,35A.
+\item MOSFET N-kanal\\
+	Den kan klare en strøm på 30A (tjek lige med en anden) ifølge databladet. Det vil altså ikke komme til at påvirke motoren, som kan trække en strøm på 0,35A. 
 	
 	I IRLZ44(mosfet N-Channel), for at der kan løbe spændingen i gennem 
 	den, så skal den have postiv spænding for at åbne og 0V for at lukke igen. 
@@ -118,7 +120,7 @@ Til at styre motoren er der bygget en H-bro, som består af fire mosfet, hvor to
 	\begin{figure}[H]
 		\centering
 		\includegraphics[width=\textwidth]{DesignOgImplementering/images/grafn}
-		\caption{Gate-to-Source Voltag}
+		\caption{Gate-to-Source Voltage}
 	\end{figure}
 	
 	Hvor man kan se ved en Gate-to-Source voltage på 5v, vil der kunne 
@@ -127,11 +129,11 @@ Til at styre motoren er der bygget en H-bro, som består af fire mosfet, hvor to
 	
 	så når mosfet får 5V på ben(gate), vil den tillade at der kan løbe strøm
 	igennem den og derved vil hele kredsløbet for en forbindelse til jord.
-	\item 
-	Mosfet P-channel: \\
-	Den kan klare en strøm på 6,7A ifølge databladet. Det vil altså ikke komme til at påvirke motoren, som kan trække en strøm på 0,35A. 
 	
-	For at der kan løbe spænding igennem IRF9Z34N(mosfet P-channel), så skal den have en negativ spænding for at åbne og en spænding på over 0V for at lukke. 
+\item MOSFET P-kanal \\
+	Det er valgt at bruge en P-MOSFET af typen IRF9Z34N. Denne kan trække en strøm på 6,7A ifølge databladet. Det vil altså ikke komme til at påvirke motoren, da den kan trække en strøm på 0,35A. 
+	
+	For at der kan løbe spænding igennem IRF9Z34N(MOSFET P-channel), skal den have en negativ spænding for at åbne og en spænding på over 0V for at lukke. 
 	hvor man kan se ved en Gate-to-Source voltage på 5v, vil der kunne 
 	løbe en strøm på omkring 5A så det er mere end nok til at
 	få motoren til at funger
@@ -143,24 +145,29 @@ Til at styre motoren er der bygget en H-bro, som består af fire mosfet, hvor to
 	så når mosfet får en negativ spædnding på ben(gate), vil den tillade at der kan løbe strøm/spænding
 	igennem den og derved vil den ene del af kredsløbet blive aktiv, så motoren begynder at køre.
 	så det er derfor at der er blevet sat to transistor og en N mosfet foran hver af P mosfetene.
-	
-	
 \end{itemize}
-\subsubsection{Diode}
+
+\subsubsection{Dioder}
 Over fire af mosfetene (Q9, Q10, Q3 og Q4) er der sat en diode af typen IN5819. Den skal fungere som beskyttelse af de fire mosfet (Q9, Q10, Q3 og Q4). Det, de gør, er, at de sikrer, at den spænding, som er tilbage i motoren, når man lukker for mosfetene, ikke løber tilbage ind i mosfetene og brænder dem af.
 
 \subsubsection{Modstande}
 \begin{itemize}
 	\item Pull down modstande:\\
-	Der er blevet brugt fire modstande (R1, R2, R3 og R4), som pull down modstande, som sørger for, at signalet vil blive holdt lavt, når der ikke er trykket, så det ben ikke står og flyver, så det kan komme til at åbne en mosfet, ved fejl og derved kommer til at brænde en mosfet eller motoren af. Der er valgt en modstand på 10kOhm, som er lille nok til at trække de små spændinger ned, når der ikke er trykket og den stor nok til at spændingen ikke løber der ned, når der er trykket.
-	\item modstande
+	Der er blevet brugt fire pull-down-modstande (R1, R2, R3 og R4). Disse sørger for, at signalet vil blive holdt lavt, når der ikke er trykket, så dette ben ikke står og flyver, så det kan komme til at åbne en mosfet ved en fejl og derved kommer til at brænde en mosfet eller motoren af. Der er valgt en modstand på 10 kOhm, hvilket betyder, at den er lille nok til at trække de små spændinger ned, når der ikke er trykket, og den stor nok til at spændingen ikke løber derned, når der er trykket. 
+	\item Andre modstande
 	\begin{itemize}
 		\item R6 og R7\\
-			Grunden til at vi skal have R6 og R7 er for at sikker at transistorernes Absolute Maximum Ratings omkring strømmen som ikke må over stige 100mA i følge datablad.(tjek lige om det er rigtig)
+			Grunden til, at R6 og R7 er der, er for at sikre, at transistorernes Absolute Maximum Ratings omkring strømmen, som ikke må overstige 100mA ifølge databladet. (tjek lige om det er rigtig)
 		\item R5 og R8\\
-		Grunden til at vi skal have R8 og R5 er for at der ikke løbe en alt for stor strøm igennem  den n mosfet, for i følge databladet kan den kun klare en strøm på omkring 30 A, når Vgs er på 10V og da vores Vgs er sat til 5V så vil den ikke kunne klar en alt for stor strøm. Så derfor er R5 og R8 sat ind for at forhindre at n mosfet brænder af.
+			Grunden til at R8 og R5 er der er, at der ikke kan løbe en alt for stor strøm igennem den N-mosfet, for ifølge databladet kan den kun klare en strøm på omkring 30A, når Vgs er på 10V, og da Vgs er sat til 5V, vil den ikke kunne klare en alt for stor strøm. Det vil altså sige, at er der R5 og R8 for at forhindre at N-mosfet brænder af.
 	\end{itemize}
-	
-	
+
 \end{itemize}
-\subsubsection{Motor}
+
+\subsubsection{Transistorer}
+\begin{itemize}
+	\item Q5 og Q7
+	\item Q6 og Q8
+\end{itemize}
+
+
