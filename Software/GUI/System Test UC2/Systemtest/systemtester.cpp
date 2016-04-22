@@ -52,6 +52,7 @@ void Systemtester::on_activateBut_clicked()
     else
     {
         ui->systemText->append("SPI Test Failed!");
+        return;
     }
 
     ui->systemText->append("Starting I2C Test...");
@@ -66,6 +67,7 @@ void Systemtester::on_activateBut_clicked()
     else
     {
         ui->systemText->append("I2C Test Failed!");
+        return;
     }
 
     ui->systemText->append("Press the 'Z' button on the Nunchuck within 5 seconds...");
@@ -80,6 +82,7 @@ void Systemtester::on_activateBut_clicked()
     else
     {
         ui->systemText->append("Wii-Nunchuck Test Failed!");
+        return;
     }
 }
 

@@ -35,14 +35,18 @@ public:
     QMenuBar *menuBar;
     QToolBar *mainToolBar;
     QStatusBar *statusBar;
+    QToolBar *toolBar;
 
     void setupUi(QMainWindow *Systemtester)
     {
         if (Systemtester->objectName().isEmpty())
             Systemtester->setObjectName(QString::fromUtf8("Systemtester"));
+        Systemtester->setEnabled(true);
         Systemtester->resize(480, 272);
+        Systemtester->setStyleSheet(QString::fromUtf8(""));
         centralWidget = new QWidget(Systemtester);
         centralWidget->setObjectName(QString::fromUtf8("centralWidget"));
+        centralWidget->setAutoFillBackground(false);
         activateBut = new QPushButton(centralWidget);
         activateBut->setObjectName(QString::fromUtf8("activateBut"));
         activateBut->setGeometry(QRect(10, 10, 91, 111));
@@ -66,6 +70,9 @@ public:
         statusBar = new QStatusBar(Systemtester);
         statusBar->setObjectName(QString::fromUtf8("statusBar"));
         Systemtester->setStatusBar(statusBar);
+        toolBar = new QToolBar(Systemtester);
+        toolBar->setObjectName(QString::fromUtf8("toolBar"));
+        Systemtester->addToolBar(Qt::TopToolBarArea, toolBar);
 
         retranslateUi(Systemtester);
 
@@ -78,6 +85,7 @@ public:
         activateBut->setText(QApplication::translate("Systemtester", "Start Test", 0, QApplication::UnicodeUTF8));
         clearBut->setText(QApplication::translate("Systemtester", "Clear", 0, QApplication::UnicodeUTF8));
         exitBut->setText(QApplication::translate("Systemtester", "Exit", 0, QApplication::UnicodeUTF8));
+        toolBar->setWindowTitle(QApplication::translate("Systemtester", "toolBar", 0, QApplication::UnicodeUTF8));
     } // retranslateUi
 
 };
