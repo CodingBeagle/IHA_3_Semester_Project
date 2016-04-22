@@ -1,107 +1,14 @@
-/* ========================================
- *
- * Copyright YOUR COMPANY, THE YEAR
- * All Rights Reserved
- * UNPUBLISHED, LICENSED SOFTWARE.
- *
- * CONFIDENTIAL AND PROPRIETARY INFORMATION
- * WHICH IS THE PROPERTY OF your company.
- *
- * ========================================
-*/
 #include <project.h>
 #include "nunchuck.h"
 #include "CommunicationProtocol.h"
-#include <time.h>
+#include "SPICommunication.h"
 
-// Define unit address for PSoC1
-#define PSoC1 0x09
-
-#define START_SPI_TEST 0xF1
-#define START_I2C_TEST 0xF2
-#define START_NUNCHUCK_TEST 0xF3
-#define SPI_OK 0xD1
-#define I2C_OK 0xD2
-#define I2C_FAIL 0xC2
-#define NUNCHUCK_OK 0xD3
-#define NUNCHUCK_FAIL 0xC3
 
 // Create buffer for read data
 uint8 dataBuffer[3];
 
 int sendHandshake = 0;
 int sendNunchuckData = 0;
-
-int testI2C = 0;
-int testNunchuck = 0;
-clock_t testNunchuckTimer, diff;
-
-
-CY_ISR(isr_spi_Interrupt)
-{
-    INT_PIN_Write(0);
-    uint8 i, j, buf[8];
-    uint32 source = 0u;
-
-    // Check if any data available.
-    // Returns the number of received data elements in the receive buffer
-    j = SPI_1_SpiUartGetRxBufferSize();
-
-    // SPI Read data from SPIS RX software buffer to buf
-    for(i=0u; i<j; i++)
-    {
-        // Retrieves the next data element from the receive buffer
-        buf[i] = SPI_1_SpiUartReadRxData();
-    }
-
-    if (j>0) // Process data received....
-    {
-        int commandType = buf[0];
-        int readError = 0;
-        switch (commandType)
-        {
-            case START_SPI_TEST:
-            testNunchuck = 0;
-            SPI_1_SpiUartClearTxBuffer();
-            SPI_1_SpiUartWriteTxData(SPI_OK);
-            
-            DebugLEDRed_Write(!DebugLEDRed_Read());
-            DebugLEDBlue_Write(1);
-            DebugLEDGreen_Write(1);
-            break;
-            
-            case START_I2C_TEST:
-            testNunchuck = 0;
-            testI2C = 1;
-            SPI_1_SpiUartClearTxBuffer();
-            
-            DebugLEDRed_Write(1);
-            DebugLEDBlue_Write(!DebugLEDBlue_Read());
-            DebugLEDGreen_Write(1);         
-            break;
-            
-            case START_NUNCHUCK_TEST:
-            SPI_1_SpiUartClearTxBuffer();
-            testNunchuck = 1;
-            testNunchuckTimer = clock();
-            SPI_1_SpiUartWriteTxData(NUNCHUCK_FAIL);
-            
-            DebugLEDRed_Write(1);
-            DebugLEDBlue_Write(1);
-            DebugLEDGreen_Write(!DebugLEDGreen_Read());               
-            break;
-        }
-        
-        INT_PIN_Write(1);
-    }
-
-    //Pin_LED_Write(!Pin_LED_Read()); // Debug -> Toggle LED!
-    //CyDelay(100);
-
-    // Clear Rx Interrupt Source
-    source = SPI_1_GetRxInterruptSourceMasked();
-    SPI_1_ClearRxInterruptSource(source);
-} 
 
 
 int main()
@@ -120,6 +27,7 @@ int main()
 
     for(;;)
     {
+        // If we havn't done a handshake with the Nunchuck yet:
        if (!sendHandshake)
         {
             if(NunchuckSendHandshake() != 0)
@@ -155,63 +63,21 @@ int main()
         // Send nunchuck data
         if (sendNunchuckData)
         {
-
-            if (testNunchuck)
-            {
-                double cpuTime = (double) (clock() - testNunchuckTimer) / CLOCKS_PER_SEC;
-                
-                // Z button pressed
-                if ((dataBuffer[2] & 0b00000011) == 2)
-                {
-                    SPI_1_SpiUartClearTxBuffer();
-                    SPI_1_SpiUartClearTxBuffer();
-                    SPI_1_SpiUartWriteTxData(NUNCHUCK_OK);
-                    testNunchuck = 0;
-                }
-            }
+            //Completes the Nunchuck test if testNunchuck is 1
+            //Sets SPITX to NUNCHUCK_OK on success and NUNCHUCK_FAIL on fail.
+            completeNunchuckTest(dataBuffer);
 
             // Sends the data in dataBuffer to PSoC1
-            sendData(PSoC1, NunchuckData, dataBuffer, 3);
+            sendData(PSoC1UnitAddress, NunchuckData, dataBuffer, 3);
             
             // Tells the program that the data has been sent 
             // and to start new data request from the Nunchuck
             sendNunchuckData = 0;
         }
         
-        if (testI2C == 1)
-        {
-            int PSoC1Reached = 0;
-            int NunchuckReached = 0;
-            int readError = 0;
-            testI2C = 0;
-            
-            I2C_1_I2CMasterClearStatus();
-            readError = I2C_1_I2CMasterSendStart(PSoC1, I2C_1_I2C_WRITE_XFER_MODE);
-            if (readError == I2C_1_I2C_MSTR_NO_ERROR)
-            {
-                PSoC1Reached = 1;
-            }
-            I2C_1_I2CMasterSendStop();
-            
-            CyDelay(5);
-            
-            I2C_1_I2CMasterClearStatus();
-            readError = I2C_1_I2CMasterSendStart(nunchuckUnitAddress, I2C_1_I2C_WRITE_XFER_MODE);
-            if (readError == I2C_1_I2C_MSTR_NO_ERROR)
-            {
-                NunchuckReached = 1;
-            }
-            I2C_1_I2CMasterSendStop();
-            
-            if (PSoC1Reached && NunchuckReached)
-            {
-                SPI_1_SpiUartWriteTxData(I2C_OK);
-            }
-            else
-            {
-                SPI_1_SpiUartWriteTxData(I2C_FAIL);
-            }
-        }
+        //Runs through I2C test, if testI2C is set to 1.
+        //Sets SPITX to I2C_OK on success or I2C_FAIL on failure.
+        completeI2CTest();
         
     }    
     return 0;
