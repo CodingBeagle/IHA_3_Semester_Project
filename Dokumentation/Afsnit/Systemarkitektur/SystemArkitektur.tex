@@ -257,11 +257,11 @@ Den integrerede I2C protokol sender data serielt i pakker af 8-bit (1 byte). På
 \end{figure}
 
 \section{Kasper and David look here and fix this hoebag}
-Systemet gør brug af den integrerede I2C protokol via en højere abstraheret \textit{Application Programming Interface} (API). Ved brug af denne API er en brugerdefineret protokol udviklet, som gør det muligt at sende kommandoer og data mellem systemets PSoCs.
+Goofy candygun gør brug af I2C protokollen via PSoC's I2C \textit{Application Programming Interface} (API). Ved brug af denne API er der blevet udviklet en kommunikationsprotokol mellem systemets PSoCs, som gør det muligt at sende kommandoer og data.
 
-Da I2C dataudveksling sker bytevist, er den brugerdefinerede I2C protokol opbygget ved at typen af kommando indikeres af den første modtagede byte. Herefter følger \textit{N}-antal bytes som kommandoens tilhørende data. \textit{N} er et vilkårligt heltal og bruges i dette afsnit når der refereres til en mængde data-bytes der sendes med en kommandotype.
+Da I2C dataudveksling sker bytevist, er kommunikations protokollen opbygget ved, at kommandoens type indikeres af den første modtagne byte. Herefter følger \textit{N}-antal bytes som er kommandoens tilhørende data. \textit{N} er et vilkårligt heltal og bruges i dette afsnit når der refereres til en mængde data-bytes der sendes med en kommandotype.
 
-Kommandoens type definerer antallet af databytes modtageren skal forvente og hvordan disse skal fortolkes. På figur \ref{fig:I2CProtokolEksempel} ses et sekvensdiagram der, med pseudo-kommandoer, demonstrerer forløbet mellem en I2C afsender og modtager ved brug af I2C protokollen.
+Kommandoens type definerer antallet af databytes modtageren skal forvente og hvordan disse skal fortolkes. På figur \ref{fig:I2CProtokolEksempel} ses et sekvensdiagram der, med pseudo-kommandoer, demonstrerer forløbet mellem en I2C afsender og modtager ved brug af kommunikations protokollen.
 
 \begin{figure}[H]
 	\centering
@@ -272,7 +272,7 @@ Kommandoens type definerer antallet af databytes modtageren skal forvente og hvo
 
 På figur \ref{fig:I2CProtokolEksempel} ses at afsenderen først starter en I2C transaktion, hvorefter typen af kommando sendes som den første byte. Efterfølgende sendes \textit{N} antal bytes, afhængig af hvor meget data den givne kommandotype har brug for at sende. Efter afsluttet I2C transaktion læser I2C modtageren typen af kommando, hvor den herefter kan fortolke \textit{N} antal modtagne bytes afhængig af den modtagne kommandotype.
 
-På tabel \ref{table:I2CKommandoer} ses de definerede kommandotyper og det tilsvarende antal af bits der sendes ved dataveksling.
+På tabel \ref{table:I2CKommandoer} ses de definerede kommandotyper og det tilsvarende antal af bytes der sendes ved dataveksling.
 
 \begin{table}[H]
 	\centering
