@@ -1,128 +1,98 @@
 #include "realCandyGun.hpp"
+#include <fcntl.h>
+#include <unistd.h>
+#include <string.h>
 #include <QFile>
+#include "ui_systemtester.h"
 
 #define BUFSIZEREAD 4
 #define BUFSIZEWRITE 3
+#define MAX_BUFFER_SIZE 10
 
 using namespace std;
 
 bool CandyGun::SPITest()
 {
-	int fd;		//file handler
-    char spiResult[BUFSIZEREAD];
+    char spiTestCommand1[] = "241";
 
-	//open candygun file
-	fd = open("dev/candygun", O_RDWR);
-	if (fd == -1)
-	{
-		return 0;
-	}
+    // Open Candygun file
+    int fileHandle = open("/dev/candygun", O_RDWR);
 
-	else
-	{
-		//send start SPI-test to PSoC
-        write(fd, "241", BUFSIZEWRITE);
-		if (fd == -1)
-		{
-			return 0;
-		}
+    if (fileHandle == -1)
+    {
+        return -1;
+    }
 
-		sleep(1);
+    write(fileHandle, spiTestCommand1, 3);
 
-		//read result of SPI-test from PSoC
-		read(fd, spiResult, BUFSIZEREAD);
-		if (fd == -1)
-		{
-			return 0;
-		}
-	}
+    close(fileHandle);
 
-	close(fd);
+    sleep(2);
 
-    if (strncmp(spiResult, "209", 3) == 0) // SPI-test SUCCES
+    fileHandle = open("/dev/candygun", O_RDWR);
+
+    char spiTestResult[MAX_BUFFER_SIZE] = "";
+    read(fileHandle, spiTestResult, MAX_BUFFER_SIZE);
+
+    close(fileHandle);
+    sleep(1);
+
+    if (strncmp(spiTestResult, "209", 3) == 0)
+    {
         return 1;
-	else // SPI-test FAIL
-		return 0;
+    }
+
+    return 0;
 }
 
 bool CandyGun::I2CTest()
 {
-	int fd;		//file handler
-    char i2cResult[BUFSIZEREAD];
+    char spiTestCommand2[] = "242";
 
-	//open candygun file
-	fd = open("dev/candygun", O_RDWR);
-	if (fd == -1)
-	{
-		return 0;
-	}
+    int fileHandle = open("/dev/candygun", O_RDWR);
 
-	else
-	{
-		//send start I2C-test to PSoC
-		fd = write(fd, "242", BUFSIZEWRITE);
-		if (fd == -1)
-		{
-			return 0;
-		}
+    write(fileHandle, spiTestCommand2, 3);
 
-		sleep(1);
+    close(fileHandle);
+    sleep(2);
 
-		//read result of I2C-test from PSoC
-		read(fd, i2cResult, BUFSIZEREAD);
-		if (fd == -1)
-		{
-			return 0;
-		}
-	}
+    fileHandle = open("/dev/candygun", O_RDWR);
 
-	close(fd);
+    char spiTestResult[MAX_BUFFER_SIZE] = "";
+    read(fileHandle, spiTestResult, MAX_BUFFER_SIZE);
 
-    if (strncmp(i2cResult, "210", 3) == 0) // I2C-test SUCCES
-		return 1;
-	else //if i2cResult == 194 - I2C-test FAIL
-		return 0;
+    close(fileHandle);
+
+    if (strncmp(spiTestResult, "210", 3) == 0)
+    {
+        return 1;
+    }
+
+    return 0;
 }
 
 bool CandyGun::NunchuckTest()
 {
-	int fd;		//file handler
-    char nunchuckResult[BUFSIZEREAD];
-    int i = 0;
+    char spiTestCommand3[] = "243";
 
-	//open candygun file
-	fd = open("dev/candygun", O_RDWR);
-	if (fd == -1)
-	{
-		return 0;
-	}
+    int fileHandle = open("/dev/candygun", O_RDWR);
 
-	else
-	{
-		//send start Nunchuck-test to PSoC
-		fd = write(fd, "251", BUFSIZEWRITE);
-		if (fd == -1)
-		{
-			return 0;
-		}
+    write(fileHandle, spiTestCommand3, 3);
 
-		sleep(1);
+    close(fileHandle);
+    sleep(5);
 
-        while ((strncmp(nunchuckResult, "211", 3) != 0) && i < 15)
-            {
-                sleep(1);
+    fileHandle = open("/dev/candygun", O_RDWR);
 
-                //Read Nunchuck-test result from PSoC
-                read(fd, nunchuckResult, BUFSIZEREAD);
+    char spiTestResult[MAX_BUFFER_SIZE] = "";
+    read(fileHandle, spiTestResult, MAX_BUFFER_SIZE);
 
-                i++;
-            }
-	}
+    close(fileHandle);
 
-	close(fd);
+    if (strncmp(spiTestResult, "211", 3) == 0)
+    {
+        return 1;
+    }
 
-    if (strncmp(nunchuckResult, "211", 3) == 0) // Nunchuck-test SUCCES
-		return 1;
-	else //if nunchuckRsult == 195 - Nunchuck-test FAIL
-		return 0;
+    return 0;
 }

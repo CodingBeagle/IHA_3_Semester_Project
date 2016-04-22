@@ -37,48 +37,49 @@ Systemtester::~Systemtester()
 
 void Systemtester::on_activateBut_clicked()
 {
-    ui->systemText->append("Starting System test");
+    ui->systemText->append("Starting System Test...");
     delay(1000);
-    systemTestGun.SPITest();
-    ui->systemText->append("Starting SPI Test");
-    delay(1000);
-    if(systemTestGun.SPITest()==1)
+
+    ui->systemText->append("Starting SPI Test...");
+    delay(500);
+
+    bool spiTestResult = systemTestGun.SPITest();
+
+    if (spiTestResult == true)
     {
-        ui->systemText->append("SPI Test Successful");
+        ui->systemText->append("SPI Test Succeeded!");
     }
-    if(systemTestGun.SPITest()==0)
+    else
     {
-        ui->systemText->append("SPI Test Unsuccessful");
-        return;
+        ui->systemText->append("SPI Test Failed!");
     }
 
-    systemTestGun.I2CTest();
-    ui->systemText->append("Starting I2C Test");
-    delay(2000);
-    if(systemTestGun.I2CTest()==1)
+    ui->systemText->append("Starting I2C Test...");
+    delay(500);
+
+    bool i2cTestResult = systemTestGun.I2CTest();
+
+    if (i2cTestResult == true)
     {
-        ui->systemText->append("I2C Test Successful");
+        ui->systemText->append("I2C Test Succeeded!");
     }
-    if(systemTestGun.I2CTest()==0)
+    else
     {
-        ui->systemText->append("I2C Test Unsuccessful");
-        return;
+        ui->systemText->append("I2C Test Failed!");
     }
 
-    systemTestGun.NunchuckTest();
-    ui->systemText->append("Starting Nunchuck Test");
-    ui->systemText->append("Please press the Z button within 6 seconds");
-    delay(6000);
-    if(systemTestGun.NunchuckTest()==1)
+    ui->systemText->append("Press the 'Z' button on the Nunchuck within 5 seconds...");
+    delay(500);
+
+    bool wiiNunchuckTest = systemTestGun.NunchuckTest();
+
+    if (wiiNunchuckTest == true)
     {
-        ui->systemText->append("Nunchuck Test Successful");
-        delay(1000);
-        ui->systemText->append("System test successful, system is ready for use");
+        ui->systemText->append("Wii-Nunchuck Test Succeeded!");
     }
-    if(systemTestGun.NunchuckTest()==0)
+    else
     {
-        ui->systemText->append("Nunchuck Test Unsuccessful");
-        return;
+        ui->systemText->append("Wii-Nunchuck Test Failed!");
     }
 }
 
