@@ -21,12 +21,6 @@ struct spi_device* candygun_get_device(void){
   return candygun_spi_device;
 }
 
-
-/*
- * ADS7870 SPI Read 16-bit Register
- * Reads 16-bit content of register at 
- * the provided ADS7870 address
- */
 int candygun_spi_read_reg8(struct spi_device *spi, u8 addr, u8* value)
 {
 	struct spi_transfer t[2];
@@ -38,11 +32,6 @@ int candygun_spi_read_reg8(struct spi_device *spi, u8 addr, u8* value)
     if(!spi)
       return -ENODEV;
 
-	/* Create Cmd byte:
-	 *
-	 * | 0|RD|16|     ADDR     |
-	 *   7  6  5  4  3  2  1  0
-     */	 
 	cmd = data;
 
 	/* Init Message */
@@ -54,15 +43,10 @@ int candygun_spi_read_reg8(struct spi_device *spi, u8 addr, u8* value)
 	t[0].tx_buf = NULL;
 	t[0].rx_buf = &receivedData;
 	t[0].len = 1;
-  t[0].delay_usecs = 150;
+  t[0].delay_usecs = 300;
 	if(MODULE_DEBUG)
 	  printk("requesting data from addr 0x%x\n", cmd);
 	spi_message_add_tail(&t[0], &m);
-
-	//t[1].tx_buf = NULL;
-	//t[1].rx_buf = &data;
-	//t[1].len = 2;
-	//spi_message_add_tail(&t[1], &m);
 
 	/* Transmit SPI Data (blocking) */
 	spi_sync(m.spi, &m);
