@@ -111,32 +111,26 @@ Til at styre motoren er der bygget en H-bro, som består af fire mosfet, hvor to
 
 \begin{itemize}
 \item MOSFET N-kanal\\
-	Den kan klare en strøm på 30A (tjek lige med en anden) ifølge databladet. Det vil altså ikke komme til at påvirke motoren, som kan trække en strøm på 0,35A. 
-	
-	I IRLZ44(mosfet N-Channel), for at der kan løbe spændingen i gennem 
-	den, så skal den have postiv spænding for at åbne og 0V for at lukke igen. 
-	man kan se på grafen 
+	Der er i denne H-bro brugt en N-kanals-MOSFET af typen IRLZ44. Denne MOSFET skal bruges til at trække strømmen fra den tilsvarende P-MOSFET til stel, så motoren kan begynde at køre. Det sker, når der kommer 5V ind på gate-benet. 
+	\\MOSFET'en fungerer på den måde, at når der kommer positiv spænding ind på gate-benet åbner den, så der kommer forbindelse til stel og når der kommmer 0V ind på dette lukker den igen. 
 	
 	\begin{figure}[H]
 		\centering
 		\includegraphics[width=\textwidth]{DesignOgImplementering/images/grafn}
-		\caption{Gate-to-Source Voltage}
+		\caption{Gate-to-Source Voltage reference til datablad her!!!!}
 	\end{figure}
 	
-	Hvor man kan se ved en Gate-to-Source voltage på 5v, vil der kunne 
-	løbe en strøm på omkring 100A(tjek lige med en anden) så det er mere end nok til at
-	få motoren til at funger
-	
-	så når mosfet får 5V på ben(gate), vil den tillade at der kan løbe strøm
-	igennem den og derved vil hele kredsløbet for en forbindelse til jord.
+	\\På figur (reference her!) ses det, at når der er en gate-to-source-spænding på 5V, vil der MOSFET'en kunne klare, at der løber en strøm på op til 100A/30A (TJEK DETTE!!). Det vil altså ikke komme til at påvirke motoren, da denne kun kan trække en strøm på cirka 0,35A. 
 	
 \item MOSFET P-kanal \\
-	Det er valgt at bruge en P-MOSFET af typen IRF9Z34N. Denne kan trække en strøm på 6,7A ifølge databladet. Det vil altså ikke komme til at påvirke motoren, da den kan trække en strøm på 0,35A. 
+	Der er valgt at bruge en P-MOSFET af typen IRF9Z34N. Denne MOSFET skal bruges til at trække de 12V ned til motoren, så denne kan køre. Samtidig sørger den for, at de 12V ikke løber ned til motoren så længe, der ikke er negativ spænding på gate-benet. 
+	Denne kan trække en strøm på 6,7A ifølge databladet. Det vil altså ikke komme til at påvirke motoren, da den kun kan trække en strøm på cirka 0,35A. 
 	
-	For at der kan løbe spænding igennem IRF9Z34N(MOSFET P-channel), skal den have en negativ spænding for at åbne og en spænding på over 0V for at lukke. 
+	For at der kan løbe spænding igennem IRF9Z34N (MOSFET P-channel), skal den have en negativ spænding for at åbne og en spænding på over 0V for at lukke. 
 	hvor man kan se ved en Gate-to-Source voltage på 5v, vil der kunne 
 	løbe en strøm på omkring 5A så det er mere end nok til at
 	få motoren til at funger
+	
 	\begin{figure}[H]
 		\centering
 		\includegraphics[width=\textwidth]{DesignOgImplementering/images/grafp}
