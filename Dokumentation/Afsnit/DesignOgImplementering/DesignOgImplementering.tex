@@ -117,28 +117,25 @@ Til at styre motoren er der bygget en H-bro, som består af fire mosfet, hvor to
 	\begin{figure}[H]
 		\centering
 		\includegraphics[width=\textwidth]{DesignOgImplementering/images/grafn}
-		\caption{Gate-to-Source Voltage reference til datablad her!!!!}
+		\caption{Gate-to-Source Voltage REFERENCE TIL DATABLAD HER!!!!}
 	\end{figure}
 	
-	\\På figur (reference her!) ses det, at når der er en gate-to-source-spænding på 5V, vil der MOSFET'en kunne klare, at der løber en strøm på op til 100A/30A (TJEK DETTE!!). Det vil altså ikke komme til at påvirke motoren, da denne kun kan trække en strøm på cirka 0,35A. 
+	På figur (reference her!) ses det, at når der er en gate-to-source-spænding på 5V, vil der MOSFET'en kunne klare, at der løber en strøm på op til 100A/30A (TJEK DETTE!!). Det vil altså ikke komme til at påvirke motoren, da denne kun kan trække en strøm på cirka 0,35A. 
 	
 \item MOSFET P-kanal \\
 	Der er valgt at bruge en P-MOSFET af typen IRF9Z34N. Denne MOSFET skal bruges til at trække de 12V ned til motoren, så denne kan køre. Samtidig sørger den for, at de 12V ikke løber ned til motoren så længe, der ikke er negativ spænding på gate-benet. 
-	Denne kan trække en strøm på 6,7A ifølge databladet. Det vil altså ikke komme til at påvirke motoren, da den kun kan trække en strøm på cirka 0,35A. 
+	Denne type MOSFET kan trække en strøm på 6,7A ifølge databladet. Det vil altså ikke komme til at påvirke motoren, da den kun kan trække en strøm på cirka 0,35A. 
 	
-	For at der kan løbe spænding igennem IRF9Z34N (MOSFET P-channel), skal den have en negativ spænding for at åbne og en spænding på over 0V for at lukke. 
-	hvor man kan se ved en Gate-to-Source voltage på 5v, vil der kunne 
-	løbe en strøm på omkring 5A så det er mere end nok til at
-	få motoren til at funger
-	
+	For at der kan løbe spænding igennem IRF9Z34N, skal den have en negativ spænding for at åbne og en spænding på over 0V for at lukke. 
+		
 	\begin{figure}[H]
 		\centering
 		\includegraphics[width=\textwidth]{DesignOgImplementering/images/grafp}
-		\caption{Gate-to-Source Voltag}
+		\caption{Gate-to-Source Voltage REFERENCE TIL DATABLAD HER!!!!}
 	\end{figure}
-	så når mosfet får en negativ spædnding på ben(gate), vil den tillade at der kan løbe strøm/spænding
-	igennem den og derved vil den ene del af kredsløbet blive aktiv, så motoren begynder at køre.
-	så det er derfor at der er blevet sat to transistor og en N mosfet foran hver af P mosfetene.
+	
+	På figuren (REFERENCE HER!) ses det, at når der er en gate-to-source-spænding på 5V, vil derr kunne løbe en strøm på omkring 5A igennem MOSFET'en, hvilket er mere end nok til at få motoren til at køre. 
+	
 \end{itemize}
 
 \subsubsection{Dioder}
@@ -153,7 +150,7 @@ Over fire af mosfetene (Q9, Q10, Q3 og Q4) er der sat en diode af typen IN5819. 
 		\item R6 og R7\\
 			Grunden til, at R6 og R7 er der, er for at sikre, at transistorernes Absolute Maximum Ratings omkring strømmen, som ikke må overstige 100mA ifølge databladet. (tjek lige om det er rigtig)
 		\item R5 og R8\\
-			Grunden til at R8 og R5 er der er, at der ikke kan løbe en alt for stor strøm igennem den N-mosfet, for ifølge databladet kan den kun klare en strøm på omkring 30A, når Vgs er på 10V, og da Vgs er sat til 5V, vil den ikke kunne klare en alt for stor strøm. Det vil altså sige, at er der R5 og R8 for at forhindre at N-mosfet brænder af.
+			Grunden til at R5 og R8 er sat ind i kredsløbet er, at der ifølge databladet kun kan løbe en strøm på omkring 30A igennem den N-MOSFET, der er brugt, Vgs er 10V. Da Vgs kun er sat til 5V, vil MOSFET'en altså ikke kunne klare en alt for stor strøm. Derfor er R5 og R8 sat ind for at forhindre, at MOSFET'en ikke brænder af. 
 	\end{itemize}
 
 \end{itemize}
@@ -161,7 +158,10 @@ Over fire af mosfetene (Q9, Q10, Q3 og Q4) er der sat en diode af typen IN5819. 
 \subsubsection{Transistorer}
 \begin{itemize}
 	\item Q5 og Q7
+	Disse transistorer sidder i kredsløbet, fordi det tager tid for N-MOSFET'en at åbne helt. Det hjælper den ene af disse transistorer til med. 
+	
 	\item Q6 og Q8
+	Disse to transistorer sidder der for at hjælpe med at lukke N-MOSFET'en igen. Inden Q5 og Q7 blev sat ind tog det ingen tid for at lukke N-MOSFET'en, men da de to blev sat ind påvirkede det lige pludselig lukketiden. Derfor sidder de der, for at IRLZ44 kan lukke hurtigt. 
 \end{itemize}
 
 
