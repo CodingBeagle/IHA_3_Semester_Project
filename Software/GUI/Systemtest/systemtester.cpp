@@ -1,9 +1,25 @@
 #include "systemtester.h"
 #include "ui_systemtester.h"
 #include <QTime>
-#include "realCandyGun.hpp"
+#include "CandyGun.hpp"
 #include "ICandyGun.hpp"
 #include "SimulCandyGun.hpp"
+
+
+//Delay function
+void delay( int mSecsToWait )
+{
+    //Adds the selected amount of msecs to the current systemclock into waittime
+    QTime waitTime = QTime::currentTime().addMSecs( mSecsToWait );
+    //While the systemclock is less than the waittime, the loop is processing, allowing the gui to update
+    //which would've failed with sleep();
+    while( QTime::currentTime() < waitTime )
+    {
+        QCoreApplication::processEvents( QEventLoop::AllEvents, 100 );
+    }
+}
+
+
 
 CandyGun testGun;
 
@@ -23,11 +39,12 @@ void Systemtester::on_activateBut_clicked()
 {
     //Writes to the text window
     ui->systemText->append("Starting System test");
-    sleep(1);
+
+    delay(1000);
     //Starts SPI-test
     testGun.SPITest();
     ui->systemText->append("Starting SPI Test");
-    sleep(1);
+    delay(1000);
     //Evaluates result of test
     if(testGun.SPITest()==1)
     {
@@ -42,7 +59,7 @@ void Systemtester::on_activateBut_clicked()
     //Starts I2C-test
     testGun.I2CTest();
     ui->systemText->append("Starting I2C Test");
-    sleep(2);
+    delay(2000);
     //Evaluates result of test
     if(testGun.I2CTest()==1)
     {
@@ -57,7 +74,7 @@ void Systemtester::on_activateBut_clicked()
     testGun.NunchuckTest();
     ui->systemText->append("Starting Nunchuck Test");
     ui->systemText->append("Please press the Z button within 6 seconds");
-    sleep(6);
+    delay(6000);
     //Evaluates result of test
     if(testGun.NunchuckTest()==1)
     {

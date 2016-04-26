@@ -14,16 +14,14 @@ TEMPLATE = app
 
 SOURCES += main.cpp\
         systemtester.cpp \
-    realCandyGun.cpp
+    CandyGun.cpp
 
 HEADERS  += systemtester.h \
-    realCandyGun.hpp \
-    ICandyGun.hpp
+    CandyGun.hpp
 
 FORMS    += systemtester.ui
 
-DISTFILES += \
-    ../../background.jpg
+DISTFILES +=
 
 RESOURCES += \
     background.qrc
