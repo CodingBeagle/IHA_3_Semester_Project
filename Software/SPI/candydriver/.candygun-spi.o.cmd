@@ -711,7 +711,6 @@ deps_/home/stud/Documents/IHA_3_Semester_Project/Software/SPI/candydriver/candyg
     $(wildcard include/config/have/mod/arch/specific.h) \
     $(wildcard include/config/modules/use/elf/rel.h) \
     $(wildcard include/config/modules/use/elf/rela.h) \
-  /home/stud/Documents/IHA_3_Semester_Project/Software/SPI/candydriver/candygun.h \
 
 /home/stud/Documents/IHA_3_Semester_Project/Software/SPI/candydriver/candygun-spi.o: $(deps_/home/stud/Documents/IHA_3_Semester_Project/Software/SPI/candydriver/candygun-spi.o)
 

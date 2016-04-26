@@ -1,8 +1,6 @@
 #include <linux/err.h>
-//#include <plat/mcspi.h>
 #include <linux/spi/spi.h>
 #include <linux/module.h>
-#include "candygun.h"
 
 #define MODULE_DEBUG 1
 
@@ -11,6 +9,7 @@ struct candygun {
   int revision;
 };
 
+/* The read data from the SPI bus */
 u8 receivedData = 0;
 
 /* We are only using ONE SPI device so far */
@@ -21,20 +20,16 @@ struct spi_device* candygun_get_device(void){
   return candygun_spi_device;
 }
 
-int candygun_spi_read_reg8(struct spi_device *spi, u8 addr, u8* value)
+int candygun_spi_read(struct spi_device *spi, u8* value)
 {
-	struct spi_transfer t[2];
+	struct spi_transfer t[1];
 	struct spi_message m;
-	u8 cmd;
-	u8 data = 0;
 
-    /* Check for valid spi device */
-    if(!spi)
-      return -ENODEV;
+  /* Check for valid spi device */
+  if(!spi)
+    return -ENODEV;
 
-	cmd = data;
-
-	/* Init Message */
+	/* Init Message struct */
 	memset(t, 0, sizeof(t));
 	spi_message_init(&m);
 	m.spi = spi;
@@ -44,17 +39,18 @@ int candygun_spi_read_reg8(struct spi_device *spi, u8 addr, u8* value)
 	t[0].rx_buf = &receivedData;
 	t[0].len = 1;
   t[0].delay_usecs = 300;
-	if(MODULE_DEBUG)
-	  printk("requesting data from addr 0x%x\n", cmd);
+
 	spi_message_add_tail(&t[0], &m);
 
 	/* Transmit SPI Data (blocking) */
 	spi_sync(m.spi, &m);
 
 	if(MODULE_DEBUG)
-	  printk(KERN_DEBUG "Canygun: Read Reg16 Addr 0x%02x Data: 0x%x\n", cmd, receivedData);
+	  printk(KERN_DEBUG "Canygun: Read value from SPI bus: %x\n", receivedData);
 
-    *value = receivedData;
+  /* Return read SPI bus value to user */
+  *value = receivedData;
+
 	return 0;
 }
 
@@ -63,23 +59,14 @@ int candygun_spi_read_reg8(struct spi_device *spi, u8 addr, u8* value)
  * Writes 8-bit content to register at 
  * the provided CANDYGUN address
  */
-int candygun_spi_write_reg8(struct spi_device *spi, u8 addr, u8 data)
+int candygun_spi_write(struct spi_device *spi, u8 addr, u8 data)
 {
   struct spi_transfer t[1];
   struct spi_message m;
-  u16 cmd;
 
   /* Check for valid spi device */
     if(!spi)
     return -ENODEV;
-
-  
-  /* Create Cmd byte:
-   *
-   * | 0|WR| 8|     ADDR     |
-   *   7  6  5  4  3  2  1  0
-   */ 
-  cmd = data;
 
   /* Init Message */
   memset(&t, 0, sizeof(t)); 
@@ -87,25 +74,21 @@ int candygun_spi_write_reg8(struct spi_device *spi, u8 addr, u8 data)
   m.spi = spi;
 
   if(MODULE_DEBUG)
-    printk(KERN_DEBUG "candygun: Write Reg8 Addr 0x%x Data 0x%02x\n", addr, data); 
-  /* Configure tx/rx buffers */
-  t[0].tx_buf = &cmd;
-  t[0].rx_buf = NULL;
-  t[0].len = 1;     //Tranfers size in bytes
-//  t[0].delay_usecs = 150; //
-  spi_message_add_tail(&t[0], &m);
+    printk(KERN_DEBUG "candygun: Writing value to SPI Bus: %02x\n", data);
 
-  //t[1].tx_buf = &receivedData;
-  //t[1].rx_buf = NULL;
-  //t[1].len = 1;
-  //sspi_message_add_tail(&t[1], &m);
+  /* Configure tx/rx buffers */
+  t[0].tx_buf = &data;
+  t[0].rx_buf = NULL;
+  t[0].len = 1; //Tranfers size in bytes
+
+  /* Add spi message to transaction */
+  spi_message_add_tail(&t[0], &m);
 
   /* Transmit SPI Data (blocking) */
   spi_sync(m.spi, &m);
 
   return 0;
 }
-
 
 /*
  * CANDYGUN Probe
@@ -117,7 +100,7 @@ static int candygun_spi_probe(struct spi_device *spi)
   printk(KERN_DEBUG "New SPI device: %s using chip select: %i\n",
 	 spi->modalias, spi->chip_select);
   
-  spi->bits_per_word = 8;  // skal gøres i probe, sæt til 16 for psoc
+  spi->bits_per_word = 8;  // For PSoC communication, we only need 8 bit for the communication protocol
   spi_setup(spi);
 
   /* In this case we assume just one device */ 
@@ -144,11 +127,8 @@ static int candygun_remove(struct spi_device *spi)
 }
 
 /*
- * ADS7870 SPI Driver Struct
- * Holds function pointers to probe/release
- * methods and the name under which it is registered
- *
- */
+  SPI Driver description struct
+*/
 static struct spi_driver candygun_spi_driver = {
   .driver = {
     .name = "candygun",
@@ -158,7 +138,6 @@ static struct spi_driver candygun_spi_driver = {
   .probe = candygun_spi_probe,
   .remove = candygun_remove,
 };
-
 
 /*
  * CANDYGUN SPI Init

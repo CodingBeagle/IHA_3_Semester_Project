@@ -4,15 +4,12 @@
 #include <asm/uaccess.h>
 #include <linux/input.h>
 #include <linux/module.h>
-#include "candygun.h"
 #include "candygun-spi.h"
 
-//#define CANDYGUN_MAJOR_NUMBER 97    //driver reference
-//#define CANDYGUN_MINOR_NUMBER 0     //device reference
-#define NUM_OF_MINORS 1        //We will only have one SPI device
+#define NUM_OF_MINORS 1
 
-#define MAXLEN              64
-#define COMPLIMENTARY_BIT   11
+/* MAXLEN is the max amount of bytes that are allowed to be copied from user space on write */
+#define MAXLEN 64
 #define MODULE_DEBUG 1
 
 /* Char Driver Globals */
@@ -20,6 +17,10 @@ static struct cdev candygunDev;
 struct file_operations candygun_Fops;
 dev_t devno;
 
+/* 
+  Class and Device structs are used for dynamic allocation of device nodes
+  and major numbers
+*/
 struct class* my_SPI_Device;   
 struct device* candygun; 
 
@@ -38,6 +39,7 @@ static struct spi_device *candygun_spi_device = NULL;
  * PUBLIC METHODS
  */
 
+/* Kernel Module Initialize method. This is run when inserting the module into the kernel */
 static int __init candygun_cdrv_init(void)
 {
   int err; 
@@ -56,7 +58,6 @@ static int __init candygun_cdrv_init(void)
 
     ERRGOTO(err_spi_init, "Failed registering char region error %d\n", err);
   }
-
   
   /* Register Char Device */
   cdev_init(&candygunDev, &candygun_Fops);
@@ -68,6 +69,7 @@ static int __init candygun_cdrv_init(void)
     ERRGOTO(err_register, "Error %d adding candy gun device\n", err);
   }
 
+  /* Create class */
   my_SPI_Device = class_create(THIS_MODULE, "my_SPI_Device");
   if(my_SPI_Device == NULL)
   {
@@ -75,17 +77,17 @@ static int __init candygun_cdrv_init(void)
     ERRGOTO(err_spi_init, "Failed registering char region error %d\n", err);
   }    
 
+  /* Create device */
   candygun = device_create(my_SPI_Device, NULL, devno, NULL, "candygun");
   if(IS_ERR(candygun))
   {
     printk(KERN_DEBUG"Failed to create device...\n");
     ERRGOTO(err_spi_init, "Failed registering char region error %d\n", err);
   }
-
-    
-  
+ 
   return 0;
   
+  /* Error Handling Region */
   err_register:
   unregister_chrdev_region(devno, NUM_OF_MINORS);
 
@@ -96,22 +98,29 @@ static int __init candygun_cdrv_init(void)
   return err;
 }
 
+/* Kernel module exit method. This is run when removing the kernel module from the kernel */
 static void __exit candygun_cdrv_exit(void)
 {
   printk("Candy gun driver Exit\n");
 
+  /* Destroy class and device */
   device_destroy(my_SPI_Device, devno);
   class_destroy(my_SPI_Device);
 
+  /* Delete cdev struct */
   cdev_del(&candygunDev);
 
+  /* Unregister chrdev region in order to release its memory usage */
   unregister_chrdev_region(devno, NUM_OF_MINORS);
 
+  /*  */
   candygun_spi_exit();
 }
 
+/* Kernel module open method. This is run when the node is opened (for example when reading or writing)  */
 int candygun_cdrv_open(struct inode *inode, struct file *filep)
 {
+  /* Retrieve major and minor number */
   int major = imajor(inode);
   int minor = iminor(inode);
 
@@ -131,8 +140,10 @@ int candygun_cdrv_open(struct inode *inode, struct file *filep)
   return 0;
 }
 
+/* Kernel Module release method. This method is called when the kernel module is closed */
 int candygun_cdrv_release(struct inode *inode, struct file *filep)
 {
+  /* Retrieve major and minor number */
   int major = imajor(inode);
   int minor = iminor(inode);
 
@@ -144,6 +155,7 @@ int candygun_cdrv_release(struct inode *inode, struct file *filep)
   return 0;
 }
 
+/* Kernel Module write method. This method is called when writing to the device node related to this driver */
 ssize_t candygun_cdrv_write(struct file *filep, const char __user *ubuf, 
                            size_t count, loff_t *f_pos)
 {
@@ -170,14 +182,8 @@ ssize_t candygun_cdrv_write(struct file *filep, const char __user *ubuf,
   if(MODULE_DEBUG)
     printk("value %i\n", value);
 
-  /*
-   * Do something
-   */
-
-
-    candygun_spi_write_reg8(candygun_spi_device, 0x01, value);
-
-
+    // Write user value to the SPI bus
+    candygun_spi_write(candygun_spi_device, 0x01, value);
   
   /* Legacy file ptr f_pos. Used to support 
    * random access but in char drv we dont! 
@@ -189,28 +195,23 @@ ssize_t candygun_cdrv_write(struct file *filep, const char __user *ubuf,
   return len;
 }
 
+/* Kernel Module read method. This method is called when reading the device node related to this driver */
 ssize_t candygun_cdrv_read(struct file *filep, char __user *ubuf, 
                           size_t count, loff_t *f_pos)
 {
   int minor, len;
   char resultBuf[MAXLEN];
   u8 result = 0;
-  //int err ;
     
   minor = iminor(filep->f_inode);
 
   if(MODULE_DEBUG)
     printk(KERN_ALERT "Reading from candygun [Minor] %i \n", minor);
     
-  /* Perform A/D Conversion */
-  candygun_spi_read_reg8(candygun_spi_device, 0xF1, &result);
+  /* Read value from SPI Bus */
+  candygun_spi_read(candygun_spi_device, 0xF1, &result);
 
-    //err = ads7870_convert((minor & 0xff), &result);
-  //if(err)
-  //  return -EFAULT;
-  
   /* Convert to string and copy to user space */
-  //  len = snprintf(resultBuf, sizeof resultBuf, "%d\n", result);
   /* Convert integer to string limited to "count" size. Returns
    * length excluding NULL termination */
   len = snprintf(resultBuf, count, "%d\n", result);
@@ -220,15 +221,11 @@ ssize_t candygun_cdrv_read(struct file *filep, char __user *ubuf,
   if(copy_to_user(ubuf, resultBuf, len))
     return -EFAULT;
 
-	
-
   /* Move fileptr */
   *f_pos += len;
 
   return len;
 }
-
-
 
 struct file_operations candygun_Fops = 
 {
@@ -242,6 +239,6 @@ struct file_operations candygun_Fops =
 module_init(candygun_cdrv_init);
 module_exit(candygun_cdrv_exit);
 
-MODULE_AUTHOR("Tenna Rasmussen");
+MODULE_AUTHOR("Semester Projekt Gruppe 3");
 MODULE_LICENSE("GPL");
 
