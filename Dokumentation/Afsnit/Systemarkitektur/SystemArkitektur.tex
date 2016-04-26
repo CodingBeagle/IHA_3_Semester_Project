@@ -1,7 +1,7 @@
 \chapter{Systemarkitektur}
 
 \subsection{Domæne model}
-På figur \ref{fig:DomainModel} ses domæne modellen for systemet. Denne er udarbejdet ved at lave en navneordsanalyse fra de specificerede use cases i afsnit \ref{afsnit:kravspecifikation}.
+På figur \ref{fig:DomainModel} ses domæne modellen for systemet. Denne er lavet for at danne et overblik over systemet, og hvordan de forskellige dele overfladisk interagerer med hinanden. 
 
 \begin{figure}[H]
 	\centering
@@ -11,6 +11,12 @@ På figur \ref{fig:DomainModel} ses domæne modellen for systemet. Denne er udar
 \end{figure}
 
 I domæne modellen ses, at brugeren interagerer med både Wii-nunchucken og med brugergrænsefladen. Brugergrænsefladen er en grænseflade til softwaren devkittet. Devkittet kommunikerer med PSoC0, som læser den analoge data der kommer fra Wii-nunchucken. Denne data bliver derefter afkodet og videresendt til PSoC1, som styrer motorene ud fra dataene.
+
+I "I2C Command" ses en grov estimering af interfacet mellem de forskellige I2C enheder i systemet. Commandtype bruges til at identificere hvilken data der bliver sendt. Data er en mængde tal-værdier der bliver tolket ud fra hvilken commandtype der er blevet sendt.
+
+I "SPI Command" ses en estimering af interfacet mellem SPI enhederne i systemet. "Commandtype" bruges til at identificere hvilken opgave systemet skal udføre (f.eks. 'I2C-test'). Data kan indeholde tal-værdier, som repræsenterer nunchuck værdier (buttonpress osv.). 
+En mere detaljeret gennemgang af disse kommunikations protokoller kan findes i afsnit \ref{afsnit:kommunikationsprotokoller} - Kommunikationsprotokoller.
+
 \section{Hardware Arkitektur}
 I hardwarearkitekturen beskrives systemet ved at nedbryde det i blokke. I BDD'et er blokkenes porte og associationer til andre blokke angivet. Disse porte anvendes senere i afsnittet, hvor de benyttes i IBD'et.
 
@@ -92,7 +98,7 @@ I softwarearkitekturen udarbejdes der applikationsmodeller bestående af sekvens
 
 De følgende delafsnit præsenterer systemets applikationsmodeller for hver CPU. For hver applikationsmodel vil der først præsenteres et eller flere sekvensdiagrammer med forklarende tekst, efterfulgt af et klassediagram udledt fra sekvensdiagrammerne.
 
-På figur \ref{fig:softwareAllocation} ses et software allokations diagram. Dette danner et overblik for systemets CPU'er og hvilket software der allokeres på hver software block. Følgende applikationsmodeller tager udgangspunkt i softwaren der allokeres i figuren.
+På figur \ref{fig:softwareAllocation} ses et software allokations diagram. Dette diagram danner et overblik over hvilke CPU'er der findes i systemet, og hvilken software der skal allokeres på disse. Følgende applikationsmodeller tager udgangspunkt i softwaren der allokeres i figuren.
 
 \begin{figure}[H]
 	\centering
@@ -184,7 +190,7 @@ På figur \ref{fig:sekvensPSoC1I2CTest} ses, at boundaryklassen, PSoC0, anmoder 
 Fra sekvensdiagrammet på figur \ref{fig:sekvensPSoC1I2CTest} udledes et klassediagram som ses foroven i figur \ref{fig:klassePSoC1}.
 
 \subsection{Kommunikationsprotokoller}
-
+\label{afsnit:kommunikationsprotokoller}
 I dette afsnit beskrives de kommunikationsprotokoller der anvendes til at sende data mellem systemets komponenter på de anvendte bustyper - I2C og SPI. På figur \ref{fig:kommunikationsOverblik} ses hvilke bustyper der anvendes mellem systemets komponenter. 
 
 \begin{figure}[H]
@@ -197,7 +203,7 @@ I dette afsnit beskrives de kommunikationsprotokoller der anvendes til at sende 
 \subsubsection{SPI Protokol}
 
 Til kommunikation mellem Devkittet og PSoC0 anvendes der \textit{Serial Parallel Interface (SPI)}. SPI-forbindelsen består af fire signaler. Et af signalerne er \textit{slave select} (SS). Det muliggør kommunikation med flere slaver. Selve dataen sendes via signalerne \textit{Master Out Slave In} (MOSI) og \textit{Master In Slave Out} (MISO). Det foregår ved \textit{Full Duplex}, hvor der altid sendes i begge retninger på én gang. Hvis der kun ønskes at sende i én retning, kan der sendes 0'er i den anden retning. Derudover er der en \textit{Clock} (SCLK), som sørger for at kommunikationen er synkron. I forhold til timing er det vigtigt, at både master og slave anvender samme \textit{Timing Mode}, som styres af to bit, \textit{SPI Clock Polarity Bit} (CPOL), som bestemmer om clock'en starter højt eller lavt, og \textit{SPI Clock Phase Bit} (CPHA), som afgør om data samples på clock'ens rising- eller falling edge. I dette projekt anvendes \textit{Timing Mode 3}, hvor clock'en starter høj og sampler på rising edge. \\
-De kommandoer, der i projektet sendes via SPI, består af 8 bit, hvilket også passer med, at SPI-forbindelsen er sat op til at sende én byte ad gangen. \\
+De kommandoer, der i projektet sendes via SPI, består af 8 bit. \\
 På tabel \ref{tabel:spiKommandoType} ses SPI-protokollen. Til venstre på tabellen ses navnet på de kommandoer, der sendes. Alle kommandoer med "TEST" i navnet sendes fra Devkit8000 til PSoC0 via MOSI. De resterende kommandoer er svar på de forskellige tests, som sendes via MISO fra PSoC0 til Devkit8000. Det er værd at lægge mærke til, at det er bevidst, at der ikke er en kommando for SPI\_FAIL. Da SPI-forbindelsen ikke testes på PSoC0, men ved at PSoC0 sender \textit{SPI\_OK} tilbage til Devkit8000 via SPI-forbindelsen. Dermed kan det først afgøres om SPI-forbindelsen fungerer korrekt, når Devkit8000, modtager (eller ikke modtager) succes-beskeden fra PSoC0. \\
 
 
@@ -256,7 +262,6 @@ Den integrerede I2C protokol sender data serielt i pakker af 8-bit (1 byte). På
 	\label{fig:I2CTimingDiagram}
 \end{figure}
 
-\section{Kasper and David look here and fix this hoebag}
 Goofy candygun gør brug af I2C protokollen via PSoC's I2C \textit{Application Programming Interface} (API). Ved brug af denne API er der blevet udviklet en kommunikationsprotokol mellem systemets PSoCs, som gør det muligt at sende kommandoer og data.
 
 Da I2C dataudveksling sker bytevist, er kommunikations protokollen opbygget ved, at kommandoens type indikeres af den første modtagne byte. Herefter følger \textit{N}-antal bytes som er kommandoens tilhørende data. \textit{N} er et vilkårligt heltal og bruges i dette afsnit når der refereres til en mængde data-bytes der sendes med en kommandotype.
