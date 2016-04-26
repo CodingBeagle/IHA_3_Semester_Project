@@ -1,6 +1,6 @@
 // ======================================================================
 // PSoC1.v generated from TopDesign.cysch
-// 04/21/2016 at 09:28
+// 04/26/2016 at 09:10
 // This file is auto generated. ANY EDITS YOU MAKE MAY BE LOST WHEN THIS FILE IS REGENERATED!!!
 // ======================================================================
 
@@ -1148,7 +1148,7 @@ module top ;
 		  .divisor(0),
 		  .period("50000000000"),
 		  .is_direct(0),
-		  .is_digital(0))
+		  .is_digital(1))
 		Clock_PWM_1
 		 (.clock_out(Net_975));
 

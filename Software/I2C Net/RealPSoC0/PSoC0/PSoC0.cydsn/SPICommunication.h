@@ -3,7 +3,7 @@
 #include "Project.h"
 #include <time.h>
     
-    
+//Define all SPI-command types and their values    
 #define START_SPI_TEST 0xF1
 #define START_I2C_TEST 0xF2
 #define START_NUNCHUCK_TEST 0xF3

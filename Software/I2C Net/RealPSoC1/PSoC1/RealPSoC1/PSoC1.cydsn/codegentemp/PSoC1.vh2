@@ -2,7 +2,7 @@
 --	Conversion of PSoC1.v to vh2:
 --
 --	Cypress Semiconductor - WARP Version 6.3 IR 41
---	Thu Apr 21 09:28:54 2016
+--	Tue Apr 26 09:10:47 2016
 --
 
 USE cypress.cypress.all;
@@ -1645,7 +1645,7 @@ Clock_PWM_1:cy_clock_v1_0
 		divisor=>0,
 		period=>"50000000000",
 		is_direct=>'0',
-		is_digital=>'0')
+		is_digital=>'1')
 	PORT MAP(clock_out=>Net_975,
 		dig_domain_out=>open);
 \PWM_X_RIGHT:PWMUDB:min_kill_reg\:cy_dsrff

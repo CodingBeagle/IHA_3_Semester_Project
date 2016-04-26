@@ -10,7 +10,7 @@ int x = 127;
 int y = 127;
 int z = 127;
 
-void debugNunchuckData(uint8* nunchuckDataBuffer);
+void controlMotor(uint8* nunchuckDataBuffer);
 
 int main()
 {
@@ -45,18 +45,16 @@ int main()
     
     for(;;)
     {
+        //Receive data from PSoC1
         receiveData(recievedDataBuffer);
 
-        debugNunchuckData(recievedDataBuffer);
+        // Uses the received data to control direction and speed of the Motor.
+        controlMotor(recievedDataBuffer);
         
-        //CyDelay(5);
-        //PWM_X_RIGHT_WriteCompare(20);
-        //CyDelay(20);
-        //PWM_X_RIGHT_WriteCompare(0);
     }
 }
 
-void debugNunchuckData(uint8* receivedDataBuffer)
+void controlMotor(uint8* receivedDataBuffer)
 {
     if(receivedDataBuffer[0] == NunchuckData)
     {
@@ -89,7 +87,7 @@ void debugNunchuckData(uint8* receivedDataBuffer)
            PWM_X_LEFT_WriteCompare(0);
         }
         
-        //Handle debug LEDs for the Y-Axis.
+        //Handle debug LEDs for the Y-Axis (No motor handling yet).
         if(receivedDataBuffer[2] < 100)
             DebugLEDBlue_Write(0);
         else if(receivedDataBuffer[2] > 150)

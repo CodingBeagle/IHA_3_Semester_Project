@@ -1,12 +1,12 @@
 #include "CommunicationProtocol.h"
 #include "Project.h"
 
-void sendData(uint32 Adress, uint8 CommandType, uint8* buffer, uint8 bufferSize)
+void sendData(uint32 Address, uint8 CommandType, uint8* buffer, uint8 bufferSize)
 {
     int readError = 0;
     int i;
     I2C_1_I2CMasterClearStatus();
-    readError = I2C_1_I2CMasterSendStart(Adress, I2C_1_I2C_WRITE_XFER_MODE);
+    readError = I2C_1_I2CMasterSendStart(Address, I2C_1_I2C_WRITE_XFER_MODE);
     if (readError == I2C_1_I2C_MSTR_NO_ERROR)
     {
         // Send command type
@@ -17,14 +17,6 @@ void sendData(uint32 Adress, uint8 CommandType, uint8* buffer, uint8 bufferSize)
         {
             I2C_1_I2CMasterWriteByte(buffer[i]);
         }
-        
-        //Debug LED. Lights up if no error.
-        DebugLEDGreen_Write(0);
-    }
-    else
-    {
-        // Debug LED. Turns off if error occurs.
-        DebugLEDGreen_Write(1);
     }
     I2C_1_I2CMasterSendStop();
     I2C_1_I2CMasterClearStatus();
@@ -46,6 +38,7 @@ void receiveData(uint8* receivedDataBuffer)
         int i;
         for(i = 0; i<slaveBufferMaxSize; i++)
         {
+            //Saves data from the I2C slave buffer into the receivedDataBuffer
             receivedDataBuffer[i] = (int)slaveWriteBuffer[i];
         }
         

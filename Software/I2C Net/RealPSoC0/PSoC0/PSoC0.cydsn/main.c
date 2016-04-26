@@ -7,13 +7,14 @@
 // Create buffer for read data
 uint8 dataBuffer[3];
 
+// "Bools" used to keep track of process
 int sendHandshake = 0;
 int sendNunchuckData = 0;
 
 
 int main()
 {    
-    CyGlobalIntEnable; /* Enable global interrupts. */
+    CyGlobalIntEnable;
     
     //Starts the I2C component on the PSoC
     I2C_1_Start();

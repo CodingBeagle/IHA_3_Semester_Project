@@ -121,6 +121,3 @@ int NunchuckReadData(uint8* buffer)
     
     I2C_1_I2CMasterSendStop();
 }
-    
-
-/* [] END OF FILE */

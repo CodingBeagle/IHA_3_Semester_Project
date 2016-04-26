@@ -38,6 +38,7 @@ void receiveData(uint8* receivedDataBuffer)
         int i;
         for(i = 0; i<slaveBufferMaxSize; i++)
         {
+            //Saves data from the I2C slave buffer into the receivedDataBuffer
             receivedDataBuffer[i] = (int)slaveWriteBuffer[i];
         }
         
