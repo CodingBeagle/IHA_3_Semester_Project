@@ -1,0 +1,11 @@
+- Opfølgning på aktionspunkter fra forrige møde
+	- Overvejelse omkring ekstra aktør
+	- Færdiggørelse af UC2
+	- Størrelser på figurer i rapporten
+- Review
+
+- Retrospective
+
+- Dokumentation
+	- Hvilket sprog bruger vi når vi dokumenterer
+	- Hvilke informationer er relevante
