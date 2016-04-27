@@ -211,10 +211,10 @@ Over fire af mosfetene (Q9, Q10, Q3 og Q4) er der sat en diode af typen IN5819. 
 \subsubsection{Transistorer}
 \begin{itemize}
 	\item Q5 og Q7
-	Disse transistorer sidder i kredsløbet, fordi det tager tid for N-MOSFET'en at åbne helt. Det hjælper den ene af disse transistorer til med. 
+	Disse transistorer sidder i kredsløbet, fordi det tager tid for P-MOSFET'en at blive opladt helt, på grund af kondensator effekt imellem benene på mosfet'en, for ellers ville den tag for lang tid om at åbne helt. Det hjælper den disse transistorer til med. 
 	
 	\item Q6 og Q8
-	Disse to transistorer sidder der for at hjælpe med at lukke N-MOSFET'en igen. Inden Q5 og Q7 blev sat ind tog det ingen tid for at lukke N-MOSFET'en, men da de to blev sat ind påvirkede det lige pludselig lukketiden. Derfor sidder de der, for at IRLZ44 kan lukke hurtigt. 
+	Disse to transistorer sidder der for at hjælpe med at lukke P-MOSFET'en igen. Inden Q5 og Q7 blev sat ind tog det tid for at lukke P-MOSFET'en, men da de to blev sat ind, kunne de hjælpe til med at aflade mosfet'ene hurtigere. Derfor sidder de der, for at IRF9Z34N kan lukke hurtigt. 
 \end{itemize}
 
 

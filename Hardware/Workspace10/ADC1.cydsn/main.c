@@ -31,12 +31,12 @@ int main()
     Clock_PWM_2_Start();
     
     PWM_X_RIGHT_WriteCompare(0);
-
+UART_1_Start();
     for(;;)
     {
     ADC_1_StartConvert();
     con= ADC_1_GetResult16(0);
-    
+   
     if ( 1300 < con && con < 1500)
     {
         PWM_X_RIGHT_WriteCompare(30);
@@ -47,7 +47,7 @@ int main()
     }
         
 
-    ADC_1_StopConvert();
+   ADC_1_StopConvert();
     
    /* adc= ADC_1_CountsTo_Volts(0,con);
     sprintf(publicar,"%.4f",adc);
