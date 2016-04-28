@@ -42,15 +42,15 @@
 .set ADC_1_IRQ__INTC_SET_PD_REG, CYREG_CM0_ISPR
 
 /* Pin_1 */
-.set Pin_1__0__DM__MASK, 0x1C0000
-.set Pin_1__0__DM__SHIFT, 18
+.set Pin_1__0__DM__MASK, 0x07
+.set Pin_1__0__DM__SHIFT, 0
 .set Pin_1__0__DR, CYREG_PRT2_DR
 .set Pin_1__0__HSIOM, CYREG_HSIOM_PORT_SEL2
-.set Pin_1__0__HSIOM_MASK, 0x0F000000
-.set Pin_1__0__HSIOM_SHIFT, 24
+.set Pin_1__0__HSIOM_MASK, 0x0000000F
+.set Pin_1__0__HSIOM_SHIFT, 0
 .set Pin_1__0__INTCFG, CYREG_PRT2_INTCFG
 .set Pin_1__0__INTSTAT, CYREG_PRT2_INTSTAT
-.set Pin_1__0__MASK, 0x40
+.set Pin_1__0__MASK, 0x01
 .set Pin_1__0__PA__CFG0, CYREG_UDB_PA2_CFG0
 .set Pin_1__0__PA__CFG1, CYREG_UDB_PA2_CFG1
 .set Pin_1__0__PA__CFG10, CYREG_UDB_PA2_CFG10
@@ -70,11 +70,11 @@
 .set Pin_1__0__PC2, CYREG_PRT2_PC2
 .set Pin_1__0__PORT, 2
 .set Pin_1__0__PS, CYREG_PRT2_PS
-.set Pin_1__0__SHIFT, 6
+.set Pin_1__0__SHIFT, 0
 .set Pin_1__DR, CYREG_PRT2_DR
 .set Pin_1__INTCFG, CYREG_PRT2_INTCFG
 .set Pin_1__INTSTAT, CYREG_PRT2_INTSTAT
-.set Pin_1__MASK, 0x40
+.set Pin_1__MASK, 0x01
 .set Pin_1__PA__CFG0, CYREG_UDB_PA2_CFG0
 .set Pin_1__PA__CFG1, CYREG_UDB_PA2_CFG1
 .set Pin_1__PA__CFG10, CYREG_UDB_PA2_CFG10
@@ -94,7 +94,7 @@
 .set Pin_1__PC2, CYREG_PRT2_PC2
 .set Pin_1__PORT, 2
 .set Pin_1__PS, CYREG_PRT2_PS
-.set Pin_1__SHIFT, 6
+.set Pin_1__SHIFT, 0
 
 /* UART_1_rx */
 .set UART_1_rx__0__DM__MASK, 0x7000

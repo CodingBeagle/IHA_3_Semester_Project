@@ -1,6 +1,6 @@
 /*******************************************************************************
 * File Name: ADC_1_PM.c
-* Version 1.0
+* Version 2.30
 *
 * Description:
 *  This file provides Sleep/WakeUp APIs functionality.
@@ -8,13 +8,12 @@
 * Note:
 *
 ********************************************************************************
-* Copyright 2008-2013, Cypress Semiconductor Corporation.  All rights reserved.
+* Copyright 2008-2015, Cypress Semiconductor Corporation.  All rights reserved.
 * You may use this file only in accordance with the license, terms, conditions,
 * disclaimers, and limitations in the end user license agreement accompanying
 * the software package with which this file was provided.
 *******************************************************************************/
 
-#include "CyLib.h"
 #include "ADC_1.h"
 
 
@@ -104,6 +103,13 @@ void ADC_1_Sleep(void)
         }
         ADC_1_StopConvert();
         ADC_1_Stop();
+        
+        /* Disable the SAR internal pump before entering the chip low power mode */
+        if((ADC_1_SAR_CTRL_REG & ADC_1_BOOSTPUMP_EN) != 0u)
+        {
+            ADC_1_SAR_CTRL_REG &= (uint32)~ADC_1_BOOSTPUMP_EN;
+            ADC_1_backup.enableState |= ADC_1_BOOSTPUMP_ENABLED;
+        }
     }
     else
     {
@@ -135,7 +141,12 @@ void ADC_1_Wakeup(void)
     ADC_1_SAR_DFT_CTRL_REG &= (uint32)~ADC_1_ADFT_OVERRIDE;
     if(ADC_1_backup.enableState != ADC_1_DISABLED)
     {
-        ADC_1_Start();
+        /* Enable the SAR internal pump  */
+        if((ADC_1_backup.enableState & ADC_1_BOOSTPUMP_ENABLED) != 0u)
+        {
+            ADC_1_SAR_CTRL_REG |= ADC_1_BOOSTPUMP_EN;
+        }
+        ADC_1_Enable();
         if((ADC_1_backup.enableState & ADC_1_STARTED) != 0u)
         {
             ADC_1_StartConvert();
