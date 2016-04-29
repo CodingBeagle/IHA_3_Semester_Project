@@ -47,6 +47,50 @@ På figur \ref{fig:NunchuckReadValues} ses I2C beskederne der bliver udvekslet m
 	\label{fig:NunchuckReadValues}
 \end{figure}
 
+\subsubsection{SPI Protokol}
+Devkittet kommunikerer over en SPI bus via SPI protokollen via SPI protokollen i afsnit {\large reference to SPIprotokol}. Dette afsnit beskriver test af denne protokol.
+
+\subsubsection{SPI Bus Test}
+Test af SPI bussen udføres i to dele. Første del af testen udføres ved at sende kommandotypen for start af SPI test i terminalen. Derefter måles retur beskeden på bussen med Analog Discovery. Anden del af testen udføres ved at afkoble en fysisk forbindelse på SPI bussen, derefter sendes kommandotypen for start SPI test via terminalen. På terminalen aflæses returbeskeden.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\textwidth]{Test/images/SPItest/SPItestkommandotype}
+	\caption{Måling af kommandotype for start SPI test}
+	\label{fig:SPItestkommandotype}
+\end{figure}
+
+I testen afsendes SPI test kommandotypen, som har værdien 0xF1. Målingen af dette ses i figur \ref{fig:SPItestkommandotype}
+
+\subsubsection{SPI Bus Test: Del 1}
+Når kommandotypen er afsendt er det forventede resultat af næste måling på SPI bussen, 0xD1. Måling af returbeskeden ses på figur \ref{fig:SPItestSPIOK}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\textwidth]{Test/images/SPItest/SPItestSPIOK1}
+	\caption{Måling af returbesked for start SPI test} 
+	\label{fig:SPItestSPIOK}
+\end{figure}
+
+På figur \ref{fig:SPItestSPIOK} ses at returbeskeden har den forventede værdi 0xD1, som indikerer at SPI bus testens første del er gennemført uden fejl.
+
+\subsubsection{SPI Bus Test: Del 2}
+Når kommandotypen er afsendt er det forventede resultat at SPI testen fejler ved at der aflæses en værdi forskellig fra den forventede værdi, 0xD1. På figur \ref{fig:SPItestFAIL}
+ses målingen af returbeskeden.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\textwidth]{Test/images/SPItest/SPItestFAIL}
+	\caption{Måling af returbesked for start SPI test}
+	\label{fig:SPItestFAIL}
+\end{figure}
+
+På figur \ref{fig:SPItestFAIL} ses returbeskeden i terminalen ikke har den forventede værdi, 0xD1. Derimod har denne værdien 0xFF, som indikerer at SPI bus testens anden del er gennemført uden fejl.
+
+Ud fra testenes resultater kan det konkluderes at implementeringen af SPI protokollen fungerer efter hensigten.
+
+
+
 \subsubsection{I2C Protokol}
 PSoC0 og PSoC1 kommunikerer over en I2C bus via I2C protokollen beskrevet i afsnit \ref{afsnit:I2CProtokol}. Dette afsnit beskriver test af denne protokol. Følgende test tager udgangspunkt i kommandotypen \textit{NunchuckData} beskrevet i tabel \ref{table:I2CKommandoer}).
 
@@ -105,7 +149,7 @@ På figur \ref{fig:I2CProtocolReadUpAnalog} ses afmålingen af modtager-bufferen
 
 På figur \ref{fig:I2CProtocolReadNoInput} ses afmålingen af modtager-bufferen når der ikke er noget brugerinput på nunchuckens analoge stick. ReceivedDataBuffer[1] blev aflæst til 0x7F, hvor det forventede resultat var 0x7E. Denne afvigelse kan skyldes at det analoge stick ikke stod helt i midten under målingen (Det analoge stick er lidt "løs" og kan defor godt finde hvile i en position der ikke er fuldt centreret). ReceivedDataBuffer[2] blev aflæst til 0x7D, hvor det forventede resultat var 0x7B. Igen kan denne afvigelse skyldes at det analoge stick ikke var i centrum under målingen.
 
-Ud fra testen kan vi konkludere at implementeringen af I2C-protokollen fungerer efter hensigten.
+Ud fra testen kan det konkluderes at implementeringen af I2C-protokollen fungerer efter hensigten.
 
 \subsection{Hardware}
 \subsubsection{H-bro} 
