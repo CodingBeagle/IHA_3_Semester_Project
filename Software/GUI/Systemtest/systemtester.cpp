@@ -27,14 +27,13 @@ void Systemtester::on_activateBut_clicked()
 
     //Starts SPI-test
     ui->systemText->append("Starting SPI Test");
-    testGun.SPITest();
 
     //Evaluates result of test
     if(testGun.SPITest()==1)
     {
         ui->systemText->append("SPI Test Successful");
     }
-    if(testGun.SPITest()==0)
+    else
     {
         ui->systemText->append("SPI Test Unsuccessful");
         return;
@@ -42,14 +41,13 @@ void Systemtester::on_activateBut_clicked()
 
     //Starts I2C-test
     ui->systemText->append("Starting I2C Test");
-    testGun.I2CTest();
 
     //Evaluates result of test
     if(testGun.I2CTest()==1)
     {
         ui->systemText->append("I2C Test Successful");
     }
-    if(testGun.I2CTest()==0)
+    else
     {
         ui->systemText->append("I2C Test Unsuccessful");
         return;
@@ -57,15 +55,15 @@ void Systemtester::on_activateBut_clicked()
     //Starts Nunchuck-test
     ui->systemText->append("Starting Nunchuck Test");
     ui->systemText->append("Please press the Z button within 6 seconds");
-    int testNunchuck = testGun.NunchuckTest();
+
     //Evaluates result of test
-    if(testNunchuck == 1)
+    if(testGun.NunchuckTest() == 1)
     {
         ui->systemText->append("Nunchuck Test Successful");
         sleep(1);
         ui->systemText->append("System test successful, system is ready for use");
     }
-    if(testGun.NunchuckTest()==0)
+    else
     {
         ui->systemText->append("Nunchuck Test Unsuccessful");
         return;
