@@ -29,11 +29,20 @@
       <height>111</height>
      </rect>
     </property>
+    <property name="font">
+     <font>
+      <pointsize>12</pointsize>
+      <weight>75</weight>
+      <italic>false</italic>
+      <bold>true</bold>
+     </font>
+    </property>
     <property name="styleSheet">
-     <string notr="true">border-image: url(:/new/BackImage/background.jpg)</string>
+     <string notr="true">border-image: url(:/new/BackImage/background.jpg)
+</string>
     </property>
     <property name="text">
-     <string/>
+     <string>Start Test</string>
     </property>
    </widget>
    <widget class="QTextBrowser" name="systemText">
