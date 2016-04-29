@@ -22,23 +22,49 @@ Domænemodellen i figur \ref{figure:allocationDiagram} præsenterer systemets ha
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=\textwidth]{SystemArkitektur/images/SoftwareAllocation.PNG}
-	\caption{Systemets software allokeringsdiagram}
+	\caption{Systemets software allokeringer}
 	\label{figure:allocationDiagram}
 \end{figure}
 
-Det kan her ses at systemet består af tre primære softwaredele: \textit{DevKit 8000 Software}, \textit{PSoC0 Software}, \textit{PSoC1 Software}. Disse er fordelt over de 3 tilsvarende CPU'er.
+Det kan her ses at systemet består af tre primære softwaredele: \textit{DevKit 8000 Software}, \textit{PSoC0 Software}, \textit{PSoC1 Software}. Disse er fordelt over de 3 tilsvarende CPU'er. Der henvises til til \textbf{APPLIKATIONSMODELLER} for overblik over de konceptuelle klasser der indgår i disse softwaredele. Her gives blot en forståelse for hvor systemets software hører til.
 
 \section{Hardware}
 
 \subsection{BDD}
 
+På figur \ref{figure:bddDiagram} ses BDD'et for systemet.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\textwidth]{SystemArkitektur/images/BDD_overordnet.PNG}
+	\caption{BDD af systemets hardware}
+	\label{figure:bddDiagram}
+\end{figure}
+
+Her vises alle hardwareblokke fra domænemodellen (figur \ref{figure:domainModel}) med nødvændige indgange og udgange for de fysiske signaler. Yderligere ses det at flow specifikationer er defineret for de ikke-atomare forbindelser \textit{I2C} samt \textit{SPI}, da disse er busser bestående af flere forbindelser. Der henvises til \textbf{IBD AFSNIT} for en detaljeret model af de fysiske forbindelser mellem hardwareblokkende.
+
 \subsection{IBD}
+
+På figur \ref{figure:ibdDiagram} ses IBD'et for systemet.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\textwidth]{SystemArkitektur/images/GoofyCandyIBDImageRev2.PNG}
+	\caption{IBD af systemets hardware}
+	\label{figure:ibdDiagram}
+\end{figure}
+
+Her vises alle hardwareblokke med de fysiske forbindelser beskrevet i BDD'et (figur \ref{figure:bddDiagram}). 
+
+Det ses at systemet bliver påvirket af tre eksterne signaler: \textit{touch}, \textit{input}, samt \textit{voltage}. \textit{touch} er input fra brugeren når der interageres med brugergrænsefladen. \textit{input} er brugerens interaktion med Wii-Nunchuk. \textit{voltage} er forsyningsspænding til systemet.
 
 \section{Software}
 
 \subsection{SPI Kommunikations Protokol}
 
 \subsection{I2C Kommunikations Protokol}
+
+
 
 \section{Signalbeskrivelse}
 	\begin{tabular}{|>{\hspace{0pt}}p{1.5cm}  >{\hspace{0pt}}p{3cm} | p{2.5cm} | p{2.5cm} | p{2.5cm} |}
