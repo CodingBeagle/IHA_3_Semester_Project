@@ -1,5 +1,5 @@
 #include "SPICommunication.h"
-#include "CommunicationProtocol.h"
+#include "I2CCommunication.h"
 #include "Nunchuck.h"
 #include "Project.h"
 

@@ -1,4 +1,4 @@
-#include "CommunicationProtocol.h"
+#include "I2CCommunication.h"
 #include "Project.h"
 
 void sendData(uint32 Address, uint8 CommandType, uint8* buffer, uint8 bufferSize)

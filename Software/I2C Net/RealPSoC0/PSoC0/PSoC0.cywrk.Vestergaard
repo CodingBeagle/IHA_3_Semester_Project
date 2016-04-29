@@ -13,19 +13,19 @@
 <v>Output</v>
 </TreeKeys>
 <TreeStates>
-<CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237 type_name="CyDesigner.Common.Base.Controls.CyTreeViewState" version="1" SelectedNodeId="PSoC0\PSoC0\Source Files\SPICommunication.c">
+<CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237 type_name="CyDesigner.Common.Base.Controls.CyTreeViewState" version="1" SelectedNodeId="PSoC0\PSoC0\Source Files\nunchuck.c">
 <ExpandedNodeIds>
 <v>PSoC0</v>
 <v>PSoC0\PSoC0</v>
 <v>PSoC0\PSoC0\TopDesign</v>
 <v>PSoC0\PSoC0\PSoC0.cydwr</v>
 <v>PSoC0\PSoC0\Header Files</v>
-<v>PSoC0\PSoC0\Header Files\CommunicationProtocol.h</v>
 <v>PSoC0\PSoC0\Header Files\cyapicallbacks.h</v>
+<v>PSoC0\PSoC0\Header Files\I2CCommunication.h</v>
 <v>PSoC0\PSoC0\Header Files\nunchuck.h</v>
 <v>PSoC0\PSoC0\Header Files\SPICommunication.h</v>
 <v>PSoC0\PSoC0\Source Files</v>
-<v>PSoC0\PSoC0\Source Files\CommunicationProtocol.c</v>
+<v>PSoC0\PSoC0\Source Files\I2CCommunication.c</v>
 <v>PSoC0\PSoC0\Source Files\main.c</v>
 <v>PSoC0\PSoC0\Source Files\nunchuck.c</v>
 <v>PSoC0\PSoC0\Source Files\SPICommunication.c</v>
@@ -124,12 +124,12 @@
 <v>PSoC0\PSoC0\TopDesign</v>
 <v>PSoC0\PSoC0\PSoC0.cydwr</v>
 <v>PSoC0\PSoC0\Header Files</v>
-<v>PSoC0\PSoC0\Header Files\CommunicationProtocol.h</v>
 <v>PSoC0\PSoC0\Header Files\cyapicallbacks.h</v>
+<v>PSoC0\PSoC0\Header Files\I2CCommunication.h</v>
 <v>PSoC0\PSoC0\Header Files\nunchuck.h</v>
 <v>PSoC0\PSoC0\Header Files\SPICommunication.h</v>
 <v>PSoC0\PSoC0\Source Files</v>
-<v>PSoC0\PSoC0\Source Files\CommunicationProtocol.c</v>
+<v>PSoC0\PSoC0\Source Files\I2CCommunication.c</v>
 <v>PSoC0\PSoC0\Source Files\main.c</v>
 <v>PSoC0\PSoC0\Source Files\nunchuck.c</v>
 <v>PSoC0\PSoC0\Source Files\SPICommunication.c</v>
@@ -174,7 +174,6 @@
 <v>PSoC0\PSoC0\CortexM0\ARM_GCC_493\Debug</v>
 <v>PSoC0\PSoC0\CortexM0\ARM_GCC_493\Debug\Listing Files</v>
 <v>PSoC0\PSoC0\CortexM0\ARM_GCC_493\Debug\Listing Files\Cm0Start.lst</v>
-<v>PSoC0\PSoC0\CortexM0\ARM_GCC_493\Debug\Listing Files\CommunicationProtocol.lst</v>
 <v>PSoC0\PSoC0\CortexM0\ARM_GCC_493\Debug\Listing Files\CyBootAsmGnu.lst</v>
 <v>PSoC0\PSoC0\CortexM0\ARM_GCC_493\Debug\Listing Files\cyfitter_cfg.lst</v>
 <v>PSoC0\PSoC0\CortexM0\ARM_GCC_493\Debug\Listing Files\CyFlash.lst</v>
@@ -203,6 +202,7 @@
 <v>PSoC0\PSoC0\CortexM0\ARM_GCC_493\Debug\Listing Files\I2C_1_scl_PM.lst</v>
 <v>PSoC0\PSoC0\CortexM0\ARM_GCC_493\Debug\Listing Files\I2C_1_sda.lst</v>
 <v>PSoC0\PSoC0\CortexM0\ARM_GCC_493\Debug\Listing Files\I2C_1_sda_PM.lst</v>
+<v>PSoC0\PSoC0\CortexM0\ARM_GCC_493\Debug\Listing Files\I2CCommunication.lst</v>
 <v>PSoC0\PSoC0\CortexM0\ARM_GCC_493\Debug\Listing Files\INT_PIN.lst</v>
 <v>PSoC0\PSoC0\CortexM0\ARM_GCC_493\Debug\Listing Files\INT_PIN_PM.lst</v>
 <v>PSoC0\PSoC0\CortexM0\ARM_GCC_493\Debug\Listing Files\isr_spi.lst</v>
@@ -279,6 +279,12 @@
 <Unloaded />
 <OpenDocs>
 <name v=".\PSoC0.cydsn\main.c" />
+<name v=".\PSoC0.cydsn\I2CCommunication.h" />
+<name v=".\PSoC0.cydsn\nunchuck.h" />
+<name v=".\PSoC0.cydsn\SPICommunication.h" />
+<name v=".\PSoC0.cydsn\I2CCommunication.c" />
+<name v=".\PSoC0.cydsn\SPICommunication.c" />
+<name v=".\PSoC0.cydsn\nunchuck.c" />
 </OpenDocs>
 <config v="" />
 <AutoUpdate v="true" />

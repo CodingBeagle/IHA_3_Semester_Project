@@ -38,11 +38,11 @@
         <Files Root="C:\Users\Daniel\Documents\IHA_3_Semester_Project\Software\I2C Net\RealPSoC0\PSoC0\PSoC0.cydsn">
           <File BuildType="BUILD" Toolchain="">.\main.c</File>
           <File BuildType="BUILD" Toolchain="">.\nunchuck.c</File>
-          <File BuildType="BUILD" Toolchain="">.\CommunicationProtocol.c</File>
+          <File BuildType="BUILD" Toolchain="">.\I2CCommunication.c</File>
           <File BuildType="BUILD" Toolchain="">.\SPICommunication.c</File>
           <File BuildType="BUILD" Toolchain="">.\cyapicallbacks.h</File>
           <File BuildType="BUILD" Toolchain="">.\nunchuck.h</File>
-          <File BuildType="BUILD" Toolchain="">.\CommunicationProtocol.h</File>
+          <File BuildType="BUILD" Toolchain="">.\I2CCommunication.h</File>
           <File BuildType="BUILD" Toolchain="">.\SPICommunication.h</File>
         </Files>
       </Folder>

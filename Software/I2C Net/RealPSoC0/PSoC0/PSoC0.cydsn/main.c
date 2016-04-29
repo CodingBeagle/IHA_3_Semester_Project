@@ -1,6 +1,6 @@
 #include <project.h>
 #include "nunchuck.h"
-#include "CommunicationProtocol.h"
+#include "I2CCommunication.h"
 #include "SPICommunication.h"
 
 

@@ -1,5 +1,6 @@
 #include <project.h>
 #include <nunchuck.h>
+#include "I2CCommunication.h"
 
 // Function sends handshake to nunchuck to initiate communication
 // Returns 0 if an error occurs
