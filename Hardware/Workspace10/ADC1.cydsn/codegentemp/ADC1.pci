@@ -1,5 +1,5 @@
 # ADC1
-# 2016-04-26 17:20:40Z
+# 2016-04-29 06:11:11Z
 
 # IO_2@[IOP=(3)][IoId=(2)] is reserved: SWDDebugEnabled
 dont_use_io iocell 3 2
@@ -9,5 +9,6 @@ set_location "ClockGenBlock" m0s8clockgenblockcell -1 -1 0
 set_io "\UART_1:tx(0)\" iocell 0 5
 set_io "\UART_1:rx(0)\" iocell 0 4
 set_io "MotorXAxisDirectionRight(0)" iocell 1 0
-set_io "Pin_1(0)" iocell 2 6
+set_io "\ADC_1:Bypass(0)\" iocell 1 7
+set_io "Pin_1(0)" iocell 2 0
 set_location "\ADC_1:cy_psoc4_sar\" p4sarcell -1 -1 0

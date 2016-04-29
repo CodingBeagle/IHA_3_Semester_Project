@@ -1,6 +1,6 @@
 /*******************************************************************************
 * File Name: ADC_1.c
-* Version 1.0
+* Version 2.30
 *
 * Description:
 *  This file provides the source code to the API for the Sequencing Successive
@@ -9,13 +9,12 @@
 * Note:
 *
 ********************************************************************************
-* Copyright 2008-2013, Cypress Semiconductor Corporation.  All rights reserved.
+* Copyright 2008-2015, Cypress Semiconductor Corporation.  All rights reserved.
 * You may use this file only in accordance with the license, terms, conditions,
 * disclaimers, and limitations in the end user license agreement accompanying
 * the software package with which this file was provided.
 *******************************************************************************/
 
-#include "CyLib.h"
 #include "ADC_1.h"
 
 
@@ -133,6 +132,38 @@ void ADC_1_Init(void)
                 ,(uint8)(ADC_1_cy_psoc4_sarmux_8__CH_8_PORT << 4u) |
                  (uint8)ADC_1_cy_psoc4_sarmux_8__CH_8_PIN
             #endif /* End ADC_1_TOTAL_CHANNELS_NUM > 8u */
+            #if(ADC_1_TOTAL_CHANNELS_NUM > 9u)
+                ,(uint8)(ADC_1_cy_psoc4_sarmux_8__CH_9_PORT << 4u) |
+                 (uint8)ADC_1_cy_psoc4_sarmux_8__CH_9_PIN
+            #endif /* End ADC_1_TOTAL_CHANNELS_NUM > 9u */
+            #if(ADC_1_TOTAL_CHANNELS_NUM > 10u)
+                ,(uint8)(ADC_1_cy_psoc4_sarmux_8__CH_10_PORT << 4u) |
+                 (uint8)ADC_1_cy_psoc4_sarmux_8__CH_10_PIN
+            #endif /* End ADC_1_TOTAL_CHANNELS_NUM > 10u */
+            #if(ADC_1_TOTAL_CHANNELS_NUM > 11u)
+                ,(uint8)(ADC_1_cy_psoc4_sarmux_8__CH_11_PORT << 4u) |
+                 (uint8)ADC_1_cy_psoc4_sarmux_8__CH_11_PIN
+            #endif /* End ADC_1_TOTAL_CHANNELS_NUM > 11u */
+            #if(ADC_1_TOTAL_CHANNELS_NUM > 12u)
+                ,(uint8)(ADC_1_cy_psoc4_sarmux_8__CH_12_PORT << 4u) |
+                 (uint8)ADC_1_cy_psoc4_sarmux_8__CH_12_PIN
+            #endif /* End ADC_1_TOTAL_CHANNELS_NUM > 12u */
+            #if(ADC_1_TOTAL_CHANNELS_NUM > 13u)
+                ,(uint8)(ADC_1_cy_psoc4_sarmux_8__CH_13_PORT << 4u) |
+                 (uint8)ADC_1_cy_psoc4_sarmux_8__CH_13_PIN
+            #endif /* End ADC_1_TOTAL_CHANNELS_NUM > 13u */
+            #if(ADC_1_TOTAL_CHANNELS_NUM > 14u)
+                ,(uint8)(ADC_1_cy_psoc4_sarmux_8__CH_14_PORT << 4u) |
+                 (uint8)ADC_1_cy_psoc4_sarmux_8__CH_14_PIN
+            #endif /* End ADC_1_TOTAL_CHANNELS_NUM > 14u */
+            #if(ADC_1_TOTAL_CHANNELS_NUM > 15u)
+                ,(uint8)(ADC_1_cy_psoc4_sarmux_8__CH_15_PORT << 4u) |
+                 (uint8)ADC_1_cy_psoc4_sarmux_8__CH_15_PIN
+            #endif /* End ADC_1_TOTAL_CHANNELS_NUM > 15u */
+            #if(ADC_1_TOTAL_CHANNELS_NUM > 16u)
+                ,(uint8)(ADC_1_cy_psoc4_sarmux_8__CH_16_PORT << 4u) |
+                 (uint8)ADC_1_cy_psoc4_sarmux_8__CH_16_PIN
+            #endif /* End ADC_1_TOTAL_CHANNELS_NUM > 16u */
         };
     #endif /* End ADC_1_TOTAL_CHANNELS_NUM > 1u */
 
@@ -144,24 +175,56 @@ void ADC_1_Init(void)
 
     /* Init SAR and MUX registers */
     ADC_1_SAR_CHAN_EN_REG = ADC_1_DEFAULT_EN_CHANNELS;
-    ADC_1_SAR_CTRL_REG = ADC_1_DEFAULT_CTRL_REG_CFG;
+    ADC_1_SAR_CTRL_REG |= ADC_1_DEFAULT_CTRL_REG_CFG | 
+        /* Enable the SAR internal pump when global pump is enabled */
+        (((ADC_1_PUMP_CTRL_REG & ADC_1_PUMP_CTRL_ENABLED) != 0u) ? 
+        ADC_1_BOOSTPUMP_EN : 0u);
     ADC_1_SAR_SAMPLE_CTRL_REG = ADC_1_DEFAULT_SAMPLE_CTRL_REG_CFG;
     ADC_1_SAR_RANGE_THRES_REG = ADC_1_DEFAULT_RANGE_THRES_REG_CFG;
     ADC_1_SAR_RANGE_COND_REG  = ADC_1_COMPARE_MODE;
     ADC_1_SAR_SAMPLE_TIME01_REG = ADC_1_DEFAULT_SAMPLE_TIME01_REG_CFG;
     ADC_1_SAR_SAMPLE_TIME23_REG = ADC_1_DEFAULT_SAMPLE_TIME23_REG_CFG;
+    
     /* Connect Vm to VSSA when even one channel is single-ended or multiple channels configured */
     #if(ADC_1_DEFAULT_MUX_SWITCH0 != 0u)
-        ADC_1_MUX_SWITCH0_REG |= ADC_1_DEFAULT_MUX_SWITCH0; 
+        ADC_1_MUX_SWITCH0_REG |= ADC_1_DEFAULT_MUX_SWITCH0;
         /* Set MUX_HW_CTRL_VSSA in MUX_SWITCH_HW_CTRL when multiple channels enabled */
         #if(ADC_1_TOTAL_CHANNELS_NUM > 1u)
-            ADC_1_MUX_SWITCH_HW_CTRL_REG |= ADC_1_DEFAULT_MUX_SWITCH0; 
-        #endif
-    #endif /*ADC_1_CHANNELS_MODE !=0 */    
+            ADC_1_MUX_SWITCH_HW_CTRL_REG |= ADC_1_DEFAULT_MUX_SWITCH0;
+        #endif /* ADC_1_TOTAL_CHANNELS_NUM > 1u */
+    #endif /*ADC_1_CHANNELS_MODE !=0 */
 
     ADC_1_SAR_SATURATE_INTR_MASK_REG = 0u;
     ADC_1_SAR_RANGE_INTR_MASK_REG = 0u;
     ADC_1_SAR_INTR_MASK_REG = ADC_1_SAR_INTR_MASK;
+
+    #if(ADC_1_CY_SAR_IP_VER == ADC_1_CY_SAR_IP_VER0)
+        ADC_1_ANA_TRIM_REG = ADC_1_TRIM_COEF;
+    #endif /* (ADC_1_CY_SAR_IP_VER == ADC_1_CY_SAR_IP_VER0) */
+
+    /* Read and modify default configuration based on characterization */
+    tmpRegVal = ADC_1_SAR_DFT_CTRL_REG;
+    tmpRegVal &= (uint32)~ADC_1_DCEN;
+    
+    #if(ADC_1_CY_SAR_IP_VER == ADC_1_CY_SAR_IP_VER0)
+        #if(ADC_1_NOMINAL_CLOCK_FREQ > (ADC_1_MAX_FREQUENCY / 2))
+            tmpRegVal |= ADC_1_SEL_CSEL_DFT_CHAR;
+        #else  /* clock speed < 9 Mhz */
+            tmpRegVal |= ADC_1_DLY_INC;
+        #endif /* clock speed > 9 Mhz */
+    #else
+        #if ((ADC_1_DEFAULT_VREF_SEL == ADC_1__INTERNAL1024) || \
+             (ADC_1_DEFAULT_VREF_SEL == ADC_1__INTERNALVREF))
+            tmpRegVal |= ADC_1_DLY_INC;
+        #else
+            tmpRegVal |= ADC_1_DCEN;
+            tmpRegVal &= (uint32)~ADC_1_DLY_INC;
+        #endif /* ((ADC_1_DEFAULT_VREF_SEL == ADC_1__INTERNAL1024) || \
+                   (ADC_1_DEFAULT_VREF_SEL == ADC_1__INTERNALVREF)) */
+    #endif /* (ADC_1_CY_SAR_IP_VER == ADC_1_CY_SAR_IP_VER0) */
+    
+    ADC_1_SAR_DFT_CTRL_REG = tmpRegVal;
+
     #if(ADC_1_MAX_RESOLUTION != ADC_1_RESOLUTION_12)
         ADC_1_WOUNDING_REG = ADC_1_ALT_WOUNDING;
     #endif /* ADC_1_MAX_RESOLUTION != ADC_1_RESOLUTION_12 */
@@ -172,8 +235,11 @@ void ADC_1_Init(void)
         #if(ADC_1_TOTAL_CHANNELS_NUM > 1u)
             tmpRegVal |= ADC_1_InputsPlacement[chNum];
         #endif /* End ADC_1_TOTAL_CHANNELS_NUM > 1u */
-        /* When the part is wounded to 10-bit then the SUB_RESOLUTION bit will be ignored and the
-        *  RESOLUTION bit selects between 10-bit (0) and 8-bit (1) resolution.
+        
+        
+        /* When the part is limited to 10-bit then the SUB_RESOLUTION bit
+        *  will be ignored and the RESOLUTION bit selects between 10-bit
+        *  (0) and 8-bit (1) resolution.
         */
         #if((ADC_1_MAX_RESOLUTION != ADC_1_RESOLUTION_12) && \
             (ADC_1_ALT_WOUNDING == ADC_1_WOUNDING_10BIT))
@@ -223,26 +289,26 @@ void ADC_1_Init(void)
         }
 
         if((ADC_1_channelsConfig[chNum] & ADC_1_DIFFERENTIAL_EN) == 0u)
-        {  
+        {
             #if((ADC_1_DEFAULT_SE_RESULT_FORMAT_SEL == ADC_1__FSIGNED) && \
                 (ADC_1_DEFAULT_NEG_INPUT_SEL == ADC_1__VREF))
                 /* Set offset to the minus half scale to convert results to unsigned format */
                 ADC_1_offset[chNum] = (int16)(counts / -2);
-            #else    
+            #else
                 ADC_1_offset[chNum] = 0;
-            #endif /* end DEFAULT_SE_RESULT_FORMAT_SEL == ADC_1__FSIGNED */    
+            #endif /* end DEFAULT_SE_RESULT_FORMAT_SEL == ADC_1__FSIGNED */
         }
         else    /* Differential channel */
         {
             #if(ADC_1_DEFAULT_DIFF_RESULT_FORMAT_SEL == ADC_1__FUNSIGNED)
                 /* Set offset to the half scale to convert results to signed format */
                 ADC_1_offset[chNum] = (int16)(counts / 2);
-            #else    
+            #else
                 ADC_1_offset[chNum] = 0;
-            #endif /* end ADC_1_DEFAULT_DIFF_RESULT_FORMAT_SEL == ADC_1__FUNSIGNED */    
+            #endif /* end ADC_1_DEFAULT_DIFF_RESULT_FORMAT_SEL == ADC_1__FUNSIGNED */
         }
         /* Calculate gain in counts per 10 volts with rounding */
-        ADC_1_countsPer10Volt[chNum] = (int16)(((counts * ADC_1_10MV_COUNTS) + 
+        ADC_1_countsPer10Volt[chNum] = (int16)(((counts * ADC_1_10MV_COUNTS) +
                             ADC_1_DEFAULT_VREF_MV_VALUE) / (ADC_1_DEFAULT_VREF_MV_VALUE * 2));
     }
 }
@@ -263,9 +329,21 @@ void ADC_1_Init(void)
 *******************************************************************************/
 void ADC_1_Enable(void)
 {
-    ADC_1_SAR_CTRL_REG |= ADC_1_ENABLE;
-    /* The block is ready to use 10 us after the enable signal is set high. */
-    CyDelayUs(ADC_1_10US_DELAY);
+    if (0u == (ADC_1_SAR_CTRL_REG & ADC_1_ENABLE))
+    {
+        #if(ADC_1_CY_SAR_IP_VER != ADC_1_CY_SAR_IP_VER0)
+
+            while (0u != (ADC_1_SAR_STATUS_REG & ADC_1_STATUS_BUSY))
+            {
+                /* wait for SAR to go idle to avoid deadlock */
+            }
+        #endif /* (ADC_1_CY_SAR_IP_VER != ADC_1_CY_SAR_IP_VER0) */
+        
+        ADC_1_SAR_CTRL_REG |= ADC_1_ENABLE;
+        
+        /* The block is ready to use 10 us after the enable signal is set high. */
+        CyDelayUs(ADC_1_10US_DELAY);         
+    }
 }
 
 
@@ -393,7 +471,7 @@ uint32 ADC_1_IsEndConversion(uint32 retMode)
             do
             {
                 status |= ADC_1_SAR_INTR_REG & ADC_1_INJ_EOC_MASK;
-            }while(((status & ADC_1_INJ_EOC_MASK) != 0u) &&
+            }while(((status & ADC_1_INJ_EOC_MASK) == 0u) &&
                    ((retMode & ADC_1_WAIT_FOR_RESULT_INJ) != 0u));
 
             if((status & ADC_1_INJ_EOC_MASK) != 0u)
@@ -638,7 +716,7 @@ void ADC_1_SetOffset(uint32 chan, int16 offset)
 *  None.
 *
 * Global variables:
-*  ADC_1_CountsPer10Volt:  modified to set the ADC gain in counts 
+*  ADC_1_CountsPer10Volt:  modified to set the ADC gain in counts
 *   per 10 volt.
 *
 *******************************************************************************/
@@ -671,7 +749,7 @@ void ADC_1_SetGain(uint32 chan, int32 adcGain)
     *
     * Global variables:
     *  ADC_1_countsPer10Volt:  used to convert ADC counts to mVolts.
-    *  ADC_1_Offset:  Used as the offset while converting ADC counts 
+    *  ADC_1_Offset:  Used as the offset while converting ADC counts
     *   to mVolts.
     *
     *******************************************************************************/
@@ -687,14 +765,14 @@ void ADC_1_SetGain(uint32 chan, int32 adcGain)
             if((ADC_1_channelsConfig[chan] & ADC_1_AVERAGING_EN) != 0u)
             {
                 adcCounts /= ADC_1_DEFAULT_AVG_SAMPLES_DIV;
-            }    
+            }
         #endif /* ADC_1_DEFAULT_AVG_MODE == ADC_1__ACCUMULATE */
 
         /* Subtract ADC offset */
         adcCounts -= ADC_1_offset[chan];
 
-        mVolts = (int16)((((int32)adcCounts * ADC_1_10MV_COUNTS) + ( (adcCounts > 0) ? 
-                 (ADC_1_countsPer10Volt[chan] / 2) : (-(ADC_1_countsPer10Volt[chan] / 2)) )) 
+        mVolts = (int16)((((int32)adcCounts * ADC_1_10MV_COUNTS) + ( (adcCounts > 0) ?
+                 (ADC_1_countsPer10Volt[chan] / 2) : (-(ADC_1_countsPer10Volt[chan] / 2)) ))
                  / ADC_1_countsPer10Volt[chan]);
 
         return( mVolts );
@@ -718,15 +796,15 @@ void ADC_1_SetGain(uint32 chan, int32 adcGain)
     *
     * Global variables:
     *  ADC_1_countsPer10Volt:  used to convert ADC counts to uVolts.
-    *  ADC_1_Offset:  Used as the offset while converting ADC counts 
+    *  ADC_1_Offset:  Used as the offset while converting ADC counts
     *   to mVolts.
     *
-    * Theory: 
+    * Theory:
     *  Care must be taken to not exceed the maximum value for a 31 bit signed
-    *  number in the conversion to uVolts and at the same time not loose 
+    *  number in the conversion to uVolts and at the same time not loose
     *  resolution.
     *  To convert adcCounts to microVolts it is required to be multiplied
-    *  on 10 million and later divide on gain in counts per 10V. 
+    *  on 10 million and later divide on gain in counts per 10V.
     *
     *******************************************************************************/
     int32 ADC_1_CountsTo_uVolts(uint32 chan, int16 adcCounts)
@@ -741,7 +819,7 @@ void ADC_1_SetGain(uint32 chan, int32 adcGain)
             if((ADC_1_channelsConfig[chan] & ADC_1_AVERAGING_EN) != 0u)
             {
                 adcCounts /= ADC_1_DEFAULT_AVG_SAMPLES_DIV;
-            }    
+            }
         #endif /* ADC_1_DEFAULT_AVG_MODE == ADC_1__ACCUMULATE */
 
         /* Subtract ADC offset */
@@ -770,7 +848,7 @@ void ADC_1_SetGain(uint32 chan, int32 adcGain)
     *
     * Global variables:
     *  ADC_1_countsPer10Volt:  used to convert ADC counts to Volts.
-    *  ADC_1_Offset:  Used as the offset while converting ADC counts 
+    *  ADC_1_Offset:  Used as the offset while converting ADC counts
     *   to mVolts.
     *
     *******************************************************************************/
@@ -786,7 +864,7 @@ void ADC_1_SetGain(uint32 chan, int32 adcGain)
             if((ADC_1_channelsConfig[chan] & ADC_1_AVERAGING_EN) != 0u)
             {
                 adcCounts /= ADC_1_DEFAULT_AVG_SAMPLES_DIV;
-            }    
+            }
         #endif /* ADC_1_DEFAULT_AVG_MODE == ADC_1__ACCUMULATE */
 
         /* Subtract ADC offset */

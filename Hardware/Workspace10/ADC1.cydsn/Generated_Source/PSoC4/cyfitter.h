@@ -2,6 +2,61 @@
 #define INCLUDED_CYFITTER_H
 #include "cydevice_trm.h"
 
+/* ADC_1_Bypass */
+#define ADC_1_Bypass__0__DM__MASK 0xE00000u
+#define ADC_1_Bypass__0__DM__SHIFT 21
+#define ADC_1_Bypass__0__DR CYREG_PRT1_DR
+#define ADC_1_Bypass__0__HSIOM CYREG_HSIOM_PORT_SEL1
+#define ADC_1_Bypass__0__HSIOM_MASK 0xF0000000u
+#define ADC_1_Bypass__0__HSIOM_SHIFT 28u
+#define ADC_1_Bypass__0__INTCFG CYREG_PRT1_INTCFG
+#define ADC_1_Bypass__0__INTSTAT CYREG_PRT1_INTSTAT
+#define ADC_1_Bypass__0__MASK 0x80u
+#define ADC_1_Bypass__0__PA__CFG0 CYREG_UDB_PA1_CFG0
+#define ADC_1_Bypass__0__PA__CFG1 CYREG_UDB_PA1_CFG1
+#define ADC_1_Bypass__0__PA__CFG10 CYREG_UDB_PA1_CFG10
+#define ADC_1_Bypass__0__PA__CFG11 CYREG_UDB_PA1_CFG11
+#define ADC_1_Bypass__0__PA__CFG12 CYREG_UDB_PA1_CFG12
+#define ADC_1_Bypass__0__PA__CFG13 CYREG_UDB_PA1_CFG13
+#define ADC_1_Bypass__0__PA__CFG14 CYREG_UDB_PA1_CFG14
+#define ADC_1_Bypass__0__PA__CFG2 CYREG_UDB_PA1_CFG2
+#define ADC_1_Bypass__0__PA__CFG3 CYREG_UDB_PA1_CFG3
+#define ADC_1_Bypass__0__PA__CFG4 CYREG_UDB_PA1_CFG4
+#define ADC_1_Bypass__0__PA__CFG5 CYREG_UDB_PA1_CFG5
+#define ADC_1_Bypass__0__PA__CFG6 CYREG_UDB_PA1_CFG6
+#define ADC_1_Bypass__0__PA__CFG7 CYREG_UDB_PA1_CFG7
+#define ADC_1_Bypass__0__PA__CFG8 CYREG_UDB_PA1_CFG8
+#define ADC_1_Bypass__0__PA__CFG9 CYREG_UDB_PA1_CFG9
+#define ADC_1_Bypass__0__PC CYREG_PRT1_PC
+#define ADC_1_Bypass__0__PC2 CYREG_PRT1_PC2
+#define ADC_1_Bypass__0__PORT 1u
+#define ADC_1_Bypass__0__PS CYREG_PRT1_PS
+#define ADC_1_Bypass__0__SHIFT 7
+#define ADC_1_Bypass__DR CYREG_PRT1_DR
+#define ADC_1_Bypass__INTCFG CYREG_PRT1_INTCFG
+#define ADC_1_Bypass__INTSTAT CYREG_PRT1_INTSTAT
+#define ADC_1_Bypass__MASK 0x80u
+#define ADC_1_Bypass__PA__CFG0 CYREG_UDB_PA1_CFG0
+#define ADC_1_Bypass__PA__CFG1 CYREG_UDB_PA1_CFG1
+#define ADC_1_Bypass__PA__CFG10 CYREG_UDB_PA1_CFG10
+#define ADC_1_Bypass__PA__CFG11 CYREG_UDB_PA1_CFG11
+#define ADC_1_Bypass__PA__CFG12 CYREG_UDB_PA1_CFG12
+#define ADC_1_Bypass__PA__CFG13 CYREG_UDB_PA1_CFG13
+#define ADC_1_Bypass__PA__CFG14 CYREG_UDB_PA1_CFG14
+#define ADC_1_Bypass__PA__CFG2 CYREG_UDB_PA1_CFG2
+#define ADC_1_Bypass__PA__CFG3 CYREG_UDB_PA1_CFG3
+#define ADC_1_Bypass__PA__CFG4 CYREG_UDB_PA1_CFG4
+#define ADC_1_Bypass__PA__CFG5 CYREG_UDB_PA1_CFG5
+#define ADC_1_Bypass__PA__CFG6 CYREG_UDB_PA1_CFG6
+#define ADC_1_Bypass__PA__CFG7 CYREG_UDB_PA1_CFG7
+#define ADC_1_Bypass__PA__CFG8 CYREG_UDB_PA1_CFG8
+#define ADC_1_Bypass__PA__CFG9 CYREG_UDB_PA1_CFG9
+#define ADC_1_Bypass__PC CYREG_PRT1_PC
+#define ADC_1_Bypass__PC2 CYREG_PRT1_PC2
+#define ADC_1_Bypass__PORT 1u
+#define ADC_1_Bypass__PS CYREG_PRT1_PS
+#define ADC_1_Bypass__SHIFT 7
+
 /* ADC_1_cy_psoc4_sar */
 #define ADC_1_cy_psoc4_sar__SAR_CTRL CYREG_SAR_CTRL
 #define ADC_1_cy_psoc4_sar__SAR_INTR CYREG_SAR_INTR
@@ -42,15 +97,15 @@
 #define ADC_1_IRQ__INTC_SET_PD_REG CYREG_CM0_ISPR
 
 /* Pin_1 */
-#define Pin_1__0__DM__MASK 0x1C0000u
-#define Pin_1__0__DM__SHIFT 18
+#define Pin_1__0__DM__MASK 0x07u
+#define Pin_1__0__DM__SHIFT 0
 #define Pin_1__0__DR CYREG_PRT2_DR
 #define Pin_1__0__HSIOM CYREG_HSIOM_PORT_SEL2
-#define Pin_1__0__HSIOM_MASK 0x0F000000u
-#define Pin_1__0__HSIOM_SHIFT 24u
+#define Pin_1__0__HSIOM_MASK 0x0000000Fu
+#define Pin_1__0__HSIOM_SHIFT 0u
 #define Pin_1__0__INTCFG CYREG_PRT2_INTCFG
 #define Pin_1__0__INTSTAT CYREG_PRT2_INTSTAT
-#define Pin_1__0__MASK 0x40u
+#define Pin_1__0__MASK 0x01u
 #define Pin_1__0__PA__CFG0 CYREG_UDB_PA2_CFG0
 #define Pin_1__0__PA__CFG1 CYREG_UDB_PA2_CFG1
 #define Pin_1__0__PA__CFG10 CYREG_UDB_PA2_CFG10
@@ -70,11 +125,11 @@
 #define Pin_1__0__PC2 CYREG_PRT2_PC2
 #define Pin_1__0__PORT 2u
 #define Pin_1__0__PS CYREG_PRT2_PS
-#define Pin_1__0__SHIFT 6
+#define Pin_1__0__SHIFT 0
 #define Pin_1__DR CYREG_PRT2_DR
 #define Pin_1__INTCFG CYREG_PRT2_INTCFG
 #define Pin_1__INTSTAT CYREG_PRT2_INTSTAT
-#define Pin_1__MASK 0x40u
+#define Pin_1__MASK 0x01u
 #define Pin_1__PA__CFG0 CYREG_UDB_PA2_CFG0
 #define Pin_1__PA__CFG1 CYREG_UDB_PA2_CFG1
 #define Pin_1__PA__CFG10 CYREG_UDB_PA2_CFG10
@@ -94,7 +149,7 @@
 #define Pin_1__PC2 CYREG_PRT2_PC2
 #define Pin_1__PORT 2u
 #define Pin_1__PS CYREG_PRT2_PS
-#define Pin_1__SHIFT 6
+#define Pin_1__SHIFT 0
 
 /* UART_1_rx */
 #define UART_1_rx__0__DM__MASK 0x7000u

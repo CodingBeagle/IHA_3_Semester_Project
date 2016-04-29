@@ -245,7 +245,7 @@ static void ClockSetup(void)
 static void AnalogSetDefault(void);
 static void AnalogSetDefault(void)
 {
-	CY_SET_XTND_REG32((void CYFAR *)CYREG_SAR_MUX_SWITCH0, 0x00000040u);
+	CY_SET_XTND_REG32((void CYFAR *)CYREG_SAR_MUX_SWITCH0, 0x00000001u);
 	SetAnalogRoutingPumps(1);
 }
 
@@ -448,10 +448,11 @@ void cyfitter_cfg(void)
 	/* IOPINS0_1 Starting address: CYDEV_PRT1_BASE */
 	CY_SET_XTND_REG32((void CYFAR *)(CYDEV_PRT1_BASE), 0x00000001u);
 	CY_SET_XTND_REG32((void CYFAR *)(CYREG_PRT1_PC), 0x00000003u);
+	CY_SET_XTND_REG32((void CYFAR *)(CYREG_PRT1_PC2), 0x00000080u);
 
 	/* IOPINS0_2 Starting address: CYDEV_PRT2_BASE */
-	CY_SET_XTND_REG32((void CYFAR *)(CYDEV_PRT2_BASE), 0x00000040u);
-	CY_SET_XTND_REG32((void CYFAR *)(CYREG_PRT2_PC2), 0x00000040u);
+	CY_SET_XTND_REG32((void CYFAR *)(CYDEV_PRT2_BASE), 0x00000001u);
+	CY_SET_XTND_REG32((void CYFAR *)(CYREG_PRT2_PC2), 0x00000001u);
 
 	/* IOPINS0_3 Starting address: CYDEV_PRT3_BASE */
 	CY_SET_XTND_REG32((void CYFAR *)(CYREG_PRT3_PC), 0x00000D80u);

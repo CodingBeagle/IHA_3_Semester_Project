@@ -1,6 +1,6 @@
 /*******************************************************************************
 * File Name: ADC_1.h
-* Version 1.0
+* Version 2.30
 *
 * Description:
 *  This file contains the function prototypes and constants used in
@@ -9,7 +9,7 @@
 * Note:
 *
 ********************************************************************************
-* Copyright 2008-2013, Cypress Semiconductor Corporation.  All rights reserved.
+* Copyright 2008-2015, Cypress Semiconductor Corporation.  All rights reserved.
 * You may use this file only in accordance with the license, terms, conditions,
 * disclaimers, and limitations in the end user license agreement accompanying
 * the software package with which this file was provided.
@@ -17,6 +17,9 @@
 
 #if !defined(CY_ADC_SAR_SEQ_ADC_1_H)
 #define CY_ADC_SAR_SEQ_ADC_1_H
+
+#include "cytypes.h"
+#include "CyLib.h"
 
 
 /***************************************
@@ -91,27 +94,40 @@ typedef struct
 
 
 
+/***************************************
+*   Conditional Compilation Parameters
+****************************************/ 
+
+#define ADC_1_CY_SAR_IP_VER0               	(0u)
+#define ADC_1_CY_SAR_IP_VER1               	(1u)
+
+#if (CY_PSOC4_4100 || CY_PSOC4_4200)
+    #define ADC_1_CY_SAR_IP_VER              (ADC_1_CY_SAR_IP_VER0)
+#else /* Other devices */
+    #define ADC_1_CY_SAR_IP_VER              (ADC_1_CY_SAR_IP_VER1)
+#endif  /* (CY_PSOC4_4100 || CY_PSOC4_4200) */
+
 
 /***************************************
 *    Initial Parameter Constants
 ***************************************/
 #define ADC_1_DEFAULT_SAMPLE_MODE_SEL        (0u)
-#define ADC_1_DEFAULT_VREF_SEL               (1u)
+#define ADC_1_DEFAULT_VREF_SEL               (3u)
 #define ADC_1_DEFAULT_NEG_INPUT_SEL          (0u)
 #define ADC_1_DEFAULT_ALT_RESOLUTION_SEL     (0u)
 #define ADC_1_DEFAULT_JUSTIFICATION_SEL      (0u)
 #define ADC_1_DEFAULT_DIFF_RESULT_FORMAT_SEL (1u)
-#define ADC_1_DEFAULT_SE_RESULT_FORMAT_SEL   (0u)
+#define ADC_1_DEFAULT_SE_RESULT_FORMAT_SEL   (1u)
 #define ADC_1_DEFAULT_CLOCK_SOURCE           (1u)
-#define ADC_1_DEFAULT_VREF_MV_VALUE          (3300)
+#define ADC_1_DEFAULT_VREF_MV_VALUE          (1024)
 #define ADC_1_DEFAULT_BUFFER_GAIN            (0u)
 #define ADC_1_DEFAULT_AVG_SAMPLES_NUM        (0u)
 #define ADC_1_DEFAULT_AVG_SAMPLES_DIV        (int16)(0x100u >> (7u - 0u))
 #define ADC_1_DEFAULT_AVG_MODE               (1u)
 #define ADC_1_MAX_RESOLUTION                 (12u)
 #define ADC_1_DEFAULT_LOW_LIMIT              (0u)
-#define ADC_1_DEFAULT_HIGH_LIMIT             (2048u)
-#define ADC_1_DEFAULT_COMPARE_MODE           (2u)
+#define ADC_1_DEFAULT_HIGH_LIMIT             (2047u)
+#define ADC_1_DEFAULT_COMPARE_MODE           (0u)
 #define ADC_1_DEFAULT_ACLKS_NUM              (4u)
 #define ADC_1_DEFAULT_BCLKS_NUM              (4u)
 #define ADC_1_DEFAULT_CCLKS_NUM              (4u)
@@ -122,10 +138,12 @@ typedef struct
 #define ADC_1_NOMINAL_CLOCK_FREQ             (3000000)
 #define ADC_1_INJ_CHANNEL_ENABLED            (0u)
 #define ADC_1_IRQ_REMOVE                     (0u)
+
 /* Determines whether the configuration contains external negative input. */
 #define ADC_1_SINGLE_PRESENT                 (0u)
 #define ADC_1_CHANNELS_MODE                  (0u)
 #define ADC_1_MAX_CHANNELS_EN_MASK           (0xffffu >> (16u - ADC_1_SEQUENCED_CHANNELS_NUM))
+
 
 /***************************************
 *        Function Prototypes
@@ -166,9 +184,10 @@ CY_ISR_PROTO( ADC_1_ISR );
 *           API Constants
 **************************************/
 /* Constants for Sleep mode states */
-#define ADC_1_STARTED                    (0x02u)
-#define ADC_1_ENABLED                    (0x01u)
 #define ADC_1_DISABLED                   (0x00u)
+#define ADC_1_ENABLED                    (0x01u)
+#define ADC_1_STARTED                    (0x02u)
+#define ADC_1_BOOSTPUMP_ENABLED          (0x04u)
 
 /*   Constants for IsEndConversion() "retMode" parameter  */
 #define ADC_1_RETURN_STATUS              (0x01u)
@@ -264,6 +283,32 @@ extern volatile int32 ADC_1_countsPer10Volt[ADC_1_TOTAL_CHANNELS_NUM];
 #define ADC_1_SAR_CHAN7_RESULT_REG         (*(reg32 *) CYREG_SAR_CHAN_RESULT07 )
 #define ADC_1_SAR_CHAN7_RESULT_PTR         ( (reg32 *) CYREG_SAR_CHAN_RESULT07 )
 
+#if(ADC_1_CY_SAR_IP_VER != ADC_1_CY_SAR_IP_VER0)
+    #define ADC_1_SAR_CHAN8_RESULT_REG         (*(reg32 *) CYREG_SAR_CHAN_RESULT08 )
+    #define ADC_1_SAR_CHAN8_RESULT_PTR         ( (reg32 *) CYREG_SAR_CHAN_RESULT08 )
+
+    #define ADC_1_SAR_CHAN9_RESULT_REG         (*(reg32 *) CYREG_SAR_CHAN_RESULT09 )
+    #define ADC_1_SAR_CHAN9_RESULT_PTR         ( (reg32 *) CYREG_SAR_CHAN_RESULT09 )
+
+    #define ADC_1_SAR_CHAN10_RESULT_REG         (*(reg32 *) CYREG_SAR_CHAN_RESULT010 )
+    #define ADC_1_SAR_CHAN10_RESULT_PTR         ( (reg32 *) CYREG_SAR_CHAN_RESULT010 )
+
+    #define ADC_1_SAR_CHAN11_RESULT_REG         (*(reg32 *) CYREG_SAR_CHAN_RESULT011 )
+    #define ADC_1_SAR_CHAN11_RESULT_PTR         ( (reg32 *) CYREG_SAR_CHAN_RESULT011 )
+
+    #define ADC_1_SAR_CHAN12_RESULT_REG         (*(reg32 *) CYREG_SAR_CHAN_RESULT012 )
+    #define ADC_1_SAR_CHAN12_RESULT_PTR         ( (reg32 *) CYREG_SAR_CHAN_RESULT012 )
+
+    #define ADC_1_SAR_CHAN13_RESULT_REG         (*(reg32 *) CYREG_SAR_CHAN_RESULT013 )
+    #define ADC_1_SAR_CHAN13_RESULT_PTR         ( (reg32 *) CYREG_SAR_CHAN_RESULT013 )
+
+    #define ADC_1_SAR_CHAN14_RESULT_REG         (*(reg32 *) CYREG_SAR_CHAN_RESULT014 )
+    #define ADC_1_SAR_CHAN14_RESULT_PTR         ( (reg32 *) CYREG_SAR_CHAN_RESULT014 )
+
+    #define ADC_1_SAR_CHAN15_RESULT_REG         (*(reg32 *) CYREG_SAR_CHAN_RESULT015 )
+    #define ADC_1_SAR_CHAN15_RESULT_PTR         ( (reg32 *) CYREG_SAR_CHAN_RESULT015 )
+#endif /* (ADC_1_CY_SAR_IP_VER != ADC_1_CY_SAR_IP_VER0) */
+
 #define ADC_1_SAR_CHAN_WORK_VALID_REG     (*(reg32 *) CYREG_SAR_CHAN_WORK_VALID)
 #define ADC_1_SAR_CHAN_WORK_VALID_PTR     ( (reg32 *) CYREG_SAR_CHAN_WORK_VALID)
 
@@ -332,8 +377,12 @@ extern volatile int32 ADC_1_countsPer10Volt[ADC_1_TOTAL_CHANNELS_NUM];
 #define ADC_1_PUMP_CTRL_REG               (*(reg32 *)  CYREG_SAR_PUMP_CTRL )
 #define ADC_1_PUMP_CTRL_PTR               ( (reg32 *)  CYREG_SAR_PUMP_CTRL )
 
+#define ADC_1_ANA_TRIM_REG                (*(reg32 *)  CYREG_SAR_ANA_TRIM )
+#define ADC_1_ANA_TRIM_PTR                ( (reg32 *)  CYREG_SAR_ANA_TRIM )
+
 #define ADC_1_WOUNDING_REG                (*(reg32 *)  CYREG_SAR_WOUNDING )
 #define ADC_1_WOUNDING_PTR                ( (reg32 *)  CYREG_SAR_WOUNDING )
+
 
 /**************************************
 *       Register Constants
@@ -360,15 +409,23 @@ extern volatile int32 ADC_1_countsPer10Volt[ADC_1_TOTAL_CHANNELS_NUM];
     #define ADC_1_NEG_OTHER              (0)
 #endif /* ADC_1_TOTAL_CHANNELS_NUM > 1u */
 
+#define ADC_1_SAR_HW_CTRL_NEGVREF        (0x00002000Lu)
+
+#define ADC_1_BOOSTPUMP_EN               (0x00100000Lu)
+
 #define ADC_1_NORMAL_PWR                 (0x00000000Lu)
 #define ADC_1_HALF_PWR                   (0x01000000Lu)
 #define ADC_1_MORE_PWR                   (0x02000000Lu)
 #define ADC_1_QUARTER_PWR                (0x03000000Lu)
+#define ADC_1_DEEPSLEEP_ON               (0x08000000Lu)
 
 #define ADC_1_DSI_SYNC_CONFIG            (0x10000000Lu)
 #define ADC_1_DSI_MODE                   (0x20000000Lu)
 #define ADC_1_SWITCH_DISABLE             (0x40000000Lu)
 #define ADC_1_ENABLE                     (0x80000000Lu)
+
+/* defines for STATUS register */
+#define ADC_1_STATUS_BUSY                (0x80000000Lu)
 
 /* defines for SAMPLE_CTRL register */
 #define ADC_1_ALT_RESOLUTION_10BIT       (0x00000001Lu)
@@ -420,10 +477,22 @@ extern volatile int32 ADC_1_countsPer10Volt[ADC_1_TOTAL_CHANNELS_NUM];
 #define ADC_1_FW_TRIGGER                 (0x00000001Lu)
 
 /* defines for DFT_CTRL register */
+#define ADC_1_DLY_INC                    (0x00000001Lu)
+#define ADC_1_HIZ                        (0x00000002Lu)
+#define ADC_1_DFT_INC_MASK               (0x000F0000Lu)
+#define ADC_1_DFT_OUTC_MASK              (0x00700000Lu)
+#define ADC_1_SEL_CSEL_DFT_MASK          (0x0F000000Lu)
+
+/* configuration for clock speed > 9 Mhz based on
+* characterization results
+*/
+#define ADC_1_SEL_CSEL_DFT_CHAR          (0x03000000Lu)
+#define ADC_1_EN_CSEL_DFT                (0x10000000Lu)
+#define ADC_1_DCEN                       (0x20000000Lu)
 #define ADC_1_ADFT_OVERRIDE              (0x80000000Lu)
 
 /* defines for CHAN_CONFIG / DIE_CHAN_CONFIG register
-*  and channelsConfig parameter 
+*  and channelsConfig parameter
 */
 #define ADC_1_SARMUX_VIRT_SELECT         (0x00000070Lu)
 #define ADC_1_DIFFERENTIAL_EN            (0x00000100Lu)
@@ -484,10 +553,13 @@ extern volatile int32 ADC_1_countsPer10Volt[ADC_1_TOTAL_CHANNELS_NUM];
 #define ADC_1_WOUNDING_10BIT             (0x00000001Lu)
 #define ADC_1_WOUNDING_8BIT              (0x00000002Lu)
 
+/* Trim value based on characterization */
+#define ADC_1_TRIM_COEF                  (2u)
+
 #if(ADC_1_MAX_RESOLUTION == ADC_1_RESOLUTION_10)
-    #define ADC_1_ALT_WOUNDING           ADC_1_WOUNDING_10BIT 
+    #define ADC_1_ALT_WOUNDING           ADC_1_WOUNDING_10BIT
 #else
-    #define ADC_1_ALT_WOUNDING           ADC_1_WOUNDING_8BIT 
+    #define ADC_1_ALT_WOUNDING           ADC_1_WOUNDING_8BIT
 #endif /* ADC_1_MAX_RESOLUTION == ADC_1_RESOLUTION_10 */
 
 #if(ADC_1_DEFAULT_VREF_SEL == ADC_1__VDDA_2)
@@ -514,7 +586,7 @@ extern volatile int32 ADC_1_countsPer10Volt[ADC_1_TOTAL_CHANNELS_NUM];
         #define ADC_1_DEFAULT_SE_NEG_INPUT    ADC_1_NEG_VSSA
     #else
         #define ADC_1_DEFAULT_SE_NEG_INPUT    ADC_1_NEG_VSSA_KELVIN
-    #endif /* (ADC_1_TOTAL_CHANNELS_NUM == 1u) */    
+    #endif /* (ADC_1_TOTAL_CHANNELS_NUM == 1u) */
     /* Do not connect VSSA to VMINUS when one channel in differential mode used */
     #if((ADC_1_TOTAL_CHANNELS_NUM == 1u) && (ADC_1_CHANNELS_MODE != 0u))
         #define ADC_1_DEFAULT_MUX_SWITCH0     0u
@@ -522,7 +594,12 @@ extern volatile int32 ADC_1_countsPer10Volt[ADC_1_TOTAL_CHANNELS_NUM];
         #define ADC_1_DEFAULT_MUX_SWITCH0     ADC_1_MUX_FW_VSSA_VMINUS
     #endif /* (ADC_1_TOTAL_CHANNELS_NUM == 1u) */
 #elif(ADC_1_DEFAULT_NEG_INPUT_SEL == ADC_1__VREF)
-    #define ADC_1_DEFAULT_SE_NEG_INPUT    ADC_1_NEG_VREF
+    /* Do not connect VNEG to VREF when one channel in differential mode used */
+    #if((ADC_1_TOTAL_CHANNELS_NUM == 1u) && (ADC_1_CHANNELS_MODE != 0u))
+        #define ADC_1_DEFAULT_SE_NEG_INPUT    0u
+    #else    /* miltiple channels or one single channel */
+        #define ADC_1_DEFAULT_SE_NEG_INPUT    ADC_1_NEG_VREF
+    #endif /* (ADC_1_TOTAL_CHANNELS_NUM == 1u) */
     #define ADC_1_DEFAULT_MUX_SWITCH0     0u
 #elif (ADC_1_SINGLE_PRESENT != 0u)
     #define ADC_1_DEFAULT_SE_NEG_INPUT    ADC_1_NEG_OTHER
@@ -531,6 +608,14 @@ extern volatile int32 ADC_1_countsPer10Volt[ADC_1_TOTAL_CHANNELS_NUM];
     #define ADC_1_DEFAULT_SE_NEG_INPUT    0u
     #define ADC_1_DEFAULT_MUX_SWITCH0     0u
 #endif /* ADC_1_DEFAULT_NEG_INPUT_SEL == ADC_1__VREF */
+
+/* If the SAR is configured for multiple channels, always set SAR_HW_CTRL_NEGVREF to 1 */
+#if(ADC_1_TOTAL_CHANNELS_NUM == 1u)
+    #define ADC_1_DEFAULT_HW_CTRL_NEGVREF 0u
+#else
+    #define ADC_1_DEFAULT_HW_CTRL_NEGVREF ADC_1_SAR_HW_CTRL_NEGVREF
+#endif /* (ADC_1_TOTAL_CHANNELS_NUM == 1u) */
+
 
 #if(ADC_1_DEFAULT_ALT_RESOLUTION_SEL == ADC_1__RES8)
     #define ADC_1_DEFAULT_ALT_RESOLUTION     (ADC_1_ALT_RESOLUTION_8BIT)
@@ -586,15 +671,16 @@ extern volatile int32 ADC_1_countsPer10Volt[ADC_1_TOTAL_CHANNELS_NUM];
 #endif /* End ADC_1_TOTAL_CHANNELS_NUM > 1 */
 
 #define ADC_1_DEFAULT_POWER \
-       ((ADC_1_NOMINAL_CLOCK_FREQ > (ADC_1_MAX_FREQUENCY / 2)) ? ADC_1_NORMAL_PWR : \
-       ((ADC_1_NOMINAL_CLOCK_FREQ > (ADC_1_MAX_FREQUENCY / 4)) ? ADC_1_HALF_PWR : \
+       ((ADC_1_NOMINAL_CLOCK_FREQ > (ADC_1_MAX_FREQUENCY / 4)) ? ADC_1_NORMAL_PWR : \
+       ((ADC_1_NOMINAL_CLOCK_FREQ > (ADC_1_MAX_FREQUENCY / 8)) ? ADC_1_HALF_PWR : \
                                                                                        ADC_1_QUARTER_PWR))
 
 #define ADC_1_DEFAULT_CTRL_REG_CFG       (ADC_1_DEFAULT_VREF_SOURCE \
                                                    | ADC_1_DEFAULT_SE_NEG_INPUT \
+                                                   | ADC_1_DEFAULT_HW_CTRL_NEGVREF \
                                                    | ADC_1_DEFAULT_POWER \
-                                                   | ADC_1_DSI_SYNC_CONFIG) \
-                                                   | ADC_1_DEFAULT_SWITCH_CONF
+                                                   | ADC_1_DSI_SYNC_CONFIG \
+                                                   | ADC_1_DEFAULT_SWITCH_CONF)
 
 #define ADC_1_DEFAULT_SAMPLE_CTRL_REG_CFG (ADC_1_DEFAULT_DIFF_RESULT_FORMAT \
                                                     | ADC_1_DEFAULT_SE_RESULT_FORMAT \

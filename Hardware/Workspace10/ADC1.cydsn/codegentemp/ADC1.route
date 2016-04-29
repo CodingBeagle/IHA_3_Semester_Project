@@ -146,12 +146,12 @@ net Net_436
 	switch ":ioport1:hsiom_out0.hsiom0_out==>:ioport1:pin0.pin_input"
 	term   ":ioport1:pin0.pin_input"
 end Net_436
-net \ADC_1:Net_2273\
+net \ADC_1:Net_3112\
 	term   ":p4sarcell.irq"
 	switch ":p4sarcell.irq==>:interrupt_idmux_14.in_0"
 	switch ":interrupt_idmux_14.interrupt_idmux_14__out==>:interrupt_14.interrupt"
 	term   ":interrupt_14.interrupt"
-end \ADC_1:Net_2273\
+end \ADC_1:Net_3112\
 net \PWM_X_RIGHT:PWMUDB:status_3\
 	term   ":udb@[UDB=(1,0)]:dp_wrapper:datapath.f1_blk_stat_comb"
 	switch ":udb@[UDB=(1,0)]:dp_wrapper:datapath.f1_blk_stat_comb==>:udb@[UDB=(1,0)]:dp_wrapper:output_permute.f1_blk_stat_comb"

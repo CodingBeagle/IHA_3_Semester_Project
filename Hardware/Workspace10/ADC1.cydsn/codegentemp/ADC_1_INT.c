@@ -1,6 +1,6 @@
 /*******************************************************************************
 * File Name: ADC_1_INT.c
-* Version 1.0
+* Version 2.30
 *
 *  Description:
 *    This file contains the code that operates during the ADC_SAR interrupt
@@ -9,14 +9,14 @@
 *   Note:
 *
 ********************************************************************************
-* Copyright 2008-2013, Cypress Semiconductor Corporation.  All rights reserved.
+* Copyright 2008-2015, Cypress Semiconductor Corporation.  All rights reserved.
 * You may use this file only in accordance with the license, terms, conditions,
 * disclaimers, and limitations in the end user license agreement accompanying
 * the software package with which this file was provided.
 *******************************************************************************/
 
-#include "CyLib.h"
 #include "ADC_1.h"
+#include "cyapicallbacks.h"
 
 
 /******************************************************************************
@@ -52,8 +52,13 @@
     {
         uint32 intr_status;
 
-        /* Rear interrupt status register */
+        /* Read interrupt status register */
         intr_status = ADC_1_SAR_INTR_REG;
+
+        #ifdef ADC_1_ISR_INTERRUPT_CALLBACK
+            ADC_1_ISR_InterruptCallback();
+        #endif /* ADC_1_ISR_INTERRUPT_CALLBACK */
+
 
         /************************************************************************
         *  Custom Code
@@ -62,7 +67,7 @@
         /* `#START MAIN_ADC_ISR`  */
 
         /* `#END`  */
-
+        
         /* Clear handled interrupt */
         ADC_1_SAR_INTR_REG = intr_status;
     }
