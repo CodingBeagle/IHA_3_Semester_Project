@@ -1,5 +1,5 @@
 # PSoC1
-# 2016-04-26 07:10:51Z
+# 2016-04-29 12:04:11Z
 
 # IO_2@[IOP=(3)][IoId=(2)] is reserved: SWDDebugEnabled
 dont_use_io iocell 3 2
@@ -14,6 +14,7 @@ set_io "DebugLEDGreen(0)" iocell 0 2
 set_io "DebugLEDBlue(0)" iocell 0 3
 set_io "MotorXAxisDirectionLeft(0)" iocell 2 7
 set_io "MotorXAxisDirectionRight(0)" iocell 1 0
+set_io "Pin_1(0)" iocell 2 4
 set_location "\PWM_X_RIGHT:PWMUDB:status_2\" 0 0 1 0
 set_location "\PWM_X_LEFT:PWMUDB:status_2\" 1 0 1 0
 set_location "\I2C_1:SCB_IRQ\" interrupt -1 -1 10
@@ -24,11 +25,13 @@ set_location "\PWM_X_RIGHT:PWMUDB:sP8:pwmdp:u0\" 0 0 2
 set_location "\PWM_X_LEFT:PWMUDB:genblk1:ctrlreg\" 1 0 6
 set_location "\PWM_X_LEFT:PWMUDB:genblk8:stsreg\" 1 0 4
 set_location "\PWM_X_LEFT:PWMUDB:sP8:pwmdp:u0\" 1 0 2
+set_location "\ADC_1:IRQ\" interrupt -1 -1 14
+set_location "\ADC_1:cy_psoc4_sar\" p4sarcell -1 -1 0
 set_location "\PWM_X_RIGHT:PWMUDB:runmode_enable\" 0 0 0 3
 set_location "\PWM_X_RIGHT:PWMUDB:prevCompare1\" 0 0 0 1
-set_location "\PWM_X_RIGHT:PWMUDB:status_0\" 0 0 0 2
-set_location "Net_167" 0 0 0 0
+set_location "\PWM_X_RIGHT:PWMUDB:status_0\" 0 0 0 0
+set_location "Net_167" 0 0 0 2
 set_location "\PWM_X_LEFT:PWMUDB:runmode_enable\" 1 0 0 3
 set_location "\PWM_X_LEFT:PWMUDB:prevCompare1\" 1 0 0 1
-set_location "\PWM_X_LEFT:PWMUDB:status_0\" 1 0 0 0
-set_location "Net_1113" 1 0 0 2
+set_location "\PWM_X_LEFT:PWMUDB:status_0\" 1 0 0 2
+set_location "Net_1113" 1 0 0 0

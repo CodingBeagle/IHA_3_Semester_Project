@@ -33,6 +33,8 @@ int main()
     // Turn off motor x axis left direction
     //MotorXAxisDirectionLeft_Write(0);
     
+    ADC_1_Start();
+    
     // Initialize PWM signals
     PWM_X_RIGHT_Start();
     Clock_PWM_2_Start();
@@ -42,6 +44,7 @@ int main()
     
     PWM_X_RIGHT_WriteCompare(0);
     PWM_X_LEFT_WriteCompare(0);
+   
     
     for(;;)
     {
@@ -56,23 +59,36 @@ int main()
 
 void controlMotor(uint8* receivedDataBuffer)
 {
+    // Initialize ADC
+    uint16 convertedValue;
+    float32 adc;
+    ADC_1_StartConvert();
+    ADC_1_IsEndConversion(ADC_1_WAIT_FOR_RESULT);
+    convertedValue= ADC_1_GetResult16(0);
+    
+    // Receive value from ADC
+    adc=ADC_1_CountsTo_mVolts(0,convertedValue);
+    
+    
     if(receivedDataBuffer[0] == NunchuckData)
     {
         
         
         //Handle debug LEDs for the X-Axis.
-        if(receivedDataBuffer[1] < 100)
+        if(receivedDataBuffer[1] < 100 && adc > 915)
         {
             DebugLEDRed_Write(0);
             PWM_X_LEFT_WriteCompare(30);
         }
-        else if(receivedDataBuffer[1] > 150)
+        else if(receivedDataBuffer[1] > 150 && adc < 2000)
         {
             DebugLEDGreen_Write(0);
             PWM_X_RIGHT_WriteCompare(30);
         }
         else
         {
+            PWM_X_LEFT_WriteCompare(0);
+            PWM_X_RIGHT_WriteCompare(0);
             DebugLEDGreen_Write(1);
             DebugLEDRed_Write(1);
         }
@@ -97,6 +113,8 @@ void controlMotor(uint8* receivedDataBuffer)
             DebugLEDBlue_Write(0);
         }
         else
-            DebugLEDBlue_Write(1);     
+            DebugLEDBlue_Write(1);    
+            
+        ADC_1_StopConvert();
     }
 }

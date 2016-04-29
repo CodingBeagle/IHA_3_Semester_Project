@@ -20,17 +20,19 @@
 ##################################################################### 
                     1::Clock Frequency Summary
 ===================================================================== 
-Number of clocks: 10
-Clock: Clock_PWM_1        | Frequency: 55.91 MHz  | Target: 0.02 MHz   | 
-Clock: Clock_PWM_2        | Frequency: 55.90 MHz  | Target: 0.02 MHz   | 
-Clock: CyHFCLK            | N/A                   | Target: 24.00 MHz  | 
-Clock: CyILO              | N/A                   | Target: 0.03 MHz   | 
-Clock: CyIMO              | N/A                   | Target: 24.00 MHz  | 
-Clock: CyLFCLK            | N/A                   | Target: 0.03 MHz   | 
-Clock: CyRouted1          | N/A                   | Target: 24.00 MHz  | 
-Clock: CySYSCLK           | N/A                   | Target: 24.00 MHz  | 
-Clock: I2C_1_SCBCLK       | N/A                   | Target: 1.60 MHz   | 
-Clock: I2C_1_SCBCLK(FFB)  | N/A                   | Target: 1.60 MHz   | 
+Number of clocks: 12
+Clock: ADC_1_intClock       | N/A                   | Target: 3.00 MHz   | 
+Clock: ADC_1_intClock(FFB)  | N/A                   | Target: 3.00 MHz   | 
+Clock: Clock_PWM_1          | Frequency: 55.91 MHz  | Target: 0.02 MHz   | 
+Clock: Clock_PWM_2          | Frequency: 55.90 MHz  | Target: 0.02 MHz   | 
+Clock: CyHFCLK              | N/A                   | Target: 24.00 MHz  | 
+Clock: CyILO                | N/A                   | Target: 0.03 MHz   | 
+Clock: CyIMO                | N/A                   | Target: 24.00 MHz  | 
+Clock: CyLFCLK              | N/A                   | Target: 0.03 MHz   | 
+Clock: CyRouted1            | N/A                   | Target: 24.00 MHz  | 
+Clock: CySYSCLK             | N/A                   | Target: 24.00 MHz  | 
+Clock: I2C_1_SCBCLK         | N/A                   | Target: 1.60 MHz   | 
+Clock: I2C_1_SCBCLK(FFB)    | N/A                   | Target: 1.60 MHz   | 
 
  =====================================================================
                     End of Clock Frequency Summary

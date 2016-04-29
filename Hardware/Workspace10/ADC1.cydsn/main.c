@@ -37,8 +37,9 @@ UART_1_Start();
     {
     ADC_1_StartConvert();
     con= ADC_1_GetResult16(0);
-   
-    if ( 1300 < con && con < 1500)
+    float32 d = ADC_1_CountsTo_Volts(0,con);
+   adc=ADC_1_CountsTo_mVolts(0,con);
+    if ( 915 < adc && adc < 2000)
     {
         PWM_X_RIGHT_WriteCompare(30);
     }

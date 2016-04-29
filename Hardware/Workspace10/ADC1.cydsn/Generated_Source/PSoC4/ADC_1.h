@@ -112,14 +112,14 @@ typedef struct
 *    Initial Parameter Constants
 ***************************************/
 #define ADC_1_DEFAULT_SAMPLE_MODE_SEL        (0u)
-#define ADC_1_DEFAULT_VREF_SEL               (3u)
+#define ADC_1_DEFAULT_VREF_SEL               (1u)
 #define ADC_1_DEFAULT_NEG_INPUT_SEL          (0u)
 #define ADC_1_DEFAULT_ALT_RESOLUTION_SEL     (0u)
 #define ADC_1_DEFAULT_JUSTIFICATION_SEL      (0u)
 #define ADC_1_DEFAULT_DIFF_RESULT_FORMAT_SEL (1u)
 #define ADC_1_DEFAULT_SE_RESULT_FORMAT_SEL   (1u)
 #define ADC_1_DEFAULT_CLOCK_SOURCE           (1u)
-#define ADC_1_DEFAULT_VREF_MV_VALUE          (1024)
+#define ADC_1_DEFAULT_VREF_MV_VALUE          (3300)
 #define ADC_1_DEFAULT_BUFFER_GAIN            (0u)
 #define ADC_1_DEFAULT_AVG_SAMPLES_NUM        (0u)
 #define ADC_1_DEFAULT_AVG_SAMPLES_DIV        (int16)(0x100u >> (7u - 0u))
