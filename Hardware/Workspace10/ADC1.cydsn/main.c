@@ -21,7 +21,7 @@ int main()
 
     ADC_1_Start();
     ADC_1_StartConvert();
-    ADC_1_IsEndConversion(ADC_1_WAIT_FOR_RESULT);
+   ADC_1_IsEndConversion(ADC_1_WAIT_FOR_RESULT);
    // ADC_1_IsEndConversion(ADC_1_WAIT_FOR_RESULT);
     /* Place your initialization/startup code here (e.g. MyInst_Start()) */
 //UART_1_Start();

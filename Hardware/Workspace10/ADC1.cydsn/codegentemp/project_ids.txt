@@ -1,7 +1,5 @@
-C:\Users\mikkel\Documents\Semesterprojekt3\Hardware\Workspace10\ADC1.cydsn\ADC1.cyprj|34c487ae-067b-42ac-a1ee-270a671158b8
-C:\Program Files (x86)\Cypress\PSoC Creator\3.3\PSoC Creator\psoc\content\default\CyAnnotationLibrary\CyAnnotationLibrary.cylib\CyAnnotationLibrary.cyprj|2bded359-f7bf-47ec-bab6-1446905a073a
-C:\Program Files (x86)\Cypress\PSoC Creator\3.3\PSoC Creator\psoc\content\cycomponentlibraryupdates\CyComponentLibraryUpdates.cylib\CyComponentLibraryUpdates.cyprj|48e93576-5b1f-4a6e-b2d2-05cea41dd1a0
-C:\Program Files (x86)\Cypress\PSoC Creator\3.3\PSoC Creator\psoc\content\cycomponentlibrary\CyComponentLibrary.cylib\CyComponentLibrary.cyprj|bdaf445b-4e98-4d45-8bc8-63aaebd3f69f
-C:\Program Files (x86)\Cypress\PSoC Creator\3.3\PSoC Creator\psoc\content\cyprimitives\CyPrimitives.cylib\CyPrimitives.cyprj|2322e4a2-8102-4a72-91f1-f602ec91f2c4
-C:\Program Files (x86)\Cypress\PSoC Creator\3.3\PSoC Creator\dev\psoc4\PSoC4AnalogDevice\psoc4arch.cydsn\psoc4arch.cyprj|eaf7447f-9d95-443e-9fec-abec28b25578
-C:\Program Files (x86)\Cypress\PSoC Creator\3.3\PSoC Creator\psoc\content\default\CyReferenceLibrary\CyReferenceLibrary.cylib\CyReferenceLibrary.cyprj|2b286951-6377-483e-a24e-97f2486ee690
+C:\Users\mikkel\Documents\Semesterprojekt3\Hardware\Workspace10\ADC1.cydsn\ADC1.cyprj|7c0d04bd-3fba-45ae-9145-c2ed09f4536c
+C:\Program Files (x86)\Cypress\PSoC Creator\3.3\PSoC Creator\psoc\content\default\CyAnnotationLibrary\CyAnnotationLibrary.cylib\CyAnnotationLibrary.cyprj|f5780fe7-8f06-4a1a-9b2b-ae031d4b2463
+C:\Program Files (x86)\Cypress\PSoC Creator\3.3\PSoC Creator\psoc\content\cycomponentlibraryupdates\CyComponentLibraryUpdates.cylib\CyComponentLibraryUpdates.cyprj|4e46ff51-002a-4af3-813f-4cecc648e1f7
+C:\Program Files (x86)\Cypress\PSoC Creator\3.3\PSoC Creator\psoc\content\cycomponentlibrary\CyComponentLibrary.cylib\CyComponentLibrary.cyprj|684adff3-c188-4852-9d87-bf644fb818b3
+C:\Program Files (x86)\Cypress\PSoC Creator\3.3\PSoC Creator\psoc\content\cyprimitives\CyPrimitives.cylib\CyPrimitives.cyprj|3580d6cb-f38e-4916-a981-33def01507f9
