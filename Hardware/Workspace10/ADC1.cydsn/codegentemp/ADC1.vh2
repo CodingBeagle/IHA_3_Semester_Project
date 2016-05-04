@@ -2,7 +2,7 @@
 --	Conversion of ADC1.v to vh2:
 --
 --	Cypress Semiconductor - WARP Version 6.3 IR 41
---	Fri Apr 29 12:26:58 2016
+--	Wed May 04 14:53:22 2016
 --
 
 USE cypress.cypress.all;
