@@ -1,0 +1,96 @@
+Vejledermøde - Intl Star Wars Day - 4/5/16
+
+- Opfølgening på review
+	Modtager
+		Holdt præsentation, ingen spørgsmål til process, mere omkring produktet
+		Reflekterende spørgsmål, de skulle høre hvilke overvejelser der var omkring design
+	Giver
+		Fint at Gunvor overtog reviewet da vi ikke var foreberedte
+		Man skal være erfaren i review hvis det skal gøres med så kort foreberedelse
+		Der ville ikke have været noget review uden Gunvors indblanding
+		Vi fandt ud af at vi ikke var bagud, når de var så langt bagud
+	Review Generelt
+		Der skal være ordenlig foreberedelsestid
+		Der skal være læsevejledning når der er et udfærdigt dokument der skal reviewes
+		Der skal være repæsentanter for alle dele af systemet (udgår misforståelser)
+- Koncentreret Rapportskrivning
+	18. maj
+- Feedback på dokumenter
+	Indledning
+		Meget ligepå og hårdt. God inspiration med youtube
+		Vi starter i midten
+		"Tredje semester oplægge handler om et embedded system" Bredt
+		"Vi vil gerne lave en slikkanon med følgende midler" Konkret
+	Rige billede
+		Vektor grafik
+		Der er apps til dette, lave et billede ud fra en PDF
+		Format: jpeg
+		Inkscape - Vi kan ikke helt finde ud af det, kræver træning, men godt at arbejde med
+	MOSCOW
+		Hvad ender vi med?
+		Must er det som vi arbejdes med i første og andet sprint
+		Det i must er det som er lavet, hvis det ikke er lavet, skal det lægges ned i could
+		"Bruger grænseflade der udskriver et eller andet"
+		Skal have hele must have og en smule should have
+		Virker som om vi har arbejdet med det hele
+		Skal ligge i projekt afgrænsing
+	UC beskrivelse
+		"Dette er den rigtige UC" (Funktionalitets UC)
+		UC kan dele op i flere use cases (eller Fejl og Mangler, viser en reflektering omkring UC'en)
+	Metode og SYSML
+		For meget lærebog og ikke nok "det har vi gjort"
+		Inddrag mere vores version, too generic
+		Knyt projektet til beskrivelse
+	SW
+		Hvilken kobling ahr vi, hvad betyder dette for projektet?
+	Designmetode
+		Vi har ikke brugt vandfalds modellen, vi har brugt scrum
+		Fremhæve scrum, mere fagteknisk metode
+		"Vi har udviklet denne del af MUST..."
+		Michael var ikke vild med implementering først og design bagefter, men det er okay i følge Gunvor
+		Små skridt med design, så implementation (lidt vandfald, men så alligevel ikke)
+		Man må ikke implementere i vildskab også dokumentere, vi har gjort det kontrolleret. 
+		Michael har nok misforstået os da vi sagde implementering først og dokumentering bagefter
+	Systembeskrivelse
+		Fin
+	Domænemodel
+		Letlæselig, Fin
+	Allokerings Diagram
+		Hvad siger det? Overflødig, men lidt silly
+		Fin sammenhæng mellem navne og enhed
+		DK SW er allokeret til DK
+		Denne SW består af disse klasse, hvilken software er allokeret til hver del
+		Tjek SYSML standarden
+	IBD
+		Generelt fin
+	Signalbeskrivelse
+		Hvad siger den?
+		Den ser mærkeligud
+	KlasseD for PSoC0
+		Pilrelationer mangler
+		Figur 12 mangler noget
+	Fejl og Mangler
+		Skal nok hedde perspektivering eller fremtidig arbejde
+		Skrot den
+	Opsætning
+		Virker fornuftig
+		System og arkitektur. Billede + tekst. 
+		Figurer er generelt bedre og mere gennemmtænkt end teksten
+	Generelt
+		Godt på vej
+		Send mere til næste uges møde
+		Afsnittet omkring overvejelse af kobling skal der arbejdes meget på. Hvad kunne der ellers have været?
+- Status på projekt
+	Print kommer i dag på et tidspunkt også skal der loddes
+	ADC er nogenlunde færdig, der kan styres i et interval
+	SW har implementeret UC2
+- Næste møde
+	Fredag d. 13 kl 15
+	
+
+Fint at minde Gunvor om dokumenter til mødeindkaldelsen
+
+		
+		
+		
+	
