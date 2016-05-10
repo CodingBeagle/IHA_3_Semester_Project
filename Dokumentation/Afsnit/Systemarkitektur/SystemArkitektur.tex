@@ -231,6 +231,14 @@ På tabel \ref{tabel:spiKommandoType} ses SPI-protokollen. Til venstre på tabel
 	\label{tabel:spiKommandoType}
 \end{table}
 
+For at aflæse en besked fra SPI-slaven, skal slaven først klargøre dens SPI-transfer buffer. Dette gøres ved, at SPI-masteren sender en commandotype til slaven, som derefter tolker kommandotypen, og eksekverer kommandoen, hvor SPI-transfer bufferen bliver sat. Imens dette sker, venter SPI-masteren i et bestemt stykke tid, for at sikre at transfer-bufferen når at blive sat. På figur \ref{figure:SDSpiReadSlave} ses et sekvensdiagram der illustrerer dette. 
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[]{SystemArkitektur/images/SDSpiSlaveRead}
+	\caption{Sekvensdiagram for at læse fra SPI-slaven}
+	\label{figure:SDSpiReadSlave}
+\end{figure}
 
 
 \subsubsection{I2C Protokol}
