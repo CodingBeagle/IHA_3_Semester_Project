@@ -26,7 +26,36 @@ Domænemodellen i figur \ref{figure:allocationDiagram} præsenterer systemets ha
 	\label{figure:allocationDiagram}
 \end{figure}
 
-Det kan her ses at systemet består af tre primære softwaredele: \textit{DevKit 8000 Software}, \textit{PSoC0 Software}, \textit{PSoC1 Software}. Disse er fordelt over de 3 tilsvarende CPU'er. Der henvises til til \textbf{APPLIKATIONSMODELLER} for overblik over de konceptuelle klasser der indgår i disse softwaredele. Her gives blot en forståelse for hvor systemets software hører til.
+Det kan her ses at systemet består af tre primære softwaredele: \textit{User Interface Software}, \textit{Nunchuck Polling Software}, \textit{Motor Control Software}. Disse er fordelt over de tre viste CPU'er.
+
+På figurerne: \ref{fig:UserInterfaceAllocationClasses}, \ref{fig:NunchuckPollingAllocationClasses}, \ref{fig:MotorControlAllocationClasses} ses et overblik over konceptuelle klasser der repræsenterer ansvarsområder de primære softwaredele får. For en beskrivelse af design og implementering af disse primære softwaredele henvises til \textbf{DESIGN OG IMPLEMENTERING \#ref}.
+
+På figur \ref{fig:UserInterfaceAllocationClasses} ses det at \textit{User Interface Software}, allokeret på DevKit 8000, har ansvar for brugergrænsefladen samt en SPI Driver til kommunikation med PSoC0. 
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.5\textwidth]{SystemArkitektur/images/UserInterfaceAllocationClasses.PNG}
+	\caption{Systemets software allokeringer}
+	\label{fig:UserInterfaceAllocationClasses}
+\end{figure}
+
+På figur \ref{fig:NunchuckPollingAllocationClasses} ses det at \textit{Nunchuck Polling Software}, allokeret på PSoC0, har ansvar for en I2C Driver, SPI Driver, samt en Nunchuck API. I2C Driveren skal bruges til kommunikation med den fysiske Nunchuck controller samt PSoC1. SPI Driveren skal bruges til kommunikation med DevKit 8000. Nunchuck API'en bruges for at tilgå data'en fra den fysiske Nunchuck controller.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.5\textwidth]{SystemArkitektur/images/NunchukPollingAllocationClasses.PNG}
+	\caption{Systemets software allokeringer}
+	\label{fig:NunchuckPollingAllocationClasses}
+\end{figure}
+
+På figur \ref{fig:MotorControlAllocationClasses} ses det at \textit{Motor Control Software}, allokeret på PSoC1, har ansvar for en I2C Driver til kommunikation med PSoC0, samt en Motor Driver til motorstyring.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.5\textwidth]{SystemArkitektur/images/MotorControlAllocationClasses.PNG}
+	\caption{Systemets software allokeringer}
+	\label{fig:MotorControlAllocationClasses}
+\end{figure}
 
 \section{Hardware}
 
@@ -43,6 +72,31 @@ På figur \ref{figure:bddDiagram} ses BDD'et for systemet.
 
 Her vises alle hardwareblokke fra domænemodellen (figur \ref{figure:domainModel}) med nødvændige indgange og udgange for de fysiske signaler. Yderligere ses det at flow specifikationer er defineret for de ikke-atomare forbindelser \textit{I2C} samt \textit{SPI}, da disse er busser bestående af flere forbindelser. Der henvises til \textbf{IBD AFSNIT} for en detaljeret model af de fysiske forbindelser mellem hardwareblokkende.
 
+\subsection{Blokbeskrivelse}
+Følgende afsnit indeholder en blokbeskrivelse samt en flowspecifikation for I2C og SPI. I flowspecifikationen beskrives I2C og SPI forbindelserne mere detaljeret fra en masters synsvinkel. \newline
+
+\noindent \textbf{DevKit 8000} \par
+\noindent \textit{DevKit 8000} er en embedded Linux platform med touch-skærm, der bruges til brugergrænsefladen for produktet. Brugeren interagerer med systemet og ser status for spillet via Devkit 8000. 
+
+\noindent \textbf{Wii-Nunchuck} \par
+\noindent \textit{Wii-Nunchuck} er controlleren som brugeren styrer kanonens retning med.
+
+\noindent \textbf{PSoC0} \par
+\noindent \textit{PSoC0} er PSoC hardware der indeholder software til I2C og SPI kommunikationen og afkodning af Wii-Nunchuck data. PSoC0 fungerer som I2C master og SPI slave. Denne PSoC er bindeleddet mellem brugergrænsefladen og resten af systemets hardware.
+
+\noindent \textbf{Motor} \par
+\noindent \textit{Motor} blokken er Candy Gun 3000's motorerer, der anvendes til at bevæge kanonen i forskellige retninger.
+
+\noindent \textbf{PSoC1} \par
+\noindent \textit{PSoC1} er PSoC hardware der indeholder software til I2C kommunikatioon og styring af Candy Gun 3000's motorer. PSoC1 fungerer som I2C slave.
+
+
+\noindent \textbf{SPI (FlowSpecification)} \par
+\noindent \textit{SPI (FlowSpecification)} beskriver signalerne der indgår i \textit{SPI} kommunikation.
+
+\noindent \textbf{I2C (FlowSpecification)} \par
+\noindent \textit{I2C (FlowSpecification)} beskriver signalerne der indgår i \textit{I2C} kommunikation.
+
 \subsection{IBD}
 
 På figur \ref{figure:ibdDiagram} ses IBD'et for systemet.
@@ -57,6 +111,31 @@ På figur \ref{figure:ibdDiagram} ses IBD'et for systemet.
 Her vises alle hardwareblokke med de fysiske forbindelser beskrevet i BDD'et (figur \ref{figure:bddDiagram}). 
 
 Det ses at systemet bliver påvirket af tre eksterne signaler: \textit{touch}, \textit{input}, samt \textit{voltage}. \textit{touch} er input fra brugeren når der interageres med brugergrænsefladen. \textit{input} er brugerens interaktion med Wii-Nunchuk. \textit{voltage} er forsyningsspænding til systemet.
+
+\subsection{Signalbeskrivelse}
+\begin{longtable}{|>{\hspace{0pt}}p{3cm} | >{\hspace{0pt}}p{3cm} | p{2cm} | p{3cm} |}
+	\hline
+	\textbf{Blok-navn} & \textbf{Funktionsbeskrivelse} & \textbf{Signaler} & \textbf{Signalbeskrivelse} \\ \hline
+	Devkit 8000 & Fungerer som grænseflade mellem bruger og systemet samt SPI master. & masterSPI & Type: SPI \newline Spændingsniveau: 0-5V \newline Hastighed: ?? \newline Beskrivelse: SPI bussen hvori der sendes og modtages data.\\ \cline{3-4}
+	& & touch & Type: touch \newline Beskrivelse: Brugertryk på Devkit 8000 touchdisplay. \\ \hline
+	PSoC0 & Fungerer som I2C master for PSoC1 og Wii-Nunchuck samt SPI slave til Devkit 8000. & slaveSPI & Type: SPI \newline Spændingsniveau: 0-5V \newline Hastighed: ?? \newline Beskrivelse: SPI bussen hvori der sendes og modtages data.\\ \cline{3-4}
+	& & wiiMaster & Type: I2C \newline Spændingsniveau: ?? \newline Hastighed: ?? \newline Beskrivelse: I2C bussen hvor der modtages data fra Nunchuck.\\ \cline{3-4}
+	& & motorMaster & Type: I2C \newline Spændingsniveau: 0-5V \newline Hastighed: 100kbit/sekund \newline Beskrivelse: I2C bussen hvor der sendes afkodet Nunchuck data til PSoC1.\\ \hline
+	PSoC1 & Modtager nunchuckinput fra PSoC0 og omsætter dataene til PWM signaler. & motorSlave & Type: I2C \newline Spændingsniveau: 0-5V \newline Hastighed: 100kbit/sekund \newline Beskrivelse: Indeholder formatteret Wii-Nunchuck data som omsættes til PWM-signal. \\ \cline{3-4} 
+	& & PWM & Type: PWM \newline Frekvens: 22kHz \newline PWM \%: 0-100\% \newline Spændingsniveau: 0-5V \newline Beskrivelse: PWM signal til styring af motorens hastighed. \\ \hline
+	Motor & Den enhed der skal bevæge kanonen & PWM & Type: PWM \newline Frekvens: 22kHz \newline PWM\%: 0-100\% \newline Spædingsniveau: 0-5V \newline Beskrivelse: PWM signal til styring af motorens hastighed. \\ \cline{3-4}
+	& & motorVoltage & Type: voltage \newline Spændingsniveau: 12V \newline Beskrivelse: Strømforsyning til motoren \\ \hline
+	Wii-nunchuck & Den fysiske controller som brugeren styrer kanonen med. & wiiSlave & Type: I2C \newline Spændingsniveau: 0-5V \newline Hastighed: 100kbit/sekund \newline Beskrivelse: Kommunikationslinje mellem PSoC1 og Wii-Nunchuck. \\ \cline{3-4}
+	& & userInput & Type: input \newline Beskrivelse: Brugerinput fra Wii-Nunchuck. \\ \hline
+	SPI & Denne blok beskriver den ikke-atomiske SPI forbindelse. & MOSI & Type: CMOS \newline Spændingsniveau: 0-5V \newline Hastighed: ?? \newline Beskrivelse: Binært data der sendes fra master til slave. \\ \cline{3-4}
+	& & MISO & Type: CMOS \newline Spændingsniveau: 0-5V \newline Hastighed: ?? \newline Beskrivelse: Binært data der sendes fra slave til master. \\ \cline{3-4}
+	& & SCLK & Type: CMOS \newline Spændingsniveau: 0-5V \newline Hastighed: ?? \newline Beskrivelse: Clock signalet fra master til slave, som bruges til at synkronisere den serielle kommunikation. \\ \cline{3-4}
+	& & SS & Type: CMOS \newline Spændingsniveau: 0-5V \newline Hastighed: ?? \newline  Beskrivelse: Slave-Select, som bruges til at bestemme hvilken slave der skal kommunikeres med. \\ \hline
+	I2C & Denne blok beskriver den ikke-atomiske I2C forbindelse. & SDA & Type: CMOS \newline Spændingsniveau: 0-5V \newline Hastighed: ?? \newline Beskrivelse: Databussen mellem I2C masteren og I2C slaver. \\ \cline{3-4}
+	& & SCL & Type: CMOS \newline Spændingsniveau: 0-5V \newline Hastighed: ?? \newline Beskrivelse: Clock signalet fra master til lyttende I2C slaver, som bruges til at synkronisere den serielle kommunikation. \\ \hline
+	\caption{Tabel med signalbeskrivelse}
+\end{longtable}
+
 
 \section{Software}
 
@@ -117,18 +196,4 @@ På tabel \ref{table:I2CKommandoer} ses de definerede kommandotyper og det tilsv
 
 Kolonnerne "Binær Værdi" og "Hex Værdi" i tabel \ref{table:I2CKommandoer} viser kommandotypens unikke tal-ID i både binær- og hexadecimalform. Denne værdi sendes som den første byte, for at identificere kommandotypen. 
 
-\section{Signalbeskrivelse}
-	\begin{tabular}{|>{\hspace{0pt}}p{1.5cm}  >{\hspace{0pt}}p{3cm} | p{2.5cm} | p{2.5cm} | p{2.5cm} |}
-		\hline
-		\textbf{Blok-navn} & \textbf{Funktionsbeskrivelse} & \textbf{Signaler} & \textbf{Kommentar} & 3\\ \hline
-		Mål & & Klarhed om projekt idé, samt de vigtigste krav bla bla bla bla & blabla & blabla\\ \hline
-		Længde & & 1 uge & 3 uger & 3 uger\\ \hline
-		Disciplin & Artefakt & Inception 1 & ... & ...\\ \hline
-		\textbf{Projekt Formulering} & hey hey hey hey & Udled projektformulering. Anvend MosCoW til at bla bla bla & & \\ \hline
-		\textbf{\hspace{0pt}Specifikation} & Kravspecifikation \& Accepttest & ... & ... & ... \\ \hline
-		\textbf{Arkitektur} & Systemarkitektur & Ingen & bla bla & bla bla \\ \hline
-		\textbf{Design} & Design dokumentation & Ingen & bla bla & bla bla\\ \hline
-		\textbf{Implementering og modul test} & HW/SW/Mekanik & Ingen & bla bla & bla bla \\ \hline
-		\textbf{Projekt styring} & Projekt plan & bla bla & bla bla & bla bla \\ \hline
-		\end{tabular}
 \subsection{Specifikation og Analyse}
