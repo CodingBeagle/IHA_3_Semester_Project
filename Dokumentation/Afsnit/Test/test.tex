@@ -153,13 +153,50 @@ Ud fra testen kan det konkluderes at implementeringen af I2C-protokollen fungere
 
 \subsection{Hardware}
 \subsubsection{H-bro} 
-Der er blevet en modul test af selv H-broen, der blevet test om den kunne køre, som det fremgår på figuren, kan man se at, i det der bliver åbenet for at motor kan køre i den ene retning, så stiger den blå op til 12V fordi nu har den fået forbindelse til ground og fået forbindelse til  de 12V. Hvor samtidigt at blå går højt, så går den orange lavere, for nu trækker den blå alt spændingen. Det samme sker når man åbner op for at den kan løbe spændingen kan løbe den anden vej, i stedet for at det er den blå som går høj, er det den orange som går høj. Med det kan man se at motor kan køre i begge retninger uden problemer. Der er blevet valgt at der ikke tages billede af at motoren køre, for man ikke se på et billede hvilken vej den køre og overhovedet den køre. Der ses også på figuren at der noget støj, når orange/blå går højt, men det er ikke noget som kommer til at påvirker vores styring af motoren
+
+\textbf{Formål}
+\\ Formålet med denne test er at viser at motor kan styres i begge retninger, ved hjælp af h broen.\\
+
+\textbf{Overordnet opstilling}
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=\textwidth]{test/images/motormodultest}
-	\caption{modultest for H-bro}
+	\includegraphics[width=\textwidth]{test/images/testhbroopst}
+	\caption{Opstilling af h bro på fumlebræt}
 \end{figure}
+
+\begin{itemize}
+	\item Røde ledninger er 9 V
+	\item	Brune ledninger 5 V
+	\item	Blå ledninger er spændinger inde imellem komponenter
+	\item	Sort er ground
+	\item	J1 og J2 er test pin 
+	\item	1a og 2a knapper til at styre motor til højre
+	\item	1b og 2b knapper til at styre motor til venstre 
+	\item	J3 er ground
+	
+	\end{itemize}
+
+For at teste om h broen kan styre motoren i begge retninger, blev der sat Analog Discovery på de to test pin (J1, J2 og J3) og der blev sat 5V, 9V og ground til. 
+Først del af testen var at tjekke om den kunne køre til højre, det blev gjord ved at trykke på knap 1a og 2a.
+Anden del af testen var at tjekke om den kunne køre til venstre det blev gjord ved at trykke på knap 1b og 2b.
+\\
+\\
+\textbf{Forventet resultat}
+At når der blev trykket på knap 1a og 2a vil den ene kurv gå høj og den anden vil for blive lav
+At når der blev trykket på knap 1b og 2b vil den anden kurv gå høj og den først vil for blive lav.
+\\
+\\
+
+\textbf{Opnået resultat}
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\textwidth]{test/images/testhbro}
+	\caption{Modultest for H-bro}
+	
+\end{figure}
+ Som det fremgår på figuren, kan man se at, i det der bliver åbnet for at motor kan køre i den ene retning, så stiger den blå op til 9V fordi nu har den fået forbindelse til ground og fået forbindelse til de 9V. Hvor samtidigt at blå går højt, så går den orange lavere, for nu trækker den blå alt spændingen. Det samme sker når man åbner op for at den kan løbe spændingen kan løbe den anden vej, i stedet for at det er den blå som går høj, er det den orange som går høj. Med det kan man se at motor kan køre i begge retninger uden problemer.
+ Der er blevet valgt at der ikke tages billede af at motoren køre, for man ikke se på et billede hvilken vej den køre og overhovedet den køre. Der ses også på figuren at der noget støj, når orange/blå går højt, men det er ikke noget som kommer til at påvirker vores styring af motoren
 
 Man kan også på figuren se at når den orange/blå går høj, så stiger den meget hurtig, grunden til den gør det var på grund af at, der er blevet sat de to transistor ind, får p mosfet, som gør at den bliver opladt hurtigere, end den ellers ville på grund af der sidder en form for kondensatorer inde i den mosfet, som skal have hjælp med at bliv opladt. Det hjælp kommer fra de transistor som er blevet sat ind før Mosfeten.  
 
