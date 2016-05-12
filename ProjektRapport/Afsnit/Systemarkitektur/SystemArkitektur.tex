@@ -110,6 +110,8 @@ På figur \ref{figure:ibdDiagram} ses IBD'et for systemet. Figuren viser hardwar
 	\label{figure:ibdDiagram}
 \end{figure}
 
+Her vises alle hardwareblokke med de fysiske forbindelser beskrevet i BDD'et (figur \ref{figure:bddDiagram}). 
+
 Det ses at systemet bliver påvirket af tre eksterne signaler: \textit{touch}, \textit{input}, samt \textit{voltage}. \textit{touch} er input fra brugeren når der interageres med brugergrænsefladen. \textit{input} er brugerens interaktion med Wii-Nunchuk. \textit{voltage} er forsyningsspænding til systemet.
 
 \subsection{Signalbeskrivelse}
@@ -136,8 +138,33 @@ Det ses at systemet bliver påvirket af tre eksterne signaler: \textit{touch}, \
 	\caption{Signalbeskrivelse}
 \end{longtable}
 
-
 \section{Software}
+Til produktet er der udviklet software til CPU'erne præsenteret i Software Allokering, afsnit \ref{afsnit:SoftwareAllokering}, figur \ref*{figure:allocationDiagram}.
+
+Dette afsnit har til formål at demonstrere sammenhængen mellem softwaren på CPU'erne og resten af systemet, samt at beskrive og identificere grænsefladerne brugt til kommunikation mellem dem. Yderligere vil klasseidentifikation også blive vist, hvor disse klasser vil specificeres i Design og Implementering.
+
+\subsection{Sekvensdiagrammer}
+
+\subsubsection{Wii-Nunchuck Information Flow}
+En essentiel del af systemet er at kunne styre motoren ved brug af Wii-Nunchuck controlleren. På figur \ref{fig:WiiNunchuckSekvensDiagram} vises gennemløbet af Wii-Nunchuck input data fra Wii-Nunchuken til motoren, med de relevante CPU'er angivet. Her ses det at input data fra Wii-Nunchuck kontinuert bliver aflæst af PSoC0. Det bemærkes her at grænsefladen mellem PSoC0 og Wii-Nunchuck er en I2C bus. Efter at PSoC0 har aflæst input data'en, overføres den til PSoC1. Grænsefladen mellem disse to PSoCs er også en I2C bus. PSoC1 kan til slut oversætte modtaget input data til PWM signaler til motorstyring samt affyring.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\textwidth] {Systemarkitektur/images/WiiNunchuckSequenceDiagram}
+	\caption{Wii-Nunchuck Input Data Forløb}
+	\label{fig:WiiNunchuckSekvensDiagram}
+\end{figure}
+
+\subsubsection{System Test}
+Use Case 2 beskriver test af systemet før spillet startes. På figur \ref{fig:SystemTestSekvensDiagram} vises test sekvensen. Det ses her at 
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\textwidth] {Systemarkitektur/images/DevKit8000SequenceDiagram}
+	\caption{System Test Forløb}
+	\label{fig:SystemTestSekvensDiagram}
+\end{figure}
+
 \subsection{SPI Kommunikations Protokol}
 I afsnit \ref{afsnit:IBD} \textbf{IBD} ses på figur \ref{figure:ibdDiagram} at Devkit8000 og PSoC0 kommunikerer via en SPI bus. Kommunikationen foregår ved at der sendes kommandotyper imellem de to enheder, SPI-master og SPI-slave. På tabel \ref{tabel:spiKommandoType} ses en de anvendte kommandotyper samt en kort beskrivelse for hver af disse.
 
