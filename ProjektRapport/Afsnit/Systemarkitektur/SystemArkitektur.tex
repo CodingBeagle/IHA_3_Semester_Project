@@ -101,7 +101,7 @@ Følgende afsnit indeholder en blokbeskrivelse samt en flowspecifikation for I2C
 \subsection{IBD}
 \label{afsnit:IBD}
 
-På figur \ref{figure:ibdDiagram} ses IBD'et for systemet.
+På figur \ref{figure:ibdDiagram} ses IBD'et for systemet. Figuren viser hardwareblokkene med de fysiske forbindelser beskrevet i BDD'et (figur \ref{figure:bddDiagram}). 
 
 \begin{figure}[H]
 	\centering
@@ -109,8 +109,6 @@ På figur \ref{figure:ibdDiagram} ses IBD'et for systemet.
 	\caption{IBD af systemets hardware}
 	\label{figure:ibdDiagram}
 \end{figure}
-
-Her vises alle hardwareblokke med de fysiske forbindelser beskrevet i BDD'et (figur \ref{figure:bddDiagram}). 
 
 Det ses at systemet bliver påvirket af tre eksterne signaler: \textit{touch}, \textit{input}, samt \textit{voltage}. \textit{touch} er input fra brugeren når der interageres med brugergrænsefladen. \textit{input} er brugerens interaktion med Wii-Nunchuk. \textit{voltage} er forsyningsspænding til systemet.
 
@@ -135,26 +133,13 @@ Det ses at systemet bliver påvirket af tre eksterne signaler: \textit{touch}, \
 	& & SS & Type: CMOS \newline Spændingsniveau: 0-5V \newline Hastighed: ?? \newline  Beskrivelse: Slave-Select, som bruges til at bestemme hvilken slave der skal kommunikeres med. \\ \hline
 	I2C & Denne blok beskriver den ikke-atomiske I2C forbindelse. & SDA & Type: CMOS \newline Spændingsniveau: 0-5V \newline Hastighed: ?? \newline Beskrivelse: Databussen mellem I2C masteren og I2C slaver. \\ \cline{3-4}
 	& & SCL & Type: CMOS \newline Spændingsniveau: 0-5V \newline Hastighed: ?? \newline Beskrivelse: Clock signalet fra master til lyttende I2C slaver, som bruges til at synkronisere den serielle kommunikation. \\ \hline
-	\caption{Tabel med signalbeskrivelse}
+	\caption{Signalbeskrivelse}
 \end{longtable}
 
 
 \section{Software}
-Til produktet er der udviklet software til CPU'erne præsenteret i Software Allokering, afsnit \ref{afsnit:SoftwareAllokering}, figur \ref*{figure:allocationDiagram}.
-
-Dette afsnit har til formål at demonstrere sammenhængen mellem softwaren på CPU'erne og resten af systemet, samt at beskrive og identificere grænsefladerne brugt til kommunikation mellem dem. Yderligere vil klasseidentifikation også blive vist, hvor disse klasser vil specificeres i Design og Implementering.
-
-\subsection{Sekvensdiagrammer}
-
-\begin{figure}[H]
-	\centering
-	\includegraphics[width=\textwidth] {Systemarkitektur/images/WiiNunchuckSequenceDiagram}
-	\caption{Eksempel af I2C Protokol Forløb}
-	\label{fig:WiiNunchuckSekvensDiagram}
-\end{figure}
-
 \subsection{SPI Kommunikations Protokol}
-I afsnittet \ref{afsnit:IBD} \textbf{IBD} ses det på IBD'et (figur \ref{figure:ibdDiagram}) at Devkit8000 og PSoC0 kommunikerer med hinanden via en SPI bus. Kommunikationen foregår ved at der sendes kommandotyper imellem de to enheder SPI-master og SPI-slave. På tabel \ref{tabel:spiKommandoType} ses en tabel over de brugte kommandotyper og en kort beskrivelse for hver af disse.
+I afsnit \ref{afsnit:IBD} \textbf{IBD} ses på figur \ref{figure:ibdDiagram} at Devkit8000 og PSoC0 kommunikerer via en SPI bus. Kommunikationen foregår ved at der sendes kommandotyper imellem de to enheder, SPI-master og SPI-slave. På tabel \ref{tabel:spiKommandoType} ses en de anvendte kommandotyper samt en kort beskrivelse for hver af disse.
 
 \begin{table}[H]
 	\centering
@@ -176,23 +161,23 @@ I afsnittet \ref{afsnit:IBD} \textbf{IBD} ses det på IBD'et (figur \ref{figure:
 			NUNCHUCK\_FAIL                                                    & Signalerer at der skete fejl under NUNCHUCK-testen      & 1100 0011                        & 0xC3                          
 		\end{tabular}
 	}
-	\caption{Kommandotyper der anvendes ved SPI kommunikation}
+	\caption{SPI kommunikation kommandotyper}
 	\label{tabel:spiKommandoType}
 \end{table}
 
-Kommunikation på en SPI-bus foregår ved bit-shifting, så hvad der står i masterens transfer buffer, bliver shiftet over i slavens read buffer, og vice versa. Kommunikationen foregår altså 2-vejs, og derfor skal der foretages 2 transmissioner for at aflæse data fra en SPI-slave, idét at slaven først skal vide hvilken data der skal klargøres i transfer-bufferen, og derefter have tid til at klargøre denne buffer, før masteren kan aflæse denne. Her skal der tages højde for, at en længere proces skal gennemføres før slaven har klargjort transfer-buffern. Derfor skal masteren, efter at have sendt kommandotypen, vente et bestemt stykke tid, før masteren prøver at aflæse slavens transfer-buffer. Dette er illustreret med et sekvensdiagram på figur \ref{figure:SDSpiSlaveRead}.
+Kommunikation på en SPI-bus foregår ved bit-shifting. Dette betyder at indholdet af masterens transfer buffer bliver skiftet over i slavens read buffer og omvendt. Kommunikationen foregår i fuld duplex, derfor skal der foretages to transmissioner for at aflæse data fra en SPI-slave. Dette skyldes at slaven skal vide hvilken data der skal klargøres i transfer-bufferen og klargøre denne buffer før masteren kan aflæse denne. Her skal der tages højde for at en længere proces skal gennemføres før slaven har klargjort transfer-buffern. Derfor skal masteren, efter at have sendt en kommandotype, vente et bestemt stykke tid før der at aflæses fra slavens transfer-buffer. Denne sekvens er illustreret med et sekvensdiagram på figur \ref{figure:SDSpiSlaveRead}.
 
 \begin{figure}[H]
 	\centering
 	\includegraphics[]{Systemarkitektur/images/SDSpiSlaveRead}
-	\caption{Sekvensdiagram for at aflæse data fra en SPI-slave}
+	\caption{Sekvensdiagram for aflæsning data fra en SPI-slave}
 	\label{figure:SDSpiSlaveRead}
 \end{figure} 
 
 \subsection{I2C Kommunikations Protokol}
-I afsnittet \ref{afsnit:IBD} \textbf{IBD} ses det på IBD'et (figur \ref{figure:ibdDiagram}) at tre hardwareblokke kommunikerer med hinanden via en I2C bus. Til denne I2C kommunikation er der defineret en protokol, som sætter en standard for hvordan modtaget data skal fortolkes. Denne protokol beskrives her.
+I afsnit \ref{afsnit:IBD} \textbf{IBD} ses på figur \ref{figure:ibdDiagram} at tre hardwareblokke kommunikerer via en I2C bus. Til denne I2C kommunikation er der defineret en protokol, som bestemmer hvordan modtaget data skal fortolkes. Denne protokol beskrives følgende.
 
-I2C gør brug af en indbygget protokol der anvender adressering af hardware-enheder for at identificere hvilken enhed der kommunikeres med. Derfor har hardwareblokkene som indgår i I2C kommunikation fået tildelt adresser. På tabel \ref{table:I2CAddress} ses adresserne tildelt systemets PSoCs.
+I2C gør brug af en indbygget protokol, der anvender adressering af hardware-enheder til identificering af hvilken enhed der kommunikeres med. Derfor har hardwareblokkene som indgår i I2C kommunikationen fået tildelt adresser. På tabel \ref{table:I2CAddress} ses adresserne tildelt systemets PSoCs.
 
 \begin{table}[H]
 	\centering
@@ -205,7 +190,7 @@ I2C gør brug af en indbygget protokol der anvender adressering af hardware-enhe
 		\rowcolor[HTML]{CBCEFB} 
 		{\color[HTML]{000000} Wii-Nunchuck}           & {\color[HTML]{000000} 1} & {\color[HTML]{000000} 0} & {\color[HTML]{000000} 1} & 0 & 0 & 1 & 0                      & 0/1                      
 	\end{tabular}
-	\caption{Adresser der anvendes på I2C bussen}
+	\caption{I2C bus addresser}
 	\label{table:I2CAddress}
 \end{table}
 
@@ -220,7 +205,7 @@ Kommandoens type definerer antallet af databytes modtageren skal forvente og hvo
 	\label{fig:I2CProtokolEksempel}
 \end{figure}
 
-På figur \ref{fig:I2CProtokolEksempel} ses at afsenderen først starter en I2C transaktion, hvorefter typen af kommando sendes som den første byte. Efterfølgende sendes \textit{N} antal bytes, afhængig af hvor meget data den givne kommandotype har brug for at sende. Efter afsluttet I2C transaktion læser I2C modtageren typen af kommando, hvor den herefter kan fortolke \textit{N} antal modtagne bytes afhængig af den modtagne kommandotype.
+På figur \ref{fig:I2CProtokolEksempel} ses at afsenderen starter en I2C transaktion, hvorefter typen af kommando sendes som den første byte. Efterfølgende sendes \textit{N} antal bytes, afhængig af hvor meget data den givne kommandotype har brug for at sende. Efter en afsluttet I2C transaktion læser I2C modtageren typen af kommando, hvor den herefter tolker \textit{N} antal modtagne bytes afhængig af den modtagne kommandotype.
 
 På tabel \ref{table:I2CKommandoer} ses de definerede kommandotyper og det tilsvarende antal af bytes der sendes ved dataveksling.
 
@@ -237,10 +222,10 @@ På tabel \ref{table:I2CKommandoer} ses de definerede kommandotyper og det tilsv
 			I2CTestAck                            & Anmodning om at få en I2C OK besked fra I2C enhed                           & 0010 1000                        & 0x28                           & Ingen databyte                                                                                                         
 		\end{tabular}
 	}
-	\caption{Kommandotyper der anvendes ved I2C kommunikation}
+	\caption{I2C kommunikation kommandotyper}
 	\label{table:I2CKommandoer}
 \end{table}
 
-Kolonnerne "Binær Værdi" og "Hex Værdi" i tabel \ref{table:I2CKommandoer} viser kommandotypens unikke tal-ID i både binær- og hexadecimalform. Denne værdi sendes som den første byte, for at identificere kommandotypen. 
+Kolonnerne \textit{Binær Værdi} og \textit{Hex Værdi} i tabel \ref{table:I2CKommandoer} viser kommandotypens unikke tal-ID i både binær- og hexadecimalform. Denne værdi sendes som den første byte, for at identificere kommandotypen. 
 
 \subsection{Specifikation og Analyse}
