@@ -16,6 +16,7 @@ På figur \ref{figure:domainModel} ses domænemodellen af systemet. Denne har ti
 Her repræsenteres hardware som blokke forbundet med associeringer. Associeringerne viser grænsefladerne mellem de forbundne hardware komponenter (Enten \textit{SPI} eller \textit{I2C}), samt retningen af kommunikationen. Af modellen fremstår konceptuelle kommandoer for grænsefladerne, som beskriver deres nødvændige attributter.
 
 \section{Software Allokering}
+\label{afsnit:SoftwareAllokering}
 
 Domænemodellen i figur \ref{figure:allocationDiagram} præsenterer systemets hardwareblokke. På figur \ref{figure:allocationDiagram} ses et software allokeringsdiagram, som viser hvilke hardwareblokke der har softwaredele af systemet allokeret på sig. 
 
@@ -139,6 +140,18 @@ Det ses at systemet bliver påvirket af tre eksterne signaler: \textit{touch}, \
 
 
 \section{Software}
+Til produktet er der udviklet software til CPU'erne præsenteret i Software Allokering, afsnit \ref{afsnit:SoftwareAllokering}, figur \ref*{figure:allocationDiagram}.
+
+Dette afsnit har til formål at demonstrere sammenhængen mellem softwaren på CPU'erne og resten af systemet, samt at beskrive og identificere grænsefladerne brugt til kommunikation mellem dem. Yderligere vil klasseidentifikation også blive vist, hvor disse klasser vil specificeres i Design og Implementering.
+
+\subsection{Sekvensdiagrammer}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\textwidth] {Systemarkitektur/images/WiiNunchuckSequenceDiagram}
+	\caption{Eksempel af I2C Protokol Forløb}
+	\label{fig:WiiNunchuckSekvensDiagram}
+\end{figure}
 
 \subsection{SPI Kommunikations Protokol}
 I afsnittet \ref{afsnit:IBD} \textbf{IBD} ses det på IBD'et (figur \ref{figure:ibdDiagram}) at Devkit8000 og PSoC0 kommunikerer med hinanden via en SPI bus. Kommunikationen foregår ved at der sendes kommandotyper imellem de to enheder SPI-master og SPI-slave. På tabel \ref{tabel:spiKommandoType} ses en tabel over de brugte kommandotyper og en kort beskrivelse for hver af disse.
