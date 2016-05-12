@@ -141,7 +141,7 @@ Det ses at systemet bliver påvirket af tre eksterne signaler: \textit{touch}, \
 \section{Software}
 
 \subsection{SPI Kommunikations Protokol}
-I afsnittet \ref{afsnit:IBD} \textbf{IBD} ses det på IBD'et (figur \ref{figure:ibdDiagram}) at Devkit8000 og PSoC0 kommunikerer med hinanden via en SPI bus. Kommunikationen foregår ved at der sendes kommandotyper imellem de to enheder. På tabel \ref{tabel:spiKommandoType} ses en tabel over de brugte kommandotyper og en kort beskrivelse for hver af disse.
+I afsnittet \ref{afsnit:IBD} \textbf{IBD} ses det på IBD'et (figur \ref{figure:ibdDiagram}) at Devkit8000 og PSoC0 kommunikerer med hinanden via en SPI bus. Kommunikationen foregår ved at der sendes kommandotyper imellem de to enheder SPI-master og SPI-slave. På tabel \ref{tabel:spiKommandoType} ses en tabel over de brugte kommandotyper og en kort beskrivelse for hver af disse.
 
 \begin{table}[H]
 	\centering
@@ -167,9 +167,16 @@ I afsnittet \ref{afsnit:IBD} \textbf{IBD} ses det på IBD'et (figur \ref{figure:
 	\label{tabel:spiKommandoType}
 \end{table}
 
+Kommunikation på en SPI-bus foregår ved bit-shifting, så hvad der står i masterens transfer buffer, bliver shiftet over i slavens read buffer, og vice versa. Kommunikationen foregår altså 2-vejs, og derfor skal der foretages 2 transmissioner for at aflæse data fra en SPI-slave, idét at slaven først skal vide hvilken data der skal klargøres i transfer-bufferen, og derefter have tid til at klargøre denne buffer, før masteren kan aflæse denne. Her skal der tages højde for, at en længere proces skal gennemføres før slaven har klargjort transfer-buffern. Derfor skal masteren, efter at have sendt kommandotypen, vente et bestemt stykke tid, før masteren prøver at aflæse slavens transfer-buffer. Dette er illustreret med et sekvensdiagram på figur \ref{figure:SDSpiSlaveRead}.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[]{Systemarkitektur/images/SDSpiSlaveRead}
+	\caption{Sekvensdiagram for at aflæse data fra en SPI-slave}
+	\label{figure:SDSpiSlaveRead}
+\end{figure} 
 
 \subsection{I2C Kommunikations Protokol}
-
 I afsnittet \ref{afsnit:IBD} \textbf{IBD} ses det på IBD'et (figur \ref{figure:ibdDiagram}) at tre hardwareblokke kommunikerer med hinanden via en I2C bus. Til denne I2C kommunikation er der defineret en protokol, som sætter en standard for hvordan modtaget data skal fortolkes. Denne protokol beskrives her.
 
 I2C gør brug af en indbygget protokol der anvender adressering af hardware-enheder for at identificere hvilken enhed der kommunikeres med. Derfor har hardwareblokkene som indgår i I2C kommunikation fået tildelt adresser. På tabel \ref{table:I2CAddress} ses adresserne tildelt systemets PSoCs.
