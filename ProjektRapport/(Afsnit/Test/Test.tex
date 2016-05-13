@@ -1,0 +1,76 @@
+\chapter{Test}
+For at verificere systemets funktionaliteter for både hardware og software blev der udført modultests, integrationstests samt en endelig accepttest. I følgende afsnit vil fremgangsmåden for hver type test blive beskrevet, samt opsummerede resultater af udførte tests. 
+
+\section{Modultest}
+Ved modultests blev én funktionalitet testet i isolation, dvs. ved så lidt påvirkning fra resten af systemet så muligt. Modultests blev udført før integrationstests, for at sikre individual funktionalitet før sammensætning af alle komponenter. Modultests blev udført både for software-komponenter og hardware-komponenter.
+
+\subsection{Software}
+Til modultest af software er der gjort brug af white-box testing. Dette blev gjort da softwaren ligger tæt op af hardwaren til kommunikationsbusserne, hvilket kræver tekniske viden af den interne struktur for både hardware og software.
+
+\subsubsection{Wii-Nunchuck}
+Dataoverførsel fra Wii-Nunchuck sker ved at PSoC0 først sender et \textit{handshake}, hvilket er en enkelt byte med værdien 0x00. Herefter kan PSoC0 aflæse Wii-Nunchuck tilstanden ved kontinuert at sende en byte med værdien \textit{??}, efterfulgt af den egentlig aflæsning. Det er altså disse to dele der skal testes på.
+
+For flere tekniske detaljer, samt billeder af målingerne, refereres til \textbf{DOKUMENTATION \#ref}
+
+Tabel \ref{table:modulTestNunchuckHandShake} og \ref{table:modulTestNunchuckReading} præsenterer modultest resultaterne for Wii-Nunchuck.
+
+\begin{table}[H]
+	\centering
+	\begin{tabular}{ll}
+		\hline
+		Forventet Resultat & \begin{tabular}[c]{@{}l@{}}På I2C Bussen måles et \textit{ACKNOWLEDGE} fra Wii-Nunchuck \\ slaven når den får tilsendt et handshake fra PSoC0. Det skal \\ desuden kunne ses at en byte med værdien 0x00 modtages \\ af Wii-Nunchuck. \end{tabular} \\
+		\rowcolor[HTML]{CBCEFB} 
+		Egentlig Resultat  & \begin{tabular}[c]{@{}l@{}}Et \textit{ACKNOWLEDGE} blev målt som forventet, \\ og handshake byten med værdi 0x00 blev modtaget korrekt. \end{tabular}                                       \\ \hline
+	\end{tabular}
+	\caption{Modultest af Wii-Nunchuck Handshake}
+	\label{table:modulTestNunchuckHandShake}
+\end{table}
+
+\begin{table}[H]
+	\centering
+	\begin{tabular}{ll}
+		\hline
+		Forventet Resultat & \begin{tabular}[c]{@{}l@{}}På I2C bussen måles en aflæsning af bytes fra Wii-Nunchuck\\ slaven.\end{tabular}                \\
+		\rowcolor[HTML]{CBCEFB} 
+		Egentlig Resultat  & \begin{tabular}[c]{@{}l@{}}På målingen af I2C bussen ses det at bytes bliver aflæst fra\\ Wii-Nunchuck slaven.\end{tabular} \\ \hline
+	\end{tabular}
+	\caption{Modultest af Wii-Nunchuck Data Aflæsning}
+	\label{table:modulTestNunchuckReading}
+\end{table}
+
+Det kan på tabel \ref{table:modulTestNunchuckHandShake} og \ref{table:modulTestNunchuckReading} ses at de egentlige resultaterne stemte overens med de forventede.
+
+\subsubsection{I2C Kommunikationsprotokol}
+I2C Kommunikationsprotokollen beskrevet i afsnit \ref{afsnit:I2CProtokol} blev modultestet ved to tests. Den første test er til for at verificere at kommandotyper bliver overført på I2C bussen i korrekt format. Den anden test er til for at verificere at modtaget I2C data fortolkes korrekt af software på PSoC0.
+
+\begin{table}[H]
+	\centering
+	\begin{tabular}{ll}
+		\hline
+		Forventet Resultat & \begin{tabular}[c]{@{}l@{}}På I2C Bussen måles kommandotypen NunchuckData \\i korrekt format.\end{tabular} \\
+		\rowcolor[HTML]{CBCEFB} 
+		Egentlig Resultat  & \begin{tabular}[c]{@{}l@{}}Målingen af I2C bussen viste kommandotypen \\ NunchuckData i korrekt format.  \end{tabular}                                       \\ \hline
+	\end{tabular}
+	\caption{Modultest af kommandotype på I2C Bussen}
+	\label{table:modulTestCommandFormat}
+\end{table}
+
+\begin{table}[H]
+	\centering
+	\begin{tabular}{ll}
+		\hline
+		Forventet Resultat & \begin{tabular}[c]{@{}l@{}} \end{tabular} \\
+		\rowcolor[HTML]{CBCEFB} 
+		Egentlig Resultat  & \begin{tabular}[c]{@{}l@{}}  \end{tabular}                                       \\ \hline
+	\end{tabular}
+	\caption{Modultest af kommando fortolknings software}
+	\label{table:modulTestI2CData}
+\end{table}
+
+\subsubsection{SPI Kommunikationsprotokol}
+
+\subsection{Hardware}
+
+\section{Integrationstest}
+
+\section{Accepttest}

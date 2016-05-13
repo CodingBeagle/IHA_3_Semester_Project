@@ -15,6 +15,8 @@ På figur \ref{figure:domainModel} ses domænemodellen af systemet. Denne har ti
 
 Her repræsenteres hardware som blokke forbundet med associeringer. Associeringerne viser grænsefladerne mellem de forbundne hardware komponenter (Enten \textit{SPI} eller \textit{I2C}), samt retningen af kommunikationen. Af modellen fremstår konceptuelle kommandoer for grænsefladerne, som beskriver deres nødvændige attributter.
 
+Domænemodellen er brugt til at udlede grænseflader for systemet, samt potentielle hardware- og softwarekomponenter. Hvad der er udledt af domænemodellen i forhold til grænseflader og komponenter, og hvordan dette bruges omdiskuteres i de følgende arkitektur afsnit.
+
 \section{Software Allokering}
 \label{afsnit:SoftwareAllokering}
 
@@ -156,7 +158,7 @@ En essentiel del af systemet er at kunne styre motoren ved brug af Wii-Nunchuck 
 \end{figure}
 
 \subsubsection{System Test}
-Use Case 2 beskriver test af systemet før spillet startes. På figur \ref{fig:SystemTestSekvensDiagram} vises test sekvensen. Det ses her at 
+Use Case 2 beskriver test af systemet før spillet startes. På figur \ref{fig:SystemTestSekvensDiagram} vises test sekvensen for en vellykket test. Det ses her at system testen sker sekventielt, og tester systemets SPI og I2C busser.
 
 \begin{figure}[H]
 	\centering
@@ -202,6 +204,7 @@ Kommunikation på en SPI-bus foregår ved bit-shifting. Dette betyder at indhold
 \end{figure} 
 
 \subsection{I2C Kommunikations Protokol}
+\label{afsnit:I2CProtokol}
 I afsnit \ref{afsnit:IBD} \textbf{IBD} ses på figur \ref{figure:ibdDiagram} at tre hardwareblokke kommunikerer via en I2C bus. Til denne I2C kommunikation er der defineret en protokol, som bestemmer hvordan modtaget data skal fortolkes. Denne protokol beskrives følgende.
 
 I2C gør brug af en indbygget protokol, der anvender adressering af hardware-enheder til identificering af hvilken enhed der kommunikeres med. Derfor har hardwareblokkene som indgår i I2C kommunikationen fået tildelt adresser. På tabel \ref{table:I2CAddress} ses adresserne tildelt systemets PSoCs.
@@ -248,11 +251,14 @@ På tabel \ref{table:I2CKommandoer} ses de definerede kommandotyper og det tilsv
 			\rowcolor[HTML]{CBCEFB} 
 			I2CTestAck                            & Anmodning om at få en I2C OK besked fra I2C enhed                           & 0010 1000                        & 0x28                           & Ingen databyte                                                                                                         
 		\end{tabular}
-	}
+	}<
 	\caption{I2C kommunikation kommandotyper}
 	\label{table:I2CKommandoer}
 \end{table}
 
 Kolonnerne \textit{Binær Værdi} og \textit{Hex Værdi} i tabel \ref{table:I2CKommandoer} viser kommandotypens unikke tal-ID i både binær- og hexadecimalform. Denne værdi sendes som den første byte, for at identificere kommandotypen. 
+
+\subsection{Klassediagrammer}
+
 
 \subsection{Specifikation og Analyse}
