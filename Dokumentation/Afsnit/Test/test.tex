@@ -1,10 +1,8 @@
-\chapter{Test}
+\chapter{Modultest}
 
-\section{Modultest}
+\section{Software}
 
-\subsection{Software}
-
-\subsubsection{Modultest af Wii-Nunchuck}
+\subsection{Modultest af Wii-Nunchuck}
 På PSoC0 er der software til aflæsning af Wii-Nunchuck input data. Følgende afsnit beskriver test af dette software.
 
 Aflæsning af Wii-Nunchuck sker i to skridt, som begge verificeres ved modul test. Først skal der sendes et \textit{Handshake} fra PSoC0 til Wii-Nunchuck for at initialisere data udveksling, og herefter sker data udveksling hver gang PSoC0 sender en anmodning om det. Disse to skridt modultestes her.
@@ -47,11 +45,22 @@ På figur \ref{fig:NunchuckReadValues} ses I2C beskederne der bliver udvekslet m
 	\label{fig:NunchuckReadValues}
 \end{figure}
 
-\subsubsection{SPI Protokol}
-Devkittet kommunikerer over en SPI bus via SPI protokollen via SPI protokollen i afsnit {\large reference to SPIprotokol}. Dette afsnit beskriver test af denne protokol.
+\subsection{SPI Protokol}
+Devkittet kommunikerer over en SPI bus. Kommunikationen følger SPI kommunikations protokollen, som er beskrevet i afsnit \ref{afsnit:spiprotokol}. Dette afsnit beskriver test af denne protokol.
 
 \subsubsection{SPI Bus Test}
-Test af SPI bussen udføres i to dele. Første del af testen udføres ved at sende kommandotypen for start af SPI test i terminalen. Derefter måles retur beskeden på bussen med Analog Discovery. Anden del af testen udføres ved at afkoble en fysisk forbindelse på SPI bussen, derefter sendes kommandotypen for start SPI test via terminalen. På terminalen aflæses returbeskeden.
+Test af SPI bussen udføres i to dele. Første del af testen udføres ved at sende kommandotypen for start af SPI test i terminalen, og derefter verificere den sendte data vha. Analog Discovery. Den anden del af testen, er at aflæse returbeskeden på bussen med Analog Discovery. Målet med denne test, er at læse kommandotypen "SPI\_OK", der indikerer en successful aflæsning af SPI-slaven.  På figur \ref{figure:SpiTestSetup} ses test opsætningen. Devkit8000, PSoC0s SPI-bus og Analog Discovery  er forbundet til hinanden igennem fumlebrættet. PSoC0 og PSoC1's I2C-forbindelser forbindes til nunchucken igennem fumlebrættet, adskilt fra SPI-forbindelserne.
+
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\textwidth]{Test/images/SPItest/SpiTestSetup}
+	\caption{Opsætning for SPI-test}
+	\label{figure:SpiTestSetup}
+\end{figure}
+
+
+I testen afsendes SPI test kommandotypen, som har værdien 0xF1 jf. tabel \ref{tabel:spiKommandoType}. For at verificere, at kommandotypen er sendt ud på SPI-bussen korrekt, blev Analog Discovery's 'Logic Analyzer' brugt til at aflæse SPI-bussen. Det var forventet at 0xF1 blev aflæst på bussen. Det afmålte resultat stemte overens med det forventede. Målingen ses på figur \ref{fig:SPItestkommandotype}. 
 
 \begin{figure}[H]
 	\centering
@@ -60,10 +69,7 @@ Test af SPI bussen udføres i to dele. Første del af testen udføres ved at sen
 	\label{fig:SPItestkommandotype}
 \end{figure}
 
-I testen afsendes SPI test kommandotypen, som har værdien 0xF1. Målingen af dette ses i figur \ref{fig:SPItestkommandotype}
-
-\subsubsection{SPI Bus Test: Del 1}
-Når kommandotypen er afsendt er det forventede resultat af næste måling på SPI bussen, 0xD1. Måling af returbeskeden ses på figur \ref{fig:SPItestSPIOK}
+Hvis SPI-kommunikationen fungerer korrekt, er det forventet at der aflæses 0xD1 på SPI-bussen, da dette betyder 'SPI\_OK' jf. tabel \ref{tabel:spiKommandoType}. Måling af returbeskeden ses på figur \ref{fig:SPItestSPIOK}.
 
 \begin{figure}[H]
 	\centering
@@ -74,24 +80,11 @@ Når kommandotypen er afsendt er det forventede resultat af næste måling på S
 
 På figur \ref{fig:SPItestSPIOK} ses at returbeskeden har den forventede værdi 0xD1, som indikerer at SPI bus testens første del er gennemført uden fejl.
 
-\subsubsection{SPI Bus Test: Del 2}
-Når kommandotypen er afsendt er det forventede resultat at SPI testen fejler ved at der aflæses en værdi forskellig fra den forventede værdi, 0xD1. På figur \ref{fig:SPItestFAIL}
-ses målingen af returbeskeden.
-
-\begin{figure}[H]
-	\centering
-	\includegraphics[width=\textwidth]{Test/images/SPItest/SPItestFAIL}
-	\caption{Måling af returbesked for start SPI test}
-	\label{fig:SPItestFAIL}
-\end{figure}
-
-På figur \ref{fig:SPItestFAIL} ses returbeskeden i terminalen ikke har den forventede værdi, 0xD1. Derimod har denne værdien 0xFF, som indikerer at SPI bus testens anden del er gennemført uden fejl.
-
 Ud fra testenes resultater kan det konkluderes at implementeringen af SPI protokollen fungerer efter hensigten.
 
 
 
-\subsubsection{I2C Protokol}
+\subsection{I2C Protokol}
 PSoC0 og PSoC1 kommunikerer over en I2C bus via I2C protokollen beskrevet i afsnit \ref{afsnit:I2CProtokol}. Dette afsnit beskriver test af denne protokol. Følgende test tager udgangspunkt i kommandotypen \textit{NunchuckData} beskrevet i tabel \ref{table:I2CKommandoer}).
 
 \subsubsection{Test af NunchuckData kommandotype} 
@@ -151,8 +144,8 @@ På figur \ref{fig:I2CProtocolReadNoInput} ses afmålingen af modtager-bufferen 
 
 Ud fra testen kan det konkluderes at implementeringen af I2C-protokollen fungerer efter hensigten.
 
-\subsection{Hardware}
-\subsubsection{H-bro} 
+\section{Hardware}
+\subsection{H-bro} 
 
 \textbf{Formål}
 \\ Formålet med denne test er at viser at motor kan styres i begge retninger, ved hjælp af h broen.\\
@@ -204,5 +197,12 @@ Man kan også på figuren se at når den orange/blå går høj, så stiger den m
 
 
 \section{Integration}
+For at verificere at systemet fungerer når det sammensættes til en enkelt enhed, er der lavet en integrationstest. Testen er lavet ud fra et 'black-box' princip, hvilket vil sige, at der kun evalueres ud fra systemets funktionalitet, og ikke på de interne forbindelser.
+Testen udføres ved, at klikke på 'Start-test', og bagefter observere udskrivningen på terminal-vinduet på grænsefladen. 
 
+\begin{figure}[H]
+	\includegraphics[width=\textwidth]{Test/images/SPItest/SPIModulTestOpsaetning2}
+	\caption{Integrationstest opstilling}
+	\label{figure:IntegrationstestOpstilling}
+\end{figure}
 \section{Accepttest}
