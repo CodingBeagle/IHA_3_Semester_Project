@@ -57,11 +57,6 @@
           <File BuildType="BUILD" Toolchain="">.\Generated_Source\PSoC4\Opamp_1.c</File>
           <File BuildType="BUILD" Toolchain="">.\Generated_Source\PSoC4\Opamp_1.h</File>
           <File BuildType="BUILD" Toolchain="">.\Generated_Source\PSoC4\Opamp_1_PM.c</File>
-          <File BuildType="BUILD" Toolchain="">.\Generated_Source\PSoC4\PWM_1.c</File>
-          <File BuildType="BUILD" Toolchain="">.\Generated_Source\PSoC4\PWM_1.h</File>
-          <File BuildType="BUILD" Toolchain="">.\Generated_Source\PSoC4\PWM_1_PM.c</File>
-          <File BuildType="BUILD" Toolchain="">.\Generated_Source\PSoC4\Clock_1.c</File>
-          <File BuildType="BUILD" Toolchain="">.\Generated_Source\PSoC4\Clock_1.h</File>
           <File BuildType="BUILD" Toolchain="">.\Generated_Source\PSoC4\cycodeshareimport.ld</File>
           <File BuildType="BUILD" Toolchain="">.\Generated_Source\PSoC4\cycodeshareexport.ld</File>
           <File BuildType="BUILD" Toolchain="">.\Generated_Source\PSoC4\cycodeshareimport.scat</File>
@@ -88,6 +83,10 @@
           <File BuildType="BUILD" Toolchain="">.\Generated_Source\PSoC4\CyLFClk.c</File>
           <File BuildType="BUILD" Toolchain="">.\Generated_Source\PSoC4\CyLFClk.h</File>
           <File BuildType="BUILD" Toolchain="">.\Generated_Source\PSoC4\project.h</File>
+          <File BuildType="BUILD" Toolchain="">.\Generated_Source\PSoC4\Pin_red.c</File>
+          <File BuildType="BUILD" Toolchain="">.\Generated_Source\PSoC4\Pin_red.h</File>
+          <File BuildType="BUILD" Toolchain="">.\Generated_Source\PSoC4\Pin_red_aliases.h</File>
+          <File BuildType="BUILD" Toolchain="">.\Generated_Source\PSoC4\Pin_red_PM.c</File>
           <File BuildType="BUILD" Toolchain="">.\Generated_Source\PSoC4\ADC_2.c</File>
           <File BuildType="BUILD" Toolchain="">.\Generated_Source\PSoC4\ADC_2.h</File>
           <File BuildType="BUILD" Toolchain="">.\Generated_Source\PSoC4\ADC_2_PM.c</File>
@@ -116,6 +115,24 @@
           <File BuildType="BUILD" Toolchain="">.\Generated_Source\PSoC4\ADC_in.h</File>
           <File BuildType="BUILD" Toolchain="">.\Generated_Source\PSoC4\ADC_in_aliases.h</File>
           <File BuildType="BUILD" Toolchain="">.\Generated_Source\PSoC4\ADC_in_PM.c</File>
+          <File BuildType="BUILD" Toolchain="">.\Generated_Source\PSoC4\PWM_led.c</File>
+          <File BuildType="BUILD" Toolchain="">.\Generated_Source\PSoC4\PWM_led.h</File>
+          <File BuildType="BUILD" Toolchain="">.\Generated_Source\PSoC4\PWM_led_PM.c</File>
+          <File BuildType="BUILD" Toolchain="">.\Generated_Source\PSoC4\Clock_0.c</File>
+          <File BuildType="BUILD" Toolchain="">.\Generated_Source\PSoC4\Clock_0.h</File>
+          <File BuildType="BUILD" Toolchain="">.\Generated_Source\PSoC4\PWM_motor.c</File>
+          <File BuildType="BUILD" Toolchain="">.\Generated_Source\PSoC4\PWM_motor.h</File>
+          <File BuildType="BUILD" Toolchain="">.\Generated_Source\PSoC4\PWM_motor_PM.c</File>
+          <File BuildType="BUILD" Toolchain="">.\Generated_Source\PSoC4\isr_Shoot.c</File>
+          <File BuildType="BUILD" Toolchain="">.\Generated_Source\PSoC4\isr_Shoot.h</File>
+          <File BuildType="BUILD" Toolchain="">.\Generated_Source\PSoC4\isr_in.c</File>
+          <File BuildType="BUILD" Toolchain="">.\Generated_Source\PSoC4\isr_in.h</File>
+          <File BuildType="BUILD" Toolchain="">.\Generated_Source\PSoC4\isr_in_aliases.h</File>
+          <File BuildType="BUILD" Toolchain="">.\Generated_Source\PSoC4\isr_in_PM.c</File>
+          <File BuildType="BUILD" Toolchain="">.\Generated_Source\PSoC4\Pin_green.c</File>
+          <File BuildType="BUILD" Toolchain="">.\Generated_Source\PSoC4\Pin_green.h</File>
+          <File BuildType="BUILD" Toolchain="">.\Generated_Source\PSoC4\Pin_green_aliases.h</File>
+          <File BuildType="BUILD" Toolchain="">.\Generated_Source\PSoC4\Pin_green_PM.c</File>
         </Files>
       </Folder>
       <Folder BuildType="STRICT" Path="C:\Users\PernilleLouise\Documents\Elektro\3. semester\E3PRJ3\Hardware\Sensor_til_tandhjul\sensor_tandhjul\Design01.cydsn\Export\ARM_GCC_Generic">

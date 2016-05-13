@@ -1,5 +1,5 @@
 /*******************************************************************************
-* File Name: PWM_1_PM.c
+* File Name: PWM_led_PM.c
 * Version 3.30
 *
 * Description:
@@ -15,13 +15,13 @@
 * the software package with which this file was provided.
 *******************************************************************************/
 
-#include "PWM_1.h"
+#include "PWM_led.h"
 
-static PWM_1_backupStruct PWM_1_backup;
+static PWM_led_backupStruct PWM_led_backup;
 
 
 /*******************************************************************************
-* Function Name: PWM_1_SaveConfig
+* Function Name: PWM_led_SaveConfig
 ********************************************************************************
 *
 * Summary:
@@ -34,41 +34,41 @@ static PWM_1_backupStruct PWM_1_backup;
 *  None
 *
 * Global variables:
-*  PWM_1_backup:  Variables of this global structure are modified to
+*  PWM_led_backup:  Variables of this global structure are modified to
 *  store the values of non retention configuration registers when Sleep() API is
 *  called.
 *
 *******************************************************************************/
-void PWM_1_SaveConfig(void) 
+void PWM_led_SaveConfig(void) 
 {
 
-    #if(!PWM_1_UsingFixedFunction)
-        #if(!PWM_1_PWMModeIsCenterAligned)
-            PWM_1_backup.PWMPeriod = PWM_1_ReadPeriod();
-        #endif /* (!PWM_1_PWMModeIsCenterAligned) */
-        PWM_1_backup.PWMUdb = PWM_1_ReadCounter();
-        #if (PWM_1_UseStatus)
-            PWM_1_backup.InterruptMaskValue = PWM_1_STATUS_MASK;
-        #endif /* (PWM_1_UseStatus) */
+    #if(!PWM_led_UsingFixedFunction)
+        #if(!PWM_led_PWMModeIsCenterAligned)
+            PWM_led_backup.PWMPeriod = PWM_led_ReadPeriod();
+        #endif /* (!PWM_led_PWMModeIsCenterAligned) */
+        PWM_led_backup.PWMUdb = PWM_led_ReadCounter();
+        #if (PWM_led_UseStatus)
+            PWM_led_backup.InterruptMaskValue = PWM_led_STATUS_MASK;
+        #endif /* (PWM_led_UseStatus) */
 
-        #if(PWM_1_DeadBandMode == PWM_1__B_PWM__DBM_256_CLOCKS || \
-            PWM_1_DeadBandMode == PWM_1__B_PWM__DBM_2_4_CLOCKS)
-            PWM_1_backup.PWMdeadBandValue = PWM_1_ReadDeadTime();
+        #if(PWM_led_DeadBandMode == PWM_led__B_PWM__DBM_256_CLOCKS || \
+            PWM_led_DeadBandMode == PWM_led__B_PWM__DBM_2_4_CLOCKS)
+            PWM_led_backup.PWMdeadBandValue = PWM_led_ReadDeadTime();
         #endif /*  deadband count is either 2-4 clocks or 256 clocks */
 
-        #if(PWM_1_KillModeMinTime)
-             PWM_1_backup.PWMKillCounterPeriod = PWM_1_ReadKillTime();
-        #endif /* (PWM_1_KillModeMinTime) */
+        #if(PWM_led_KillModeMinTime)
+             PWM_led_backup.PWMKillCounterPeriod = PWM_led_ReadKillTime();
+        #endif /* (PWM_led_KillModeMinTime) */
 
-        #if(PWM_1_UseControl)
-            PWM_1_backup.PWMControlRegister = PWM_1_ReadControlRegister();
-        #endif /* (PWM_1_UseControl) */
-    #endif  /* (!PWM_1_UsingFixedFunction) */
+        #if(PWM_led_UseControl)
+            PWM_led_backup.PWMControlRegister = PWM_led_ReadControlRegister();
+        #endif /* (PWM_led_UseControl) */
+    #endif  /* (!PWM_led_UsingFixedFunction) */
 }
 
 
 /*******************************************************************************
-* Function Name: PWM_1_RestoreConfig
+* Function Name: PWM_led_RestoreConfig
 ********************************************************************************
 *
 * Summary:
@@ -81,41 +81,41 @@ void PWM_1_SaveConfig(void)
 *  None
 *
 * Global variables:
-*  PWM_1_backup:  Variables of this global structure are used to
+*  PWM_led_backup:  Variables of this global structure are used to
 *  restore the values of non retention registers on wakeup from sleep mode.
 *
 *******************************************************************************/
-void PWM_1_RestoreConfig(void) 
+void PWM_led_RestoreConfig(void) 
 {
-        #if(!PWM_1_UsingFixedFunction)
-            #if(!PWM_1_PWMModeIsCenterAligned)
-                PWM_1_WritePeriod(PWM_1_backup.PWMPeriod);
-            #endif /* (!PWM_1_PWMModeIsCenterAligned) */
+        #if(!PWM_led_UsingFixedFunction)
+            #if(!PWM_led_PWMModeIsCenterAligned)
+                PWM_led_WritePeriod(PWM_led_backup.PWMPeriod);
+            #endif /* (!PWM_led_PWMModeIsCenterAligned) */
 
-            PWM_1_WriteCounter(PWM_1_backup.PWMUdb);
+            PWM_led_WriteCounter(PWM_led_backup.PWMUdb);
 
-            #if (PWM_1_UseStatus)
-                PWM_1_STATUS_MASK = PWM_1_backup.InterruptMaskValue;
-            #endif /* (PWM_1_UseStatus) */
+            #if (PWM_led_UseStatus)
+                PWM_led_STATUS_MASK = PWM_led_backup.InterruptMaskValue;
+            #endif /* (PWM_led_UseStatus) */
 
-            #if(PWM_1_DeadBandMode == PWM_1__B_PWM__DBM_256_CLOCKS || \
-                PWM_1_DeadBandMode == PWM_1__B_PWM__DBM_2_4_CLOCKS)
-                PWM_1_WriteDeadTime(PWM_1_backup.PWMdeadBandValue);
+            #if(PWM_led_DeadBandMode == PWM_led__B_PWM__DBM_256_CLOCKS || \
+                PWM_led_DeadBandMode == PWM_led__B_PWM__DBM_2_4_CLOCKS)
+                PWM_led_WriteDeadTime(PWM_led_backup.PWMdeadBandValue);
             #endif /* deadband count is either 2-4 clocks or 256 clocks */
 
-            #if(PWM_1_KillModeMinTime)
-                PWM_1_WriteKillTime(PWM_1_backup.PWMKillCounterPeriod);
-            #endif /* (PWM_1_KillModeMinTime) */
+            #if(PWM_led_KillModeMinTime)
+                PWM_led_WriteKillTime(PWM_led_backup.PWMKillCounterPeriod);
+            #endif /* (PWM_led_KillModeMinTime) */
 
-            #if(PWM_1_UseControl)
-                PWM_1_WriteControlRegister(PWM_1_backup.PWMControlRegister);
-            #endif /* (PWM_1_UseControl) */
-        #endif  /* (!PWM_1_UsingFixedFunction) */
+            #if(PWM_led_UseControl)
+                PWM_led_WriteControlRegister(PWM_led_backup.PWMControlRegister);
+            #endif /* (PWM_led_UseControl) */
+        #endif  /* (!PWM_led_UsingFixedFunction) */
     }
 
 
 /*******************************************************************************
-* Function Name: PWM_1_Sleep
+* Function Name: PWM_led_Sleep
 ********************************************************************************
 *
 * Summary:
@@ -129,35 +129,35 @@ void PWM_1_RestoreConfig(void)
 *  None
 *
 * Global variables:
-*  PWM_1_backup.PWMEnableState:  Is modified depending on the enable
+*  PWM_led_backup.PWMEnableState:  Is modified depending on the enable
 *  state of the block before entering sleep mode.
 *
 *******************************************************************************/
-void PWM_1_Sleep(void) 
+void PWM_led_Sleep(void) 
 {
-    #if(PWM_1_UseControl)
-        if(PWM_1_CTRL_ENABLE == (PWM_1_CONTROL & PWM_1_CTRL_ENABLE))
+    #if(PWM_led_UseControl)
+        if(PWM_led_CTRL_ENABLE == (PWM_led_CONTROL & PWM_led_CTRL_ENABLE))
         {
             /*Component is enabled */
-            PWM_1_backup.PWMEnableState = 1u;
+            PWM_led_backup.PWMEnableState = 1u;
         }
         else
         {
             /* Component is disabled */
-            PWM_1_backup.PWMEnableState = 0u;
+            PWM_led_backup.PWMEnableState = 0u;
         }
-    #endif /* (PWM_1_UseControl) */
+    #endif /* (PWM_led_UseControl) */
 
     /* Stop component */
-    PWM_1_Stop();
+    PWM_led_Stop();
 
     /* Save registers configuration */
-    PWM_1_SaveConfig();
+    PWM_led_SaveConfig();
 }
 
 
 /*******************************************************************************
-* Function Name: PWM_1_Wakeup
+* Function Name: PWM_led_Wakeup
 ********************************************************************************
 *
 * Summary:
@@ -171,19 +171,19 @@ void PWM_1_Sleep(void)
 *  None
 *
 * Global variables:
-*  PWM_1_backup.pwmEnable:  Is used to restore the enable state of
+*  PWM_led_backup.pwmEnable:  Is used to restore the enable state of
 *  block on wakeup from sleep mode.
 *
 *******************************************************************************/
-void PWM_1_Wakeup(void) 
+void PWM_led_Wakeup(void) 
 {
      /* Restore registers values */
-    PWM_1_RestoreConfig();
+    PWM_led_RestoreConfig();
 
-    if(PWM_1_backup.PWMEnableState != 0u)
+    if(PWM_led_backup.PWMEnableState != 0u)
     {
         /* Enable component's operation */
-        PWM_1_Enable();
+        PWM_led_Enable();
     } /* Do nothing if component's block was disabled before */
 
 }

@@ -14,17 +14,41 @@
 #include <stdio.h>
 #include <math.h>
 
+volatile uint16 ADCresult; 
+volatile int16 resVolt; 
+
+CY_ISR(isr_in)
+{
+    PWM_motor_Start(); //Start motor
+    
+    do 
+    {
+        Pin_red_Write(0); //Sluk rød led
+        Pin_green_Write(1); //Tænd grøn led
+        ADCresult = ADC_2_GetResult16(0);   //output fra ADC
+        resVolt = ADC_2_CountsTo_mVolts(0, ADCresult);  //konvertering af ADC-output til mV
+    }while (resVolt<=1500);
+    
+    PWM_motor_Stop(); //Stop motor
+    Pin_green_Write(0); //Sluk grøn led
+    Pin_red_Write(1); //Tænd rød led
+}
+
 int main()
 {
+    //initialisering af interrupt
+     isr_Shoot_StartEx(isr_in); 
+    
     CyGlobalIntEnable; /* Enable global interrupts. */
         
-    volatile uint16 ADCresult; 
+    
     
     /* Place your initialization/startup code here (e.g. MyInst_Start()) */
     
     
-    Opamp_1_Start();
-    PWM_1_Start(); //initialisering af PWM
+    Opamp_1_Start(); //initialisering af opamp
+    PWM_led_Start(); //initialisering af PWM til led
+    PWM_motor_Start(); //initialisering af PWM til motor
     
     //Initialisering af ADC
     ADC_2_Start(); 
@@ -32,15 +56,13 @@ int main()
     ADC_2_IsEndConversion(ADC_2_WAIT_FOR_RESULT); 
     
     
+   
     
+    Pin_red_Write(1); //Tænd rød led
+    Pin_green_Write(0); 
     for(;;)
     {
-        ADCresult = ADC_2_GetResult16(0);
-        
-        // if(ADCresult>=)
-        //{
-            
-        //}
+                
     }
 }
 
