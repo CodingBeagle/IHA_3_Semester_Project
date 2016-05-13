@@ -14,30 +14,42 @@
   <file name="C:\Users\PernilleLouise\Documents\Elektro\3. semester\E3PRJ3\Hardware\Sensor_til_tandhjul\sensor_tandhjul\Design01.cydsn\codegentemp\cyfitteriar.inc" value="NONE;" />
   <file name="C:\Users\PernilleLouise\Documents\Elektro\3. semester\E3PRJ3\Hardware\Sensor_til_tandhjul\sensor_tandhjul\Design01.cydsn\codegentemp\cyfitter.h" value="NONE;" />
   <file name="C:\Users\PernilleLouise\Documents\Elektro\3. semester\E3PRJ3\Hardware\Sensor_til_tandhjul\sensor_tandhjul\Design01.cydsn\codegentemp\cydisabledsheets.h" value="NONE;" />
-  <file name="C:\Users\PernilleLouise\Documents\Elektro\3. semester\E3PRJ3\Hardware\Sensor_til_tandhjul\sensor_tandhjul\Design01.cydsn\codegentemp\Pin_1.c" value="ARM_C_FILE;Pin_1" />
-  <file name="C:\Users\PernilleLouise\Documents\Elektro\3. semester\E3PRJ3\Hardware\Sensor_til_tandhjul\sensor_tandhjul\Design01.cydsn\codegentemp\Pin_1.h" value="NONE;Pin_1" />
-  <file name="C:\Users\PernilleLouise\Documents\Elektro\3. semester\E3PRJ3\Hardware\Sensor_til_tandhjul\sensor_tandhjul\Design01.cydsn\codegentemp\Pin_1_aliases.h" value="NONE;Pin_1" />
-  <file name="C:\Users\PernilleLouise\Documents\Elektro\3. semester\E3PRJ3\Hardware\Sensor_til_tandhjul\sensor_tandhjul\Design01.cydsn\codegentemp\Pin_1_PM.c" value="ARM_C_FILE;Pin_1" />
-  <file name="C:\Users\PernilleLouise\Documents\Elektro\3. semester\E3PRJ3\Hardware\Sensor_til_tandhjul\sensor_tandhjul\Design01.cydsn\codegentemp\Pin_4.c" value="ARM_C_FILE;Pin_4" />
-  <file name="C:\Users\PernilleLouise\Documents\Elektro\3. semester\E3PRJ3\Hardware\Sensor_til_tandhjul\sensor_tandhjul\Design01.cydsn\codegentemp\Pin_4.h" value="NONE;Pin_4" />
-  <file name="C:\Users\PernilleLouise\Documents\Elektro\3. semester\E3PRJ3\Hardware\Sensor_til_tandhjul\sensor_tandhjul\Design01.cydsn\codegentemp\Pin_4_aliases.h" value="NONE;Pin_4" />
-  <file name="C:\Users\PernilleLouise\Documents\Elektro\3. semester\E3PRJ3\Hardware\Sensor_til_tandhjul\sensor_tandhjul\Design01.cydsn\codegentemp\Pin_4_PM.c" value="ARM_C_FILE;Pin_4" />
+  <file name="C:\Users\PernilleLouise\Documents\Elektro\3. semester\E3PRJ3\Hardware\Sensor_til_tandhjul\sensor_tandhjul\Design01.cydsn\codegentemp\opamp_m.c" value="ARM_C_FILE;opamp_m" />
+  <file name="C:\Users\PernilleLouise\Documents\Elektro\3. semester\E3PRJ3\Hardware\Sensor_til_tandhjul\sensor_tandhjul\Design01.cydsn\codegentemp\opamp_m.h" value="NONE;opamp_m" />
+  <file name="C:\Users\PernilleLouise\Documents\Elektro\3. semester\E3PRJ3\Hardware\Sensor_til_tandhjul\sensor_tandhjul\Design01.cydsn\codegentemp\opamp_m_aliases.h" value="NONE;opamp_m" />
+  <file name="C:\Users\PernilleLouise\Documents\Elektro\3. semester\E3PRJ3\Hardware\Sensor_til_tandhjul\sensor_tandhjul\Design01.cydsn\codegentemp\opamp_m_PM.c" value="ARM_C_FILE;opamp_m" />
+  <file name="C:\Users\PernilleLouise\Documents\Elektro\3. semester\E3PRJ3\Hardware\Sensor_til_tandhjul\sensor_tandhjul\Design01.cydsn\codegentemp\PWM_out.c" value="ARM_C_FILE;PWM_out" />
+  <file name="C:\Users\PernilleLouise\Documents\Elektro\3. semester\E3PRJ3\Hardware\Sensor_til_tandhjul\sensor_tandhjul\Design01.cydsn\codegentemp\PWM_out.h" value="NONE;PWM_out" />
+  <file name="C:\Users\PernilleLouise\Documents\Elektro\3. semester\E3PRJ3\Hardware\Sensor_til_tandhjul\sensor_tandhjul\Design01.cydsn\codegentemp\PWM_out_aliases.h" value="NONE;PWM_out" />
+  <file name="C:\Users\PernilleLouise\Documents\Elektro\3. semester\E3PRJ3\Hardware\Sensor_til_tandhjul\sensor_tandhjul\Design01.cydsn\codegentemp\PWM_out_PM.c" value="ARM_C_FILE;PWM_out" />
   <file name="C:\Users\PernilleLouise\Documents\Elektro\3. semester\E3PRJ3\Hardware\Sensor_til_tandhjul\sensor_tandhjul\Design01.cydsn\codegentemp\Opamp_1.c" value="ARM_C_FILE;Opamp_1" />
   <file name="C:\Users\PernilleLouise\Documents\Elektro\3. semester\E3PRJ3\Hardware\Sensor_til_tandhjul\sensor_tandhjul\Design01.cydsn\codegentemp\Opamp_1.h" value="NONE;Opamp_1" />
   <file name="C:\Users\PernilleLouise\Documents\Elektro\3. semester\E3PRJ3\Hardware\Sensor_til_tandhjul\sensor_tandhjul\Design01.cydsn\codegentemp\Opamp_1_PM.c" value="ARM_C_FILE;Opamp_1" />
   <file name="C:\Users\PernilleLouise\Documents\Elektro\3. semester\E3PRJ3\Hardware\Sensor_til_tandhjul\sensor_tandhjul\Design01.cydsn\codegentemp\PWM_1.c" value="ARM_C_FILE;PWM_1" />
   <file name="C:\Users\PernilleLouise\Documents\Elektro\3. semester\E3PRJ3\Hardware\Sensor_til_tandhjul\sensor_tandhjul\Design01.cydsn\codegentemp\PWM_1.h" value="NONE;PWM_1" />
   <file name="C:\Users\PernilleLouise\Documents\Elektro\3. semester\E3PRJ3\Hardware\Sensor_til_tandhjul\sensor_tandhjul\Design01.cydsn\codegentemp\PWM_1_PM.c" value="ARM_C_FILE;PWM_1" />
-  <file name="C:\Users\PernilleLouise\Documents\Elektro\3. semester\E3PRJ3\Hardware\Sensor_til_tandhjul\sensor_tandhjul\Design01.cydsn\codegentemp\Pin_2.c" value="ARM_C_FILE;Pin_2" />
-  <file name="C:\Users\PernilleLouise\Documents\Elektro\3. semester\E3PRJ3\Hardware\Sensor_til_tandhjul\sensor_tandhjul\Design01.cydsn\codegentemp\Pin_2.h" value="NONE;Pin_2" />
-  <file name="C:\Users\PernilleLouise\Documents\Elektro\3. semester\E3PRJ3\Hardware\Sensor_til_tandhjul\sensor_tandhjul\Design01.cydsn\codegentemp\Pin_2_aliases.h" value="NONE;Pin_2" />
-  <file name="C:\Users\PernilleLouise\Documents\Elektro\3. semester\E3PRJ3\Hardware\Sensor_til_tandhjul\sensor_tandhjul\Design01.cydsn\codegentemp\Pin_2_PM.c" value="ARM_C_FILE;Pin_2" />
-  <file name="C:\Users\PernilleLouise\Documents\Elektro\3. semester\E3PRJ3\Hardware\Sensor_til_tandhjul\sensor_tandhjul\Design01.cydsn\codegentemp\Pin_3.c" value="ARM_C_FILE;Pin_3" />
-  <file name="C:\Users\PernilleLouise\Documents\Elektro\3. semester\E3PRJ3\Hardware\Sensor_til_tandhjul\sensor_tandhjul\Design01.cydsn\codegentemp\Pin_3.h" value="NONE;Pin_3" />
-  <file name="C:\Users\PernilleLouise\Documents\Elektro\3. semester\E3PRJ3\Hardware\Sensor_til_tandhjul\sensor_tandhjul\Design01.cydsn\codegentemp\Pin_3_aliases.h" value="NONE;Pin_3" />
-  <file name="C:\Users\PernilleLouise\Documents\Elektro\3. semester\E3PRJ3\Hardware\Sensor_til_tandhjul\sensor_tandhjul\Design01.cydsn\codegentemp\Pin_3_PM.c" value="ARM_C_FILE;Pin_3" />
+  <file name="C:\Users\PernilleLouise\Documents\Elektro\3. semester\E3PRJ3\Hardware\Sensor_til_tandhjul\sensor_tandhjul\Design01.cydsn\codegentemp\opamp_p.c" value="ARM_C_FILE;opamp_p" />
+  <file name="C:\Users\PernilleLouise\Documents\Elektro\3. semester\E3PRJ3\Hardware\Sensor_til_tandhjul\sensor_tandhjul\Design01.cydsn\codegentemp\opamp_p.h" value="NONE;opamp_p" />
+  <file name="C:\Users\PernilleLouise\Documents\Elektro\3. semester\E3PRJ3\Hardware\Sensor_til_tandhjul\sensor_tandhjul\Design01.cydsn\codegentemp\opamp_p_aliases.h" value="NONE;opamp_p" />
+  <file name="C:\Users\PernilleLouise\Documents\Elektro\3. semester\E3PRJ3\Hardware\Sensor_til_tandhjul\sensor_tandhjul\Design01.cydsn\codegentemp\opamp_p_PM.c" value="ARM_C_FILE;opamp_p" />
+  <file name="C:\Users\PernilleLouise\Documents\Elektro\3. semester\E3PRJ3\Hardware\Sensor_til_tandhjul\sensor_tandhjul\Design01.cydsn\codegentemp\opamp_out.c" value="ARM_C_FILE;opamp_out" />
+  <file name="C:\Users\PernilleLouise\Documents\Elektro\3. semester\E3PRJ3\Hardware\Sensor_til_tandhjul\sensor_tandhjul\Design01.cydsn\codegentemp\opamp_out.h" value="NONE;opamp_out" />
+  <file name="C:\Users\PernilleLouise\Documents\Elektro\3. semester\E3PRJ3\Hardware\Sensor_til_tandhjul\sensor_tandhjul\Design01.cydsn\codegentemp\opamp_out_aliases.h" value="NONE;opamp_out" />
+  <file name="C:\Users\PernilleLouise\Documents\Elektro\3. semester\E3PRJ3\Hardware\Sensor_til_tandhjul\sensor_tandhjul\Design01.cydsn\codegentemp\opamp_out_PM.c" value="ARM_C_FILE;opamp_out" />
   <file name="C:\Users\PernilleLouise\Documents\Elektro\3. semester\E3PRJ3\Hardware\Sensor_til_tandhjul\sensor_tandhjul\Design01.cydsn\codegentemp\Clock_1.c" value="ARM_C_FILE;Clock_1" />
   <file name="C:\Users\PernilleLouise\Documents\Elektro\3. semester\E3PRJ3\Hardware\Sensor_til_tandhjul\sensor_tandhjul\Design01.cydsn\codegentemp\Clock_1.h" value="NONE;Clock_1" />
+  <file name="C:\Users\PernilleLouise\Documents\Elektro\3. semester\E3PRJ3\Hardware\Sensor_til_tandhjul\sensor_tandhjul\Design01.cydsn\codegentemp\ADC_in.c" value="ARM_C_FILE;ADC_in" />
+  <file name="C:\Users\PernilleLouise\Documents\Elektro\3. semester\E3PRJ3\Hardware\Sensor_til_tandhjul\sensor_tandhjul\Design01.cydsn\codegentemp\ADC_in.h" value="NONE;ADC_in" />
+  <file name="C:\Users\PernilleLouise\Documents\Elektro\3. semester\E3PRJ3\Hardware\Sensor_til_tandhjul\sensor_tandhjul\Design01.cydsn\codegentemp\ADC_in_aliases.h" value="NONE;ADC_in" />
+  <file name="C:\Users\PernilleLouise\Documents\Elektro\3. semester\E3PRJ3\Hardware\Sensor_til_tandhjul\sensor_tandhjul\Design01.cydsn\codegentemp\ADC_in_PM.c" value="ARM_C_FILE;ADC_in" />
+  <file name="C:\Users\PernilleLouise\Documents\Elektro\3. semester\E3PRJ3\Hardware\Sensor_til_tandhjul\sensor_tandhjul\Design01.cydsn\codegentemp\ADC_2.c" value="ARM_C_FILE;ADC_2" />
+  <file name="C:\Users\PernilleLouise\Documents\Elektro\3. semester\E3PRJ3\Hardware\Sensor_til_tandhjul\sensor_tandhjul\Design01.cydsn\codegentemp\ADC_2.h" value="NONE;ADC_2" />
+  <file name="C:\Users\PernilleLouise\Documents\Elektro\3. semester\E3PRJ3\Hardware\Sensor_til_tandhjul\sensor_tandhjul\Design01.cydsn\codegentemp\ADC_2_PM.c" value="ARM_C_FILE;ADC_2" />
+  <file name="C:\Users\PernilleLouise\Documents\Elektro\3. semester\E3PRJ3\Hardware\Sensor_til_tandhjul\sensor_tandhjul\Design01.cydsn\codegentemp\ADC_2_INT.c" value="ARM_C_FILE;ADC_2" />
+  <file name="C:\Users\PernilleLouise\Documents\Elektro\3. semester\E3PRJ3\Hardware\Sensor_til_tandhjul\sensor_tandhjul\Design01.cydsn\codegentemp\ADC_2_IRQ.c" value="ARM_C_FILE;ADC_2_IRQ" />
+  <file name="C:\Users\PernilleLouise\Documents\Elektro\3. semester\E3PRJ3\Hardware\Sensor_til_tandhjul\sensor_tandhjul\Design01.cydsn\codegentemp\ADC_2_IRQ.h" value="NONE;ADC_2_IRQ" />
+  <file name="C:\Users\PernilleLouise\Documents\Elektro\3. semester\E3PRJ3\Hardware\Sensor_til_tandhjul\sensor_tandhjul\Design01.cydsn\codegentemp\ADC_2_intClock.c" value="ARM_C_FILE;ADC_2_intClock" />
+  <file name="C:\Users\PernilleLouise\Documents\Elektro\3. semester\E3PRJ3\Hardware\Sensor_til_tandhjul\sensor_tandhjul\Design01.cydsn\codegentemp\ADC_2_intClock.h" value="NONE;ADC_2_intClock" />
   <file name="C:\Users\PernilleLouise\Documents\Elektro\3. semester\E3PRJ3\Hardware\Sensor_til_tandhjul\sensor_tandhjul\Design01.cydsn\codegentemp\cycodeshareimport.ld" value="NONE;" />
   <file name="C:\Users\PernilleLouise\Documents\Elektro\3. semester\E3PRJ3\Hardware\Sensor_til_tandhjul\sensor_tandhjul\Design01.cydsn\codegentemp\cycodeshareexport.ld" value="NONE;" />
   <file name="C:\Users\PernilleLouise\Documents\Elektro\3. semester\E3PRJ3\Hardware\Sensor_til_tandhjul\sensor_tandhjul\Design01.cydsn\codegentemp\cycodeshareimport.scat" value="NONE;" />

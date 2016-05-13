@@ -1,0 +1,83 @@
+\documentclass{article}
+
+% -- PREAMBLE START --
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern} % load a font with all the characters
+
+\usepackage{parskip}
+
+\usepackage[danish]{isodate}
+
+% Create front page info
+\title{Referat af Vejledermøde}
+\author{Gruppe 3}
+\date{12.02.2016 - kl. 12:00}
+% -- PREAMBLE END --
+
+\begin{document}
+	\maketitle
+	
+	\section{Fremmødte}
+	\begin{itemize}
+		\item Kasper, Daniel, Mikkel, Tenna, Pernille
+	\end{itemize}
+	
+	\section{Udeblevet med afbud}
+	\begin{itemize}
+		\item Mia
+		\item Michael
+	\end{itemize}
+	
+	\section{Udeblevet uden afbud}
+	\begin{itemize}
+		\item Ingen
+	\end{itemize}
+	
+	\section{Dagsorden}
+	\begin{itemize}
+		\item Valg af mødeleder
+		\subitem Tenna
+		\item Valg af referent
+		\subitem Pernille
+		\item Godkendelse af referat fra forrige møde 
+		\subitem Godkendt. 
+		\item Opfølgning på aktionspunkter fra forrige møde
+		\begin{itemize}
+			\item rettelser til rapport
+			\subitem Der er blevet rettet noget men ikke det hele. 
+			
+			\item 
+		\end{itemize}
+		\item Gennemgang af tidsplan
+		\subitem Tenna og Pernille kæmper med at få lavet detektoren til at virke. 
+		\item Status på projektet
+		\begin{itemize}
+			\item Vi har lavet en platform der kan dreje fra side til side. Og så har vi bygget noget af LEGO, der kan dreje op og ned. Og så har vi bygget en skyder. 
+			\item Platformen kan også styres med nunchuck. 
+			\item Der er ikke lavet en illustrativ GUI. Men den er i gang. 
+			\item Daniel og Kasper har skrevet en masse rapport. 
+		\end{itemize}
+		\item Spørgsmål til rapport
+		\begin{itemize}
+			\item Modultest af SPI og I2C med en masse forskellige typer. Der er ikke dokumenteret for hver enkelt type. Lav note om at der er kørt det samme for alle talværdier. 
+			\subitem Normalt når man laver SW-test kører man alle scenarier igennem. 
+			\subitem I rapporten tænkes det at lave en tabel med forventet resultat og reelt resultat. 
+			\subitem Hvis man løber total tør for plads er test det man kan fjerne fra rapporten. Henvis helt konkret til den i rapporten. 
+			\item Længde af rapporten
+			\subitem Hvis man kommer langt op over 50 LaTeX-sider skal alarmklokkerne ringe. 
+			\subitem Hvis rapporten er for lang er det et symptom på, at vi ikke har fattet os i korthed. 
+			\subitem Det er okay, at rapporten er lang lige nu. 
+			\item Præsentation af løsninger, hvorfor har vi gjort som vi har gjort, andre løsninger. 
+			\item Husk krydshenvisninger! 
+			\subitem Evt. \\ref{} som tom, så kommer der spørgsmålstegn. 
+			\item Opgaver til rapporten
+			\subitem Analyse
+			\subsubitem Her beskrives overordnet, hvordan og hvorfor om valg af fx H-bro, Devkit. 
+			\subsubitem Gunvor: Det man normalt vil putte ind er helt grundlæggende fysiske egenskaber. Hvad skal styre hele skidtet. Fysiklove. Sige, at den skal styres af noget embedded. Det embeddede skal styres af PSoCs. Analyse af fysik i systemet. Hvordan virker Candygun rent fysisk. Hvordan styres den? Valget af devkit er truffet før alt, så det beskrives her, hvad der gjorde, at vi valgte de forskellige dele. Hvorfor er delene relevante for projektet? PSoC er smart fordi det er et udviklingsboard, der er let at arbejde med. 
+		\end{itemize}
+		
+		\item Tidspunkt for næste møde
+		\subitem Onsdag d. 18. maj kl. 8.15. 
+	\end{itemize}
+\end{document}

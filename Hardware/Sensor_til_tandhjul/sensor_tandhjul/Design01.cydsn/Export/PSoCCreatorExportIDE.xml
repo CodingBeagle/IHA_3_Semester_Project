@@ -54,28 +54,12 @@
           <File BuildType="BUILD" Toolchain="">.\Generated_Source\PSoC4\cyfitteriar.inc</File>
           <File BuildType="BUILD" Toolchain="">.\Generated_Source\PSoC4\cyfitter.h</File>
           <File BuildType="BUILD" Toolchain="">.\Generated_Source\PSoC4\cydisabledsheets.h</File>
-          <File BuildType="BUILD" Toolchain="">.\Generated_Source\PSoC4\Pin_1.c</File>
-          <File BuildType="BUILD" Toolchain="">.\Generated_Source\PSoC4\Pin_1.h</File>
-          <File BuildType="BUILD" Toolchain="">.\Generated_Source\PSoC4\Pin_1_aliases.h</File>
-          <File BuildType="BUILD" Toolchain="">.\Generated_Source\PSoC4\Pin_1_PM.c</File>
-          <File BuildType="BUILD" Toolchain="">.\Generated_Source\PSoC4\Pin_4.c</File>
-          <File BuildType="BUILD" Toolchain="">.\Generated_Source\PSoC4\Pin_4.h</File>
-          <File BuildType="BUILD" Toolchain="">.\Generated_Source\PSoC4\Pin_4_aliases.h</File>
-          <File BuildType="BUILD" Toolchain="">.\Generated_Source\PSoC4\Pin_4_PM.c</File>
           <File BuildType="BUILD" Toolchain="">.\Generated_Source\PSoC4\Opamp_1.c</File>
           <File BuildType="BUILD" Toolchain="">.\Generated_Source\PSoC4\Opamp_1.h</File>
           <File BuildType="BUILD" Toolchain="">.\Generated_Source\PSoC4\Opamp_1_PM.c</File>
           <File BuildType="BUILD" Toolchain="">.\Generated_Source\PSoC4\PWM_1.c</File>
           <File BuildType="BUILD" Toolchain="">.\Generated_Source\PSoC4\PWM_1.h</File>
           <File BuildType="BUILD" Toolchain="">.\Generated_Source\PSoC4\PWM_1_PM.c</File>
-          <File BuildType="BUILD" Toolchain="">.\Generated_Source\PSoC4\Pin_2.c</File>
-          <File BuildType="BUILD" Toolchain="">.\Generated_Source\PSoC4\Pin_2.h</File>
-          <File BuildType="BUILD" Toolchain="">.\Generated_Source\PSoC4\Pin_2_aliases.h</File>
-          <File BuildType="BUILD" Toolchain="">.\Generated_Source\PSoC4\Pin_2_PM.c</File>
-          <File BuildType="BUILD" Toolchain="">.\Generated_Source\PSoC4\Pin_3.c</File>
-          <File BuildType="BUILD" Toolchain="">.\Generated_Source\PSoC4\Pin_3.h</File>
-          <File BuildType="BUILD" Toolchain="">.\Generated_Source\PSoC4\Pin_3_aliases.h</File>
-          <File BuildType="BUILD" Toolchain="">.\Generated_Source\PSoC4\Pin_3_PM.c</File>
           <File BuildType="BUILD" Toolchain="">.\Generated_Source\PSoC4\Clock_1.c</File>
           <File BuildType="BUILD" Toolchain="">.\Generated_Source\PSoC4\Clock_1.h</File>
           <File BuildType="BUILD" Toolchain="">.\Generated_Source\PSoC4\cycodeshareimport.ld</File>
@@ -104,6 +88,34 @@
           <File BuildType="BUILD" Toolchain="">.\Generated_Source\PSoC4\CyLFClk.c</File>
           <File BuildType="BUILD" Toolchain="">.\Generated_Source\PSoC4\CyLFClk.h</File>
           <File BuildType="BUILD" Toolchain="">.\Generated_Source\PSoC4\project.h</File>
+          <File BuildType="BUILD" Toolchain="">.\Generated_Source\PSoC4\ADC_2.c</File>
+          <File BuildType="BUILD" Toolchain="">.\Generated_Source\PSoC4\ADC_2.h</File>
+          <File BuildType="BUILD" Toolchain="">.\Generated_Source\PSoC4\ADC_2_PM.c</File>
+          <File BuildType="BUILD" Toolchain="">.\Generated_Source\PSoC4\ADC_2_INT.c</File>
+          <File BuildType="BUILD" Toolchain="">.\Generated_Source\PSoC4\ADC_2_IRQ.c</File>
+          <File BuildType="BUILD" Toolchain="">.\Generated_Source\PSoC4\ADC_2_IRQ.h</File>
+          <File BuildType="BUILD" Toolchain="">.\Generated_Source\PSoC4\ADC_2_intClock.c</File>
+          <File BuildType="BUILD" Toolchain="">.\Generated_Source\PSoC4\ADC_2_intClock.h</File>
+          <File BuildType="BUILD" Toolchain="">.\Generated_Source\PSoC4\opamp_m.c</File>
+          <File BuildType="BUILD" Toolchain="">.\Generated_Source\PSoC4\opamp_m.h</File>
+          <File BuildType="BUILD" Toolchain="">.\Generated_Source\PSoC4\opamp_m_aliases.h</File>
+          <File BuildType="BUILD" Toolchain="">.\Generated_Source\PSoC4\opamp_m_PM.c</File>
+          <File BuildType="BUILD" Toolchain="">.\Generated_Source\PSoC4\PWM_out.c</File>
+          <File BuildType="BUILD" Toolchain="">.\Generated_Source\PSoC4\PWM_out.h</File>
+          <File BuildType="BUILD" Toolchain="">.\Generated_Source\PSoC4\PWM_out_aliases.h</File>
+          <File BuildType="BUILD" Toolchain="">.\Generated_Source\PSoC4\PWM_out_PM.c</File>
+          <File BuildType="BUILD" Toolchain="">.\Generated_Source\PSoC4\opamp_p.c</File>
+          <File BuildType="BUILD" Toolchain="">.\Generated_Source\PSoC4\opamp_p.h</File>
+          <File BuildType="BUILD" Toolchain="">.\Generated_Source\PSoC4\opamp_p_aliases.h</File>
+          <File BuildType="BUILD" Toolchain="">.\Generated_Source\PSoC4\opamp_p_PM.c</File>
+          <File BuildType="BUILD" Toolchain="">.\Generated_Source\PSoC4\opamp_out.c</File>
+          <File BuildType="BUILD" Toolchain="">.\Generated_Source\PSoC4\opamp_out.h</File>
+          <File BuildType="BUILD" Toolchain="">.\Generated_Source\PSoC4\opamp_out_aliases.h</File>
+          <File BuildType="BUILD" Toolchain="">.\Generated_Source\PSoC4\opamp_out_PM.c</File>
+          <File BuildType="BUILD" Toolchain="">.\Generated_Source\PSoC4\ADC_in.c</File>
+          <File BuildType="BUILD" Toolchain="">.\Generated_Source\PSoC4\ADC_in.h</File>
+          <File BuildType="BUILD" Toolchain="">.\Generated_Source\PSoC4\ADC_in_aliases.h</File>
+          <File BuildType="BUILD" Toolchain="">.\Generated_Source\PSoC4\ADC_in_PM.c</File>
         </Files>
       </Folder>
       <Folder BuildType="STRICT" Path="C:\Users\PernilleLouise\Documents\Elektro\3. semester\E3PRJ3\Hardware\Sensor_til_tandhjul\sensor_tandhjul\Design01.cydsn\Export\ARM_GCC_Generic">
