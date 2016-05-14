@@ -1,5 +1,17 @@
-\chapter{Projektformulering}
-\section{Indledning}
+\chapter{Indledning}
+\section{Krav til produktet}
+Dette projekt tager udgangspunkt i projektoplægget for 3. Semester projektet, præsenteret af \textit{Ingeniørhøjskolen, Aarhus Universitet}. Til dette projekt er der ikke stillet krav til typen af produkt der skal udvikles, dog er der sat krav til hvad produket skal indeholde. Disse krav er som følge:
+
+\begin{itemize}
+	\item{Systemet \textit{skal} via sensorer/aktuatorer interagere med omverdenen}
+	\item{Systemet \textit{skal} have en brugergrænseflade}
+	\item{Systemet \textit{skal} indeholde faglige elementer fra semesterets andre fag}
+	\item{Systemet \textit{skal} anvende en indlejret Linux platform og en PSoC platform}
+\end{itemize}
+
+På baggrund af disse krav er der udarbejdet 
+
+\section{Systembeskrivelse}
 Ønsket med dette projekt er at udvikle en mekanisk enhed der kan styres med en håndholdt controller. Med dette udgangspunkt blev forskellige muligheder undersøgt som inspirationskilde, hvor valget herefter faldt på en kanon til affyring af slik. Ideen med en kanon der affyrer slik er ikke original, som det kan ses ud fra projektet \textit{"The Candy Cannon"} som er fundet på YouTube: \textbf{https://www.youtube.com/watch?v=VgZhQJQnnqA}. Til forskel fra \textit{The Candy Cannon} og lignende projekter som affyrer projektiler uden et egentlig formål, vil der i dette projekt blive udviklet en kanon til brug i et spil. Kanonen affyres og styres af spillerne via en controller. Altså skal projektet ende med en kanon som indgår i et to personersspil, f.eks. til brug ved fester og andre sociale begivenheder.
 
 I dette projektet skal der altså udvikles en slikkanon til spillet \textit{Goofy Candygun 3000}. Denne slikkanon skal kunne skyde med slik. Dette kunne for eksempel være M\&M’s eller Skittle’s.
@@ -39,26 +51,6 @@ På figur \ref{ref:RigtBillede} ses et rigt billede af det ønskede produkt. Bil
 	\caption{Rigt Billede af det endelige produkt}
 	\label{ref:RigtBillede}
 \end{figure}
-
-\section{MoSCoW}
-I forbindelse med projektet gøres der brug af MoSCoW-princippet (\textbf{https://en.wikipedia.org/wiki/MoSCoW\_method}) for at prioritere hvilke krav, der skal være implementeret ved projektets afslutning. Ifølge MoSCoW er prioriteringerne 'Must have', 'Should have', 'Could have' og 'Won't have'. Kravene er, som følger:
-\begin{itemize}
-	\item{Produktet must have:}
-	\subitem{En motor til styring af kanonen}
-	\subitem{En grafisk brugergrænseflade til visning af statistikker}
-	\subitem{En Wii-nunchuck til styring af motoren}
-	\subitem{En kanon med en afskydningsmekanisme}
-	\item{Produktet should have:}
-	\subitem{Et mål til registering af point} 
-	\subitem{En lokal ranglistestatistik}
-	\item{Produktet could have:}
-	\subitem{Partymode-indstilling til over to spillere}
-	\subitem{Trådløs Wii-nunchuckstyring}
-	\subitem{Afspilning af lydeffekter}
-	\item{Produktet won't have:}
-	\subitem{Et batteri til brug uden strømforsyning}
-	\subitem{Online ranglistestatistik}	
-\end{itemize}
 
 \section{Opdeling af gruppen}
 I løbet af projektet vil projektgruppen blive opdelt i to hovedgrupper - 'hardware' og 'software'. Softwaregruppen vil desuden stå for grænsefladeprogrammering mellem software og hardware. Disse grupper vil have til ansvar at designe og implementere hhv. hardware og software til projektet. Hardwaregruppen vil bestå af de personer, der læser til elektroingeniør (Mikkel Nielsen og Pernille Kjeldgaard). Softwaregruppen vil bestå af de personer, der læser til IKT-ingeniør (Kasper Rieder, Michael Kloock, Tenna Rasmussen, Mia Konstmann og Daniel Jensen).

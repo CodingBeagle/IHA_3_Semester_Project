@@ -1,22 +1,12 @@
 \chapter{Metode}
-I arbejdet med projektet er det vigtigt at anvende gode analyse- og designmetoder. Dermed er det muligt at komme fra den indledende idé til det endelige produkt med lavere risiko for misforståelser og kommunikationsfejl undervejs. Det er også en stor fordel, hvis de metoder, der anvendes, er intuitive og har nogle fastlagte standarter. Det gør det muligt for udenforstående at sætte sig ind i, hvordan projektet er udviklet og designet. Dermed bliver projektet og dets produkt i højere grad uafhængigt af enkeltpersoner, og det bliver muligt at genskabe produktet. 
-I forbindelse med udviklingen af Goofy Candygun 3000 er der anvendt use cases til at beskrive brugen af produktet. Gennem analyse af use cases er det muligt at skabe overblik over de nødvendige funktioner, som produktet skal have for at opfylde projektformuleringen. Som modellerings sprog til diagrammer er der anvendt SysML, som netop har faslagte standarter, der gør de forskellige diagrammer lettere at sætte sig ind i, og som dermed bidrager til at give en god forståelse for opbygningen og designet af produktet.
-
+I arbejdet med projektet er det vigtigt at anvende gode analyse- og designmetoder. Dermed er det muligt at komme fra den indledende idé til det endelige produkt med lavere risiko for misforståelser og kommunikationsfejl undervejs. Det er også en stor fordel, hvis de metoder, der anvendes, er intuitive og har nogle fastlagte standarter. Det gør det muligt for udenforstående at sætte sig ind i, hvordan projektet er udviklet og designet. Dermed bliver projektet og dets produkt i højere grad uafhængigt af enkeltpersoner, og det bliver muligt at genskabe produktet.
 
 \section{SysML}
-%Reference: http://www.omgsysml.org/
-%Reference: https://en.wikipedia.org/wiki/Unified_Modeling_Language
-SysML er et modelleringssprog, der bygger videre på det meget udbredte modelleringssprog, UML. Men hvor UML hovedsagligt er udviklet til brug i objekt orienteret software udvikling, er SysML i højere grad udviklet med fokus på beskrivelse af både software- og hardwaresystemer. Det gør det særdeles velegnet til dette projekt, som netop består af både software- og hardwaredele. Det er derfor også anvendt i store dele af arbejdet med analyse og design af produktet. \\
-SysML diagrammer kan overordnet inddeles i adfærdsdiagrammer og strukturdiagrammer. I analysen er der hovedsageligt anvendt adfærdsdiagrammerne; use case diagram og sekvensdiagram. Use case diagrammet giver et godt overblik over aktørenes roller i forhold til de forskellige anvendelser af produktet. Sekvensdiagrammerne er brugt analytisk til at udlede de metoder, de forskellige klasser og software enheder skal indeholde. Desuden er sekvensdiagrammer gode til at specificere grænseflader mellem delsystemer, da de afdækker kommunikationen mellem de forskellige enheder. I forhold til strukturdiagrammer benyttes ”Internal Block Diagram” (IBD) og ”Block Definition Diagram” (BDD). I BDD’et nedbrydes systemet i blokke, så der skabes et overblik over, hvad systemet består af hardwaremæssigt. IBD’et giver et overskueligt indblik i forbindelserne mellem de forskellige blokke og grænsefladerne mellem delene. Tilsammen danner de et godt grundlag for det videre design af produktet. \\
-Når SysML benyttes til at beskrive software design, erstatter elementerne fra SysML blokdiagrammer det udbredte UML klassediagram. Der anvendes også et blokdiagram til at overskueliggøre de konceptuelle klasser i domænemodellen. Ud fra domænemodellen udledes klassediagrammer, som beskriver strukturen i software arkitekturen og designet. 
+Til dette projekt er der anvendt \textit{SysML} som visuelt modelleringsværktøj, til at skabe diagrammer. SysML blev valgt, da det er en anerkendt industristandard\cite{website:SysML} , hvilket betyder at det er mere universalt brugbart. Specifikationen for SysML kan findes i bilag, \textit{SysML Specification.pdf}.
 
-
+SysML er et modelleringssprog, der bygger videre på det meget udbredte modelleringssprog, UML. Men hvor UML hovedsagligt er udviklet til brug i objekt orienteret software udvikling, er SysML i højere grad udviklet med fokus på beskrivelse af både software- og hardwaresystemer. Det gør det særdeles velegnet til dette projekt, som netop består af både software- og hardwaredele. Det er derfor også i store dele af arbejdet med analyse og design af produktet.
 
 
 \section{Software Design Principper}
 
 **Cohesion, coupling**
-
-\section{Designmetode}
-
-**Afvigelser fra traditionelt vandfaldsmodel**
