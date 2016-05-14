@@ -1,0 +1,63 @@
+Spørg Gunvor hvor formelt teksten skal være i process rapporten.
+-Indledning til "scrum kursus ved systematic" (de, vi, etc)
+-Konklusion for første sprint (brug af vi)
+
+-Spørg Gunvor om alle kommando typer skal testes.
+--Skriv notater om hvad der måske kunne gøres bedre
+
+-Modultests
+--Hvis vi løber helt tør for plads kan de fjernes fra rapporten, og denne beskrivelse kan flyttes over til dokumentation som overblik
+
+-Spørg Gunvor om betydning af længden.
+--Hvis vi når 50 sider med billeder inklusivt skal vi til at passe på. Vi skal bare skrive og forkorte rapporten til sidst.
+
+-Spørg Gunvor om blok beskrivelse skal med i rapporten.
+--Hører til i rapporten
+
+-Spørg Gunvor om signalbeskrivelse er med i rapporten.
+--Den hører til i rapporten
+
+-Spørg Gunvor om argumentation for SPI og I2C protokoller.
+--I rapporten må vi gerne præsentere løsninger og herefter argumentere for dem
+
+-Spørg Gunvor om hvor meget klassebeskrivelse der egentlig skal med.
+--Må gerne fjernes
+
+-Før arkitektur må der gerne beskrives grundlæggende hardware som PSoC og DevKit.
+
+Projektrapport:
+
+-Generelt:
+	-Beskrive software motorstyring.
+	-Beskriv software GUI i arkitektur samt status på design og implementering
+-Resumé
+	-Det hele skal skrives.
+-Abstract
+	-Det hele skal skrives.
+-Indledning
+	-Indledning skal tilrettes Gunvors feedback.
+	-Projektformulering skal tilrettes Gunvors feedback.
+-Designmetode
+	-Slet dette, det er processrelateret.
+-Analyseafsnit
+	-Skriv om valg af DevKit8000
+	-Skriv om valg af PSoC
+	-Skriv om valg af motorstyring
+	-Skriv om valg af Wii-Nunchuck
+-Systembeskrivelse
+	-Omskriv
+	-Opdater illustrationen til den nye
+-Arkitektur
+	-Klassediagrammer
+	-IBD og BDD diagrammer skal gøres større
+	-Signalbeskrivelse skal rettes igennem
+	-Find på bedre navn til "Sekvensdiagrammer" afsnit
+	-Skriv mere tekst til "System Test"
+	-I2C og SPI protokoller
+		-Valg og begrundelser for løsning
+	-Omskriv I2C kommunikationsprotokol
+		-Kommandotype tabel skal komme før sekvensdiagram
+	-Slet specifikation og analyse afsnit
+-Design og Implementering
+	-SPI Devkit skal rettes
+	-Interface Driver skal rettes
