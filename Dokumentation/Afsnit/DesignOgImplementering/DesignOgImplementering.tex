@@ -56,30 +56,112 @@ I tabel \ref{realIdriverFunktioner} ses funktionsbeskrivelser for RealCandyGun.
 \end{table}
 
 
-\subsection{Klassediagrammer}
+\section{Klassediagrammer}
 
-\subsubsection{PSoC0}
-På figur \ref{figure:PSoC0KlasseDiagram} ses klassediagrammet indeholdende klasserne som bruges af softwaren allokeret på CPU'en PSoC0.
+\subsection{PSoC Software}
+De følgende klassediagrammer på figur \ref{figure:klassediagramPSoC0} og \ref{figure:klassediagramPSoC1} giver et overblik over hvilke klasser der bliver gjort brug af på PSoC0 og PSoC1. De efterfølgende afsnit vil beskrive klasserne og deres funktioner.
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=\textwidth]{DesignOgImplementering/images/PSoC0KlasseDiagram}
-	\caption{Klassediagram for CPU'en PSoC0}
-	\label{figure:PSoC0KlasseDiagram}
+	\includegraphics[width=.7\textwidth]{DesignOgImplementering/images/PSoC0KlassediagramOversigt}
+	\caption{Klassediagram oversigt for PSoC0}
+	\label{figure:klassediagramPSoC0}
 \end{figure}
 
-På figur \ref{figure:PSoC0KlasseDiagram} kan det ses at softwaren på PSoC0 CPU'en gør brug af klasserne \textit{CommunicationProtocol} samt \textit{Nunchuck}.
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=.7\textwidth]{DesignOgImplementering/images/PSoC1KlassediagramOversigt}
+	\caption{Klassediagram oversigt for PSoC1}
+	\label{figure:klassediagramPSoC1}
+\end{figure}
 
-Klassebeskrivelser kan findes i \textbf{!INDSÆT BILAG TIL DOXYGEN!}
+\subsection{I2CCommunication}
+I dette afsnit vil softwaren der omhandler I2C-kommunikation blive beskrevet. Dette inkluderer et klassediagram, samt en klassebeskrivelse.
+\subsubsection{Klassediagram}
+På figur \ref{figure:klassediagramI2CCommunication} ses klassediagrammet for I2CCommunication. 
+\begin{figure}[H]
+	\centering
+	%\includegraphics[width=0.9\textwidth, trim={0 19cm 9cm 0},clip]{DesignOgImplementering/images/I2CCommunication.pdf}
+	\includegraphics[]{DesignOgImplementering/images/I2CCommunication}
+	%\includegraphics[width =0.9\textwidth]{DesignOgImplementering/images/I2CCommunication2}
+	\caption{Klassediagram for I2CCommunication klassen}
+	\label{figure:klassediagramI2CCommunication}
+\end{figure}
 
-\subsection{Afkodning af Wii-Nunchuck Data Bytes}
+\subsubsection{Klassebeskrivelser}
+Som det ses på klassediagrammet figur \ref{figure:klassediagramI2CCommunication} indeholder klassen flere metoder. Disse metoder blive beskrevet her.\newline
+
+\noindent\textbf{void sendData(uint8 Address, uint8 commandType, uint8* buffer, uint8 buffersize)}\newline
+Denne metode sender, via PSoC Creators I2C-API, den data der ligger i "buffer" af kommandotypen "commandType" til slaven med adressen "Address". \newline
+
+\noindent\textbf{void initReceiveData()} \newline 
+Denne metode initialiserer de to buffers (slaveWrite og slaveRead) der kræves på en I2C-slave, for at kunne gøre bruge af PSoC Creator's I2C-API. \newline
+
+\noindent\textbf{void receiveData(uint8* buffer)}\newline
+Denne metode venter på at slaveRead bufferen er blevet fyldt. Når dette er sket, bliver slaveRead bufferen kopieret over i "buffer".   
+
+\subsection{Nunchuck}
+I dette afsnit vil softwaren der specifikt omhandler kommunikationen mellem PSoC0 og Nunchucken blive beskrevet. Dette gøres vha. et klassediagram og klassebeskrivelser.
+
+\subsubsection{Klassediagram}
+På figur \ref{figure:NunchuckKlassediagram} ses klassediagrammet for Nunchuck klassen.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[]{DesignOgImplementering/images/nunchuck}
+	\caption{Klassediagram for klassen Nunchuck}
+	\label{figure:NunchuckKlassediagram}
+\end{figure}
+
+\subsubsection{Klassebeskrivelser}
+Metoderne fra klassediagrammet figur \ref{figure:NunchuckKlassediagram} vil blive beskrevet i dette afsnit.
+
+\noindent\textbf{int NunchuckSendHandshake()}\newline
+Denne metode sender et "handshake" (Se dokumentationen afsnit \textbf{INSERT AFSNIT HER \#ref}) til Nunchuck enheden. Handshaket bruges til at "parre" PSoC'en med nunchucken. Metoden returnerer et '0' hvis der opstår en fejl. \newline
+
+\noindent\textbf{int NunchuckRequestData()}\newline
+Denne metode sender et 0x00 til nunchuck'en, og derved beder nunchuck'en om at klargøre data til overførsel. Metoden returnerer et '0' hvis der opstår en fejl. \newline
+
+\noindent\textbf{int NunchuckreadData(uint8* buffer)}\newline
+Denne metode bruger PSoC Creator's I2C-API til at læse data fra nunchuck'en (data der blev klargjort fra NunchuckRequestData()). Disse data bliver derefter dekrypteret og gemt i "buffer", så de bliver tilgængelige uden for metodens scope. \newline
+
+I klassediagrammet er der en sektion kaldet "Defines". Disse Defines bruges i implementeringen til forskellige formål. \textit{PSoC0UnitAddress, PSoC1UnitAddres} og \textit{nunchuckUnitAddress} bruges til at definere adresserne for I2C-nettets slaver. \textit{NunchuckData, I2CTestRequest} og \textit{I2CTestACK} er kommando typer der bruges til at bestemme hvilken kommando type der er blevet sendt/modtaget, og hvor mange bytes der skal forventes at være gemt i databufferen (Se dokumentationen afsnit \textbf{INDSÆT REFERENCE TIL DOKUMENTATIONAFSNIT \#ref}) 
+
+\subsection{SPI - PSoC}
+I dette afsnit vil softwaren der specifikt omhandler SPI-kommunikationen mellem PSoC0 og DevKit8000 blive beskrevet. Dette gøres vha. et klassediagram og klassebeskrivelser
+
+\subsubsection{Klassediagram}
+På figur \ref{figure:KlassediagramSPICommunication} ses klassediagrammet over SPICommunication klassen.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[]{DesignOgImplementering/images/SPICommunication}
+	\caption{Klassediagram over klassen SPICommunication}
+	\label{figure:KlassediagramSPICommunication}
+\end{figure}
+\subsubsection{Klassebeskrivelser}
+I dette afsnit vil klassens metoder og defines blive beskrevet.
+\newline
+
+\noindent\textbf{void completeSPITest()} \newline
+Denne metode gemmer \textit{SPI\_OK} i PSoC'ens SPI-transfer buffer. \newline
+
+\noindent\textbf{void completeI2CTest()} \newline
+Denne metode gennemfører I2C-Testen. Dette gøres ved at der sendes en besked til alle enheder på I2C-nettet, og hvis der ikke registreres nogen fejl på denne besked, bliver \textit{I2C\_OK} gemt i PSoC'ens SPI-transfer buffer. Registreres der en fejl, bliver \textit{I2C\_FAIL} gemt i SPI-transfer buffer. \newline
+
+\noindent\textbf{void completeNunchuckTest(uint8* databuf)} \newline
+Denne metode gennemfører Nunchuck-testen. Dette gøres ved at der startes en timer på 6 sekunder. Hvis der sker et tryk på 'Z'-knappen på nunchucken indenfor disse 6 sekunder, vil \textit{NUNCHUCK\_OK} blive gemt i SPI-transfer bufferen. Hvis der ikke registreres nogen tryk inden for de 6 sekunder, er det \textit{NUNCHUCK\_FAIL} der gemmes.\newline
+
+I klassediagrammet er der beskrevet en række "Defines". Disse defines bruges i klassen som unikke ID'er der indikerer om en test er gennemført OK eller om den er fejlet.
+
+\section{Afkodning af Wii-Nunchuck Data Bytes}
 Aflæste bytes fra Wii-Nunchuck - indeholdende tilstanden af knapperne og det analoge stick - er kodet når de oprindeligt modtages via I2C bussen. Disse bytes skal altså afkodes før deres værdier er brugbare. Afkodningen af hver byte sker ved brug af følgende formel:
 
 \textit{AfkodetByte = (AflæstByte XOR 0x17) + 0x17}
 
 Fra formlen kan det ses at den aflæste byte skal \textit{XOR}'s (Exclusive Or) med værdien 0x17, hvorefter dette resultat skal adderes med værdien 0x17.
 
-\subsection{Kalibrering af Wii-Nunchuck Analog Stick}
+\section{Kalibrering af Wii-Nunchuck Analog Stick}
 De afkodede bytes for Wii-Nunchuck's analoge stick har definerede standardværdier for dets forskellige fysiske positioner. Disse værdier findes i tabel \ref{tabel:WiiNunchuckStickPositioner}
 
 \begin{table}[H]
