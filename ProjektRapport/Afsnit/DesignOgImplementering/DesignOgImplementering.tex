@@ -5,6 +5,41 @@
 \section{Hardware}
 
 \subsection{Motorstyring}
+\subsubsection{H-bro}
+\subsubsection{Detektor}
+Dette er en form for en detektor, som består af et potentiometer og en ADC, som er en del af “motorstyring” blokken, så ved hjælp af Potentiometeret kan man søger for at motoren ikke drejer for langt ud til begge sider.  Der kunne være brugt en stepper motor til at syre det med, men for at få mere hardware med, blev det besluttet at det var en bedre løsning.
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\textwidth]{Afsnit/DesignOgImplementering/images/poten}
+	\caption{potentiometer}
+	\label{fig:poten}
+\end{figure}
+\textbf{måske et billede af opstilling i stedet for}\\
+Potentiometer har til formal at skulle holde styre på at motoren ikke køre ud længere end det hvad det fastsatte krav er. Der er blevet valgt at bruge et Potentiometer som er et linæret et, som vil sige at når man for hver ændring man laver på Potentiometeret, vil der også ske en ændring i spændingen. Så når den bliver fast gjord til motoren vil man kunne se en ændring i den spænding som kommer ud fra potentiometeret, som bliver sendt ind i ADC’en, som er af typen Sequencing Successive Approximation ADC, som er placeret internt i PSoC’en. Så når spænding bliver aflæst, vil man kunne vide præcise hvor motoren er.  
+ADC’en er en sample hold kreds, som vil sige den holder på dataen end til der er fundet en værdi, så der går noget tid i mellem hver værdi, så der er søgeret for at der ikke bliver lavet over samples og der ikke bliver lavet aliasing af det signal som kommer ind i ADC’en. For at finde den værdi som bliver sendt ind i ADC'en, bliver der lavet en skala som bliver halvert alt efter hvor værdien ligger på skalaen, som vist på figur \ref{fig:pot}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\textwidth]{Afsnit/DesignOgImplementering/images/ADC}
+	\caption{ADC}
+	\label{fig:pot}
+	\end{figure}
+
+Der er blevet målt med en vinkel måler for at over holde kravene i kravspecifikationen. Hvor der blev fundet frem til min og max hvor motoren må køre i mellem. \\
+\\
+Min=915 mV\\
+\\
+Max = 2000mV\\
+\\
+Disse værdier er aflæst fra PSoC’en, da den har en ref spændingen på 3.3V vil den have lavere værdier end hvad der bliver sendt ud fra Potentiometeret.
+
+
+\begin{equation}
+ \frac {5V} {3.3V}= 1.515
+\end{equation}
+Der er en forskel på ca. 1.515   mellem potentiometer og ADC. Så ADC er ca. 1,515 mindre end hvad potentiometer sender ud.
+\\
+For at forstå hvordan ADC’en og potentiometeret funger henvises der til dokumentatioen 
 
 \subsection{Affyringsmekanisme}
 
