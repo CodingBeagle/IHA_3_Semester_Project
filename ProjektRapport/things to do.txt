@@ -37,8 +37,6 @@ Projektrapport:
 -Indledning
 	-Indledning skal tilrettes Gunvors feedback.
 	-Projektformulering skal tilrettes Gunvors feedback.
--Designmetode
-	-Slet dette, det er processrelateret.
 -Analyseafsnit
 	-Skriv om valg af DevKit8000
 	-Skriv om valg af PSoC
@@ -58,6 +56,8 @@ Projektrapport:
 	-Omskriv I2C kommunikationsprotokol
 		-Kommandotype tabel skal komme før sekvensdiagram
 	-Slet specifikation og analyse afsnit
+	-Beskriv motorstyring (software)
 -Design og Implementering
 	-SPI Devkit skal rettes
+	-Beskriv motorstyring (software)
 	-Interface Driver skal rettes
