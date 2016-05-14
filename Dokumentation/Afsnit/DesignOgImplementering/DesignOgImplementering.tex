@@ -300,16 +300,7 @@ Over fire af mosfetene (Q9, Q10, Q3 og Q4) er der sat en diode af typen IN5819. 
 	Disse to transistorer sidder der for at hjælpe med at lukke P-MOSFET'en igen. Inden Q5 og Q7 blev sat ind tog det tid for at lukke P-MOSFET'en, men da de to blev sat ind, kunne de hjælpe til med at aflade mosfet'ene hurtigere. Derfor sidder de der, for at IRF9Z34N kan lukke hurtigt. 
 \end{itemize}
 \subsubsection{Potentiometer}
-Potentiometer virker på den måde at man kan ændre på modstandsværdien i selv potentiometeret, så man kan får en laver volt ud, som man kan se på figur \ref{fig:potentiometer1} neden for 
-\begin{figure}[H]
-	\centering
-	\includegraphics[width=\textwidth]{DesignOgImplementering/images/potentiometer1}
-	\caption{hvordan potentiometer er opbygget}
-	\label{fig:potentiometer1}
-	
-\end{figure}
-
-Hvor a  er indgangs spændingen og b er ground. W er så udgangs spændingen, så det er den spændingen som vi trækker ud af potentiometeret. For bedre at forstå potentiometeret, kan man se det som spændingsdeler formlen.
+For at kunne holde styre på at motoren ikke bare drejer hele vejen rundt, men holder sig inde for de grænser som blev fast sat i kravspecifikationen, er der blevet valgt at bruge et potentiometer, som virker på den måde at man kan ændre på modstandsværdien i selv potentiometeret, så man kan få en laver spænding ud, der ved kan man styre hvor langt motoren er drejet over til den ene side ved kun at kigge på selv spændingen fra potentiometeret. For at regne ud hvor langt motoren er, kan man regne ud hvor meget spænding der kommer ud ved at bruge spændingsdeler formlen, som er vist på figur \ref{fig:potentiometer2}
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=\textwidth]{DesignOgImplementering/images/potentiometer}
@@ -317,16 +308,22 @@ Hvor a  er indgangs spændingen og b er ground. W er så udgangs spændingen, s�
 	\label{fig:potentiometer2}
 	
 \end{figure}
+Hvor man se Rtop og Rbottom, som en modstand, men den bliver delt af midter strengen, som fortæller hvor modstanden skal deles henne og som man kan se på formlen ved side af, kan man se hvor meget spænding som kommer ud af den. 
+Det potentiometer som bliver brugt i dette projekt er 47Kohm, som er linæret vil spændingen stiger lige meget hver gang man drejer på potentiometeret
 
-Som man kan se på figur\ref{fig:potentiometer2}, så skal man se Rtop og Rbottom, som en modstand, men den bliver delt af midter strengen, som er vores W fra forrige billede, som fortæller hvor modstanden skal deles henne og som man kan se på formlen ved side af, kan man se hvor meget spænding som kommer ud af den. 
-
-Linærte potentiometer
-Det vil siger når det er linæret, vil spændingen stiger lige meget hver gang man drejer på potentiometeret, i forhold til hvis det havde været et log potentiometeret, vil spændingen ikke stige så meget i starten, hvor den i den sidste del vil stige mere eksponentiel. 
-
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\textwidth]{DesignOgImplementering/images/udpot}
+	\caption{udregning for potentiometer}
+	\label{fig:pot}
+	
+\end{figure}
+Så dvs når potentiometeret står i midten vil der komme en spænding ud på ca 2.5V, så når spændingen bliver lavere vil der komme et punkt hvor motoren ikke vil kunne køre til den ene side mere og det samme sker når man hæver, vil motoren ikke kunne køre den anden vej. 
+Der er blevet målt med en vinkel måler for at over holde kravene i 
 
 \subsubsection{ADC}
-Er analog to digital converter, det vil sige at den får et analog signal ind, som den så konverterer til et digital tal, som man kan bruge til at indstille ting efter, som fx i dette projekt, hvor motoren bliver stillet efter hvad spændingen er. 
-Der bliver i dette projekt brugt en Sequencing Successive Approximation ADC, som funger på denne måde at det er et sample hold kreds, som vil sige at den holder på et signal end til den er klar på at tag et nyt signal ind. Så den har tid til at finde frem til hvilken værdi, som den skal konverter til, er ved at sættet DAC til midscale og tjekke om inputtet er højre eller lavere end hvor midscaler er. Hvis den er højere får den 1 og hvis den er laver for den et 0, det bit bliver gemt i et register. Så finder man nu midten i mellem midscale og den øvre halvdel eller nedre halvdel af skalaen og sådan bliver man ved end til alle bit er blevet sat. Så tjekker man registeret for at læse hvilket tal som er fundet, ved at læse fra MSB(most significant bit) til LSB(least significant bit) og det er tal som man har sat på indgangen. På figuren\ref{fig:ADC1} kan man få et bedre overblik over hvordan ADC funger. 
+For at kunne læse hvad spænding er på potentiometeret, så bliver der brugt i dette projekt ADC af typen Sequencing Successive Approximation ADC. Som funger på denne måde at 
+det er et sample hold kreds, som vil sige at den holder på et signal end til den er klar på at tag et nyt signal ind. Så den har tid til at finde frem til hvilken værdi, som den skal konverter til, er ved at sættet DAC til midscale og tjekke om inputtet er højre eller lavere end hvor midscaler er. Hvis den er højere får den 1 og hvis den er laver for den et 0, det bit bliver gemt i et register. Så finder man nu midten i mellem midscale og den øvre halvdel eller nedre halvdel af skalaen og sådan bliver man ved end til alle bit er blevet sat. Så tjekker man registeret for at læse hvilket tal som er fundet, ved at læse fra MSB(most significant bit) til LSB(least significant bit) og det er tal som man har sat på indgangen. På figuren\ref{fig:ADC1} kan man få et bedre overblik over hvordan ADC funger. 
 
 \begin{figure}[H]
 	\centering
@@ -336,4 +333,4 @@ Der bliver i dette projekt brugt en Sequencing Successive Approximation ADC, som
 	
 \end{figure}
 
-Jo flere bit man har jo mere præcise bliver det også, men man kan godt risiker at man er 1LSB over/under det resultat man skal have.
+Jo flere bit man har jo mere præcise bliver det også, men man kan godt risiker at man er 1LSB over/under det resultat man skal have, men for dette projekt gør det ikke noget om man 1 LSB over/under.
