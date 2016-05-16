@@ -63,14 +63,25 @@ På tabel \ref{tabel:ansvarsområder} ses opdelingen af ansvarsområder mellem p
 
 \begin{table}[H]
 	\centering
-	\begin{tabular}{lllllll}
-		Ansvarsområder    & Daniel V.J. & Mia PK. & Mikkel N. & Kasper R. & Tenna R. & Pernille L.K. \\
+	\begin{tabular}{llllllll}
+		\hline
+		\multicolumn{1}{|l|}{Ansvarsområder}     & \multicolumn{1}{l|}{DVJ} & \multicolumn{1}{l|}{MPK} & \multicolumn{1}{l|}{MN} & \multicolumn{1}{l|}{KR} & \multicolumn{1}{l|}{MMK} & \multicolumn{1}{l|}{TR} & \multicolumn{1}{l|}{PLK} \\ \hline
 		\rowcolor[HTML]{CBCEFB} 
-		Ansvarsområde \#1 & P           & S       & S         & S         & S        & S             \\
-		Ansvarsområde \#2 & S           & P       & S         & S         & S        & S             \\
+		I2C Kommunikationsprotokol PSoC Software & P                        & S                        &                         & P                       &                          &                         &                          \\
+		Nunchuck PSoC Software                   & S                        & P                        &                         & S                       &                          &                         &                          \\
 		\rowcolor[HTML]{CBCEFB} 
-		etc....           & S           & S       & S         & S         & P        & S            
+		SPI Kommunikationsprotokol PSoC Software & P                        & S                        &                         & P                       &                          &                         &                          \\
+		SPI Driver Devkit Software               &                          & S                        &                         & S                       &                          & P                       &                          \\
+		\rowcolor[HTML]{CBCEFB} 
+		Brugergrænseflade Devkit Software        &                          &                          &                         &                         & P                        &                         &                          \\
+		Motorstyring PSoC Software               &                          & P                        & P                       & S                       &                          &                         &                          \\
+		\rowcolor[HTML]{CBCEFB} 
+		Use Case 2 Implementering                & P                        & S                        &                         & P                       &                          &                         &                          \\
+		&                          &                          &                         &                         &                          &                         &                          \\
+		\rowcolor[HTML]{CBCEFB} 
+		H-bro                                    &                          &                          &                         &                         &                          &                         &                          \\
+		Affyringsmekanisme                       &                          &                          &                         &                         &                          &                         &                         
 	\end{tabular}
-	\caption{Ansvarsområder}
-	\label{tabel:ansvarsområder}
+		\caption{Ansvarsområder tabel}
+		\label{ansvarsområder}
 \end{table}
