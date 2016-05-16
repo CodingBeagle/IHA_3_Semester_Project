@@ -67,10 +67,12 @@ På figur \ref{fig:MotorControlAllocationClasses} ses det at \textit{Motor Contr
 På figur \ref{figure:bddDiagram} ses BDD'et for systemet.
 
 \begin{figure}[H]
+	\begin{adjustwidth}{-3cm}{-\rightmargin}
 	\centering
-	\includegraphics[width=\textwidth]{SystemArkitektur/images/BDD_overordnet.PNG}
+	\includegraphics[width=0.9\paperwidth]{SystemArkitektur/images/BDD_overordnet.PNG}
 	\caption{BDD af systemets hardware}
 	\label{figure:bddDiagram}
+	\end{adjustwidth}
 \end{figure}
 
 Her vises alle hardwareblokke fra domænemodellen (figur \ref{figure:domainModel}) med nødvændige indgange og udgange for de fysiske signaler. Yderligere ses det at flow specifikationer er defineret for de ikke-atomare forbindelser \textit{I2C} samt \textit{SPI}, da disse er busser bestående af flere forbindelser. Der henvises til \textbf{IBD AFSNIT} for en detaljeret model af de fysiske forbindelser mellem hardwareblokkende.
@@ -106,16 +108,19 @@ Følgende afsnit indeholder en blokbeskrivelse samt en flowspecifikation for I2C
 På figur \ref{figure:ibdDiagram} ses IBD'et for systemet. Figuren viser hardwareblokkene med de fysiske forbindelser beskrevet i BDD'et (figur \ref{figure:bddDiagram}). 
 
 \begin{figure}[H]
+	\begin{adjustwidth}{-3cm}{-\rightmargin}
 	\centering
-	\includegraphics[width=\textwidth]{SystemArkitektur/images/GoofyCandyIBDImageRev2.PNG}
+	\includegraphics[width=0.9\paperwidth]{SystemArkitektur/images/GoofyCandyIBDImageRev2.PNG}
 	\caption{IBD af systemets hardware}
 	\label{figure:ibdDiagram}
+	\end{adjustwidth}	
 \end{figure}
 
 Her vises alle hardwareblokke med de fysiske forbindelser beskrevet i BDD'et (figur \ref{figure:bddDiagram}). 
 
 Det ses at systemet bliver påvirket af tre eksterne signaler: \textit{touch}, \textit{input}, samt \textit{voltage}. \textit{touch} er input fra brugeren når der interageres med brugergrænsefladen. \textit{input} er brugerens interaktion med Wii-Nunchuk. \textit{voltage} er forsyningsspænding til systemet.
 
+\newpage
 \subsection{Signalbeskrivelse}
 \begin{longtable}{|>{\hspace{0pt}}p{3cm} | >{\hspace{0pt}}p{3cm} | p{2cm} | p{3cm} |}
 	\hline
@@ -141,11 +146,32 @@ Det ses at systemet bliver påvirket af tre eksterne signaler: \textit{touch}, \
 \end{longtable}
 
 \section{Software}
-Til produktet er der udviklet software til CPU'erne præsenteret i Software Allokering, afsnit \ref{afsnit:SoftwareAllokering}, figur \ref*{figure:allocationDiagram}.
+Softwaren til systemet er udarbejdet for hver CPU (se evt. software allokeringsdiagrammet på side \pageref{figure:allocationDiagram} figur \ref{figure:allocationDiagram}) ud fra en applikationsmodel, der kan ses i dokumentationen side (\textbf{Indsæt reference til applikationsmodel dokumentations \#ref}). Ud fra disse applikationsmodeller er der udarbejdet klassediagrammer, der viser software klasserne på den givne CPU, samt deres relationer til hinanden.
 
-Dette afsnit har til formål at demonstrere sammenhængen mellem softwaren på CPU'erne og resten af systemet, samt at beskrive og identificere grænsefladerne brugt til kommunikation mellem dem. Yderligere vil klasseidentifikation også blive vist, hvor disse klasser vil specificeres i Design og Implementering.
+\begin{figure}[H]
+	\centering
+	\includegraphics[]{SystemArkitektur/images/DevKit8000ClassDiagram}
+	\caption{Klassediagram for DevKit8000 CPU}
+	\label{figure:initialKlassediagramDevkit}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[]{SystemArkitektur/images/klassediagramPSoC0}
+	\caption{Klassediagram for PSoC0 CPU}
+	\label{figure:initialKlassediagramPSoC0}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[]{SystemArkitektur/images/klassediagramPSoC1}
+	\caption{Klassediagram for PSoC1 CPU}
+	\label{figure:initialKlassediagramPSoC1}
+\end{figure}
+
 
 \subsection{Sekvensdiagrammer}
+Dette afsnit har til formål at demonstrere sammenhængen mellem softwaren på CPU'erne og resten af systemet, samt at beskrive og identificere grænsefladerne brugt til kommunikation mellem dem. Yderligere vil klasseidentifikation også blive vist, hvor disse klasser vil specificeres i Design og Implementering.
 
 \subsubsection{Wii-Nunchuck Information Flow}
 En essentiel del af systemet er at kunne styre motoren ved brug af Wii-Nunchuck controlleren. På figur \ref{fig:WiiNunchuckSekvensDiagram} vises gennemløbet af Wii-Nunchuck input data fra Wii-Nunchuken til motoren, med de relevante CPU'er angivet. Her ses det at input data fra Wii-Nunchuck kontinuert bliver aflæst af PSoC0. Det bemærkes her at grænsefladen mellem PSoC0 og Wii-Nunchuck er en I2C bus. Efter at PSoC0 har aflæst input data'en, overføres den til PSoC1. Grænsefladen mellem disse to PSoCs er også en I2C bus. PSoC1 kan til slut oversætte modtaget input data til PWM signaler til motorstyring samt affyring.
@@ -240,8 +266,9 @@ På figur \ref{fig:I2CProtokolEksempel} ses at afsenderen starter en I2C transak
 På tabel \ref{table:I2CKommandoer} ses de definerede kommandotyper og det tilsvarende antal af bytes der sendes ved dataveksling.
 
 \begin{table}[H]
+	\begin{adjustwidth}{-3cm}{-\rightmargin}
 	\centering
-	\resizebox{1.2\textwidth}{!}{
+	\resizebox{1.5\textwidth}{!}{
 		\begin{tabular}{lllll}
 			\hline
 			\multicolumn{1}{|l|}{Kommandotype}    & \multicolumn{1}{l|}{Beskrivelse}                                            & \multicolumn{1}{l|}{Binær Værdi} & \multicolumn{1}{l|}{Hex Værdi} & \multicolumn{1}{l|}{Data Bytes}                                                                                         \\ \hline
@@ -254,6 +281,7 @@ På tabel \ref{table:I2CKommandoer} ses de definerede kommandotyper og det tilsv
 	}<
 	\caption{I2C kommunikation kommandotyper}
 	\label{table:I2CKommandoer}
+	\end{adjustwidth}
 \end{table}
 
 Kolonnerne \textit{Binær Værdi} og \textit{Hex Værdi} i tabel \ref{table:I2CKommandoer} viser kommandotypens unikke tal-ID i både binær- og hexadecimalform. Denne værdi sendes som den første byte, for at identificere kommandotypen. 
