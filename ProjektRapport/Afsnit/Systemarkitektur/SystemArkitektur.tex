@@ -225,6 +225,11 @@ Kommunikation på en SPI-bus foregår ved bit-shifting. Dette betyder at indhold
 	\label{figure:SDSpiSlaveRead}
 \end{figure} 
 
+\subsubsection{Designvalg}
+SPI kommunikations protokollen er designet ud fra det grundlag at DevKit8000, som SPI master, skal læse tilstande fra SPI slaven ved brug af en timeout model. Ved timeout model menes der at DevKit8000 sender en kommandotype ud, venter et bestemt antal sekunder, og herefter læser værdien fra SPI slaven. Denne model er modelleret på figur \ref{figure:SDSpiSlaveRead}
+
+Et alternativt design ville være at generere et interrupt til SPI masteren når slaven havde data der skulle læses. Til dette system blev timeout modellen dog valgt, da det hardwaremæssigt var simplere at implementere, samt at alt nødvændig funktionalitet kan implementeres med den valgte model.
+
 \subsection{I2C Kommunikations Protokol}
 \label{afsnit:I2CProtokol}
 I afsnit \ref{afsnit:IBD} \textbf{IBD} ses på figur \ref{figure:ibdDiagram} at tre hardwareblokke kommunikerer via en I2C bus. Til denne I2C kommunikation er der defineret en protokol, som bestemmer hvordan modtaget data skal fortolkes. Denne protokol beskrives følgende.
@@ -282,7 +287,11 @@ På tabel \ref{table:I2CKommandoer} ses de definerede kommandotyper og det tilsv
 
 Kolonnerne \textit{Binær Værdi} og \textit{Hex Værdi} i tabel \ref{table:I2CKommandoer} viser kommandotypens unikke tal-ID i både binær- og hexadecimalform. Denne værdi sendes som den første byte, for at identificere kommandotypen. 
 
-\subsection{Klassediagrammer}
+\subsubsection{Designvalg}
+Den primære idé bag valg af kommandotype metoden til I2C kommunikations protokollen er først og fremmest så modtageren kan differentiere mellem flere handlinger i systemet. En anden vigtig grund er at man, ved kommandotyper, kan associere et dynamisk antal bytes til hver kommando. Dvs, hvis en modtager får en kommandotype \textit{A}, vil den vide at den efterfølgende skal læse 5 bytes, hvormiod at en kommandotype \textit{B} ville betyde at der kun skulle læses 2 bytes.
 
+En anden fordel ved kommandotype metoden er, at den er relativ simpel at implementere i kode, som vist ved pseudofunktionerne i figur \ref{fig:I2CProtokolEksempel}.  
+
+\subsection{Klassediagrammer}
 
 \subsection{Specifikation og Analyse}
