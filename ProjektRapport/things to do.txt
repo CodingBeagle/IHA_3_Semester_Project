@@ -44,8 +44,6 @@ Projektrapport:
 	-Signalbeskrivelse skal rettes igennem
 	-Find på bedre navn til "Sekvensdiagrammer" afsnit
 	-Skriv mere tekst til "System Test"
-	-Omskriv I2C kommunikationsprotokol
-		-Kommandotype tabel skal komme før sekvensdiagram
 	-Beskriv motorstyring (software)
 -Design og Implementering
 	-SPI Devkit skal rettes
