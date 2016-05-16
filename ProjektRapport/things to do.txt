@@ -39,14 +39,11 @@ Projektrapport:
 	-Projektformulering skal tilrettes Gunvors feedback.
 -Systembeskrivelse
 	-Omskriv
-	-Opdater illustrationen til den nye
 -Arkitektur
 	-Klassediagrammer
 	-Signalbeskrivelse skal rettes igennem
 	-Find på bedre navn til "Sekvensdiagrammer" afsnit
 	-Skriv mere tekst til "System Test"
-	-I2C og SPI protokoller
-		-Valg og begrundelser for løsning
 	-Omskriv I2C kommunikationsprotokol
 		-Kommandotype tabel skal komme før sekvensdiagram
 	-Beskriv motorstyring (software)
@@ -54,3 +51,4 @@ Projektrapport:
 	-SPI Devkit skal rettes
 	-Beskriv motorstyring (software)
 	-Interface Driver skal rettes
+	-Aktivitetsdiagrammer for vigtige algoritmer
