@@ -1,5 +1,6 @@
 \chapter{Analyse}
-Til projektet er der brugt nogle grundlæggende hardwarekomponenter til realisering af systemets arkitektur. Disse hardwarekomponenter vil blive præsenteret følgende.
+\label{afsnit:analyse}
+Til projektets prototype er der brugt nogle grundlæggende hardwarekomponenter til realisering af systemets arkitektur. Disse hardwarekomponenter vil blive præsenteret følgende.
 
 \section{DevKit8000}
 DevKit8000 er en indlejret linux platform med et tilkoblet 4.3 tommer touch-display.
@@ -9,4 +10,7 @@ Denne indlejrede linux platform blev valgt, da den allerede fra start understøt
 DevKit8000 platformen er også brugt gennem undervisning på IHA, hvilket betyder at der er god adgang til de compilers der skal bruges til platformen.
 
 \section{Programmable System-on-Chip (PSoC)}
-PSoC er en microcontroller der kan omprogrammeres via et medfølgende \textit{Integrated Development Environment} (IDE). PSoC'en understøtter multiple \textit{Seriel Communication Busses} (SCB), hvilket gør denne microcontroller ideel til dette system, da det skal kommunikere med sensorer og aktuatorer. 
+PSoC er en microcontroller der kan omprogrammeres via et medfølgende \textit{Integrated Development Environment} (IDE). PSoC'en understøtter multiple \textit{Seriel Communication Busses} (SCB), hvilket gør denne microcontroller ideel til dette system, da der skal kommunikeres med sensorer og aktuatorer.
+
+\section{Wii-Nunchuck}
+Til brugerstyring af systemets kanon er en Wii-Nunchuck controller valgt. Denne controller er valgt, da den har gode egenskaber til styring af en kanon. Wii-Nunchucken understøtter desuden en af PSoC'ens kommunikationsprotokoller, så den nemt kan kommunikere med resten af systemet.
