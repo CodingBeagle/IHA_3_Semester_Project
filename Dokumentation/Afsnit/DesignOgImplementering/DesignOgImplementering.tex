@@ -300,21 +300,21 @@ Over fire af mosfetene (Q9, Q10, Q3 og Q4) er der sat en diode af typen IN5819. 
 	Disse to transistorer sidder der for at hjælpe med at lukke P-MOSFET'en igen. Inden Q5 og Q7 blev sat ind tog det tid for at lukke P-MOSFET'en, men da de to blev sat ind, kunne de hjælpe til med at aflade mosfet'ene hurtigere. Derfor sidder de der, for at IRF9Z34N kan lukke hurtigt. 
 \end{itemize}
 \subsubsection{Potentiometer}
-For at kunne holde styre på at motoren ikke bare drejer hele vejen rundt, men holder sig inde for de grænser som blev fast sat i kravspecifikationen, er der blevet valgt at bruge et potentiometer, som virker på den måde at man kan ændre på modstandsværdien i selv potentiometeret, så man kan få en laver spænding ud, der ved kan man styre hvor langt motoren er drejet over til den ene side ved kun at kigge på selv spændingen fra potentiometeret. For at regne ud hvor langt motoren er, kan man regne ud hvor meget spænding der kommer ud ved at bruge spændingsdeler formlen, som er vist på figur \ref{fig:potentiometer2}
+Motoren, som styrer platformen, skal kunne bevæge sig frit i intervallet, som er fastsat i kravspecifikationen \textbf{\#ref Reference til kravspecikation (ikke funktionelle krav)}. For at begrænse denne bevægelse anvendes et potentiometer. Når motoren bevæger sig, ændres potentiometerets modstandsværdi og dermed ændres spændingsniveauet. Dermed kan positionen af motoren bestemmes ved at se på output spændingen fra potentiometret. For at regne ud hvor langt motoren er, kan man regne ud hvor meget spænding der kommer ud ved at bruge spændingsdeler formlen, som er vist på figur \ref{fig:potentiometer2}
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=\textwidth]{DesignOgImplementering/images/potentiometer}
-	\caption{spændigsdeler formlen hvordan den virker i potentiometere}
+	\caption{Spændingsdeler formlen for potentiometeret}
 	\label{fig:potentiometer2}
 	
 \end{figure}
 Hvor man se Rtop og Rbottom, som en modstand, men den bliver delt af midter strengen, som fortæller hvor modstanden skal deles henne og som man kan se på formlen ved side af, kan man se hvor meget spænding som kommer ud af den. 
-Det potentiometer som bliver brugt i dette projekt er 47Kohm, som er linæret vil spændingen stiger lige meget hver gang man drejer på potentiometeret
+Det potentiometer som bliver brugt i dette projekt er 47Kohm, som er linæret vil spændingen stiger proportionalt med modstanden-
 
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=\textwidth]{DesignOgImplementering/images/udpot}
-	\caption{udregning for potentiometer}
+	\caption{Udregning for potentiometerets midtpunktsspænding}
 	\label{fig:pot}
 	
 \end{figure}
@@ -322,8 +322,7 @@ Så dvs når potentiometeret står i midten vil der komme en spænding ud på ca
 Der er blevet målt med en vinkel måler for at over holde kravene i 
 
 \subsubsection{ADC}
-For at kunne læse hvad spænding er på potentiometeret, så bliver der brugt i dette projekt ADC af typen Sequencing Successive Approximation ADC. Som funger på denne måde at 
-det er et sample hold kreds, som vil sige at den holder på et signal end til den er klar på at tag et nyt signal ind. Så den har tid til at finde frem til hvilken værdi, som den skal konverter til, er ved at sættet DAC til midscale og tjekke om inputtet er højre eller lavere end hvor midscaler er. Hvis den er højere får den 1 og hvis den er laver for den et 0, det bit bliver gemt i et register. Så finder man nu midten i mellem midscale og den øvre halvdel eller nedre halvdel af skalaen og sådan bliver man ved end til alle bit er blevet sat. Så tjekker man registeret for at læse hvilket tal som er fundet, ved at læse fra MSB(most significant bit) til LSB(least significant bit) og det er tal som man har sat på indgangen. På figuren\ref{fig:ADC1} kan man få et bedre overblik over hvordan ADC funger. 
+For at kunne aflæse spændingen på potentiometeret, anvendes en AD converter af typen Sequencing Successive Approximation ADC. En sequencing SAR ADC indeholder et sample-hold kredsløb. Kredsløbet holder på et indgangssignal indtil det næste signal registres på kredsløbets indgang. Dermed har converteren tid til at bestemme outputværdien. ADC'en er indstillet til midscale og bruger dette punkt til sammenligning med inputsignalet. Hvis signalet er højere end midscale bliver et bit sat til 1 og hvis den er lavere bliver bittet sat til 0. Disse bit bliver gemt i et register. Herefter sættes midpunktet man nu midten i mellem midscale og den øvre halvdel eller nedre halvdel af skalaen og sådan bliver man ved end til alle bit er blevet sat. Så tjekker man registeret for at læse hvilket tal som er fundet, ved at læse fra MSB(most significant bit) til LSB(least significant bit) og det er tal som man har sat på indgangen. På figuren\ref{fig:ADC1} kan man få et bedre overblik over hvordan ADC funger. 
 
 \begin{figure}[H]
 	\centering
