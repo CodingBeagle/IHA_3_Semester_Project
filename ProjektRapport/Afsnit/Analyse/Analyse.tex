@@ -1,0 +1,12 @@
+\chapter{Analyse}
+Til projektet er der brugt nogle grundlæggende hardwarekomponenter til realisering af systemets arkitektur. Disse hardwarekomponenter vil blive præsenteret følgende.
+
+\section{DevKit8000}
+DevKit8000 er en indlejret linux platform med et tilkoblet 4.3 tommer touch-display.
+
+Denne indlejrede linux platform blev valgt, da den allerede fra start understøtter interfacing med et touch-display. Dette kan bruges til systemets brugergrænseflade. DevKit8000 understøtter desuden de serielle kommunikationsbusser SPI og I2C, hvilket er typiske busser der bliver brugt til kommunikation med sensorer samt aktuatorer. 
+
+DevKit8000 platformen er også brugt gennem undervisning på IHA, hvilket betyder at der er god adgang til de compilers der skal bruges til platformen.
+
+\section{Programmable System-on-Chip (PSoC)}
+PSoC er en microcontroller der kan omprogrammeres via et medfølgende \textit{Integrated Development Environment} (IDE). PSoC'en understøtter multiple \textit{Seriel Communication Busses} (SCB), hvilket gør denne microcontroller ideel til dette system, da det skal kommunikere med sensorer og aktuatorer. 
