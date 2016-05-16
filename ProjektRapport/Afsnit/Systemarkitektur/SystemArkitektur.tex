@@ -290,8 +290,4 @@ Kolonnerne \textit{Binær Værdi} og \textit{Hex Værdi} i tabel \ref{table:I2CK
 \subsubsection{Designvalg}
 Den primære idé bag valg af kommandotype metoden til I2C kommunikations protokollen er først og fremmest så modtageren kan differentiere mellem flere handlinger i systemet. En anden vigtig grund er at man, ved kommandotyper, kan associere et dynamisk antal bytes til hver kommando. Dvs, hvis en modtager får en kommandotype \textit{A}, vil den vide at den efterfølgende skal læse 5 bytes, hvormiod at en kommandotype \textit{B} ville betyde at der kun skulle læses 2 bytes.
 
-En anden fordel ved kommandotype metoden er, at den er relativ simpel at implementere i kode, som vist ved pseudofunktionerne i figur \ref{fig:I2CProtokolEksempel}.  
-
-\subsection{Klassediagrammer}
-
-\subsection{Specifikation og Analyse}
+En anden fordel ved kommandotype metoden er, at den er relativ simpel at implementere i kode, som vist ved pseudofunktionerne i figur \ref{fig:I2CProtokolEksempel}.
