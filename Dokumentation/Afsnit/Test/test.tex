@@ -196,22 +196,37 @@ Man kan også på figuren se at når den orange/blå går høj, så stiger den m
 
 
 
-\section{Integration}
-For at verificere at systemet fungerer når det sammensættes til en enkelt enhed, er der lavet en integrationstest. Testen er lavet ud fra et 'black-box' princip, hvilket vil sige, at der kun evalueres ud fra systemets funktionalitet, og ikke på de interne struktur.
-Testen udføres ved, at klikke på 'Start-test', og bagefter observere udskrivningen på terminal-vinduet på brugergrænsefladen. 
+\section{Integrationtest - Use case 2}
+For at verificere at use case 2 fungerer når det sammensættes til en enkelt enhed, er der lavet en integrationstest. Testen er lavet ud fra et 'black-box' princip, hvilket vil sige, at der kun evalueres ud fra systemets funktionalitet, og ikke på den interne struktur.
+Testen udføres ved, at klikke på 'Start-test', og bagefter observeres udskriften på terminal-vinduet på brugergrænsefladen. På figur \ref{figure:IntegrationstestOpstilling} ses opstillingen for integrationstesten.
 
 \begin{figure}[H]
-	\includegraphics[width=\textwidth]{Test/images/SPItest/SPIModulTestOpsaetning2}
+	\includegraphics[width=\textwidth]{Test/images/IntegrationstestProtokoller/opstilling}
 	\caption{Integrationstest opstilling}
 	\label{figure:IntegrationstestOpstilling}
 \end{figure}
 
-På figur 
+Opstillingen viser, at Nunchuck'en og de to PSoC's er forbundet til samme I2C-netværk via fumlebrættet. PSoC0(PSoC'en til højre) er også forbundet til DevKit8000 via SPI, ledt igennem fumlebrættet. På Devkittet ses brugergrænsefladen, hvor testen initieres ved at klikke på "Start test". Brugergrænsefladen har også et terminalvindue, hvor testens status bliver udprintet.
+
+Selve testen gennemføres, ved at der klikkes "Start test" på brugergrænsefladen, og derefter følges evt. instruktioner der vises på brugergrænsefladen. Det forventes, at efter testen, vil brugergrænsefladen fortælle, at testen blev gennemført uden fejl, og systemet er klar til brug. Figur \ref{figure:integrationstestresult} viser brugergrænsefladen efter endt system test.
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=\textwidth]{Test/images/SPItest/SPIModulTestTerminal}
-	\caption{Output fra integrationstesten}
+	\includegraphics[width=\textwidth]{Test/images/IntegrationstestProtokoller/resultat2}
+	\caption{Resultat af integrationstesten}
 	\label{figure:integrationstestresult}
 \end{figure}
+
+Som det ses, er resultatet af testen som forventet, og testen er gennemført. Under testen bliver brugeren bedt om at trykke på nunchucken's 'z' knap. Hvis brugeren ikke klikker på knappen indenfor det angivne stykke tid, forventes det at testen vil fejle. Figur \ref{figure:integrationstestresult1} viser netop dette.
+
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\textwidth]{Test/images/IntegrationstestProtokoller/resultat1}
+	\caption{Resultat hvis man ikke klikker på nunchuck}
+	\label{figure:integrationstestresult1}
+\end{figure}
+
+Som det ses, fejlede testen, hvilket stemte overens med det forventede resultat. Derved kan det konkluderes at systemet opfører sig som forventet.
+
 \section{Accepttest}
