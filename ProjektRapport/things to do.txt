@@ -42,7 +42,6 @@ Projektrapport:
 -Arkitektur
 	-Klassediagrammer
 	-Signalbeskrivelse skal rettes igennem
-	-Find på bedre navn til "Sekvensdiagrammer" afsnit
 	-Skriv mere tekst til "System Test"
 	-Beskriv motorstyring (software)
 -Design og Implementering
