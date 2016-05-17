@@ -1,5 +1,5 @@
 /*******************************************************************************
-* File Name: PWM_out.h  
+* File Name: PWM_motor_out.h  
 * Version 2.20
 *
 * Description:
@@ -15,8 +15,8 @@
 * the software package with which this file was provided.
 *******************************************************************************/
 
-#if !defined(CY_PINS_PWM_out_ALIASES_H) /* Pins PWM_out_ALIASES_H */
-#define CY_PINS_PWM_out_ALIASES_H
+#if !defined(CY_PINS_PWM_motor_out_ALIASES_H) /* Pins PWM_motor_out_ALIASES_H */
+#define CY_PINS_PWM_motor_out_ALIASES_H
 
 #include "cytypes.h"
 #include "cyfitter.h"
@@ -26,17 +26,17 @@
 /***************************************
 *              Constants        
 ***************************************/
-#define PWM_out_0			(PWM_out__0__PC)
-#define PWM_out_0_PS		(PWM_out__0__PS)
-#define PWM_out_0_PC		(PWM_out__0__PC)
-#define PWM_out_0_DR		(PWM_out__0__DR)
-#define PWM_out_0_SHIFT	(PWM_out__0__SHIFT)
-#define PWM_out_0_INTR	((uint16)((uint16)0x0003u << (PWM_out__0__SHIFT*2u)))
+#define PWM_motor_out_0			(PWM_motor_out__0__PC)
+#define PWM_motor_out_0_PS		(PWM_motor_out__0__PS)
+#define PWM_motor_out_0_PC		(PWM_motor_out__0__PC)
+#define PWM_motor_out_0_DR		(PWM_motor_out__0__DR)
+#define PWM_motor_out_0_SHIFT	(PWM_motor_out__0__SHIFT)
+#define PWM_motor_out_0_INTR	((uint16)((uint16)0x0003u << (PWM_motor_out__0__SHIFT*2u)))
 
-#define PWM_out_INTR_ALL	 ((uint16)(PWM_out_0_INTR))
+#define PWM_motor_out_INTR_ALL	 ((uint16)(PWM_motor_out_0_INTR))
 
 
-#endif /* End Pins PWM_out_ALIASES_H */
+#endif /* End Pins PWM_motor_out_ALIASES_H */
 
 
 /* [] END OF FILE */
