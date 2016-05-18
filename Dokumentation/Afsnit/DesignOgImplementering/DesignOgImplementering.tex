@@ -207,9 +207,11 @@ Der blev først designet en H-bro, som bestod af to N-MOSFET's af typen IRLZ44 o
 	\centering
 	\includegraphics[width=\textwidth]{DesignOgImplementering/images/motorkreds}
 	\caption{Kredsløb for H-bro}
+	\label{fig:hbro}
 	\end{figure}
+	
 
-\begin{table}[]
+\begin{table}[H]
 	\centering
 	\caption{Komponentbetegnelser på H-bro}
 	\label{my-label}
@@ -244,7 +246,7 @@ Der blev først designet en H-bro, som bestod af to N-MOSFET's af typen IRLZ44 o
 
 
 \subsubsection{MOSFET'er}
-Til at styre motoren er der bygget en H-bro, som består af fire mosfet, hvor to af dem er af typen IRF9Z34N (mosfet P-channel, som er Q9 og Q10 på kredsløbstegningen) og de to andre mosfet er af typen IRLZ44 (mosfet N-Channel, som er Q3 og Q4 kredsløbstegningen). Det er valgt at bruge mosfet for at kunne styre H-broen, da det ved denne er muligt at lukke og åbne for spændingen, og de bliver styret af spænding, i forhold til transistorer, som bliver styret af strøm. 
+Til at styre motoren er der bygget en H-bro, som består af fire mosfet, hvor to af dem er af typen IRF9Z34N (mosfet P-channel, som er Q9 og Q10 på figur \ref{fig:hbro}) og de to andre mosfet er af typen IRLZ44 (mosfet N-Channel, som er Q3 og Q4 på figur\ref{fig:hbro}). Det er valgt at bruge mosfet for at kunne styre H-broen, da det ved denne er muligt at lukke og åbne for spændingen, og de bliver styret af spænding, i forhold til transistorer, som bliver styret af strøm. 
 
 \begin{itemize}
 \item MOSFET N-kanal\\
@@ -255,13 +257,14 @@ Til at styre motoren er der bygget en H-bro, som består af fire mosfet, hvor to
 		\centering
 		\includegraphics[width=\textwidth]{DesignOgImplementering/images/grafn}
 		\caption{Gate-to-Source Voltage REFERENCE TIL DATABLAD HER!!!!}
+		\label{fig:mosfetn}
 	\end{figure}
 	
-	På figur (reference her!) ses det, at når der er en gate-to-source-spænding på 5V, vil der MOSFET'en kunne klare, at der løber en strøm på op til 100A/30A (TJEK DETTE!!). Det vil altså ikke komme til at påvirke motoren, da denne kun kan trække en strøm på cirka 0,35A. 
+	På figur \ref{fig:mosfetn} ses det, at når der er en gate-to-source-spænding på 5V, vil der MOSFET'en kunne klare, at der løber en strøm på op til 100A i følge datablad \textbf{\#ref Reference til datablad}. Det vil altså ikke komme til at påvirke motoren, da denne kun kan trække en strøm på cirka 0,35A. 
 	
 \item MOSFET P-kanal \\
 	Der er valgt at bruge en P-MOSFET af typen IRF9Z34N. Denne MOSFET skal bruges til at trække de 12V ned til motoren, så denne kan køre. Samtidig sørger den for, at de 12V ikke løber ned til motoren så længe, der ikke er negativ spænding på gate-benet. 
-	Denne type MOSFET kan trække en strøm på 6,7A ifølge databladet. Det vil altså ikke komme til at påvirke motoren, da den kun kan trække en strøm på cirka 0,35A. 
+	Denne type MOSFET kan trække en strøm på 6,7A ifølge databladet \textbf{\#ref Reference til datablad}. Det vil altså ikke komme til at påvirke motoren, da den kun kan trække en strøm på cirka 0,35A. 
 	
 	For at der kan løbe spænding igennem IRF9Z34N, skal den have en negativ spænding for at åbne og en spænding på over 0V for at lukke. 
 		
@@ -269,35 +272,36 @@ Til at styre motoren er der bygget en H-bro, som består af fire mosfet, hvor to
 		\centering
 		\includegraphics[width=\textwidth]{DesignOgImplementering/images/grafp}
 		\caption{Gate-to-Source Voltage REFERENCE TIL DATABLAD HER!!!!}
+		\label{fig:mosfetp}
 	\end{figure}
 	
-	På figuren (REFERENCE HER!) ses det, at når der er en gate-to-source-spænding på 5V, vil derr kunne løbe en strøm på omkring 5A igennem MOSFET'en, hvilket er mere end nok til at få motoren til at køre. 
+	På figuren \ref{fig:mosfetp} ses det, at når der er en gate-to-source-spænding på 5V, vil derr kunne løbe en strøm på omkring 5A igennem MOSFET'en, hvilket er mere end nok til at få motoren til at køre. 
 	
 \end{itemize}
 
 \subsubsection{Dioder}
-Over fire af mosfetene (Q9, Q10, Q3 og Q4) er der sat en diode af typen IN5819. Den skal fungere som beskyttelse af de fire mosfet (Q9, Q10, Q3 og Q4). Det, de gør, er, at de sikrer, at den spænding, som er tilbage i motoren, når man lukker for mosfetene, ikke løber tilbage ind i mosfetene og brænder dem af.
+Over fire af mosfetene (Q9, Q10, Q3 og Q4) som set på figur \ref{fig:hbro} er der sat en diode af typen IN5819. Den skal fungere som beskyttelse af de fire mosfet (Q9, Q10, Q3 og Q4). Det, de gør, er, at de sikrer, at den spænding, som er tilbage i motoren, når man lukker for mosfetene, ikke løber tilbage ind i mosfetene og brænder dem af.
 
 \subsubsection{Modstande}
 \begin{itemize}
 	\item Pull down modstande:\\
-	Der er blevet brugt fire pull-down-modstande (R1, R2, R3 og R4). Disse sørger for, at signalet vil blive holdt lavt, når der ikke er trykket, så dette ben ikke står og flyver, så det kan komme til at åbne en mosfet ved en fejl og derved kommer til at brænde en mosfet eller motoren af. Der er valgt en modstand på 10 kOhm, hvilket betyder, at den er lille nok til at trække de små spændinger ned, når der ikke er trykket, og den stor nok til at spændingen ikke løber derned, når der er trykket. 
+	Der er blevet brugt fire pull-down-modstande (R1, R2, R3 og R4 som set på figur \ref{fig:hbro}). Disse sørger for, at signalet vil blive holdt lavt, når der ikke er trykket, så dette ben ikke står og flyver, så det kan komme til at åbne en mosfet ved en fejl og derved kommer til at brænde en mosfet eller motoren af. Der er valgt en modstand på 10 kOhm, hvilket betyder, at den er lille nok til at trække de små spændinger ned, når der ikke er trykket, og den stor nok til at spændingen ikke løber derned, når der er trykket. 
 	\item Andre modstande
 	\begin{itemize}
 		\item R6 og R7\\
-			Grunden til, at R6 og R7 er der, er for at sikre, at transistorernes Absolute Maximum Ratings omkring strømmen, som ikke må overstige 100mA ifølge databladet. (tjek lige om det er rigtig)
+			Grunden til, at R6 og R7(på figur \ref{fig:hbro}), er der, er for at sikre, at transistorernes Absolute Maximum Ratings omkring strømmen, som ikke må overstige 100mA ifølge databladet. (tjek lige om det er rigtig)
 		\item R5 og R8\\
-			Grunden til at R5 og R8 er sat ind i kredsløbet er, at der ifølge databladet kun kan løbe en strøm på omkring 30A igennem den N-MOSFET, der er brugt, Vgs er 10V. Da Vgs kun er sat til 5V, vil MOSFET'en altså ikke kunne klare en alt for stor strøm. Derfor er R5 og R8 sat ind for at forhindre, at MOSFET'en ikke brænder af. 
+			Grunden til at R5 og R8(kan ses på figur \ref{fig:hbro}) er sat ind i kredsløbet er, at der ifølge databladet kun kan løbe en strøm på omkring 30A igennem den N-MOSFET, der er brugt, Vgs er 10V. Da Vgs kun er sat til 5V, vil MOSFET'en altså ikke kunne klare en alt for stor strøm. Derfor er R5 og R8 sat ind for at forhindre, at MOSFET'en ikke brænder af. 
 	\end{itemize}
 
 \end{itemize}
 
 \subsubsection{Transistorer}
 \begin{itemize}
-	\item Q5 og Q7
+	\item Q5 og Q7(kan ses på figur \ref{fig:hbro})
 	Disse transistorer sidder i kredsløbet, fordi det tager tid for P-MOSFET'en at blive opladt helt, på grund af kondensator effekt imellem benene på mosfet'en, for ellers ville den tag for lang tid om at åbne helt. Det hjælper den disse transistorer til med. 
 	
-	\item Q6 og Q8
+	\item Q6 og Q8(kan ses på figur \ref{fig:hbro})
 	Disse to transistorer sidder der for at hjælpe med at lukke P-MOSFET'en igen. Inden Q5 og Q7 blev sat ind tog det tid for at lukke P-MOSFET'en, men da de to blev sat ind, kunne de hjælpe til med at aflade mosfet'ene hurtigere. Derfor sidder de der, for at IRF9Z34N kan lukke hurtigt. 
 \end{itemize}
 \subsubsection{Potentiometer}
