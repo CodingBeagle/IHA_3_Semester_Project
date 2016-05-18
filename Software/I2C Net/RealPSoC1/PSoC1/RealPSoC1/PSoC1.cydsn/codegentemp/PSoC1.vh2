@@ -2,7 +2,7 @@
 --	Conversion of PSoC1.v to vh2:
 --
 --	Cypress Semiconductor - WARP Version 6.3 IR 41
---	Wed May 18 10:12:14 2016
+--	Wed May 18 14:40:05 2016
 --
 
 USE cypress.cypress.all;
@@ -154,7 +154,7 @@ SIGNAL \PWM_Y_UP:PWMUDB:status_3\ : bit;
 SIGNAL \PWM_Y_UP:PWMUDB:status_2\ : bit;
 SIGNAL \PWM_Y_UP:PWMUDB:status_1\ : bit;
 SIGNAL \PWM_Y_UP:PWMUDB:status_0\ : bit;
-SIGNAL Net_2603 : bit;
+SIGNAL Net_2747 : bit;
 SIGNAL \PWM_Y_UP:PWMUDB:prevCompare1\ : bit;
 SIGNAL \PWM_Y_UP:PWMUDB:cmp1\ : bit;
 SIGNAL \PWM_Y_UP:PWMUDB:cmp1_status\ : bit;
@@ -238,10 +238,10 @@ SIGNAL \PWM_Y_UP:PWMUDB:pwm1_i\ : bit;
 SIGNAL \PWM_Y_UP:PWMUDB:pwm2_i_reg\ : bit;
 SIGNAL \PWM_Y_UP:PWMUDB:pwm2_i\ : bit;
 SIGNAL \PWM_Y_UP:PWMUDB:tc_i_reg\ : bit;
-SIGNAL Net_2600 : bit;
+SIGNAL Net_2744 : bit;
 SIGNAL Net_1783 : bit;
-SIGNAL Net_2601 : bit;
-SIGNAL Net_2602 : bit;
+SIGNAL Net_2745 : bit;
+SIGNAL Net_2746 : bit;
 SIGNAL \PWM_Y_UP:PWMUDB:pwm_temp\ : bit;
 SIGNAL \PWM_Y_UP:PWMUDB:MODULE_1:b_31\ : bit;
 SIGNAL \PWM_Y_UP:PWMUDB:MODULE_1:b_30\ : bit;
@@ -862,7 +862,7 @@ SIGNAL \PWM_X_LEFT:PWMUDB:status_3\ : bit;
 SIGNAL \PWM_X_LEFT:PWMUDB:status_2\ : bit;
 SIGNAL \PWM_X_LEFT:PWMUDB:status_1\ : bit;
 SIGNAL \PWM_X_LEFT:PWMUDB:status_0\ : bit;
-SIGNAL Net_2615 : bit;
+SIGNAL Net_2759 : bit;
 SIGNAL \PWM_X_LEFT:PWMUDB:prevCompare1\ : bit;
 SIGNAL \PWM_X_LEFT:PWMUDB:cmp1\ : bit;
 SIGNAL \PWM_X_LEFT:PWMUDB:cmp1_status\ : bit;
@@ -946,9 +946,9 @@ SIGNAL \PWM_X_LEFT:PWMUDB:pwm1_i\ : bit;
 SIGNAL \PWM_X_LEFT:PWMUDB:pwm2_i_reg\ : bit;
 SIGNAL \PWM_X_LEFT:PWMUDB:pwm2_i\ : bit;
 SIGNAL \PWM_X_LEFT:PWMUDB:tc_i_reg\ : bit;
-SIGNAL Net_2612 : bit;
-SIGNAL Net_2613 : bit;
-SIGNAL Net_2614 : bit;
+SIGNAL Net_2756 : bit;
+SIGNAL Net_2757 : bit;
+SIGNAL Net_2758 : bit;
 SIGNAL \PWM_X_LEFT:PWMUDB:pwm_temp\ : bit;
 SIGNAL \PWM_X_LEFT:PWMUDB:MODULE_3:b_31\ : bit;
 SIGNAL \PWM_X_LEFT:PWMUDB:MODULE_3:b_30\ : bit;
@@ -1340,7 +1340,7 @@ SIGNAL \PWM_Y_DOWN:PWMUDB:status_3\ : bit;
 SIGNAL \PWM_Y_DOWN:PWMUDB:status_2\ : bit;
 SIGNAL \PWM_Y_DOWN:PWMUDB:status_1\ : bit;
 SIGNAL \PWM_Y_DOWN:PWMUDB:status_0\ : bit;
-SIGNAL Net_2627 : bit;
+SIGNAL Net_2771 : bit;
 SIGNAL \PWM_Y_DOWN:PWMUDB:prevCompare1\ : bit;
 SIGNAL \PWM_Y_DOWN:PWMUDB:cmp1\ : bit;
 SIGNAL \PWM_Y_DOWN:PWMUDB:cmp1_status\ : bit;
@@ -1424,10 +1424,10 @@ SIGNAL \PWM_Y_DOWN:PWMUDB:pwm1_i\ : bit;
 SIGNAL \PWM_Y_DOWN:PWMUDB:pwm2_i_reg\ : bit;
 SIGNAL \PWM_Y_DOWN:PWMUDB:pwm2_i\ : bit;
 SIGNAL \PWM_Y_DOWN:PWMUDB:tc_i_reg\ : bit;
-SIGNAL Net_2624 : bit;
+SIGNAL Net_2768 : bit;
 SIGNAL Net_1897 : bit;
-SIGNAL Net_2625 : bit;
-SIGNAL Net_2626 : bit;
+SIGNAL Net_2769 : bit;
+SIGNAL Net_2770 : bit;
 SIGNAL \PWM_Y_DOWN:PWMUDB:pwm_temp\ : bit;
 SIGNAL \PWM_Y_DOWN:PWMUDB:MODULE_4:b_31\ : bit;
 SIGNAL \PWM_Y_DOWN:PWMUDB:MODULE_4:b_30\ : bit;
@@ -2322,7 +2322,7 @@ MotorXAxisDirectionRight:cy_psoc3_pins_v1_10
 		clock=>\PWM_Y_UP:PWMUDB:ClockOutFromEnBlock\,
 		status=>(zero, \PWM_Y_UP:PWMUDB:status_5\, zero, \PWM_Y_UP:PWMUDB:status_3\,
 			\PWM_Y_UP:PWMUDB:status_2\, \PWM_Y_UP:PWMUDB:status_1\, \PWM_Y_UP:PWMUDB:status_0\),
-		interrupt=>Net_2603);
+		interrupt=>Net_2747);
 \PWM_Y_UP:PWMUDB:sP8:pwmdp:u0\:cy_psoc3_dp
 	GENERIC MAP(cy_dpconfig=>"0000000001000000000000001100000001000000010000000000000011000000000000001100000000000000110000000000000011000000000000001100000011111111000000001111111111111111101000000000000000000100000000000000000000011000",
 		d0_init=>"00000000",
@@ -2560,7 +2560,7 @@ MotorXAxisDirectionRight:cy_psoc3_pins_v1_10
 		clock=>\PWM_X_LEFT:PWMUDB:ClockOutFromEnBlock\,
 		status=>(zero, \PWM_X_LEFT:PWMUDB:status_5\, zero, \PWM_X_LEFT:PWMUDB:status_3\,
 			\PWM_X_LEFT:PWMUDB:status_2\, \PWM_X_LEFT:PWMUDB:status_1\, \PWM_X_LEFT:PWMUDB:status_0\),
-		interrupt=>Net_2615);
+		interrupt=>Net_2759);
 \PWM_X_LEFT:PWMUDB:sP8:pwmdp:u0\:cy_psoc3_dp
 	GENERIC MAP(cy_dpconfig=>"0000000001000000000000001100000001000000010000000000000011000000000000001100000000000000110000000000000011000000000000001100000011111111000000001111111111111111101000000000000000000100000000000000000000011000",
 		d0_init=>"00000000",
@@ -2661,7 +2661,7 @@ Clock_PWM_1:cy_clock_v1_0
 		id=>"c39d3257-3a17-4796-becb-d7a751336172",
 		source_clock_id=>"",
 		divisor=>0,
-		period=>"50000000000",
+		period=>"333333333.333333",
 		is_direct=>'0',
 		is_digital=>'1')
 	PORT MAP(clock_out=>Net_975,
@@ -3104,7 +3104,7 @@ Pin_1:cy_psoc3_pins_v1_10
 		clock=>\PWM_Y_DOWN:PWMUDB:ClockOutFromEnBlock\,
 		status=>(zero, \PWM_Y_DOWN:PWMUDB:status_5\, zero, \PWM_Y_DOWN:PWMUDB:status_3\,
 			\PWM_Y_DOWN:PWMUDB:status_2\, \PWM_Y_DOWN:PWMUDB:status_1\, \PWM_Y_DOWN:PWMUDB:status_0\),
-		interrupt=>Net_2627);
+		interrupt=>Net_2771);
 \PWM_Y_DOWN:PWMUDB:sP8:pwmdp:u0\:cy_psoc3_dp
 	GENERIC MAP(cy_dpconfig=>"0000000001000000000000001100000001000000010000000000000011000000000000001100000000000000110000000000000011000000000000001100000011111111000000001111111111111111101000000000000000000100000000000000000000011000",
 		d0_init=>"00000000",

@@ -1,5 +1,5 @@
 -- Project:   PSoC1
--- Generated: 05/18/2016 10:12:18
+-- Generated: 05/18/2016 14:40:09
 -- PSoC Creator  3.3 SP1
 
 ENTITY PSoC1 IS
@@ -670,9 +670,9 @@ BEGIN
             ilo => ClockBlock_ILO,
             lfclk => ClockBlock_LFCLK,
             dsi_in_0 => ClockBlock_Routed1,
+            udb_div_0 => dclk_to_genclk,
             ff_div_7 => \ADC_1:Net_1845_ff7\,
-            ff_div_2 => \I2C_1:Net_847_ff2\,
-            udb_div_0 => dclk_to_genclk);
+            ff_div_2 => \I2C_1:Net_847_ff2\);
 
     \I2C_1:sda\:logicalport
         GENERIC MAP(

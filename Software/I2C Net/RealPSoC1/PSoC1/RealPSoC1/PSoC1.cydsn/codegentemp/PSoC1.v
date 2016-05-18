@@ -1,6 +1,6 @@
 // ======================================================================
 // PSoC1.v generated from TopDesign.cysch
-// 05/18/2016 at 10:12
+// 05/18/2016 at 14:39
 // This file is auto generated. ANY EDITS YOU MAKE MAY BE LOST WHEN THIS FILE IS REGENERATED!!!
 // ======================================================================
 
@@ -1448,18 +1448,18 @@ endmodule
 // top
 module top ;
 
-          wire  Net_2634;
-          wire  Net_2633;
-          wire  Net_2632;
-          wire  Net_2631;
-          wire  Net_2630;
-          wire  Net_2629;
-          wire  Net_2628;
-          wire  Net_2627;
-          wire  Net_2626;
-          wire  Net_2625;
-          wire  Net_2624;
-          wire  Net_2623;
+          wire  Net_2778;
+          wire  Net_2777;
+          wire  Net_2776;
+          wire  Net_2775;
+          wire  Net_2774;
+          wire  Net_2773;
+          wire  Net_2772;
+          wire  Net_2771;
+          wire  Net_2770;
+          wire  Net_2769;
+          wire  Net_2768;
+          wire  Net_2767;
           wire  Net_1293;
           wire  Net_1292;
           wire  Net_1291;
@@ -1467,18 +1467,18 @@ module top ;
     electrical  Net_1289;
     electrical  Net_1188;
           wire  Net_989;
-          wire  Net_2622;
-          wire  Net_2621;
-          wire  Net_2620;
-          wire  Net_2619;
-          wire  Net_2618;
-          wire  Net_2617;
-          wire  Net_2616;
-          wire  Net_2615;
-          wire  Net_2614;
-          wire  Net_2613;
-          wire  Net_2612;
-          wire  Net_2611;
+          wire  Net_2766;
+          wire  Net_2765;
+          wire  Net_2764;
+          wire  Net_2763;
+          wire  Net_2762;
+          wire  Net_2761;
+          wire  Net_2760;
+          wire  Net_2759;
+          wire  Net_2758;
+          wire  Net_2757;
+          wire  Net_2756;
+          wire  Net_2755;
           wire  Net_1127;
           wire  Net_1126;
           wire  Net_1125;
@@ -1491,18 +1491,18 @@ module top ;
           wire  Net_1118;
           wire  Net_1117;
           wire  Net_1116;
-          wire  Net_2610;
-          wire  Net_2609;
-          wire  Net_2608;
-          wire  Net_2607;
-          wire  Net_2606;
-          wire  Net_2605;
-          wire  Net_2604;
-          wire  Net_2603;
-          wire  Net_2602;
-          wire  Net_2601;
-          wire  Net_2600;
-          wire  Net_2599;
+          wire  Net_2754;
+          wire  Net_2753;
+          wire  Net_2752;
+          wire  Net_2751;
+          wire  Net_2750;
+          wire  Net_2749;
+          wire  Net_2748;
+          wire  Net_2747;
+          wire  Net_2746;
+          wire  Net_2745;
+          wire  Net_2744;
+          wire  Net_2743;
           wire  Net_8;
           wire  Net_7;
           wire  Net_6;
@@ -1897,18 +1897,18 @@ module top ;
     PWM_v3_30_1 PWM_Y_UP (
         .reset(1'b0),
         .clock(Net_975),
-        .tc(Net_2600),
-        .pwm1(Net_2601),
-        .pwm2(Net_2602),
-        .interrupt(Net_2603),
+        .tc(Net_2744),
+        .pwm1(Net_2745),
+        .pwm2(Net_2746),
+        .interrupt(Net_2747),
         .capture(1'b0),
         .kill(1'b1),
         .enable(1'b1),
         .trigger(1'b0),
         .cmp_sel(1'b0),
         .pwm(Net_1783),
-        .ph1(Net_2609),
-        .ph2(Net_2610));
+        .ph1(Net_2753),
+        .ph2(Net_2754));
     defparam PWM_Y_UP.Resolution = 8;
 
     PWM_v3_30_2 PWM_X_RIGHT (
@@ -1931,18 +1931,18 @@ module top ;
     PWM_v3_30_3 PWM_X_LEFT (
         .reset(1'b0),
         .clock(Net_975),
-        .tc(Net_2612),
-        .pwm1(Net_2613),
-        .pwm2(Net_2614),
-        .interrupt(Net_2615),
+        .tc(Net_2756),
+        .pwm1(Net_2757),
+        .pwm2(Net_2758),
+        .interrupt(Net_2759),
         .capture(1'b0),
         .kill(1'b1),
         .enable(1'b1),
         .trigger(1'b0),
         .cmp_sel(1'b0),
         .pwm(Net_1113),
-        .ph1(Net_2621),
-        .ph2(Net_2622));
+        .ph1(Net_2765),
+        .ph2(Net_2766));
     defparam PWM_X_LEFT.Resolution = 8;
 
 
@@ -1950,7 +1950,7 @@ module top ;
 		#(.id("c39d3257-3a17-4796-becb-d7a751336172"),
 		  .source_clock_id(""),
 		  .divisor(0),
-		  .period("50000000000"),
+		  .period("333333333.333333"),
 		  .is_direct(0),
 		  .is_digital(1))
 		Clock_PWM_1
@@ -2038,18 +2038,18 @@ module top ;
     PWM_v3_30_5 PWM_Y_DOWN (
         .reset(1'b0),
         .clock(Net_975),
-        .tc(Net_2624),
-        .pwm1(Net_2625),
-        .pwm2(Net_2626),
-        .interrupt(Net_2627),
+        .tc(Net_2768),
+        .pwm1(Net_2769),
+        .pwm2(Net_2770),
+        .interrupt(Net_2771),
         .capture(1'b0),
         .kill(1'b1),
         .enable(1'b1),
         .trigger(1'b0),
         .cmp_sel(1'b0),
         .pwm(Net_1897),
-        .ph1(Net_2633),
-        .ph2(Net_2634));
+        .ph1(Net_2777),
+        .ph2(Net_2778));
     defparam PWM_Y_DOWN.Resolution = 8;
 
 	wire [0:0] tmpOE__MotorYAxisDirectionUp_net;
