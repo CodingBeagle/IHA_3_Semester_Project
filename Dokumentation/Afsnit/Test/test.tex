@@ -193,6 +193,91 @@ At når der blev trykket på knap 1b og 2b vil den anden kurv gå høj og den f�
 
 Man kan også på figuren se at når den orange/blå går høj, så stiger den meget hurtig, grunden til den gør det var på grund af at, der er blevet sat de to transistor ind, får p mosfet, som gør at den bliver opladt hurtigere, end den ellers ville på grund af der sidder en form for kondensatorer inde i den mosfet, som skal have hjælp med at bliv opladt. Det hjælp kommer fra de transistor som er blevet sat ind før Mosfeten.  
 
+\subsection{detektor}
+
+\textbf{Formål}
+\\ Formålet med denne test er at vise at motoren ikke kan køre ud over to fast satte værdier.\\
+\\
+\textbf{Overordnet opstilling}
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\textwidth]{test/images/ModultestADC/opstilADC}
+	\caption{opstilling af test for detektor}
+\end{figure}
+
+
+\begin{itemize}
+	\item Rød firekant 1 er potentiometer
+	\item	Rød firekant 2 er h-broen på print
+	\item	Rød firekant 3 ”PSoC 1”
+	\item	Rød firekant 4 er wii nunchuck
+	\item	Rød firekant 5 er ”PSoC 0” hvor der 3 ledninger(lilla, blå og orange) som går til devkit 
+	\item Rød firekant 6 hvor der sidder pull up modstande til kommunikationen mellem ”PSoC 1” og ”PSoC 0”
+	\item	sort ledning går til ground 
+	\item	gul ledning er data mellem de forskellige module
+	\item grøn ledning er klokken
+	\item rød ledningen er spænding til h -bro
+	
+\end{itemize}
+For at teste om motor kunne køre i begge retninger når den er i mellem 900mV og 2000mV og når den kommer over 2000mV eller under 900mV skal den ikke kunne køre i en af retningerne.
+For at tjekke hvilken værdi som blev brugt, blev der sat en analog discovery på potentiometeret og på ADC, blev der debugget og så for at tjekke om motoren kun kunne køre i en retning blev det en visueltest. \\
+\\
+Første del af testen består i at tjekke om motoren kan kun køre mod venstre, når potentiometeret er drejet til en værdi under 900mV. Hvor der blev set på hvilken værdi potentiometer gav og hvad ADC’en fik og en visueltest af om motoren kun kunne køre i en retning.\\
+Andel del af testen består i at tjekke om motoren kunne køre begge vej, når potentiometeret er drejet til en værdi mellem 900mV og 2000mV. Hvor der blev set på hvilken værdi potentiometer gav og hvad ADC’en fik og en visueltest af om motoren kun kunne køre i begge retning.\\
+Tredje del består i at tjekke om motoren kan kun køre mod højre, når potentiometeret er drejet til en værdi over 2000mV. Hvor der blev set på hvilken værdi potentiometer gav og hvad ADC’en fik og en visueltest af om motoren kun kunne køre i den anden retning.\\
+\\
+\textbf{Forventet resultat }
+\\Første del: at når der en værdi under 900mV bliver sendt ind, vil motoren kun kunne køre mod venstre.\\
+Anden del: at når der en værdi mellem 900mV og 2000mV bliver sendt ind, vil motoren kunne køre i begge retninger.\\
+Tredje del: at når der en værdi over 2000mV bliver sendt ind, vil motoren kun kunne køre mod højre.
+
+\textbf{Opnået resultat}
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\textwidth]{test/images/ModultestADC/260mVanalog}
+	\caption{måleresultat fra analog Discovery, ved først del af test}
+	\label{figure:analoglav}
+\end{figure}
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\textwidth]{test/images/ModultestADC/nedDebug}
+	\caption{måleresultat fra ADC, ved først del af test}
+	\label{figure: ADClav}
+\end{figure}
+Først del: Som det fremgår på figur \label{fig:analoglav} bliver der sendt fra potentiometeret  en spænding på 260mV og på firgur \label{fig:ADClav} kan man se at ADC’en modtog en værdi på 187mV, man skal huske på at der en forskel på 1.515 i mellem potentiometeret og ADC \textbf{\#ref Reference til DesignOgImplementering }. 
+Som forventet kunne motoren kun køre mod venstre\\
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\textwidth]{test/images/ModultestADC/2538Vanalog}
+	\caption{måleresultat fra analog Discovery, ved anden del af test}
+	\label{figure:analogmid}
+\end{figure}
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\textwidth]{test/images/ModultestADC/mellemDebug}
+	\caption{måleresultat fra ADC, ved anden del af test}
+	\label{figure: ADCmid}
+\end{figure}
+Anden del: Som det fremgår på figur \label{fig:analogmid}  bliver der sendt fra potentiometeret en spænding på 2538mV og på firgur \label{fig:ADCmid}  kan man se at ADC’en modtog en værdi på 1595mV, man skal huske på at der en forskel på 1.515 i mellem potentiometeret og ADC \textbf{\#ref Reference til DesignOgImplementering }. 
+Som forventet kunne motoren kun køre i begge retninger.\\
+
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\textwidth]{test/images/ModultestADC/4904mVanalog}
+	\caption{måleresultat fra analog Discovery, ved trejde del af test}
+	\label{figure:analoghoj}
+\end{figure}
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\textwidth]{test/images/ModultestADC/opDebug}
+	\caption{måleresultat fra ADC, ved trejde del af test}
+	\label{figure: ADChoj}
+\end{figure}
+Tredje del: Som det fremgår på figur \label{fig:analoghoj} bliver der sendt fra potentiometeret en spænding på 4909mV og på firgur \label{fig:ADChoj}  kan man se at ADC’en modtog en værdi på 3252mV, man skal huske på at der en forskel på 1.515 i mellem potentiometeret og ADC \textbf{\#ref Reference til DesignOgImplementering }. 
+Som forventet kunne motoren kun køre mod højre.
+
+
 
 
 
