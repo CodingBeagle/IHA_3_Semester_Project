@@ -307,9 +307,6 @@
 <Unloaded />
 <OpenDocs>
 <name v=".\PSoC0.cydsn\main.c" />
-<name v=".\PSoC0.cydsn\I2CCommunication.h" />
-<name v=".\PSoC0.cydsn\nunchuck.h" />
-<name v=".\PSoC0.cydsn\SPICommunication.h" />
 <name v=".\PSoC0.cydsn\I2CCommunication.c" />
 <name v=".\PSoC0.cydsn\SPICommunication.c" />
 <name v=".\PSoC0.cydsn\nunchuck.c" />

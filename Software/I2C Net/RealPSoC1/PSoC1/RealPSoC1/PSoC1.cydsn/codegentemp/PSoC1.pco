@@ -1,5 +1,5 @@
 # PSoC1
-# 2016-04-29 12:04:11Z
+# 2016-05-18 08:12:18Z
 
 # IO_2@[IOP=(3)][IoId=(2)] is reserved: SWDDebugEnabled
 dont_use_io iocell 3 2
@@ -15,23 +15,42 @@ set_io "DebugLEDBlue(0)" iocell 0 3
 set_io "MotorXAxisDirectionLeft(0)" iocell 2 7
 set_io "MotorXAxisDirectionRight(0)" iocell 1 0
 set_io "Pin_1(0)" iocell 2 4
-set_location "\PWM_X_RIGHT:PWMUDB:status_2\" 0 0 1 0
-set_location "\PWM_X_LEFT:PWMUDB:status_2\" 1 0 1 0
+set_io "MotorYAxisDirectionUp(0)" iocell 3 7
+set_io "MotorYAxisDirectionDown(0)" iocell 0 0
+set_io "Shoot(0)" iocell 3 5
+set_location "\PWM_Y_UP:PWMUDB:status_2\" 0 0 0 0
+set_location "\PWM_X_RIGHT:PWMUDB:status_2\" 0 1 0 0
+set_location "\PWM_X_LEFT:PWMUDB:status_2\" 1 0 0 0
+set_location "\PWM_Y_DOWN:PWMUDB:status_2\" 1 1 0 0
 set_location "\I2C_1:SCB_IRQ\" interrupt -1 -1 10
 set_location "\I2C_1:SCB\" m0s8scbcell -1 -1 0
-set_location "\PWM_X_RIGHT:PWMUDB:genblk1:ctrlreg\" 0 0 6
-set_location "\PWM_X_RIGHT:PWMUDB:genblk8:stsreg\" 0 0 4
-set_location "\PWM_X_RIGHT:PWMUDB:sP8:pwmdp:u0\" 0 0 2
+set_location "\PWM_Y_UP:PWMUDB:genblk1:ctrlreg\" 0 0 6
+set_location "\PWM_Y_UP:PWMUDB:genblk8:stsreg\" 0 0 4
+set_location "\PWM_Y_UP:PWMUDB:sP8:pwmdp:u0\" 0 0 2
+set_location "\PWM_X_RIGHT:PWMUDB:genblk1:ctrlreg\" 0 1 6
+set_location "\PWM_X_RIGHT:PWMUDB:genblk8:stsreg\" 0 1 4
+set_location "\PWM_X_RIGHT:PWMUDB:sP8:pwmdp:u0\" 0 1 2
 set_location "\PWM_X_LEFT:PWMUDB:genblk1:ctrlreg\" 1 0 6
 set_location "\PWM_X_LEFT:PWMUDB:genblk8:stsreg\" 1 0 4
 set_location "\PWM_X_LEFT:PWMUDB:sP8:pwmdp:u0\" 1 0 2
 set_location "\ADC_1:IRQ\" interrupt -1 -1 14
 set_location "\ADC_1:cy_psoc4_sar\" p4sarcell -1 -1 0
-set_location "\PWM_X_RIGHT:PWMUDB:runmode_enable\" 0 0 0 3
-set_location "\PWM_X_RIGHT:PWMUDB:prevCompare1\" 0 0 0 1
-set_location "\PWM_X_RIGHT:PWMUDB:status_0\" 0 0 0 0
-set_location "Net_167" 0 0 0 2
-set_location "\PWM_X_LEFT:PWMUDB:runmode_enable\" 1 0 0 3
-set_location "\PWM_X_LEFT:PWMUDB:prevCompare1\" 1 0 0 1
-set_location "\PWM_X_LEFT:PWMUDB:status_0\" 1 0 0 2
-set_location "Net_1113" 1 0 0 0
+set_location "\PWM_Y_DOWN:PWMUDB:genblk1:ctrlreg\" 1 1 6
+set_location "\PWM_Y_DOWN:PWMUDB:genblk8:stsreg\" 1 1 4
+set_location "\PWM_Y_DOWN:PWMUDB:sP8:pwmdp:u0\" 1 1 2
+set_location "\PWM_Y_UP:PWMUDB:runmode_enable\" 0 0 0 1
+set_location "\PWM_Y_UP:PWMUDB:prevCompare1\" 0 0 0 3
+set_location "\PWM_Y_UP:PWMUDB:status_0\" 0 0 1 0
+set_location "Net_1783" 0 0 0 2
+set_location "\PWM_X_RIGHT:PWMUDB:runmode_enable\" 0 1 0 1
+set_location "\PWM_X_RIGHT:PWMUDB:prevCompare1\" 0 1 0 3
+set_location "\PWM_X_RIGHT:PWMUDB:status_0\" 0 1 1 0
+set_location "Net_167" 0 1 0 2
+set_location "\PWM_X_LEFT:PWMUDB:runmode_enable\" 1 0 0 1
+set_location "\PWM_X_LEFT:PWMUDB:prevCompare1\" 1 0 0 3
+set_location "\PWM_X_LEFT:PWMUDB:status_0\" 1 0 1 0
+set_location "Net_1113" 1 0 0 2
+set_location "\PWM_Y_DOWN:PWMUDB:runmode_enable\" 1 1 0 1
+set_location "\PWM_Y_DOWN:PWMUDB:prevCompare1\" 1 1 0 3
+set_location "\PWM_Y_DOWN:PWMUDB:status_0\" 1 1 1 0
+set_location "Net_1897" 1 1 0 2
