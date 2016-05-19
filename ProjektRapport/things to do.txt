@@ -1,49 +1,52 @@
-Spørg Gunvor hvor formelt teksten skal være i process rapporten.
+SpÃ¸rg Gunvor hvor formelt teksten skal vÃ¦re i process rapporten.
 -Indledning til "scrum kursus ved systematic" (de, vi, etc)
--Konklusion for første sprint (brug af vi)
+-Konklusion for fÃ¸rste sprint (brug af vi)
 
--Spørg Gunvor om alle kommando typer skal testes.
---Skriv notater om hvad der måske kunne gøres bedre
+-SpÃ¸rg Gunvor om alle kommando typer skal testes.
+--Skriv notater om hvad der mÃ¥ske kunne gÃ¸res bedre
 
 -Modultests
---Hvis vi løber helt tør for plads kan de fjernes fra rapporten, og denne beskrivelse kan flyttes over til dokumentation som overblik
+--Hvis vi lÃ¸ber helt tÃ¸r for plads kan de fjernes fra rapporten, og denne beskrivelse kan flyttes over til dokumentation som overblik
 
--Spørg Gunvor om betydning af længden.
---Hvis vi når 50 sider med billeder inklusivt skal vi til at passe på. Vi skal bare skrive og forkorte rapporten til sidst.
+-SpÃ¸rg Gunvor om betydning af lÃ¦ngden.
+--Hvis vi nÃ¥r 50 sider med billeder inklusivt skal vi til at passe pÃ¥. Vi skal bare skrive og forkorte rapporten til sidst.
 
--Spørg Gunvor om blok beskrivelse skal med i rapporten.
---Hører til i rapporten
+-SpÃ¸rg Gunvor om blok beskrivelse skal med i rapporten.
+--HÃ¸rer til i rapporten
 
--Spørg Gunvor om signalbeskrivelse er med i rapporten.
---Den hører til i rapporten
+-SpÃ¸rg Gunvor om signalbeskrivelse er med i rapporten.
+--Den hÃ¸rer til i rapporten
 
--Spørg Gunvor om argumentation for SPI og I2C protokoller.
---I rapporten må vi gerne præsentere løsninger og herefter argumentere for dem
+-SpÃ¸rg Gunvor om argumentation for SPI og I2C protokoller.
+--I rapporten mÃ¥ vi gerne prÃ¦sentere lÃ¸sninger og herefter argumentere for dem
 
--Spørg Gunvor om hvor meget klassebeskrivelse der egentlig skal med.
---Må gerne fjernes
+-SpÃ¸rg Gunvor om hvor meget klassebeskrivelse der egentlig skal med.
+--MÃ¥ gerne fjernes
 
--Før arkitektur må der gerne beskrives grundlæggende hardware som PSoC og DevKit.
+-FÃ¸r arkitektur mÃ¥ der gerne beskrives grundlÃ¦ggende hardware som PSoC og DevKit.
 
 Projektrapport:
 
 -Generelt:
 	-Beskrive software motorstyring.
-	-Beskriv software GUI i arkitektur samt status på design og implementering
--Resumé
+	-Beskriv software GUI i arkitektur samt status pÃ¥ design og implementering
+-ResumÃ©
 	-Det hele skal skrives.
 -Abstract
 	-Det hele skal skrives.
 -Indledning
+	-Flyt tabel for ansvarsomrÃ¥der
 	-Indledning skal tilrettes Gunvors feedback.
 	-Projektformulering skal tilrettes Gunvors feedback.
 -Systembeskrivelse
 	-Omskriv
 -Arkitektur
-	-Klassediagrammer
+	-Klassediagrammer (applikationsmodel)
 	-Signalbeskrivelse skal rettes igennem
 	-Skriv mere tekst til "System Test"
 	-Beskriv motorstyring (software)
+	-Ret BDD (motor til motorstyring)
+	-BrugergrÃ¦nseflade beskrivelse
 -Design og Implementering
 	-SPI Devkit skal rettes
 	-Beskriv motorstyring (software)
