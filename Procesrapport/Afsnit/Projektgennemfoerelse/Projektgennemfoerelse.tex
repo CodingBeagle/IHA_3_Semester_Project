@@ -1,5 +1,5 @@
-\chapter{Scrum}
-Under dette projektforløb er udviklingsmodellen, scrum, brugt til processtyring. Denne udviklings model er en iterativ osv...
+\chapter{Udviklingsmodel - Scrum}
+Under dette projektforløb er scrum udviklingsmodellen brugt til processtyring. Denne udviklingsmodel er en iterativ metode til styring af produkt udvikling.
 
 %I dette afsnit beskrives den udviklingsmodel der anvendes i forbindelse projektets forløb. I dette projekt er der blevet gjort brug af scrum som udviklingsmetode.
 
@@ -131,18 +131,28 @@ I modsætning til projektarbejdet, var der en ansvarsfølelse for de opgaver der
 
 \chapter{Udviklingsforløb}
 I de følgende afsnit vil udviklingsforløbet af projektet beskrives for hvert sprint. Herunder vil der de erfaringer der blev gjort for hvert sprint beskrives.
+
 	\section{Sprint 1}
 	\textbf{19/2/16 - 14/3/16}\newline
 	\textbf{Varighed:} 3 uger\newline
-	\textbf{Scrum master: }Kasper \newline
+	\textbf{Scrum master: }Kasper \newline \newline
 	Formålet med det første sprint var at dokumentere, implementere og teste use case 2, Test Kommunikationsprotokoller.
-	Sprintet startede ud med at lave en backlog i Pivotal Tracker. Der blev lavet userstories på baggrund af brugerønsker samt userstories til de dokumenter, der udgør de tre færdige rapporter. Herefter blev to userstories udvalgt til sprint backloggen, der skulle arbejdes på i dette sprint. Disse userstories består af underopgaver, der hørte til implementeringen af hardware og software. Når en underopgave blev færdiggjort, blev den krydset af i userstory'en. Da vi ikke færdiggjorde nogen af disse userstories til fulde, medførte det at vi tilsyneladende ikke har opnået nogen resultater i dette sprint. På burndown chartet kan man ikke se at vi har lavet noget, selvom vi har fået I2C kommunikation til at lykkedes, en fungerende H-bro til motorstyring og en test GUI. \newline
+	Sprintet startede ud med at lave en backlog i Pivotal Tracker. Der blev lavet userstories på baggrund af brugerønsker samt userstories til de dokumenter, der udgør de tre færdige rapporter. Herefter blev to userstories udvalgt til sprint backloggen, der skulle arbejdes på i dette sprint. Disse userstories består af underopgaver, der hørte til implementeringen af hardware og software. Når en underopgave blev færdiggjort, blev den krydset af i userstory'en. \newline
 	
 	I kravspecifikationen blev det bestemt der skulle anvendes tre PSoC til I2C kommunikationen mellem GUI, motor og nunchuck. Under arkitektur dannelsen så vi at PSoC2 forbundet til nunchucken kun pollede for information og videredesendte det. Ved at fjerne PSoC2 forbundet til nunchuck'en og forbinde den til PSoC1 forbundet til motoren. Dermed overtager PSoC1 funktionaliteten af PSoC2 og vi undgår unødig kommunikation. \newline
 	
 	Under sprintet udførte vi diverse opgaver, der ikke stod i sprint backloggen. Dette blev gjort da vi havde glemt at definere dem som userstories da vi udvalgt opgaver til sprintbackloggen. Dermed er der blevet udført meget mere under sprintet end der kan ses på Pivotal Tracker. \newline
 	
 	Under dette sprint har vi anvendt logbøger, i stedet for daglig stand up møder. Der blev hver morgen noteret det, som man egentligt ville have nævnt til de daglige møder. Det gav en del arbejde til scrum masteren, der skulle tjekke hver dag om alle havde lavet dagens indlæg. Derudover forsvandt kommunikationen mellem gruppensmedlemmer i perioder, da der ikke var nogen andre end scrum masteren, der kiggede logbøgerne igennem. Dette gav anledning til en del miskommunikation omkring arbejdsdage og arbejdsopgaver. For at undgå dette vil vi forsøge os med daglige stand up møder, med vejlederen, i næste sprint. \newline
+	
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=\textwidth]{Projektgennemfoerelse/images/burndown1}
+		\caption{Burndown chart for sprint 1}
+		\label{ref:Burndown1}
+	\end{figure}
+	
+	På figur \ref{ref:Burndown1} ses et burndown chart for første sprint. Dette billede er taget efter sprintet er afsluttet og derfor ser det ud til at 100\% af opgaverne er færdiggjorte. Ved at se på grafen kan man se at lige  inden sprintet afsluttede manglede der 16 point på sprintbackloggen. Grafen er præget af en plateau effekt. Dette skyldes størrelsen på opgaverne på sprintbackloggen. Det ser ud til at der er inaktive perioder efterfulgt af et dyk. Da vi ikke færdiggjorde nogen af vores userstories til fulde, medførte det at vi tilsyneladende ikke har opnået nogen resultater i dette sprint.  \newline
 	
 	\textbf{Under dette sprint har vi lært:}
 	\begin{itemize}
@@ -152,7 +162,7 @@ I de følgende afsnit vil udviklingsforløbet af projektet beskrives for hvert s
 		\item At der skal bruges mere tid til at opdatere gruppens status
 	\end{itemize}
 	
-	Da sprintet var færdig er vi gået tilbage og ændret på sprint backloggen for både at findele de userstories vi havde inkluderet og for at dokumentere de ting der er blevet udført i dette sprint, som ikke var inkluderet. Derudover tager den erfaring vi har fået med arkitekturen med til et af de næste sprint hvor use case 1 skal implementeres. Da vi ikke havde så meget erfaring med scrum og denne form for udviklingsmetode mistede vi under sprintet overblikket og dermed kom vi for langsomt i gang med implementeringen. Dette skyldes både vores uerfarenhed med scrum og dårlig tidsestimering. Vi opnåede meget i dette sprint, dog opnåede vi ikke det ønskede mål, som var en færdig implementeret use case 2. 
+	Da sprintet var færdig er vi gået tilbage og ændret på sprint backloggen for både at findele de userstories vi havde inkluderet og for at dokumentere de ting der er blevet udført i dette sprint, som ikke var inkluderet. Derudover tager den erfaring vi har fået med arkitekturen med til et af de næste sprint hvor use case 2 skal implementeres. Da vi ikke havde så meget erfaring med scrum mistede vi under sprintet overblikket og dermed kom vi for langsomt i gang med implementeringen. Dette skyldes både vores uerfarenhed med scrum og dårlig tidsestimering. Vi opnåede meget i dette sprint, dog opnåede vi ikke det ønskede mål, som var en færdig implementeret use case 2. 
 	
 	
 	
@@ -160,12 +170,21 @@ I de følgende afsnit vil udviklingsforløbet af projektet beskrives for hvert s
 	\textbf{16/3/16 - 6/4/16}\newline
 	\textbf{Varighed:} 3 uger\newline	
 	\textbf{Scrum master: }Pernille \newline
-	Formålet med anden sprint var at designe og implementere software og hardware til use case 2, Test Kommunikationsprotokoller. Sprintet startede ud med sprintplanlægningsmøde. Her blev der i gruppen blev aftalt hvilke userstories skulle laves under sprintet. Da disse var fastlagt blev der aftalt et sprintplanlægningsmøde med vejlederen, der hjalp med tidsestimering af disse opgaver. Dette var en langsommelig process, men dette var nødvendigt da vi ikke havde anvendt Pivotal Tracker ordentligt og havde problemer med tidsestimering i sidste sprint. Under mødet blev opgaverne også prioriteret, noget som ikke sketet i sidste sprint, dermed blev der skabt et overblik af de vigtigste opgaver til sprintet. \newline
+	Formålet med anden sprint var at designe og implementere software og hardware til use case 2, Test Kommunikationsprotokoller. Sprintet startede ud med sprintplanlægningsmøde. Her blev der i gruppen blev aftalt hvilke userstories skulle laves under sprintet. Da disse var fastlagt blev der aftalt et sprintplanlægningsmøde med vejlederen, der hjalp med tidsestimering af disse opgaver. Dette var en langsommelig process, men dette var nødvendigt da vi ikke havde anvendt Pivotal Tracker ordentligt og havde problemer med tidsestimering i sidste sprint. Under mødet blev opgaverne også prioriteret, noget som ikke blev gjort i sidste sprint, dermed blev der skabt et overblik af de vigtigste opgaver til sprintet. \newline
 	
-	Som noget nyt forsøgte gruppen sig med stand up meetings. Dette var et forsøg på at anvende scrum i et større omfang end vi tidligere har gjort. I en hel uge blev der afholdt morgen møder med vejlederen inden dagens lektioner. Til disse møder blev der nævnt hvad man ellers ville have været skrevet i logbøgerne. Dette gjorde arbejdet meget lettere for scrum masteren, da denne skulle fungere som ordstyrer til disse møder. Møderne gav gruppens medlemmer et overblik som man ikke havde fået ved logbøgerne, da man ikke aktivt skulle opsøge information omkring hvad de andre medlemmer foretog sig. Gruppen oplevede, at fordi vi havde kontakt med vejlederen dagligt, fik vi hurtigere svar til de problemer der opstod og hjælpen var bedre end det vi kunne modtage fra en mail. Der var dog nogle problemer med møderne, da den uge de kørte over, var en uge hvor der skete meget samarbejde. Dermed blev møderne en samtale omkring hvad hardware- og softwaregruppen havde lavet dagen forinden. Stå op møderne ville have fungeret meget bedre hvis de havde foregået i en uge hvor der blev arbejdet mere individuelt. \newline
+	Som noget nyt forsøgte gruppen sig med stand up meetings. Dette var et forsøg på at anvende scrum i et større omfang end vi tidligere har gjort. I en hel uge blev der afholdt morgen møder med vejlederen inden dagens lektioner. Til disse møder blev der nævnt hvad man ellers ville have været skrevet i logbøgerne. Dette gjorde arbejdet lettere for scrum masteren, da hun skulle fungere som ordstyrer til disse møder, i stedet for at læse logbøger. Møderne gav gruppens medlemmer et overblik som man ikke havde fået ved logbøgerne, da man ikke aktivt skulle opsøge information omkring hvad de andre medlemmer foretog sig. Gruppen oplevede, at fordi vi havde kontakt med vejlederen dagligt, fik vi hurtig respons til opstandne problemer og hjælpen var bedre end det vi kunne modtage fra en mail. Der var dog nogle problemer med møderne, da den uge de kørte over, var en uge hvor der skete meget samarbejde. Dermed blev møderne en samtale omkring hvad hardware- og softwaregruppen havde lavet dagen forinden. Stå op møderne ville have fungeret meget bedre hvis de havde foregået i en uge hvor der blev arbejdet mere individuelt. \newline
 	
-	En af grundene til at opgaverne fra sprint backloggen ikke var fuldført var fordi at der i midten af dette sprint var påske ferie. Dette gav anledning til diskussioner i gruppen da der ikke var enighed omkring antallet af arbejdstimer i ferien. Løsningen på dette var at der blev aftalt to arbejds dage i ferien, hvor der skulle arbejdes på projektet. Resten af ferien var det op til hver gruppemedlem at bestemme hvilke dage der skulle arbejdes. \newline
+	En af grundene til at opgaverne fra sprint backloggen ikke var fuldført var fordi at der i midten af dette sprint var påske ferie. Dette gav anledning til diskussioner i gruppen da der ikke var enighed omkring antallet af arbejdstimer i ferien. Løsningen på dette var at der blev aftalt to arbejdsdage i ferien, hvor der skulle arbejdes på projektet. Resten af ferien var det op til hver gruppemedlem at bestemme hvilke dage der skulle arbejdes. \newline
 	
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=\textwidth]{Projektgennemfoerelse/images/burndown2}
+		\caption{Burndown chart for sprint 2}
+		\label{ref:Burndown2}
+	\end{figure}
+	
+	På figur \ref{ref:Burndown2} ses anden sprints burndown chart. Her ses at ved sprint afslutningen var der stadig 18 point i ufærdige opgaver på sprintbackloggen. Det ses også at sprintet blev afsluttet en dag tidligere end forventet. Grafen er stadig præget af en plateau effekt. Denne gang er det i en værre grad end ved første sprint. Dette skyldes formenligt flere dages inaktivitet under ferien og problemer med kommunikationsprotokoller i software. \newline 
+
 	\textbf{Under dette sprint har vi lært:}
 	\begin{itemize}
 		\item At give opgaver realistiske tidsestimater
@@ -179,13 +198,22 @@ I de følgende afsnit vil udviklingsforløbet af projektet beskrives for hvert s
 	\section{Sprint 3}
 	\textbf{7/4/16 - 27/4/16}\newline
 	\textbf{Varighed: }3 uger \newline
-	\textbf{Scrum master: }Mia \newline
+	\textbf{Scrum master: }Mia \newline \newline
 	Formålet med tredje sprint var at færdiggøre use case 2, samt få implemeteret dele af hardware til use case 1. Til sprintplanlægningsmødet oplevede gruppen et stort mandefald, da nogle af gruppens medlemmer var syge. Dette hindrede resten af gruppen i at planlægge sprintet efter alles ønsker. Da der var nogle medlemmer, som var dukket op på trods af sygdom, havde et ønske at tage hjem inden dagens lektioner blev dette møde timeboxed til en time. Under denne time fik gruppen fastlagt målet for sprintet og defineret de opgaver der skulle til for at nå dette mål. Da alle gruppens medlemmer ikke var til stede og der var sat den nødvendige tid af til sprintplanlægningsmødet oplevede vi igen at opgaverne ikke var veldefinerede og der var opgaver der manglede på sprint backloggen. \newline
 	
 	Under dette sprint deltog alle gruppens medlemmer i et scrumkursus som Systematic udbyder. Da scrum er den udviklingsmodel som anvendes til dette projekt, forekom det naturligt for gruppens deltagere at deltage som en gruppe. Hermed kunne de erfaringer og konklusioner som blev draget til kurset blive anvendt til at styrke gruppens kommunikation og samarbejde. 
 	Til kurset blev der undervist i omfattende teori omkring scrum, der blev afholdt diskussioner og scrum blev taget i brug gennem øvelser. Øvelserne fokuserede på at træne evner, som har afgørende betydning for scrum. Disse inkluderede tidsestimering, planlægning, kommunikation og organisering. \newline
 	
 	Kommunikation er afgørende når der arbejdes med scrum. Dette noget vi oplevede da arbejdede med øvelserne til scrumkurset og da vi så på arbejdsgangen på Systematic. Gruppen har indset at logbøgerne, som blev genoptaget efter det fejlede forsøg med fysiske stand up meetings, ikke fungerede i en grad til at de kunne erstatte de fysiske stand up meetings, som scrum kræver. Kommunikationen i gruppen er ikke optimal, da der arbejdes mere individulet end der er blevet gjort hidtil, og der sker ingen kommunikation på tværs af undergrupperne. Derfor oprettes der en Facebook samtale, som skal sørge for kommunikationen. Med dette anvendes en platform som gruppen i forvejen bruger i dagligdagen til at opretholde kommunikationen.  \newline 
+	
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=\textwidth]{Projektgennemfoerelse/images/burndown3}
+		\caption{Burndown chart for sprint 3}
+		\label{ref:Burndown3}
+	\end{figure}
+	
+	På figur \ref{ref:Burndown3} ses burndown chartet for sprint 3.
 	
 	\textbf{Under dette sprint har vi lært:}
 	\begin{itemize}
@@ -200,7 +228,14 @@ I de følgende afsnit vil udviklingsforløbet af projektet beskrives for hvert s
 	\textbf{27/4/16 - 18/5/16}\newline
 	\textbf{Varighed: }3 uger \newline
 	\textbf{Scrum master: }Tenna \newline
-	Formålet med fjerde og sidste sprint er at afslutte alle påbegyndte implementationsopgaver.  
+	Formålet med fjerde og sidste sprint er at afslutte alle påbegyndte implementationsopgaver. 
+	
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=\textwidth]{Projektgennemfoerelse/images/burndown4}
+		\caption{Burndown chart for sprint 4}
+		\label{ref:Burndown4}
+	\end{figure}
 	
 
 % \section{Konflikthåndtering}
