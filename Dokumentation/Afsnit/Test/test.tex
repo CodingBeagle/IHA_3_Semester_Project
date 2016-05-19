@@ -184,14 +184,22 @@ At når der blev trykket på knap 1b og 2b vil den anden kurv gå høj og den f�
 \textbf{Opnået resultat}
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=\textwidth]{test/images/testhbro}
-	\caption{Modultest for H-bro}
+	\includegraphics[width=\textwidth]{test/images/hbromob}
+	\caption{Modultest for H-bro, blå går høj}
+		\label{figure:hbrob}
 	
 \end{figure}
- Som det fremgår på figuren, kan man se at, i det der bliver åbnet for at motor kan køre i den ene retning, så stiger den blå op til 9V fordi nu har den fået forbindelse til ground og fået forbindelse til de 9V. Hvor samtidigt at blå går højt, så går den orange lavere, for nu trækker den blå alt spændingen. Det samme sker når man åbner op for at den kan løbe spændingen kan løbe den anden vej, i stedet for at det er den blå som går høj, er det den orange som går høj. Med det kan man se at motor kan køre i begge retninger uden problemer.
- Der er blevet valgt at der ikke tages billede af at motoren køre, for man ikke se på et billede hvilken vej den køre og overhovedet den køre. Der ses også på figuren at der noget støj, når orange/blå går højt, men det er ikke noget som kommer til at påvirker vores styring af motoren
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\textwidth]{test/images/hbromoo}
+	\caption{Modultest for H-bro, blå går høj}
+	\label{figure:hbroo}
+	
+\end{figure}
+ Som det fremgår på figur \ref{figure:hbrob}, kan man se at, i det der bliver åbnet for at motor kan køre i den ene retning, så stiger den blå op til 9V fordi nu har den fået forbindelse til ground og fået forbindelse til de 9V. Hvor samtidigt at blå går højt, så går den orange lavere, for nu trækker den blå alt spændingen. Det samme sker når man åbner op for at den kan løbe spændingen kan løbe den anden vej, som ses på firgur \ref{figure: hbroo}, i stedet for at det er den blå som går høj, er det den orange som går høj. Med det kan man se at motor kan køre i begge retninger uden problemer.
+ Der er blevet valgt at der ikke tages billede af at motoren køre, for man ikke se på et billede hvilken vej den køre og overhovedet den køre. Der ses også på figur\ref{figure:hbrob} og figur \ref{figure:hbroo} at der noget støj, når orange/blå går højt, men det er ikke noget som kommer til at påvirker vores styring af motoren
 
-Man kan også på figuren se at når den orange/blå går høj, så stiger den meget hurtig, grunden til den gør det var på grund af at, der er blevet sat de to transistor ind, får p mosfet, som gør at den bliver opladt hurtigere, end den ellers ville på grund af der sidder en form for kondensatorer inde i den mosfet, som skal have hjælp med at bliv opladt. Det hjælp kommer fra de transistor som er blevet sat ind før Mosfeten.  
+Man kan også på figur se at når den orange/blå går høj, så stiger den meget hurtig, grunden til den gør det var på grund af at, der er blevet sat de to transistor ind, får p mosfet, som gør at den bliver opladt hurtigere, end den ellers ville på grund af der sidder en form for kondensatorer inde i den mosfet, som skal have hjælp med at bliv opladt. Det hjælp kommer fra de transistor som er blevet sat ind før Mosfeten.  
 
 \subsection{detektor}
 
@@ -244,7 +252,7 @@ Tredje del: at når der en værdi over 2000mV bliver sendt ind, vil motoren kun 
 	\caption{måleresultat fra ADC, ved først del af test}
 	\label{figure: ADClav}
 \end{figure}
-Først del: Som det fremgår på figur \label{fig:analoglav} bliver der sendt fra potentiometeret  en spænding på 260mV og på firgur \label{fig:ADClav} kan man se at ADC’en modtog en værdi på 187mV, man skal huske på at der en forskel på 1.515 i mellem potentiometeret og ADC \textbf{\#ref Reference til DesignOgImplementering }. 
+Først del: Som det fremgår på figur \ref{fig:analoglav} bliver der sendt fra potentiometeret  en spænding på 260mV og på firgur \ref{fig:ADClav} kan man se at ADC’en modtog en værdi på 187mV, man skal huske på at der en forskel på 1.515 i mellem potentiometeret og ADC \textbf{\#ref Reference til DesignOgImplementering }. 
 Som forventet kunne motoren kun køre mod venstre\\
 \begin{figure}[H]
 	\centering
@@ -258,7 +266,7 @@ Som forventet kunne motoren kun køre mod venstre\\
 	\caption{måleresultat fra ADC, ved anden del af test}
 	\label{figure: ADCmid}
 \end{figure}
-Anden del: Som det fremgår på figur \label{fig:analogmid}  bliver der sendt fra potentiometeret en spænding på 2538mV og på firgur \label{fig:ADCmid}  kan man se at ADC’en modtog en værdi på 1595mV, man skal huske på at der en forskel på 1.515 i mellem potentiometeret og ADC \textbf{\#ref Reference til DesignOgImplementering }. 
+Anden del: Som det fremgår på figur \ref{fig:analogmid}  bliver der sendt fra potentiometeret en spænding på 2538mV og på firgur \ref{fig:ADCmid}  kan man se at ADC’en modtog en værdi på 1595mV, man skal huske på at der en forskel på 1.515 i mellem potentiometeret og ADC \textbf{\#ref Reference til DesignOgImplementering }. 
 Som forventet kunne motoren kun køre i begge retninger.\\
 
 
@@ -274,7 +282,7 @@ Som forventet kunne motoren kun køre i begge retninger.\\
 	\caption{måleresultat fra ADC, ved trejde del af test}
 	\label{figure: ADChoj}
 \end{figure}
-Tredje del: Som det fremgår på figur \label{fig:analoghoj} bliver der sendt fra potentiometeret en spænding på 4909mV og på firgur \label{fig:ADChoj}  kan man se at ADC’en modtog en værdi på 3252mV, man skal huske på at der en forskel på 1.515 i mellem potentiometeret og ADC \textbf{\#ref Reference til DesignOgImplementering }. 
+Tredje del: Som det fremgår på figur \ref{fig:analoghoj} bliver der sendt fra potentiometeret en spænding på 4909mV og på firgur \ref{fig:ADChoj}  kan man se at ADC’en modtog en værdi på 3252mV, man skal huske på at der en forskel på 1.515 i mellem potentiometeret og ADC \textbf{\#ref Reference til DesignOgImplementering }. 
 Som forventet kunne motoren kun køre mod højre.
 
 
