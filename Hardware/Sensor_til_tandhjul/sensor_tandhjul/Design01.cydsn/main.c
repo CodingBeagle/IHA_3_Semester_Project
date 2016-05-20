@@ -40,6 +40,7 @@ CY_ISR(isr_in)
     
     PWM_motor_Stop(); //Stop motor
     Pin_green_Write(1); //Sluk grøn led
+    CyDelay(500); //pause på 0,5 sek inden der igen kan skydes
     Pin_red_Write(0); //Tænd rød led
 }
 
