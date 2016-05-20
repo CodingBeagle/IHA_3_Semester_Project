@@ -131,13 +131,31 @@ Følgende afsnit præsenterer applikationsmodeller relevante til Use Case 1 - Sp
 	\label{fig:WiiNunchuckSequenceDiagram}
 \end{figure}
 
+\newpage
 \section{Use Case 2 - Test Kommunikationsprotokoller}
 
 Følgende afsnit præsenterer applikationsmodeller relevante til Use Case 2 - Test Kommunikationsprotokoller, fordelt over systemets CPU'er.
 
+På figur \ref{fig:SystemTestOverviewSequenceDiagram} ses et overordnet sekvensdiagram for use casen. Her starter brugeren testen gennem brugergrænsefladen. Først bliver SPI bussen mellem DevKit8000 og PSoC0 testet. Herefter bliver I2C bussen testet ved at PSoC0 undersøger om de nødvændige I2C slaver (PSoC1 og Wii-Nunchuck) kan kommunikeres med. Til slut får brugeren en besked om at skulle trykke på en Wii-Nunchuck knap, hvorefter der bliver testet om knaptrykket skete eller ej.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\textwidth]{Systemarkitektur/images/OverordnetSekvensDiagramSystemTest}
+	\caption{Sekvensdiagram for Use Case 2 - Test Kommunikationsprotokoller}
+	\label{fig:SystemTestOverviewSequenceDiagram}
+\end{figure}
+
 % ---------------Devkit Applikationsmodel-----------------------------
 \subsection{Applikationsmodel for User Interface Software}
-Sekvensdiagrammet for Devkit 8000 ses på figur \ref{fig:sekvensDevkit}. Kontrolklassen er Test Communication Protocol, er på figurerne er forkortet til TCP. Der er to boundaryklasser, da DevKit 8000 skal håndtere kommunikationen mellem brugeren og PSoC0. Brugeren interagerer via en grafisk brugergrænseflade (GUI). Som det ses af diagrammet initieres testen af brugeren via brugergrænsefladen og derefter er det kontrolklassen, der sørger for, at de forskellige tests bliver sat i gang ved at kommunikere med PSoC0. Når en test er færdiggjort meldes resultatet ud til brugeren via GUI'en.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.8]{Systemarkitektur/images/KlasseIdentifikationDevKit.png}
+	\caption{Klasseidentifikation for Devkit 8000}
+	\label{fig:klasseidentifikationDevKit}
+\end{figure}
+
+Sekvensdiagrammet for Devkit 8000 ses på figur \ref{fig:sekvensDevkit}. Kontrolklassen, som er klassen der skal udføre Use Casen, kaldes Test Communication Protocol (TCP). Der er to boundaryklasser, da DevKit 8000 skal håndtere kommunikationen med en brugergrænseflade, samt en SPI bus. Som det fremkommer af diagrammet er det kontrolklassen, der sørger for, at de forskellige tests bliver sat i gang ved at kommunikere med PSoC0 over SPI bussen. Når en test er færdiggjort meldes resultatet ud til brugeren via GUI'en.
 
 \begin{figure}[H]
 	\centering
@@ -157,6 +175,14 @@ Ud fra sekvensdiagrammet for Devkit 8000 er der udledt metoder til klasserne. De
 
 % ---------------PSoC0 Applikationsmodel-----------------------------
 \subsection{Applikationsmodel for Nunchuck Polling Software}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.8]{Systemarkitektur/images/KlasseIdentifikationPSoC0.png}
+	\caption{Klasseidentifikation for PSoC0}
+	\label{fig:klasseidentifikationPSoC}
+\end{figure}
+
 På figur \ref{fig:sekvensPSoC0SPITest}, \ref{fig:sekvensPSoC0I2CTest} og \ref{fig:sekvensPSoC0NunchuckTest} ses sekvensdiagrammer for PSoC0. Sekvensdiagrammerne er blevet opdelt i de 3 tests der gennemføres i use casen; SPI, I2C og Nunchuck kommunikations tests. Kontrolklassen er Test Communication Protocol, hvilket på figurerne er forkortet til TCP. Derudover er der tre boundaryklasser, da PSoC0 skal kommunikere både med Devkit 8000, Nunchucken og PSoC1.
 
 \begin{figure}[H]
@@ -197,6 +223,14 @@ I klassediagrammet på figur \ref{fig:klassePSoC0} ses kontrolklassen og de tre 
 
 % ---------------PSoC1 Applikationsmodel-----------------------------
 \subsection{Applikationsmodel for Motor Control Software}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.8]{Systemarkitektur/images/KlasseIdentifikationPSoC1.png}
+	\caption{Klasseidentifikation for PSoC1}
+	\label{fig:klasseidentifikationPSoC1}
+\end{figure}
+
 Sekvensdiagrammet for PSoC1 ses på figur \ref{fig:sekvensPSoC1I2CTest}. Som forrig afsnit er kontrolklassen Test Communication Protocols, hvilket i diagrammet er forkortet til TCP. I dette tilfælde er der kun én boundaryklasse, da PSoC1, i denne use case, kun anvendes til I2C testen og derfor kun skal kommunikere med PSoC0. 
 
 \begin{figure}[H]
