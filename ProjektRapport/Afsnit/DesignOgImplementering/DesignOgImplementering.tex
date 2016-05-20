@@ -4,24 +4,33 @@
 
 \subsection{Motorstyring}
 \subsubsection{H-bro}
-\subsubsection{Detektor}
-Denne detektor består af et potentiometer og en ADC, som er en del af “motorstyring” blokken, så ved hjælp af potentiometeret kan man sørge for, at motoren ikke drejer for langt ud til begge sider.  Der kunne være brugt en stepper-motor til at styre det med, men for at få mere hardware med, blev det besluttet, at det var en bedre løsning at gøre det på denne måde.
+\subsubsection{Rotationsbegrænsning}
+Motoren, som styrer platformen, skal kunne bevæge sig frit i intervallet, som er fastsat i kravspecifikationen \textbf{\#ref Reference til kravspecikation (ikke funktionelle krav)}. For at begrænse denne bevægelse, udenfor det fastsatte interval, anvendes der et potentiometer. Når motoren bevæger sig, ændres potentiometerets modstandsværdi og dermed ændres spændingsniveauet. Dermed kan positionen af motoren bestemmes ved at se på outputspændingen fra potentiometret. Et alternativ til denne løsning er at der anvendes en stepper motor, frem for en DC motor, der kan styres i små steps. Da det var ønsket om at arbejde med flere hardware elementer end kun motoren, blev DC motoren med rotationsberænsning valgt.
+
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=\textwidth]{Afsnit/DesignOgImplementering/images/poten}
-	\caption{potentiometer}
-	\label{fig:poten}
+	\includegraphics[scale=0.3]{Afsnit/DesignOgImplementering/images/potentiometerADC}
+	\caption{Opstilling for rotationsbegrænsning}
+	\label{fig:opstillingADC}
 \end{figure}
-\textbf{måske et billede af opstilling i stedet for}\\
-Potentiometeret har til formål at skulle holde styr på, at motoren ikke kører længere ud end det hvad det fastsatte krav er. Der er blevet valgt at bruge et Potentiometer som er et linæret et, som vil sige at når man for hver ændring man laver på Potentiometeret, vil der også ske en ændring i output spændingen. Så når den bliver fast gjord til motoren vil man kunne se en ændring i den spænding som kommer ud fra potentiometeret, som bliver sendt ind i ADC’en, som er af typen Sequencing Successive Approximation ADC, som er placeret internt i PSoC’en. Så når output spændingen fra potentiometer bliver aflæst, vil man kunne vide præcise hvor motoren er.  
-ADC’en er en sample hold kreds, som vil sige den holder på dataen end til der er fundet en værdi, så der går noget tid i mellem hver værdi, så der er søgeret for at der ikke bliver lavet over samples og der ikke bliver lavet aliasing af det signal som kommer ind i ADC’en. For at finde den værdi som bliver sendt ind i ADC'en, bliver der lavet en skala som bliver halvert alt efter hvor værdien ligger på skalaen, som vist på figur \ref{fig:pot}
+
+\noindent På figur \ref{fig:opstillingADC} ses opstillingen for rotationsbegrænsningen. På figuren ses at potententiometerets skaft er forbundet til motoren, som roterer når motoren bevæges. Potenitiometeret bliver forsynet med 5V og stel fra PSoC1 via den røde og sorte ledning. Ouputspændingen fra potentiometeret er forbundet til PSoC1 via den gule ledning.  \newline
+
+Potentiometeret har til formål at styre motoren i det definerede interval. Det valgte potentiometer er lineær 47k\(\Omega\) potentiometer. Det vil sige at for hver ændring der sker i modstanden, vil der ske en proportional ændring i outputspændingen. Outputspændingen føres ind på et ben på PSoC'en som er forbundet til en intern AD converter, som er en Sequencing Successive Approximation ADC. Denne anvendes til at digitalisere det analoge signal fra potentiometeret.
+
+En sequencing SAR ADC indeholder et sample-hold kredsløb og en comparator. Kredsløbet holder på et indgangssignal indtil det næste signal registres på kredsløbets indgang. Dermed har converteren tid til at bestemme resultatet af konverteringen. Comparatoren sammenligner inputsignalet med midscaleværdien. 
 
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=\textwidth]{Afsnit/DesignOgImplementering/images/ADC}
 	\caption{ADC opbygning}
-	\label{fig:pot}
-	\end{figure}
+	\label{fig:konvertering}
+\end{figure}
+
+På figur \ref{fig:konvertering}
+ADC'en indstillet til midscale og bruger dette punkt til sammenligning med inputsignalet.  
+
+ADC’en består af et sample hold kreds. Det vil sige de på dataen end til der er fundet en værdi, så der går noget tid i mellem hver værdi, så der er søgeret for at der ikke bliver lavet over samples og der ikke bliver lavet aliasing af det signal som kommer ind i ADC’en. For at finde den værdi som bliver sendt ind i ADC'en, bliver der lavet en skala som bliver halvert alt efter hvor værdien ligger på skalaen, som vist på figur \ref{fig:pot}
 
 Der er blevet målt med en vinkel måler for at over holde kravene i kravspecifikationen\textbf{\#ref Reference til kravspecikation (ikke funktionelle krav)}. Hvor der blev fundet frem til en min og max hvor motoren må køre i mellem. \\
 \\
@@ -38,6 +47,8 @@ Disse værdier er aflæst fra PSoC’en, da den har en ref spændingen på 3.3V 
 Der er en forskel på ca. 1.515   mellem potentiometer og ADC. Så ADC er ca. 1,515 mindre end hvad potentiometer sender ud.
 \\
 For at forstå hvordan ADC’en og potentiometeret fungerer henvises til dokumentationen.
+
+\
 
 \subsection{Affyringsmekanisme}
 Affyringsmekanismen er bygget op af en motor; et motorstyringskredsløb; et detektorkredsløb, der skal detektere, at motoren kun kører en enkelt omgang, når der skydes; og en kanon, som er bygget op af noget mekanik og LEGO. 
