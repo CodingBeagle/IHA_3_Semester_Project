@@ -23,10 +23,11 @@ CY_ISR(isr_in)
     resVolt = ADC_2_CountsTo_mVolts(0, ADCresult);  //konvertering af ADC-output til mV
     PWM_motor_Start(); //Start motor
     
-    if(resVolt<=1500) //hvis dioder kan se hinanden, drejes motoren hen så de ikke kan se hinanden længere
+    if(!(resVolt<=1500)) //hvis dioder kan se hinanden, drejes motoren hen så de ikke kan se hinanden længere
     {
-        while(resVolt<=1500) 
-        {} //tom whileløkke
+        //while(!(resVolt<=1500))
+        //{}
+        CyDelay(30);
     }
     
     do 
