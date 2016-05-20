@@ -76,6 +76,9 @@ De tre funktioner som Interface driveren indeholder i forbindelse med use case 2
 Brugergrænsefladen anvender interface driveren ved at inkludere headerfilerne og oprette en ICandyGun pointer, der peger på en instans af én af de to afledte klasser. Ved at pakke kommunikationen  til kernemodulet for candydriveren væk i funktioner kan brugergrænsefladen anvende funktionerne uden at kende til SPI-protokollen. Det sikrer igen lav kobling, og i tilfælde hvor det kunne ønskes, at SPI-kommunikationen kan erstattes af en anden kommunikationsform, kan det gøres uden, at der skal foretages ændringer i brugergrænsefladen.\\
  
 \subsection{Brugergrænseflade}
+Selve Usecase 2 styres via brugergrænsfladen fra Devkit8000.
+Dette afsnit beskriver brugergrænsefladens design.
+
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=\textwidth]{Afsnit/DesignOgImplementering/images/GUIPic}
@@ -86,7 +89,7 @@ Brugergrænsefladen anvender interface driveren ved at inkludere headerfilerne o
 Brugergrænsefladen er lavet med det indbyggede design framework i QT Creator 5.
 QT frameworket opretter "hovedvinduet" i brugergrænsefladen som en klasse. Knapperne tilføjes som private slots i klassen
 hvilket gør dem i stand til interagere i brugergrænsefladen. Når en knap er assignet til et slot i klassen, og der trykkes på den pågældende knap, bliver det assignede signal broadcastet
-og slot-funktionen bliver kørt. Alle tre knapper i brugergrænsefladen er assignet signal-typen "clicked()". Signalet broadcastets når knappen trykkes.
+og slot-funktionen bliver kørt. Alle tre knapper i brugergrænsefladen er assignet signal-typen "clicked()".
 
 \begin{figure}[H]
 	\centering
