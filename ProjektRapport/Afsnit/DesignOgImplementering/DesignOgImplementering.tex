@@ -37,15 +37,20 @@ Disse værdier er aflæst fra PSoC’en, da den har en ref spændingen på 3.3V 
 \end{equation}
 Der er en forskel på ca. 1.515   mellem potentiometer og ADC. Så ADC er ca. 1,515 mindre end hvad potentiometer sender ud.
 \\
-For at forstå hvordan ADC’en og potentiometeret fungerer henvises der til dokumentatioen.
+For at forstå hvordan ADC’en og potentiometeret fungerer henvises til dokumentationen.
 
 \subsection{Affyringsmekanisme}
 Affyringsmekanismen er bygget op af en motor; et motorstyringskredsløb; et detektorkredsløb, der skal detektere, at motoren kun kører en enkelt omgang, når der skydes; og en kanon, som er bygget op af noget mekanik og LEGO. 
 
 \subsubsection{Detektor}
-Detektorens formål er at detektere, hvornår motoren er kørt en omgang, og derefter slukke den. 
+Detektorens formål er at detektere, hvornår motoren har kørt en omgang og derefter slukke den. Princippet i detektoren er, at en fotodiode skal modtage lyssignal fra en LED, hvorefter den skal sende signal om at starte motoren. Når fotodioden ikke længere kan se lyssignalet fra LED'en, skal den sende signal om at slukke motoren igen. Det vil sige, at det er vigtigt, at det kun er lyset fra LED'en fotodioden kan se. Dette sikres ved at sætte LED'en til at lyse med en frekvens på 10 kHz og lave et båndpasfilter, som kun lader disse frekvenser opfanges i fotodioden. 
+
+Dette båndpasfilter er opbygget af et højpasfilter og et lavpasfilter. Til at sende signal om, at motoren skal køre bruges, at når fotodioden kan se LED'en skal den sende et højt signal ud. Her bruges PSoC'ens operationsforstærker. For at gøre dette signal til et pænt firkantsignal, blev der lavet en envelopedetector, som er opbygget af en diode, en modstand og en kondensator. 
+
+Det signal, som kom fra PSoC'en var dog for lavt til at kunne blive opfattet som et højt signal. Derfor 
 
 \subsubsection{Motorstyring}
+Til at styre affyringsmekanismens motor er der bygget et kredsløb med en MOSFET som primære komponent. MOSFET'en skal sørge for, at motoren kun kører, når der bliver sendt PWM-signal ind i den. 
 
 
 \subsubsection{Kanon}
