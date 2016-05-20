@@ -110,7 +110,7 @@ void controlMotor(uint8* receivedDataBuffer)
         if(receivedDataBuffer[2] < 100)
         {
             DebugLEDBlue_Write(0);
-            PWM_Y_DOWN_WriteCompare(100);
+            PWM_Y_DOWN_WriteCompare(80);
         }
         else if(receivedDataBuffer[2] > 150)
         {
@@ -126,15 +126,14 @@ void controlMotor(uint8* receivedDataBuffer)
             DebugLEDBlue_Write(1);
         }
         
-        if(receivedDataBuffer[3] && 0b00000011 == 2)
+        if((receivedDataBuffer[3] & 0b00000011) == 2)
         {
-           Shoot_Write(1);
+            Shoot_Write(1);
         }
         else
         {
-            Shoot_Write(0);
+           Shoot_Write(0);
         }
-        
             
         ADC_1_StopConvert();
     }
