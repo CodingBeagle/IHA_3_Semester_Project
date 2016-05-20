@@ -1,5 +1,4 @@
-  \chapter{Design og implementering}
-
+\chapter{Design og implementering}
 
 \section{Software Design}
 
@@ -56,9 +55,9 @@ I tabel \ref{realIdriverFunktioner} ses funktionsbeskrivelser for RealCandyGun.
 \end{table}
 
 
-\section{Klassediagrammer}
+\section{PSoC Software}
 
-\subsection{PSoC Software}
+%\subsection{PSoC Software}
 De følgende klassediagrammer på figur \ref{figure:klassediagramPSoC0} og \ref{figure:klassediagramPSoC1} giver et overblik over hvilke klasser der bliver gjort brug af på PSoC0 og PSoC1. De efterfølgende afsnit vil beskrive klasserne og deres funktioner.
 
 \begin{figure}[H]
@@ -75,8 +74,43 @@ De følgende klassediagrammer på figur \ref{figure:klassediagramPSoC0} og \ref{
 	\label{figure:klassediagramPSoC1}
 \end{figure}
 
+\subsection{SPI - PSoC}
+I dette afsnit vil softwaren der specifikt omhandler SPI-kommunikationen mellem PSoC0 og DevKit8000 blive beskrevet. Dette gøres vha. et klassediagram og klassebeskrivelser
+
+\subsubsection{Klassediagram}
+På figur \ref{figure:KlassediagramSPICommunication} ses klassediagrammet over SPICommunication klassen.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[]{DesignOgImplementering/images/SPICommunication}
+	\caption{Klassediagram over klassen SPICommunication}
+	\label{figure:KlassediagramSPICommunication}
+\end{figure}
+\subsubsection{Klassebeskrivelser}
+I dette afsnit vil klassens metoder og defines blive beskrevet.
+\newline
+
+\noindent\textbf{void completeSPITest()} \newline
+Denne metode gemmer \textit{SPI\_OK} i PSoC'ens SPI-transfer buffer. \newline
+
+\noindent\textbf{void completeI2CTest()} \newline
+Denne metode gennemfører I2C-Testen. Dette gøres ved at der sendes en besked til alle enheder på I2C-nettet, og hvis der ikke registreres nogen fejl på denne besked, bliver \textit{I2C\_OK} gemt i PSoC'ens SPI-transfer buffer. Registreres der en fejl, bliver \textit{I2C\_FAIL} gemt i SPI-transfer buffer. \newline
+
+\noindent\textbf{void completeNunchuckTest(uint8* databuf)} \newline
+Denne metode gennemfører Nunchuck-testen. Dette gøres ved at der startes en timer på 6 sekunder. Hvis der sker et tryk på 'Z'-knappen på nunchucken indenfor disse 6 sekunder, vil \textit{NUNCHUCK\_OK} blive gemt i SPI-transfer bufferen. Hvis der ikke registreres nogen tryk inden for de 6 sekunder, er det \textit{NUNCHUCK\_FAIL} der gemmes.\newline
+
+I klassediagrammet er der beskrevet en række "Defines". Disse defines bruges i klassen som unikke ID'er der indikerer om en test er gennemført OK eller om den er fejlet.
+
+\subsubsection{SPI Indstillinger på PSoC}
+I forbindelse med SPI forbindelsen i systemet, skal der sættes nogle indstillinger på PSoC0, idét at denne kommunikerer med Devkittet via SPI. 
+PSoC'en sættes som en slave, idét at det er Devkittet der aflæser og skriver til PSoC0.
+SCLK sættes til CPHA=1 og CPOL=1. Disse er valgt arbitrært, dog ud fra den forudsætning, at de skal stemme overens med indstillingerne på Devkittet, idét disse indstillinger beskriver hvornår databit aflæses/sættes i forhold til clock'en. 
+'Data Rate' sættes til 1Mbps, da dette er en sikker/stabil overførselshastighed. Igen skal denne indstilling være ens for PSoC og Devkit.
+Den sidste indstilling der sættes, er 'transfer' og 'read' buffer size. Disse er valgt til at være 8-bit, da projektets SPI kommunikationsprotokol ikke har brug for størrere datamængder. Igen skal denne indstilling være ens for både SPI-master og slave. 
+
 \subsection{I2CCommunication}
-I dette afsnit vil softwaren der omhandler I2C-kommunikation blive beskrevet. Dette inkluderer et klassediagram, samt en klassebeskrivelse.
+I dette afsnit vil softwaren der omhandler I2C-kommunikation blive beskrevet. Dette inkluderer et klassediagram,  klassebeskrivelser og indstillingerne for I2C kommunikationen på PSoC'en.
+
 \subsubsection{Klassediagram}
 På figur \ref{figure:klassediagramI2CCommunication} ses klassediagrammet for I2CCommunication. 
 \begin{figure}[H]
@@ -98,7 +132,13 @@ Denne metode sender, via PSoC Creators I2C-API, den data der ligger i "buffer" a
 Denne metode initialiserer de to buffers (slaveWrite og slaveRead) der kræves på en I2C-slave, for at kunne gøre bruge af PSoC Creator's I2C-API. \newline
 
 \noindent\textbf{void receiveData(uint8* buffer)}\newline
-Denne metode venter på at slaveRead bufferen er blevet fyldt. Når dette er sket, bliver slaveRead bufferen kopieret over i "buffer".   
+Denne metode venter på at slaveRead bufferen er blevet fyldt. Når dette er sket, bliver slaveRead bufferen kopieret over i "buffer".
+
+\subsubsection{I2C indstillinger på PSoC}
+I forbindelse med at have en I2C forbindelse på PSoC'en, er der et par indstillinger der skal sættes. Hver PSoC der gør brug af I2C, sættes til at være en "Multi-master-slave". Dette gøres for at alle I2C enheder kan gøre brug af "I2CCommunication" klassen, idét at denne indeholder funktioner for både master og slave. 
+En anden vigtig indstilling er I2C bussens 'Data Rate'. Denne er fra PSoC creators side sat til 100kbps som standard, hvilket er en passende hastighed for dette projekt.
+En hver enhed på I2C nettet skal også have en adresse. En tabel for adressefordelingen ses på tabel \ref{table:I2CAddress}
+
 
 \subsection{Nunchuck}
 I dette afsnit vil softwaren der specifikt omhandler kommunikationen mellem PSoC0 og Nunchucken blive beskrevet. Dette gøres vha. et klassediagram og klassebeskrivelser.
@@ -127,32 +167,7 @@ Denne metode bruger PSoC Creator's I2C-API til at læse data fra nunchuck'en (da
 
 I klassediagrammet er der en sektion kaldet "Defines". Disse Defines bruges i implementeringen til forskellige formål. \textit{PSoC0UnitAddress, PSoC1UnitAddres} og \textit{nunchuckUnitAddress} bruges til at definere adresserne for I2C-nettets slaver. \textit{NunchuckData, I2CTestRequest} og \textit{I2CTestACK} er kommando typer der bruges til at bestemme hvilken kommando type der er blevet sendt/modtaget, og hvor mange bytes der skal forventes at være gemt i databufferen (Se dokumentationen afsnit \textbf{INDSÆT REFERENCE TIL DOKUMENTATIONAFSNIT \#ref}) 
 
-\subsection{SPI - PSoC}
-I dette afsnit vil softwaren der specifikt omhandler SPI-kommunikationen mellem PSoC0 og DevKit8000 blive beskrevet. Dette gøres vha. et klassediagram og klassebeskrivelser
 
-\subsubsection{Klassediagram}
-På figur \ref{figure:KlassediagramSPICommunication} ses klassediagrammet over SPICommunication klassen.
-
-\begin{figure}[H]
-	\centering
-	\includegraphics[]{DesignOgImplementering/images/SPICommunication}
-	\caption{Klassediagram over klassen SPICommunication}
-	\label{figure:KlassediagramSPICommunication}
-\end{figure}
-\subsubsection{Klassebeskrivelser}
-I dette afsnit vil klassens metoder og defines blive beskrevet.
-\newline
-
-\noindent\textbf{void completeSPITest()} \newline
-Denne metode gemmer \textit{SPI\_OK} i PSoC'ens SPI-transfer buffer. \newline
-
-\noindent\textbf{void completeI2CTest()} \newline
-Denne metode gennemfører I2C-Testen. Dette gøres ved at der sendes en besked til alle enheder på I2C-nettet, og hvis der ikke registreres nogen fejl på denne besked, bliver \textit{I2C\_OK} gemt i PSoC'ens SPI-transfer buffer. Registreres der en fejl, bliver \textit{I2C\_FAIL} gemt i SPI-transfer buffer. \newline
-
-\noindent\textbf{void completeNunchuckTest(uint8* databuf)} \newline
-Denne metode gennemfører Nunchuck-testen. Dette gøres ved at der startes en timer på 6 sekunder. Hvis der sker et tryk på 'Z'-knappen på nunchucken indenfor disse 6 sekunder, vil \textit{NUNCHUCK\_OK} blive gemt i SPI-transfer bufferen. Hvis der ikke registreres nogen tryk inden for de 6 sekunder, er det \textit{NUNCHUCK\_FAIL} der gemmes.\newline
-
-I klassediagrammet er der beskrevet en række "Defines". Disse defines bruges i klassen som unikke ID'er der indikerer om en test er gennemført OK eller om den er fejlet.
 
 \section{Afkodning af Wii-Nunchuck Data Bytes}
 Aflæste bytes fra Wii-Nunchuck - indeholdende tilstanden af knapperne og det analoge stick - er kodet når de oprindeligt modtages via I2C bussen. Disse bytes skal altså afkodes før deres værdier er brugbare. Afkodningen af hver byte sker ved brug af følgende formel:
@@ -207,9 +222,11 @@ Der blev først designet en H-bro, som bestod af to N-MOSFET's af typen IRLZ44 o
 	\centering
 	\includegraphics[width=\textwidth]{DesignOgImplementering/images/motorkreds}
 	\caption{Kredsløb for H-bro}
+	\label{fig:hbro}
 	\end{figure}
+	
 
-\begin{table}[]
+\begin{table}[H]
 	\centering
 	\caption{Komponentbetegnelser på H-bro}
 	\label{my-label}
@@ -242,8 +259,9 @@ Der blev først designet en H-bro, som bestod af to N-MOSFET's af typen IRLZ44 o
 	\end{tabular}
 \end{table}
 
+
 \subsubsection{MOSFET'er}
-Til at styre motoren er der bygget en H-bro, som består af fire mosfet, hvor to af dem er af typen IRF9Z34N (mosfet P-channel, som er Q9 og Q10 på kredsløbstegningen) og de to andre mosfet er af typen IRLZ44 (mosfet N-Channel, som er Q3 og Q4 kredsløbstegningen). Det er valgt at bruge mosfet for at kunne styre H-broen, da det ved denne er muligt at lukke og åbne for spændingen, og de bliver styret af spænding, i forhold til transistorer, som bliver styret af strøm. 
+Til at styre motoren er der bygget en H-bro, som består af fire mosfet, hvor to af dem er af typen IRF9Z34N (mosfet P-channel, som er Q9 og Q10 på figur \ref{fig:hbro}) og de to andre mosfet er af typen IRLZ44 (mosfet N-Channel, som er Q3 og Q4 på figur\ref{fig:hbro}). Det er valgt at bruge mosfet for at kunne styre H-broen, da det ved denne er muligt at lukke og åbne for spændingen, og de bliver styret af spænding, i forhold til transistorer, som bliver styret af strøm. 
 
 \begin{itemize}
 \item MOSFET N-kanal\\
@@ -254,13 +272,14 @@ Til at styre motoren er der bygget en H-bro, som består af fire mosfet, hvor to
 		\centering
 		\includegraphics[width=\textwidth]{DesignOgImplementering/images/grafn}
 		\caption{Gate-to-Source Voltage REFERENCE TIL DATABLAD HER!!!!}
+		\label{fig:mosfetn}
 	\end{figure}
 	
-	På figur (reference her!) ses det, at når der er en gate-to-source-spænding på 5V, vil der MOSFET'en kunne klare, at der løber en strøm på op til 100A/30A (TJEK DETTE!!). Det vil altså ikke komme til at påvirke motoren, da denne kun kan trække en strøm på cirka 0,35A. 
+	På figur \ref{fig:mosfetn} ses det, at når der er en gate-to-source-spænding på 5V, vil der MOSFET'en kunne klare, at der løber en strøm på op til 100A i følge datablad \textbf{\#ref Reference til datablad}. Det vil altså ikke komme til at påvirke motoren, da denne kun kan trække en strøm på cirka 0,35A. 
 	
 \item MOSFET P-kanal \\
 	Der er valgt at bruge en P-MOSFET af typen IRF9Z34N. Denne MOSFET skal bruges til at trække de 12V ned til motoren, så denne kan køre. Samtidig sørger den for, at de 12V ikke løber ned til motoren så længe, der ikke er negativ spænding på gate-benet. 
-	Denne type MOSFET kan trække en strøm på 6,7A ifølge databladet. Det vil altså ikke komme til at påvirke motoren, da den kun kan trække en strøm på cirka 0,35A. 
+	Denne type MOSFET kan trække en strøm på 6,7A ifølge databladet \textbf{\#ref Reference til datablad}. Det vil altså ikke komme til at påvirke motoren, da den kun kan trække en strøm på cirka 0,35A. 
 	
 	For at der kan løbe spænding igennem IRF9Z34N, skal den have en negativ spænding for at åbne og en spænding på over 0V for at lukke. 
 		
@@ -268,39 +287,40 @@ Til at styre motoren er der bygget en H-bro, som består af fire mosfet, hvor to
 		\centering
 		\includegraphics[width=\textwidth]{DesignOgImplementering/images/grafp}
 		\caption{Gate-to-Source Voltage REFERENCE TIL DATABLAD HER!!!!}
+		\label{fig:mosfetp}
 	\end{figure}
 	
-	På figuren (REFERENCE HER!) ses det, at når der er en gate-to-source-spænding på 5V, vil derr kunne løbe en strøm på omkring 5A igennem MOSFET'en, hvilket er mere end nok til at få motoren til at køre. 
+	På figuren \ref{fig:mosfetp} ses det, at når der er en gate-to-source-spænding på 5V, vil derr kunne løbe en strøm på omkring 5A igennem MOSFET'en, hvilket er mere end nok til at få motoren til at køre. 
 	
 \end{itemize}
 
 \subsubsection{Dioder}
-Over fire af mosfetene (Q9, Q10, Q3 og Q4) er der sat en diode af typen IN5819. Den skal fungere som beskyttelse af de fire mosfet (Q9, Q10, Q3 og Q4). Det, de gør, er, at de sikrer, at den spænding, som er tilbage i motoren, når man lukker for mosfetene, ikke løber tilbage ind i mosfetene og brænder dem af.
+Over fire af mosfetene (Q9, Q10, Q3 og Q4) som set på figur \ref{fig:hbro} er der sat en diode af typen IN5819. Den skal fungere som beskyttelse af de fire mosfet (Q9, Q10, Q3 og Q4). Det, de gør, er, at de sikrer, at den spænding, som er tilbage i motoren, når man lukker for mosfetene, ikke løber tilbage ind i mosfetene og brænder dem af.
 
 \subsubsection{Modstande}
 \begin{itemize}
 	\item Pull down modstande:\\
-	Der er blevet brugt fire pull-down-modstande (R1, R2, R3 og R4). Disse sørger for, at signalet vil blive holdt lavt, når der ikke er trykket, så dette ben ikke står og flyver, så det kan komme til at åbne en mosfet ved en fejl og derved kommer til at brænde en mosfet eller motoren af. Der er valgt en modstand på 10 kOhm, hvilket betyder, at den er lille nok til at trække de små spændinger ned, når der ikke er trykket, og den stor nok til at spændingen ikke løber derned, når der er trykket. 
+	Der er blevet brugt fire pull-down-modstande (R1, R2, R3 og R4 som set på figur \ref{fig:hbro}). Disse sørger for, at signalet vil blive holdt lavt, når der ikke er trykket, så dette ben ikke står og flyver, så det kan komme til at åbne en mosfet ved en fejl og derved kommer til at brænde en mosfet eller motoren af. Der er valgt en modstand på 10 kOhm, hvilket betyder, at den er lille nok til at trække de små spændinger ned, når der ikke er trykket, og den stor nok til at spændingen ikke løber derned, når der er trykket. 
 	\item Andre modstande
 	\begin{itemize}
 		\item R6 og R7\\
-			Grunden til, at R6 og R7 er der, er for at sikre, at transistorernes Absolute Maximum Ratings omkring strømmen, som ikke må overstige 100mA ifølge databladet. (tjek lige om det er rigtig)
+			Grunden til, at R6 og R7(på figur \ref{fig:hbro}), er der, er for at sikre, at transistorernes Absolute Maximum Ratings omkring strømmen, som ikke må overstige 100mA ifølge databladet. (tjek lige om det er rigtig)
 		\item R5 og R8\\
-			Grunden til at R5 og R8 er sat ind i kredsløbet er, at der ifølge databladet kun kan løbe en strøm på omkring 30A igennem den N-MOSFET, der er brugt, Vgs er 10V. Da Vgs kun er sat til 5V, vil MOSFET'en altså ikke kunne klare en alt for stor strøm. Derfor er R5 og R8 sat ind for at forhindre, at MOSFET'en ikke brænder af. 
+			Grunden til at R5 og R8(kan ses på figur \ref{fig:hbro}) er sat ind i kredsløbet er, at der ifølge databladet kun kan løbe en strøm på omkring 30A igennem den N-MOSFET, der er brugt, Vgs er 10V. Da Vgs kun er sat til 5V, vil MOSFET'en altså ikke kunne klare en alt for stor strøm. Derfor er R5 og R8 sat ind for at forhindre, at MOSFET'en ikke brænder af. 
 	\end{itemize}
 
 \end{itemize}
 
 \subsubsection{Transistorer}
 \begin{itemize}
-	\item Q5 og Q7
+	\item Q5 og Q7(kan ses på figur \ref{fig:hbro})
 	Disse transistorer sidder i kredsløbet, fordi det tager tid for P-MOSFET'en at blive opladt helt, på grund af kondensator effekt imellem benene på mosfet'en, for ellers ville den tag for lang tid om at åbne helt. Det hjælper den disse transistorer til med. 
 	
-	\item Q6 og Q8
+	\item Q6 og Q8(kan ses på figur \ref{fig:hbro})
 	Disse to transistorer sidder der for at hjælpe med at lukke P-MOSFET'en igen. Inden Q5 og Q7 blev sat ind tog det tid for at lukke P-MOSFET'en, men da de to blev sat ind, kunne de hjælpe til med at aflade mosfet'ene hurtigere. Derfor sidder de der, for at IRF9Z34N kan lukke hurtigt. 
 \end{itemize}
 \subsubsection{Potentiometer}
-Motoren, som styrer platformen, skal kunne bevæge sig frit i intervallet, som er fastsat i kravspecifikationen \textbf{\#ref Reference til kravspecikation (ikke funktionelle krav)}. For at begrænse denne bevægelse anvendes et potentiometer. Når motoren bevæger sig, ændres potentiometerets modstandsværdi og dermed ændres spændingsniveauet. Dermed kan positionen af motoren bestemmes ved at se på output spændingen fra potentiometret. For at regne ud hvor langt motoren er, kan man regne ud hvor meget spænding der kommer ud ved at bruge spændingsdeler formlen, som er vist på figur \ref{fig:potentiometer2}
+Motoren, som styrer platformen, skal kunne bevæge sig frit i intervallet, som er fastsat i kravspecifikationen \textbf{\#ref Reference til kravspecikation (ikke funktionelle krav)}. For at begrænse denne bevægelse anvendes der et potentiometer. Når motoren bevæger sig, ændres potentiometerets modstandsværdi og dermed ændres spændingsniveauet. Dermed kan positionen af motoren bestemmes ved at se på output spændingen fra potentiometret. For at regne ud hvor langt motoren er, kan man regne ud hvor meget spænding der kommer ud ved at bruge spændingsdeler formlen, som er vist på figur \ref{fig:potentiometer2}
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=\textwidth]{DesignOgImplementering/images/potentiometer}
@@ -308,18 +328,10 @@ Motoren, som styrer platformen, skal kunne bevæge sig frit i intervallet, som e
 	\label{fig:potentiometer2}
 	
 \end{figure}
-Hvor man se Rtop og Rbottom, som en modstand, men den bliver delt af midter strengen, som fortæller hvor modstanden skal deles henne og som man kan se på formlen ved side af, kan man se hvor meget spænding som kommer ud af den. 
-Det potentiometer som bliver brugt i dette projekt er 47Kohm, som er linæret vil spændingen stiger proportionalt med modstanden-
-
-\begin{figure}[H]
-	\centering
-	\includegraphics[width=\textwidth]{DesignOgImplementering/images/udpot}
-	\caption{Udregning for potentiometerets midtpunktsspænding}
-	\label{fig:pot}
-	
-\end{figure}
-Så dvs når potentiometeret står i midten vil der komme en spænding ud på ca 2.5V, så når spændingen bliver lavere vil der komme et punkt hvor motoren ikke vil kunne køre til den ene side mere og det samme sker når man hæver, vil motoren ikke kunne køre den anden vej. 
-Der er blevet målt med en vinkel måler for at over holde kravene i 
+Hvor man se Rtop og Rbottom, som en modstand, men den bliver delt af midter strengen, som fortæller hvor modstanden skal deles henne og som man kan se på formlen ved side af, der ved kan man regne ud hvad  output spændingen fra potentiometret er.\\
+Det potentiometer som bliver brugt i dette projekt er et 47Kohm, som er linæret, som vil sige at spændingen stiger proportionalt med modstanden. 
+Derved kan man finde to værdier som motor ikke må komme over/under, som også holder sig inde for de krav som blev fast sat i kravspecifikationen \textbf{\#ref Reference til kravspecikation (ikke funktionelle krav)}. Så hvis de komme over/under en af værdierne, så må motoren ikke mere køre til den pågældende retning. Disse to værdier som blev fundet, er fundet ved hjælp af en vinkelmåler.
+ 
 
 \subsubsection{ADC}
 For at kunne aflæse spændingen på potentiometeret, anvendes en AD converter af typen Sequencing Successive Approximation ADC. En sequencing SAR ADC indeholder et sample-hold kredsløb. Kredsløbet holder på et indgangssignal indtil det næste signal registres på kredsløbets indgang. Dermed har converteren tid til at bestemme outputværdien. ADC'en er indstillet til midscale og bruger dette punkt til sammenligning med inputsignalet. Hvis signalet er højere end midscale bliver et bit sat til 1 og hvis den er lavere bliver bittet sat til 0. Disse bit bliver gemt i et register. Herefter sættes midpunktet man nu midten i mellem midscale og den øvre halvdel eller nedre halvdel af skalaen og sådan bliver man ved end til alle bit er blevet sat. Så tjekker man registeret for at læse hvilket tal som er fundet, ved at læse fra MSB(most significant bit) til LSB(least significant bit) og det er tal som man har sat på indgangen. På figuren\ref{fig:ADC1} kan man få et bedre overblik over hvordan ADC funger. 
@@ -332,4 +344,9 @@ For at kunne aflæse spændingen på potentiometeret, anvendes en AD converter a
 	
 \end{figure}
 
-Jo flere bit man har jo mere præcise bliver det også, men man kan godt risiker at man er 1LSB over/under det resultat man skal have, men for dette projekt gør det ikke noget om man 1 LSB over/under.
+Det vil sige at jo flere bit man har jo mere præcise bliver det også, men man kan godt risiker at man er 1LSB over/under det resultat man skal have, men for dette projekt gør det ikke noget om man 1 LSB over/under.\\
+Der skal også tages forbehold for at der en forskel på hvad potentiometeret sender ud og hvad ADC'en modtager, for ADC'en kan kun modtage op til ca. 3.3V og potentiometeret kan sende ca. 5V ud. 
+\begin{equation}
+\frac {5V} {3.3V}= 1.515
+\end{equation}
+Så der er en forskel på ca. 1.515   mellem potentiometer og ADC. Så ADC er ca. 1,515 mindre end hvad potentiometer sender ud.

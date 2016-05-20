@@ -60,64 +60,70 @@
 \end{tabular}
 
 \section{Use case 2 - Hovedscenarie}
-\begin{tabular}{|>{\hspace{0pt}}p{0.6cm} |  >{\hspace{0pt}}p{3.5cm} | >{\hspace{0pt}}p{2.5cm} | p{2.5cm} | p{2cm} |}
+\begin{table}[H]
+	\centering
+	\begin{tabular}{|l|l|l|l|l|}
 		\hline
-		Step & Handling & Forventet observation/resultat& Faktisk observation/resultat & Vurdering (OK/FAIL)\\ \hline
-		1 & Tryk start test på brugergrænseflade & Brugergrænsefladen udskriver at SPI og I2C testen er godkendt. Brugergrænsefladen anmoder bruger om tryk på Z på Wii-nunchuck & & \\ \hline
-		
-		2 & Tryk Z på Wii- nunchuck & Brugergrænsefladen udskriver at Wii-testen er godkendt & & \\ \hline
-		
-\end{tabular}
+		Step & Handling                                                                        & \begin{tabular}[c]{@{}l@{}}Forventet \\ observation/resultat\end{tabular}                                                                                                          & \begin{tabular}[c]{@{}l@{}}Faktisk \\ observation/resultat\end{tabular} & \begin{tabular}[c]{@{}l@{}}Vurdering \\ (OK/FAIL)\end{tabular} \\ \hline
+		1.   & \begin{tabular}[c]{@{}l@{}}Tryk på \\ "Systemtest" \\ på GUI\end{tabular}                 & \begin{tabular}[c]{@{}l@{}}Systemtest brugergrænsefladen\\ vises på Devkittet.\end{tabular}                                                                                        &                                                                         &                                                                \\ \hline
+		2.   & \begin{tabular}[c]{@{}l@{}}Tryk på \\ "Start Test \\ på GUI"\end{tabular}                 & \begin{tabular}[c]{@{}l@{}}Brugergrænsefladen udskriver\\ at SPI og I2C testen er\\ godkendt. Brugergrænsefladen\\ anmoder brugereren \\ om tryk på Z på Wii-nunchuck\end{tabular} &                                                                         &                                                                \\ \hline
+		3.   & \begin{tabular}[c]{@{}l@{}}Tryk 'Z' knappen\\ på \\ Wii-nunchucken\end{tabular} & \begin{tabular}[c]{@{}l@{}}Brugergrænsefladen udskriver\\ at Wii-testen er godkendt\end{tabular}                                                                                   &                                                                         &                                                                \\ \hline
+	\end{tabular}
+\end{table}
 
 \subsection{Use case 2 - Exception 1}
-\begin{tabular}{|>{\hspace{0pt}}p{0.6cm} |  >{\hspace{0pt}}p{3.5cm} | >{\hspace{0pt}}p{2.5cm} | p{2.5cm} | p{2cm} |}
-	\hline
-	Step & Handling & Forventet observation/resultat& Faktisk observation/resultat & Vurdering (OK/FAIL)\\ \hline
-	1 & Fjern SPI-kablet fra DevKittet. & & & \\ \hline
-	
-	2 & Tryk på start test på brugergrænseflade & Brugergrænsefladen udskriver SPI forbindelses fejlmeddelelse. & & \\ \hline
-	
-\end{tabular}
+\begin{table}[H]
+	\centering
+	\begin{tabular}{|l|l|l|l|l|}
+		\hline
+		Step & Handling                                                                 & \begin{tabular}[c]{@{}l@{}}Forventet \\ observation/resultat\end{tabular}                                   & \begin{tabular}[c]{@{}l@{}}Faktisk \\ observation/resultat\end{tabular} & \begin{tabular}[c]{@{}l@{}}Vurdering \\ (OK/FAIL)\end{tabular} \\ \hline
+		1.   & \begin{tabular}[c]{@{}l@{}}Fjern SPI-kablet\\ fra Devkittet\end{tabular} &                                                                                                             &                                                                         &                                                                \\ \hline
+		2.   & \begin{tabular}[c]{@{}l@{}}Tryk på \\ "Systemtest" \\ på GUI \end{tabular}          & \begin{tabular}[c]{@{}l@{}}Systemtest bruger-\\ grænsefladen\\ vises på Devkittet.\end{tabular}             &                                                                         &                                                                \\ \hline
+		3.   & \begin{tabular}[c]{@{}l@{}}Tryk på \\ "Start Test" \\ på GUI\end{tabular}          & \begin{tabular}[c]{@{}l@{}}Brugergrænsefladen \\ udskriver at\\ SPI forbindelsen\\ mislykkedes\end{tabular} &                                                                         &                                                                \\ \hline
+	\end{tabular}
+\end{table}
 
 
 \subsection{Use case 2 - Exception 2}
-\begin{tabular}{|>{\hspace{0pt}}p{0.6cm} |  >{\hspace{0pt}}p{3.5cm} | >{\hspace{0pt}}p{2.5cm} | p{2.5cm} | p{2cm} |}
-	\hline
-	Step & Handling & Forventet observation/resultat& Faktisk observation/resultat & Vurdering (OK/FAIL)\\ \hline
-	1 & Fjern I2C-kabler fra alle I2C slaver. & & & \\ \hline
-	
-	2 & Tryk på start test på brugergrænseflade & Brugergrænsefladen udskriver I2C forbindelses fejlmeddelelse. & & \\ \hline
-	
-\end{tabular}
+\begin{table}[H]
+	\centering
+	\begin{tabular}{|l|l|l|l|l|}
+		\hline
+		Step & Handling                                                                 & \begin{tabular}[c]{@{}l@{}}Forventet \\ observation/resultat\end{tabular}                                   & \begin{tabular}[c]{@{}l@{}}Faktisk \\ observation/resultat\end{tabular} & \begin{tabular}[c]{@{}l@{}}Vurdering \\ (OK/FAIL)\end{tabular} \\ \hline
+		1.   & \begin{tabular}[c]{@{}l@{}}Fjern I2C-kabel\\ fra PSoC0\end{tabular}      &                                                                                                             &                                                                         &                                                                \\ \hline
+		2.   & \begin{tabular}[c]{@{}l@{}}Tryk på \\ "Systemtest"\\ på GUI\end{tabular} & \begin{tabular}[c]{@{}l@{}}Systemtest bruger-\\ grænsefladen\\ vises på Devkittet.\end{tabular}             &                                                                         &                                                                \\ \hline
+		3.   & \begin{tabular}[c]{@{}l@{}}Tryk på \\ "Start Test"\\ på GUI\end{tabular} & \begin{tabular}[c]{@{}l@{}}Brugergrænsefladen \\ udskriver at\\ SPI forbindelsen\\ lykkedes og \\ I2C forbindelsen \\ mislykkedes\end{tabular} &                                                                         &                                                                \\ \hline
+	\end{tabular}
+\end{table}
 
 \subsection{Use case 2 - Exception 3}
-\begin{tabular}{|>{\hspace{0pt}}p{0.6cm} |  >{\hspace{0pt}}p{3.5cm} | >{\hspace{0pt}}p{2.5cm} | p{2.5cm} | p{2cm} |}
-	\hline
-	Step & Handling & Forventet observation/resultat& Faktisk observation/resultat & Vurdering (OK/FAIL)\\ \hline
-	1 & Disconnect Wii nun-chucken fra systemet. & & & \\ \hline
-	
-	2 & Tryk på start test på brugergrænseflade & & & \\ \hline
-	
-	3 & Vent på timeout. & Brugergrænsefladen udskriver Wii Nunchuck forbindelses fejlmeddelelse& & \\ \hline
-\end{tabular}
+\begin{table}[H]
+	\centering
+	\begin{tabular}{|l|l|l|l|l|}
+		\hline
+		Step & Handling                                                                     & \begin{tabular}[c]{@{}l@{}}Forventet \\ observation/resultat\end{tabular}                                        & \begin{tabular}[c]{@{}l@{}}Faktisk \\ observation/resultat\end{tabular} & \begin{tabular}[c]{@{}l@{}}Vurdering \\ (OK/FAIL)\end{tabular} \\ \hline
+		1.   & \begin{tabular}[c]{@{}l@{}}Afkobl Nun-\\ chucken\\ fra systemet\end{tabular} &                                                                                                                  &                                                                         &                                                                \\ \hline
+		2.   & \begin{tabular}[c]{@{}l@{}}Tryk på \\ "Systemtest"\\ på GUI\end{tabular}     & \begin{tabular}[c]{@{}l@{}}Systemtest bruger-\\ grænsefladen\\ vises på Devkittet.\end{tabular}                  &                                                                         &                                                                \\ \hline
+		3.   & \begin{tabular}[c]{@{}l@{}}Tryk på \\ "Start Test"\\ på GUI\end{tabular}     & \begin{tabular}[c]{@{}l@{}}Brugergrænsefladen \\ udskriver at\\ SPI og I2C forbindelsen\\ lykkedes\end{tabular}  &                                                                         &                                                                \\ \hline
+		4.   & Afvent timeout                                                               & \begin{tabular}[c]{@{}l@{}}Brugergrænsefladen \\ udskriver at\\ Nunchuck forbindelsen\\ mislykkedes\end{tabular} &                                                                         &                                                                \\ \hline
+	\end{tabular}
+\end{table}
 
-\newpage
+
 \section{Ikke-funktionelle krav}
 \begin{tabular}{|>{\hspace{0pt}}p{0.6cm} |  >{\hspace{0pt}}p{3.5cm} | >{\hspace{0pt}}p{2.5cm} | p{2.5cm} | p{2cm} |}
 	\hline
 	Krav & Test & Forventet observation/resultat& Faktisk observation/resultat & Vurdering (OK/FAIL)\\ \hline
 	
-	1.1 & Bruger styrer kanon fra "top" position til "bund" posiion, og måler vinkelforskellen. & Den afmålte vinkelforskel må være 70 \degree  \(\pm\) 5 \degree & & \\ \hline
-	
-	1.2 & Bruger drejer kanonen fra længst til højre til længst til venstre og måler vinkelforskellen. &Den afmålte vinkelforskel ligger indenfor 70 \degree \(\pm\) 5 \degree & & \\ \hline
+	1 & Bruger drejer kanonen så lang til venstre og højre som muligt. & Det observeres at kanonen ikke har roteret 360 \degree  & & \\ \hline
 	
 	2 & Et projektil på 1.25 cm i diameter \(\pm\) 5mm affyres fra kanonen. & Projektilet bliver affyret & & \\ \hline
 	
 	3 & Et projektil affyres, og distancen mellem kanonen og stedet hvor projektilet lander måles. & Distancen er blevet målt til at være større end 1 meter. & & \\ \hline
 	
-	4 & Mål kanonens dimensioner med en lineal. & Dimensionerne overstiger ikke 40cm x 40cm x 40cm. & & \\ \hline
+	4 & Mål kanonens dimensioner med en lineal. & Dimensionerne overstiger ikke 50cm x 50cm x 50cm. & & \\ \hline
 	
-	5 & Tryk på "triggeren" på Wii Nunchuck, og mål med et stopur hvor lang tid der går fra tryk, til kanonen bliver affyret. &Den målte tid er mindre end 10 sekunder. & & \\ \hline
+	5 & Tryk på 'Z' knappen på Wii Nunchuck, og mål med et stopur hvor lang tid der går fra tryk, til kanonen bliver affyret. &Den målte tid er mindre end 10 sekunder. & & \\ \hline
 	
 	6 & Kanonen affyres 3 gange, og et stopur startes ved første skud, og stoppes ved det tredje skud. &Den målte tid er mindre end 60 sekunder. & & \\ \hline
 	

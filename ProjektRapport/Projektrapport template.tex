@@ -17,6 +17,14 @@
 
 \usepackage[table,xcdraw]{xcolor}
 
+% For rotating text in tables
+\usepackage{array,graphicx}
+\usepackage{booktabs}
+\usepackage{pifont}
+
+\newcommand*\rot{\rotatebox{90}}
+\newcommand*\OK{\ding{51}}
+
 %Billeder skal
 \usepackage{graphicx}
 \graphicspath{ {Afsnit/} }
@@ -128,6 +136,6 @@
 	\include{Afsnit/Udviklingsvaerktoejer/Udviklingsvaerktoejer}
 	\include{Afsnit/ResultaterOgDiskussion/ResultaterOgDiskussion}
 	\include{Afsnit/FremtidigtArbejde/FremtidigtArbejde}
-	\include{Afsnit/FejlOgMangler/FejlOgMangler}
+	%\include{Afsnit/FejlOgMangler/FejlOgMangler}
 	\include{Afsnit/Referencer/Referencer}
 \end{document}	

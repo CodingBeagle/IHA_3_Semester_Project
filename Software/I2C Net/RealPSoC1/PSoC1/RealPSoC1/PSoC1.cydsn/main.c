@@ -27,6 +27,7 @@ int main()
     DebugLEDGreen_Write(1);
     DebugLEDRed_Write(1);
     DebugLEDBlue_Write(1);
+    Shoot_Write(0);
     
     CyGlobalIntEnable; /* Enable global interrupts. */
 
@@ -37,14 +38,17 @@ int main()
     
     // Initialize PWM signals
     PWM_X_RIGHT_Start();
-    Clock_PWM_2_Start();
+    //Clock_PWM_2_Start();
     
     PWM_X_LEFT_Start();
+    PWM_Y_UP_Start();
+    PWM_Y_DOWN_Start();
     Clock_PWM_1_Start();
     
     PWM_X_RIGHT_WriteCompare(0);
     PWM_X_LEFT_WriteCompare(0);
-   
+    PWM_Y_UP_WriteCompare(0);
+    PWM_Y_DOWN_WriteCompare(0);
     
     for(;;)
     {
@@ -68,7 +72,8 @@ void controlMotor(uint8* receivedDataBuffer)
     
     // Receive value from ADC
     adc=ADC_1_CountsTo_mVolts(0,convertedValue);
-    
+    // FOR TESTING REMEMBER TO DELET
+    adc = 1200;
     
     if(receivedDataBuffer[0] == NunchuckData)
     {
@@ -78,12 +83,12 @@ void controlMotor(uint8* receivedDataBuffer)
         if(receivedDataBuffer[1] < 100 && adc > 915)
         {
             DebugLEDRed_Write(0);
-            PWM_X_LEFT_WriteCompare(30);
+            PWM_X_LEFT_WriteCompare(70);
         }
         else if(receivedDataBuffer[1] > 150 && adc < 2000)
         {
             DebugLEDGreen_Write(0);
-            PWM_X_RIGHT_WriteCompare(30);
+            PWM_X_RIGHT_WriteCompare(70);
         }
         else
         {
@@ -93,6 +98,7 @@ void controlMotor(uint8* receivedDataBuffer)
             DebugLEDRed_Write(1);
         }
         
+        /*
         if (receivedDataBuffer[1] < 150)
         {
            PWM_X_RIGHT_WriteCompare(0);
@@ -102,18 +108,36 @@ void controlMotor(uint8* receivedDataBuffer)
         {
            PWM_X_LEFT_WriteCompare(0);
         }
-        
+        */
         //Handle debug LEDs for the Y-Axis (No motor handling yet).
         if(receivedDataBuffer[2] < 100)
+        {
             DebugLEDBlue_Write(0);
+            PWM_Y_DOWN_WriteCompare(100);
+        }
         else if(receivedDataBuffer[2] > 150)
         {
+            PWM_Y_UP_WriteCompare(100);
             DebugLEDGreen_Write(0);
             DebugLEDRed_Write(0);
             DebugLEDBlue_Write(0);
         }
         else
-            DebugLEDBlue_Write(1);    
+        {
+            PWM_Y_UP_WriteCompare(0);
+            PWM_Y_DOWN_WriteCompare(0);
+            DebugLEDBlue_Write(1);
+        }
+        
+        if(receivedDataBuffer[3] && 0b00000011 == 2)
+        {
+           Shoot_Write(1);
+        }
+        else
+        {
+            Shoot_Write(0);
+        }
+        
             
         ADC_1_StopConvert();
     }

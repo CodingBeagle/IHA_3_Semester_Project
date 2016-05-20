@@ -1,5 +1,5 @@
 # PSoC1
-# 2016-04-26 07:10:49Z
+# 2016-05-18 12:40:07Z
 
 # IO_2@[IOP=(3)][IoId=(2)] is reserved: SWDDebugEnabled
 dont_use_io iocell 3 2
@@ -13,3 +13,7 @@ set_io "DebugLEDGreen(0)" iocell 0 2
 set_io "DebugLEDBlue(0)" iocell 0 3
 set_io "MotorXAxisDirectionLeft(0)" iocell 2 7
 set_io "MotorXAxisDirectionRight(0)" iocell 1 0
+set_io "Pin_1(0)" iocell 2 4
+set_io "MotorYAxisDirectionUp(0)" iocell 3 7
+set_io "Shoot(0)" iocell 3 5
+set_location "\ADC_1:cy_psoc4_sar\" p4sarcell -1 -1 0

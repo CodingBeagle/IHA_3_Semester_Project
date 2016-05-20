@@ -17,49 +17,6 @@ Her repræsenteres hardware som blokke forbundet med associeringer. Associeringe
 
 Domænemodellen er brugt til at udlede grænseflader for systemet, samt potentielle hardware- og softwarekomponenter. Hvad der er udledt af domænemodellen i forhold til grænseflader og komponenter, og hvordan dette bruges omdiskuteres i de følgende arkitektur afsnit.
 
-\section{Software Allokering}
-\label{afsnit:SoftwareAllokering}
-
-Domænemodellen i figur \ref{figure:allocationDiagram} præsenterer systemets hardwareblokke. På figur \ref{figure:allocationDiagram} ses et software allokeringsdiagram, som viser hvilke hardwareblokke der har softwaredele af systemet allokeret på sig. 
-
-\begin{figure}[H]
-	\centering
-	\includegraphics[width=\textwidth]{SystemArkitektur/images/SoftwareAllocation.PNG}
-	\caption{Systemets software allokeringer}
-	\label{figure:allocationDiagram}
-\end{figure}
-
-Det kan her ses at systemet består af tre primære softwaredele: \textit{User Interface Software}, \textit{Nunchuck Polling Software}, \textit{Motor Control Software}. Disse er fordelt over de tre viste CPU'er.
-
-På figurerne: \ref{fig:UserInterfaceAllocationClasses}, \ref{fig:NunchuckPollingAllocationClasses}, \ref{fig:MotorControlAllocationClasses} ses et overblik over konceptuelle klasser der repræsenterer ansvarsområder de primære softwaredele får. For en beskrivelse af design og implementering af disse primære softwaredele henvises til \textbf{DESIGN OG IMPLEMENTERING \#ref}.
-
-På figur \ref{fig:UserInterfaceAllocationClasses} ses det at \textit{User Interface Software}, allokeret på DevKit 8000, har ansvar for brugergrænsefladen samt en SPI Driver til kommunikation med PSoC0. 
-
-\begin{figure}[H]
-	\centering
-	\includegraphics[width=0.4\textwidth]{SystemArkitektur/images/UserInterfaceAllocationClasses.PNG}
-	\caption{Systemets software allokeringer}
-	\label{fig:UserInterfaceAllocationClasses}
-\end{figure}
-
-På figur \ref{fig:NunchuckPollingAllocationClasses} ses det at \textit{Nunchuck Polling Software}, allokeret på PSoC0, har ansvar for en I2C Driver, SPI Driver, samt en Nunchuck API. I2C Driveren skal bruges til kommunikation med den fysiske Nunchuck controller samt PSoC1. SPI Driveren skal bruges til kommunikation med DevKit 8000. Nunchuck API'en bruges for at tilgå data'en fra den fysiske Nunchuck controller.
-
-\begin{figure}[H]
-	\centering
-	\includegraphics[width=0.4\textwidth]{SystemArkitektur/images/NunchukPollingAllocationClasses.PNG}
-	\caption{Systemets software allokeringer}
-	\label{fig:NunchuckPollingAllocationClasses}
-\end{figure}
-
-På figur \ref{fig:MotorControlAllocationClasses} ses det at \textit{Motor Control Software}, allokeret på PSoC1, har ansvar for en I2C Driver til kommunikation med PSoC0, samt en Motor Driver til motorstyring.
-
-\begin{figure}[H]
-	\centering
-	\includegraphics[width=0.4\textwidth]{SystemArkitektur/images/MotorControlAllocationClasses.PNG}
-	\caption{Systemets software allokeringer}
-	\label{fig:MotorControlAllocationClasses}
-\end{figure}
-
 \section{Hardware}
 
 \subsection{BDD}
@@ -142,29 +99,64 @@ Det ses at systemet bliver påvirket af tre eksterne signaler: \textit{touch}, \
 \end{longtable}
 
 \section{Software}
-Softwaren til systemet er udarbejdet for hver CPU (se evt. software allokeringsdiagrammet på side \pageref{figure:allocationDiagram} figur \ref{figure:allocationDiagram}) ud fra en applikationsmodel, der kan ses i dokumentationen side (\textbf{Indsæt reference til applikationsmodel dokumentations \#ref}). Ud fra disse applikationsmodeller er der udarbejdet klassediagrammer, der viser software klasserne på den givne CPU, samt klassernes relationer til hinanden. Et indledende forslag til klassediagrammerne for hver CPU i systemet kan ses på figur \ref{figure:initialKlassediagramDevkit}, \ref{figure:initialKlassediagramPSoC0} og \ref{figure:initialKlassediagramPSoC1}.
+
+\subsection{Software Allokering}
+\label{afsnit:SoftwareAllokering}
+
+Domænemodellen i figur \ref{figure:domainModel}, side \pageref{figure:domainModel}, præsenterer systemets hardwareblokke. På figur \ref{figure:allocationDiagram} ses et software allokeringsdiagram, som viser hvilke hardwareblokke der har softwaredele af systemet allokeret på sig. 
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=\textwidth]{SystemArkitektur/images/DevKit8000ClassDiagram}
-	\caption{Klassediagram for DevKit8000 CPU}
-	\label{figure:initialKlassediagramDevkit}
+	\includegraphics[width=\textwidth]{SystemArkitektur/images/SoftwareAllocation.PNG}
+	\caption{Systemets software allokeringer}
+	\label{figure:allocationDiagram}
 \end{figure}
+
+Det kan her ses at systemet består af tre primære softwaredele: \textit{User Interface Software}, \textit{Nunchuck Polling Software}, \textit{Motor Control Software}. Disse er fordelt over de tre viste CPU'er.
+
+På tabel \ref{tabel:softwareAllocationDescription} er hvert allokeret software komponent beskrevet.
+
+\begin{table}[H]
+	\centering
+	\begin{tabular}{|ll|}
+		\hline
+		User Interface Software   & \begin{tabular}[c]{@{}l@{}}Dette allokerede software er brugergrænsefladen\\ som brugeren interagerer med på DevKit8000 touch-skærmen.\end{tabular}                                                  \\
+		\rowcolor[HTML]{CBCEFB} 
+		Nunchuck Polling Software & \begin{tabular}[c]{@{}l@{}}Dette allokerede software har til ansvar at polle\\ Nunchuck tilstanden og videresende det til\\ PSoC1.\end{tabular}                                                      \\
+		Motor Control Software    & \cellcolor[HTML]{FFFFFF}\begin{tabular}[c]{@{}l@{}}Dette allokerede software har til ansvar at\\ bruge den pollede Nunchuck data fra PSoC0\\ til motorstyring samt affyringsmekanismen.\end{tabular} \\ \hline
+	\end{tabular}
+	\caption{Beskrivelse af den allokerede software}
+	\label{tabel:softwareAllocationDescription}
+\end{table}
+
+På figurerne: \ref{fig:UserInterfaceAllocationClasses}, \ref{fig:NunchuckPollingAllocationClasses}, \ref{fig:MotorControlAllocationClasses} ses et overblik over konceptuelle klasser der repræsenterer ansvarsområder de primære softwaredele får. For en beskrivelse af design og implementering af disse primære softwaredele henvises til \textbf{DESIGN OG IMPLEMENTERING \#ref}.
+
+På figur \ref{fig:UserInterfaceAllocationClasses} ses det at \textit{User Interface Software}, allokeret på DevKit 8000, har ansvar for brugergrænsefladen samt en SPI Driver til kommunikation med PSoC0. 
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=\textwidth]{SystemArkitektur/images/klassediagramPSoC0}
-	\caption{Klassediagram for PSoC0 CPU}
-	\label{figure:initialKlassediagramPSoC0}
+	\includegraphics[width=0.4\textwidth]{SystemArkitektur/images/UserInterfaceAllocationClasses.PNG}
+	\caption{Systemets software allokeringer}
+	\label{fig:UserInterfaceAllocationClasses}
 \end{figure}
+
+På figur \ref{fig:NunchuckPollingAllocationClasses} ses det at \textit{Nunchuck Polling Software}, allokeret på PSoC0, har ansvar for en I2C Driver, SPI Driver, samt en Nunchuck API. I2C Driveren skal bruges til kommunikation med den fysiske Nunchuck controller samt PSoC1. SPI Driveren skal bruges til kommunikation med DevKit 8000. Nunchuck API'en bruges for at tilgå data'en fra den fysiske Nunchuck controller.
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[]{SystemArkitektur/images/klassediagramPSoC1}
-	\caption{Klassediagram for PSoC1 CPU}
-	\label{figure:initialKlassediagramPSoC1}
+	\includegraphics[width=0.4\textwidth]{SystemArkitektur/images/NunchukPollingAllocationClasses.PNG}
+	\caption{Systemets software allokeringer}
+	\label{fig:NunchuckPollingAllocationClasses}
 \end{figure}
 
+På figur \ref{fig:MotorControlAllocationClasses} ses det at \textit{Motor Control Software}, allokeret på PSoC1, har ansvar for en I2C Driver til kommunikation med PSoC0, samt en Motor Driver til motorstyring.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.4\textwidth]{SystemArkitektur/images/MotorControlAllocationClasses.PNG}
+	\caption{Systemets software allokeringer}
+	\label{fig:MotorControlAllocationClasses}
+\end{figure}
 
 \subsection{Informationsflow i systemet}
 \label{afsnit:informationFlow}
@@ -188,6 +180,29 @@ Use Case 2 beskriver test af systemet før spillet startes. På figur \ref{fig:S
 	\includegraphics[width=\textwidth] {Systemarkitektur/images/DevKit8000SequenceDiagram}
 	\caption{System Test Forløb}
 	\label{fig:SystemTestSekvensDiagram}
+\end{figure}
+
+Softwaren til systemet er udarbejdet for hver CPU (se evt. software allokeringsdiagrammet på side \pageref{figure:allocationDiagram} figur \ref{figure:allocationDiagram}) ud fra en applikationsmodel, der kan ses i dokumentationen side (\textbf{Indsæt reference til applikationsmodel dokumentations \#ref}). Ud fra disse applikationsmodeller er der udarbejdet klassediagrammer, der viser software klasserne på den givne CPU, samt klassernes relationer til hinanden. Et indledende forslag til klassediagrammerne for hver CPU i systemet kan ses på figur \ref{figure:initialKlassediagramDevkit}, \ref{figure:initialKlassediagramPSoC0} og \ref{figure:initialKlassediagramPSoC1}.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\textwidth]{SystemArkitektur/images/DevKit8000ClassDiagram}
+	\caption{Klassediagram for DevKit8000 CPU}
+	\label{figure:initialKlassediagramDevkit}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\textwidth]{SystemArkitektur/images/klassediagramPSoC0}
+	\caption{Klassediagram for PSoC0 CPU}
+	\label{figure:initialKlassediagramPSoC0}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[]{SystemArkitektur/images/klassediagramPSoC1}
+	\caption{Klassediagram for PSoC1 CPU}
+	\label{figure:initialKlassediagramPSoC1}
 \end{figure}
 
 \subsection{SPI Kommunikations Protokol}

@@ -1,7 +1,5 @@
-C:\Users\PernilleLouise\Documents\Elektro\3. semester\E3PRJ3\Hardware\Sensor_til_tandhjul\sensor_tandhjul\Design01.cydsn\Design01.cyprj|e68cfe70-498d-4974-a41d-1bbb2c02a429
-C:\Program Files (x86)\Cypress\PSoC Creator\3.3\PSoC Creator\psoc\content\default\CyAnnotationLibrary\CyAnnotationLibrary.cylib\CyAnnotationLibrary.cyprj|90a3cc74-3e40-4fe2-a495-445813b52bc6
-C:\Program Files (x86)\Cypress\PSoC Creator\3.3\PSoC Creator\psoc\content\cycomponentlibraryupdates\CyComponentLibraryUpdates.cylib\CyComponentLibraryUpdates.cyprj|420d7715-717c-4348-b998-8bfad50e66eb
-C:\Program Files (x86)\Cypress\PSoC Creator\3.3\PSoC Creator\psoc\content\cycomponentlibrary\CyComponentLibrary.cylib\CyComponentLibrary.cyprj|4247ee14-3ad1-4219-9bc0-ede552f57cc7
-C:\Program Files (x86)\Cypress\PSoC Creator\3.3\PSoC Creator\psoc\content\cyprimitives\CyPrimitives.cylib\CyPrimitives.cyprj|712b1c30-bc5c-4ba0-9c72-a2a632083235
-C:\Program Files (x86)\Cypress\PSoC Creator\3.3\PSoC Creator\dev\psoc4\PSoC4AnalogDevice\psoc4arch.cydsn\psoc4arch.cyprj|c3bfaca5-2a9d-4cb6-80ed-f414830ffd03
-C:\Program Files (x86)\Cypress\PSoC Creator\3.3\PSoC Creator\psoc\content\default\CyReferenceLibrary\CyReferenceLibrary.cylib\CyReferenceLibrary.cyprj|e12e33c8-61a6-45de-a49b-c6cd694f01a6
+C:\Users\PernilleLouise\Documents\Elektro\3. semester\E3PRJ3\Hardware\Sensor_til_tandhjul\sensor_tandhjul\Design01.cydsn\Design01.cyprj|8ed00fe4-e562-4af8-9ddf-29af30af421d
+C:\Program Files (x86)\Cypress\PSoC Creator\3.3\PSoC Creator\psoc\content\default\CyAnnotationLibrary\CyAnnotationLibrary.cylib\CyAnnotationLibrary.cyprj|014266c8-e5cb-4e27-b944-b80699b91a3c
+C:\Program Files (x86)\Cypress\PSoC Creator\3.3\PSoC Creator\psoc\content\cycomponentlibraryupdates\CyComponentLibraryUpdates.cylib\CyComponentLibraryUpdates.cyprj|a6dfc86a-7d9a-4b12-91e6-28b4bf06e549
+C:\Program Files (x86)\Cypress\PSoC Creator\3.3\PSoC Creator\psoc\content\cycomponentlibrary\CyComponentLibrary.cylib\CyComponentLibrary.cyprj|8a71a7f1-65ba-4e88-939a-9bd4d26ea6d1
+C:\Program Files (x86)\Cypress\PSoC Creator\3.3\PSoC Creator\psoc\content\cyprimitives\CyPrimitives.cylib\CyPrimitives.cyprj|2c9ad96b-5ba2-44ec-bef5-c9747ec66a3d

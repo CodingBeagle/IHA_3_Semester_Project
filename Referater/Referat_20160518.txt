@@ -1,0 +1,105 @@
+Accepttest
+- Afholdes Fredag kl 13.30 i lab med Gunvor
+
+- Hvis Gunvor skal kommentere skal det ske inden næste mandag 
+
+Proces Rapport
+- Referere til referater og bilag for at underbygge
+	Eks. Referere til Blackboard side 
+- Mangler krydshenvisninger
+	- Kommunikation: Grupperum, det er ikke synd for os men den væsentlig hindring
+		Det er svært at kommunikere når vi ikke har et sted at mødes.
+	- Facebook gruppen i bilag, henvisninger så det underbygger teksten
+	- Billeder fra Pivotal Tracker
+		Hvordan ser det ud og hvordan har vi sat det op
+	- Samarbejdsaftale
+		Henvisninger til konkret aftaler
+	- Bilag B: Samling af møde referater
+	- Arbejdsfordeling
+		Konkret med hvem der gør hvad
+	- Projektledelse
+		Drop overskriften
+		Scrummaster må ikke have en leder eller sekretær rolle
+		Scrummaster er udelukkende facilitator (f.eks. denne opgave er ikke løst, hvad skal vi gøre ved det)
+		Ingen ledelse i scrum, alle har lige meget ansvar i projektet
+		Sige at man har brug process styring == scrum.¨
+		Problematisere at det er nemt at skubbe opgaver over på scrummasteren
+	- Systematic
+		Mere konkret, nævne eksempel over hvem og hvad 
+		"Da der sker skal laves papir hatte ... "
+		Det bliver mere troværdigt når der kommer konkrete eksempler
+	- Ståopmøder
+		"Da vi arbejdede meget sammen var udbyttet ikke optimalt, da vi fysisk set havde arbejdet meget sammen"
+	- Konflikthåndtering
+		Den SKAL Gunvor se inden der aflevere
+		Drop det ellers skal det igennem Gunvor først
+		Vi skal være professionelle og det er konflikter ikke
+	- Generelt
+		Mere konkret og underbyggende
+		Eller virker det som dansk stil
+		Afsnit der ikke giver mening skal væk
+	- Sproget
+		Troværdighed med vi og navne
+		Det skal holdes hele vejen ned
+		Der skal skrives hvem der var scrummaster under sprint resumerne
+
+Projektrapport
+	- Indledning
+		Ikke rørt siden sidst
+		Fint med læringmålene, men der skal referes til disse
+		Fint med video over candgun, men afsnittet skal være mere talesprog (Kun i starten)
+		Der skal bruges referencer til linket og generelt mere af dem
+		Markedssynsvinkel, hvad er vi oppe mod
+		Krav til produktet er ikke blødt, men burde hedde projekt oplæg
+		Fornuftig flow og rød tråd
+	- Ansvarsområder
+		Specificere opgaverne, de er for brede og de skal have underpunkter
+		Have navnene lodret, så sensor ikke skal gætte hvem der har lavet hvad
+		Hbro underpunkt: Lodning og montering af printudlæg
+		Skal kun omfatte arbejdsopgaver, ikke dokumenteringsopgaver
+	- Moscow
+		Reference til moscow princippet
+	- Sysml
+		Reference til sysml
+	- Devkit
+		Reference 
+	- PSoC
+		Reference
+	- Nunchuck
+		Reference
+	- Allocation diagram
+		Der skal være en relation mellem CG300 og devkit
+	- Figurer
+		Figur 9 går ud over margen, dette er gjort med vilje, men måske mere ind i midten
+		Tekst skal ind i figuren
+		Der skal vær plads i margen hvis rapporten bliver printet
+	- I2C kommunikation
+		Der skal være tabel med I2C addresser lidt højere op
+	- Potentiometer
+		Reference til billede
+	- ADC
+		Mangler forklarende figurtekst
+		Hvad ser man egentligt?
+	- Test
+		Nævn kort at der er lavet modultest i rapporten og referere til dokumentation hvis der mangler plads
+	- SPI
+		Uoverskueligt, ikke rørt siden sidst	
+	- Figurer
+		Der skal arbejdes med størrelser og Inkscape
+	- Fejl og Mangler
+		Skal slettes eller ændres til perspektivering	
+
+Review 
+	- Gunvor var imponeret over GUI'en
+
+Retrospective
+ 	- Arbejde
+		Vi har arbejdet meget
+	- Rapport
+		Set på det gamle, rettet det i forhold til det nye, så det hele hang sammen
+	- Affyringsmekanisme
+		Er blevet lavet med hjælp fra PT og TS
+	- Stå op møder
+		Kommunikation virker bedre
+		Når man skriver rapport kan man sig hvad der konkret arbejdes på 
+		

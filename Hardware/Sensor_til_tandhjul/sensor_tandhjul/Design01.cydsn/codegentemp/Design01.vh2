@@ -2,7 +2,7 @@
 --	Conversion of Design01.v to vh2:
 --
 --	Cypress Semiconductor - WARP Version 6.3 IR 41
---	Fri May 13 20:55:50 2016
+--	Tue May 17 15:31:05 2016
 --
 
 USE cypress.cypress.all;
@@ -20,12 +20,12 @@ SIGNAL tmpIO_0__opamp_m_net_0 : bit;
 TERMINAL tmpSIOVREF__opamp_m_net_0 : bit;
 SIGNAL one : bit;
 SIGNAL tmpINTERRUPT_0__opamp_m_net_0 : bit;
-SIGNAL tmpOE__PWM_out_net_0 : bit;
+SIGNAL tmpOE__PWM_led_out_net_0 : bit;
 SIGNAL Net_381 : bit;
-SIGNAL tmpFB_0__PWM_out_net_0 : bit;
-SIGNAL tmpIO_0__PWM_out_net_0 : bit;
-TERMINAL tmpSIOVREF__PWM_out_net_0 : bit;
-SIGNAL tmpINTERRUPT_0__PWM_out_net_0 : bit;
+SIGNAL tmpFB_0__PWM_led_out_net_0 : bit;
+SIGNAL tmpIO_0__PWM_led_out_net_0 : bit;
+TERMINAL tmpSIOVREF__PWM_led_out_net_0 : bit;
+SIGNAL tmpINTERRUPT_0__PWM_led_out_net_0 : bit;
 TERMINAL Net_276 : bit;
 TERMINAL \Opamp_1:Net_9\ : bit;
 TERMINAL \Opamp_1:Net_18\ : bit;
@@ -891,6 +891,11 @@ SIGNAL tmpFB_0__Pin_green_net_0 : bit;
 SIGNAL tmpIO_0__Pin_green_net_0 : bit;
 TERMINAL tmpSIOVREF__Pin_green_net_0 : bit;
 SIGNAL tmpINTERRUPT_0__Pin_green_net_0 : bit;
+SIGNAL tmpOE__PWM_motor_out_net_0 : bit;
+SIGNAL tmpFB_0__PWM_motor_out_net_0 : bit;
+SIGNAL tmpIO_0__PWM_motor_out_net_0 : bit;
+TERMINAL tmpSIOVREF__PWM_motor_out_net_0 : bit;
+SIGNAL tmpINTERRUPT_0__PWM_motor_out_net_0 : bit;
 SIGNAL \PWM_led:PWMUDB:min_kill_reg\\D\ : bit;
 SIGNAL \PWM_led:PWMUDB:prevCapture\\D\ : bit;
 SIGNAL \PWM_led:PWMUDB:trig_last\\D\ : bit;
@@ -1029,7 +1034,7 @@ opamp_m:cy_psoc3_pins_v1_10
 		out_clock_en=>tmpOE__opamp_m_net_0,
 		out_reset=>zero,
 		interrupt=>tmpINTERRUPT_0__opamp_m_net_0);
-PWM_out:cy_psoc3_pins_v1_10
+PWM_led_out:cy_psoc3_pins_v1_10
 	GENERIC MAP(id=>"4a3b8127-9275-4a33-9017-39e3157948ae",
 		drive_mode=>"110",
 		ibuf_enabled=>"1",
@@ -1087,10 +1092,10 @@ PWM_out:cy_psoc3_pins_v1_10
 		input_buffer_sel=>"00")
 	PORT MAP(oe=>(tmpOE__opamp_m_net_0),
 		y=>Net_381,
-		fb=>(tmpFB_0__PWM_out_net_0),
+		fb=>(tmpFB_0__PWM_led_out_net_0),
 		analog=>(open),
-		io=>(tmpIO_0__PWM_out_net_0),
-		siovref=>(tmpSIOVREF__PWM_out_net_0),
+		io=>(tmpIO_0__PWM_led_out_net_0),
+		siovref=>(tmpSIOVREF__PWM_led_out_net_0),
 		annotation=>(open),
 		in_clock=>zero,
 		in_clock_en=>tmpOE__opamp_m_net_0,
@@ -1098,7 +1103,7 @@ PWM_out:cy_psoc3_pins_v1_10
 		out_clock=>zero,
 		out_clock_en=>tmpOE__opamp_m_net_0,
 		out_reset=>zero,
-		interrupt=>tmpINTERRUPT_0__PWM_out_net_0);
+		interrupt=>tmpINTERRUPT_0__PWM_led_out_net_0);
 \Opamp_1:cy_psoc4_abuf\:cy_psoc4_abuf_v1_0
 	GENERIC MAP(cy_registers=>"",
 		needs_dsab=>'0',
@@ -2138,6 +2143,76 @@ Pin_green:cy_psoc3_pins_v1_10
 		out_clock_en=>tmpOE__opamp_m_net_0,
 		out_reset=>zero,
 		interrupt=>tmpINTERRUPT_0__Pin_green_net_0);
+PWM_motor_out:cy_psoc3_pins_v1_10
+	GENERIC MAP(id=>"b6b7d940-79c4-46ef-bce3-99daa10b4eae",
+		drive_mode=>"110",
+		ibuf_enabled=>"1",
+		init_dr_st=>"1",
+		input_sync=>"1",
+		input_clk_en=>'0',
+		input_sync_mode=>"0",
+		intr_mode=>"00",
+		invert_in_clock=>'0',
+		invert_in_clock_en=>'0',
+		invert_in_reset=>'0',
+		invert_out_clock=>'0',
+		invert_out_clock_en=>'0',
+		invert_out_reset=>'0',
+		io_voltage=>"",
+		layout_mode=>"CONTIGUOUS",
+		output_conn=>"1",
+		output_sync=>"0",
+		output_clk_en=>'0',
+		output_mode=>"0",
+		output_reset=>'0',
+		output_clock_mode=>"0",
+		oe_sync=>"0",
+		oe_conn=>"0",
+		oe_reset=>'0',
+		pin_aliases=>"",
+		pin_mode=>"O",
+		por_state=>4,
+		sio_group_cnt=>0,
+		sio_hifreq=>"00000000",
+		sio_hyst=>"1",
+		sio_ibuf=>"00000000",
+		sio_info=>"00",
+		sio_obuf=>"00000000",
+		sio_refsel=>"00000000",
+		sio_vtrip=>"00000000",
+		sio_vohsel=>"00000000",
+		slew_rate=>"0",
+		spanning=>'0',
+		sw_only=>'0',
+		vtrip=>"10",
+		width=>1,
+		port_alias_required=>'0',
+		port_alias_group=>"",
+		use_annotation=>"0",
+		pa_in_clock=>-1,
+		pa_in_clock_en=>-1,
+		pa_in_reset=>-1,
+		pa_out_clock=>-1,
+		pa_out_clock_en=>-1,
+		pa_out_reset=>-1,
+		ovt_needed=>"0",
+		ovt_slew_control=>"00",
+		ovt_hyst_trim=>"0",
+		input_buffer_sel=>"00")
+	PORT MAP(oe=>(tmpOE__opamp_m_net_0),
+		y=>Net_1976,
+		fb=>(tmpFB_0__PWM_motor_out_net_0),
+		analog=>(open),
+		io=>(tmpIO_0__PWM_motor_out_net_0),
+		siovref=>(tmpSIOVREF__PWM_motor_out_net_0),
+		annotation=>(open),
+		in_clock=>zero,
+		in_clock_en=>tmpOE__opamp_m_net_0,
+		in_reset=>zero,
+		out_clock=>zero,
+		out_clock_en=>tmpOE__opamp_m_net_0,
+		out_reset=>zero,
+		interrupt=>tmpINTERRUPT_0__PWM_motor_out_net_0);
 \PWM_led:PWMUDB:min_kill_reg\:cy_dsrff
 	PORT MAP(d=>tmpOE__opamp_m_net_0,
 		s=>zero,
@@ -2285,7 +2360,7 @@ Pin_green:cy_psoc3_pins_v1_10
 \PWM_motor:PWMUDB:pwm_i_reg\:cy_dff
 	PORT MAP(d=>\PWM_motor:PWMUDB:pwm_i\,
 		clk=>\PWM_motor:PWMUDB:ClockOutFromEnBlock\,
-		q=>\PWM_motor:PWMUDB:pwm_i_reg\);
+		q=>Net_1976);
 \PWM_motor:PWMUDB:pwm1_i_reg\:cy_dff
 	PORT MAP(d=>zero,
 		clk=>\PWM_motor:PWMUDB:ClockOutFromEnBlock\,

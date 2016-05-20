@@ -99,10 +99,6 @@
           <File BuildType="BUILD" Toolchain="">.\Generated_Source\PSoC4\opamp_m.h</File>
           <File BuildType="BUILD" Toolchain="">.\Generated_Source\PSoC4\opamp_m_aliases.h</File>
           <File BuildType="BUILD" Toolchain="">.\Generated_Source\PSoC4\opamp_m_PM.c</File>
-          <File BuildType="BUILD" Toolchain="">.\Generated_Source\PSoC4\PWM_out.c</File>
-          <File BuildType="BUILD" Toolchain="">.\Generated_Source\PSoC4\PWM_out.h</File>
-          <File BuildType="BUILD" Toolchain="">.\Generated_Source\PSoC4\PWM_out_aliases.h</File>
-          <File BuildType="BUILD" Toolchain="">.\Generated_Source\PSoC4\PWM_out_PM.c</File>
           <File BuildType="BUILD" Toolchain="">.\Generated_Source\PSoC4\opamp_p.c</File>
           <File BuildType="BUILD" Toolchain="">.\Generated_Source\PSoC4\opamp_p.h</File>
           <File BuildType="BUILD" Toolchain="">.\Generated_Source\PSoC4\opamp_p_aliases.h</File>
@@ -133,6 +129,14 @@
           <File BuildType="BUILD" Toolchain="">.\Generated_Source\PSoC4\Pin_green.h</File>
           <File BuildType="BUILD" Toolchain="">.\Generated_Source\PSoC4\Pin_green_aliases.h</File>
           <File BuildType="BUILD" Toolchain="">.\Generated_Source\PSoC4\Pin_green_PM.c</File>
+          <File BuildType="BUILD" Toolchain="">.\Generated_Source\PSoC4\PWM_led_out.c</File>
+          <File BuildType="BUILD" Toolchain="">.\Generated_Source\PSoC4\PWM_led_out.h</File>
+          <File BuildType="BUILD" Toolchain="">.\Generated_Source\PSoC4\PWM_led_out_aliases.h</File>
+          <File BuildType="BUILD" Toolchain="">.\Generated_Source\PSoC4\PWM_led_out_PM.c</File>
+          <File BuildType="BUILD" Toolchain="">.\Generated_Source\PSoC4\PWM_motor_out.c</File>
+          <File BuildType="BUILD" Toolchain="">.\Generated_Source\PSoC4\PWM_motor_out.h</File>
+          <File BuildType="BUILD" Toolchain="">.\Generated_Source\PSoC4\PWM_motor_out_aliases.h</File>
+          <File BuildType="BUILD" Toolchain="">.\Generated_Source\PSoC4\PWM_motor_out_PM.c</File>
         </Files>
       </Folder>
       <Folder BuildType="STRICT" Path="C:\Users\PernilleLouise\Documents\Elektro\3. semester\E3PRJ3\Hardware\Sensor_til_tandhjul\sensor_tandhjul\Design01.cydsn\Export\ARM_GCC_Generic">

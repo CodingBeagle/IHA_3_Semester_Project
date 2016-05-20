@@ -23,9 +23,11 @@
 <dep name=".\Generated_Source\PSoC4\CyLib.h" />
 <dep name=".\Generated_Source\PSoC4\Opamp_1.h" />
 <dep name=".\Generated_Source\PSoC4\PWM_led.h" />
+<dep name=".\Generated_Source\PSoC4\PWM_led_out.h" />
+<dep name=".\Generated_Source\PSoC4\PWM_led_out_aliases.h" />
 <dep name=".\Generated_Source\PSoC4\PWM_motor.h" />
-<dep name=".\Generated_Source\PSoC4\PWM_out.h" />
-<dep name=".\Generated_Source\PSoC4\PWM_out_aliases.h" />
+<dep name=".\Generated_Source\PSoC4\PWM_motor_out.h" />
+<dep name=".\Generated_Source\PSoC4\PWM_motor_out_aliases.h" />
 <dep name=".\Generated_Source\PSoC4\Pin_green.h" />
 <dep name=".\Generated_Source\PSoC4\Pin_green_aliases.h" />
 <dep name=".\Generated_Source\PSoC4\Pin_red.h" />
@@ -64,9 +66,11 @@
 <file name=".\Generated_Source\PSoC4\CyLib.h" />
 <file name=".\Generated_Source\PSoC4\Opamp_1.h" />
 <file name=".\Generated_Source\PSoC4\PWM_led.h" />
+<file name=".\Generated_Source\PSoC4\PWM_led_out.h" />
+<file name=".\Generated_Source\PSoC4\PWM_led_out_aliases.h" />
 <file name=".\Generated_Source\PSoC4\PWM_motor.h" />
-<file name=".\Generated_Source\PSoC4\PWM_out.h" />
-<file name=".\Generated_Source\PSoC4\PWM_out_aliases.h" />
+<file name=".\Generated_Source\PSoC4\PWM_motor_out.h" />
+<file name=".\Generated_Source\PSoC4\PWM_motor_out_aliases.h" />
 <file name=".\Generated_Source\PSoC4\Pin_green.h" />
 <file name=".\Generated_Source\PSoC4\Pin_green_aliases.h" />
 <file name=".\Generated_Source\PSoC4\Pin_red.h" />
@@ -93,6 +97,46 @@
 <file name=".\Generated_Source\PSoC4\opamp_p_aliases.h" />
 <file name=".\Generated_Source\PSoC4\project.h" />
 <file name=".\main.c" />
+<file name=".\CortexM0\ARM_GCC_493\Debug\PWM_motor.o">
+<dep name=".\Generated_Source\PSoC4\CyLFClk.h" />
+<dep name=".\Generated_Source\PSoC4\CyLib.h" />
+<dep name=".\Generated_Source\PSoC4\PWM_motor.c" />
+<dep name=".\Generated_Source\PSoC4\PWM_motor.h" />
+<dep name=".\Generated_Source\PSoC4\cydevice_trm.h" />
+<dep name=".\Generated_Source\PSoC4\cyfitter.h" />
+<dep name=".\Generated_Source\PSoC4\cytypes.h" />
+</file>
+<file name=".\Generated_Source\PSoC4\PWM_motor.c" />
+<file name=".\CortexM0\ARM_GCC_493\Debug\PWM_motor_PM.o">
+<dep name=".\Generated_Source\PSoC4\CyLFClk.h" />
+<dep name=".\Generated_Source\PSoC4\CyLib.h" />
+<dep name=".\Generated_Source\PSoC4\PWM_motor.h" />
+<dep name=".\Generated_Source\PSoC4\PWM_motor_PM.c" />
+<dep name=".\Generated_Source\PSoC4\cydevice_trm.h" />
+<dep name=".\Generated_Source\PSoC4\cyfitter.h" />
+<dep name=".\Generated_Source\PSoC4\cytypes.h" />
+</file>
+<file name=".\Generated_Source\PSoC4\PWM_motor_PM.c" />
+<file name=".\CortexM0\ARM_GCC_493\Debug\PWM_led.o">
+<dep name=".\Generated_Source\PSoC4\CyLFClk.h" />
+<dep name=".\Generated_Source\PSoC4\CyLib.h" />
+<dep name=".\Generated_Source\PSoC4\PWM_led.c" />
+<dep name=".\Generated_Source\PSoC4\PWM_led.h" />
+<dep name=".\Generated_Source\PSoC4\cydevice_trm.h" />
+<dep name=".\Generated_Source\PSoC4\cyfitter.h" />
+<dep name=".\Generated_Source\PSoC4\cytypes.h" />
+</file>
+<file name=".\Generated_Source\PSoC4\PWM_led.c" />
+<file name=".\CortexM0\ARM_GCC_493\Debug\PWM_led_PM.o">
+<dep name=".\Generated_Source\PSoC4\CyLFClk.h" />
+<dep name=".\Generated_Source\PSoC4\CyLib.h" />
+<dep name=".\Generated_Source\PSoC4\PWM_led.h" />
+<dep name=".\Generated_Source\PSoC4\PWM_led_PM.c" />
+<dep name=".\Generated_Source\PSoC4\cydevice_trm.h" />
+<dep name=".\Generated_Source\PSoC4\cyfitter.h" />
+<dep name=".\Generated_Source\PSoC4\cytypes.h" />
+</file>
+<file name=".\Generated_Source\PSoC4\PWM_led_PM.c" />
 <file name=".\CortexM0\ARM_GCC_493\Debug\ADC_2.o">
 <dep name=".\Generated_Source\PSoC4\ADC_2.c" />
 <dep name=".\Generated_Source\PSoC4\ADC_2.h" />
@@ -228,66 +272,46 @@
 <dep name=".\Generated_Source\PSoC4\cytypes.h" />
 </file>
 <file name=".\Generated_Source\PSoC4\Opamp_1_PM.c" />
-<file name=".\CortexM0\ARM_GCC_493\Debug\PWM_led.o">
-<dep name=".\Generated_Source\PSoC4\CyLFClk.h" />
-<dep name=".\Generated_Source\PSoC4\CyLib.h" />
-<dep name=".\Generated_Source\PSoC4\PWM_led.c" />
-<dep name=".\Generated_Source\PSoC4\PWM_led.h" />
-<dep name=".\Generated_Source\PSoC4\cydevice_trm.h" />
-<dep name=".\Generated_Source\PSoC4\cyfitter.h" />
-<dep name=".\Generated_Source\PSoC4\cytypes.h" />
-</file>
-<file name=".\Generated_Source\PSoC4\PWM_led.c" />
-<file name=".\CortexM0\ARM_GCC_493\Debug\PWM_led_PM.o">
-<dep name=".\Generated_Source\PSoC4\CyLFClk.h" />
-<dep name=".\Generated_Source\PSoC4\CyLib.h" />
-<dep name=".\Generated_Source\PSoC4\PWM_led.h" />
-<dep name=".\Generated_Source\PSoC4\PWM_led_PM.c" />
-<dep name=".\Generated_Source\PSoC4\cydevice_trm.h" />
-<dep name=".\Generated_Source\PSoC4\cyfitter.h" />
-<dep name=".\Generated_Source\PSoC4\cytypes.h" />
-</file>
-<file name=".\Generated_Source\PSoC4\PWM_led_PM.c" />
-<file name=".\CortexM0\ARM_GCC_493\Debug\PWM_motor.o">
-<dep name=".\Generated_Source\PSoC4\CyLFClk.h" />
-<dep name=".\Generated_Source\PSoC4\CyLib.h" />
-<dep name=".\Generated_Source\PSoC4\PWM_motor.c" />
-<dep name=".\Generated_Source\PSoC4\PWM_motor.h" />
-<dep name=".\Generated_Source\PSoC4\cydevice_trm.h" />
-<dep name=".\Generated_Source\PSoC4\cyfitter.h" />
-<dep name=".\Generated_Source\PSoC4\cytypes.h" />
-</file>
-<file name=".\Generated_Source\PSoC4\PWM_motor.c" />
-<file name=".\CortexM0\ARM_GCC_493\Debug\PWM_motor_PM.o">
-<dep name=".\Generated_Source\PSoC4\CyLFClk.h" />
-<dep name=".\Generated_Source\PSoC4\CyLib.h" />
-<dep name=".\Generated_Source\PSoC4\PWM_motor.h" />
-<dep name=".\Generated_Source\PSoC4\PWM_motor_PM.c" />
-<dep name=".\Generated_Source\PSoC4\cydevice_trm.h" />
-<dep name=".\Generated_Source\PSoC4\cyfitter.h" />
-<dep name=".\Generated_Source\PSoC4\cytypes.h" />
-</file>
-<file name=".\Generated_Source\PSoC4\PWM_motor_PM.c" />
-<file name=".\CortexM0\ARM_GCC_493\Debug\PWM_out.o">
-<dep name=".\Generated_Source\PSoC4\PWM_out.c" />
-<dep name=".\Generated_Source\PSoC4\PWM_out.h" />
-<dep name=".\Generated_Source\PSoC4\PWM_out_aliases.h" />
+<file name=".\CortexM0\ARM_GCC_493\Debug\PWM_led_out.o">
+<dep name=".\Generated_Source\PSoC4\PWM_led_out.c" />
+<dep name=".\Generated_Source\PSoC4\PWM_led_out.h" />
+<dep name=".\Generated_Source\PSoC4\PWM_led_out_aliases.h" />
 <dep name=".\Generated_Source\PSoC4\cydevice_trm.h" />
 <dep name=".\Generated_Source\PSoC4\cyfitter.h" />
 <dep name=".\Generated_Source\PSoC4\cypins.h" />
 <dep name=".\Generated_Source\PSoC4\cytypes.h" />
 </file>
-<file name=".\Generated_Source\PSoC4\PWM_out.c" />
-<file name=".\CortexM0\ARM_GCC_493\Debug\PWM_out_PM.o">
-<dep name=".\Generated_Source\PSoC4\PWM_out.h" />
-<dep name=".\Generated_Source\PSoC4\PWM_out_PM.c" />
-<dep name=".\Generated_Source\PSoC4\PWM_out_aliases.h" />
+<file name=".\Generated_Source\PSoC4\PWM_led_out.c" />
+<file name=".\CortexM0\ARM_GCC_493\Debug\PWM_led_out_PM.o">
+<dep name=".\Generated_Source\PSoC4\PWM_led_out.h" />
+<dep name=".\Generated_Source\PSoC4\PWM_led_out_PM.c" />
+<dep name=".\Generated_Source\PSoC4\PWM_led_out_aliases.h" />
 <dep name=".\Generated_Source\PSoC4\cydevice_trm.h" />
 <dep name=".\Generated_Source\PSoC4\cyfitter.h" />
 <dep name=".\Generated_Source\PSoC4\cypins.h" />
 <dep name=".\Generated_Source\PSoC4\cytypes.h" />
 </file>
-<file name=".\Generated_Source\PSoC4\PWM_out_PM.c" />
+<file name=".\Generated_Source\PSoC4\PWM_led_out_PM.c" />
+<file name=".\CortexM0\ARM_GCC_493\Debug\PWM_motor_out.o">
+<dep name=".\Generated_Source\PSoC4\PWM_motor_out.c" />
+<dep name=".\Generated_Source\PSoC4\PWM_motor_out.h" />
+<dep name=".\Generated_Source\PSoC4\PWM_motor_out_aliases.h" />
+<dep name=".\Generated_Source\PSoC4\cydevice_trm.h" />
+<dep name=".\Generated_Source\PSoC4\cyfitter.h" />
+<dep name=".\Generated_Source\PSoC4\cypins.h" />
+<dep name=".\Generated_Source\PSoC4\cytypes.h" />
+</file>
+<file name=".\Generated_Source\PSoC4\PWM_motor_out.c" />
+<file name=".\CortexM0\ARM_GCC_493\Debug\PWM_motor_out_PM.o">
+<dep name=".\Generated_Source\PSoC4\PWM_motor_out.h" />
+<dep name=".\Generated_Source\PSoC4\PWM_motor_out_PM.c" />
+<dep name=".\Generated_Source\PSoC4\PWM_motor_out_aliases.h" />
+<dep name=".\Generated_Source\PSoC4\cydevice_trm.h" />
+<dep name=".\Generated_Source\PSoC4\cyfitter.h" />
+<dep name=".\Generated_Source\PSoC4\cypins.h" />
+<dep name=".\Generated_Source\PSoC4\cytypes.h" />
+</file>
+<file name=".\Generated_Source\PSoC4\PWM_motor_out_PM.c" />
 <file name=".\CortexM0\ARM_GCC_493\Debug\Pin_green.o">
 <dep name=".\Generated_Source\PSoC4\Pin_green.c" />
 <dep name=".\Generated_Source\PSoC4\Pin_green.h" />
@@ -462,6 +486,28 @@
 <file name=".\Generated_Source\PSoC4\CyBootAsmGnu.s" />
 <file name=".\Generated_Source\PSoC4\cydevicegnu_trm.inc" />
 <file name=".\Generated_Source\PSoC4\cyfittergnu.inc" />
+<file name=".\Generated_Source\PSoC4\PWM_out.h" />
+<file name=".\Generated_Source\PSoC4\PWM_out_aliases.h" />
+<file name=".\CortexM0\ARM_GCC_493\Debug\PWM_out.o">
+<dep name=".\Generated_Source\PSoC4\PWM_out.c" />
+<dep name=".\Generated_Source\PSoC4\PWM_out.h" />
+<dep name=".\Generated_Source\PSoC4\PWM_out_aliases.h" />
+<dep name=".\Generated_Source\PSoC4\cydevice_trm.h" />
+<dep name=".\Generated_Source\PSoC4\cyfitter.h" />
+<dep name=".\Generated_Source\PSoC4\cypins.h" />
+<dep name=".\Generated_Source\PSoC4\cytypes.h" />
+</file>
+<file name=".\Generated_Source\PSoC4\PWM_out.c" />
+<file name=".\CortexM0\ARM_GCC_493\Debug\PWM_out_PM.o">
+<dep name=".\Generated_Source\PSoC4\PWM_out.h" />
+<dep name=".\Generated_Source\PSoC4\PWM_out_PM.c" />
+<dep name=".\Generated_Source\PSoC4\PWM_out_aliases.h" />
+<dep name=".\Generated_Source\PSoC4\cydevice_trm.h" />
+<dep name=".\Generated_Source\PSoC4\cyfitter.h" />
+<dep name=".\Generated_Source\PSoC4\cypins.h" />
+<dep name=".\Generated_Source\PSoC4\cytypes.h" />
+</file>
+<file name=".\Generated_Source\PSoC4\PWM_out_PM.c" />
 <file name=".\Generated_Source\PSoC4\Clock_1.h" />
 <file name=".\CortexM0\ARM_GCC_493\Debug\Clock_1.o">
 <dep name=".\Generated_Source\PSoC4\Clock_1.c" />
@@ -675,8 +721,6 @@
 <dep name=".\CortexM0\ARM_GCC_493\Debug\ADC_2_intClock.o" />
 <dep name=".\CortexM0\ARM_GCC_493\Debug\opamp_m.o" />
 <dep name=".\CortexM0\ARM_GCC_493\Debug\opamp_m_PM.o" />
-<dep name=".\CortexM0\ARM_GCC_493\Debug\PWM_out.o" />
-<dep name=".\CortexM0\ARM_GCC_493\Debug\PWM_out_PM.o" />
 <dep name=".\CortexM0\ARM_GCC_493\Debug\opamp_p.o" />
 <dep name=".\CortexM0\ARM_GCC_493\Debug\opamp_p_PM.o" />
 <dep name=".\CortexM0\ARM_GCC_493\Debug\opamp_out.o" />
@@ -693,6 +737,10 @@
 <dep name=".\CortexM0\ARM_GCC_493\Debug\isr_in_PM.o" />
 <dep name=".\CortexM0\ARM_GCC_493\Debug\Pin_green.o" />
 <dep name=".\CortexM0\ARM_GCC_493\Debug\Pin_green_PM.o" />
+<dep name=".\CortexM0\ARM_GCC_493\Debug\PWM_led_out.o" />
+<dep name=".\CortexM0\ARM_GCC_493\Debug\PWM_led_out_PM.o" />
+<dep name=".\CortexM0\ARM_GCC_493\Debug\PWM_motor_out.o" />
+<dep name=".\CortexM0\ARM_GCC_493\Debug\PWM_motor_out_PM.o" />
 <dep name=".\CortexM0\ARM_GCC_493\Debug\Design01.a" />
 <dep name="${CyRoot}\psoc\content\cycomponentlibrary\CyComponentLibrary.cylib\CortexM0\ARM_GCC_493\Debug\CyComponentLibrary.a" />
 </file>
@@ -765,6 +813,10 @@
 <name_val_pair name=".\Generated_Source\PSoC4\Pin_red_PM.c" v="-mcpu=cortex-m0 -mthumb -Wno-main -I. -IGenerated_Source\PSoC4 -Wa,-alh=${OutputDir}/${CompileFile}.lst -g -D DEBUG -Wall -ffunction-sections -Og -ffat-lto-objects" />
 <name_val_pair name=".\Generated_Source\PSoC4\Pin_green.c" v="-mcpu=cortex-m0 -mthumb -Wno-main -I. -IGenerated_Source\PSoC4 -Wa,-alh=${OutputDir}/${CompileFile}.lst -g -D DEBUG -Wall -ffunction-sections -Og -ffat-lto-objects" />
 <name_val_pair name=".\Generated_Source\PSoC4\Pin_green_PM.c" v="-mcpu=cortex-m0 -mthumb -Wno-main -I. -IGenerated_Source\PSoC4 -Wa,-alh=${OutputDir}/${CompileFile}.lst -g -D DEBUG -Wall -ffunction-sections -Og -ffat-lto-objects" />
+<name_val_pair name=".\Generated_Source\PSoC4\PWM_led_out.c" v="-mcpu=cortex-m0 -mthumb -Wno-main -I. -IGenerated_Source\PSoC4 -Wa,-alh=${OutputDir}/${CompileFile}.lst -g -D DEBUG -Wall -ffunction-sections -Og -ffat-lto-objects" />
+<name_val_pair name=".\Generated_Source\PSoC4\PWM_led_out_PM.c" v="-mcpu=cortex-m0 -mthumb -Wno-main -I. -IGenerated_Source\PSoC4 -Wa,-alh=${OutputDir}/${CompileFile}.lst -g -D DEBUG -Wall -ffunction-sections -Og -ffat-lto-objects" />
+<name_val_pair name=".\Generated_Source\PSoC4\PWM_motor_out.c" v="-mcpu=cortex-m0 -mthumb -Wno-main -I. -IGenerated_Source\PSoC4 -Wa,-alh=${OutputDir}/${CompileFile}.lst -g -D DEBUG -Wall -ffunction-sections -Og -ffat-lto-objects" />
+<name_val_pair name=".\Generated_Source\PSoC4\PWM_motor_out_PM.c" v="-mcpu=cortex-m0 -mthumb -Wno-main -I. -IGenerated_Source\PSoC4 -Wa,-alh=${OutputDir}/${CompileFile}.lst -g -D DEBUG -Wall -ffunction-sections -Og -ffat-lto-objects" />
 </name>
 </genericCmdLineData>
 <codeGenCmdLineTag v="-.appdatapath &quot;C:\Users\PernilleLouise\AppData\Local\Cypress Semiconductor\PSoC Creator\3.3&quot; -.fdsnotice -.fdswarpdepfile=warp_dependencies.txt -.fdselabdepfile=elab_dependencies.txt -.fdsbldfile=generated_files.txt -p &quot;C:\Users\PernilleLouise\Documents\Elektro\3. semester\E3PRJ3\Hardware\Sensor_til_tandhjul\sensor_tandhjul\Design01.cydsn\Design01.cyprj&quot; -d CY8C4245AXI-483 -s &quot;C:\Users\PernilleLouise\Documents\Elektro\3. semester\E3PRJ3\Hardware\Sensor_til_tandhjul\sensor_tandhjul\Design01.cydsn\Generated_Source\PSoC4&quot; -- -yv2 -q10 -ygs -o2 -v3 -.fftcfgtype=LE" />
@@ -1742,6 +1794,46 @@
 <v>${CyRoot}\psoc\content\cyprimitives\CyPrimitives.cylib\cy_pins_v2_20\PSoC4\API\pins.h</v>
 <v>${CyRoot}\psoc\content\cyprimitives\CyPrimitives.cylib\cy_pins_v2_20\PSoC4\API\aliases.h</v>
 <v>${CyRoot}\psoc\content\cyprimitives\CyPrimitives.cylib\cy_pins_v2_20\PSoC4\API\pins_PM.c</v>
+<v>${CyRoot}\psoc\content\cyprimitives\CyPrimitives.cylib\cy_pins_v2_20\cy_pins_v2_20.cysym</v>
+<v>${CyRoot}\psoc\content\cyprimitives\CyPrimitives.cylib\cy_pins_v2_20\cy_pins_v2_20.pdf</v>
+<v>${CyRoot}\psoc\content\cyprimitives\CyPrimitives.cylib\cy_pins_v2_20\cy_pins_v2_20.cystate</v>
+<v>${CyRoot}\psoc\content\cyprimitives\CyPrimitives.cylib\cy_pins_v2_20\cy_pins_v2_20.cyprimitive</v>
+<v>${CyRoot}\psoc\content\cyprimitives\CyPrimitives.cylib\cy_pins_v2_20</v>
+<v>${CyRoot}\psoc\content\cyprimitives\CyPrimitives.cylib\cy_pins_v2_20\Custom\custom.cs</v>
+<v>${CyRoot}\psoc\content\cyprimitives\CyPrimitives.cylib\cy_pins_v2_20\Custom\cyenums.cs</v>
+<v>${CyRoot}\psoc\content\cyprimitives\CyPrimitives.cylib\cy_pins_v2_20\Custom\cypinsdata.cs</v>
+<v>${CyRoot}\psoc\content\cyprimitives\CyPrimitives.cylib\cy_pins_v2_20\Custom\cypinpicture.cs</v>
+<v>${CyRoot}\psoc\content\cyprimitives\CyPrimitives.cylib\cy_pins_v2_20\Custom\cypinutils.cs</v>
+<v>${CyRoot}\psoc\content\cyprimitives\CyPrimitives.cylib\cy_pins_v2_20\Custom\cygeneralcontrol.cs</v>
+<v>${CyRoot}\psoc\content\cyprimitives\CyPrimitives.cylib\cy_pins_v2_20\Custom\cygeneralcontrol.Designer.cs</v>
+<v>${CyRoot}\psoc\content\cyprimitives\CyPrimitives.cylib\cy_pins_v2_20\Custom\cyinputcontrol.cs</v>
+<v>${CyRoot}\psoc\content\cyprimitives\CyPrimitives.cylib\cy_pins_v2_20\Custom\cyinputcontrol.Designer.cs</v>
+<v>${CyRoot}\psoc\content\cyprimitives\CyPrimitives.cylib\cy_pins_v2_20\Custom\cymappingcontrol.cs</v>
+<v>${CyRoot}\psoc\content\cyprimitives\CyPrimitives.cylib\cy_pins_v2_20\Custom\cymappingcontrol.Designer.cs</v>
+<v>${CyRoot}\psoc\content\cyprimitives\CyPrimitives.cylib\cy_pins_v2_20\Custom\cyoutputcontrol.cs</v>
+<v>${CyRoot}\psoc\content\cyprimitives\CyPrimitives.cylib\cy_pins_v2_20\Custom\cyoutputcontrol.Designer.cs</v>
+<v>${CyRoot}\psoc\content\cyprimitives\CyPrimitives.cylib\cy_pins_v2_20\Custom\cypinaliasdialog.cs</v>
+<v>${CyRoot}\psoc\content\cyprimitives\CyPrimitives.cylib\cy_pins_v2_20\Custom\cypinaliasdialog.Designer.cs</v>
+<v>${CyRoot}\psoc\content\cyprimitives\CyPrimitives.cylib\cy_pins_v2_20\Custom\cypinscontrol.cs</v>
+<v>${CyRoot}\psoc\content\cyprimitives\CyPrimitives.cylib\cy_pins_v2_20\Custom\cypinscontrol.Designer.cs</v>
+<v>${CyRoot}\psoc\content\cyprimitives\CyPrimitives.cylib\cy_pins_v2_20\Custom\cyporcontrol.cs</v>
+<v>${CyRoot}\psoc\content\cyprimitives\CyPrimitives.cylib\cy_pins_v2_20\Custom\cyporcontrol.Designer.cs</v>
+<v>${CyRoot}\psoc\content\cyprimitives\CyPrimitives.cylib\cy_pins_v2_20\Custom\Resource1.Designer.cs</v>
+<v>${CyRoot}\psoc\content\cyprimitives\CyPrimitives.cylib\cy_pins_v2_20\Custom\cyclockingcontrol.cs</v>
+<v>${CyRoot}\psoc\content\cyprimitives\CyPrimitives.cylib\cy_pins_v2_20\Custom\cyclockingcontrol.Designer.cs</v>
+<v>${CyRoot}\psoc\content\cyprimitives\CyPrimitives.cylib\cy_pins_v2_20\Custom\cygeneralcontrol.resx</v>
+<v>${CyRoot}\psoc\content\cyprimitives\CyPrimitives.cylib\cy_pins_v2_20\Custom\cyinputcontrol.resx</v>
+<v>${CyRoot}\psoc\content\cyprimitives\CyPrimitives.cylib\cy_pins_v2_20\Custom\cymappingcontrol.resx</v>
+<v>${CyRoot}\psoc\content\cyprimitives\CyPrimitives.cylib\cy_pins_v2_20\Custom\cyoutputcontrol.resx</v>
+<v>${CyRoot}\psoc\content\cyprimitives\CyPrimitives.cylib\cy_pins_v2_20\Custom\cypinaliasdialog.resx</v>
+<v>${CyRoot}\psoc\content\cyprimitives\CyPrimitives.cylib\cy_pins_v2_20\Custom\cypinscontrol.resx</v>
+<v>${CyRoot}\psoc\content\cyprimitives\CyPrimitives.cylib\cy_pins_v2_20\Custom\cyporcontrol.resx</v>
+<v>${CyRoot}\psoc\content\cyprimitives\CyPrimitives.cylib\cy_pins_v2_20\Custom\Resource1.resx</v>
+<v>${CyRoot}\psoc\content\cyprimitives\CyPrimitives.cylib\cy_pins_v2_20\Custom\cyclockingcontrol.resx</v>
+<v>${CyRoot}\psoc\content\cyprimitives\CyPrimitives.cylib\cy_pins_v2_20\PSoC4\API\pins.c</v>
+<v>${CyRoot}\psoc\content\cyprimitives\CyPrimitives.cylib\cy_pins_v2_20\PSoC4\API\pins.h</v>
+<v>${CyRoot}\psoc\content\cyprimitives\CyPrimitives.cylib\cy_pins_v2_20\PSoC4\API\aliases.h</v>
+<v>${CyRoot}\psoc\content\cyprimitives\CyPrimitives.cylib\cy_pins_v2_20\PSoC4\API\pins_PM.c</v>
 <v>.\Design01.cydwr</v>
 <v>${CyRoot}\psoc\content\cycomponentlibrary\CyComponentLibrary.cylib\cy_boot_v5_30\PSoC4\API\cm0gcc.ld</v>
 <v>${CyRoot}\psoc\content\cycomponentlibrary\CyComponentLibrary.cylib\cy_boot_v5_30\PSoC4\API\Cm0RealView.scat</v>
@@ -1889,6 +1981,14 @@
 <v>.\Generated_Source\PSoC4\Pin_green.h</v>
 <v>.\Generated_Source\PSoC4\Pin_green_aliases.h</v>
 <v>.\Generated_Source\PSoC4\Pin_green_PM.c</v>
+<v>.\Generated_Source\PSoC4\PWM_led_out.c</v>
+<v>.\Generated_Source\PSoC4\PWM_led_out.h</v>
+<v>.\Generated_Source\PSoC4\PWM_led_out_aliases.h</v>
+<v>.\Generated_Source\PSoC4\PWM_led_out_PM.c</v>
+<v>.\Generated_Source\PSoC4\PWM_motor_out.c</v>
+<v>.\Generated_Source\PSoC4\PWM_motor_out.h</v>
+<v>.\Generated_Source\PSoC4\PWM_motor_out_aliases.h</v>
+<v>.\Generated_Source\PSoC4\PWM_motor_out_PM.c</v>
 </gen_list>
 <warp_dep>
 <v>C:\Program Files (x86)\Cypress\PSoC Creator\3.3\PSoC Creator\warp\lib\ieee\work\stdlogic.vif</v>
@@ -1898,14 +1998,14 @@
 <v>C:\Program Files (x86)\Cypress\PSoC Creator\3.3\PSoC Creator\warp\lib\common\stdlogic\rtlpkg.vif</v>
 <v>C:\Program Files (x86)\Cypress\PSoC Creator\3.3\PSoC Creator\warp\lib\common\stdlogic\cy_psoc3.vif</v>
 </warp_dep>
-<deps_time v="131076393547989247" />
+<deps_time v="131079654710617715" />
 <top_block v="TopDesign" />
 <last_generation v="0" />
 </CyGuid_925cc1e1-309e-4e08-b0a1-09a83c35b157>
 </dataGuid>
 <dataGuid v="769d31ea-68b1-4f0c-b90a-7c10a43ee563">
 <CyGuid_769d31ea-68b1-4f0c-b90a-7c10a43ee563 type_name="CyDesigner.Common.ProjMgmt.Model.CyLinkCustomData" version="1">
-<deps_time v="131076393612284363" />
+<deps_time v="131079654736097147" />
 </CyGuid_769d31ea-68b1-4f0c-b90a-7c10a43ee563>
 </dataGuid>
 <dataGuid v="504337dd-7d07-4bc7-9057-90e60cf6c469">

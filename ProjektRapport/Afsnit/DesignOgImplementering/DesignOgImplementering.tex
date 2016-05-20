@@ -1,13 +1,11 @@
 \chapter{Design og Implementering}
 
-\section{Valg og Begrundelse}
-
 \section{Hardware}
 
 \subsection{Motorstyring}
 \subsubsection{H-bro}
 \subsubsection{Detektor}
-Dette er en form for en detektor, som består af et potentiometer og en ADC, som er en del af “motorstyring” blokken, så ved hjælp af Potentiometeret kan man søger for at motoren ikke drejer for langt ud til begge sider.  Der kunne være brugt en stepper motor til at syre det med, men for at få mere hardware med, blev det besluttet at det var en bedre løsning.
+Denne detektor består af et potentiometer og en ADC, som er en del af “motorstyring” blokken, så ved hjælp af Potentiometeret kan man søger for at motoren ikke drejer for langt ud til begge sider.  Der kunne være brugt en stepper motor til at syre det med, men for at få mere hardware med, blev det besluttet at det var en bedre løsning at gør det på denne måde.
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=\textwidth]{Afsnit/DesignOgImplementering/images/poten}
@@ -15,17 +13,18 @@ Dette er en form for en detektor, som består af et potentiometer og en ADC, som
 	\label{fig:poten}
 \end{figure}
 \textbf{måske et billede af opstilling i stedet for}\\
-Potentiometer har til formal at skulle holde styre på at motoren ikke køre ud længere end det hvad det fastsatte krav er. Der er blevet valgt at bruge et Potentiometer som er et linæret et, som vil sige at når man for hver ændring man laver på Potentiometeret, vil der også ske en ændring i spændingen. Så når den bliver fast gjord til motoren vil man kunne se en ændring i den spænding som kommer ud fra potentiometeret, som bliver sendt ind i ADC’en, som er af typen Sequencing Successive Approximation ADC, som er placeret internt i PSoC’en. Så når spænding bliver aflæst, vil man kunne vide præcise hvor motoren er.  
-ADC’en er en sample hold kreds, som vil sige den holder på dataen end til der er fundet en værdi, så der går noget tid i mellem hver værdi, så der er søgeret for at der ikke bliver lavet over samples og der ikke bliver lavet aliasing af det signal som kommer ind i ADC’en. For at finde den værdi som bliver sendt ind i ADC'en, bliver der lavet en skala som bliver halvert alt efter hvor værdien ligger på skalaen, som vist på figur \ref{fig:pot}
+Potentiometer har til formal at skulle holde styre på at motoren ikke køre ud længere end det hvad det fastsatte krav er. Der er blevet valgt at bruge et Potentiometer som er et linæret et, som vil sige at når man for hver ændring man laver på Potentiometeret, vil der også ske en ændring i output spændingen. Så når den bliver fast gjord til motoren vil man kunne se en ændring i den spænding som kommer ud fra potentiometeret, som bliver sendt ind i ADC’en, som er af typen Sequencing Successive Approximation ADC, som er placeret internt i PSoC’en. Så når output spændingen fra potentiometer bliver aflæst, vil man kunne vide præcise hvor motoren er.  
+ADC’en er en sample hold kreds, som vil sige den holder på dataen end til der er fundet en værdi, så der går noget tid i mellem hver værdi, så der er søgeret for at der ikke bliver lavet over samples og der ikke bliver lavet aliasing af det signal som kommer ind i ADC’en. For at finde den værdi som bliver sendt ind i ADC'en, bliver der lavet en skala hvor DAC bliver sat til midscale og tjekke om inputtet er højre eller lavere end hvor midscaler er. Hvis den er højere får den 1 og hvis den er laver for den et 0, det bit bliver gemt i et register og sådan bliver den ved end til alle bit er sat. På figur \ref{fig:ADC12} kan man få et bedre overblik over hvordan ADC funger. 
+
 
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=\textwidth]{Afsnit/DesignOgImplementering/images/ADC}
-	\caption{ADC}
-	\label{fig:pot}
+	\caption{ADC opbygning}
+	\label{fig:ADC12}
 	\end{figure}
 
-Der er blevet målt med en vinkel måler for at over holde kravene i kravspecifikationen. Hvor der blev fundet frem til min og max hvor motoren må køre i mellem. \\
+Der er blevet målt med en vinkel måler for at over holde kravene i kravspecifikationen\textbf{\#ref Reference til kravspecikation (ikke funktionelle krav)}. Hvor der blev fundet frem til en min og max hvor motoren må køre i mellem. \\
 \\
 Min=915 mV\\
 \\
@@ -122,3 +121,59 @@ I praksis skal de afkodede værdier for det analoge stick kalibreres, da slør p
 I projektet er de afkodede værdier for det analoge stick kalibreret med værdien -15 (0x0F i hexadecimal), altså ser den endelige formel for afkodning samt kalibrering således ud:
 
 \textit{AfkodetByte = (AflæstByte XOR 0x17) + 0x17 - 0x0F}
+
+\subsection{PSoC Software}
+De følgende klassediagrammer på figur \ref{figure:klassediagramPSoC0} og \ref{figure:klassediagramPSoC1} giver et overblik over hvilke klasser der bliver gjort brug af på PSoC0 og PSoC1. De efterfølgende afsnit vil beskrive klasserne og deres funktioner.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=.7\textwidth]{DesignOgImplementering/images/PSoC0KlassediagramOversigt}
+	\caption{Klassediagram oversigt for PSoC0}
+	\label{figure:klassediagramPSoC0}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=.7\textwidth]{DesignOgImplementering/images/PSoC1KlassediagramOversigt}
+	\caption{Klassediagram oversigt for PSoC1}
+	\label{figure:klassediagramPSoC1}
+\end{figure}
+
+\subsection{I2CCommunication}
+I dette afsnit vil softwaren der omhandler I2C-kommunikation blive beskrevet. Dette inkluderer et klassediagram, samt en klassebeskrivelse.
+\subsubsection{Klassediagram}
+På figur \ref{figure:klassediagramI2CCommunication} ses klassediagrammet for I2CCommunication. 
+\begin{figure}[H]
+	\centering
+	%\includegraphics[width=0.9\textwidth, trim={0 19cm 9cm 0},clip]{DesignOgImplementering/images/I2CCommunication.pdf}
+	\includegraphics[]{DesignOgImplementering/images/I2CCommunication}
+	%\includegraphics[width =0.9\textwidth]{DesignOgImplementering/images/I2CCommunication2}
+	\caption{Klassediagram for I2CCommunication klassen}
+	\label{figure:klassediagramI2CCommunication}
+\end{figure}
+
+\subsection{Nunchuck}
+I dette afsnit vil softwaren der specifikt omhandler kommunikationen mellem PSoC0 og Nunchucken blive beskrevet. Dette gøres vha. et klassediagram og klassebeskrivelser.
+
+\subsubsection{Klassediagram}
+På figur \ref{figure:NunchuckKlassediagram} ses klassediagrammet for Nunchuck klassen.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[]{DesignOgImplementering/images/nunchuck}
+	\caption{Klassediagram for klassen Nunchuck}
+	\label{figure:NunchuckKlassediagram}
+\end{figure}
+
+\subsection{SPI - PSoC}
+I dette afsnit vil softwaren der specifikt omhandler SPI-kommunikationen mellem PSoC0 og DevKit8000 blive beskrevet. Dette gøres vha. et klassediagram og klassebeskrivelser
+
+\subsubsection{Klassediagram}
+På figur \ref{figure:KlassediagramSPICommunication} ses klassediagrammet over SPICommunication klassen.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[]{DesignOgImplementering/images/SPICommunication}
+	\caption{Klassediagram over klassen SPICommunication}
+	\label{figure:KlassediagramSPICommunication}
+\end{figure}

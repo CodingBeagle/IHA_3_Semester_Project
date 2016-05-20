@@ -23,15 +23,15 @@ CY_ISR(isr_in)
     
     do 
     {
-        Pin_red_Write(0); //Sluk rød led
-        Pin_green_Write(1); //Tænd grøn led
+        Pin_red_Write(1); //Sluk rød led
+        Pin_green_Write(0); //Tænd grøn led
         ADCresult = ADC_2_GetResult16(0);   //output fra ADC
         resVolt = ADC_2_CountsTo_mVolts(0, ADCresult);  //konvertering af ADC-output til mV
     }while (resVolt<=1500);
     
     PWM_motor_Stop(); //Stop motor
-    Pin_green_Write(0); //Sluk grøn led
-    Pin_red_Write(1); //Tænd rød led
+    Pin_green_Write(1); //Sluk grøn led
+    Pin_red_Write(0); //Tænd rød led
 }
 
 int main()
@@ -48,7 +48,7 @@ int main()
     
     Opamp_1_Start(); //initialisering af opamp
     PWM_led_Start(); //initialisering af PWM til led
-    PWM_motor_Start(); //initialisering af PWM til motor
+    //PWM_motor_Start(); //initialisering af PWM til motor
     
     //Initialisering af ADC
     ADC_2_Start(); 
@@ -58,8 +58,8 @@ int main()
     
    
     
-    Pin_red_Write(1); //Tænd rød led
-    Pin_green_Write(0); 
+    Pin_green_Write(1); //Sluk grøn led
+    Pin_red_Write(0); //Tænd rød led
     for(;;)
     {
                 
