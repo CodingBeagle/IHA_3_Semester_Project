@@ -72,12 +72,9 @@ void controlMotor(uint8* receivedDataBuffer)
     
     // Receive value from ADC
     adc=ADC_1_CountsTo_mVolts(0,convertedValue);
-    // FOR TESTING REMEMBER TO DELET
-    adc = 1200;
     
     if(receivedDataBuffer[0] == NunchuckData)
     {
-        
         
         //Handle debug LEDs for the X-Axis.
         if(receivedDataBuffer[1] < 100 && adc > 915)
