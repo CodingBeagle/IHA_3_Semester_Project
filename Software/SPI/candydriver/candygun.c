@@ -5,6 +5,7 @@
 #include <linux/input.h>
 #include <linux/module.h>
 #include "candygun-spi.h"
+#include <linux/slab.h>
 
 #define NUM_OF_MINORS 1
 
@@ -202,14 +203,14 @@ ssize_t candygun_cdrv_read(struct file *filep, char __user *ubuf,
   int minor, len;
   char resultBuf[MAXLEN];
   u8 result = 0;
-    
+
   minor = iminor(filep->f_inode);
 
   if(MODULE_DEBUG)
     printk(KERN_ALERT "Reading from candygun [Minor] %i \n", minor);
     
   /* Read value from SPI Bus */
-  candygun_spi_read(candygun_spi_device, 0xF1, &result);
+  result = candygun_spi_read(candygun_spi_device, 0xF1, 0);
 
   /* Convert to string and copy to user space */
   /* Convert integer to string limited to "count" size. Returns

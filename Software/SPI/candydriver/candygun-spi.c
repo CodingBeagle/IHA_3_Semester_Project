@@ -22,7 +22,7 @@ struct spi_device* candygun_get_device(void){
 
 int candygun_spi_read(struct spi_device *spi, u8* value)
 {
-	struct spi_transfer t[1];
+	struct spi_transfer t[2];
 	struct spi_message m;
 
   /* Check for valid spi device */
@@ -38,7 +38,7 @@ int candygun_spi_read(struct spi_device *spi, u8* value)
 	t[0].tx_buf = NULL;
 	t[0].rx_buf = &receivedData;
 	t[0].len = 1;
-  t[0].delay_usecs = 300;
+  t[0].delay_usecs = 150;
 
 	spi_message_add_tail(&t[0], &m);
 
@@ -46,12 +46,12 @@ int candygun_spi_read(struct spi_device *spi, u8* value)
 	spi_sync(m.spi, &m);
 
 	if(MODULE_DEBUG)
-	  printk(KERN_DEBUG "Canygun: Read value from SPI bus: %x\n", receivedData);
+	  printk(KERN_DEBUG "Candygun: Read value from SPI bus: %x\n", receivedData);
 
   /* Return read SPI bus value to user */
-  *value = receivedData;
+  //(*value) = receivedData;
 
-	return 0;
+	return receivedData;
 }
 
 /*
