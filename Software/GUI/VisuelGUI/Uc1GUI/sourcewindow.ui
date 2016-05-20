@@ -59,7 +59,7 @@
      </rect>
     </property>
     <property name="text">
-     <string>Start Test</string>
+     <string>Systemtest</string>
     </property>
    </widget>
    <widget class="QPushButton" name="startBut">
