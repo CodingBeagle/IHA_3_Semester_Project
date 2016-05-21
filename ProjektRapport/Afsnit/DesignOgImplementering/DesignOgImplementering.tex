@@ -1,8 +1,11 @@
 \chapter{Design og Implementering}
 
 \section{Hardware}
+I Goofy Candygun 3000 indgår forskellige hardware-dele, som skal udgøre det færdige system. Ud fra BDD'et ses det, at de to overordnede hardware-dele, der skal udvikles, er motorstyring til den vertikale og horisontale drejeretning, og en affyringsmekanisme. 
 
 \subsection{Motorstyring}
+De to motorer, der skal sørge for at affyringsmekanismen kan sigte både vertikalt og horisontalt, består af to dele. Den ene del er en H-bro, som skal sørge for, at motorerne kan skifte retning. Den anden del er en detektor, der skal sørge for, at motorerne ikke kan dreje en hele omgang men kun cirka 70 grader. 
+
 \subsubsection{H-bro}
 \subsubsection{Rotationsbegrænsning}
 Motoren, som styrer platformen, skal kunne bevæge sig frit i intervallet, som er fastsat i kravspecifikationen \textbf{\#ref Reference til kravspecikation (ikke funktionelle krav)}. For at begrænse denne bevægelse, udenfor det fastsatte interval, anvendes der et potentiometer. Når motoren bevæger sig, ændres potentiometerets modstandsværdi og dermed ændres spændingsniveauet. Dermed kan positionen af motoren bestemmes ved at se på outputspændingen fra potentiometret. Et alternativ til denne løsning er at der anvendes en stepper motor, frem for en DC motor, der kan styres i små steps. Da det var ønsket om at arbejde med flere hardware elementer end kun motoren, blev DC motoren med rotationsberænsning valgt.
@@ -38,13 +41,13 @@ Min=915 mV\\
 \\
 Max = 2000mV\\
 \\
-Disse værdier er aflæst fra PSoC’en, da den har en ref spændingen på 3.3V vil den have lavere værdier end hvad der bliver sendt ud fra Potentiometeret.
+Disse værdier er aflæst fra PSoC’en, da den har en ref spændingen på 3.3V vil den have lavere værdier end hvad der bliver sendt ud fra potentiometeret.
 
 
 \begin{equation}
  \frac {5V} {3.3V}= 1.515
 \end{equation}
-Der er en forskel på ca. 1.515   mellem potentiometer og ADC. Så ADC er ca. 1,515 mindre end hvad potentiometer sender ud.
+Der er en forskel på cirka 1,515 mellem potentiometer og ADC. Så ADC er cirka 1,515 mindre end hvad potentiometer sender ud.
 \\
 For at forstå hvordan ADC’en og potentiometeret fungerer henvises til dokumentationen.
 
@@ -58,11 +61,24 @@ Detektorens formål er at detektere, hvornår motoren har kørt en omgang og der
 
 Dette båndpasfilter er opbygget af et højpasfilter og et lavpasfilter. Til at sende signal om, at motoren skal køre bruges, at når fotodioden kan se LED'en skal den sende et højt signal ud. Her bruges PSoC'ens operationsforstærker. For at gøre dette signal til et pænt firkantsignal, blev der lavet en envelopedetector, som er opbygget af en diode, en modstand og en kondensator. 
 
-Det signal, som kom fra PSoC'en var dog for lavt til at kunne blive opfattet som et højt signal. Derfor 
+Det signal, som kom fra PSoC'en var dog for lavt til at kunne blive opfattet som et højt signal. Grunden til dette var, at signalet lå på mellem 1,5V og 2V. Det ville give et for lille interval, hvor det kunne opfattes som højt, når referencespændingen på samme tid var hævet fra 0V til 0,5V. Derfor blev der indsat en operationsforstærker, som skulle forstærke dette signal ved hjælp af en ikke-inverterende forstærker. Dette kredsløb blev opbygget på baggrund af, at signalet skulle fordobles. Derfor blev der opstillet følgende ligning \ref{}: 
+
+\begin{equation} 
+	U_{O}=(1+\frac{R_{2}}{R_{1}})*U_{P}
+\end{equation}
+
+Det vil altså sige, at hvis de to modstande, der sættes ind er ens, vil indgangssignalet blive fordoblet. Hvis der eksempelvis sendes 2V ind vil der være 4V på udgangen: 
+
+\begin{equation}
+	U_{O}=(1+\frac{10k\Omega}{10k\Omega})*2V
+\end{equation}
+
+Herefter var det muligt at aflæse et tydeligt firkantsignal med en peak-to-peak-værdi på 3,5V. 
 
 \subsubsection{Motorstyring}
 Til at styre affyringsmekanismens motor er der bygget et kredsløb med en MOSFET som primære komponent. MOSFET'en skal sørge for, at motoren kun kører, når der bliver sendt PWM-signal ind i den. 
 
+Der er sat en diode parallelt med motoren for at sikre motoren mod store spændingsspikes, der kan forekomme, når MOSFET'en bliver afbrudt. Der er også sat en diode fra source til drain. Denne sikrer, at spikes genereret af motoren ikke brænder motoren af. 
 
 \subsubsection{Kanon}
 Selve kanonen i systemet er bygget op af to træplader og LEGO. Den ene træplade skal kunne dreje fra side til side, således at det er muligt at sigte i den horisontale retning. Den vertikale retning er bygget af LEGO, ligesom selve kanonen også er bygget i LEGO. 
