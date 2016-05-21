@@ -7,6 +7,14 @@ I Goofy Candygun 3000 indgår forskellige hardware-dele, som skal udgøre det f�
 De to motorer, der skal sørge for at affyringsmekanismen kan sigte både vertikalt og horisontalt, består af to dele. Den ene del er en H-bro, som skal sørge for, at motorerne kan skifte retning. Den anden del er en detektor, der skal sørge for, at motorerne ikke kan dreje en hele omgang men kun cirka 70 grader. 
 
 \subsubsection{H-bro}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=1.2\textwidth]{Afsnit/DesignOgImplementering/images/H-bro}
+	\caption{Diagram af H-bro}
+	\label{fig:hbro}
+\end{figure}
+
 \subsubsection{Rotationsbegrænsning}
 Motoren, som styrer platformen, skal kunne bevæge sig frit i intervallet, som er fastsat i kravspecifikationen \textbf{\#ref Reference til kravspecikation (ikke funktionelle krav)}. For at begrænse denne bevægelse, udenfor det fastsatte interval, anvendes der et potentiometer. Når motoren bevæger sig, ændres potentiometerets modstandsværdi og dermed ændres spændingsniveauet. Dermed kan positionen af motoren bestemmes ved at se på outputspændingen fra potentiometret. Et alternativ til denne løsning er at der anvendes en stepper motor, frem for en DC motor, der kan styres i små steps. Da det var ønsket om at arbejde med flere hardware elementer end kun motoren, blev DC motoren med rotationsberænsning valgt.
 
