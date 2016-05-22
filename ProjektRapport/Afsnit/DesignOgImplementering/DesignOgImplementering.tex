@@ -7,8 +7,9 @@ I Goofy Candygun 3000 indgår forskellige hardware-dele, som skal udgøre det f�
 For at kanonen kan sigte både vertikalt og horisontalt skal den kunne køre i begge disse retninger. Det afhjælpes ved at bruge to DC-motorer - en til hver retning. Men for at disse så kan køre både forlæns og baglæns skal der bruges en H-bro. For at sikre at motorerne ikke kan dreje 360 grader er der udviklet en rotationsbegrænsning, som gør at de kun kan dreje cirka 35 grader ud til hver side. 
 
 \subsubsection{H-bro}
-H-broen er bygget op af to identiske kredsløb - et til hver retning. Derfor beskrives kun den ene retning. Kredsløbet består af en N-MOSFET og en P-MOSFET. 
+%H-broen er bygget op af to identiske kredsløb - et til hver retning. Derfor beskrives kun den ene retning. Kredsløbet består af en N-MOSFET og en P-MOSFET. 
 
+%Når der bliver sendt signal ind på gate-benet på N-MOSFET'en vil der løbe strøm gennem MOSFET'en og op til motoren. 
 
 \begin{figure}[H]
 	\begin{adjustwidth}{-3cm}{-\rightmargin}
@@ -108,9 +109,16 @@ Det vil altså sige, at hvis de to modstande, der sættes ind er ens, vil indgan
 Herefter var det muligt at aflæse et tydeligt firkantsignal med en peak-to-peak-værdi på 3,5V. 
 
 \subsubsection{Motorstyring}
-Til at styre affyringsmekanismens motor er der bygget et kredsløb med en MOSFET som primære komponent. MOSFET'en skal sørge for, at motoren kun kører, når der bliver sendt PWM-signal ind i den. 
+Til at styre affyringsmekanismens motor er der bygget et kredsløb med en MOSFET som primære komponent. MOSFET'en skal sørge for, at motoren kun kører, når der bliver sendt PWM-signal ind i den. Kredsløbsdiagrammet kan ses på figur \ref{fig:affyringsmotor}. 
 
-Der er sat en diode parallelt med motoren for at sikre motoren mod store spændingsspikes, der kan forekomme, når MOSFET'en bliver afbrudt. Der er også sat en diode fra source til drain. Denne sikrer, at spikes genereret af motoren ikke brænder motoren af. 
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.7\textwidth]{Afsnit/DesignOgImplementering/images/motor_affyring}
+	\caption{Diagram over motorstyring til motor på affyringsmekanisme}
+	\label{fig:affyringsmotor}
+\end{figure}
+
+Dioden D1 er sat ind for at sikre motoren mod store spændingsspikes, der kan forekomme, når MOSFET'en bliver afbrudt. Dioden D2, der sidder fra source til drain, sikrer, at spikes genereret af motoren, når den slukkes, ikke brænder MOSFET'en af. 
 
 \subsubsection{Kanon}
 Selve kanonen i systemet er bygget op af to træplader og LEGO. Den ene træplade skal kunne dreje fra side til side, således at det er muligt at sigte i den horisontale retning. Den vertikale retning er bygget af LEGO, ligesom selve kanonen også er bygget i LEGO. 
