@@ -3,20 +3,24 @@
 \section{Hardware}
 I Goofy Candygun 3000 indgår forskellige hardware-dele, som skal udgøre det færdige system. Ud fra BDD'et ses det, at de to overordnede hardware-dele, der skal udvikles, er motorstyring til den vertikale og horisontale drejeretning, og en affyringsmekanisme. 
 
-\subsection{Motorstyring}
-De to motorer, der skal sørge for at affyringsmekanismen kan sigte både vertikalt og horisontalt, består af to dele. Den ene del er en H-bro, som skal sørge for, at motorerne kan skifte retning. Den anden del er en detektor, der skal sørge for, at motorerne ikke kan dreje en hele omgang men kun cirka 70 grader. 
+\subsection{Motorstyring af drejeretning}
+For at kanonen kan sigte både vertikalt og horisontalt skal den kunne køre i begge disse retninger. Det afhjælpes ved at bruge to DC-motorer - en til hver retning. Men for at disse så kan køre både forlæns og baglæns skal der bruges en H-bro. For at sikre at motorerne ikke kan dreje 360 grader er der udviklet en rotationsbegrænsning, som gør at de kun kan dreje cirka 35 grader ud til hver side. 
 
 \subsubsection{H-bro}
+H-broen er bygget op af to identiske kredsløb - et til hver retning. Derfor beskrives kun den ene retning. Kredsløbet består af en N-MOSFET og en P-MOSFET. 
+
 
 \begin{figure}[H]
+	\begin{adjustwidth}{-3cm}{-\rightmargin}
 	\centering
-	\includegraphics[width=1.2\textwidth]{Afsnit/DesignOgImplementering/images/H-bro}
+	\includegraphics[width=0.9\paperwidth]{Afsnit/DesignOgImplementering/images/H-bro}
 	\caption{Diagram af H-bro}
 	\label{fig:hbro}
+	\end{adjustwidth}
 \end{figure}
 
 \subsubsection{Rotationsbegrænsning}
-Motoren, som styrer platformen, skal kunne bevæge sig frit i intervallet, som er fastsat i kravspecifikationen \textbf{\#ref Reference til kravspecikation (ikke funktionelle krav)}. For at begrænse denne bevægelse, udenfor det fastsatte interval, anvendes der et potentiometer. Når motoren bevæger sig, ændres potentiometerets modstandsværdi og dermed ændres spændingsniveauet. Dermed kan positionen af motoren bestemmes ved at se på outputspændingen fra potentiometret. Et alternativ til denne løsning er at der anvendes en stepper motor, frem for en DC motor, der kan styres i små steps. Da det var ønsket om at arbejde med flere hardware elementer end kun motoren, blev DC motoren med rotationsberænsning valgt.
+Motoren, som styrer platformen, skal kunne bevæge sig frit i intervallet, som er fastsat i kravspecifikationen \textbf{\#ref Reference til kravspecikation (ikke-funktionelle krav)}. For at begrænse denne bevægelse udenfor det fastsatte interval, anvendes der et potentiometer. Når motoren bevæger sig, ændres potentiometerets modstandsværdi og dermed ændres spændingsniveauet. Dermed kan positionen af motoren bestemmes ved at se på outputspændingen fra potentiometret. Et alternativ til denne løsning er, at der anvendes en stepper motor fremfor en DC-motor, der kan styres i små steps. Da der var et ønske om at arbejde med flere hardwareelementer end kun motoren, blev DC-motoren med rotationsbegrænsning valgt.
 
 \begin{figure}[H]
 	\centering
@@ -25,7 +29,7 @@ Motoren, som styrer platformen, skal kunne bevæge sig frit i intervallet, som e
 	\label{fig:opstillingADC}
 \end{figure}
 
-\noindent På figur \ref{fig:opstillingADC} ses opstillingen for rotationsbegrænsningen. På figuren ses at potententiometerets skaft er forbundet til motoren, som roterer når motoren bevæges. Potenitiometeret bliver forsynet med 5V og stel fra PSoC1 via den røde og sorte ledning. Ouputspændingen fra potentiometeret er forbundet til PSoC1 via den gule ledning.  \newline
+\noindent På figur \ref{fig:opstillingADC} ses opstillingen for rotationsbegrænsningen. På figuren ses, at potententiometerets skaft er forbundet til motoren, som roterer når motoren bevæges. Potenitiometeret bliver forsynet med 5V og stel fra PSoC1 via den røde og sorte ledning. Ouputspændingen fra potentiometeret er forbundet til PSoC1 via den gule ledning.  \newline
 
 Potentiometeret har til formål at styre motoren i det definerede interval. Det valgte potentiometer er lineær 47k\(\Omega\) potentiometer. Det vil sige at for hver ændring der sker i modstanden, vil der ske en proportional ændring i outputspændingen. Outputspændingen føres ind på et ben på PSoC'en som er forbundet til en intern AD converter, som er en Sequencing Successive Approximation ADC. Denne anvendes til at digitalisere det analoge signal fra potentiometeret.
 
@@ -59,10 +63,8 @@ Der er en forskel på cirka 1,515 mellem potentiometer og ADC. Så ADC er cirka 
 \\
 For at forstå hvordan ADC’en og potentiometeret fungerer henvises til dokumentationen.
 
-\
-
 \subsection{Affyringsmekanisme}
-Affyringsmekanismen er består af en motor; et motorstyringskredsløb; et detektorkredsløb, der skal detektere, at motoren kun kører en enkelt omgang, når der skydes; og en kanon, som er bygget op af noget mekanik og LEGO. 
+Affyringsmekanismen består af en motor; et motorstyringskredsløb; et detektorkredsløb, der skal detektere, at motoren kun kører en enkelt omgang, når der skydes; og en kanon, som er bygget op af noget mekanik og LEGO. 
 
 \subsubsection{Detektor}
 Når kanonen affyres, styres det af motoren, og som mekanikken er opbygget, er der et propertionelt forhold mellem omdrejning på motoren og antal skud, der affyres. Derfor er det væsentligt at vide, hvornår motoren har roteret en runde, så den kan stoppes, inden der igen skydes. Til det formål anvendes detektoren. Billedet på figur \ref{fig:detektor} illustrerer hvordan detektoren anvendes.
@@ -81,7 +83,7 @@ Båndpasfiltret er opbygget af et højpasfilter, et lavpasfilter og en operation
 
 For at gøre dette signal til et pænt firkantsignal, blev der lavet en envelopedetector, som er opbygget af en diode, en modstand og en kondensator. 
 
-Det signal, som kom fra PSoC'en var dog for lavt til at kunne blive opfattet som et højt signal. Grunden til dette var, at signalet lå på mellem 1,5V og 2V. Det ville give et for lille interval, hvor det kunne opfattes som højt, når referencespændingen på samme tid var hævet fra 0V til 0,5V. Derfor blev der indsat en operationsforstærker, som skulle forstærke dette signal ved hjælp af en ikke-inverterende forstærker. Dette kredsløb blev opbygget på baggrund af, at signalet skulle fordobles. Derfor blev der opstillet følgende ligning \ref{}: 
+Det signal, som kom fra PSoC'en var dog for lavt til at kunne blive opfattet som et højt signal. Grunden til dette var, at signalet lå på mellem 1,5V og 2V. Det ville give et for lille interval, hvor det kunne opfattes som højt, når referencespændingen på samme tid var hævet fra 0V til 0,5V. Derfor blev der indsat en operationsforstærker, som skulle forstærke dette signal ved hjælp af en ikke-inverterende forstærker. Dette kredsløb blev opbygget på baggrund af, at signalet skulle fordobles. Derfor blev der opstillet følgende ligning \ref{reference til Tores bog}: 
 
 \begin{equation} 
 	U_{O}=(1+\frac{R_{2}}{R_{1}})*U_{P}
