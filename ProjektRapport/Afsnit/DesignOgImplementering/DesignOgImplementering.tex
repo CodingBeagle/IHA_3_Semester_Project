@@ -1,10 +1,10 @@
 \chapter{Design og Implementering}
 
 \section{Hardware}
-I Goofy Candygun 3000 indgår forskellige hardware-dele, som skal udgøre det færdige system. Ud fra BDD'et ses det, at de to overordnede hardware-dele, der skal udvikles, er motorstyring til den vertikale og horisontale drejeretning, og en affyringsmekanisme. 
+I Goofy Candygun 3000 indgår forskellige hardwaredele, som skal udgøre det færdige system. Ud fra BDD'et ses det, at de to overordnede hardwaredele, der skal udvikles, er motorstyring til den vertikale og horisontale drejeretning, og en affyringsmekanisme. 
 
 \subsection{Motorstyring af drejeretning}
-For at kanonen kan sigte både vertikalt og horisontalt skal den kunne køre i begge disse retninger. Det afhjælpes ved at bruge to DC-motorer - en til hver retning. Men for at disse så kan køre både forlæns og baglæns skal der bruges en H-bro. For at sikre at motorerne ikke kan dreje 360 grader er der udviklet en rotationsbegrænsning, som gør at de kun kan dreje cirka 35 grader ud til hver side. 
+For at kanonen kan sigte både vertikalt og horisontalt, skal den kunne køre i begge disse retninger. Det afhjælpes ved at bruge to DC-motorer - en til hver retning. Men for at disse så kan køre både forlæns og baglæns, skal der bruges en H-bro. For at sikre at motorerne ikke kan dreje 360 grader, er der udviklet en rotationsbegrænsning, som gør, at de kun kan dreje cirka 35 grader ud til hver side. 
 
 \subsubsection{H-bro}
 %H-broen er bygget op af to identiske kredsløb - et til hver retning. Derfor beskrives kun den ene retning. Kredsløbet består af en N-MOSFET og en P-MOSFET. 
@@ -21,7 +21,7 @@ For at kanonen kan sigte både vertikalt og horisontalt skal den kunne køre i b
 \end{figure}
 
 \subsubsection{Rotationsbegrænsning}
-Motoren, som styrer platformen, skal kunne bevæge sig frit i intervallet, som er fastsat i kravspecifikationen \textbf{\#ref Reference til kravspecikation (ikke-funktionelle krav)}. For at begrænse denne bevægelse udenfor det fastsatte interval, anvendes der et potentiometer. Når motoren bevæger sig, ændres potentiometerets modstandsværdi og dermed ændres spændingsniveauet. Dermed kan positionen af motoren bestemmes ved at se på outputspændingen fra potentiometret. Et alternativ til denne løsning er, at der anvendes en stepper motor fremfor en DC-motor, der kan styres i små steps. Da der var et ønske om at arbejde med flere hardwareelementer end kun motoren, blev DC-motoren med rotationsbegrænsning valgt.
+Motoren, som styrer platformen, skal kunne bevæge sig frit i intervallet, som er fastsat i kravspecifikationen \textbf{\#ref Reference til kravspecikation (ikke-funktionelle krav)}. For at begrænse denne bevægelse udenfor det fastsatte interval, anvendes der et potentiometer. Når motoren bevæger sig, ændres potentiometerets modstandsværdi, og dermed ændres spændingsniveauet. Altså kan motorens position bestemmes ved at se på outputspændingen fra potentiometret. Et alternativ til denne løsning er, at der anvendes en steppermotor, der kan styres i små steps, fremfor en DC-motor. Da der var et ønske om at arbejde med flere hardwareelementer end kun motoren, blev DC-motoren med rotationsbegrænsning valgt.
 
 \begin{figure}[H]
 	\centering
@@ -30,11 +30,11 @@ Motoren, som styrer platformen, skal kunne bevæge sig frit i intervallet, som e
 	\label{fig:opstillingADC}
 \end{figure}
 
-\noindent På figur \ref{fig:opstillingADC} ses opstillingen for rotationsbegrænsningen. På figuren ses, at potententiometerets skaft er forbundet til motoren, som roterer når motoren bevæges. Potenitiometeret bliver forsynet med 5V og stel fra PSoC1 via den røde og sorte ledning. Ouputspændingen fra potentiometeret er forbundet til PSoC1 via den gule ledning.  \newline
+\noindent På figur \ref{fig:opstillingADC} ses opstillingen for rotationsbegrænsningen. På figuren ses, at potententiometerets skaft er forbundet til motoren, som roterer når motoren bevæges. Potentiometeret bliver forsynet med 5V og stel fra PSoC1 via den røde og sorte ledning. Ouputspændingen fra potentiometeret er forbundet til PSoC1 via den gule ledning.  \newline
 
-Potentiometeret har til formål at styre motoren i det definerede interval. Det valgte potentiometer er lineær 47k\(\Omega\) potentiometer. Det vil sige at for hver ændring der sker i modstanden, vil der ske en proportional ændring i outputspændingen. Outputspændingen føres ind på et ben på PSoC'en som er forbundet til en intern AD converter, som er en Sequencing Successive Approximation ADC. Denne anvendes til at digitalisere det analoge signal fra potentiometeret.
+Potentiometeret har til formål at styre motoren i det definerede interval. Det valgte potentiometer er et lineært 47k\(\Omega\) potentiometer. Det vil sige, at for hver ændring, der sker i modstanden, vil der ske en proportional ændring i outputspændingen. Outputspændingen føres ind på et ben på PSoC'en, som er forbundet til en intern AD-converter, som er en Sequencing Successive Approximation ADC. Denne anvendes til at digitalisere det analoge signal fra potentiometeret.
 
-En sequencing SAR ADC indeholder et sample-hold kredsløb og en comparator. Kredsløbet holder på et indgangssignal indtil det næste signal registres på kredsløbets indgang. Dermed har converteren tid til at bestemme resultatet af konverteringen. Comparatoren sammenligner inputsignalet med midscaleværdien. 
+En sequencing SAR ADC indeholder et sample-hold kredsløb og en comparator. Kredsløbet holder på et indgangssignal, indtil det næste signal registreres på kredsløbets indgang. Dermed har converteren tid til at bestemme resultatet af konverteringen. Comparatoren sammenligner inputsignalet med midscaleværdien. 
 
 \begin{figure}[H]
 	\centering
@@ -43,20 +43,17 @@ En sequencing SAR ADC indeholder et sample-hold kredsløb og en comparator. Kred
 	\label{fig:konvertering}
 \end{figure}
 
-På figur \ref{fig:konvertering}
-ADC'en indstillet til midscale og bruger dette punkt til sammenligning med inputsignalet.  
+På figur \ref{fig:konvertering} er ADC'en indstillet til midscale og bruger dette punkt til sammenligning med inputsignalet.  
 
-ADC’en består af et sample hold kreds. Det vil sige de på dataen end til der er fundet en værdi, så der går noget tid i mellem hver værdi, så der er søgeret for at der ikke bliver lavet over samples og der ikke bliver lavet aliasing af det signal som kommer ind i ADC’en. For at finde den værdi som bliver sendt ind i ADC'en, bliver der lavet en skala som bliver halvert alt efter hvor værdien ligger på skalaen, som vist på figur \ref{fig:pot}
+ADC’en består af et sampleholdkredsløb. Det vil sige, at den ser på dataene indtil der er fundet en værdi, så der går noget tid imellem hver værdi, så der er sørget for, at der ikke bliver lavet oversamples og der ikke bliver lavet aliasering af det signal, som kommer ind i ADC’en. For at finde den værdi, som bliver sendt ind i ADC'en, bliver der lavet en skala, som bliver halveret alt efter, hvor værdien ligger på skalaen, som vist på figur \ref{fig:pot}
 
-Der er blevet målt med en vinkel måler for at over holde kravene i kravspecifikationen\textbf{\#ref Reference til kravspecikation (ikke funktionelle krav)}. Hvor der blev fundet frem til en min og max hvor motoren må køre i mellem. \\
+Der er blevet målt med en vinkelmåler for at overholde kravene i kravspecifikationen\textbf{\#ref Reference til kravspecikation (ikke funktionelle krav)}. Hvor der blev fundet frem til en minimum- og maksimumværdi, hvor motoren må køre imellem. \\
 \\
 Min=915 mV\\
 \\
 Max = 2000mV\\
 \\
-Disse værdier er aflæst fra PSoC’en, da den har en ref spændingen på 3.3V vil den have lavere værdier end hvad der bliver sendt ud fra potentiometeret.
-
-
+Disse værdier er aflæst fra PSoC’en. Da den har en referencespænding på 3.3V vil den have lavere værdier, end hvad der bliver sendt ud fra potentiometeret.
 \begin{equation}
  \frac {5V} {3.3V}= 1.515
 \end{equation}
