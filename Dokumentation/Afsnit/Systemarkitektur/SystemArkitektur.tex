@@ -114,7 +114,11 @@ På tabel \ref{tabel:softwareAllocationDescription} er hvert allokeret software 
 		User Interface Software   & \begin{tabular}[c]{@{}l@{}}Dette allokerede software er brugergrænsefladen\\ som brugeren interagerer med på DevKit8000 touch-skærmen.\end{tabular}                                                  \\
 		\rowcolor[HTML]{CBCEFB} 
 		Nunchuck Polling Software & \begin{tabular}[c]{@{}l@{}}Dette allokerede software har til ansvar at polle\\ Nunchuck tilstanden og videresende det til\\ PSoC1.\end{tabular}                                                      \\
-		Motor Control Software    & \cellcolor[HTML]{FFFFFF}\begin{tabular}[c]{@{}l@{}}Dette allokerede software har til ansvar at\\ bruge den pollede Nunchuck data fra PSoC0\\ til motorstyring samt affyringsmekanismen.\end{tabular} \\ \hline
+		Motor Control Software    & \cellcolor[HTML]{FFFFFF}\begin{tabular}[c]{@{}l@{}}Dette allokerede software har til ansvar at\\ bruge den pollede Nunchuck data fra PSoC0\\ til motorstyring samt affyringsmekanismen.\end{tabular} 
+		\\ 
+		\rowcolor[HTML]{CBCEFB} 
+		Projectile Launcher Software & \begin{tabular}[c]{@{}l@{}}Dette allokerede software har til ansvar at aktivere\\ affyringsmekanismen når et \\ knaptryk detekteres på Nunchuck.\end{tabular} \\
+		\hline
 	\end{tabular}
 	\caption{Beskrivelse af den allokerede software}
 	\label{tabel:softwareAllocationDescription}
@@ -129,6 +133,75 @@ Følgende afsnit præsenterer applikationsmodeller relevante til Use Case 1 - Sp
 	\includegraphics[width=\textwidth]{Systemarkitektur/images/WiiNunchuckSequenceDiagram.png}
 	\caption{Overordnet sekvensdiagram for Wii-Nunchuck informations flow}
 	\label{fig:WiiNunchuckSequenceDiagram}
+\end{figure}
+
+\subsection{Applikationsmodel for Nunchuck Polling Software}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.8]{Systemarkitektur/images/klasseIdentificationUC1PSoC0}
+	\caption{Klasseidentifikation for PSoC0}
+	\label{fig:klasseidentifikationUC1PSoC0}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.8]{Systemarkitektur/images/UC1PSoC0SequenceDiagram}
+	\caption{Sekvensdiagram for PSoC0}
+	\label{fig:sekvensUC1PSoC0}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.8]{Systemarkitektur/images/klasseUC1PSoC0}
+	\caption{Klassediagram for PSoC0}
+	\label{fig:klasseUC1PSoC0}
+\end{figure}
+
+\subsection{Applikationsmodel for Motor Control Software}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.8]{Systemarkitektur/images/klasseIdentificationUC1PSoC1}
+	\caption{Klasseidentifikation for PSoC1}
+	\label{fig:klasseidentifikationUC1PSoC1}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.8]{Systemarkitektur/images/UC1PSoC1SequenceDiagram}
+	\caption{Sekvensdiagram for PSoC1}
+	\label{fig:sekvensUC1PSoC1}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.8]{Systemarkitektur/images/klasseUC1PSoC1}
+	\caption{Klassediagram for PSoC1}
+	\label{fig:klasseUC1PSoC1}
+\end{figure}
+
+\subsection{Applikationsmodel for Projectile Launcher Software}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.8]{Systemarkitektur/images/klasseIdentificationUC1PSoC2}
+	\caption{Klasseidentifikation for PSoC2}
+	\label{fig:klasseidentifikationUC1PSoC2}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.8]{Systemarkitektur/images/UC1PSoC2SequenceDiagram}
+	\caption{Sekvensdiagram for PSoC2}
+	\label{fig:sekvensUC1PSoC2}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.8]{Systemarkitektur/images/klasseUC1PSoC2}
+	\caption{Klassediagram for PSoC2}
+	\label{fig:klasseUC1PSoC2}
 \end{figure}
 
 \newpage
@@ -250,6 +323,32 @@ På figur \ref{fig:sekvensPSoC1I2CTest} ses, at boundaryklassen, PSoC0, anmoder 
 \end{figure}
 
 Fra sekvensdiagrammet på figur \ref{fig:sekvensPSoC1I2CTest} udledes et klassediagram som ses foroven i figur \ref{fig:klassePSoC1}.
+
+\section{Samlede Klassediagrammer}
+
+\subsection{PSoC0}
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\textwidth]{Systemarkitektur/images/classOverviewPSoC0}
+	\caption{Klassediagram for PSoC0}
+	\label{fig:OverallKlassePSoC0}
+\end{figure}
+
+\subsection{PSoC1}
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\textwidth]{Systemarkitektur/images/classOverviewPSoC1}
+	\caption{Klassediagram for PSoC01}
+	\label{fig:OverallKlassePSoC1}
+\end{figure}
+
+\subsection{PSoC2}
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\textwidth]{Systemarkitektur/images/classOverviewPSoC2}
+	\caption{Klassediagram for PSoC2}
+	\label{fig:OverallKlassePSoC2}
+\end{figure}
 
 \section{Kommunikationsprotokoller}
 \label{afsnit:kommunikationsprotokoller}
