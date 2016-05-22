@@ -65,19 +65,21 @@ For at forstå hvordan ADC’en og potentiometeret fungerer henvises til dokumen
 Affyringsmekanismen er består af en motor; et motorstyringskredsløb; et detektorkredsløb, der skal detektere, at motoren kun kører en enkelt omgang, når der skydes; og en kanon, som er bygget op af noget mekanik og LEGO. 
 
 \subsubsection{Detektor}
-Når kanonen affyres, styres det af motoren, og som mekanikken er opbygget, er der et propertionalt forhold mellem omdrejning på motoren og antal skud, der affyres. Derfor er det væsentligt at vide, hvornår motoren har roteret en runde, så den kan stoppes, inden der igen skydes. Til det formål anvendes detektoren. Illustrationen på figur \ref{fig:detektor} illustrerer hvordan detektoren anvendes.
+Når kanonen affyres, styres det af motoren, og som mekanikken er opbygget, er der et propertionelt forhold mellem omdrejning på motoren og antal skud, der affyres. Derfor er det væsentligt at vide, hvornår motoren har roteret en runde, så den kan stoppes, inden der igen skydes. Til det formål anvendes detektoren. Billedet på figur \ref{fig:detektor} illustrerer hvordan detektoren anvendes.
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[scale=0.75]{Afsnit/DesignOgImplementering/images/Photodiode}
-	\caption{illutration til forklaring af detektorens anvendelse}
+	\includegraphics[width=\textwidth]{Afsnit/DesignOgImplementering/images/detektor}
+	\caption{Detektorens placering på affyringsmekanismen}
 	\label{fig:detektor}
 \end{figure}
 
-Den røde LED og fotodioden anbringes på affyringsmekanismen, som det ses på figur \ref{fig:detektor}. De vender ind mod hinanden, men er adskilt af papskiven med hakker i. Papskiven er forbundet til motorens rotation og kan Detektoren fungerer så ved, at idet fotodioden modtager et lyssignal fra LED'en, skal den sende et signal om at motoren skal stoppes. Detektoren monteres på  
-Det vil sige, at det er vigtigt, at det kun er lyset fra LED'en fotodioden kan se. Dette sikres ved at sætte LED'en til at lyse med en frekvens på 10 kHz og lave et båndpasfilter, som kun lader disse frekvenser opfanges i fotodioden. 
+Den røde LED og fotodioden anbringes på affyringsmekanismen, som det ses på figur \ref{fig:detektor}. De vender ind mod hinanden, men er adskilt af papskiven. Papskiven er forbundet til motorens rotation, og hver gang et af papskivens hakker roterer forbi dioderne, kan de se hinanden. Fotodioden sender derefter et signal, som kan bruges til at stoppe motoren. Hvert hak passer med, at der er blevet affyret et skud.  
+Detektoren skal kun sende et signal, når fotodioden ser lyset fra LED'en. Det er derfor vigtigt, at den ikke bliver forstyrret af dagslys og andre lyskilder. For at sikre dette, styres den røde LED af et PWM-signal, så LED'en blinker med en frekvens på 10 kHz. Detektoren opbygges tilsvarende af et båndpasfilter, med en centerfrekvens på 10 kHz, som sorterer andre frekvensområder og DC-signaler fra. 
 
-Dette båndpasfilter er opbygget af et højpasfilter og et lavpasfilter. Til at sende signal om, at motoren skal køre bruges, at når fotodioden kan se LED'en skal den sende et højt signal ud. Her bruges PSoC'ens operationsforstærker. For at gøre dette signal til et pænt firkantsignal, blev der lavet en envelopedetector, som er opbygget af en diode, en modstand og en kondensator. 
+Båndpasfiltret er opbygget af et højpasfilter, et lavpasfilter og en operationsforstærker. Da PSoC'en har en indbygget operationsforstærker, anvendes denne. Af hensyn til operationsforstærkeren, er der valgt en referencespænding på 0,5 V på den positive indgang. Det er opnået ved en spændingsdeler, for hvilken beregningen kan ses i dokumentationen !!!!. Der er negativ feedback på operationsforstærkeren, hvilket sikrer, at der opretholdes samme spænding, 0,5 V, på begge indgange i operationsforstærkeren.
+
+For at gøre dette signal til et pænt firkantsignal, blev der lavet en envelopedetector, som er opbygget af en diode, en modstand og en kondensator. 
 
 Det signal, som kom fra PSoC'en var dog for lavt til at kunne blive opfattet som et højt signal. Grunden til dette var, at signalet lå på mellem 1,5V og 2V. Det ville give et for lille interval, hvor det kunne opfattes som højt, når referencespændingen på samme tid var hævet fra 0V til 0,5V. Derfor blev der indsat en operationsforstærker, som skulle forstærke dette signal ved hjælp af en ikke-inverterende forstærker. Dette kredsløb blev opbygget på baggrund af, at signalet skulle fordobles. Derfor blev der opstillet følgende ligning \ref{}: 
 
