@@ -330,23 +330,22 @@ Platformen, som styres af motoren, må ikke kunne rotere 360 \(\deg\). Dette ses
 	\label{fig:opstillingADC}
 \end{figure}
 
-Den første del af rotationsbegrænsningen er et potentiometer, som fungerer efter spændingsdelerprincippet, som vist på figur \ref{fig:potentiometer2}.
+\noindent \textbf{Potentiometer} \newline
+\noindent Den første del af rotationsbegrænsningen er et potentiometer, som fungerer efter spændingsdelerprincippet, som vist på figur \ref{fig:potentiometer2}.
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=\textwidth]{DesignOgImplementering/images/potentiometer}
+	\includegraphics[scale=0.65]{DesignOgImplementering/images/potentiometer}
 	\caption{Spændingsdeler formlen for potentiometeret}
 	\label{fig:potentiometer2}
 	
 \end{figure}
-I potentiometeret findes en roterende kontakt, der danner en justerbar spændingsdeler. Når skaftet på potentiometret roteres ændres modstanden i de to variable modstande, \(\ R_{1}\) og  \(\ R_{2}\). På figur \ref{fig:potentiometer2} ses at
- Hvor man se Rtop og Rbottom, som en modstand, men den bliver delt af midter strengen, som fortæller hvor modstanden skal deles henne og som man kan se på formlen ved side af, der ved kan man regne ud hvad  output spændingen fra potentiometret er.\\
-Det potentiometer som bliver brugt i dette projekt er et 47Kohm, som er linæret, som vil sige at spændingen stiger proportionalt med modstanden. 
-Derved kan man finde to værdier som motor ikke må komme over/under, som også holder sig inde for de krav som blev fast sat i kravspecifikationen \textbf{\#ref Reference til kravspecikation (ikke funktionelle krav)}. Så hvis de komme over/under en af værdierne, så må motoren ikke mere køre til den pågældende retning. Disse to værdier som blev fundet, er fundet ved hjælp af en vinkelmåler.
- 
 
-\subsubsection{ADC}
-For at kunne aflæse spændingen på potentiometeret, anvendes en AD converter af typen Sequencing Successive Approximation ADC. En sequencing SAR ADC indeholder et sample-hold kredsløb. Kredsløbet holder på et indgangssignal indtil det næste signal registres på kredsløbets indgang. Dermed har converteren tid til at bestemme outputværdien. ADC'en er indstillet til midscale og bruger dette punkt til sammenligning med inputsignalet. Hvis signalet er højere end midscale bliver et bit sat til 1 og hvis den er lavere bliver bittet sat til 0. Disse bit bliver gemt i et register. Herefter sættes midpunktet man nu midten i mellem midscale og den øvre halvdel eller nedre halvdel af skalaen og sådan bliver man ved end til alle bit er blevet sat. Så tjekker man registeret for at læse hvilket tal som er fundet, ved at læse fra MSB(most significant bit) til LSB(least significant bit) og det er tal som man har sat på indgangen. På figuren\ref{fig:ADC1} kan man få et bedre overblik over hvordan ADC funger. 
+\noindent Det anvendte potentiometer har en størrelse på 47\(\ K\Omega\). Denne er lineær. Det vil sige at spændingen stiger proportionalt med modstanden. I potentiometeret findes en roterende kontakt, der danner en justerbar spændingsdeler. Når skaftet på potentiometret roteres ændres modstanden i de to variable modstande, \(\ R_{1}\) og  \(\ R_{2}\). På figur \ref{fig:potentiometer2} ses en konceptuel afbildning af de variable modstande i potentiometret, hvor der ses at udgangsspændingen er spændingen over \(\ R_{1}\). \newline
+
+\noindent \textbf{ADC} \newline
+For at kunne aflæse spændingen på potentiometeret, anvendes en 12-bit AD converter af typen Sequencing Successive Approximation ADC. En sequencing SAR ADC indeholder et sample-hold kredsløb. Kredsløbet holder på et indgangssignal indtil det næste signal registres på kredsløbets indgang. Dermed har converteren tid til at bestemme outputværdien. \newline \newline
+\noindent ADC'en fungerer ved at midscale indstilles til halvdelen af referencespændingen. Inputsignalet sammenlignes med midscale, hvis inputsignalet er højere end midscaleværdien sættes MSB 1 og hvis signalet er lavere bliver denne sat til 0. Herefter bliver midscale værdien rekursivt sat til havdelen af intervallet, som inputsignalet ligger indenfor, og bittene ned til LSB bliver sat. Bittene der sættes, bliver gemt i et register. Når konverteringen er gennemført, kan værdien af inputsignalet aflæses i dette register. 
 
 \begin{figure}[H]
 	\centering
@@ -356,9 +355,7 @@ For at kunne aflæse spændingen på potentiometeret, anvendes en AD converter a
 	
 \end{figure}
 
-Det vil sige at jo flere bit man har jo mere præcise bliver det også, men man kan godt risiker at man er 1LSB over/under det resultat man skal have, men for dette projekt gør det ikke noget om man 1 LSB over/under.\\
-Der skal også tages forbehold for at der en forskel på hvad potentiometeret sender ud og hvad ADC'en modtager, for ADC'en kan kun modtage op til ca. 3.3V og potentiometeret kan sende ca. 5V ud. 
-\begin{equation}
-\frac {5V} {3.3V}= 1.515
-\end{equation}
-Så der er en forskel på ca. 1.515   mellem potentiometer og ADC. Så ADC er ca. 1,515 mindre end hvad potentiometer sender ud.
+På figur \ref{fig:ADC1} ses et eksempel over de første fem trin i en konvertering. Til dette projekt arbejdes der med en 12-bit AD converter, dermed ville denne konvertering forsætte 12 trin ned.  \newline
+
+\textbf{PSoC Indstillinger}
+For at håndtere begrænsningen for rotationen
