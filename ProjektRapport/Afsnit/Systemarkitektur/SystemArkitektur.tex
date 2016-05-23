@@ -154,9 +154,13 @@ Use Case 2 beskriver test af systemet før spillet startes. På figur \ref{fig:S
 \end{figure}
 
 \subsection{Samlede Klassediagrammer}
-På baggrund af sekvensdiagrammerne i afsnit \ref{afsnit:informationFlow} samt de detaljerede applikationsmodeller analyseret i DOKUMENTATION \textbf{\#ref}, er der udledt samlede klassediagrammer for hver individuel CPU i systemet. Disse er med til at identificere potentielle klasser og funktionaliter der skal overvejes i implementation og design af systemet, og har altså fungeret som et udgangspunkt til resten af udviklingsprocessen.
+På baggrund af sekvensdiagrammerne i afsnit \ref{afsnit:informationFlow} samt de detaljerede applikationsmodeller analyseret i DOKUMENTATION \textbf{\#ref}, er der udledt samlede klassediagrammer for hver individuel CPU i systemet. Disse er med til at identificere konceptuelle klasser og funktionaliter der skal overvejes i implementation og design af systemet, og har altså fungeret som et udgangspunkt til resten af udviklingsprocessen.
 
-På figur \ref{fig:CompleteClassDiagramDevKit8000} ses det samlede klassediagram for DevKit8000. Her er der identificeret 3 konceptuelle klasser. \textit{DevKit8000 Controller} har ansvar for at køre den primære logik for systemets Use Cases, og for at kunne gøre dette er der brug for at kommunikere med \textit{Graphical User Interface} (GUI), samt et \textit{SPI Interface}.
+På figur \ref{fig:CompleteClassDiagramDevKit8000}, \ref{fig:CompleteClassDiagramPSoC0}, \ref{fig:CompleteClassDiagramPSoC1}, og \ref{fig:CompleteClassDiagramPSoC2} ses de samlede klassediagrammer for hver CPU.
+
+For disse klassediagrammer er der konceptuelle klasser som gentager sig selv. Alle klassediagrammer har én klasse af typen \textit{controller}. Disse klasse indeholder alt funktionalitet der er nødvændig for at kunne implementere systemets Use Cases. Yderligere bliver klasserne \textit{I2C Interface} samt \textit{SPI Interface} gentaget. Disse repræsenterer klasser for de tilsvarende bustyper, I2C og SPI, og bruges af softwaren til at sende og modtage data på disse busser.
+
+På figur \ref{fig:CompleteClassDiagramDevKit8000} ses det at DevKit8000 controlleren skal have funktionalitet til start af system test, i relation til Use Case 2. For at kunne udføre dette kommunikerer den med grænsefladen Graphical User Interface (\textit{GUI}), for at kunne vise resultater til brugeren. Desuden skal controlleren kommunikere med grænsefladen \textit{SPI Interface}, for at sende data ud til til resten af systemet via SPI bussen.
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=\textwidth] {Systemarkitektur/images/CompleteClassDiagramDevKit8000}
@@ -164,7 +168,7 @@ På figur \ref{fig:CompleteClassDiagramDevKit8000} ses det samlede klassediagram
 	\label{fig:CompleteClassDiagramDevKit8000}
 \end{figure}
 
-På figur \ref{fig:CompleteClassDiagramPSoC0} ses det samlede klassediagram for PSoC0. Her er der identificeret 3 konceptuelle klasser. \textit{PSoC0 Controller} har til ansvar at eksekvere den primære logik for systemets Use Cases. For at kunne gøre dette er der brug for at kommunikere med et \textit{I2C Interface} samt et \textit{SPI Interface}.
+På figur \ref{fig:CompleteClassDiagramPSoC0} ses det at PSoC0 controlleren skal have funktionalitet til at starte tests af systemets busser. Yderligere skal den også kunne dekode og kalibrere data der kommer fra Nunchuck. I relation til disse funktionaliteter skal den kunne modtage og sende data på systemets I2C og SPI busser.
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=\textwidth] {Systemarkitektur/images/CompleteClassDiagramPSoC0}
@@ -172,6 +176,7 @@ På figur \ref{fig:CompleteClassDiagramPSoC0} ses det samlede klassediagram for 
 	\label{fig:CompleteClassDiagramPSoC0}
 \end{figure}
 
+På figur \ref{fig:CompleteClassDiagramPSoC1} ses det at PSoC1 controlleren kommunikerer med grænsefladerne \textit{I2C Interface}, \textit{Motor Control} samt \textit{PSoC2}. Controlleren skal kunne regulere fart på systemets motorstyring, for at kunne styre kanonen. Desuden skal den kunne sende en affyringsbesked til \textit{PSoC2}. For at regulere fart og affyre kanonen, skal controlleren kunne aflæse Nunchucken's tilstand fra \textit{I2C Interface}.
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=\textwidth] {Systemarkitektur/images/CompleteClassDiagramPSoC1}
@@ -179,6 +184,7 @@ På figur \ref{fig:CompleteClassDiagramPSoC0} ses det samlede klassediagram for 
 	\label{fig:CompleteClassDiagramPSoC1}
 \end{figure}
 
+På figur \ref{fig:CompleteClassDiagramPSoC2} ses det at PSoC2 skal have funktionalitet til at aktivere afskydning, som gøres ved at kommunikere med grænsefladen \textit{Projectile Launcher}. Afskydningen aktiveres af grænsefladen \textit{PSoC1}.
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=\textwidth] {Systemarkitektur/images/CompleteClassDiagramPSoC2}
