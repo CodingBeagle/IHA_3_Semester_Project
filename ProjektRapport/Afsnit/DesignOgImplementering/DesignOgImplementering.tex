@@ -18,7 +18,20 @@ H-broen er en del af ”motorControl” blokken, hvor den har til opgave at styr
 		\label{fig:hbro}
 	%\end{adjustwidth}
 \end{figure}
-
+\begin{table}[H]
+	\centering
+	\begin{tabular}{|l|l|l}
+		\cline{1-2}
+		\textbf{Betegnelse} & \textbf{Komponent}  	    &  \\ \cline{1-2}
+		Q1   				& IRLZ44(mosfet N-kanal)  &  \\ \cline{1-2}
+		Q4   				& IRLZ44(MOSFET N-kanal)	&  \\ \cline{1-2}
+		Q5   				& BC547                     &  \\ \cline{1-2}
+		Q6   				& BC557                     &  \\ \cline{1-2}
+		Q9   				& IRF9Z34N(MOSFET P-kanal)	&  \\ \cline{1-2}
+	\end{tabular}
+	\caption{Komponentbetegnelser på H-bro}
+	\label{hbrotabel}
+\end{table}
 For at få motoren til for eksempel at køre til højre, skal P mosfet og N mosfet åbnes. For at N mosfet’en skal åbne, skal der et positiv spændingen til. Imens for at P mosfet’en kan åbne, skal den have en negativ spænding på gatebenet for at kunne åbne. For at løse dette blev der sat en N mosfet, foran hver af P mosfet, for at trække spændingen ned, så P mosfet’ene kan åbne. \\
 
 Da der ønskes at kunne skifte motorens retning hurtigt og ofte, var det nødvendigt at indsætte en transistor foran hver P-MOSFET
