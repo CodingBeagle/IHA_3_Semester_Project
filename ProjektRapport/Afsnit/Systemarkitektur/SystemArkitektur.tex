@@ -129,35 +129,6 @@ På tabel \ref{tabel:softwareAllocationDescription} er hvert allokeret software 
 	\label{tabel:softwareAllocationDescription}
 \end{table}
 
-På figurerne: \ref{fig:UserInterfaceAllocationClasses}, \ref{fig:NunchuckPollingAllocationClasses}, \ref{fig:MotorControlAllocationClasses} ses et overblik over konceptuelle klasser der repræsenterer ansvarsområder de primære softwaredele får. For en beskrivelse af design og implementering af disse primære softwaredele henvises til \textbf{DESIGN OG IMPLEMENTERING \#ref}.
-
-På figur \ref{fig:UserInterfaceAllocationClasses} ses det at \textit{User Interface Software}, allokeret på DevKit 8000, har ansvar for brugergrænsefladen samt en SPI Driver til kommunikation med PSoC0. 
-
-\begin{figure}[H]
-	\centering
-	\includegraphics[width=0.4\textwidth]{SystemArkitektur/images/UserInterfaceAllocationClasses.PNG}
-	\caption{Systemets software allokeringer}
-	\label{fig:UserInterfaceAllocationClasses}
-\end{figure}
-
-På figur \ref{fig:NunchuckPollingAllocationClasses} ses det at \textit{Nunchuck Polling Software}, allokeret på PSoC0, har ansvar for en I2C Driver, SPI Driver, samt en Nunchuck API. I2C Driveren skal bruges til kommunikation med den fysiske Nunchuck controller samt PSoC1. SPI Driveren skal bruges til kommunikation med DevKit 8000. Nunchuck API'en bruges for at tilgå data'en fra den fysiske Nunchuck controller.
-
-\begin{figure}[H]
-	\centering
-	\includegraphics[width=0.4\textwidth]{SystemArkitektur/images/NunchukPollingAllocationClasses.PNG}
-	\caption{Systemets software allokeringer}
-	\label{fig:NunchuckPollingAllocationClasses}
-\end{figure}
-
-På figur \ref{fig:MotorControlAllocationClasses} ses det at \textit{Motor Control Software}, allokeret på PSoC1, har ansvar for en I2C Driver til kommunikation med PSoC0, samt en Motor Driver til motorstyring.
-
-\begin{figure}[H]
-	\centering
-	\includegraphics[width=0.4\textwidth]{SystemArkitektur/images/MotorControlAllocationClasses.PNG}
-	\caption{Systemets software allokeringer}
-	\label{fig:MotorControlAllocationClasses}
-\end{figure}
-
 \subsection{Informationsflow i systemet}
 \label{afsnit:informationFlow}
 Dette afsnit har til formål at demonstrere sammenhængen mellem softwaren på CPU'erne og resten af systemet, samt at beskrive og identificere grænsefladerne brugt til kommunikation mellem dem. Yderligere vil klasseidentifikation også blive vist, hvor disse klasser vil specificeres i Design og Implementering.
