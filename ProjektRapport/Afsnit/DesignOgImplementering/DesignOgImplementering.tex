@@ -7,20 +7,41 @@ I Goofy Candygun 3000 indgår forskellige hardwaredele, som skal udgøre det fæ
 For at kanonen kan sigte både vertikalt og horisontalt, skal den kunne køre i begge disse retninger. Det afhjælpes ved at bruge to DC-motorer - en til hver retning. Men for at disse så kan køre både forlæns og baglæns, skal der bruges en H-bro. For at sikre at motorerne ikke kan dreje 360 grader, er der udviklet en rotationsbegrænsning, som gør, at de kun kan dreje cirka 35 grader ud til hver side. 
 
 \subsubsection{H-bro}
-For at få mulighed for, at motoren kan køre både frem og bakke, skal der bruges en H-bro. I stedet for at bruge en færdig driver er der valgt at udvikle en selv. På figur \ref{fig:hbro} ses kredsløbsdiagrammet for H-broen. 
-
-H-broen er bygget op af to identiske kredsløb - et til hver retning. Derfor beskrives kun den ene retning. Kredsløbet består grundlæggende af en N-MOSFET og en P-MOSFET. Når der sendes 5V ind på gate-benet til de to MOSFET's løber der en strøm gennem dem. Det betyder, at der bliver åbnet for, at motoren kan køre. I dette tilfælde skal motoren køre ved hjælp af et PWM-signal, så det betyder, at de to MOSFET's vil stå og åbne og lukke så lang tid, dette signal sendes ind. Det betyder også, at det er muligt, at styre motorens hastighed ved hjælp af PWM-signalets dutycycle. 
-
-For at gøre det muligt, at motoren kan skifte retning hurtigt er der indsat to transistorer. Inden disse blev sat ind, blev P-MOSFET'en opladet hurtigt men afladet meget langsomt. For at få den til at aflade hurtigt
+For at få mulighed for, at motoren både kan køre frem og bakke, skal der bruges en H-bro. I stedet for at bruge en færdig driver er der valgt at udvikle en selv. På figur \ref{fig:hbro} ses kredsløbsdiagrammet for H-broen. 
 
 \begin{figure}[H]
 	\begin{adjustwidth}{-3cm}{-\rightmargin}
-	\centering
-	\includegraphics[width=0.9\paperwidth]{Afsnit/DesignOgImplementering/images/H-bro}
-	\caption{Diagram af H-bro}
-	\label{fig:hbro}
+		\centering
+		\includegraphics[width=0.9\paperwidth]{Afsnit/DesignOgImplementering/images/H-bro}
+		\caption{Diagram af H-bro}
+		\label{fig:hbro}
 	\end{adjustwidth}
 \end{figure}
+
+\begin{table}[H]
+	\centering
+	\begin{tabular}{|l|l|l}
+		\cline{1-2}
+		\textbf{Betegnelse} & \textbf{Komponent}  	    &  \\ \cline{1-2}
+		VCC        			& 5V                        &  \\ \cline{1-2}
+		Q1   				& IRLZ44(mosfet N-Channel)  &  \\ \cline{1-2}
+		Q2   				& IRLZ44(MOSFET N-kanal)	&  \\ \cline{1-2}
+		Q3   				& IRLZ44(MOSFET N-kanal)	&  \\ \cline{1-2}
+		Q4   				& IRLZ44(MOSFET N-kanal)	&  \\ \cline{1-2}
+		Q5   				& BC547                     &  \\ \cline{1-2}
+		Q6   				& BC557                     &  \\ \cline{1-2}
+		Q7   				& BC547                     &  \\ \cline{1-2}
+		Q8   				& BC557                     &  \\ \cline{1-2}
+		Q9   				& IRF9Z34N(MOSFET P-kanal)	&  \\ \cline{1-2}
+		Q10  				& IRF9Z34N(MOSFET P-kanal) 	&  \\ \cline{1-2}
+	\end{tabular}
+	\caption{Komponentbetegnelser på H-bro}
+	\label{hbrotabel}
+\end{table}
+
+H-broen er bygget op af to identiske kredsløb - et til hver retning. Derfor beskrives kun den ene retning. Kredsløbet består grundlæggende af en N-MOSFET og en P-MOSFET. Når der sendes 5V ind på gate-benet til de to MOSFET's løber der en strøm gennem dem. Det betyder, at der bliver åbnet for, at motoren kan køre. I dette tilfælde skal motoren køre ved hjælp af et PWM-signal, så det betyder, at de to MOSFET's vil stå og åbne og lukke så lang tid, dette signal sendes ind. Det betyder også, at det er muligt, at styre motorens hastighed ved hjælp af PWM-signalets dutycycle. 
+
+For at gøre det muligt, at motoren kan skifte retning hurtigt er der indsat to transistorer. Inden disse blev sat ind, blev P-MOSFET'en (Q9) opladet hurtigt men afladet meget langsomt. For at få den til at aflade hurtigt blev Q5 indsat. Det gjorde, at N-MOSFET'en (Q4) blev langsom til at oplade, så derfor blev Q6 sat ind. 
 
 \subsubsection{Rotationsbegrænsning}
 Motoren, som styrer platformen, skal kunne bevæge sig frit i intervallet, som er fastsat i kravspecifikationen \textbf{\#ref Reference til kravspecikation (ikke-funktionelle krav)}. For at begrænse denne bevægelse udenfor det fastsatte interval, anvendes der et potentiometer. Når motoren bevæger sig, ændres potentiometerets modstandsværdi, og dermed ændres spændingsniveauet. Altså kan motorens position bestemmes ved at se på outputspændingen fra potentiometret. Et alternativ til denne løsning er, at der anvendes en steppermotor, der kan styres i små steps, fremfor en DC-motor. Da der var et ønske om at arbejde med flere hardwareelementer end kun motoren, blev DC-motoren med rotationsbegrænsning valgt.
