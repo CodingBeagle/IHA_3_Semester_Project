@@ -7,40 +7,43 @@ I Goofy Candygun 3000 indgår forskellige hardwaredele, som skal udgøre det fæ
 For at kanonen kan sigte både vertikalt og horisontalt, skal den kunne køre i begge disse retninger. Det afhjælpes ved at bruge to DC-motorer - en til hver retning. Men for at disse så kan køre både forlæns og baglæns, skal der bruges en H-bro. For at sikre at motorerne ikke kan dreje 360 grader, er der udviklet en rotationsbegrænsning, som gør, at de kun kan dreje cirka 35 grader ud til hver side. 
 
 \subsubsection{H-bro}
-For at få mulighed for, at motoren både kan køre frem og bakke, skal der bruges en H-bro. I stedet for at bruge en færdig driver er der valgt at udvikle en selv. På figur \ref{fig:hbro} ses kredsløbsdiagrammet for H-broen. 
-
+H-broen er en del af ”motorControl” blokken, hvor den har til opgave at styre motoren, så den både kan køre til højre og venstre. Der blev valgt i denne projekt at bygge en h-broen op fra bunden selv. Selvom man kunne få en komponeret som indholdet en h-bro, som man sagtes kunne bruges, men den blev valgt fra, for selv at få en bedre ide om hvordan h-broen er bygget op og hvordan den funger.  
 \begin{figure}[H]
 	\begin{adjustwidth}{-3cm}{-\rightmargin}
 		\centering
-		\includegraphics[width=0.9\paperwidth]{Afsnit/DesignOgImplementering/images/H-bro}
-		\caption{Diagram af H-bro}
+		\includegraphics[width=0.4\paperwidth]{Afsnit/DesignOgImplementering/images/hbro}
+		\caption{færdig H-bro}
 		\label{fig:hbro}
 	\end{adjustwidth}
 \end{figure}
 
-I tabel \ref{hbrotabel} ses en oversigt over komponentværdier. En fyldestgørende oversigt over disse kan ses i \#ref{dokumentation hbro}. 
 
-\begin{table}[H]
-	\centering
-	\begin{tabular}{|l|l|l}
-		\cline{1-2}
-		\textbf{Betegnelse} & \textbf{Komponent}  	    &  \\ \cline{1-2}
-		Q1   				& IRLZ44(mosfet N-Channel)  &  \\ \cline{1-2}
-		Q4   				& IRLZ44(MOSFET N-kanal)	&  \\ \cline{1-2}
-		Q5   				& BC547                     &  \\ \cline{1-2}
-		Q6   				& BC557                     &  \\ \cline{1-2}
-		Q9   				& IRF9Z34N(MOSFET P-kanal)	&  \\ \cline{1-2}
-	\end{tabular}
-	\caption{Komponentbetegnelser på H-bro}
-	\label{hbrotabel}
-\end{table}
+For at få motoren til fx at køre til højre, skal P mosfet og N mosfet åbnes. For at N mosfet’en skal åbne, skal der et positiv spændingen til. Imens for at P mosfet’en kan åbne, skal den have en negativ spænding på gatebenet for at kunne åbne. For at løse dette blev der sat en N mosfet, foran hver af P mosfet, for at trække spændingen ned, så P mosfet’ene kan åbne. \\
 
-H-broen er bygget op af to identiske kredsløb - et til hver retning. Derfor beskrives kun den ene retning. Kredsløbet består grundlæggende af en N-MOSFET og en P-MOSFET. Når der sendes 5V ind på gate-benet til de to MOSFET's løber der en strøm gennem dem. Det betyder, at der bliver åbnet for, at motoren kan køre. I dette tilfælde skal motoren køre ved hjælp af et PWM-signal, så det betyder, at de to MOSFET's vil stå og åbne og lukke så lang tid, dette signal sendes ind. Det betyder også, at det er muligt, at styre motorens hastighed ved hjælp af PWM-signalets dutycycle. 
+Da der i dette projekt ønskes at skifte retning ofte, blev der sat foran hver P mosfet, to transistorer, for at hurtig at kunne aflade og oplade mosfet’ene, på grund af kondensator effekt i mellem benene ville det tag længere tid at åbne og lukke for mosfet’en, så derfor blev det valgt at sætte transistorer ind. Selvom der findes en komponent (IRF2101), som kan hjælpe med dette, men der blev valgt at bruge transistorer, for at få en bedre ide om hvordan det hele funger. Som man kan se på figur\ref{fig:mof} viser hvordan det så ud før at transistorer var sat ind. På figur \ref{fig:moe} viser det  hvordan det ser ud efter at transistorerne er sat ind. Så det gør som forvente at mosfet’ene åbne og lukker hurtigere. \\
+\begin{figure}[H]
+	\begin{adjustwidth}{-3cm}{-\rightmargin}
+		\centering
+		\includegraphics[width=0.3\paperwidth]{Afsnit/DesignOgImplementering/images/mof}
+		\caption{før transistorer blev sat ind}
+		\label{fig:mof}
+	\end{adjustwidth}
+\end{figure}
 
-For at gøre det muligt, at motoren kan skifte retning hurtigt er der indsat to transistorer. Inden disse blev sat ind, blev P-MOSFET'en (Q9) opladet hurtigt men afladet meget langsomt. For at få den til at aflade hurtigt blev Q5 indsat. Det gjorde, at N-MOSFET'en (Q4) blev langsom til at oplade, så derfor blev Q6 sat ind. 
+\begin{figure}[H]
+	\begin{adjustwidth}{-3cm}{-\rightmargin}
+		\centering
+		\includegraphics[width=0.3\paperwidth]{Afsnit/DesignOgImplementering/images/moe}
+		\caption{efter transistorer blev sat ind}
+		\label{fig:moe}
+	\end{adjustwidth}
+\end{figure}
+Der er også blevet sat diode fire ind i kredsløbet, de fire dioder skal fungere som beskyttelse af mosfet’ene, Det, de gør, er, at de sikrer, at den spænding, som er tilbage i motoren, når man lukker for mosfetene, ikke løber tilbage ind i mosfetene og brænder dem af.
+\\
+Resten af komponenterne bliver beskrevet over i dokumentationen ref.
 
 \subsubsection{Rotationsbegrænsning}
-Platformen, som styres af motoren, må ikke kunne rotere 360 \(\deg\). Dette ses kravspecifikationen \textbf{\#ref Reference til kravspecikation (ikke-funktionelle krav)}. For at begrænse motorens bevægelse, anvendes der et potentiometer. Når motoren bevæger sig, ændres potentiometerets modstandsværdi, og dermed ændres spændingsniveauet. Altså kan motorens position bestemmes ved at se på outputspændingen fra potentiometret. 
+Motoren, som styrer platformen, skal kunne bevæge sig frit i intervallet, som er fastsat i kravspecifikationen \textbf{\#ref Reference til kravspecikation (ikke-funktionelle krav)}. For at begrænse denne bevægelse udenfor det fastsatte interval, anvendes der et potentiometer. Når motoren bevæger sig, ændres potentiometerets modstandsværdi, og dermed ændres spændingsniveauet. Altså kan motorens position bestemmes ved at se på outputspændingen fra potentiometret. Et alternativ til denne løsning er, at der anvendes en steppermotor, der kan styres i små steps, fremfor en DC-motor. Da der var et ønske om at arbejde med flere hardwareelementer end kun motoren, blev DC-motoren med rotationsbegrænsning valgt.
 
 \begin{figure}[H]
 	\centering
@@ -52,6 +55,33 @@ Platformen, som styres af motoren, må ikke kunne rotere 360 \(\deg\). Dette ses
 \noindent På figur \ref{fig:opstillingADC} ses opstillingen for rotationsbegrænsningen. På figuren ses, at potententiometerets skaft er forbundet til motoren, som roterer når motoren bevæges. Potentiometeret bliver forsynet med 5V og stel fra PSoC1 via den røde og sorte ledning. Ouputspændingen fra potentiometeret er forbundet til PSoC1 via den gule ledning.  \newline
 
 Potentiometeret har til formål at styre motoren i det definerede interval. Det valgte potentiometer er et lineært 47k\(\Omega\) potentiometer. Det vil sige, at for hver ændring, der sker i modstanden, vil der ske en proportional ændring i outputspændingen. Outputspændingen føres ind på et ben på PSoC'en, som er forbundet til en intern AD-converter, som er en Sequencing Successive Approximation ADC. Denne anvendes til at digitalisere det analoge signal fra potentiometeret.
+
+En sequencing SAR ADC indeholder et sample-hold kredsløb og en comparator. Kredsløbet holder på et indgangssignal, indtil det næste signal registreres på kredsløbets indgang. Dermed har converteren tid til at bestemme resultatet af konverteringen. Comparatoren sammenligner inputsignalet med midscaleværdien. 
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\textwidth]{Afsnit/DesignOgImplementering/images/ADC}
+	\caption{ADC opbygning}
+	\label{fig:konvertering}
+\end{figure}
+
+På figur \ref{fig:konvertering} er ADC'en indstillet til midscale og bruger dette punkt til sammenligning med inputsignalet.  
+
+ADC’en består af et sampleholdkredsløb. Det vil sige, at den ser på dataene indtil der er fundet en værdi, så der går noget tid imellem hver værdi, så der er sørget for, at der ikke bliver lavet oversamples og der ikke bliver lavet aliasering af det signal, som kommer ind i ADC’en. For at finde den værdi, som bliver sendt ind i ADC'en, bliver der lavet en skala, som bliver halveret alt efter, hvor værdien ligger på skalaen, som vist på figur \ref{fig:pot}
+
+Der er blevet målt med en vinkelmåler for at overholde kravene i kravspecifikationen\textbf{\#ref Reference til kravspecikation (ikke funktionelle krav)}. Hvor der blev fundet frem til en minimum- og maksimumværdi, hvor motoren må køre imellem. \\
+\\
+Min=915 mV\\
+\\
+Max = 2000mV\\
+\\
+Disse værdier er aflæst fra PSoC’en. Da den har en referencespænding på 3.3V vil den have lavere værdier, end hvad der bliver sendt ud fra potentiometeret.
+\begin{equation}
+ \frac {5V} {3.3V}= 1.515
+\end{equation}
+Der er en forskel på cirka 1,515 mellem potentiometer og ADC. Så ADC er cirka 1,515 mindre end hvad potentiometer sender ud.
+\\
+For at forstå hvordan ADC’en og potentiometeret fungerer henvises til dokumentationen.
 
 
 % % % % % % % % % Affyringsmekanisme % % % % % % % % % % % % % % % 
@@ -83,7 +113,7 @@ Båndpasfiltret er opbygget af et højpasfilter, et lavpasfilter og en operation
 
 Når fotodioden kan se lyset fra den røde LED er signalet, som kommer fra udgangen af operationsforstærkeren, et firkantsignal med en frekvens på 10 kHz,. Når fotodioden ikke kan se det røde lys, er spændingen på udgangen 0,5 V. Det ønskes omdannet til et signal, der går højt, når PWM-signalet starter, og går lavt, når PWM-signalet er væk igen. For at opnå dette, blev der lavet en envelopedetector, som er opbygget af en diode, en modstand og en kondensator. Dioden sikrer, at skulle der komme negative spændinger, så vil de blive frasorteret. Kondensatoren er dimentioneret efter, at den bliver opladet på de første udsving fra firkantsignalet. Modstanden er dimentioneret, så spændingen ikke aflades mellem svingningerne på 10 kHz signalet. En simulering af dette kan ses i dokumentationen !!!! 
 
-Outputtet, fra envelopedetektoren var dog noget lavt. Det lå mellem 1,5V og 2V. Derfor blev der indsat en ikke-inverterende forstærker for at fordoble signalet. Forstærkeren består af en opamp og to modstande. Derfor blev der opstillet følgende ligning \#ref{reference til Tores bog}: 
+Outputtet, fra envelopedetektoren var dog noget lavt. Det lå mellem 1,5V og 2V. Derfor blev der indsat en ikke-inverterende forstærker for at fordoble signalet. Forstærkeren består af en opamp og to modstande. Derfor blev der opstillet følgende ligning \ref{reference til Tores bog}: 
 
 \begin{equation} 
 	U_{O}=(1+\frac{R_{2}}{R_{1}})*U_{P}
@@ -100,18 +130,16 @@ Herefter var det muligt at aflæse et tydeligt firkantsignal med en peak-to-peak
 Den røde LED er koblet direkte til et 0-5 V, 10 kHz PWM signal fra PSoC'en. Den kan godt klare sig uden en formodstand. 
 
 \subsubsection{Motorstyring}
-Til at styre affyringsmekanismens motor er der bygget et kredsløb med en MOSFET som primære komponent. MOSFET'en skal sørge for, at motoren kun kører, når der bliver sendt PWM-signal ind på gatebenet. Kredsløbsdiagrammet kan ses på figur \ref{fig:affyringsmotor}. 
+Til at styre affyringsmekanismens motor er der bygget et kredsløb med en MOSFET som primære komponent. MOSFET'en skal sørge for, at motoren kun kører, når der bliver sendt PWM-signal ind i den. Kredsløbsdiagrammet kan ses på figur \ref{fig:affyringsmotor}. 
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=0.7\textwidth]{Afsnit/DesignOgImplementering/images/affyringsmotor}
+	\includegraphics[width=0.7\textwidth]{Afsnit/DesignOgImplementering/images/motor_affyring}
 	\caption{Diagram over motorstyring til motor på affyringsmekanisme}
 	\label{fig:affyringsmotor}
 \end{figure}
 
-Når der sendes PWM-signal ind på MOSFET'ens gateben vil motorens hastighed kunne styres ved hjælp af PWM-signalets dutycycle. Der er valgt en meget lav dutycycle. Grunden til dette er, at motoren ikke må køre så hurtigt, at den ikke kan nå at stoppe igen inden den har kørt en omgang mere. Dette kunne være afhjulpet med en bremsefunktion, men den er ikke implementeret. 
-
-Der sidder to dioder i kredsløbet. Disse er begge sat ind for at beskytte henholdsvis motoren og MOSFET'en. Dioden D1 er sat ind for at sikre motoren mod store spændingsspikes, der kan forekomme, når MOSFET'en bliver afbrudt. Dioden D2, der sidder fra source til drain, sikrer, at spikes genereret af motoren, når den slukkes, ikke brænder MOSFET'en af. 
+Dioden D1 er sat ind for at sikre motoren mod store spændingsspikes, der kan forekomme, når MOSFET'en bliver afbrudt. Dioden D2, der sidder fra source til drain, sikrer, at spikes genereret af motoren, når den slukkes, ikke brænder MOSFET'en af. 
 
 \subsubsection{Kanon og platform}
 Selve kanonen og platformen den står på er bygget op af to træplader og LEGO. Den ene træplade kan dreje fra side til side, således at det er muligt at sigte i den horisontale retning. Opbygningen ses på figur \ref{fig:Horisontalmekanik}. Træpladen placeres på den øverste metalskive omkring skruen, så den drejer med rundt, når motoren roterer. Rotationen er opnået ved, at skruen kan dreje frit, men stadig er holdt lodret. Det store tandhjul er boret ud i midten, og der er indsat en møtrik, så den kan skrues på skruen. Forholdet mellem det store og det lille tandhjul gør at rotationshastigheden bliver gearet ned. Endeligt er motoren skruet fast til den nederste træplade, men i en højde, der gør at den kan drive det lille tandhjul, som er forbundet med gearkæden til det store tandhjul. 
