@@ -37,7 +37,8 @@ Når motoren skal køre fremad, skal Q9 og Q4 åbnes. For at N-MOSFET'en (Q4) ka
 
 %For at få motoren til for eksempel at køre til højre, skal P mosfet og N mosfet åbnes. For at N mosfet’en skal åbne, skal der et positiv spændingen til. Imens for at P mosfet’en kan åbne, skal den have en negativ spænding på gatebenet for at kunne åbne. For at løse dette blev der sat en N mosfet, foran hver af P mosfet, for at trække spændingen ned, så P mosfet’ene kan åbne. \\
 
-Da motoren gerne skal kunne skifte retning hurtigt og ofte, er det nødvendigt, at de to MOSFET's kan både åbne og lukke hurtigt. På figur \ref{fig:mof} ses, hvordan Q9 er i det grundlæggende kredsløb hurtig til at lukke men langsom til at åbne. Derfor blev Q5 indsat. Det gav det problem, at Q9 blev langsom til at lukke, og derfor blev Q6 sat ind. På figur \ref{fig:moe} ses, hvordan driveren gør, at Q9 både åbner og lukker hurtigt. 
+Da motoren gerne skal kunne skifte retning hurtigt og ofte, er det nødvendigt, at de to MOSFET's kan både åbne og lukke hurtigt. På figur \ref{fig:mof} ses, hvordan Q9 åbner og lukke langsomt, i forhold til hvad der var ønsket for projektet, dette skyldes kondensator effekt i mellem benene på mosfet'ene.
+Derfor blev Q5 indsat, for at mosfet'en kan åbne hurtigere. Der var stadig det problem, at Q9 var langsom til at lukke, og derfor blev Q6 sat ind. På figur \ref{fig:moe} ses, hvordan driveren gør, at Q9 både åbner og lukker hurtigt. \\
 
 De to transistorer kunne godt have været erstattet af komponenten IRF2101, som er en driver, der gør præcis det samme, som beskrevet ovenfor. Denne er ikke anvendt, da det gav en større forståelse at udvikle driveren selv. 
 
@@ -62,7 +63,7 @@ De to transistorer kunne godt have været erstattet af komponenten IRF2101, som 
 	\end{adjustwidth}
 \end{figure}
 
-Der er også blevet sat diode fire ind i kredsløbet, de fire dioder skal fungere som beskyttelse af mosfet’ene, Det, de gør, er, at de sikrer, at den spænding, som er tilbage i motoren, når man lukker for mosfetene, ikke løber tilbage ind i mosfetene og brænder dem af.
+Der er også blevet sat diode fire ind i kredsløbet, de fire dioder skal fungere som beskyttelse af mosfet’ene, Det de gør, er at de sikrer at den spænding, som er tilbage i motoren, når man lukker for mosfetene, ikke løber tilbage ind i mosfetene og brænder dem af.
 \\
 Resten af komponenterne bliver beskrevet over i dokumentationen \ref{dokumentation, h-bro}.
 
