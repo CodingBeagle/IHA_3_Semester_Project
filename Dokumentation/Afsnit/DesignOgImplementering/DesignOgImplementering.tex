@@ -319,8 +319,19 @@ Over fire af mosfetene (Q9, Q10, Q3 og Q4) som set på figur \ref{fig:hbro} er d
 	\item Q6 og Q8(kan ses på figur \ref{fig:hbro})
 	Disse to transistorer sidder der for at hjælpe med at lukke P-MOSFET'en igen. Inden Q5 og Q7 blev sat ind tog det tid for at lukke P-MOSFET'en, men da de to blev sat ind, kunne de hjælpe til med at aflade mosfet'ene hurtigere. Derfor sidder de der, for at IRF9Z34N kan lukke hurtigt. 
 \end{itemize}
-\subsubsection{Potentiometer}
-Motoren, som styrer platformen, skal kunne bevæge sig frit i intervallet, som er fastsat i kravspecifikationen \textbf{\#ref Reference til kravspecikation (ikke funktionelle krav)}. For at begrænse denne bevægelse anvendes der et potentiometer. Når motoren bevæger sig, ændres potentiometerets modstandsværdi og dermed ændres spændingsniveauet. Dermed kan positionen af motoren bestemmes ved at se på output spændingen fra potentiometret. For at regne ud hvor langt motoren er, kan man regne ud hvor meget spænding der kommer ud ved at bruge spændingsdeler formlen, som er vist på figur \ref{fig:potentiometer2}
+
+\subsubsection{Rotationsbegrænsning}
+Platformen, som styres af motoren, må ikke kunne rotere 360 \(\deg\). Dette ses kravspecifikationen \textbf{\#ref Reference til kravspecikation (ikke-funktionelle krav)}. For at begrænse motorens bevægelse, anvendes et potentiometer samt en ADC. Når motoren bevæger sig, ændres potentiometerets modstandsværdi, og dermed ændres spændingsniveauet. På figur \ref{fig:opstillingADC} ses den endelige opstilling af rotationsbegrænsningen.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.3]{Afsnit/DesignOgImplementering/images/potentiometerADC}
+	\caption{Opstilling for rotationsbegrænsning}
+	\label{fig:opstillingADC}
+\end{figure}
+
+Den første del af rotationsbegrænsningen er et potentiometer, som fungerer efter spændingsdelerprincippet, som vist på figur \ref{fig:potentiometer2}.
+
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=\textwidth]{DesignOgImplementering/images/potentiometer}
@@ -328,7 +339,8 @@ Motoren, som styrer platformen, skal kunne bevæge sig frit i intervallet, som e
 	\label{fig:potentiometer2}
 	
 \end{figure}
-Hvor man se Rtop og Rbottom, som en modstand, men den bliver delt af midter strengen, som fortæller hvor modstanden skal deles henne og som man kan se på formlen ved side af, der ved kan man regne ud hvad  output spændingen fra potentiometret er.\\
+I potentiometeret findes en roterende kontakt, der danner en justerbar spændingsdeler. Når skaftet på potentiometret roteres ændres modstanden i de to variable modstande, \(\ R_{1}\) og  \(\ R_{2}\). På figur \ref{fig:potentiometer2} ses at
+ Hvor man se Rtop og Rbottom, som en modstand, men den bliver delt af midter strengen, som fortæller hvor modstanden skal deles henne og som man kan se på formlen ved side af, der ved kan man regne ud hvad  output spændingen fra potentiometret er.\\
 Det potentiometer som bliver brugt i dette projekt er et 47Kohm, som er linæret, som vil sige at spændingen stiger proportionalt med modstanden. 
 Derved kan man finde to værdier som motor ikke må komme over/under, som også holder sig inde for de krav som blev fast sat i kravspecifikationen \textbf{\#ref Reference til kravspecikation (ikke funktionelle krav)}. Så hvis de komme over/under en af værdierne, så må motoren ikke mere køre til den pågældende retning. Disse to værdier som blev fundet, er fundet ved hjælp af en vinkelmåler.
  
