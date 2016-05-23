@@ -213,19 +213,19 @@ De tre funktioner som Interface driveren indeholder i forbindelse med use case 2
 Brugergrænsefladen anvender interface driveren ved at inkludere headerfilerne og oprette en ICandyGun pointer, der peger på en instans af én af de to afledte klasser. Ved at pakke kommunikationen  til kernemodulet for candydriveren væk i funktioner kan brugergrænsefladen anvende funktionerne uden at kende til SPI-protokollen. Det sikrer igen lav kobling, og i tilfælde hvor det kunne ønskes, at SPI-kommunikationen kan erstattes af en anden kommunikationsform, kan det gøres uden, at der skal foretages ændringer i brugergrænsefladen.\\
  
 \subsection{Brugergrænseflade}
-Selve Usecase 2 styres via brugergrænsfladen fra Devkit8000.
-Dette afsnit beskriver brugergrænsefladens design.
+Usecase 2 styres via brugergrænsfladen fra Devkit8000.
+Dette afsnit beskriver brugergrænsefladens design. Figur \ref{fig:GUIPic} viser GUI'en for use case 2.
 
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=\textwidth]{Afsnit/DesignOgImplementering/images/GUIPic}
-	\caption{Brugergrænseflade for usecase 2}
+	\caption{Brugergrænseflade for usecase 2 - Test kommunikationsprotokoller}
 	\label{fig:GUIPic}
 \end{figure}
 
 Brugergrænsefladen er lavet med det indbyggede design framework i QT Creator 5.
 QT frameworket opretter "hovedvinduet" i brugergrænsefladen som en klasse. Knapperne tilføjes som private slots i klassen
-hvilket gør dem i stand til interagere i brugergrænsefladen. Når en knap er assignet til et slot i klassen, og der trykkes på den pågældende knap, bliver det assignede signal broadcastet
+hvilket gør dem i stand til interagere i brugergrænsefladen. Når en knap er assignet til et slot i klassen, og der trykkes på den pågældende knap, bliver det tildelte signal broadcastet
 og slot-funktionen bliver kørt. Alle tre knapper i brugergrænsefladen er assignet signal-typen "clicked()".
 
 \begin{figure}[H]
@@ -306,7 +306,7 @@ I systemarkitekturen på figur \ref{fig:CompleteClassDiagramPSoC0} og \ref{fig:C
 Den fulde klassebeskrivelse for I2CCommunication klassen kan findes i dokumentationen \#ref \textbf{Indsæt reference til klassebeskrivelse for I2CCommunication i dokumentationen}.
 
 \subsubsection{Nunchuck}
-Nunchuck klassen er seperat fra I2CCommunication klassen, idét at Nunchucken bruger sin egen kommunikationsprotokol, som defineret i \#ref \textbf{Reference til nunchuck i bilag}. Fra systemarkitekturen figur \ref{fig:CompleteClassDiagramPSoC0} og \ref{fig:CompleteClassDiagramPSoC1}, er det udledt at softwaren skal have metoder til at skrive og læse fra nunchucken. På figur \ref{figure:NunchuckKlassediagram} ses klassediagrammet for den implementerede nunchuck klasse, der indeholder metoder der har disse funktionaliteter.
+Nunchuck klassen er seperat fra I2CCommunication klassen, på trods af at kommunikationen foregår over I2C-bussen, idét at Nunchucken bruger sin egen kommunikationsprotokol, som defineret i \#ref \textbf{Reference til nunchuck i bilag}. Fra figur \ref{fig:CompleteClassDiagramPSoC0} og \ref{fig:CompleteClassDiagramPSoC1} i systemarkitekturen der omhandler PSoC software, er det udledt at softwaren skal have metoder til at skrive og læse fra nunchucken. På figur \ref{figure:NunchuckKlassediagram} ses klassediagrammet for den implementerede nunchuck klasse, der indeholder metoder der har disse funktionaliteter.
 
 
 \begin{figure}[H]
@@ -319,10 +319,8 @@ Nunchuck klassen er seperat fra I2CCommunication klassen, idét at Nunchucken br
 Den fulde klassebeskrivelse for Nunchuck klassen og dens metoder kan ses i dokumentationen side \#ref \textbf{Reference til Nunchuck klassebeskrivelser i dokumentationen} 
 
 \subsubsection{SPI - PSoC}
-I dette afsnit vil softwaren der specifikt omhandler SPI-kommunikationen mellem PSoC0 og DevKit8000 blive beskrevet. Dette gøres vha. et klassediagram og klassebeskrivelser
+I dette afsnit vil softwaren der specifikt omhandler SPI-kommunikationen mellem PSoC0 og DevKit8000 blive beskrevet fra PSoC-CPU'ens perspektiv. På figur \ref{figure:KlassediagramSPICommunication} ses den klasse der omhandler SPI-kommunikationen i systemet. Ud fra klassediagrammet figur \ref{fig:CompleteClassDiagramPSoC0} i systemarkitekturen, er det blevet udledt at SPI-klassen skal kunne starte og gennemføre forskellige test. Figur \ref{figure:KlassediagramSPICommunication} viser klassediagrammet for den implementerede klasse, der afspejler netop dette.
 
-
-På figur \ref{figure:KlassediagramSPICommunication} ses klassediagrammet over SPICommunication klassen.
 
 \begin{figure}[H]
 	\centering
@@ -331,6 +329,7 @@ På figur \ref{figure:KlassediagramSPICommunication} ses klassediagrammet over S
 	\label{figure:KlassediagramSPICommunication}
 \end{figure}
 
+En detaljeret klassebeskrivelse for SPICommunication klassen kan findes i dokumentationen side \#ref \textbf{Referer til SPICommunication klassebeskrivelse i dokumentationen}.
 
 \subsection{PSoC - Affyringsmekanisme}
  
