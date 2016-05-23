@@ -18,7 +18,7 @@ For at få mulighed for, at motoren både kan køre frem og bakke, skal der brug
 	\end{adjustwidth}
 \end{figure}
 
-I tabel \ref{hbrotabel} ses en oversigt over komponentværdier. En fyldestgørende oversigt over disse kan ses i \ref{dokumentation hbro}. 
+I tabel \ref{hbrotabel} ses en oversigt over komponentværdier. En fyldestgørende oversigt over disse kan ses i \#ref{dokumentation hbro}. 
 
 \begin{table}[H]
 	\centering
@@ -51,7 +51,7 @@ Platformen, som styres af motoren, må ikke kunne rotere 360 \(\deg\). Dette ses
 
 \noindent På figur \ref{fig:opstillingADC} ses opstillingen for rotationsbegrænsningen. På figuren ses, at potententiometerets skaft er forbundet til motoren, som roterer når motoren bevæges. Potentiometeret bliver forsynet med 5V og stel fra PSoC1 via den røde og sorte ledning. Ouputspændingen fra potentiometeret er forbundet til PSoC1 via den gule ledning.  \newline
 
-\noindent Potentiometeret har til formål at begrænse motorens bevægelse. Det valgte potentiometer er et lineært 47k\(\Omega\) potentiometer. Det vil sige, at for hver ændring, der sker i modstanden, vil der ske en proportional ændring i outputspændingen. Outputspændingen føres ind på et ben på PSoC'en, som er forbundet til en intern AD-converter, som er en Sequencing Successive Approximation ADC. Denne ADC består af et sample-hold kredsløb. Denne anvendes til at digitalisere det analoge signal fra potentiometeret.
+Potentiometeret har til formål at styre motoren i det definerede interval. Det valgte potentiometer er et lineært 47k\(\Omega\) potentiometer. Det vil sige, at for hver ændring, der sker i modstanden, vil der ske en proportional ændring i outputspændingen. Outputspændingen føres ind på et ben på PSoC'en, som er forbundet til en intern AD-converter, som er en Sequencing Successive Approximation ADC. Denne anvendes til at digitalisere det analoge signal fra potentiometeret.
 
 
 % % % % % % % % % Affyringsmekanisme % % % % % % % % % % % % % % % 
@@ -83,7 +83,7 @@ Båndpasfiltret er opbygget af et højpasfilter, et lavpasfilter og en operation
 
 Når fotodioden kan se lyset fra den røde LED er signalet, som kommer fra udgangen af operationsforstærkeren, et firkantsignal med en frekvens på 10 kHz,. Når fotodioden ikke kan se det røde lys, er spændingen på udgangen 0,5 V. Det ønskes omdannet til et signal, der går højt, når PWM-signalet starter, og går lavt, når PWM-signalet er væk igen. For at opnå dette, blev der lavet en envelopedetector, som er opbygget af en diode, en modstand og en kondensator. Dioden sikrer, at skulle der komme negative spændinger, så vil de blive frasorteret. Kondensatoren er dimentioneret efter, at den bliver opladet på de første udsving fra firkantsignalet. Modstanden er dimentioneret, så spændingen ikke aflades mellem svingningerne på 10 kHz signalet. En simulering af dette kan ses i dokumentationen !!!! 
 
-Outputtet, fra envelopedetektoren var dog noget lavt. Det lå mellem 1,5V og 2V. Derfor blev der indsat en ikke-inverterende forstærker for at fordoble signalet. Forstærkeren består af en opamp og to modstande. Derfor blev der opstillet følgende ligning \ref{reference til Tores bog}: 
+Outputtet, fra envelopedetektoren var dog noget lavt. Det lå mellem 1,5V og 2V. Derfor blev der indsat en ikke-inverterende forstærker for at fordoble signalet. Forstærkeren består af en opamp og to modstande. Derfor blev der opstillet følgende ligning \#ref{reference til Tores bog}: 
 
 \begin{equation} 
 	U_{O}=(1+\frac{R_{2}}{R_{1}})*U_{P}
@@ -100,16 +100,18 @@ Herefter var det muligt at aflæse et tydeligt firkantsignal med en peak-to-peak
 Den røde LED er koblet direkte til et 0-5 V, 10 kHz PWM signal fra PSoC'en. Den kan godt klare sig uden en formodstand. 
 
 \subsubsection{Motorstyring}
-Til at styre affyringsmekanismens motor er der bygget et kredsløb med en MOSFET som primære komponent. MOSFET'en skal sørge for, at motoren kun kører, når der bliver sendt PWM-signal ind i den. Kredsløbsdiagrammet kan ses på figur \ref{fig:affyringsmotor}. 
+Til at styre affyringsmekanismens motor er der bygget et kredsløb med en MOSFET som primære komponent. MOSFET'en skal sørge for, at motoren kun kører, når der bliver sendt PWM-signal ind på gatebenet. Kredsløbsdiagrammet kan ses på figur \ref{fig:affyringsmotor}. 
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=0.7\textwidth]{Afsnit/DesignOgImplementering/images/motor_affyring}
+	\includegraphics[width=0.7\textwidth]{Afsnit/DesignOgImplementering/images/affyringsmotor}
 	\caption{Diagram over motorstyring til motor på affyringsmekanisme}
 	\label{fig:affyringsmotor}
 \end{figure}
 
-Dioden D1 er sat ind for at sikre motoren mod store spændingsspikes, der kan forekomme, når MOSFET'en bliver afbrudt. Dioden D2, der sidder fra source til drain, sikrer, at spikes genereret af motoren, når den slukkes, ikke brænder MOSFET'en af. 
+Når der sendes PWM-signal ind på MOSFET'ens gateben vil motorens hastighed kunne styres ved hjælp af PWM-signalets dutycycle. Der er valgt en meget lav dutycycle. Grunden til dette er, at motoren ikke må køre så hurtigt, at den ikke kan nå at stoppe igen inden den har kørt en omgang mere. Dette kunne være afhjulpet med en bremsefunktion, men den er ikke implementeret. 
+
+Der sidder to dioder i kredsløbet. Disse er begge sat ind for at beskytte henholdsvis motoren og MOSFET'en. Dioden D1 er sat ind for at sikre motoren mod store spændingsspikes, der kan forekomme, når MOSFET'en bliver afbrudt. Dioden D2, der sidder fra source til drain, sikrer, at spikes genereret af motoren, når den slukkes, ikke brænder MOSFET'en af. 
 
 \subsubsection{Kanon og platform}
 Selve kanonen og platformen den står på er bygget op af to træplader og LEGO. Den ene træplade kan dreje fra side til side, således at det er muligt at sigte i den horisontale retning. Opbygningen ses på figur \ref{fig:Horisontalmekanik}. Træpladen placeres på den øverste metalskive omkring skruen, så den drejer med rundt, når motoren roterer. Rotationen er opnået ved, at skruen kan dreje frit, men stadig er holdt lodret. Det store tandhjul er boret ud i midten, og der er indsat en møtrik, så den kan skrues på skruen. Forholdet mellem det store og det lille tandhjul gør at rotationshastigheden bliver gearet ned. Endeligt er motoren skruet fast til den nederste træplade, men i en højde, der gør at den kan drive det lille tandhjul, som er forbundet med gearkæden til det store tandhjul. 
