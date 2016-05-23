@@ -92,13 +92,13 @@ I2C Kommunikationsprotokollen beskrevet i afsnit \ref{afsnit:I2CProtokol} blev m
 \subsubsection{Rotationsdetektor}
 Der er udført en række modultests af rotationsdetektoren. Først er der en beskrivelse af testen, der skulle teste de forskellige dele i rotationsdetektorkredsløbet, både mens fotodioden modtager et lyssignal fra LED'en, og når den ikke gør. Herefter følger en beskrivelse af modultesten af det båndpasfilter, der indgår i rotationsdetektoren og til sidst er der en beskrivelse af modultesten af motorens PWM-signal. 
 
-På figur \ref{figure:målepunkter} ses, hvor der er målt for at teste rotationsdetektoren. 
+På figur \ref{fig:målepunkter} ses, hvor der er målt for at teste rotationsdetektoren. 
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=\textwidth]{DesignOgImplementering/images/Rotationsdetektor_målepunkter}
+	\includegraphics[width=\textwidth]{Test/images/rotationsdetektor_målepunkter}
 	\caption{Målepunkter på rotationsdetektor}
-	\label{figure:målepunkter}
+	\label{fig:målepunkter}
 \end{figure}
 
 I tabel \ref{dioderIkkeSe} ses resultaterne fra modultesten af rotationsdetektoren, når fotodioden ikke får noget lyssignal. Det ses, at det virtuelle nul fra spændingsdeleren ligger på 0,4V, og at forstærkeren fordobler signalet, hvilket var meningen. 
@@ -149,7 +149,7 @@ I tabel \ref{forstaerkerudgang} ses resultaterne fra modultesten af båndpasfilt
 		5V (lyser LED?)    & Ja                       & Ja                  \\ \hline
 	\end{tabular}
 	\caption{Modultest af forstærkerudgangen}
-	\label{forstaerkerudgang}
+	\label{table:forstaerkerudgang}
 \end{table}
 
 Afskæringsfrekvenserne for båndpasfilteret ligger på 15,9Hz og 31,2kHz, så hvis båndpasfilteret skulle være helt optimalt skulle alt, der ligger udenfor disse frekvenser dæmpes fuldstændig. Det ses dog i tabel \ref{forstaerkerudgang}, at det ikke helt er tilfældet. Ved 40kHz er signalet dæmpet til 3V, og ved 10kHz lader filteret alt gå igennem. Ved 10 Hz ses det, at signalet dæmpes, men der forekommer også mange spikes, som forstyrrer signalet. Derfor er der ikke indsat et tal i tabellen. 
