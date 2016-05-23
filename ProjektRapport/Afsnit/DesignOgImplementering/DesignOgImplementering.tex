@@ -292,22 +292,25 @@ De efterfølgende afsnit vil beskrive klasserne og deres funktioner.
 \end{figure}
 
 \subsubsection{I2CCommunication}
-I dette afsnit vil softwaren der omhandler I2C-kommunikation blive beskrevet. Dette inkluderer et klassediagram, samt en klassebeskrivelse.
-\paragraph{Klassediagram}
+I systemarkitekturen på figur \ref{fig:CompleteClassDiagramPSoC0} og \ref{fig:CompleteClassDiagramPSoC1}, er der udarbejdet klassediagrammer der beskriver funktionaliteterne for PSoC0- og 1 softwaren. Mht. til I2C-kommunikation klassen, er den overordnede funktionalitet, at kunne sende og modtage data via I2C-nettet. På figur \ref{figure:klassediagramI2CCommunication} ses klassediagrammet for I2CCommunication klassen, der netop har metoder og attributter til at dække disse behov.
+
+\paragraph{Klassediagram} 
 På figur \ref{figure:klassediagramI2CCommunication} ses klassediagrammet for I2CCommunication. 
+
 \begin{figure}[H]
 	\centering
-	%\includegraphics[width=0.9\textwidth, trim={0 19cm 9cm 0},clip]{DesignOgImplementering/images/I2CCommunication.pdf}
 	\includegraphics[]{DesignOgImplementering/images/I2CCommunication}
-	%\includegraphics[width =0.9\textwidth]{DesignOgImplementering/images/I2CCommunication2}
 	\caption{Klassediagram for I2CCommunication klassen}
 	\label{figure:klassediagramI2CCommunication}
 \end{figure}
 
+Den fulde klassebeskrivelse for I2CCommunication klassen kan findes i dokumentationen \#ref \textbf{Indsæt reference til klassebeskrivelse for I2CCommunication i dokumentationen}.
+
 \subsubsection{Nunchuck}
+Nunchuck klassen er seperat fra I2CCommunication klassen, idét at Nunchucken bruger sin egen kommunikationsprotokol, som defineret i \#ref \textbf{} 
 I dette afsnit vil softwaren der specifikt omhandler kommunikationen mellem PSoC0 og Nunchucken blive beskrevet. Dette gøres vha. et klassediagram og klassebeskrivelser.
 
-\paragraph{Klassediagram}
+\paragraph{Klassediagram} 
 På figur \ref{figure:NunchuckKlassediagram} ses klassediagrammet for Nunchuck klassen.
 
 \begin{figure}[H]
@@ -320,7 +323,8 @@ På figur \ref{figure:NunchuckKlassediagram} ses klassediagrammet for Nunchuck k
 \subsubsection{SPI - PSoC}
 I dette afsnit vil softwaren der specifikt omhandler SPI-kommunikationen mellem PSoC0 og DevKit8000 blive beskrevet. Dette gøres vha. et klassediagram og klassebeskrivelser
 
-\paragraph{Klassediagram}
+\paragraph{Klassediagram} 
+
 På figur \ref{figure:KlassediagramSPICommunication} ses klassediagrammet over SPICommunication klassen.
 
 \begin{figure}[H]
