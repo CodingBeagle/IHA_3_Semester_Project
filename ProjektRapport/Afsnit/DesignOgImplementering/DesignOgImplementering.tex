@@ -1,41 +1,48 @@
 \chapter{Design og Implementering}
 
 \section{Hardware}
-I Goofy Candygun 3000 indgår forskellige hardwaredele, som skal udgøre det færdige system. Ud fra BDD'et ses det, at de to overordnede hardwaredele, der skal udvikles, er motorstyring til den vertikale og horisontale drejeretning, og en affyringsmekanisme. 
+I Goofy Candygun 3000 indgår et antal hardwaredele, som skal udgøre det færdige system. Ud fra BDD'et ses det, at de to overordnede hardwaredele, der skal udvikles, er motorstyring til den vertikale og horisontale drejeretning, og en affyringsmekanisme. 
 
 \subsection{Motorstyring af drejeretning}
 For at kanonen kan sigte både vertikalt og horisontalt, skal den kunne køre i begge disse retninger. Det afhjælpes ved at bruge to DC-motorer - en til hver retning. Men for at disse så kan køre både forlæns og baglæns, skal der bruges en H-bro. For at sikre at motorerne ikke kan dreje 360 grader, er der udviklet en rotationsbegrænsning, som gør, at de kun kan dreje cirka 35 grader ud til hver side. 
 
 \subsubsection{H-bro}
-H-broen er en del af ”motorControl” blokken, hvor den har til opgave at styre motoren, så den både kan køre til højre og venstre. Der blev valgt i dette projekt at bygge en h-broen op fra bunden selv. Selvom der findes en komponent som indholder en H-bro, der også sagtens kunne benyttes, er der blevet designet en H-bro fra bunden, da det giver en bedre forståelse af, hvordan den fungerer. 
+H-broen er en del af "motorControl"-blokken. Denne har til opgave at styre motoren, så den både kan køre til højre og venstre. Selvom der findes en komponent som indholder en H-bro, der også sagtens kunne benyttes, er der blevet designet en H-bro fra bunden, da det giver en bedre forståelse af, hvordan den fungerer. H-broen er opbygget af to identiske kredsløb, så der gives her en beskrivelse af den ene side af H-broen. På \ref{hbro} ses det færdige kredsløbsdiagram over H-broen. 
 
 \begin{figure}[H]
-	%\begin{adjustwidth}
-		%{3cm}{-\rightmargin}
 		\centering
 		\includegraphics[width=\textwidth]{Afsnit/DesignOgImplementering/images/H-bro}
 		\caption{Kredsløbsdiagram for H-broen}
 		\label{fig:hbro}
-	%\end{adjustwidth}
 \end{figure}
+
+I \ref{hbrotabel} ses relevante komponentværdier for H-broen. En fyldestgørende oversigt over disse ses i \ref{dokumentationen}
+
 \begin{table}[H]
 	\centering
 	\begin{tabular}{|l|l|l}
 		\cline{1-2}
 		\textbf{Betegnelse} & \textbf{Komponent}  	    &  \\ \cline{1-2}
-		Q1   				& IRLZ44(mosfet N-kanal)  &  \\ \cline{1-2}
-		Q4   				& IRLZ44(MOSFET N-kanal)	&  \\ \cline{1-2}
+		Q1   				& IRLZ44 (MOSFET N-kanal)  	&  \\ \cline{1-2}
+		Q4   				& IRLZ44 (MOSFET N-kanal)	&  \\ \cline{1-2}
 		Q5   				& BC547                     &  \\ \cline{1-2}
 		Q6   				& BC557                     &  \\ \cline{1-2}
-		Q9   				& IRF9Z34N(MOSFET P-kanal)	&  \\ \cline{1-2}
+		Q9   				& IRF9Z34N (MOSFET P-kanal)	&  \\ \cline{1-2}
 	\end{tabular}
 	\caption{Komponentbetegnelser på H-bro}
 	\label{hbrotabel}
 \end{table}
-For at få motoren til for eksempel at køre til højre, skal P mosfet og N mosfet åbnes. For at N mosfet’en skal åbne, skal der et positiv spændingen til. Imens for at P mosfet’en kan åbne, skal den have en negativ spænding på gatebenet for at kunne åbne. For at løse dette blev der sat en N mosfet, foran hver af P mosfet, for at trække spændingen ned, så P mosfet’ene kan åbne. \\
 
-Da der ønskes at kunne skifte motorens retning hurtigt og ofte, var det nødvendigt at indsætte en transistor foran hver P-MOSFET
-Da der i dette projekt ønskes at skifte retning ofte, blev der sat foran hver P mosfet, to transistorer, for at hurtig at kunne aflade og oplade mosfet’ene, på grund af kondensator effekt i mellem benene ville det tag længere tid at åbne og lukke for mosfet’en, så derfor blev det valgt at sætte transistorer ind. Selvom der findes en komponent (IRF2101), som kan hjælpe med dette, men der blev valgt at bruge transistorer, for at få en bedre ide om hvordan det hele funger. Som man kan se på figur\ref{fig:mof} viser hvordan det så ud før at transistorer var sat ind. På figur \ref{fig:moe} viser det  hvordan det ser ud efter at transistorerne er sat ind. Så det gør som forvente at mosfet’ene åbne og lukker hurtigere. \\
+Når motoren skal køre fremad, skal Q9 og Q4 åbnes. For at N-MOSFET'en (Q4) kan åbne, skal der en positiv spænding ind på gatebenet. For at P-MOSFET'en (Q9) kan åbne, skal den have en negativ spænding. For at løse dette blev der sat en N mosfet, foran hver af P mosfet, for at trække spændingen ned, så P mosfet’ene kan åbne. \\
+
+%For at få motoren til for eksempel at køre til højre, skal P mosfet og N mosfet åbnes. For at N mosfet’en skal åbne, skal der et positiv spændingen til. Imens for at P mosfet’en kan åbne, skal den have en negativ spænding på gatebenet for at kunne åbne. For at løse dette blev der sat en N mosfet, foran hver af P mosfet, for at trække spændingen ned, så P mosfet’ene kan åbne. \\
+
+Da motoren gerne skal kunne skifte retning hurtigt og ofte, er det nødvendigt, at de to MOSFET's kan både åbne og lukke hurtigt. På figur \ref{fig:mof} ses, hvordan Q9 er i det grundlæggende kredsløb hurtig til at lukke men langsom til at åbne. Derfor blev Q5 indsat. Det gav det problem, at Q9 blev langsom til at lukke, og derfor blev Q6 sat ind. På figur \ref{fig:moe} ses, hvordan driveren gør, at Q9 både åbner og lukker hurtigt. 
+
+De to transistorer kunne godt have været erstattet af komponenten IRF2101, som er en driver, der gør præcis det samme, som beskrevet ovenfor. Denne er ikke anvendt, da det gav en større forståelse at udvikle driveren selv. 
+
+%Da der ønskes at kunne skifte motorens retning hurtigt og ofte, var det nødvendigt at indsætte en transistor foran hver P-MOSFET
+%Da der i dette projekt ønskes at skifte retning ofte, blev der sat foran hver P mosfet, to transistorer, for at hurtig at kunne aflade og oplade mosfet’ene, på grund af kondensator effekt i mellem benene ville det tag længere tid at åbne og lukke for mosfet’en, så derfor blev det valgt at sætte transistorer ind. Selvom der findes en komponent (IRF2101), som kan hjælpe med dette, men der blev valgt at bruge transistorer, for at få en bedre ide om hvordan det hele funger. Som man kan se på figur\ref{fig:mof} viser hvordan det så ud før at transistorer var sat ind. På figur \ref{fig:moe} viser det  hvordan det ser ud efter at transistorerne er sat ind. Så det gør som forvente at mosfet’ene åbne og lukker hurtigere. \\
 
 \begin{figure}[H]
 	\begin{adjustwidth}{-3cm}{-\rightmargin}
