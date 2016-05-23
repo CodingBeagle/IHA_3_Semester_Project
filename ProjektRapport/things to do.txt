@@ -35,20 +35,45 @@ Projektrapport:
 -Abstract
 	-Det hele skal skrives.
 -Indledning
-	-Flyt tabel for ansvarsområder
-	-Indledning skal tilrettes Gunvors feedback.
+	-Flyt tabel for ansvarsområder - og udfyld denne.
+	-Indledning skal tilrettes Gunvors feedback. 
 	-Projektformulering skal tilrettes Gunvors feedback.
 -Systembeskrivelse
-	-Omskriv
+	-Krav til produktet skal rettes igennem - Måske noget med nogle læringsmål?
+	-Omskriv/omformuleres
+-Krav
+	- Use case beskrivelserne skal forkortes
+		- HUSK GERNE LÆRINGSMÅL
 -Arkitektur
-	-Klassediagrammer (applikationsmodel)
+	- Begrundelse for valg af I2C mellem PSoC's
+	- Begrundelse for valg af SPI mellem Devkit og PSoC
 	-Signalbeskrivelse skal rettes igennem
-	-Skriv mere tekst til "System Test"
 	-Beskriv motorstyring (software)
-	-Ret BDD (motor til motorstyring)
+	-Ret BDD - Grupering af enheder
+	-Blokbeskrivelsen rettes igennem
 
 -Design og Implementering
-	-SPI Devkit skal rettes
+	-Rotationsbegrænsning - fjern udregninger
+	-Affyringsmekanisme - For meget tekst.
+	-SPI Devkit skal rettes - For meget tekst
+	-Interface driver skal rettes - For meget tekst
 	-Beskriv motorstyring (software)
-	-Interface Driver skal rettes
-	-Aktivitetsdiagrammer for vigtige algoritmer
+	-Aktivitetsdiagrammer for vigtige algoritmer - Tilføjes til dokumentationen, og referes til.
+	-Brugergrænseflade - Tekst til STM.
+	-Affyringsmekanisme - For meget tekst - Kan forklares i Sekvensdiagrammer.
+-Test
+	-Skal uddybes, og der skal oprettes ordentlige referencer til dvs. tests i dokumentationen
+
+-Udviklingsværktøjer
+	-Diskuter relevans af afsnit
+	-Analog discovery afsnit skrives
+
+-Fremtidigt arbejde
+	-Rettes igennem, tilføjes mere tekst?
+
+-Perspektivering
+	-Skal skrives. 
+	-Admin aktør i use case 2
+
+-Konklusion
+	-Skal skrives helt.
