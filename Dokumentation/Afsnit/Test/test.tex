@@ -1,5 +1,5 @@
 \chapter{Modultest}
-Ved modultests blev én funktionalitet testet isoleret, dvs. ved så lidt påvirkning fra resten af systemet som muligt. Modultests blev udført før integrationstests, for at sikre individuel funktionalitet før sammensætning af alle komponenter. Modultests blev udført både for software-komponenter og hardware-komponenter.
+Ved modultests blev én funktionalitet testet isoleret. Det vil sige med så lidt påvirkning fra resten af systemet som muligt. Modultests blev udført før integrationstests, for at sikre individuel funktionalitet før sammensætning af alle komponenter. Modultests blev udført både for software-komponenter og hardware-komponenter.
 
 \section{Software}
 Til modultest af software er der gjort brug af white-box testing. Dette er gjort, da softwaren ligger tæt op ad hardwaren til kommunikationsbusserne, hvilket kræver teknisk viden om den interne struktur for både hardware og software.
@@ -230,10 +230,10 @@ Ud fra testen kan det konkluderes at implementeringen af I2C-protokollen fungere
 \section{Hardware}
 \subsection{H-bro} 
 
-\textbf{Formål}
-\\ Formålet med denne test er at viser at motor kan styres i begge retninger, ved hjælp af h broen.\\
+\textbf{Formål} \newline
+Formålet med denne test er at vise at en motor kan styres i begge retninger med H-broen.\newline
 
-\textbf{Overordnet opstilling}
+\noindent \textbf{Opstilling}
 
 \begin{figure}[H]
 	\centering
@@ -242,23 +242,21 @@ Ud fra testen kan det konkluderes at implementeringen af I2C-protokollen fungere
 \end{figure}
 
 \begin{itemize}
-	\item Røde ledninger er 9 V
-	\item	Brune ledninger 5 V
-	\item	Blå ledninger er spændinger inde imellem komponenter
-	\item	Sort er ground
-	\item	J1 og J2 er test pin 
-	\item	1a og 2a knapper til at styre motor til højre
-	\item	1b og 2b knapper til at styre motor til venstre 
+	\item 	Røde ledninger: 9 V
+	\item	Brune ledninger: 5 V
+	\item	Sorte ledninger er stel
+	\item	Blå ledninger er forbindelser komponenter
+	\item	J1 og J2 er output pins 
 	\item	J3 er ground
-	
-	\end{itemize}
+	\item	1a og 2a knapper til at styre motor til højre
+	\item	1b og 2b knapper til at styre motor til venstre 	
+\end{itemize}
 
-For at teste om h broen kan styre motoren i begge retninger, blev der sat Analog Discovery på de to test pin (J1, J2 og J3) og der blev sat 5V, 9V og ground til. 
-Først del af testen var at tjekke om den kunne køre til højre, det blev gjord ved at trykke på knap 1a og 2a.
-Anden del af testen var at tjekke om den kunne køre til venstre det blev gjord ved at trykke på knap 1b og 2b.
-\\
-\\
-\textbf{Forventet resultat}
+\noindent Til test af H-broens motorstyring i begge retninger blev to oscilloskop kanaler forbundet til output pin J1 og J2, samt oscilloskopene stel til J3. Fumlebrættet forsynes med 9V, 5V og stel fra en spændingskilde. 
+
+\noindent Testen blev udført i to dele. Først testes H-broen i højre omdrejningsretning ved at trykke på 1a og 2a, derefter i venstre omdrejning ved at trykke 1b og 2b. \newline
+
+\noindent \textbf{Forventet resultat} \newline
 At når der blev trykket på knap 1a og 2a vil den ene kurv gå høj og den anden vil for blive lav
 At når der blev trykket på knap 1b og 2b vil den anden kurv gå høj og den først vil for blive lav.
 \\
