@@ -7,9 +7,11 @@ I Goofy Candygun 3000 indgår forskellige hardwaredele, som skal udgøre det fæ
 For at kanonen kan sigte både vertikalt og horisontalt, skal den kunne køre i begge disse retninger. Det afhjælpes ved at bruge to DC-motorer - en til hver retning. Men for at disse så kan køre både forlæns og baglæns, skal der bruges en H-bro. For at sikre at motorerne ikke kan dreje 360 grader, er der udviklet en rotationsbegrænsning, som gør, at de kun kan dreje cirka 35 grader ud til hver side. 
 
 \subsubsection{H-bro}
-%H-broen er bygget op af to identiske kredsløb - et til hver retning. Derfor beskrives kun den ene retning. Kredsløbet består af en N-MOSFET og en P-MOSFET. 
+For at få mulighed for, at motoren kan køre både frem og bakke, skal der bruges en H-bro. I stedet for at bruge en færdig driver er der valgt at udvikle en selv. På figur \ref{fig:hbro} ses kredsløbsdiagrammet for H-broen. 
 
-%Når der bliver sendt signal ind på gate-benet på N-MOSFET'en vil der løbe strøm gennem MOSFET'en og op til motoren. 
+H-broen er bygget op af to identiske kredsløb - et til hver retning. Derfor beskrives kun den ene retning. Kredsløbet består grundlæggende af en N-MOSFET og en P-MOSFET. Når der sendes 5V ind på gate-benet til de to MOSFET's løber der en strøm gennem dem. Det betyder, at der bliver åbnet for, at motoren kan køre. I dette tilfælde skal motoren køre ved hjælp af et PWM-signal, så det betyder, at de to MOSFET's vil stå og åbne og lukke så lang tid, dette signal sendes ind. Det betyder også, at det er muligt, at styre motorens hastighed ved hjælp af PWM-signalets dutycycle. 
+
+For at gøre det muligt, at motoren kan skifte retning hurtigt er der indsat to transistorer. Inden disse blev sat ind, blev P-MOSFET'en opladet hurtigt men afladet meget langsomt. For at få den til at aflade hurtigt
 
 \begin{figure}[H]
 	\begin{adjustwidth}{-3cm}{-\rightmargin}
