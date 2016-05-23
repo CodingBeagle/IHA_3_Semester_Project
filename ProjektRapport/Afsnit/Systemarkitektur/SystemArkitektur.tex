@@ -8,7 +8,7 @@ På figur \ref{figure:domainModel} ses domænemodellen af systemet. Denne har ti
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=\textwidth]{SystemArkitektur/images/DomainModel.PNG}
+	\includegraphics[width=\textwidth]{SystemArkitektur/images/domainModel}
 	\caption{Systemets domænemodel}
 	\label{figure:domainModel}
 \end{figure}
@@ -26,7 +26,7 @@ På figur \ref{figure:bddDiagram} ses BDD'et for systemet.
 \begin{figure}[H]
 	\begin{adjustwidth}{-3cm}{-\rightmargin}
 	\centering
-	\includegraphics[width=0.9\paperwidth]{SystemArkitektur/images/BDD_overordnet.PNG}
+	\includegraphics[width=0.9\paperwidth]{SystemArkitektur/images/bddDiagram}
 	\caption{BDD af systemets hardware}
 	\label{figure:bddDiagram}
 	\end{adjustwidth}
@@ -63,7 +63,7 @@ På figur \ref{figure:ibdDiagram} ses IBD'et for systemet. Figuren viser hardwar
 \begin{figure}[H]
 	\begin{adjustwidth}{-3cm}{-\rightmargin}
 	\centering
-	\includegraphics[width=0.9\paperwidth]{SystemArkitektur/images/GoofyCandyIBDImageRev2.PNG}
+	\includegraphics[width=0.9\paperwidth]{SystemArkitektur/images/ibdDiagram}
 	\caption{IBD af systemets hardware}
 	\label{figure:ibdDiagram}
 	\end{adjustwidth}	
@@ -107,7 +107,7 @@ Domænemodellen i figur \ref{figure:domainModel}, side \pageref{figure:domainMod
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=\textwidth]{SystemArkitektur/images/SoftwareAllocation.PNG}
+	\includegraphics[width=\textwidth]{SystemArkitektur/images/SoftwareAllocation}
 	\caption{Systemets software allokeringer}
 	\label{figure:allocationDiagram}
 \end{figure}
@@ -123,7 +123,11 @@ På tabel \ref{tabel:softwareAllocationDescription} er hvert allokeret software 
 		User Interface Software   & \begin{tabular}[c]{@{}l@{}}Dette allokerede software er brugergrænsefladen\\ som brugeren interagerer med på DevKit8000 touch-skærmen.\end{tabular}                                                  \\
 		\rowcolor[HTML]{CBCEFB} 
 		Nunchuck Polling Software & \begin{tabular}[c]{@{}l@{}}Dette allokerede software har til ansvar at polle\\ Nunchuck tilstanden og videresende det til\\ PSoC1.\end{tabular}                                                      \\
-		Motor Control Software    & \cellcolor[HTML]{FFFFFF}\begin{tabular}[c]{@{}l@{}}Dette allokerede software har til ansvar at\\ bruge den pollede Nunchuck data fra PSoC0\\ til motorstyring samt affyringsmekanismen.\end{tabular} \\ \hline
+		Motor Control Software    & \cellcolor[HTML]{FFFFFF}\begin{tabular}[c]{@{}l@{}}Dette allokerede software har til ansvar at\\ bruge den pollede Nunchuck data fra PSoC0\\ til motorstyring samt affyringsmekanismen.\end{tabular} 
+		\\ 
+		\rowcolor[HTML]{CBCEFB} 
+		Projectile Launcher Software & \begin{tabular}[c]{@{}l@{}}Dette allokerede software har til ansvar at aktivere\\ affyringsmekanismen når et \\ knaptryk detekteres på Nunchuck.\end{tabular} \\
+		\hline
 	\end{tabular}
 	\caption{Beskrivelse af den allokerede software}
 	\label{tabel:softwareAllocationDescription}
@@ -138,7 +142,7 @@ En essentiel del af systemet er at kunne styre motoren ved brug af Wii-Nunchuck 
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=\textwidth] {Systemarkitektur/images/WiiNunchuckSequenceDiagram}
+	\includegraphics[width=\textwidth] {Systemarkitektur/images/SequenceDiagramUC1}
 	\caption{Wii-Nunchuck Input Data Forløb}
 	\label{fig:WiiNunchuckSekvensDiagram}
 \end{figure}
@@ -148,7 +152,7 @@ Use Case 2 beskriver test af systemet før spillet startes. På figur \ref{fig:S
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=\textwidth] {Systemarkitektur/images/OverordnetSekvensDiagramSystemTest}
+	\includegraphics[width=\textwidth] {Systemarkitektur/images/SequenceDiagramUC2}
 	\caption{System Test Forløb}
 	\label{fig:SystemTestSekvensDiagram}
 \end{figure}
