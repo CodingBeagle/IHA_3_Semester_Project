@@ -40,7 +40,7 @@ H-broen er bygget op af to identiske kredsløb - et til hver retning. Derfor bes
 For at gøre det muligt, at motoren kan skifte retning hurtigt er der indsat to transistorer. Inden disse blev sat ind, blev P-MOSFET'en (Q9) opladet hurtigt men afladet meget langsomt. For at få den til at aflade hurtigt blev Q5 indsat. Det gjorde, at N-MOSFET'en (Q4) blev langsom til at oplade, så derfor blev Q6 sat ind. 
 
 \subsubsection{Rotationsbegrænsning}
-Motoren, som styrer platformen, skal kunne bevæge sig frit i intervallet, som er fastsat i kravspecifikationen \textbf{\#ref Reference til kravspecikation (ikke-funktionelle krav)}. For at begrænse denne bevægelse udenfor det fastsatte interval, anvendes der et potentiometer. Når motoren bevæger sig, ændres potentiometerets modstandsværdi, og dermed ændres spændingsniveauet. Altså kan motorens position bestemmes ved at se på outputspændingen fra potentiometret. Et alternativ til denne løsning er, at der anvendes en steppermotor, der kan styres i små steps, fremfor en DC-motor. Da der var et ønske om at arbejde med flere hardwareelementer end kun motoren, blev DC-motoren med rotationsbegrænsning valgt.
+Platformen, som styres af motoren, må ikke kunne rotere 360 \(\deg\). Dette ses kravspecifikationen \textbf{\#ref Reference til kravspecikation (ikke-funktionelle krav)}. For at begrænse motorens bevægelse, anvendes der et potentiometer. Når motoren bevæger sig, ændres potentiometerets modstandsværdi, og dermed ændres spændingsniveauet. Altså kan motorens position bestemmes ved at se på outputspændingen fra potentiometret. 
 
 \begin{figure}[H]
 	\centering
@@ -51,34 +51,7 @@ Motoren, som styrer platformen, skal kunne bevæge sig frit i intervallet, som e
 
 \noindent På figur \ref{fig:opstillingADC} ses opstillingen for rotationsbegrænsningen. På figuren ses, at potententiometerets skaft er forbundet til motoren, som roterer når motoren bevæges. Potentiometeret bliver forsynet med 5V og stel fra PSoC1 via den røde og sorte ledning. Ouputspændingen fra potentiometeret er forbundet til PSoC1 via den gule ledning.  \newline
 
-Potentiometeret har til formål at styre motoren i det definerede interval. Det valgte potentiometer er et lineært 47k\(\Omega\) potentiometer. Det vil sige, at for hver ændring, der sker i modstanden, vil der ske en proportional ændring i outputspændingen. Outputspændingen føres ind på et ben på PSoC'en, som er forbundet til en intern AD-converter, som er en Sequencing Successive Approximation ADC. Denne anvendes til at digitalisere det analoge signal fra potentiometeret.
-
-En sequencing SAR ADC indeholder et sample-hold kredsløb og en comparator. Kredsløbet holder på et indgangssignal, indtil det næste signal registreres på kredsløbets indgang. Dermed har converteren tid til at bestemme resultatet af konverteringen. Comparatoren sammenligner inputsignalet med midscaleværdien. 
-
-\begin{figure}[H]
-	\centering
-	\includegraphics[width=\textwidth]{Afsnit/DesignOgImplementering/images/ADC}
-	\caption{ADC opbygning}
-	\label{fig:konvertering}
-\end{figure}
-
-På figur \ref{fig:konvertering} er ADC'en indstillet til midscale og bruger dette punkt til sammenligning med inputsignalet.  
-
-ADC’en består af et sampleholdkredsløb. Det vil sige, at den ser på dataene indtil der er fundet en værdi, så der går noget tid imellem hver værdi, så der er sørget for, at der ikke bliver lavet oversamples og der ikke bliver lavet aliasering af det signal, som kommer ind i ADC’en. For at finde den værdi, som bliver sendt ind i ADC'en, bliver der lavet en skala, som bliver halveret alt efter, hvor værdien ligger på skalaen, som vist på figur \ref{fig:pot}
-
-Der er blevet målt med en vinkelmåler for at overholde kravene i kravspecifikationen\textbf{\#ref Reference til kravspecikation (ikke funktionelle krav)}. Hvor der blev fundet frem til en minimum- og maksimumværdi, hvor motoren må køre imellem. \\
-\\
-Min=915 mV\\
-\\
-Max = 2000mV\\
-\\
-Disse værdier er aflæst fra PSoC’en. Da den har en referencespænding på 3.3V vil den have lavere værdier, end hvad der bliver sendt ud fra potentiometeret.
-\begin{equation}
- \frac {5V} {3.3V}= 1.515
-\end{equation}
-Der er en forskel på cirka 1,515 mellem potentiometer og ADC. Så ADC er cirka 1,515 mindre end hvad potentiometer sender ud.
-\\
-For at forstå hvordan ADC’en og potentiometeret fungerer henvises til dokumentationen.
+\noindent Potentiometeret har til formål at begrænse motorens bevægelse. Det valgte potentiometer er et lineært 47k\(\Omega\) potentiometer. Det vil sige, at for hver ændring, der sker i modstanden, vil der ske en proportional ændring i outputspændingen. Outputspændingen føres ind på et ben på PSoC'en, som er forbundet til en intern AD-converter, som er en Sequencing Successive Approximation ADC. Denne ADC består af et sample-hold kredsløb. Denne anvendes til at digitalisere det analoge signal fra potentiometeret.
 
 
 % % % % % % % % % Affyringsmekanisme % % % % % % % % % % % % % % % 
