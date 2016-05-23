@@ -68,7 +68,7 @@ Der er også blevet sat diode fire ind i kredsløbet, de fire dioder skal funger
 Resten af komponenterne bliver beskrevet over i dokumentationen \ref{dokumentation, h-bro}.
 
 \subsubsection{Rotationsbegrænsning}
-Motoren, som styrer platformen, skal kunne bevæge sig frit i intervallet, som er fastsat i kravspecifikationen \textbf{\#ref Reference til kravspecikation (ikke-funktionelle krav)}. For at begrænse denne bevægelse udenfor det fastsatte interval, anvendes der et potentiometer. Når motoren bevæger sig, ændres potentiometerets modstandsværdi, og dermed ændres spændingsniveauet. Altså kan motorens position bestemmes ved at se på outputspændingen fra potentiometret. Et alternativ til denne løsning er, at der anvendes en steppermotor, der kan styres i små steps, fremfor en DC-motor. Da der var et ønske om at arbejde med flere hardwareelementer end kun motoren, blev DC-motoren med rotationsbegrænsning valgt.
+Platformen, som styres af motoren, må ikke kunne rotere 360 \(\deg\). Dette ses kravspecifikationen \textbf{\#ref Reference til kravspecikation (ikke-funktionelle krav)}. For at begrænse motorens bevægelse, anvendes et potentiometer samt en ADC. Når motoren bevæger sig, ændres potentiometerets modstandsværdi, og dermed ændres spændingsniveauet. På figur \ref{fig:opstillingADC} ses den endelige opstilling af rotationsbegrænsningen.
 
 \begin{figure}[H]
 	\centering
@@ -77,36 +77,45 @@ Motoren, som styrer platformen, skal kunne bevæge sig frit i intervallet, som e
 	\label{fig:opstillingADC}
 \end{figure}
 
-\noindent På figur \ref{fig:opstillingADC} ses opstillingen for rotationsbegrænsningen. På figuren ses, at potententiometerets skaft er forbundet til motoren, som roterer når motoren bevæges. Potentiometeret bliver forsynet med 5V og stel fra PSoC1 via den røde og sorte ledning. Ouputspændingen fra potentiometeret er forbundet til PSoC1 via den gule ledning.  \newline
-
-Potentiometeret har til formål at styre motoren i det definerede interval. Det valgte potentiometer er et lineært 47k\(\Omega\) potentiometer. Det vil sige, at for hver ændring, der sker i modstanden, vil der ske en proportional ændring i outputspændingen. Outputspændingen føres ind på et ben på PSoC'en, som er forbundet til en intern AD-converter, som er en Sequencing Successive Approximation ADC. Denne anvendes til at digitalisere det analoge signal fra potentiometeret.
-
-En sequencing SAR ADC indeholder et sample-hold kredsløb og en comparator. Kredsløbet holder på et indgangssignal, indtil det næste signal registreres på kredsløbets indgang. Dermed har converteren tid til at bestemme resultatet af konverteringen. Comparatoren sammenligner inputsignalet med midscaleværdien. 
+\noindent \textbf{Potentiometer} \newline
+\noindent Den første del af rotationsbegrænsningen er et potentiometer, som fungerer efter spændingsdelerprincippet, som vist på figur \ref{fig:potentiometer2}.
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=\textwidth]{Afsnit/DesignOgImplementering/images/ADC}
-	\caption{ADC opbygning}
-	\label{fig:konvertering}
+	\includegraphics[scale=0.65]{DesignOgImplementering/images/potentiometer}
+	\caption{Spændingsdeler formlen for potentiometeret}
+	\label{fig:potentiometer2}
+	
 \end{figure}
 
-På figur \ref{fig:konvertering} er ADC'en indstillet til midscale og bruger dette punkt til sammenligning med inputsignalet.  
+\noindent Det anvendte potentiometer har en størrelse på 47\(\ K\Omega\). Denne er lineær. Det vil sige at spændingen stiger proportionalt med modstanden. I potentiometeret findes en roterende kontakt, der danner en justerbar spændingsdeler. Når skaftet på potentiometret roteres ændres modstanden i de to variable modstande, \(\ R_{1}\) og  \(\ R_{2}\). På figur \ref{fig:potentiometer2} ses en konceptuel afbildning af de variable modstande i potentiometret, hvor der ses at udgangsspændingen er spændingen over \(\ R_{1}\). \newline
 
-ADC’en består af et sampleholdkredsløb. Det vil sige, at den ser på dataene indtil der er fundet en værdi, så der går noget tid imellem hver værdi, så der er sørget for, at der ikke bliver lavet oversamples og der ikke bliver lavet aliasering af det signal, som kommer ind i ADC’en. For at finde den værdi, som bliver sendt ind i ADC'en, bliver der lavet en skala, som bliver halveret alt efter, hvor værdien ligger på skalaen, som vist på figur \ref{fig:pot}
+\noindent \textbf{ADC} \newline
+For at kunne aflæse spændingen på potentiometeret, anvendes en 12-bit AD converter af typen Sequencing Successive Approximation ADC. En sequencing SAR ADC indeholder et sample-hold kredsløb. Kredsløbet holder på et indgangssignal indtil det næste signal registres på kredsløbets indgang. Dermed har converteren tid til at bestemme outputværdien. \newline \newline
+\noindent ADC'en fungerer ved at midscale indstilles til halvdelen af referencespændingen. Inputsignalet sammenlignes med midscale, hvis inputsignalet er højere end midscaleværdien sættes MSB 1 og hvis signalet er lavere bliver denne sat til 0. Herefter bliver midscale værdien rekursivt sat til havdelen af intervallet, som inputsignalet ligger indenfor, og bittene ned til LSB bliver sat. Bittene der sættes, bliver gemt i et register. Når konverteringen er gennemført, kan værdien af inputsignalet aflæses i dette register. 
 
-Der er blevet målt med en vinkelmåler for at overholde kravene i kravspecifikationen\textbf{\#ref Reference til kravspecikation (ikke funktionelle krav)}. Hvor der blev fundet frem til en minimum- og maksimumværdi, hvor motoren må køre imellem. \\
-\\
-Min=915 mV\\
-\\
-Max = 2000mV\\
-\\
-Disse værdier er aflæst fra PSoC’en. Da den har en referencespænding på 3.3V vil den have lavere værdier, end hvad der bliver sendt ud fra potentiometeret.
-\begin{equation}
- \frac {5V} {3.3V}= 1.515
-\end{equation}
-Der er en forskel på cirka 1,515 mellem potentiometer og ADC. Så ADC er cirka 1,515 mindre end hvad potentiometer sender ud.
-\\
-For at forstå hvordan ADC’en og potentiometeret fungerer henvises til dokumentationen.
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\textwidth]{DesignOgImplementering/images/ADC}
+	\caption{Illustation af AD konvertering}
+	\label{fig:ADC1}
+	
+\end{figure}
+
+\noindent På figur \ref{fig:ADC1} ses et eksempel over de første fem trin i en konvertering. Til dette projekt arbejdes der med en 12-bit AD converter, dermed ville denne konvertering forsætte 12 trin ned.  \newline
+
+\noindent \textbf{PSoC Indstillinger} \newline
+I forbindelse med begrænsning af motorens rotation er der nogle indstillinger der skal sættes. ADC'en skal indstilles til at gøre brug af en kanal i single mode, da der ét inputsignal fra potentiometret og denne skal bestemmes i forhold til stel. For at styre motorens bevægelse i et interval er følgende algoritme implementeret.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\textwidth]{DesignOgImplementering/images/rotationalgorithm}
+	\caption{Aktivitetsdiagram for rotationsbegrænsningsalgortimen}
+	\label{fig:rotation}
+	
+\end{figure}
+
+\noindent På figur \ref{fig:rotation} ses et aktivitetsdiagram for algoritmen for rotationsbegrænsning. Der er fastsat to værdier for ydergrænser. Når motoren bevæger sig udover ydergrænserne, blokeres motoren for den givne retning indtil motoren er tilbage i intervallet. 
 
 
 % % % % % % % % % Affyringsmekanisme % % % % % % % % % % % % % % % 

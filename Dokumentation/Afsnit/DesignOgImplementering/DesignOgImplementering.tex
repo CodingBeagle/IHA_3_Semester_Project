@@ -65,14 +65,14 @@ I tabel \ref{realIdriverFunktioner} ses funktionsbeskrivelser for RealCandyGun.
 
 \subsubsection{Klassebeskrivelse}
 
-\noindent\textbf{void on_activateBut_clicked()} \newline
+\noindent\textbf{void on\_activateBut\_clicked()} \newline
 Dette slot er startknappen i brugergrænsefladen. Ved tryk bliver knappens signal broadcastet og knappens funktion bliver kørt. Forløbet for dette slot beskrives i figur \ref{fig:stmGUI}. Der skrives til konsolvinduet, derefter testes der på SPITest(). Hvis der returnes true, skrives dette til konsollen og programmet fortsætter til I2CTest(). Hvis der returnes false, skrives dette til konsollen og programmet returnerer til idle-tilstand. Nu testes der på I2CTest(). Hvis der returnes true, skrives dette til konsollen og programmet fortsætter til NunchuckTest(). Hvis der returnes false, skrives dette til konsollen og programmet returnerer til idle-tilstand.
 Der testes der på NunchuckTest(). Hvis der returnes true, skrives dette til konsollen, og der skrives at systemtesten er gennemført. Hvis der returnes false, skrives dette til konsollen. Programmeret returnerer til idle-tilstand. \newline
 
-\noindent\textbf{void on_clearBut_clicked()} \newline
+\noindent\textbf{void on\_clearBut\_clicked()} \newline
 Dette slot er clearknappen i brugergrænsefladen. Knappens funktionalitet er en clearing af konsol vinduet. \newline
 
-\noindent\textbf{void on_exitBut_clicked()} \newline
+\noindent\textbf{void on\_exitBut\_clicked()} \newline
 
 \begin{figure}[H]
 	\centering
