@@ -223,6 +223,8 @@ I afsnit \ref{afsnit:IBD} \textbf{IBD} ses på figur \ref{figure:ibdDiagram} at 
 	\label{tabel:spiKommandoType}
 \end{table}
 
+Kommandotyperne er udledt fra det samlede klassediagram for DevKit8000, figur \ref{fig:CompleteClassDiagramDevKit8000}. På figuren kan det ses at \textit{DevKit8000 Controller} skal kunne starte tests for SPI, I2C, samt Nunchuck og aflæse resultatet af disse.  
+
 Kommunikation på en SPI-bus foregår ved bit-shifting. Dette betyder at indholdet af masterens transfer buffer bliver skiftet over i slavens read buffer og omvendt. Kommunikationen foregår i fuld duplex, derfor skal der foretages to transmissioner for at aflæse data fra en SPI-slave. Dette skyldes at slaven skal vide hvilken data der skal klargøres i transfer-bufferen og klargøre denne buffer før masteren kan aflæse denne. Her skal der tages højde for at en længere proces skal gennemføres før slaven har klargjort transfer-buffern. Derfor skal masteren, efter at have sendt en kommandotype, vente et bestemt stykke tid før der at aflæses fra slavens transfer-buffer. Denne sekvens er illustreret med et sekvensdiagram på figur \ref{figure:SDSpiSlaveRead}.
 
 \begin{figure}[H]
@@ -270,16 +272,15 @@ På tabel \ref{table:I2CKommandoer} ses de definerede kommandotyper og det tilsv
 				\hline
 				\multicolumn{1}{|l|}{Kommandotype}    & \multicolumn{1}{l|}{Beskrivelse}                                            & \multicolumn{1}{l|}{Binær Værdi} & \multicolumn{1}{l|}{Hex Værdi} & \multicolumn{1}{l|}{Data Bytes}                                                                                         \\ \hline
 				\rowcolor[HTML]{CBCEFB} 
-				{\color[HTML]{000000} NunchchuckData} & {\color[HTML]{000000} Indeholder aflæst data fra Wii Nunchuck controlleren} & 0010 1010                        & 0xA2                           & \begin{tabular}[c]{@{}l@{}}Byte \#1 Analog X-værdi\\ Byte \#2 Analog Y-værdi\\ Byte \#3 Analog Buttonstate\end{tabular} \\
-				I2CTestRequest                        & Anmoder PSoC0 om at starte I2C-kommunikations test                          & 0010 1001                        & 0x29                           & Ingen databyte                                                                                                          \\
-				\rowcolor[HTML]{CBCEFB} 
-				I2CTestAck                            & Anmodning om at få en I2C OK besked fra I2C enhed                           & 0010 1000                        & 0x28                           & Ingen databyte                                                                                                         
+				{\color[HTML]{000000} NunchchuckData} & {\color[HTML]{000000} Indeholder aflæst data fra Wii Nunchuck controlleren} & 0010 1010                        & 0xA2                           & \begin{tabular}[c]{@{}l@{}}Byte \#1 Analog X-værdi\\ Byte \#2 Analog Y-værdi\\ Byte \#3 Analog Buttonstate\end{tabular} \\                                                                               
 			\end{tabular}
 		}
 		\caption{I2C kommunikation kommandotyper}
 		\label{table:I2CKommandoer}
 	\end{adjustwidth}
 \end{table}
+
+Kommandotyperne er primært udledt fra det samlede klassediagram for PSoC1, figur \ref{fig:CompleteClassDiagramPSoC1}. På figuren kan det ses at \textit{PSoC1 Controller} skal kunne aflæse input tilstand fra I2C Interface. På det samlede klassediagram for PSoC0, figur \ref{fig:CompleteClassDiagramPSoC0}, kan det også ses at PSoC0 Controller skal kunne udføre tilsvarende handling på I2C Interface. Denne funktionalitet er overført til kommandotypen \textit{NunchuckData}.
 
 Kolonnerne \textit{Binær Værdi} og \textit{Hex Værdi} i tabel \ref{table:I2CKommandoer} viser kommandotypens unikke tal-ID i både binær- og hexadecimalform. Denne værdi sendes som den første byte, for at identificere kommandotypen.
 
