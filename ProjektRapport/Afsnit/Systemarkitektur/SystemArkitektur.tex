@@ -153,27 +153,37 @@ Use Case 2 beskriver test af systemet før spillet startes. På figur \ref{fig:S
 	\label{fig:SystemTestSekvensDiagram}
 \end{figure}
 
-Softwaren til systemet er udarbejdet for hver CPU (se evt. software allokeringsdiagrammet på side \pageref{figure:allocationDiagram} figur \ref{figure:allocationDiagram}) ud fra en applikationsmodel, der kan ses i dokumentationen side (\textbf{Indsæt reference til applikationsmodel dokumentations \#ref}). Ud fra disse applikationsmodeller er der udarbejdet klassediagrammer, der viser software klasserne på den givne CPU, samt klassernes relationer til hinanden. Et indledende forslag til klassediagrammerne for hver CPU i systemet kan ses på figur \ref{figure:initialKlassediagramDevkit}, \ref{figure:initialKlassediagramPSoC0} og \ref{figure:initialKlassediagramPSoC1}.
+\subsection{Samlede Klassediagrammer}
+På baggrund af sekvensdiagrammerne i afsnit \ref{afsnit:informationFlow} samt de detaljerede applikationsmodeller analyseret i DOKUMENTATION \textbf{\#ref}, er der udledt samlede klassediagrammer for hver individuel CPU i systemet. Disse er med til at identificere potentielle klasser og funktionaliter der skal overvejes i implementation og design af systemet, og har altså fungeret som et udgangspunkt til resten af udviklingsprocessen.
 
+På figur \ref{fig:CompleteClassDiagramDevKit8000} ses det samlede klassediagram for DevKit8000. Her er der identificeret 3 konceptuelle klasser. \textit{DevKit8000 Controller} har ansvar for at køre den primære logik for systemets Use Cases, og for at kunne gøre dette er der brug for at kommunikere med \textit{Graphical User Interface} (GUI), samt et \textit{SPI Interface}.
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=\textwidth]{SystemArkitektur/images/DevKit8000ClassDiagram}
-	\caption{Klassediagram for DevKit8000 CPU}
-	\label{figure:initialKlassediagramDevkit}
+	\includegraphics[width=\textwidth] {Systemarkitektur/images/CompleteClassDiagramDevKit8000}
+	\caption{Samlet Klassediagram for DevKit8000}
+	\label{fig:CompleteClassDiagramDevKit8000}
+\end{figure}
+
+På figur \ref{fig:CompleteClassDiagramPSoC0} ses det samlede klassediagram for PSoC0. Her er der identificeret 3 konceptuelle klasser. \textit{PSoC0 Controller} har til ansvar at eksekvere den primære logik for systemets Use Cases. For at kunne gøre dette er der brug for at kommunikere med et \textit{I2C Interface} samt et \textit{SPI Interface}.
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\textwidth] {Systemarkitektur/images/CompleteClassDiagramPSoC0}
+	\caption{Samlet Klassediagram for PSoC0}
+	\label{fig:CompleteClassDiagramPSoC0}
 \end{figure}
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=\textwidth]{SystemArkitektur/images/klassediagramPSoC0}
-	\caption{Klassediagram for PSoC0 CPU}
-	\label{figure:initialKlassediagramPSoC0}
+	\includegraphics[width=\textwidth] {Systemarkitektur/images/CompleteClassDiagramPSoC1}
+	\caption{Samlet Klassediagram for PSoC1}
+	\label{fig:CompleteClassDiagramPSoC1}
 \end{figure}
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[]{SystemArkitektur/images/klassediagramPSoC1}
-	\caption{Klassediagram for PSoC1 CPU}
-	\label{figure:initialKlassediagramPSoC1}
+	\includegraphics[width=\textwidth] {Systemarkitektur/images/CompleteClassDiagramPSoC2}
+	\caption{Samlet Klassediagram for PSoC2}
+	\label{fig:CompleteClassDiagramPSoC2}
 \end{figure}
 
 \subsection{SPI Kommunikations Protokol}
