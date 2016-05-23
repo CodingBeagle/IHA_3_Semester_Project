@@ -7,20 +7,21 @@ I Goofy Candygun 3000 indgår forskellige hardwaredele, som skal udgøre det fæ
 For at kanonen kan sigte både vertikalt og horisontalt, skal den kunne køre i begge disse retninger. Det afhjælpes ved at bruge to DC-motorer - en til hver retning. Men for at disse så kan køre både forlæns og baglæns, skal der bruges en H-bro. For at sikre at motorerne ikke kan dreje 360 grader, er der udviklet en rotationsbegrænsning, som gør, at de kun kan dreje cirka 35 grader ud til hver side. 
 
 \subsubsection{H-bro}
-H-broen er en del af ”motorControl” blokken, hvor den har til opgave at styre motoren, så den både kan køre til højre og venstre. Der blev valgt i dette projekt at bygge en h-broen op fra bunden selv. Selvom man kunne få en komponeret som indholdet en h-bro, som man sagtes kunne bruges, men den blev valgt fra, for selv at få en bedre ide om hvordan h-broen er bygget op og hvordan den fungerer.  
+H-broen er en del af ”motorControl” blokken, hvor den har til opgave at styre motoren, så den både kan køre til højre og venstre. Der blev valgt i dette projekt at bygge en h-broen op fra bunden selv. Selvom der findes en komponent som indholder en H-bro, der også sagtens kunne benyttes, er der blevet designet en H-bro fra bunden, da det giver en bedre forståelse af, hvordan den fungerer. 
 
 \begin{figure}[H]
-	\begin{adjustwidth}{-3cm}{-\rightmargin}
+	%\begin{adjustwidth}
+		%{3cm}{-\rightmargin}
 		\centering
-		\includegraphics[width=0.4\paperwidth]{Afsnit/DesignOgImplementering/images/H-bro}
+		\includegraphics[width=\textwidth]{Afsnit/DesignOgImplementering/images/H-bro}
 		\caption{Kredsløbsdiagram for H-broen}
 		\label{fig:hbro}
-	\end{adjustwidth}
+	%\end{adjustwidth}
 \end{figure}
 
+For at få motoren til for eksempel at køre til højre, skal P mosfet og N mosfet åbnes. For at N mosfet’en skal åbne, skal der et positiv spændingen til. Imens for at P mosfet’en kan åbne, skal den have en negativ spænding på gatebenet for at kunne åbne. For at løse dette blev der sat en N mosfet, foran hver af P mosfet, for at trække spændingen ned, så P mosfet’ene kan åbne. \\
 
-For at få motoren til fx at køre til højre, skal P mosfet og N mosfet åbnes. For at N mosfet’en skal åbne, skal der et positiv spændingen til. Imens for at P mosfet’en kan åbne, skal den have en negativ spænding på gatebenet for at kunne åbne. For at løse dette blev der sat en N mosfet, foran hver af P mosfet, for at trække spændingen ned, så P mosfet’ene kan åbne. \\
-
+Da der ønskes at kunne skifte motorens retning hurtigt og ofte, var det nødvendigt at indsætte en transistor foran hver P-MOSFET
 Da der i dette projekt ønskes at skifte retning ofte, blev der sat foran hver P mosfet, to transistorer, for at hurtig at kunne aflade og oplade mosfet’ene, på grund af kondensator effekt i mellem benene ville det tag længere tid at åbne og lukke for mosfet’en, så derfor blev det valgt at sætte transistorer ind. Selvom der findes en komponent (IRF2101), som kan hjælpe med dette, men der blev valgt at bruge transistorer, for at få en bedre ide om hvordan det hele funger. Som man kan se på figur\ref{fig:mof} viser hvordan det så ud før at transistorer var sat ind. På figur \ref{fig:moe} viser det  hvordan det ser ud efter at transistorerne er sat ind. Så det gør som forvente at mosfet’ene åbne og lukker hurtigere. \\
 
 \begin{figure}[H]
@@ -43,7 +44,7 @@ Da der i dette projekt ønskes at skifte retning ofte, blev der sat foran hver P
 
 Der er også blevet sat diode fire ind i kredsløbet, de fire dioder skal fungere som beskyttelse af mosfet’ene, Det, de gør, er, at de sikrer, at den spænding, som er tilbage i motoren, når man lukker for mosfetene, ikke løber tilbage ind i mosfetene og brænder dem af.
 \\
-Resten af komponenterne bliver beskrevet over i dokumentationen ref.
+Resten af komponenterne bliver beskrevet over i dokumentationen \ref{dokumentation, h-bro}.
 
 \subsubsection{Rotationsbegrænsning}
 Motoren, som styrer platformen, skal kunne bevæge sig frit i intervallet, som er fastsat i kravspecifikationen \textbf{\#ref Reference til kravspecikation (ikke-funktionelle krav)}. For at begrænse denne bevægelse udenfor det fastsatte interval, anvendes der et potentiometer. Når motoren bevæger sig, ændres potentiometerets modstandsværdi, og dermed ændres spændingsniveauet. Altså kan motorens position bestemmes ved at se på outputspændingen fra potentiometret. Et alternativ til denne løsning er, at der anvendes en steppermotor, der kan styres i små steps, fremfor en DC-motor. Da der var et ønske om at arbejde med flere hardwareelementer end kun motoren, blev DC-motoren med rotationsbegrænsning valgt.
