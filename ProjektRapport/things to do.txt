@@ -1,4 +1,4 @@
-Spørg Gunvor hvor formelt teksten skal være i process rapporten.
+﻿Spørg Gunvor hvor formelt teksten skal være i process rapporten.
 -Indledning til "scrum kursus ved systematic" (de, vi, etc)
 -Konklusion for første sprint (brug af vi)
 
@@ -46,7 +46,7 @@ Projektrapport:
 	-Skriv mere tekst til "System Test"
 	-Beskriv motorstyring (software)
 	-Ret BDD (motor til motorstyring)
-	-Brugergrænseflade beskrivelse
+
 -Design og Implementering
 	-SPI Devkit skal rettes
 	-Beskriv motorstyring (software)
