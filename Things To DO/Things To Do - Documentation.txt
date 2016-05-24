@@ -1,9 +1,5 @@
--Ret aktør-kontekst diagram
--Ret use case diagram
--Opdater tekst for domæne model
 -Opdater tekst for BDD
 -Opdater blokbeskrivelse for BDD
--Ret signalbeskrivelse (SPI og I2C)
 -Opdater overordnet sekvensdiagram for UC1 + Tekst
 -Tekst til alle figurer i applikationsmodel for UC1
 -Tekst til klasse identifikationsdiagrammer for UC2

@@ -7,7 +7,6 @@
 -Systemarkitektur
    -Opdater BDD fra dokumentation
    -Ret blokbeskrivelse
-   -Opdater signalbeskrivelse ved SPI og I2C
    -Skriv tekst til overordnede sekvensdiagrammer
 -Design og implementering
    -Hardware
