@@ -54,25 +54,44 @@ På tabel \ref{ansvarsomraader} ses opdelingen af ansvarsområder mellem projekt
 
 \begin{table}[H]
 	\centering
-	\begin{tabular}{|llllllll|}
-		\hline
-		\multicolumn{1}{|l|}{Ansvarsområder}     & \rot{Daniel Jensen }& \rot{Mia Konstmann } & \rot{Mikkel Nielsen } & \rot{Kasper Rieder } & \rot{Michael Kloock } & \rot{Tenna Rasmussen } & \rot{Pernille Kjeldgaard } \\ \hline
-		\rowcolor[HTML]{CBCEFB} 
-		I2C Kommunikationsprotokol PSoC Software & P                        & S                        &                         & P                       &                          &                         &                          \\
-		Nunchuck PSoC Software                   & S                        & P                        &                         & S                       &                          &                         &                          \\
-		\rowcolor[HTML]{CBCEFB} 
-		SPI Kommunikationsprotokol PSoC Software & P                        & S                        &                         & P                       &                          &                         &                          \\
-		SPI Driver Devkit Software               &                          & S                        &                         & S                       &                          & P                       &                          \\
-		\rowcolor[HTML]{CBCEFB} 
-		Brugergrænseflade Devkit Software        &                          &                          &                         &                         & P                        &                         &                          \\
-		Motorstyring PSoC Software               &                          & P                        & P                       & S                       &                          &                         &                          \\
-		\rowcolor[HTML]{CBCEFB} 
-		Use Case 2 Implementering                & P                        & S                        &                         & P                       &                          &                         &                          \\
-		&                          &                          &                         &                         &                          &                         &                          \\
-		\rowcolor[HTML]{CBCEFB} 
-		H-bro                                    &                          &                          &                         &                         &                          &                         &                          \\
-		Affyringsmekanisme                       &                          &                          &                         &                         &                          &                         &                         
-	\end{tabular}
-	\caption{Ansvarsområder tabel}
 	\label{ansvarsomraader}
+	\begin{tabular}{|ll|l|l|l|l|l|l|l|}
+		\hline
+		& \multicolumn{1}{l|}{Ansvarsområder}    & \rot{Daniel Jensen }& \rot{Mia Konstmann } & \rot{Mikkel Nielsen } & \rot{Kasper Rieder } & \rot{Michael Kloock } & \rot{Tenna Rasmussen } & \rot{Pernille Kjeldgaard } \\ \hline
+		\rowcolor[HTML]{CBCEFB} 
+		\multicolumn{2}{l|}{\cellcolor[HTML]{CBCEFB}I2C Kommunikationsprotokol} &     &     &    &    &     &    &     \\ \cline{3-9} 
+		& Printudlægdesign og Lodning                     &     & S   & S  & P  &     &    &     \\ \cline{3-9} 
+		& PSoC Software                                   & P   & S   &    & P  &     &    &     \\ \cline{3-9} 
+		\rowcolor[HTML]{CBCEFB} 
+		\multicolumn{2}{l|}{\cellcolor[HTML]{CBCEFB}Wii-Nunchuck}               &     &     &    &    &     &    &     \\ \cline{3-9} 
+		& PSoC Software                                   & S   & P   &    & S  &     &    &     \\ \cline{3-9} 
+		\rowcolor[HTML]{CBCEFB} 
+		\multicolumn{2}{l|}{\cellcolor[HTML]{CBCEFB}SPI Kommunikationsprotokol} &     &     &    &    &     &    &     \\ \cline{3-9} 
+		& Stik og Ledninger                               &     & P   & P  &    &     &    &     \\ \cline{3-9} 
+		& PSoC Software                                   & P   & S   &    & P  &     &    &     \\ \cline{3-9} 
+		\rowcolor[HTML]{CBCEFB} 
+		\multicolumn{2}{l|}{\cellcolor[HTML]{CBCEFB}SPI Driver}                 &     &     &    &    &     &    &     \\ \cline{3-9} 
+		& Kernemodul til Devkit 8000                      & S   & S   &    & S  &     & P  &     \\ \cline{3-9} 
+		\rowcolor[HTML]{CBCEFB} 
+		\multicolumn{2}{l|}{\cellcolor[HTML]{CBCEFB}Brugergrænseflade}          &     &     &    &    &     &    &     \\ \cline{3-9} 
+		& Interface Driver                                & S   &     &    & S  & S   &    &     \\ \cline{3-9} 
+		& Systemtest GUI                                  &     &     &    &    & P   &    &     \\ \cline{3-9} 
+		& Demo GUI                                        &     &     &    &    & P   &    &     \\ \cline{3-9} 
+		\rowcolor[HTML]{CBCEFB} 
+		\multicolumn{2}{l|}{\cellcolor[HTML]{CBCEFB}Rotationsbegrænsning}       &     &     &    &    &     &    &     \\ \cline{3-9} 
+		& PSoC Software                                   &     & P   & P  & S  &     &    &     \\ \cline{3-9} 
+		\rowcolor[HTML]{CBCEFB} 
+		\multicolumn{2}{l|}{\cellcolor[HTML]{CBCEFB}Use Case 2}                 &     &     &    &    &     &    &     \\ \cline{3-9} 
+		& Implementering                                  & P   & S   &    & P  &     &    &     \\ \cline{3-9} 
+		&                                                 &     &     &    &    &     &    &     \\ \cline{3-9} 
+		\rowcolor[HTML]{CBCEFB} 
+		\multicolumn{2}{l|}{\cellcolor[HTML]{CBCEFB}Motorstyring}               &     &     &    &    &     &    &     \\ \cline{3-9} 
+		& H-bro                                           &     &     & P  &    &     &    &     \\ \cline{3-9} 
+		& Ultiboard Design                                &     &     & P  &    &     &    &     \\ \cline{3-9} 
+		& Lodning                                         &     &     &    &    &     &    &     \\ \cline{3-9} 
+		\rowcolor[HTML]{CBCEFB} 
+		\multicolumn{2}{l|}{\cellcolor[HTML]{CBCEFB}Affyringsmekanisme}         &     &     &    &    &     &    &     \\ \cline{3-9} 
+		&                                                 &     &     &    &    &     &    &     \\ \cline{3-9} 
+	\end{tabular}
+		\caption{Oversigt over ansvarsområder}
 \end{table}
