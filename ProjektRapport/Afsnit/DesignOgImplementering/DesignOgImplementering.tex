@@ -237,6 +237,8 @@ QT frameworket opretter "hovedvinduet" i brugergrænsefladen som en klasse. Knap
 hvilket gør dem i stand til interagere i brugergrænsefladen. Når en knap er assignet til et slot i klassen, og der trykkes på den pågældende knap, bliver det tildelte signal broadcastet
 og slot-funktionen bliver kørt. Alle tre knapper i brugergrænsefladen er assignet signal-typen "clicked()".
 
+Her vises en statemachine for brugergrænsefladens forløb igennem usecase 2.
+
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=1.2\textwidth]{Afsnit/DesignOgImplementering/images/StateMachineUC2}
@@ -244,7 +246,10 @@ og slot-funktionen bliver kørt. Alle tre knapper i brugergrænsefladen er assig
 	\label{fig:StateMachineUC2}
 \end{figure}
 
-Brugergrænsefladen for UC2 er en simpel test-konsol. Den består af 3 knapper og et tekstvindue. Brugergrænsefladen interfacer med SPI-protokollen, gennem vores interface driver. Den første knap, Start test, initierer UC2. Efterhånden som testen løbes igennem kaldes test funktionerne, og ved hjælp af if-conditions, bliver der tjekket på retur-værdierne fra interface-funktionerne. Hvis retur-værdien er true, skrives der en "--test successful" besked i tekstvinduet. og widgeten kører videre. Hvis retur-værdien er false, skrives der en "--test unsuccessful" i tekstvinduet og widgeten returnerer til idle tilstand. Når alle test er successful, skrives "System test successful, system is ready for use" til tekstvinduet, og widgeten returnerer til idle tilstand. Den anden knap, Clear, clearer tekstvinduet til blank tilstand. Den tredje knap, Exit, lukker widgeten.
+Statemachinens forløb beskrives i dokumentationen, #RefDoku
+
+Brugergrænsefladen for UC2 er en simpel test-konsol. Den består af 3 knapper og et konsol vindue. Brugergrænsefladen interfacer med SPI-protokollen, gennem vores interface driver. Den første knap, Start test, initierer UC2. Efterhånden som testen løbes igennem kaldes test funktionerne, og ved hjælp af if-conditions, bliver der tjekket på retur-værdierne fra interface-funktionerne. Hvis retur-værdien er true, skrives der en "--test successful" besked i konsol vinduet. og widgeten kører videre. Hvis retur-værdien er false, skrives der en "--test unsuccessful" i tekstvinduet og widgeten returnerer til idle tilstand. Når alle test er successful, skrives "System test successful, system is ready for use" til tekstvinduet, og widgeten returnerer til idle tilstand. Den anden knap, Clear, clearer konsollen til blank tilstand. Den tredje knap, Exit, lukker widgeten.
+Koblingen i brugergrænsefladen hænger udelukkende sammen med interfacedriveren. Knapperne kalder funktioner fra interfacedriveren, og ved ændring i disse funktioner, ville foresage ændringer i brugergrænsefladen.
 
 \subsection{Nunchuck}
 Til styring af kanonen bruges en Wii-nunchuck. Følgende afsnit beskriver PSoC0's håndtering af data fra Wii-nunchuck.
