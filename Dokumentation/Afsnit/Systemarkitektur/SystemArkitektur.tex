@@ -25,7 +25,7 @@ En mere detaljeret gennemgang af disse kommunikations protokoller kan findes i a
 
 % ---------------BDD--------------------------------------------------
 \section{BDD for Candygun 3000}
-På figur \ref{fig:BDD} ses et \textit{Block Definition Diagram (BDD)} hvor Candygun 3000 brudt ned i blokkene PSoC0, PSoC1 og Devkit 8000. Devkit 8000 er brugergrænsefladen, som brugeren kan interagere med via touchskærmen. Denne kommunikerer via SPI til PSoC0, som er SPI-slave. PSoC0 er forbundet til PSoC1, hvor kommunikeres via I2C og den fungerer som I2C-master. Udover bindeled mellem SPI og I2C kommunikationen har  PSoC0 ansvaret for Wii-nunchucken. PSoC1 står for ar aflæse og afkode input fra nunchucken, som også kommunikerer via I2C, og videresender dataene til PSoC1. PSoC1, som står for motorstyringen, tager dataene og konverterer dem til et PWM-signal. Dette signal sendes derefter til de to motorer. På figur \ref{fig:BDD} ses blokkenes associationer og deres porte.  
+På figur \ref{fig:BDD} ses et \textit{Block Definition Diagram (BDD)} hvor Candygun 3000 brudt ned i blokkene PSoC0, PSoC1 og Devkit 8000. Devkit 8000 er brugergrænsefladen, som brugeren kan interagere med via touchskærmen. Denne kommunikerer via SPI til PSoC0, som er SPI-slave. PSoC0 er forbundet til PSoC1, hvor kommunikeres via I2C og den fungerer som I2C-master. Udover bindeled mellem SPI og I2C kommunikationen har  PSoC0 ansvaret for Wii-nunchucken. PSoC1 står for ar aflæse og afkode input fra nunchucken, som også kommunikerer via I2C, og videresender dataene til PSoC1. PSoC1, som står for motorstyringen, som vil sige den tager dataene både fra wii nunchucken og fra potentiometeret  for at finde frem til den rigtige h bro som den skal åbne for. På figur \ref{fig:BDD} ses blokkenes associationer og deres porte.  
 
 \begin{figure}[H]
 	\centering
@@ -104,12 +104,7 @@ I signalbeskrivelsen gælder det, at når et signal beskrives som 'højt' operer
 	& & PWM & Type: PWM \newline Frekvens: 22kHz \newline PWM \%: 0-100\% \newline Spændingsniveau: 0-5V \newline Beskrivelse: PWM signal til styring af motorens hastighed. \\ \hline
 	MotorControl & Den enhed der skal bevæge kanonen & PWM1 & Type: PWM \newline Frekvens: 3MHz \newline PWM\%: 0-100\% \newline Spædingsniveau: 0-5V \newline Beskrivelse: PWM signal til styring af motorens hastighed. \\ \cline{3-4}
 	&& PWM2 & Type: PWM \newline Frekvens: 3MHz \newline PWM\%: 0-100\% \newline Spædingsniveau: 0-5V \newline Beskrivelse: PWM signal til styring af motorens hastighed. \\ \cline{3-4}
-<<<<<<< d86f10829a9a7f5a2001e662a13ff152b853d5ed
-ingsniveau: 9V \newline Beskrivelse: Strømforsyning til motoren \\ \cline{3-4}
-4}
-oren står henne\\ \cline{3-4}
 
->>>>>>> 2dbaa406e466e2f1fe057d01ac2ce09af7bd7ec6
 
 	&& PWM3 & Type: PWM \newline Frekvens: 3MHz \newline PWM\%: 0-100\% \newline Spædingsniveau: 0-5V \newline Beskrivelse: PWM signal til styring af motorens hastighed. \\ \cline{3-4}
 	&& PWM4 & Type: PWM \newline Frekvens: 3MHz \newline PWM\%: 0-100\% \newline Spædingsniveau: 0-5V \newline Beskrivelse: PWM signal til styring af motorens hastighed. \\ \cline{3-4}
