@@ -64,6 +64,7 @@ I tabel \ref{realIdriverFunktioner} ses funktionsbeskrivelser for RealCandyGun.
 \end{figure}
 
 \subsubsection{Klassebeskrivelse}
+\label{sec:stmDescrip}
 
 \noindent\textbf{void on\_activateBut\_clicked()} \newline
 Dette slot er startknappen i brugergrænsefladen. Ved tryk bliver knappens signal broadcastet og knappens funktion bliver kørt. Forløbet for dette slot beskrives i figur \ref{fig:stmGUI}. Der skrives til konsolvinduet, derefter testes der på SPITest(). Hvis der returnes true, skrives dette til konsollen og programmet fortsætter til I2CTest(). Hvis der returnes false, skrives dette til konsollen og programmet returnerer til idle-tilstand. Nu testes der på I2CTest(). Hvis der returnes true, skrives dette til konsollen og programmet fortsætter til NunchuckTest(). Hvis der returnes false, skrives dette til konsollen og programmet returnerer til idle-tilstand.
@@ -258,6 +259,7 @@ Der blev først designet en H-bro, som bestod af to N-MOSFET's af typen IRLZ44 o
 	\begin{tabular}{|l|l|l}
 		\cline{1-2}
 		Betegnelse 	& Komponent 	          	 &  \\ \cline{1-2}
+		VCC        	& 5V                         &  \\ \cline{1-2}
 		Q1   		& IRLZ44(mosfet N-Channel)   &  \\ \cline{1-2}
 		Q2   		& IRLZ44(mosfet N-Channel)   &  \\ \cline{1-2}
 		Q3   		& IRLZ44(mosfet N-Channel)   &  \\ \cline{1-2}
@@ -276,10 +278,10 @@ Der blev først designet en H-bro, som bestod af to N-MOSFET's af typen IRLZ44 o
 		R6   		& 100$\Omega$                &  \\ \cline{1-2}
 		R7   		& 100$\Omega$                &  \\ \cline{1-2}
 		R8   		& 10k$\Omega$                &  \\ \cline{1-2}
-		D1   		& IN5819(diode)              &  \\ \cline{1-2}
-		D2   		& IN5819(diode)              &  \\ \cline{1-2}
-		D3   		& IN5819(diode)              &  \\ \cline{1-2}
-		D4   		& IN5819(diode)              &  \\ \cline{1-2}
+		D1   		& IN5819                     &  \\ \cline{1-2}
+		D2   		& IN5819                     &  \\ \cline{1-2}
+		D3   		& IN5819                     &  \\ \cline{1-2}
+		D4   		& IN5819                     &  \\ \cline{1-2}
 	\end{tabular}
 	\caption{Komponentbetegnelser på H-bro 5}
 	\label{my-label}
