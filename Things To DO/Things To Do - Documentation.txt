@@ -1,0 +1,19 @@
+-Ret aktør-kontekst diagram
+-Ret use case diagram
+-Opdater tekst for domæne model
+-Opdater tekst for BDD
+-Opdater blokbeskrivelse for BDD
+-Ret signalbeskrivelse (SPI og I2C)
+-Opdater overordnet sekvensdiagram for UC1 + Tekst
+-Tekst til alle figurer i applikationsmodel for UC1
+-Tekst til klasse identifikationsdiagrammer for UC2
+-Mangler generelt tekst til figurer i applikationsmodel for UC2
+-Opdater tekst til samlede klassediagrammer (fra rapport)
+-Ret sekvensdiagram for I2C protocol communication (execution blocks) og diagram navn
+-Færdiggør arkitektur til GUI
+-Opdater tekst til design og implementering - PSoC software
+-Aktivitetsdiagram til Nunchuck algoritme
+-Aktivitetsdiagram til I2C kommunikation
+-Færdiggør opsummering af modultest
+-Afrund modultest af Wii-Nunchuck
+-Slet accepttestafsnit under MODULTEST afsnittet
