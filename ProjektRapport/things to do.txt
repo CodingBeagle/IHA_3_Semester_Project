@@ -51,14 +51,14 @@ Projektrapport:
 	-Blokbeskrivelsen rettes igennem
 
 -Design og Implementering
-	-Rotationsbegrænsning - fjern udregninger
-	-Affyringsmekanisme - For meget tekst.
+	-Affyringsmekanisme HW - For meget tekst.
+	-Affyringsmekanisme SW - For meget tekst - Kan forklares i Sekvensdiagrammer.
 	-SPI Devkit skal rettes - For meget tekst
 	-Interface driver skal rettes - For meget tekst
 	-Beskriv motorstyring (software)
 	-Aktivitetsdiagrammer for vigtige algoritmer - Tilføjes til dokumentationen, og referes til.
 	-Brugergrænseflade - Tekst til STM.
-	-Affyringsmekanisme - For meget tekst - Kan forklares i Sekvensdiagrammer.
+	
 -Test
 	-Skal uddybes, og der skal oprettes ordentlige referencer til dvs. tests i dokumentationen
 
@@ -66,7 +66,7 @@ Projektrapport:
 	-Diskuter relevans af afsnit
 	-Analog discovery afsnit skrives
 
--Fremtidigt arbejde
+-Fremtidigt arbejde (Perspektivering)
 	-Rettes igennem, tilføjes mere tekst?
 
 -Perspektivering
