@@ -144,6 +144,7 @@ På tabel \ref{tabel:softwareAllocationDescription} er hvert allokeret software 
 \section{Use Case 1 - Spil Goofy Candy Gun 3000}
 
 Følgende afsnit præsenterer applikationsmodeller relevante til Use Case 1 - Spil Goofy Candy Gun 3000, fordelt over systemets CPU'er.
+En essentiel del af use case 1, er at kunne styre motoren ved brug af Wii-Nunchuck controlleren. På figur \ref{fig:WiiNunchuckSequenceDiagram} vises gennemløbet af Wii-Nunchuck input data fra Wii-Nunchuken til motoren, med de relevante CPU'er angivet.
 
 \begin{figure}[H]
 	\centering
@@ -151,6 +152,9 @@ Følgende afsnit præsenterer applikationsmodeller relevante til Use Case 1 - Sp
 	\caption{Overordnet sekvensdiagram for Wii-Nunchuck informations flow}
 	\label{fig:WiiNunchuckSequenceDiagram}
 \end{figure}
+
+ Her ses det at input data fra Wii-Nunchuck kontinuert bliver aflæst af PSoC0. Det bemærkes her at grænsefladen mellem PSoC0 og Wii-Nunchuck er en I2C bus. Efter at PSoC0 har aflæst input data'en, overføres den til PSoC1. Grænsefladen mellem disse to PSoCs er også en I2C bus. PSoC1 kan til slut oversætte modtaget input data til PWM signaler til motorstyring samt affyring.
+
 
 \subsection{Applikationsmodel for Nunchuck Polling Software}
 
