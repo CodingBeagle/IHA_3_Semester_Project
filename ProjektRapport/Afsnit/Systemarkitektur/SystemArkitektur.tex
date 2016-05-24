@@ -46,7 +46,7 @@ Følgende afsnit indeholder en blokbeskrivelse samt en flowspecifikation for I2C
 		 DevKit 8000 er en embedded Linux platform med touch-skærm, \\ der bruges tilbrugergrænsefladen for produktet. Brugeren inter- \\ agerer med systemet og ser status for spillet via Devkit 8000.                                                      \end{tabular} \\ \hline
 		Wii-Nunchuck            & \begin{tabular}[c]{@{}l@{}}Wii-Nunchuck er controlleren som brugeren styrer kanonens \\ retning med. \end{tabular} \\ \hline
 		PSoC0                   & \begin{tabular}[c]{@{}l@{}}PSoC0 er PSoC hardware der indeholder software til I2C og \\ SPI kommunikationen og afkodning af Wii-Nunchuck data. \\ PSoC0 fungerer som I2C masterog SPI slave. Denne PSoC er \\ bindeleddet mellem brugergrænsefladen og restenaf systemets \\ hardware. \end{tabular} \\ \hline
-		Motor                   & \begin{tabular}[c]{@{}l@{}}Motor blokken er Candy Gun 3000’s motorerer, der anvendes \\ til at bevægekanonen i forskellige retninger. \end{tabular} \\ \hline
+		MotorControl                   & \begin{tabular}[c]{@{}l@{}}MotorControl blokken er Candy Gun 3000’s motorerer, der anvendes \\ til at bevægekanonen i forskellige retninger. \end{tabular} \\ \hline
 		PSoC1                   & \begin{tabular}[c]{@{}l@{}}PSoC1 er PSoC hardware der indeholder software til I2C \\ kommunikation og styring af Candy Gun 3000’s motorer. \\ PSoC1 fungerer som I2C slave. \end{tabular} \\ \hline
 		SPI (FlowSpecification) &  \begin{tabular}[c]{@{}l@{}}SPI (FlowSpecification) beskriver signalerne der indgår i SPI \\ kommunikation. \end{tabular} \\ \hline
 		I2C (FlowSpecification) &  \begin{tabular}[c]{@{}l@{}}I2C (FlowSpecification) beskriver signalerne der indgår i I2C \\ kommunikation. \end{tabular} \\ \hline	
@@ -63,7 +63,7 @@ På figur \ref{figure:ibdDiagram} ses IBD'et for systemet. Figuren viser hardwar
 \begin{figure}[H]
 	\begin{adjustwidth}{-3cm}{-\rightmargin}
 	\centering
-	\includegraphics[width=0.9\paperwidth]{SystemArkitektur/images/ibdDiagram}
+	\includegraphics[width=0.9\paperwidth]{SystemArkitektur/images/jgjgj}
 	\caption{IBD af systemets hardware}
 	\label{figure:ibdDiagram}
 	\end{adjustwidth}	
@@ -85,8 +85,14 @@ Det ses at systemet bliver påvirket af tre eksterne signaler: \textit{touch}, \
 	& & motorMaster & Type: I2C \newline Spændingsniveau: 0-5V \newline Hastighed: 100kbit/sekund \newline Beskrivelse: I2C bussen hvor der sendes afkodet Nunchuck data til PSoC1.\\ \hline
 	PSoC1 & Modtager nunchuckinput fra PSoC0 og omsætter dataene til PWM signaler. & motorSlave & Type: I2C \newline Spændingsniveau: 0-5V \newline Hastighed: 100kbit/sekund \newline Beskrivelse: Indeholder formatteret Wii-Nunchuck data som omsættes til PWM-signal. \\ \cline{3-4} 
 	& & PWM & Type: PWM \newline Frekvens: 22kHz \newline PWM \%: 0-100\% \newline Spændingsniveau: 0-5V \newline Beskrivelse: PWM signal til styring af motorens hastighed. \\ \hline
-	Motor & Den enhed der skal bevæge kanonen & PWM & Type: PWM \newline Frekvens: 22kHz \newline PWM\%: 0-100\% \newline Spædingsniveau: 0-5V \newline Beskrivelse: PWM signal til styring af motorens hastighed. \\ \cline{3-4}
-	& & motorVoltage & Type: voltage \newline Spændingsniveau: 12V \newline Beskrivelse: Strømforsyning til motoren \\ \hline
+	MotorControl & Den enhed der skal bevæge kanonen & PWM1 & Type: PWM \newline Frekvens: 3MHz \newline PWM\%: 0-100\% \newline Spædingsniveau: 0-5V \newline Beskrivelse: PWM signal til styring af motorens hastighed. \\ \cline{3-4}
+	&& PWM2 & Type: PWM \newline Frekvens: 3MHz \newline PWM\%: 0-100\% \newline Spædingsniveau: 0-5V \newline Beskrivelse: PWM signal til styring af motorens hastighed. \\ \cline{3-4}
+	&& PWM3 & Type: PWM \newline Frekvens: 3MHz \newline PWM\%: 0-100\% \newline Spædingsniveau: 0-5V \newline Beskrivelse: PWM signal til styring af motorens hastighed. \\ \cline{3-4}
+	&& PWM4 & Type: PWM \newline Frekvens: 3MHz \newline PWM\%: 0-100\% \newline Spædingsniveau: 0-5V \newline Beskrivelse: PWM signal til styring af motorens hastighed. \\ \cline{3-4}
+	& & motorVoltage & Type: voltage \newline Spændingsniveau: 9V \newline Beskrivelse: Strømforsyning til motoren \\ \cline{3-4}
+	& & potentiometer & Type: power5V \newline Spændingsniveau: 5V \newline Beskrivelse: giver Rotationsbegrænsing 5V\\ \cline{3-4}
+	& & PotenOut1 & Type: Outspænding \newline Spændingsniveau: en spænding 0V-5V \newline Beskrivelse: den spænding viser hvor motoren står henne\\ \cline{3-4}
+	& & PotenOut2 & Type: Outspænding \newline Spændingsniveau: en spænding 0V-5V \newline Beskrivelse: den spænding viser hvor motoren står henne \\ \hline
 	Wii-nunchuck & Den fysiske controller som brugeren styrer kanonen med. & wiiSlave & Type: I2C \newline Spændingsniveau: 0-5V \newline Hastighed: 100kbit/sekund \newline Beskrivelse: Kommunikationslinje mellem PSoC1 og Wii-Nunchuck. \\ \cline{3-4}
 	& & userInput & Type: input \newline Beskrivelse: Brugerinput fra Wii-Nunchuck. \\ \hline
 	SPI & Denne blok beskriver den ikke-atomiske SPI forbindelse. & MOSI & Type: CMOS \newline Spændingsniveau: 0-5V \newline Hastighed: ?? \newline Beskrivelse: Binært data der sendes fra master til slave. \\ \cline{3-4}
