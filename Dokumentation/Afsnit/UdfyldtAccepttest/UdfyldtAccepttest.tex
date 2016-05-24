@@ -1,0 +1,115 @@
+\chapter{Udfyldt Accepttest}
+Accepttesten i afsnit \ref{afsnit:accepttestspecifikation} er blevet udført i samarbejde med vejleder (Gunvor Elisabeth Kirkelund). Dette afsnit vil vise den udfyldte accepttest.
+
+\section{Use case 1 - Hovedscenarie}
+\begin{tabular}{|>{\hspace{0pt}}p{0.6cm} |  >{\hspace{0pt}}p{3.5cm} | >{\hspace{0pt}}p{2.5cm} | p{2.5cm} | p{2cm} |}
+	\hline
+	Step & Handling & Forventet observation/resultat& Faktisk observation/resultat & Vurdering (OK/FAIL)\\ \hline
+	1 & Vælg single-player mode. & Brugergrænsefladen viser spilside for one-player mode og anmoder om, at der fyldes slik i magasinet og at kanon indstilles. & & FAIL \\ \hline
+	
+	
+	3 & Fyld slik i kanon. Indstil kanon til affyring med Wii-nunchuck. & Kanon indstiller sig svarende til Wii-nunchucks placering. & & OK \\ \hline
+	
+	4 & Udløs kanon med trigger på wii-nunchuck. & Kanon udløses. & Slik "dispenses" & FAIL \\ \hline
+	
+	5 & Gentag punkt 4 og 5 to gange.  & Punkt 4 og 5 gentages.  & Virker lidt & FAIL \\ \hline
+	
+	
+	6 & Tryk på knap for at vende tilbage til starttilstand. & Brugergrænseflade vender tilbage til startside. & & OK \\ \hline
+\end{tabular}
+
+\subsection{Use case 1 - Extension 1}
+\begin{tabular}{|>{\hspace{0pt}}p{0.6cm} |  >{\hspace{0pt}}p{3.5cm} | >{\hspace{0pt}}p{2.5cm} | p{2.5cm} | p{2cm} |}
+	\hline
+	Step & Handling & Forventet observation/resultat& Faktisk observation/resultat & Vurdering (OK/FAIL)\\ \hline
+	
+	1 & Vælg party mode. & Brugergrænsefladen viser spilside for two-player mode og anmoder om valg af antal skud. & & OK \\ \hline
+	
+	2 & Fyld slik i kanon. Indstil kanon til affyring med Wii-nunchuck. & Kanon indstiller sig svarende til Wii-nunchucks placering. & Kører frem og tilbage & OK \\ \hline
+	
+	3 & Udløs kanon med trigger på Wii-nunchuck. & Kanon udløses. & & OK \\ \hline
+	
+	4 & Giv Wii-nunchuck til den anden spiller. & Den anden spiller modtager Wii-nunchuck.  & &  OK\\ \hline
+	
+	5 & Gentag punkt 5 til 6 indtil skud er opbrugt. & Punkt 5 til 6 gentages. & & OK\\ \hline
+	
+	
+	6 & Tryk på knap for at vende tilbage til starttilstand. & Brugergrænseflade vender tilbage til startside. & & OK\\ \hline
+\end{tabular}
+
+\subsection{Use case 1 - Extension 2}
+\begin{tabular}{|>{\hspace{0pt}}p{0.6cm} |  >{\hspace{0pt}}p{3.5cm} | >{\hspace{0pt}}p{2.5cm} | p{2.5cm} | p{2cm} |}
+	\hline
+	Step & Handling & Forventet observation/resultat& Faktisk observation/resultat & Vurdering (OK/FAIL)\\ \hline
+	
+	1 & Vælg single-player mode. & Brugergrænsefladen viser spilside for one-player mode og anmoder om, at kanon indstilles. & Går til singleplay menu & OK \\ \hline
+	
+	2 & Tryk på knap for afslutning af spil. & Brugergrænseflade vender tilbage til startside. &Går ud af single player menu & OK \\ \hline
+\end{tabular}
+
+\section{Use case 2 - Hovedscenarie}
+\begin{table}[H]
+	\centering
+	\begin{tabular}{|l|l|l|l|l|}
+		\hline
+		Step & Handling                                                                        & \begin{tabular}[c]{@{}l@{}}Forventet \\ observation/resultat\end{tabular}                                                                                                          & \begin{tabular}[c]{@{}l@{}}Faktisk \\ observation/resultat\end{tabular} & \begin{tabular}[c]{@{}l@{}}Vurdering \\ (OK/FAIL)\end{tabular} \\ \hline
+		1.   & \begin{tabular}[c]{@{}l@{}}Tryk på \\ "Systemtest" \\ på GUI\end{tabular}                 & \begin{tabular}[c]{@{}l@{}}Systemtest brugergrænsefladen\\ vises på Devkittet.\end{tabular}                                                                                        &                                                                         & OK                                                               \\ \hline
+		2.   & \begin{tabular}[c]{@{}l@{}}Tryk på \\ "Start Test \\ på GUI"\end{tabular}                 & \begin{tabular}[c]{@{}l@{}}Brugergrænsefladen udskriver\\ at SPI og I2C testen er\\ godkendt. Brugergrænsefladen\\ anmoder brugereren \\ om tryk på Z på Wii-nunchuck\end{tabular} &                                                                         &                                                            OK    \\ \hline
+		3.   & \begin{tabular}[c]{@{}l@{}}Tryk 'Z' knappen\\ på \\ Wii-nunchucken\end{tabular} & \begin{tabular}[c]{@{}l@{}}Brugergrænsefladen udskriver\\ at Wii-testen er godkendt\end{tabular}                                                                                   &                                                                         &     OK                                                           \\ \hline
+	\end{tabular}
+\end{table}
+
+\subsection{Use case 2 - Exception 1}
+\begin{table}[H]
+	\centering
+	\begin{tabular}{|l|l|l|l|l|}
+		\hline
+		Step & Handling                                                                 & \begin{tabular}[c]{@{}l@{}}Forventet \\ observation/resultat\end{tabular}                                   & \begin{tabular}[c]{@{}l@{}}Faktisk \\ observation/resultat\end{tabular} & \begin{tabular}[c]{@{}l@{}}Vurdering \\ (OK/FAIL)\end{tabular} \\ \hline
+		1.   & \begin{tabular}[c]{@{}l@{}}Fjern SPI-kablet\\ fra Devkittet\end{tabular} &                                                                                                             &   Fjerner hele SPI kablet                                                                      &   OK                                                             \\ \hline
+		2.   & \begin{tabular}[c]{@{}l@{}}Tryk på \\ "Systemtest" \\ på GUI \end{tabular}          & \begin{tabular}[c]{@{}l@{}}Systemtest bruger-\\ grænsefladen\\ vises på Devkittet.\end{tabular}             &                                                                         &                OK                                                \\ \hline
+		3.   & \begin{tabular}[c]{@{}l@{}}Tryk på \\ "Start Test" \\ på GUI\end{tabular}          & \begin{tabular}[c]{@{}l@{}}Brugergrænsefladen \\ udskriver at\\ SPI forbindelsen\\ mislykkedes\end{tabular} &      SPI Unsuccessful                                                                   &           OK                                                     \\ \hline
+	\end{tabular}
+\end{table}
+
+
+\subsection{Use case 2 - Exception 2}
+\begin{table}[H]
+	\centering
+	\begin{tabular}{|l|l|l|l|l|}
+		\hline
+		Step & Handling                                                                 & \begin{tabular}[c]{@{}l@{}}Forventet \\ observation/resultat\end{tabular}                                   & \begin{tabular}[c]{@{}l@{}}Faktisk \\ observation/resultat\end{tabular} & \begin{tabular}[c]{@{}l@{}}Vurdering \\ (OK/FAIL)\end{tabular} \\ \hline
+		1.   & \begin{tabular}[c]{@{}l@{}}Fjern I2C-kabel\\ fra PSoC0\end{tabular}      &                                                                                                             &                                                                         & OK                                                               \\ \hline
+		2.   & \begin{tabular}[c]{@{}l@{}}Tryk på \\ "Systemtest"\\ på GUI\end{tabular} & \begin{tabular}[c]{@{}l@{}}Systemtest bruger-\\ grænsefladen\\ vises på Devkittet.\end{tabular}             &                                                                         & OK                                                               \\ \hline
+		3.   & \begin{tabular}[c]{@{}l@{}}Tryk på \\ "Start Test"\\ på GUI\end{tabular} & \begin{tabular}[c]{@{}l@{}}Brugergrænsefladen \\ udskriver at\\ SPI forbindelsen\\ lykkedes og \\ I2C forbindelsen \\ mislykkedes\end{tabular} &  I2C Unsuccessful                                                                       &           OK                                                     \\ \hline
+	\end{tabular}
+\end{table}
+
+\subsection{Use case 2 - Exception 3}
+\begin{table}[H]
+	\centering
+	\begin{tabular}{|l|l|l|l|l|}
+		\hline
+		Step & Handling                                                                     & \begin{tabular}[c]{@{}l@{}}Forventet \\ observation/resultat\end{tabular}                                        & \begin{tabular}[c]{@{}l@{}}Faktisk \\ observation/resultat\end{tabular} & \begin{tabular}[c]{@{}l@{}}Vurdering \\ (OK/FAIL)\end{tabular} \\ \hline
+		
+		1.   & \begin{tabular}[c]{@{}l@{}}Tryk på \\ "Systemtest"\\ på GUI\end{tabular}     & \begin{tabular}[c]{@{}l@{}}Systemtest bruger-\\ grænsefladen\\ vises på Devkittet.\end{tabular}                  &                                                                         &         OK                                                       \\ \hline
+		2.   & \begin{tabular}[c]{@{}l@{}}Tryk på \\ "Start Test"\\ på GUI\end{tabular}     & \begin{tabular}[c]{@{}l@{}}Brugergrænsefladen \\ udskriver at\\ SPI og I2C forbindelsen\\ lykkedes\end{tabular}  &    Er succesfuld                                                                     &                                                      OK          \\ \hline
+		3.   & Afvent timeout                                                               & \begin{tabular}[c]{@{}l@{}}Brugergrænsefladen \\ udskriver at\\ Nunchuck forbindelsen\\ mislykkedes\end{tabular} & Nunchuck unsuccessful                                                                        &                                                         OK       \\ \hline
+	\end{tabular}
+\end{table}
+
+\section{Ikke-funktionelle krav}
+\begin{tabular}{|>{\hspace{0pt}}p{0.6cm} |  >{\hspace{0pt}}p{3.5cm} | >{\hspace{0pt}}p{2.5cm} | p{2.5cm} | p{2cm} |}
+	\hline
+	Krav & Test & Forventet observation/resultat& Faktisk observation/resultat & Vurdering (OK/FAIL)\\ \hline
+	
+	1 & Bruger drejer kanonen så lang til venstre og højre som muligt. & Det observeres at kanonen ikke har roteret 360 \degree  & Drejer under 90 \degree & OK\\ \hline
+	
+	2 & Et projektil på 1.25 cm i diameter \(\pm\) 5mm affyres fra kanonen. & Projektilet bliver affyret & Falder ud & FAIL \\ \hline
+	
+	3 & Mål produktet dimensioner med en lineal. & Dimensionerne overstiger ikke 50cm x 60cm x 50cm. &Målt til 40x56x32 & OK \\ \hline
+	
+	4 & Tryk på 'Z' knappen på Wii Nunchuck, og mål med et stopur hvor lang tid der går fra tryk, til kanonen bliver affyret. &Den målte tid er mindre end 10 sekunder. & Målt til 1.36 sek. & OK \\ \hline
+	
+	5 & Kanonen affyres 3 gange, og et stopur startes ved første skud, og stoppes ved det tredje skud. &Den målte tid er mindre end 60 sekunder. & Målt til 2.21 sek. & OK \\ \hline
+	
+\end{tabular}
