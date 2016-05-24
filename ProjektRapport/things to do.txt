@@ -27,15 +27,11 @@
 
 Projektrapport:
 
--Generelt:
-	-Beskrive software motorstyring.
-	-Beskriv software GUI i arkitektur samt status på design og implementering
 -Resumé
 	-Det hele skal skrives.
 -Abstract
 	-Det hele skal skrives.
 -Indledning
-	-Flyt tabel for ansvarsområder - og udfyld denne.
 	-Indledning skal tilrettes Gunvors feedback. 
 	-Projektformulering skal tilrettes Gunvors feedback.
 -Systembeskrivelse
@@ -43,33 +39,23 @@ Projektrapport:
 	-Omskriv/omformuleres
 -Krav
 	- Use case beskrivelserne skal forkortes
-		- HUSK GERNE LÆRINGSMÅL
 -Arkitektur
 	-Signalbeskrivelse skal rettes igennem
 	-Beskriv motorstyring (software)
 	-Ret BDD - Grupering af enheder
 	-Blokbeskrivelsen rettes igennem
-
 -Design og Implementering
 	-Affyringsmekanisme HW - For meget tekst.
 	-Affyringsmekanisme SW - For meget tekst - Kan forklares i Sekvensdiagrammer.
 	-SPI Devkit skal rettes - For meget tekst
 	-Interface driver skal rettes - For meget tekst
-	-Beskriv motorstyring (software)
 	-Brugergrænseflade - Tekst til STM.
-	
 -Test
 	-Skal uddybes, og der skal oprettes ordentlige referencer til dvs. tests i dokumentationen
-
--Udviklingsværktøjer
+-Udviklingsværktøjer <-- sendes i dokumentqtion
 	-Diskuter relevans af afsnit
 	-Analog discovery afsnit skrives
-
 -Fremtidigt arbejde (Perspektivering)
 	-Rettes igennem, tilføjes mere tekst?
-
--Perspektivering
-	-Skal skrives. 
-	-Admin aktør i use case 2
 -Konklusion
 	-Skal skrives helt.
