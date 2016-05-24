@@ -238,38 +238,45 @@ Formålet med denne test er at vise at en motor kan styres i begge retninger med
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=\textwidth]{test/images/testhbroopst}
-	\caption{Opstilling af h bro på fumlebræt}
+	\caption{Opstilling af H-bro på fumlebræt}
 \end{figure}
 
-\begin{itemize}
-	\item 	Røde ledninger: 9 V
-	\item	Brune ledninger: 5 V
-	\item	Sorte ledninger er stel
-	\item	Blå ledninger er forbindelser komponenter
-	\item	J1 og J2 er output pins 
-	\item	J3 er ground
-	\item	1a og 2a knapper til at styre motor til højre
-	\item	1b og 2b knapper til at styre motor til venstre 	
-\end{itemize}
+\begin{table}[H]
+	\centering
+	\label{hbro}
+	\begin{tabular}{|l|l|}
+		\hline
+		\textbf{Element} & \textbf{Beskrivelse}                   \\ \hline
+		J1, J2           & Output Pins                            \\ \hline
+		J3               & Stel Pin                               \\ \hline
+		1a, 2a           & Knapper til at styre motor til højre   \\ \hline
+		1b, 2b           & Knapper til at styre motor til venstre \\ \hline
+		Sorte ledninger  & Stel                                   \\ \hline
+		Røde ledninger   & 9V                                     \\ \hline
+		Brune ledninger  & 5V                                     \\ \hline
+		Blå ledninger    & Interkomponente forbindelser           \\ \hline
+	\end{tabular}
+		\caption{Elementer i testopstillingen}
+\end{table}
 
-\noindent Til test af H-broens motorstyring i begge retninger blev to oscilloskop kanaler forbundet til output pin J1 og J2, samt oscilloskopene stel til J3. Fumlebrættet forsynes med 9V, 5V og stel fra en spændingskilde. 
+\noindent Til test af H-broens motorstyring i begge retninger blev to oscilloskop kanaler forbundet til output pin J1 og J2, samt oscilloskopenes stel til J3. Fumlebrættet forsynes med 9V, 5V og stel fra en spændingskilde. 
 
 \noindent Testen blev udført i to dele. Først testes H-broen i højre omdrejningsretning ved at trykke på 1a og 2a, derefter i venstre omdrejning ved at trykke 1b og 2b. \newline
 
 \noindent \textbf{Forventet resultat} \newline
-At når der blev trykket på knap 1a og 2a vil den ene kurv gå høj og den anden vil for blive lav
-At når der blev trykket på knap 1b og 2b vil den anden kurv gå høj og den først vil for blive lav.
-\\
-\\
+I første del af modultesten forventes det at når 1a og 2a blev nedtrykket vil den blå kurve stige til 9V samt den orange kurve vil falde til 0V. Ved anden del af testen forventes det at når 1b og 2b blev nedtrykket vil den orange kurve stige til 9V samt den blå kurve falde til 0V. \newline
 
-\textbf{Opnået resultat}
+\noindent \textbf{Opnået resultat}
+
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=\textwidth]{test/images/hbromob}
-	\caption{Modultest for H-bro, blå går høj}
+	\caption{Modultest for højre omdrejningsretning}
 		\label{figure:hbrob}
-	
 \end{figure}
+
+ \noindent Som det fremgår af figur \ref{figure:hbrob}, ses det at, når 1a og 2a nedtrykkes får det blå retningssignal forbindelse til stel og dermed trækker denne alt spændingen og stiger til 9V. Da alt spænding trækkes af det blå retningssignal, bliver det orange retningssignal groundet. Dermed kan motoren styres via H-broen i højre omdrejningsretning. 
+
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=\textwidth]{test/images/hbromoo}
@@ -277,94 +284,118 @@ At når der blev trykket på knap 1b og 2b vil den anden kurv gå høj og den f�
 	\label{figure:hbroo}
 	
 \end{figure}
- Som det fremgår på figur \ref{figure:hbrob}, kan man se at, i det der bliver åbnet for at motor kan køre i den ene retning, så stiger den blå op til 9V fordi nu har den fået forbindelse til ground og fået forbindelse til de 9V. Hvor samtidigt at blå går højt, så går den orange lavere, for nu trækker den blå alt spændingen. Det samme sker når man åbner op for at den kan løbe spændingen kan løbe den anden vej, som ses på firgur \ref{figure: hbroo}, i stedet for at det er den blå som går høj, er det den orange som går høj. Med det kan man se at motor kan køre i begge retninger uden problemer.
- Der er blevet valgt at der ikke tages billede af at motoren køre, for man ikke se på et billede hvilken vej den køre og overhovedet den køre. Der ses også på figur\ref{figure:hbrob} og figur \ref{figure:hbroo} at der noget støj, når orange/blå går højt, men det er ikke noget som kommer til at påvirker vores styring af motoren
 
-Man kan også på figur se at når den orange/blå går høj, så stiger den meget hurtig, grunden til den gør det var på grund af at, der er blevet sat de to transistor ind, får p mosfet, som gør at den bliver opladt hurtigere, end den ellers ville på grund af der sidder en form for kondensatorer inde i den mosfet, som skal have hjælp med at bliv opladt. Det hjælp kommer fra de transistor som er blevet sat ind før Mosfeten.  
+Ved anden del af modultesten nedtrykkes 1b og 2b. På figur \ref{figure:hbroo} ses resultatet af dette. Det observeres at knappene nedtrykkes får det orange retningssignal forbindelse til stel og stiger til 9V, samt at det blå retningssignal falder til 0V. Dermed er det bevist at motoren kan styres vi H-broen i venstre omdrejningsretning. 
 
-\subsection{detektor}
+Ud fra disse to test kan det konkluderes at en motor kan styres i begge omdrejningsretninger via H-broen. Fra figurene \ref{figure:hbrob} og \ref{figure:hbroo} kan det også observeres at der ikke fremkommer støj, når retningssignalerne stiger til 9V, dermed vil der ikke være forstyrrende elementer der kommer til at påvirke styringen af motoren.
+  
 
-\textbf{Formål}
-\\ Formålet med denne test er at vise at motoren ikke kan køre ud over to fast satte værdier.\\
-\\
-\textbf{Overordnet opstilling}
+\subsection{Rotationsbegrænsning}
+\noindent \textbf{Formål} \newline
+\noindent Formålet med denne test er at bevise at motoren ikke kan køre ud over de ydergrænser, men kan bevæge sig frit i det tilladte interval. \newline
+
+\noindent \textbf{Opstilling}
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=\textwidth]{test/images/ModultestADC/opstilADC}
-	\caption{opstilling af test for detektor}
+	\caption{Testopstilling for rotationsbegrænsning}
 \end{figure}
 
+\noindent \textbf{Bemærkning: }Ved denne testopstilling er potentiometeret ikke fastsat til motoren, dermed følger output spændingen ikke motorens rotationer. Denne test bruges til at bevise at retningssignaler blokeres, når potentiometeret bevæges udover de tilladte grænser. Dette gøres manuelt. 
 
-\begin{itemize}
-	\item Rød firekant 1 er potentiometer
-	\item	Rød firekant 2 er h-broen på print
-	\item	Rød firekant 3 ”PSoC 1”
-	\item	Rød firekant 4 er wii nunchuck
-	\item	Rød firekant 5 er ”PSoC 0” hvor der 3 ledninger(lilla, blå og orange) som går til devkit 
-	\item Rød firekant 6 hvor der sidder pull up modstande til kommunikationen mellem ”PSoC 1” og ”PSoC 0”
-	\item	sort ledning går til ground 
-	\item	gul ledning er data mellem de forskellige module
-	\item grøn ledning er klokken
-	\item rød ledningen er spænding til h -bro
-	
-\end{itemize}
-For at teste om motor kunne køre i begge retninger når den er i mellem 900mV og 2000mV og når den kommer over 2000mV eller under 900mV skal den ikke kunne køre i en af retningerne.
-For at tjekke hvilken værdi som blev brugt, blev der sat en analog discovery på potentiometeret og på ADC, blev der debugget og så for at tjekke om motoren kun kunne køre i en retning blev det en visueltest. \\
-\\
-Første del af testen består i at tjekke om motoren kan kun køre mod venstre, når potentiometeret er drejet til en værdi under 900mV. Hvor der blev set på hvilken værdi potentiometer gav og hvad ADC’en fik og en visueltest af om motoren kun kunne køre i en retning.\\
-Andel del af testen består i at tjekke om motoren kunne køre begge vej, når potentiometeret er drejet til en værdi mellem 900mV og 2000mV. Hvor der blev set på hvilken værdi potentiometer gav og hvad ADC’en fik og en visueltest af om motoren kun kunne køre i begge retning.\\
-Tredje del består i at tjekke om motoren kan kun køre mod højre, når potentiometeret er drejet til en værdi over 2000mV. Hvor der blev set på hvilken værdi potentiometer gav og hvad ADC’en fik og en visueltest af om motoren kun kunne køre i den anden retning.\\
-\\
-\textbf{Forventet resultat }
-\\Første del: at når der en værdi under 900mV bliver sendt ind, vil motoren kun kunne køre mod venstre.\\
-Anden del: at når der en værdi mellem 900mV og 2000mV bliver sendt ind, vil motoren kunne køre i begge retninger.\\
-Tredje del: at når der en værdi over 2000mV bliver sendt ind, vil motoren kun kunne køre mod højre.
-
-\textbf{Opnået resultat}
-\begin{figure}[H]
+\begin{table}[H]
 	\centering
-	\includegraphics[width=\textwidth]{test/images/ModultestADC/260mVanalog}
-	\caption{måleresultat fra analog Discovery, ved først del af test}
-	\label{figure:analoglav}
-\end{figure}
-\begin{figure}[H]
-	\centering
-	\includegraphics[width=\textwidth]{test/images/ModultestADC/nedDebug}
-	\caption{måleresultat fra ADC, ved først del af test}
-	\label{figure: ADClav}
-\end{figure}
-Først del: Som det fremgår på figur \ref{fig:analoglav} bliver der sendt fra potentiometeret  en spænding på 260mV og på firgur \ref{fig:ADClav} kan man se at ADC’en modtog en værdi på 187mV, man skal huske på at der en forskel på 1.515 i mellem potentiometeret og ADC \textbf{\#ref Reference til DesignOgImplementering }. 
-Som forventet kunne motoren kun køre mod venstre\\
+	\label{table:RBelements}
+	\begin{tabular}{|l|l|}
+		\hline
+		\textbf{Element} & \textbf{Beskrivelse}                              \\ \hline
+		1                & Potentiometer                                     \\ \hline
+		2                & H-bro                                             \\ \hline
+		3                & PSoC1                                             \\ \hline
+		4                & Wii-Nunchuck                                      \\ \hline
+		5                & PSoC0                                             \\ \hline
+		6                & Print med pull-up modstande til I2C kommunikation \\ \hline
+		Sorte ledninger  & Stel                                              \\ \hline
+		Røde ledninger   & 5V                                                \\ \hline
+		Gule ledninger   & Data linjer mellem moduler                        \\ \hline
+		Grønne ledninger  & Clock signal                                      \\ \hline
+	\end{tabular}
+	\caption{Elementer i testopstillingen}
+\end{table}
+
+Test af rotationsbegrænsning blev udført i tre dele. I første del testes om motoren kan styres i begge retninger når outputspændingen fra potentiometret ligger mellem 915mV og 2000mV. I anden del testes der for at retningssignalet til venstre blokeres når potentiometerets outputspænding overstiger 2000mV. I tredje del testes der for at retningssignalet til højre blokeres når potentiometerets outputspænding falder under 915mV. 
+
+Til at monitorere outputspændingen fra potentiometeret er et Analog Discovery tilsluttet til dens udgange gennem et fumlebræt. Til at for at aflæse værdier fra AD converteren sættes PSoC1 i debug mode. Resultater verficeres visuelt. \newline
+
+\noindent \textbf{Forventet resultat} \newline
+Første del: Potentiometeret indstilles til midterposition. Det observeres at motoren kan roteres i begge retninger. \newline
+Anden del: Potentimetret indstilles til at have den størst mulig modstandsværdi. Det observeres at motoren kun kan roteres til højre. \newline
+Tredje del: Potentiometret indstilles til at have lavest mulig modstandsværdi. Det observeres at motoren kun kan roteres til venstre. \newline
+
+\noindent Da ADC'en har en referencespænding på 3.3V og outputtet af potentiometret er mellem 0V-5V er foholdet givet ved:
+\begin{equation}
+\frac {5V} {3.3V}= 1.515
+\end{equation}
+Dermed forventes der et tilnærmelsesvis forhold mellem ADC'ens og potentiometrets output. \newline
+
+\noindent \textbf{Opnået resultat}
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=\textwidth]{test/images/ModultestADC/2538Vanalog}
-	\caption{måleresultat fra analog Discovery, ved anden del af test}
+	\caption{Første del: Potentiometer output 2538mV}
 	\label{figure:analogmid}
 \end{figure}
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=\textwidth]{test/images/ModultestADC/mellemDebug}
-	\caption{måleresultat fra ADC, ved anden del af test}
+	\caption{Første del: ADC output 1595mV}
 	\label{figure: ADCmid}
 \end{figure}
-Anden del: Som det fremgår på figur \ref{fig:analogmid}  bliver der sendt fra potentiometeret en spænding på 2538mV og på firgur \ref{fig:ADCmid}  kan man se at ADC’en modtog en værdi på 1595mV, man skal huske på at der en forskel på 1.515 i mellem potentiometeret og ADC \textbf{\#ref Reference til DesignOgImplementering }. 
-Som forventet kunne motoren kun køre i begge retninger.\\
 
+\noindent Som det fremgår på figur \ref{figure:analogmid} er output spændingen af potentiometeret 2538mV og på figur \ref{figure: ADCmid} ses det at outputspændingen af ADC’en har en værdi på 1595mV. Tages der hensyn til det førnævnte forhold, ses det at den forventede outputspænding er:
+\begin{equation}
+1595mV * 1.515 = 2416mV
+\end{equation}
+Da den faktiske spænding fra potentiometeret 2538mV stemmer det faktiske resultat overens med det forventede resultat. Det observeres at motoren kan styres i begge retninger.
 
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=\textwidth]{test/images/ModultestADC/4904mVanalog}
-	\caption{måleresultat fra analog Discovery, ved trejde del af test}
+	\caption{Anden del: Potentiometer output 4904mV}
 	\label{figure:analoghoj}
 \end{figure}
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=\textwidth]{test/images/ModultestADC/opDebug}
-	\caption{måleresultat fra ADC, ved trejde del af test}
+	\caption{Anden del: ADC output 3252mV}
 	\label{figure: ADChoj}
 \end{figure}
-Tredje del: Som det fremgår på figur \ref{fig:analoghoj} bliver der sendt fra potentiometeret en spænding på 4909mV og på firgur \ref{fig:ADChoj}  kan man se at ADC’en modtog en værdi på 3252mV, man skal huske på at der en forskel på 1.515 i mellem potentiometeret og ADC \textbf{\#ref Reference til DesignOgImplementering }. 
-Som forventet kunne motoren kun køre mod højre.
+\noindent Som det fremgår på figur \ref{figure:analoghoj} er output spændingen af potentiometeret 4904mV og på figur \ref{figure: ADChoj} ses det at outputspændingen af ADC’en har en værdi på 3252mV. Tages der hensyn til det førnævnte forhold, ses det at den forventede outputspænding er:
+\begin{equation}
+3252mV * 1.515 = 4926mV
+\end{equation}
+Da den faktiske spænding fra potentiometeret 4904mV stemmer det faktiske resultat overens med det forventede resultat. Det observeres at motoren kun kan styres i højre.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\textwidth]{test/images/ModultestADC/260mVanalog}
+	\caption{Tredje del: Potentiometer output 260mV}
+	\label{figure:analoglav}
+\end{figure}
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\textwidth]{test/images/ModultestADC/nedDebug}
+	\caption{Tredje del: ADC output 187mV}
+	\label{figure: ADClav}
+\end{figure}
+
+\noindent Som det fremgår på figur \ref{figure:analoglav} er output spændingen af potentiometeret 260mV og på figur \ref{figure: ADClav} ses det at outputspændingen af ADC’en har en værdi på 187mV. Tages der hensyn til det førnævnte forhold, ses det at den forventede outputspænding er:
+\begin{equation}
+187mV * 1.515 = 280.5mV
+\end{equation}
+Da den faktiske spænding fra potentiometeret 260mV stemmer det faktiske resultat overens med det forventede resultat. Det observeres at motoren kun kan styres til venstre.
+
+Ud fra disse tre deltests kan det konkluderes at rotationsbegrænsningen fungerer efter hensigten.
 
 
 \subsection{Rotationsdetektor}
