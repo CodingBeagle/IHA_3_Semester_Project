@@ -195,16 +195,7 @@ Denne metode bruger PSoC Creator's I2C-API til at læse data fra nunchuck'en (da
 
 I klassediagrammet er der en sektion kaldet "Defines". Disse Defines bruges i implementeringen til forskellige formål. \textit{PSoC0UnitAddress, PSoC1UnitAddres} og \textit{nunchuckUnitAddress} bruges til at definere adresserne for I2C-nettets slaver. \textit{NunchuckData, I2CTestRequest} og \textit{I2CTestACK} er kommando typer der bruges til at bestemme hvilken kommando type der er blevet sendt/modtaget, og hvor mange bytes der skal forventes at være gemt i databufferen (Se dokumentationen afsnit \textbf{INDSÆT REFERENCE TIL DOKUMENTATIONAFSNIT \#ref}) 
 
-\subsubsection{Nunchuck Data Flow Algoritme}
 
-\begin{figure}[H]
-	\begin{adjustwidth}{-2cm}{-\rightmargin}	
-		\centering
-		\includegraphics[width=0.75\paperwidth]{DesignOgImplementering/images/nunchuckFlowActivity}
-		\caption{Aktivitetsdiagram som viser overføring af Nunchuck data til PSoC1}
-		\label{figure:NunchuckFlowActivity}
-	\end{adjustwidth}
-\end{figure}
 
 \section{Afkodning af Wii-Nunchuck Data Bytes}
 Aflæste bytes fra Wii-Nunchuck - indeholdende tilstanden af knapperne og det analoge stick - er kodet når de oprindeligt modtages via I2C bussen. Disse bytes skal altså afkodes før deres værdier er brugbare. Afkodningen af hver byte sker ved brug af følgende formel:
@@ -342,8 +333,18 @@ Over fire af mosfetene (Q9, Q10, Q3 og Q4) som set på figur \ref{fig:hbro} er d
 	\begin{itemize}
 		\item R6 og R7\\
 			Grunden til, at R6 og R7(på figur \ref{fig:hbro}), er der, er for at sikre, at transistorernes Absolute Maximum Ratings omkring strømmen, som ikke må overstige 100mA ifølge databladet. (tjek lige om det er rigtig)
+		
+			
+			\begin{displaymath}
+			\frac {9V}{100mA} 	=90\Omega
+			\end{displaymath}
+			Der blev sat en 100$\Omega$ i stedet for at være sikker på at der ikke var noget som blev brændt af
 		\item R5 og R8\\
-			Grunden til at R5 og R8(kan ses på figur \ref{fig:hbro}) er sat ind i kredsløbet er, at der ifølge databladet kun kan løbe en strøm på omkring 30A igennem den N-MOSFET, der er brugt, Vgs er 10V. Da Vgs kun er sat til 5V, vil MOSFET'en altså ikke kunne klare en alt for stor strøm. Derfor er R5 og R8 sat ind for at forhindre, at MOSFET'en ikke brænder af. 
+			Grunden til at R5 og R8(kan ses på figur \ref{fig:hbro}) er sat ind i kredsløbet er, at der ifølge databladet kun kan løbe en strøm på omkring 30A igennem den N-MOSFET, der er brugt, Vgs er 10V. Da Vgs kun er sat til 5V, vil MOSFET'en altså ikke kunne klare en alt for stor strøm. Derfor er R5 og R8 sat ind for at forhindre, at MOSFET'en ikke brænder af.
+			 \begin{displaymath}
+			 \frac {9V}{30A} 	=0.3\Omega
+			 \end{displaymath}
+			 0.3$\Omega$ alt for lidt, så der blev prøvet end til der blev fundet en som virkerede og det var 10K$\Omega$
 	\end{itemize}
 
 \end{itemize}
