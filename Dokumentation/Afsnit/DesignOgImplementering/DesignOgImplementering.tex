@@ -197,7 +197,6 @@ Denne metode bruger PSoC Creator's I2C-API til at læse data fra nunchuck'en (da
 
 I klassediagrammet er der en sektion kaldet "Defines". Disse Defines bruges i implementeringen til forskellige formål. \textit{PSoC0UnitAddress, PSoC1UnitAddres} og \textit{nunchuckUnitAddress} bruges til at definere adresserne for I2C-nettets slaver. \textit{NunchuckData, I2CTestRequest} og \textit{I2CTestACK} er kommando typer der bruges til at bestemme hvilken kommando type der er blevet sendt/modtaget, og hvor mange bytes der skal forventes at være gemt i databufferen (Se dokumentationen afsnit \textbf{INDSÆT REFERENCE TIL DOKUMENTATIONAFSNIT \#ref}) 
 
-<<<<<<< 8274aa6323f55fbea4f9d6cd8a023ff38717e674
 \subsection{Rotationsbegrænsning}
 I forbindelse med begrænsning af motorens rotation er der nogle indstillinger der skal sættes. ADC'en skal indstilles til at gøre brug af en kanal i single mode, da der ét inputsignal fra potentiometret og denne skal bestemmes i forhold til stel. For at styre motorens bevægelse i et interval er følgende algoritme implementeret.
 
@@ -222,8 +221,6 @@ Til styring af motorene gøres der brug af fire PWM blokke, to til styring af X-
 
 \noindent På figur \ref{fig:motorstyringal} ses aktivitetsdiagrammet for motorstyringsalgoritmen. Der ses at retningensignalerne bestemmes ud fra Wii-Nunchuck'ens inputværdier fra X- og Y-aksen.
 
-=======
->>>>>>> 0a1d8918381267eb4e358ac91a97539c7fd97098
 \section{Afkodning af Wii-Nunchuck Data Bytes}
 Aflæste bytes fra Wii-Nunchuck - indeholdende tilstanden af knapperne og det analoge stick - er kodet når de oprindeligt modtages via I2C bussen. Disse bytes skal altså afkodes før deres værdier er brugbare. Afkodningen af hver byte sker ved brug af følgende formel:
 
@@ -416,25 +413,7 @@ For at kunne aflæse spændingen på potentiometeret, anvendes en 12-bit AD conv
 	
 \end{figure}
 
-<<<<<<< 8274aa6323f55fbea4f9d6cd8a023ff38717e674
 \noindent På figur \ref{fig:ADC1} ses et eksempel over de første fem trin i en konvertering. Til dette projekt arbejdes der med en 12-bit AD converter, dermed ville denne konvertering forsætte 12 trin ned.  \newline
-=======
-\noindent På figur \ref{fig:ADC1} ses et eksempel over de første fem trin i en konvertering. Til dette projekt arbejdes der med en 12-bit AD converter, dermed ville denne konvertering forsætte 12 trin ned.  \newline
-
-\noindent \textbf{PSoC Indstillinger} \newline
-I forbindelse med begrænsning af motorens rotation er der nogle indstillinger der skal sættes. ADC'en skal indstilles til at gøre brug af en kanal i single mode, da der ét inputsignal fra potentiometret og denne skal bestemmes i forhold til stel. For at styre motorens bevægelse i et interval er følgende algoritme implementeret.
-
-\begin{figure}[H]
-	\centering
-	\includegraphics[width=\textwidth]{DesignOgImplementering/images/rotationalgorithm}
-	\caption{Aktivitetsdiagram for rotationsbegrænsningsalgortimen}
-	\label{fig:rotation}
-\end{figure}
-
-\noindent På figur \ref{fig:rotation} ses et aktivitetsdiagram for algoritmen for rotationsbegrænsning. Der er fastsat to værdier for ydergrænser. Når motoren bevæger sig udover ydergrænserne, blokeres motoren for den givne retning indtil motoren er tilbage i intervallet. 
-
-\subsection{Affyringsmekanisme} 
-Affyringsmekanismen består overordnet af en rotationsdetektor, en motorstyringsenhed og en mekanisk del. Disse er beskrevet herunder. 
 
 \subsection{Affyringsmekanisme}
 Affyringsmekanismen består af en motor; et motorstyringskredsløb; et detektorkredsløb, der skal detektere, at motoren kun kører en enkelt omgang, når der skydes; og en kanon, som er bygget op af noget mekanik og LEGO. 
