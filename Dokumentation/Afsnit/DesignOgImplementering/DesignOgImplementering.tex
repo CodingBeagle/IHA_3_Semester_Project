@@ -285,16 +285,16 @@ Der blev først designet en H-bro, som bestod af to N-MOSFET's af typen IRLZ44 o
 		\cline{1-2}
 		Betegnelse 	& Komponent 	          	 &  \\ \cline{1-2}
 		VCC        	& 5V                         &  \\ \cline{1-2}
-		Q1   		& IRLZ44 (mosfet N-kanal)   &  \\ \cline{1-2}
-		Q2   		& IRLZ44 (mosfet N-kanal)   &  \\ \cline{1-2}
-		Q3   		& IRLZ44 (mosfet N-kanal)   &  \\ \cline{1-2}
-		Q4   		& IRLZ44 (mosfet N-kanal)   &  \\ \cline{1-2}
+		Q1   		& IRLZ44 (MOSFET N-kanal)   &  \\ \cline{1-2}
+		Q2   		& IRLZ44 (MOSFET N-kanal)   &  \\ \cline{1-2}
+		Q3   		& IRLZ44 (MOSFET N-kanal)   &  \\ \cline{1-2}
+		Q4   		& IRLZ44 (MOSFET N-kanal)   &  \\ \cline{1-2}
 		Q5   		& BC547                      &  \\ \cline{1-2}
 		Q6   		& BC557                      &  \\ \cline{1-2}
 		Q7   		& BC547                      &  \\ \cline{1-2}
 		Q8   		& BC557                      &  \\ \cline{1-2}
-		Q9   		& IRF9Z34N (mosfet P-kanal) &  \\ \cline{1-2}
-		Q10  		& IRF9Z34N (mosfet P-kanal) &  \\ \cline{1-2}
+		Q9   		& IRF9Z34N (MOSFET P-kanal) &  \\ \cline{1-2}
+		Q10  		& IRF9Z34N (MOSFET P-kanal) &  \\ \cline{1-2}
 		R1   		& 10k$\Omega$                &  \\ \cline{1-2}
 		R2   		& 10k$\Omega$                &  \\ \cline{1-2}
 		R3   		& 10k$\Omega$                &  \\ \cline{1-2}
@@ -508,7 +508,7 @@ Herefter var det muligt at aflæse et tydeligt firkantsignal med en peak-to-peak
 Den røde LED er koblet direkte til et 0-5V, 10 kHz PWM-signal fra PSoC'en. Den kan godt klare sig uden en formodstand. 
 
 \subsubsection{Motorstyring}
-Til at styre affyringsmekanismens motor er der bygget et kredsløb med en MOSFET som primære komponent. MOSFET'en skal sørge for, at motoren kun kører, når der bliver sendt PWM-signal ind i den. Kredsløbsdiagrammet kan ses på figur \ref{fig:affyringsmotor}. 
+Til at styre affyringsmekanismens motor er der bygget et kredsløb med en MOSFET af typen IRLZ44 som primære komponent. Denne skal fungere som en switch, da den skal sørge for, at motoren kun kører, når der bliver sendt PWM-signal ind i den. Kredsløbsdiagrammet kan ses på figur \ref{fig:affyringsmotor}. 
 
 \begin{figure}[H]
 	\centering
@@ -516,6 +516,8 @@ Til at styre affyringsmekanismens motor er der bygget et kredsløb med en MOSFET
 	\caption{Diagram over motorstyring til motor på affyringsmekanisme}
 	\label{fig:affyringsmotor}
 \end{figure}
+
+Der ønskes i dette tilfælde at kunne styre motorens hastighed. Derfor anvendes et PWM-signal, som sendes ind på gatebenet og styrer motoren. Hastigheden kan så styres ved hjælp af PWM-signalets dutycycle. Hvis ikke MOSFET'en var der, ville motoren køre med fuld hastighed hele tiden, hvilket i dette tilfælde ikke ville være optimalt. 
 
 Dioden D1 er sat ind for at sikre motoren mod store spændingsspikes, der kan forekomme, når MOSFET'en bliver afbrudt. Dioden D2, der sidder fra source til drain, sikrer, at spikes genereret af motoren, når den slukkes, ikke brænder MOSFET'en af. 
 
