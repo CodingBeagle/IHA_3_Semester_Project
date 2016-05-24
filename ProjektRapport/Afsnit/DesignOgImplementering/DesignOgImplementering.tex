@@ -246,7 +246,7 @@ Her vises en statemachine for brugergrænsefladens forløb igennem usecase 2.
 	\label{fig:StateMachineUC2}
 \end{figure}
 
-Statemachinens forløb beskrives i dokumentationen, #RefDoku
+Statemachinens forløb beskrives i dokumentationen, \#RefDoku
 
 Brugergrænsefladen for UC2 er en simpel test-konsol. Den består af 3 knapper og et konsol vindue. Brugergrænsefladen interfacer med SPI-protokollen, gennem vores interface driver. Den første knap, Start test, initierer UC2. Efterhånden som testen løbes igennem kaldes test funktionerne, og ved hjælp af if-conditions, bliver der tjekket på retur-værdierne fra interface-funktionerne. Hvis retur-værdien er true, skrives der en "--test successful" besked i konsol vinduet. og widgeten kører videre. Hvis retur-værdien er false, skrives der en "--test unsuccessful" i tekstvinduet og widgeten returnerer til idle tilstand. Når alle test er successful, skrives "System test successful, system is ready for use" til tekstvinduet, og widgeten returnerer til idle tilstand. Den anden knap, Clear, clearer konsollen til blank tilstand. Den tredje knap, Exit, lukker widgeten.
 Koblingen i brugergrænsefladen hænger udelukkende sammen med interfacedriveren. Knapperne kalder funktioner fra interfacedriveren, og ved ændring i disse funktioner, ville foresage ændringer i brugergrænsefladen.
