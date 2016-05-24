@@ -7,7 +7,7 @@ I Goofy Candygun 3000 indgår et antal hardwaredele, som skal udgøre det færdi
 For at kanonen kan sigte både vertikalt og horisontalt, skal den kunne køre i begge disse retninger. Det afhjælpes ved at bruge to DC-motorer - en til hver retning. Men for at disse så kan køre både forlæns og baglæns, skal der bruges en H-bro. For at sikre at motorerne ikke kan dreje 360 grader, er der udviklet en rotationsbegrænsning, som gør, at de kun kan dreje cirka 35 grader ud til hver side. 
 
 \subsubsection{H-bro}
-H-broen er en del af "motorControl"-blokken. Denne har til opgave at styre motoren, så den både kan køre til højre og venstre. Selvom der findes en komponent som indholder en H-bro, der også sagtens kunne benyttes, er der blevet designet en H-bro fra bunden, da det giver en bedre forståelse af, hvordan den fungerer. H-broen er opbygget af to identiske kredsløb, så der gives her en beskrivelse af den ene side af H-broen. På \ref{hbro} ses det færdige kredsløbsdiagram over H-broen. 
+H-broen er en del af motorblokken på BDD'et \ref{BDD}. Denne har til opgave at styre motoren, så den både kan køre til højre og venstre. Selvom der findes en komponent som indholder en H-bro, der også sagtens kunne benyttes, er der blevet designet en H-bro fra bunden, da det giver en bedre forståelse af, hvordan den fungerer. H-broen er opbygget af to identiske kredsløb, så der gives her en beskrivelse af den ene side af H-broen. På \ref{fig:hbro} ses det færdige kredsløbsdiagram over H-broen. 
 
 \begin{figure}[H]
 		\centering
@@ -16,7 +16,7 @@ H-broen er en del af "motorControl"-blokken. Denne har til opgave at styre motor
 		\label{fig:hbro}
 \end{figure}
 
-I \ref{hbrotabel} ses relevante komponentværdier for H-broen. En fyldestgørende oversigt over disse ses i \ref{dokumentationen}
+I tabel \ref{hbrotabel} ses relevante komponentværdier for H-broen. En fyldestgørende oversigt over disse ses i \ref{dokumentationen}
 
 \begin{table}[H]
 	\centering
@@ -33,39 +33,31 @@ I \ref{hbrotabel} ses relevante komponentværdier for H-broen. En fyldestgørend
 	\label{hbrotabel}
 \end{table}
 
-Når motoren skal køre fremad, skal Q9 og Q4 åbnes. For at N-MOSFET'en (Q4) kan åbne, skal der en positiv spænding ind på gatebenet. For at P-MOSFET'en (Q9) kan åbne, skal den have en negativ spænding. For at løse dette blev der sat en N mosfet, foran hver af P mosfet, for at trække spændingen ned, så P mosfet’ene kan åbne. \\
+Når motoren skal køre fremad, skal Q9 og Q4 åbnes. For at N-MOSFET'en (Q4) kan åbne, skal der en positiv spænding ind på gatebenet. For at P-MOSFET'en (Q9) kan åbne, skal den have en negativ spænding. For at løse dette blev der sat en N-MOSFET foran hver P-MOSFET.
 
-%For at få motoren til for eksempel at køre til højre, skal P mosfet og N mosfet åbnes. For at N mosfet’en skal åbne, skal der et positiv spændingen til. Imens for at P mosfet’en kan åbne, skal den have en negativ spænding på gatebenet for at kunne åbne. For at løse dette blev der sat en N mosfet, foran hver af P mosfet, for at trække spændingen ned, så P mosfet’ene kan åbne. \\
+Da motoren gerne skal kunne skifte retning hurtigt og ofte, er det nødvendigt, at de to MOSFET's kan både åbne og lukke hurtigt. På figur \ref{fig:mof} ses, hvordan Q9 åbner og lukker langsomt, hvilket skyldes kondensatoreffekten mellem benene på MOSFET'en.
 
-Da motoren gerne skal kunne skifte retning hurtigt og ofte, er det nødvendigt, at de to MOSFET's kan både åbne og lukke hurtigt. På figur \ref{fig:mof} ses, hvordan Q9 åbner og lukke langsomt, i forhold til hvad der var ønsket for projektet, dette skyldes kondensator effekt i mellem benene på mosfet'ene.
-Derfor blev Q5 indsat, for at mosfet'en kan åbne hurtigere. Der var stadig det problem, at Q9 var langsom til at lukke, og derfor blev Q6 sat ind. På figur \ref{fig:moe} ses, hvordan driveren gør, at Q9 både åbner og lukker hurtigt. \\
+For at få Q9 til åbne hurtigere blev Q5 indsat. Der var stadig det problem, at Q9 var langsom til at lukke, og derfor blev Q6 sat ind. På figur \ref{fig:moe} ses, hvordan driveren gør, at Q9 både åbner og lukker hurtigt.
 
 De to transistorer kunne godt have været erstattet af komponenten IRF2101, som er en driver, der gør præcis det samme, som beskrevet ovenfor. Denne er ikke anvendt, da det gav en større forståelse at udvikle driveren selv. 
 
-%Da der ønskes at kunne skifte motorens retning hurtigt og ofte, var det nødvendigt at indsætte en transistor foran hver P-MOSFET
-%Da der i dette projekt ønskes at skifte retning ofte, blev der sat foran hver P mosfet, to transistorer, for at hurtig at kunne aflade og oplade mosfet’ene, på grund af kondensator effekt i mellem benene ville det tag længere tid at åbne og lukke for mosfet’en, så derfor blev det valgt at sætte transistorer ind. Selvom der findes en komponent (IRF2101), som kan hjælpe med dette, men der blev valgt at bruge transistorer, for at få en bedre ide om hvordan det hele funger. Som man kan se på figur\ref{fig:mof} viser hvordan det så ud før at transistorer var sat ind. På figur \ref{fig:moe} viser det  hvordan det ser ud efter at transistorerne er sat ind. Så det gør som forvente at mosfet’ene åbne og lukker hurtigere. \\
-
 \begin{figure}[H]
-	\begin{adjustwidth}{-3cm}{-\rightmargin}
-		\centering
-		\includegraphics[width=0.3\paperwidth]{Afsnit/DesignOgImplementering/images/mof}
-		\caption{før transistorer blev sat ind}
-		\label{fig:mof}
-	\end{adjustwidth}
+	\centering
+	\includegraphics[width=0.3\paperwidth]{Afsnit/DesignOgImplementering/images/mof}
+	\caption{Illustration af Q9's åbne- og lukketid før transistorer blev sat ind i kredsløb}
+	\label{fig:mof}
 \end{figure}
 
 \begin{figure}[H]
-	\begin{adjustwidth}{-3cm}{-\rightmargin}
-		\centering
-		\includegraphics[width=0.3\paperwidth]{Afsnit/DesignOgImplementering/images/moe}
-		\caption{efter transistorer blev sat ind}
-		\label{fig:moe}
-	\end{adjustwidth}
+	\centering
+	\includegraphics[width=0.3\paperwidth]{Afsnit/DesignOgImplementering/images/moe}
+	\caption{Illustration af Q9's åbne- og lukketid efter transistorer blev sat ind i kredsløb}
+	\label{fig:moe}
 \end{figure}
 
-Der er også blevet sat diode fire ind i kredsløbet, de fire dioder skal fungere som beskyttelse af mosfet’ene, Det de gør, er at de sikrer at den spænding, som er tilbage i motoren, når man lukker for mosfetene, ikke løber tilbage ind i mosfetene og brænder dem af.
-\\
-Resten af komponenterne bliver beskrevet over i dokumentationen \ref{dokumentation, h-bro}.
+De fire dioder, der er indsat i kredsløbet, skal fungere som beskyttelse af de fire MOSFET's. Det, de gør, er, at de sikrer, at den spænding, som er tilbage i motoren, når der lukkes for MOSFET'ene, ikke løber tilbage ind i mosfetene og brænder dem af.
+
+For en fyldestgørende beskrivelse af H-broen, ses \ref{dokumentation, H-bro}. 
 
 \subsubsection{Rotationsbegrænsning}
 Platformen, som styres af motoren, må ikke kunne rotere 360 \(\deg\). Dette ses kravspecifikationen \textbf{\#ref Reference til kravspecikation (ikke-funktionelle krav)}. For at begrænse motorens bevægelse, anvendes et potentiometer samt en ADC. Når motoren bevæger sig, ændres potentiometerets modstandsværdi, og dermed ændres spændingsniveauet. På figur \ref{fig:opstillingADC} ses den endelige opstilling af rotationsbegrænsningen.
@@ -85,7 +77,6 @@ Platformen, som styres af motoren, må ikke kunne rotere 360 \(\deg\). Dette ses
 	\includegraphics[scale=0.65]{DesignOgImplementering/images/potentiometer}
 	\caption{Spændingsdeler formlen for potentiometeret}
 	\label{fig:potentiometer2}
-	
 \end{figure}
 
 \noindent Det anvendte potentiometer har en størrelse på 47\(\ K\Omega\). Denne er lineær. Det vil sige at spændingen stiger proportionalt med modstanden. I potentiometeret findes en roterende kontakt, der danner en justerbar spændingsdeler. Når skaftet på potentiometret roteres ændres modstanden i de to variable modstande, \(\ R_{1}\) og  \(\ R_{2}\). På figur \ref{fig:potentiometer2} ses en konceptuel afbildning af de variable modstande i potentiometret, hvor der ses at udgangsspændingen er spændingen over \(\ R_{1}\). \newline
