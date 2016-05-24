@@ -56,7 +56,6 @@ Projektrapport:
 	-SPI Devkit skal rettes - For meget tekst
 	-Interface driver skal rettes - For meget tekst
 	-Beskriv motorstyring (software)
-	-Aktivitetsdiagrammer for vigtige algoritmer - Tilføjes til dokumentationen, og referes til.
 	-Brugergrænseflade - Tekst til STM.
 	
 -Test
