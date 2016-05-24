@@ -70,10 +70,30 @@ Platformen, som styres af motoren, må ikke kunne rotere 360 \(\deg\). Dette ses
 \end{figure}
 
 \noindent \textbf{Potentiometer} \newline
-Det anvendte potentiometer har en størrelse på 47\(\ K\Omega\). Denne er lineær. Det vil sige at spændingen stiger proportionalt med modstanden. I potentiometeret findes en roterende kontakt, der danner en justerbar spændingsdeler over to conceptuelle modstande. Når skaftet på potentiometret roteres ændres modstanden i de to variable modstande og dermed sker der en ændring i outputspændingen.
+\noindent Den første del af rotationsbegrænsningen er et potentiometer, som fungerer efter spændingsdelerprincippet, som vist på figur \ref{fig:potentiometer2}.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.65]{DesignOgImplementering/images/potentiometer}
+	\caption{Spændingsdeler formlen for potentiometeret}
+	\label{fig:potentiometer2}
+\end{figure}
+
+\noindent Det anvendte potentiometer har en størrelse på 47\(\ K\Omega\). Denne er lineær. Det vil sige at spændingen stiger proportionalt med modstanden. I potentiometeret findes en roterende kontakt, der danner en justerbar spændingsdeler. Når skaftet på potentiometret roteres ændres modstanden i de to variable modstande, \(\ R_{1}\) og  \(\ R_{2}\). På figur \ref{fig:potentiometer2} ses en konceptuel afbildning af de variable modstande i potentiometret, hvor der ses at udgangsspændingen er spændingen over \(\ R_{1}\). \newline
 
 \noindent \textbf{ADC} \newline
 For at kunne aflæse spændingen på potentiometeret, anvendes en 12-bit AD converter af typen Sequencing Successive Approximation ADC. En sequencing SAR ADC indeholder et sample-hold kredsløb. Kredsløbet holder på et indgangssignal indtil det næste signal registres på kredsløbets indgang. Dermed har converteren tid til at bestemme outputværdien. \newline \newline
+\noindent ADC'en fungerer ved at midscale indstilles til halvdelen af referencespændingen. Inputsignalet sammenlignes med midscale, hvis inputsignalet er højere end midscaleværdien sættes MSB 1 og hvis signalet er lavere bliver denne sat til 0. Herefter bliver midscale værdien rekursivt sat til havdelen af intervallet, som inputsignalet ligger indenfor, og bittene ned til LSB bliver sat. Bittene der sættes, bliver gemt i et register. Når konverteringen er gennemført, kan værdien af inputsignalet aflæses i dette register. 
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\textwidth]{DesignOgImplementering/images/ADC}
+	\caption{Illustation af AD konvertering}
+	\label{fig:ADC1}
+	
+\end{figure}
+
+\noindent På figur \ref{fig:ADC1} ses et eksempel over de første fem trin i en konvertering. Til dette projekt arbejdes der med en 12-bit AD converter, dermed ville denne konvertering forsætte 12 trin ned.  \newline
 
 \noindent \textbf{PSoC Indstillinger} \newline
 I forbindelse med begrænsning af motorens rotation er der nogle indstillinger der skal sættes. ADC'en skal indstilles til at gøre brug af en kanal i single mode, da der ét inputsignal fra potentiometret og denne skal bestemmes i forhold til stel. For at styre motorens bevægelse i et interval er følgende algoritme implementeret.
@@ -207,21 +227,20 @@ Når der skal skrives og læses, anvendes read- og write-funktionerne. Ofte vill
 
 
 \subsection{Interface Driver}
-Interface driveren fungerer som bindeled mellem brugergrænsefladen og candydriveren på Devkit8000. Den indeholder tre funktioner. Funktionerne anvendes i use case 2 til at teste kommunikationsforbindelserne i resten af systemet. Interface driveren er designet og implementeret i C++ og gør brug af klasserelationen arv, for at opnå lav kobling. Et klassediagram for interface driveren se på figur  \ref{fig:idriveruc2}.\\
+Interface driveren fungerer som bindeled mellem brugergrænsefladen og candydriveren på Devkit8000. Den indeholder tre funktioner.
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=\textwidth]{Afsnit/DesignOgImplementering/images/IdriverKlasseDiagram}
-	\caption{Interface driver for UC2}
-	\label{fig:idriveruc2}
+	\includegraphics[width=\textwidth]{Afsnit/DesignOgImplementering/images/InterfacedriverKlassediagram}
+	\caption{Klassediagram for Interfacedriver}
+	\label{fig:idriverclass}
 \end{figure}
 
-Basisklassen er ICandyGun. Det er en abstrakt klasse, da den udelukkende indeholder virtuelle metoder. Derudover er der én afledt klasse, RealCandyGun. 
-%SimulCandyGun implementerer metoderne til at simulere respons fra Candydriveren. Dermed kan brugergrænsefladen testes uafhængigt af de resterende dele af systemet. Simuleringen er implementeret med \textit{srand()}-funktionen fra \textit{cstdlib}-biblioteket, som returnerer et tilfældigt tal, som her bliver mellem 0 og 1. 
-I RealCandyGun-klassen er metoderne implementeret efter SPI-protokollen og med de nødvendige funktioner til at skrive til et kernemodul. Fx open(), close(), read () og write(). Da interface driveren er implementeret med arv, skal der ikke foretages betydelige ændringer i brugergrænsefladen, hvis det skulle være ønsket at udskifte driveren, eller lave en test-version, hvor funktionerne simuleres. Dermed opnås lav kobling. \\
-De tre funktioner som Interface driveren indeholder i forbindelse med use case 2 (test use casen) er: SPITest(), I2CTest(), NunchuckTest(). Hver af de tre funktioner anvendes til at starte en test af de forskellige kommunikationsforbindelser: SPI, I2C og brugerinputet fra nunchucken. Alle funktionerne returnerer en bool, som enten er true eller false, alt efter om testen var succesful eller ej. 
-Når der skal startes en test, åbner den pågældende funktion filen \textit{dev/candygun} og skriver SPI-kommandoen for \textit{start test} til filen. Derefter venter funktionen ét sekund og læser så svaret fra filen. Da der i nunchucktesten ventes på et brugerinput, og brugeren skal have lidt tid til at trykke på nunchuck-knappen, er der oprettet en while-løkke, som tjekker flere gange om testen returnerer true. Hvis testen ikke returnerer true ved første check, venter funktionen atter et sekund og tjekker igen. Det gør den op til 15 gange og melder derefter om fejl, hvis ikke den returnerer true inden.\\
-Brugergrænsefladen anvender interface driveren ved at inkludere headerfilerne og oprette en ICandyGun pointer, der peger på en instans af én af de to afledte klasser. Ved at pakke kommunikationen  til kernemodulet for candydriveren væk i funktioner kan brugergrænsefladen anvende funktionerne uden at kende til SPI-protokollen. Det sikrer igen lav kobling, og i tilfælde hvor det kunne ønskes, at SPI-kommunikationen kan erstattes af en anden kommunikationsform, kan det gøres uden, at der skal foretages ændringer i brugergrænsefladen.\\
+Interface driveren indeholder fire metoder: SPITest(), I2CTest(), NunchuckTest() og delay(int ms). De tre test metoder anvendes til at starte en test af de forskellige kommunikationsforbindelser: SPI, I2C og Nunchuck forbindelse.
+Hver af disse tre metoder tilgår /dev/candygun på DevKit8000.
+De skriver en unik værdi til filen, som SPI-driveren tilgår.
+Efter hver tilskrivning lukkes adgangen til filen. Herefter kaldes delay-metoden, så andre dele af systemet har tid til at skrive et svar til /dev/candygun. Herefter læser metoderne fra filen. Rækkefølgen for metodekaldende kan ses på figur \ref{fig:SystemTestSekvensDiagram}
+
  
 \subsection{Brugergrænseflade}
 Usecase 2 styres via brugergrænsfladen fra Devkit8000.
@@ -355,7 +374,7 @@ På figur \ref{fig:aktivitetsdiagramDetektor} ses kodesekvensen som køres, når
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=1\textwidth]{Afsnit/DesignOgImplementering/images/PSoC2sekvens.png}
-	\caption{Interface driver for UC2}
+	\caption{ANDET NAVN TAK! Vi kan ikke have to interface / driver for UC2}
 	\label{fig:aktivitetsdiagramDetektor}
 \end{figure}
 
