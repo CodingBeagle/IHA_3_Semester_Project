@@ -52,9 +52,6 @@ Projektrapport:
 	-Brugergrænseflade - Tekst til STM.
 -Test
 	-Skal uddybes, og der skal oprettes ordentlige referencer til dvs. tests i dokumentationen
--Udviklingsværktøjer <-- sendes i dokumentqtion
-	-Diskuter relevans af afsnit
-	-Analog discovery afsnit skrives
 -Fremtidigt arbejde (Perspektivering)
 	-Rettes igennem, tilføjes mere tekst?
 -Konklusion
