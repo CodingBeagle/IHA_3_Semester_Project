@@ -195,6 +195,7 @@ Denne metode bruger PSoC Creator's I2C-API til at læse data fra nunchuck'en (da
 
 I klassediagrammet er der en sektion kaldet "Defines". Disse Defines bruges i implementeringen til forskellige formål. \textit{PSoC0UnitAddress, PSoC1UnitAddres} og \textit{nunchuckUnitAddress} bruges til at definere adresserne for I2C-nettets slaver. \textit{NunchuckData, I2CTestRequest} og \textit{I2CTestACK} er kommando typer der bruges til at bestemme hvilken kommando type der er blevet sendt/modtaget, og hvor mange bytes der skal forventes at være gemt i databufferen (Se dokumentationen afsnit \textbf{INDSÆT REFERENCE TIL DOKUMENTATIONAFSNIT \#ref}) 
 
+<<<<<<< 8274aa6323f55fbea4f9d6cd8a023ff38717e674
 \subsection{Rotationsbegrænsning}
 I forbindelse med begrænsning af motorens rotation er der nogle indstillinger der skal sættes. ADC'en skal indstilles til at gøre brug af en kanal i single mode, da der ét inputsignal fra potentiometret og denne skal bestemmes i forhold til stel. For at styre motorens bevægelse i et interval er følgende algoritme implementeret.
 
@@ -219,6 +220,8 @@ Til styring af motorene gøres der brug af fire PWM blokke, to til styring af X-
 
 \noindent På figur \ref{fig:motorstyringal} ses aktivitetsdiagrammet for motorstyringsalgoritmen. Der ses at retningensignalerne bestemmes ud fra Wii-Nunchuck'ens inputværdier fra X- og Y-aksen.
 
+=======
+>>>>>>> 0a1d8918381267eb4e358ac91a97539c7fd97098
 \section{Afkodning af Wii-Nunchuck Data Bytes}
 Aflæste bytes fra Wii-Nunchuck - indeholdende tilstanden af knapperne og det analoge stick - er kodet når de oprindeligt modtages via I2C bussen. Disse bytes skal altså afkodes før deres værdier er brugbare. Afkodningen af hver byte sker ved brug af følgende formel:
 
@@ -252,14 +255,16 @@ I projektet er de afkodede værdier for det analoge stick kalibreret med værdie
 
 \section{Hardwaredesign}
 På baggrund af BDD'et er der fundet følgende hardwareblokke, der skal udarbejdes: 
+
 \begin{itemize}
-	\item Motorstyring
 	\item Tre motorer
+	\item Motorstyring
 	\item Affyringsmekanisme 
 \end{itemize}
+
 Disse beskrives i de følgende afsnit. 
 
-\subsubsection{Motor}
+\subsection{Motor}
 Der er valgt at bruge en DC-motor i alle tre tilfælde. De to motorer skal bruges til at styre kanonen i to retninger, og den sidste skal bruges i affyringsmekanismen. 
 
 \subsection{Motorstyring}
@@ -274,7 +279,6 @@ Der blev først designet en H-bro, som bestod af to N-MOSFET's af typen IRLZ44 o
 	\caption{Kredsløb for H-bro}
 	\label{fig:hbro}
 	\end{figure}
-	
 
 \begin{table}[H]
 	\centering
@@ -300,21 +304,21 @@ Der blev først designet en H-bro, som bestod af to N-MOSFET's af typen IRLZ44 o
 		R6   		& 100$\Omega$                &  \\ \cline{1-2}
 		R7   		& 100$\Omega$                &  \\ \cline{1-2}
 		R8   		& 10k$\Omega$                &  \\ \cline{1-2}
-		D1   		& IN5819                     &  \\ \cline{1-2}
-		D2   		& IN5819                     &  \\ \cline{1-2}
-		D3   		& IN5819                     &  \\ \cline{1-2}
-		D4   		& IN5819                     &  \\ \cline{1-2}
+		D1   		& IN5819(diode)              &  \\ \cline{1-2}
+		D2   		& IN5819(diode)              &  \\ \cline{1-2}
+		D3   		& IN5819(diode)              &  \\ \cline{1-2}
+		D4   		& IN5819(diode)              &  \\ \cline{1-2}
 	\end{tabular}
-	\caption{Komponentbetegnelser på H-bro 5}
+	\caption{Komponentbetegnelser på H-bro}
 	\label{my-label}
 \end{table}
 
-
-\subsubsection{MOSFET'er}
+\begin{itemize}
+\item MOSFET'er \\
 Til at styre motoren er der bygget en H-bro, som består af fire mosfet, hvor to af dem er af typen IRF9Z34N (mosfet P-channel, som er Q9 og Q10 på figur \ref{fig:hbro}) og de to andre mosfet er af typen IRLZ44 (mosfet N-Channel, som er Q3 og Q4 på figur\ref{fig:hbro}). Det er valgt at bruge mosfet for at kunne styre H-broen, da det ved denne er muligt at lukke og åbne for spændingen, og de bliver styret af spænding, i forhold til transistorer, som bliver styret af strøm. 
 
 \begin{itemize}
-\item MOSFET N-kanal\\
+\item MOSFET N-kanal \\
 	Der er i denne H-bro brugt en N-kanals-MOSFET af typen IRLZ44. Denne MOSFET skal bruges til at trække strømmen fra den tilsvarende P-MOSFET til stel, så motoren kan begynde at køre. Det sker, når der kommer 5V ind på gate-benet. 
 	\\MOSFET'en fungerer på den måde, at når der kommer positiv spænding ind på gate-benet åbner den, så der kommer forbindelse til stel og når der kommmer 0V ind på dette lukker den igen. 
 	
@@ -344,13 +348,13 @@ Til at styre motoren er der bygget en H-bro, som består af fire mosfet, hvor to
 	
 \end{itemize}
 
-\subsubsection{Dioder}
+\item Dioder \\
 Over fire af mosfetene (Q9, Q10, Q3 og Q4) som set på figur \ref{fig:hbro} er der sat en diode af typen IN5819. Den skal fungere som beskyttelse af de fire mosfet (Q9, Q10, Q3 og Q4). Det, de gør, er, at de sikrer, at den spænding, som er tilbage i motoren, når man lukker for mosfetene, ikke løber tilbage ind i mosfetene og brænder dem af.
 
-\subsubsection{Modstande}
+\item Modstande \\
 \begin{itemize}
 	\item Pull down modstande:\\
-	Der er blevet brugt fire pull-down-modstande (R1, R2, R3 og R4 som set på figur \ref{fig:hbro}). Disse sørger for, at signalet vil blive holdt lavt, når der ikke er trykket, så dette ben ikke står og flyver, så det kan komme til at åbne en mosfet ved en fejl og derved kommer til at brænde en mosfet eller motoren af. Der er valgt en modstand på 10 kOhm, hvilket betyder, at den er lille nok til at trække de små spændinger ned, når der ikke er trykket, og den stor nok til at spændingen ikke løber derned, når der er trykket. 
+	Der er blevet brugt fire pull-down-modstande (R1, R2, R3 og R4 som set på figur \ref{fig:hbro}). Disse sørger for, at signalet vil blive holdt lavt, når der ikke er trykket, så dette ben ikke står og flyver, så det kan komme til at åbne en mosfet ved en fejl og derved kommer til at brænde en mosfet eller motoren af. Der er valgt en modstand på $10k\Omega$, hvilket betyder, at den er lille nok til at trække de små spændinger ned, når der ikke er trykket, og den stor nok til at spændingen ikke løber derned, når der er trykket. 
 	\item Andre modstande
 	\begin{itemize}
 		\item R6 og R7\\
@@ -363,21 +367,17 @@ Over fire af mosfetene (Q9, Q10, Q3 og Q4) som set på figur \ref{fig:hbro} er d
 			Der blev sat en 100$\Omega$ i stedet for at være sikker på at der ikke var noget som blev brændt af
 		\item R5 og R8\\
 			Grunden til at R5 og R8(kan ses på figur \ref{fig:hbro}) er sat ind i kredsløbet er, at der ifølge databladet kun kan løbe en strøm på omkring 30A igennem den N-MOSFET, der er brugt, Vgs er 10V. Da Vgs kun er sat til 5V, vil MOSFET'en altså ikke kunne klare en alt for stor strøm. Derfor er R5 og R8 sat ind for at forhindre, at MOSFET'en ikke brænder af.
-			 \begin{displaymath}
-			 \frac {9V}{30A} 	=0.3\Omega
-			 \end{displaymath}
-			 0.3$\Omega$ alt for lidt, så der blev prøvet end til der blev fundet en som virkerede og det var 10K$\Omega$
 	\end{itemize}
-
 \end{itemize}
 
-\subsubsection{Transistorer}
+\item Transistorer\\
 \begin{itemize}
 	\item Q5 og Q7(kan ses på figur \ref{fig:hbro})
 	Disse transistorer sidder i kredsløbet, fordi det tager tid for P-MOSFET'en at blive opladt helt, på grund af kondensator effekt imellem benene på mosfet'en, for ellers ville den tag for lang tid om at åbne helt. Det hjælper den disse transistorer til med. 
 	
 	\item Q6 og Q8(kan ses på figur \ref{fig:hbro})
 	Disse to transistorer sidder der for at hjælpe med at lukke P-MOSFET'en igen. Inden Q5 og Q7 blev sat ind tog det tid for at lukke P-MOSFET'en, men da de to blev sat ind, kunne de hjælpe til med at aflade mosfet'ene hurtigere. Derfor sidder de der, for at IRF9Z34N kan lukke hurtigt. 
+\end{itemize}
 \end{itemize}
 
 \subsubsection{Rotationsbegrænsning}
@@ -398,7 +398,6 @@ Platformen, som styres af motoren, må ikke kunne rotere 360 \(\deg\). Dette ses
 	\includegraphics[scale=0.65]{DesignOgImplementering/images/potentiometer}
 	\caption{Spændingsdeler formlen for potentiometeret}
 	\label{fig:potentiometer2}
-	
 \end{figure}
 
 \noindent Det anvendte potentiometer har en størrelse på 47\(\ K\Omega\). Denne er lineær. Det vil sige at spændingen stiger proportionalt med modstanden. I potentiometeret findes en roterende kontakt, der danner en justerbar spændingsdeler. Når skaftet på potentiometret roteres ændres modstanden i de to variable modstande, \(\ R_{1}\) og  \(\ R_{2}\). På figur \ref{fig:potentiometer2} ses en konceptuel afbildning af de variable modstande i potentiometret, hvor der ses at udgangsspændingen er spændingen over \(\ R_{1}\). \newline
@@ -415,4 +414,126 @@ For at kunne aflæse spændingen på potentiometeret, anvendes en 12-bit AD conv
 	
 \end{figure}
 
+<<<<<<< 8274aa6323f55fbea4f9d6cd8a023ff38717e674
 \noindent På figur \ref{fig:ADC1} ses et eksempel over de første fem trin i en konvertering. Til dette projekt arbejdes der med en 12-bit AD converter, dermed ville denne konvertering forsætte 12 trin ned.  \newline
+=======
+\noindent På figur \ref{fig:ADC1} ses et eksempel over de første fem trin i en konvertering. Til dette projekt arbejdes der med en 12-bit AD converter, dermed ville denne konvertering forsætte 12 trin ned.  \newline
+
+\noindent \textbf{PSoC Indstillinger} \newline
+I forbindelse med begrænsning af motorens rotation er der nogle indstillinger der skal sættes. ADC'en skal indstilles til at gøre brug af en kanal i single mode, da der ét inputsignal fra potentiometret og denne skal bestemmes i forhold til stel. For at styre motorens bevægelse i et interval er følgende algoritme implementeret.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\textwidth]{DesignOgImplementering/images/rotationalgorithm}
+	\caption{Aktivitetsdiagram for rotationsbegrænsningsalgortimen}
+	\label{fig:rotation}
+\end{figure}
+
+\noindent På figur \ref{fig:rotation} ses et aktivitetsdiagram for algoritmen for rotationsbegrænsning. Der er fastsat to værdier for ydergrænser. Når motoren bevæger sig udover ydergrænserne, blokeres motoren for den givne retning indtil motoren er tilbage i intervallet. 
+
+\subsection{Affyringsmekanisme} 
+Affyringsmekanismen består overordnet af en rotationsdetektor, en motorstyringsenhed og en mekanisk del. Disse er beskrevet herunder. 
+
+\subsection{Affyringsmekanisme}
+Affyringsmekanismen består af en motor; et motorstyringskredsløb; et detektorkredsløb, der skal detektere, at motoren kun kører en enkelt omgang, når der skydes; og en kanon, som er bygget op af noget mekanik og LEGO. 
+
+\subsubsection{Rotationsdetektor}
+Når kanonen affyres, styres det af motoren, og som mekanikken er opbygget, er der et proportionelt forhold mellem omdrejning på motoren og antal skud, der affyres. Derfor er det væsentligt at vide, hvornår motoren har roteret en runde, så den kan stoppes, inden der igen skydes. Til det formål anvendes detektoren. Billedet på figur \ref{fig:detektor} illustrerer hvordan detektoren anvendes.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\textwidth]{Afsnit/DesignOgImplementering/images/detektor}
+	\caption{Detektorens placering på affyringsmekanismen}
+	\label{fig:detektor}
+\end{figure}
+
+Den røde LED og fotodioden anbringes på affyringsmekanismen, som det ses på figur \ref{fig:detektor}. De vender ind mod hinanden, men er adskilt af papskiven. Papskiven er forbundet til motorens rotation, og hver gang et af papskivens hakker roterer forbi dioderne, kan de se hinanden. Fotodioden sender derefter et signal, som kan bruges til at stoppe motoren. Hvert hak passer med, at der er blevet affyret et skud.  
+
+Detektoren skal kun sende et signal, når fotodioden ser lyset fra LED'en. Det er derfor vigtigt, at den ikke bliver forstyrret af dagslys og andre lyskilder. For at sikre dette, styres den røde LED af et PWM-signal, så LED'en blinker med en frekvens på 10 kHz. Detektoren opbygges tilsvarende af et båndpasfilter, med en centerfrekvens på 10 kHz, som sorterer andre frekvensområder og DC-signaler fra. 10 kHz er rigeligt højt, til at det for øjet ikke er synligt at LED'en blinker. Samtidig er det ikke for højt til, at en almindelig operationsforstærker kan håndtere det. På figur \ref*{fig:detektortand} ses et kredsløbsdiagram for detektoren og LED'en.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\textwidth]{Afsnit/DesignOgImplementering/images/detektor_tandhjul}
+	\caption{Kredsløbsdiagram for detektoren}
+	\label{fig:detektortand}
+\end{figure}
+
+Båndpasfiltret er opbygget af et højpasfilter, et lavpasfilter og en operationsforstærker. Da PSoC'en har en indbygget operationsforstærker, anvendes denne. Højpasfilterets afskæringsfrekvens er beregnet på følgende måde: \\
+
+\begin{math}
+	f_{H}=fraq{1}/{2\pi R_{H} C_{H}}=fraq{1}{2\pi \cdot 10k\Omega \cdot 1\mu F}=15,9Hz
+\end{math} \\
+
+Og lavpasfilterets afskæringsfrekvens er beregnet på følgende måde: \\
+
+\begin{math}
+	f_{L}=fraq{1}/{2\pi R_{L} C_{L}}=fraq{1}{2\pi \cdot 510k\Omega \cdot 10pF}=15,9Hz
+\end{math} \\
+
+Software design og implementering af den ses under \ref{PSoC Software!!!!}. Af hensyn til operationsforstærkeren, er der valgt en referencespænding på 0,5 V på den positive indgang. Det er opnået ved en spændingsdeler, for hvilken beregning ses herunder: 
+
+
+
+Der er negativ feedback på operationsforstærkeren, hvilket sikrer, at der opretholdes samme spænding, 0,5 V, på begge indgange i operationsforstærkeren. Når fotodioden kan se den røde LED, genererer den en strøm, som bliver omsat til en spænding i kredsløbet. Operationsforstærkeren vil opretholde 0,5 V på den negative indgang. Den vil derfor regulere udgangen for at ophæve de ændringer, som fotodioden skaber på den negative indgang. Udgangssignalet vil dermed afspejle det PWM-signal, som den røde LED sender.  
+
+Når fotodioden kan se lyset fra den røde LED er signalet, som kommer fra udgangen af operationsforstærkeren, et firkantsignal med en frekvens på 10 kHz,. Når fotodioden ikke kan se det røde lys, er spændingen på udgangen 0,5 V. Det ønskes omdannet til et signal, der går højt, når PWM-signalet starter, og går lavt, når PWM-signalet er væk igen. For at opnå dette, blev der lavet en envelopedetector, som er opbygget af en diode, en modstand og en kondensator. Dioden sikrer, at skulle der komme negative spændinger, så vil de blive frasorteret. Kondensatoren er dimentioneret efter, at den bliver opladet på de første udsving fra firkantsignalet. Modstanden er dimentioneret, så spændingen ikke aflades mellem svingningerne på 10 kHz signalet. En simulering af dette kan ses i dokumentationen !!!! 
+
+Outputtet, fra envelopedetektoren var dog noget lavt. Det lå mellem 1,5V og 2V. Derfor blev der indsat en ikke-inverterende forstærker for at fordoble signalet. Forstærkeren består af en opamp og to modstande. Derfor blev der opstillet følgende ligning \ref{reference til Tores bog}: 
+
+\begin{equation} 
+	U_{O}=(1+\frac{R_{2}}{R_{1}}) \cdot U_{P}
+\end{equation}
+
+Det vil altså sige, at hvis de to modstande, der sættes ind er ens, vil indgangssignalet blive fordoblet. Hvis der eksempelvis sendes 2V ind vil der være 4V på udgangen: 
+
+\begin{equation}
+	U_{O}=(1+\frac{10k\Omega}{10k\Omega}) \cdot 2V
+\end{equation}
+
+Herefter var det muligt at aflæse et tydeligt firkantsignal med en peak-to-peak-værdi på 3,5V. 
+
+Den røde LED er koblet direkte til et 0-5 V, 10 kHz PWM signal fra PSoC'en. Den kan godt klare sig uden en formodstand. 
+
+\subsubsection{Motorstyring}
+Til at styre affyringsmekanismens motor er der bygget et kredsløb med en MOSFET som primære komponent. MOSFET'en skal sørge for, at motoren kun kører, når der bliver sendt PWM-signal ind i den. Kredsløbsdiagrammet kan ses på figur \ref{fig:affyringsmotor}. 
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.7\textwidth]{Afsnit/DesignOgImplementering/images/affyringsmotor}
+	\caption{Diagram over motorstyring til motor på affyringsmekanisme}
+	\label{fig:affyringsmotor}
+\end{figure}
+
+Dioden D1 er sat ind for at sikre motoren mod store spændingsspikes, der kan forekomme, når MOSFET'en bliver afbrudt. Dioden D2, der sidder fra source til drain, sikrer, at spikes genereret af motoren, når den slukkes, ikke brænder MOSFET'en af. 
+
+\subsubsection{Kanon og platform}
+Selve kanonen og platformen den står på er bygget op af to træplader og LEGO. Den ene træplade kan dreje fra side til side, således at det er muligt at sigte i den horisontale retning. Opbygningen ses på figur \ref{fig:Horisontalmekanik}. Træpladen placeres på den øverste metalskive omkring skruen, så den drejer med rundt, når motoren roterer. Rotationen er opnået ved, at skruen kan dreje frit, men stadig er holdt lodret. Det store tandhjul er boret ud i midten, og der er indsat en møtrik, så den kan skrues på skruen. Forholdet mellem det store og det lille tandhjul gør at rotationshastigheden bliver gearet ned. Endeligt er motoren skruet fast til den nederste træplade, men i en højde, der gør at den kan drive det lille tandhjul, som er forbundet med gearkæden til det store tandhjul. 
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=1\textwidth]{Afsnit/DesignOgImplementering/images/horisontalMekanik}
+	\caption{Horisontal mekanik}
+	\label{fig:Horisontalmekanik}
+\end{figure}
+
+Mekanikken for den vertikale retning er bygget af LEGO. Et billede af opbygningen ses på figur \ref{fig:kanon}. Styringen af den vertikale bevægelse bliver håndteret af den vertikale motor, som ses på figur \ref{fig:kanon}. Motoren er forbundet til tandhjulene til vertikal styring. Der er ét tandhjul på hver side af motoren. De er begge bygget sammen med resten af kanonen. Når motoren drejer, bliver tandhjulene og hele kanonen vippet fremover eller bagover. 
+
+Ligesom den vertikale styring er selve kanonen også bygget i LEGO. Den har et magasin, som det fremgår af figur \ref{fig:kanon}. Der kan kommes slik i magasinet, som så bliver affyret. Affyringen styres af den anden motor på figur \ref{fig:kanon}. Når affyringsmotoren drejer bliver to større tandhjul roteret. De to tandhjul er desuden forbundet til to små tandhjul, som er 5 gange så små. Med denne gearing roterer de små tandhjul 5 gange så hurtigt. De små tandhjul er forbundet til to mellem størrelse tandhjul, som drejer med dem rundt. Tandhjulene i mellemstørrelse styrer affyringen ved at omdanne den roterende bevægelse til en vandret bevægelse frem og tilbage, som affyrer kanonen.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=1\textwidth]{Afsnit/DesignOgImplementering/images/kanon}
+	\caption{Kanon i LEGO}
+	\label{fig:kanon}
+\end{figure}
+
+
+
+
+
+
+
+
+
+
+>>>>>>> 0a1d8918381267eb4e358ac91a97539c7fd97098
