@@ -45,8 +45,6 @@ Projektrapport:
 	- Use case beskrivelserne skal forkortes
 		- HUSK GERNE LÆRINGSMÅL
 -Arkitektur
-	- Begrundelse for valg af I2C mellem PSoC's
-	- Begrundelse for valg af SPI mellem Devkit og PSoC
 	-Signalbeskrivelse skal rettes igennem
 	-Beskriv motorstyring (software)
 	-Ret BDD - Grupering af enheder
@@ -74,6 +72,5 @@ Projektrapport:
 -Perspektivering
 	-Skal skrives. 
 	-Admin aktør i use case 2
-
 -Konklusion
 	-Skal skrives helt.

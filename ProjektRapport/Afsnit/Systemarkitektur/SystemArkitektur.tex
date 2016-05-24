@@ -199,6 +199,8 @@ På figur \ref{fig:CompleteClassDiagramPSoC2} ses det at PSoC2 skal have funktio
 \subsection{SPI Kommunikations Protokol}
 I afsnit \ref{afsnit:IBD} \textbf{IBD} ses på figur \ref{figure:ibdDiagram} at Devkit8000 og PSoC0 kommunikerer via en SPI bus. Kommunikationen foregår ved at der sendes kommandotyper imellem de to enheder, SPI-master og SPI-slave. På tabel \ref{tabel:spiKommandoType} ses en de anvendte kommandotyper samt en kort beskrivelse for hver af disse.
 
+Der er til systemet valgt en SPI bus mellem DevKit8000 og PSoC0, da der i dette tilfælde kun er brug for en bus med god support for én master og én slave. En SPI Bus skalerer ikke godt med multiple slaver i forhold til SPI, da en SPI bus skal have en fysisk forbindelse for hvert enkel slave der tilkobles. Bussen er dog simpel at implementere, og hver derfor ideel for denne grænseflade.
+
 \begin{table}[H]
 	\centering
 	\resizebox{\textwidth}{!}{%
@@ -242,6 +244,8 @@ Et alternativt design ville være at generere et interrupt til SPI masteren når
 \subsection{I2C Kommunikations Protokol}
 \label{afsnit:I2CProtokol}
 I afsnit \ref{afsnit:IBD} \textbf{IBD} ses på figur \ref{figure:ibdDiagram} at tre hardwareblokke kommunikerer via en I2C bus. Til denne I2C kommunikation er der defineret en protokol, som bestemmer hvordan modtaget data skal fortolkes. Denne protokol beskrives følgende.
+
+I2C bussen er brugt til disse forbindelser af to primære grunde. Først og fremmest er Nunchuck controlleren implementeret som en I2C Slave fra producentens side. Derfor skulle der gøres brug af en I2C bus i alle tilfælde. Yderligere skulle Nunchuken's input sendes videre til PSoC1, og I2C er en bus der skalerer godt med multiple enheder. Derfor var det naturligt at udvide I2C bussen mellem Nunchuck og PSoC0 med PSoC1.
 
 I2C gør brug af en indbygget protokol, der anvender adressering af hardware-enheder til identificering af hvilken enhed der kommunikeres med. Derfor har hardwareblokkene som indgår i I2C kommunikationen fået tildelt adresser. På tabel \ref{table:I2CAddress} ses adresserne tildelt systemets PSoCs.
 
