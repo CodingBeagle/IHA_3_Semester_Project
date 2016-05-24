@@ -1,6 +1,52 @@
 \chapter{Forord}
 I denne rapport vil produktet Goofy Candygun 3000 blive beskrevet. Goofy Candygun 3000 er udviklet i forbindelse med semesterprojektet på tredje semester på IHA. \newline
 
-\noindent Gruppen, der har udviklet Goofy Candygun 3000, består af følgende syv personer: Kasper Rieder, Daniel Vestergaard Jensen, Mikkel Nielsen, Tenna Rasmussen, Michael Kloock, Mia Konstmann og Pernille Kjeldgaard. Gruppens vejleder er Gunvor Kirkelund. Rapporten skal afleveres fredag d. 27. maj 2016 og skal bedømmes ved en mundtlig en eksamen d. 22. juni 2016. Produktet dokumenteres foruden denne rapport med en procesrapport, et dokumentationsdokument og diverse bilag. 
+\noindent Gruppen, der har udviklet Goofy Candygun 3000, består af følgende syv personer: Kasper Rieder, Daniel Vestergaard Jensen, Mikkel Nielsen, Tenna Rasmussen, Michael Kloock, Mia Konstmann og Pernille Kjeldgaard. Gruppens vejleder er Gunvor Kirkelund. Rapporten skal afleveres fredag d. 27. maj 2016 og skal bedømmes ved en mundtlig en eksamen d. 22. juni 2016. Produktet dokumenteres foruden denne rapport med en procesrapport, et dokumentationsdokument og diverse bilag. \newline
+
+\noindent På tabel \ref{ansvarsomraader} ses opdelingen af ansvarsområder mellem projektgruppens medlemmer. Her bruges bogstavet \textit{P} til at angive \textit{primært} ansvar, hvor bogstavet \textit{S} angiver \textit{sekundært} ansvar.
+
+\begin{table}[H]
+	\centering
+	\label{ansvarsomraader}
+	\begin{tabular}{|ll|l|l|l|l|l|l|l|}
+		\hline
+		& \multicolumn{1}{l|}{Ansvarsområder}    & \rot{Daniel Jensen }& \rot{Mia Konstmann } & \rot{Mikkel Nielsen } & \rot{Kasper Rieder } & \rot{Michael Kloock } & \rot{Tenna Rasmussen } & \rot{Pernille Kjeldgaard } \\ \hline
+		\rowcolor[HTML]{CBCEFB} 
+		\multicolumn{2}{l|}{\cellcolor[HTML]{CBCEFB}I2C Kommunikationsprotokol} &     &     &    &    &     &    &     \\ \cline{3-9} 
+		& Printudlægdesign og Lodning                     &     & S   & S  & P  &     &    &     \\ \cline{3-9} 
+		& PSoC Software                                   & P   & S   &    & P  &     &    &     \\ \cline{3-9} 
+		\rowcolor[HTML]{CBCEFB} 
+		\multicolumn{2}{l|}{\cellcolor[HTML]{CBCEFB}Wii-Nunchuck}               &     &     &    &    &     &    &     \\ \cline{3-9} 
+		& PSoC Software                                   & S   & P   &    & S  &     &    &     \\ \cline{3-9} 
+		\rowcolor[HTML]{CBCEFB} 
+		\multicolumn{2}{l|}{\cellcolor[HTML]{CBCEFB}SPI Kommunikationsprotokol} &     &     &    &    &     &    &     \\ \cline{3-9} 
+		& Stik og Ledninger                               &     & P   & P  &    &     &    &     \\ \cline{3-9} 
+		& PSoC Software                                   & P   & S   &    & P  &     &    &     \\ \cline{3-9} 
+		\rowcolor[HTML]{CBCEFB} 
+		\multicolumn{2}{l|}{\cellcolor[HTML]{CBCEFB}SPI Driver}                 &     &     &    &    &     &    &     \\ \cline{3-9} 
+		& Kernemodul til Devkit 8000                      & S   & S   &    & S  &     & P  &     \\ \cline{3-9} 
+		\rowcolor[HTML]{CBCEFB} 
+		\multicolumn{2}{l|}{\cellcolor[HTML]{CBCEFB}Brugergrænseflade}          &     &     &    &    &     &    &     \\ \cline{3-9} 
+		& Interface Driver                                & S   &     &    & S  & S   &    &     \\ \cline{3-9} 
+		& Systemtest GUI                                  &     &     &    &    & P   &    &     \\ \cline{3-9} 
+		& Demo GUI                                        &     &     &    &    & P   &    &     \\ \cline{3-9} 
+		\rowcolor[HTML]{CBCEFB} 
+		\multicolumn{2}{l|}{\cellcolor[HTML]{CBCEFB}Rotationsbegrænsning}       &     &     &    &    &     &    &     \\ \cline{3-9} 
+		& PSoC Software                                   &     & P   & P  & S  &     &    &     \\ \cline{3-9} 
+		\rowcolor[HTML]{CBCEFB} 
+		\multicolumn{2}{l|}{\cellcolor[HTML]{CBCEFB}Use Case 2}                 &     &     &    &    &     &    &     \\ \cline{3-9} 
+		& Implementering                                  & P   & S   &    & P  &     &    &     \\ \cline{3-9} 
+		&                                                 &     &     &    &    &     &    &     \\ \cline{3-9} 
+		\rowcolor[HTML]{CBCEFB} 
+		\multicolumn{2}{l|}{\cellcolor[HTML]{CBCEFB}Motorstyring}               &     &     &    &    &     &    &     \\ \cline{3-9} 
+		& H-bro                                           &     &     & P  &    &     &    &     \\ \cline{3-9} 
+		& Ultiboard Design                                &     &     & P  &    &     &    &     \\ \cline{3-9} 
+		& Lodning                                         &     &     &    &    &     &    &     \\ \cline{3-9} 
+		\rowcolor[HTML]{CBCEFB} 
+		\multicolumn{2}{l|}{\cellcolor[HTML]{CBCEFB}Affyringsmekanisme}         &     &     &    &    &     &    &     \\ \cline{3-9} 
+		&                                                 &     &     &    &    &     &    &     \\ \cline{3-9} 
+	\end{tabular}
+	\caption{Oversigt over ansvarsområder}
+\end{table}
 
 \section{Læsevejledning}
