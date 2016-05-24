@@ -7,7 +7,5 @@
 -Ret sekvensdiagram for I2C protocol communication (execution blocks) og diagram navn
 -Færdiggør arkitektur til GUI
 -Opdater tekst til design og implementering - PSoC software
--Aktivitetsdiagram til Nunchuck algoritme
--Aktivitetsdiagram til I2C kommunikation
 -Færdiggør opsummering af modultest
 -Afrund modultest af Wii-Nunchuck

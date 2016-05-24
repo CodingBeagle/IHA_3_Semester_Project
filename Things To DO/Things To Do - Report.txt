@@ -1,5 +1,6 @@
 -Lav resumé
 -Lav abstract
+-Afrund systembeskrivelse
 -Analyse
    -Skriv motorvalg
 -Systemarkitektur
