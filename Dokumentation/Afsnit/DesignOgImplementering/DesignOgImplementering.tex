@@ -105,48 +105,31 @@ Håndterer opbyggelsen af en SPI-message, sætter transferbufferen til NULL, da 
 
 
 \subsection{Interfacedriver}
-Interface driveren er bindeled mellem brugergrænsefladen og candydriveren. Interface driveren er implementeret i c++ og opbygget med klasserelationen arv. Den indeholder tre funktioner til use case 2. De håndterer test af de forskellige kommunikationsforbindelser i systemet. Der er en basisklasse, ICandyGun, som er abstrakt, da alle metoder er virtuelle. Derudover er der to afledte klasser, SimulCandyGun og RealCandyGun. SimulCandyGun simulerer svaret på funktionerne ved brug af rand()-funktionen. Den sikrer at brugergrænsefladen kan testes uden at være forbundet til det resterende system. RealCandyGun klassen implementerer de rigtig funktioner med forbindelse til det restende system, og anvender de nødvendige funktioner til at skrive til og læse fra et kernemodul. På figur \ref{fig:IDriverKlasseDiagram} ses klassediagrammet for arvehierarkiet i Interface Driveren. 
+Interface driveren er bindeled mellem brugergrænsefladen og candydriveren. Interface driveren er implementeret i c++. Den indeholder fire funktioner til use case 2. De håndterer test af de forskellige kommunikationsforbindelser i systemet. Candygun klassen implementerer de rigtig funktioner med forbindelse til det restende system, og anvender de nødvendige funktioner til at skrive til og læse fra et kernemodul. På figur \ref{fig:InterfacedriverKlasseDiagram} ses klassediagrammet for Interface Driveren. 
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=\textwidth]{DesignOgImplementering/images/IdriverKlasseDiagram}
+	\includegraphics[width=\textwidth]{DesignOgImplementering/images/InterfacedriverKlassediagram}
 	\caption{Klassediagram for Interface driveren på Devkit8000}
-	\label{fig:IDriverKlasseDiagram}
+	\label{fig:InterfacedriverKlassediagram}
 \end{figure}
 
-I det følgende ses tabeller for funktionsbeskrivelser. Funktioner for ICandyGun-klassen er ikke beskrevet, da klassen er abstrakt og ingen af funktionerne dermed er implementeret i klassen. Til gengæld er både funktionerne for SimulCandygun og RealCandyGun beskrevet i hver sin tabel. Bemærk at funktionerne hedder det samme for begge klasser, da de begge er afledte funktioner i et arvehierarki, som det sås på figur \ref{fig:IDriverKlasseDiagram}.  
-I tabel \ref{SimulFunktioner} ses funktionsbeskrivelser for SimulCandyGun. 
+\subsubsection{Klassebeskrivelse}
 
-\begin{table}[H]
-	\centering
-	% \caption{My caption}
-	\label{SimulFunktioner}
-	\begin{tabular}{|l|l|}
-		\hline
-		\textbf{Metode}      & \textbf{Beskrivelse}                                                                                                     \\ \hline
-		SPITest(): bool      & Simulerer resultatet af SPI-testen i systemet. \\ Der anvendes rand() til at returnerer et tilfældigt tal mellem 0 og 1.    \\ \hline
-		I2CTest(): bool      & Simulerer resultatet af I2C-testen i systemet. \\ Der anvendes rand() til at returnerer et tilfældigt tal mellem 0 og 1.    \\ \hline
-		nunchuckTest(): bool & Simulerer resultatet af nuchucktesten i systemet. \\ Der anvendes rand() til at returnerer et tilfældigt tal mellem 0 og 1. \\ \hline
-	\end{tabular}
-\end{table}
+\textbf{bool SPITest()}
+Denne metode initierer SPI-test ved at skrive SPI-kommandoen "241" til "dev/candygun", som er den node, der oprettes af Candydriveren. Dernæst indeholder funktionen et delay på 1 sek, for at give SPI-testen tid til at blive udført. Til sidst læser funktionen fra "dev/candygun" og tjekker om den får den korrekte returværdi, "209". Ved korrekt returværdi returnerer funktionen true. Ved fejl returnerer funktionen false.      
+                                                  
+\textbf{bool I2CTest()}
+Denne metode initierer I2C-test ved at skrive I2C-kommandoen "242" til "dev/candygun", som er den node, der oprettes af Candydriveren. Dernæst indeholder funktionen et delay på 1 sek, for at give I2C-testen tid til at blive udført. Til sidst læser funktionen fra "dev/candygun" og tjekker om den får den korrekte returværdi, "210". Ved korrekt returværdi returnerer funktionen true. Ved fejl returnerer funktionen false.
+                                                     
+\textbf{bool nunchuckTest()}	
+Denne metode initierer nunchuck-test ved at skrive nunchuck-kommandoen "251" til "dev/candygun", som er den node, der oprettes af Candydriveren. Metoden tjekker "dev/candygun" efter 6 sekunder, om der er trykket på nunchuckknappen. Det ses ved den korrekte returværdi, "211". Ved korrekt returværdi returnerer funktionen true.
+
+\textbf{static void delay(int ms)}
+Denne metode initierer et delay. Det valgte antal ms bliver lagt til det interne systemur. Når systemuret når til det sammenlagte tidspunkt, fortsættes programmet.
 
 
-I tabel \ref{realIdriverFunktioner} ses funktionsbeskrivelser for RealCandyGun.
-
-\begin{table}[H]
-	\centering
-	% \caption{My caption}
-	\label{realIdriverFunktioner}
-	\begin{tabular}{|l|l|}
-		\hline
-		\textbf{Metode}      & \textbf{Beskrivelse}                                                                                                                                                                                                                                                                                                                                                                                                                                                           \\ \hline
-		SPITest(): bool      & Initierer SPI-test ved at skrive SPI-kommandoen "241" til "dev/candygun", som er den node, der oprettes af Candydriveren. Dernæst indeholder funktionen et delay på 1 sek, for at give SPI-testen tid til at blive udført. Til sidst læser funktionen fra "dev/candygun" og tjekker om den får den korrekte returværdi, "209". Ved korrekt returværdi returnerer funktionen true. Ved fejl returnerer funktionen false.                                                        \\ \hline
-		I2CTest(): bool      & Initierer I2C-test ved at skrive I2C-kommandoen "242" til "dev/candygun", som er den node, der oprettes af Candydriveren. Dernæst indeholder funktionen et delay på 1 sek, for at give I2C-testen tid til at blive udført. Til sidst læser funktionen fra "dev/candygun" og tjekker om den får den korrekte returværdi, "210". Ved korrekt returværdi returnerer funktionen true. Ved fejl returnerer funktionen false.                                                        \\ \hline
-		nunchuckTest(): bool & Initierer nunchuck-test ved at skrive nunchuck-kommandoen "251" til "dev/candygun", som er den node, der oprettes af Candydriveren. Dernæst indeholder funktionen en whileløkke, som ved at læse fra "dev/candygun" tjekker hvert sekund, om der er trykket på nunchuckknappen. Det ses ved den korrekte returværdi, "211". Ved korrekt returværdi returnerer funktionen true. Ved fejl kører whileløkken igen. Efter 15 sek. uden korrekt værdi, returnerer funktionen false. \\ \hline
-	\end{tabular}
-\end{table}
-
-\subsection{Brugergrænseflade - WIP}
+\subsection{Brugergrænseflade}
 
 \begin{figure}[H]
 	\centering

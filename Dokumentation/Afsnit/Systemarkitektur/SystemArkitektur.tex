@@ -504,6 +504,26 @@ På tabel \ref{table:I2CKommandoer} ses de definerede kommandotyper og det tilsv
 
 Kolonnerne "Binær Værdi" og "Hex Værdi" i tabel \ref{table:I2CKommandoer} viser kommandotypens unikke tal-ID i både binær- og hexadecimalform. Denne værdi sendes som den første byte, for at identificere kommandotypen. 
 
+\section{Brugergrænseflade}
 
 
+Ved hjælp af en brugergrænseflade, kan systemtesten styres fra DevKit8000.
+Brugergrænsefladen er opbygget ud fra sekvensdiagrammet figur \ref{fig:SystemTestOverviewSequenceDiagram},
+ud fra dette kunne brugergrænsefladen skitseres som figur \ref{fig:GUISkitse}.
+Grænsefladen mellem DevKit8000 og PSoC0 er en SPI-bus som ses på figur \ref{fig:IBD}, og brugergrænsefladen er koblet til DevKit8000 ved hjælp af en interfacedriver.
+Brugergrænsefladen skal sende startsekvensen til interfacedriveren, hvorefter dette sendes til PSoC0 og videre ud i systemet.
+Brugergrænsefladen skal aflæse svaret fra systemtesten og printe dette ud i en konsol.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\textwidth] {Systemarkitektur/images/GUISkitse}
+	\caption{Skitse af brugergrænseflade}
+	\label{fig:GUISkitse}
+\end{figure}
+
+
+Brugergrænsefladen er designet ud fra den sekventielle struktur i usecase 2, se afsnit \ref{afsnit:FUC2}. Dette er løst ved hjælp af Event-Driven Programming.
+Denne model drives ved hjælp af events, som i dette tilfælde aktiveres af brugeren ved knaptryk. Knapperne vil blive tildelt forskellige funktionaliteter, der faciliterer systemtesten.
+
+Et alternativ kunne være trådbaseret design. Interfacedriveren kunne oprettes som en seperat tråd fra GUI'en, der ville køre den samme funktionalitet. Dette ville være unødvendigt i forhold til den sekvetielle struktur i systemet. Kompleksiteten i dette design ville være overvældende i forhold til den ønskede funktionalitet og blev derfor fravalgt.
 
