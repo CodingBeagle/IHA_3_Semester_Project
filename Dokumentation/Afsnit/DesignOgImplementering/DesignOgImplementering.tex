@@ -104,8 +104,11 @@ Håndterer opbyggelsen af en SPI-message, sætter receivebufferen til NULL, da d
 Håndterer opbyggelsen af en SPI-message, sætter transferbufferen til NULL, da der ikke skal skrives, sætter en kerne buffer til receive, og anvender funktioner fra linux/spi/spi.h til at udføre SPI-transfer.  \\
 
 
-\subsection{Interfacedriver}
-Interface driveren er bindeled mellem brugergrænsefladen og candydriveren. Interface driveren er implementeret i c++. Den indeholder fire funktioner til use case 2. De håndterer test af de forskellige kommunikationsforbindelser i systemet. Candygun klassen implementerer de rigtig funktioner med forbindelse til det restende system, og anvender de nødvendige funktioner til at skrive til og læse fra et kernemodul. På figur \ref{fig:InterfacedriverKlasseDiagram} ses klassediagrammet for Interface Driveren. 
+\subsection{Brugergrænseflade}
+I dette afsnit beskrives de forskellige dele af brugergrænsefladen.
+
+\subsubsection{Interfacedriver}
+Interface driveren er bindeled mellem brugergrænsefladen og candydriveren. Interface driveren er implementeret i c++. Den indeholder fire funktioner til use case 2. De håndterer test af de forskellige kommunikationsforbindelser i systemet. Candygun klassen implementerer de rigtig funktioner med forbindelse til det restende system, og anvender de nødvendige funktioner til at skrive til og læse fra et kernemodul. På figur \ref{fig:InterfacedriverKlassediagram} ses klassediagrammet for Interface Driveren. 
 
 \begin{figure}[H]
 	\centering
@@ -114,41 +117,42 @@ Interface driveren er bindeled mellem brugergrænsefladen og candydriveren. Inte
 	\label{fig:InterfacedriverKlassediagram}
 \end{figure}
 
-\subsubsection{Klassebeskrivelse}
+\paragraph{Klassebeskrivelse} \mbox{} \\
 
 \textbf{bool SPITest()}
 Denne metode initierer SPI-test ved at skrive SPI-kommandoen "241" til "dev/candygun", som er den node, der oprettes af Candydriveren. Dernæst indeholder funktionen et delay på 1 sek, for at give SPI-testen tid til at blive udført. Til sidst læser funktionen fra "dev/candygun" og tjekker om den får den korrekte returværdi, "209". Ved korrekt returværdi returnerer funktionen true. Ved fejl returnerer funktionen false.      
-                                                  
+
 \textbf{bool I2CTest()}
 Denne metode initierer I2C-test ved at skrive I2C-kommandoen "242" til "dev/candygun", som er den node, der oprettes af Candydriveren. Dernæst indeholder funktionen et delay på 1 sek, for at give I2C-testen tid til at blive udført. Til sidst læser funktionen fra "dev/candygun" og tjekker om den får den korrekte returværdi, "210". Ved korrekt returværdi returnerer funktionen true. Ved fejl returnerer funktionen false.
-                                                     
+
 \textbf{bool nunchuckTest()}	
 Denne metode initierer nunchuck-test ved at skrive nunchuck-kommandoen "251" til "dev/candygun", som er den node, der oprettes af Candydriveren. Metoden tjekker "dev/candygun" efter 6 sekunder, om der er trykket på nunchuckknappen. Det ses ved den korrekte returværdi, "211". Ved korrekt returværdi returnerer funktionen true.
 
 \textbf{static void delay(int ms)}
 Denne metode initierer et delay. Det valgte antal ms bliver lagt til det interne systemur. Når systemuret når til det sammenlagte tidspunkt, fortsættes programmet.
 
-
-\subsection{Brugergrænseflade}
+\subsubsection{Systemtest GUI}
+Usecase 2 styres via Systemtest GUI'en fra Devkit8000.
+Dette afsnit beskriver Systemtest GUI'ens design.
 
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=\textwidth]{DesignOgImplementering/images/KlassediagramGUI}
-	\caption{Klassediagram for Brugergrænsefladen}
+	\caption{Klassediagram for Systemtest GUI}
 	\label{fig:KlassediagramGUI}
 \end{figure}
 
-\subsubsection{Klassebeskrivelse}
+\paragraph{Klassebeskrivelse}\mbox{} \\
 \label{sec:stmDescrip}
 
-\noindent\textbf{void on\_activateBut\_clicked()} \newline
+\noindent void on\_activateBut\_clicked(): \newline
 Dette slot er startknappen i brugergrænsefladen. Ved tryk bliver knappens signal broadcastet og knappens funktion bliver kørt. Forløbet for dette slot beskrives i figur \ref{fig:stmGUI}. Der skrives til konsolvinduet, derefter testes der på SPITest(). Hvis der returnes true, skrives dette til konsollen og programmet fortsætter til I2CTest(). Hvis der returnes false, skrives dette til konsollen og programmet returnerer til idle-tilstand. Nu testes der på I2CTest(). Hvis der returnes true, skrives dette til konsollen og programmet fortsætter til NunchuckTest(). Hvis der returnes false, skrives dette til konsollen og programmet returnerer til idle-tilstand.
 Der testes der på NunchuckTest(). Hvis der returnes true, skrives dette til konsollen, og der skrives at systemtesten er gennemført. Hvis der returnes false, skrives dette til konsollen. Programmeret returnerer til idle-tilstand. \newline
 
-\noindent\textbf{void on\_clearBut\_clicked()} \newline
+\noindent void on\_clearBut\_clicked(): \newline
 Dette slot er clearknappen i brugergrænsefladen. Knappens funktionalitet er en clearing af konsol vinduet. \newline
 
-\noindent\textbf{void on\_exitBut\_clicked()} \newline
+\noindent void on\_exitBut\_clicked(): \newline
 Dette slot er exitknappen i brugergrænsefladen. Knappens funktionalitet består i, at programmet lukkes.
 
 
@@ -159,7 +163,90 @@ Dette slot er exitknappen i brugergrænsefladen. Knappens funktionalitet består
 	\label{fig:stmGUI}
 \end{figure}
 
+\subsubsection{Demo GUI}
+I dette afsnit beskriver Demo GUI'en for usecase 1.
+Strukturen for denne GUI er lignende til Systemtest GUI'en.
+Denne demo er en repræsentation af hvad der kunne være en færdig implementeret GUI til usecase 1.
 
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=1.2\textwidth]{Afsnit/DesignOgImplementering/images/DemoGUIClass}
+	\caption{Klassediagram for Demo GUI}
+	\label{fig:DemoGUIClass}
+\end{figure}
+
+\paragraph{Klassebeskrivelse} \mbox{} \\
+
+\label{afsnit:democlass}
+
+\noindent\textbf{Sourcewindow:}\newline
+Klassens vindue består af fire knapper med følgende\newline
+\noindent \textbf{Slots:}\newline
+void on\_exitBut\_clicked():\newline
+Denne knap har den samme funktion som exitBut fra metodebeskrivelsen afsnit \#ref \newline
+
+\noindent void on\_scoreBut\_clicked():\newline
+Denne knap åbner vinduet til Highscore-klassen.\newline
+
+\noindent void on\_startBut\_clicked():\newline
+Denne knap åbner vinduet til Gamechoice-klassen.\newline
+
+\noindent void on\_testBut\_clicked():\newline
+Denne knap åbner vinduet til Systemtester-klassen, se afsnit for \#Systemtestgui for beskrivelse.\newline
+
+\noindent\textbf{Highscore:}\newline
+Klassens vindue består af et konsol vindue og tre knapper med følgende\newline
+\noindent \textbf{Slots:}\newline
+\noindent void on\_setHiBut\_clicked():\newline
+Denne knap skriver nogle testværdier til konsol vinduet.\newline
+
+\noindent void on\_clearHiBut\_clicked():\newline
+Denne knap clearer konsol vinduet. \newline
+
+\noindent void on\_exitHiBut\_clicked();\newline
+Denne knap lukker Highscore vinduet og GUI'en returnerer til sourcewindow.\newline
+
+\noindent\textbf{Gamechoice:}\newline
+\noindent Klassens vindue består af tre knapper med følgende \newline
+\noindent \textbf{Slots:}\newline
+\noindent void on\_choiceOne\_clicked():\newline
+Denne knap åbner vinduet til Oneplayerscreen-klassen, og
+den opretter et oneplayerscreen objekt og kalder en slot-funktionen setTestScores fra oneplayerscreen.\newline
+
+\noindent void on\_choiceTwo\_clicked():\newline
+Denne knap åbner vinduet til Twoplayerscreen-klassen, og
+den opretter et twoplayerscreen objekt og kalder en slot-funktionen setTestScores fra twoplayerscreen.\newline
+
+\noindent void on\_choiceExitBut\_clicked():\newline
+Denne knap lukker Gamechoice vinduet og GUI'en returnerer til sourcewindow.\newline
+
+\noindent\textbf{Oneplayerscreen:}\newline
+Klassens vindue består af et konsol vindue, en knap med følgende\newline
+\noindent \textbf{Slots:}\newline
+void on\_playerExitBut\_clicked():\newline
+Denne knap lukker Oneplayerscreen vinduet og GUI'en returnerer til Gamechoice.\newline
+
+\noindent void setTestScores():\newline
+Dette slot skriver testværdier til Oneplayerscreen's konsol vindue.\newline
+
+\noindent \textbf{Twoplayerscreen:}\newline
+Klassens vindue består af to konsol vinduer, en knap med følgende\newline
+\noindent \textbf{Slots:}\newline
+void on\_twoExitBut\_clicked():\newline
+Denne knap lukker Twoplayerscreen vinduet og GUI'en returnerer til Gamechoice.\newline
+
+\noindent void setTestScores():\newline
+Dette slot skriver testværdier til Twoplayerscreen's konsol vinduer.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=1.2\textwidth]{Afsnit/DesignOgImplementering/images/StateMachineDemoGUI}
+	\caption{State machine for Demo GUI}
+	\label{fig:StateMachineDemo}
+\end{figure}
+
+Denne State Machine giver en visuel repræsentation af skiften mellem GUI-vinduer.  Hvert knaptryk er et event og slot-funktionen for den pågældende knap bliver kørt.
+Se klassebeskrivelsen,\ref{afsnit:democlass} for detaljeret beskrivelse.
 
 \section{PSoC Software}
 På figur \ref{figure:klassediagramPSoC0} og \ref{figure:klassediagramPSoC1} ses de endelige klassediagrammer for PSoC0 og PSoC1. Disse klassediagrammer er designet ud fra applikationsmodellerne for use case 1 og 2 i afsnit \ref{afsnit:applikationsmodelUC1} og \ref{afsnit:applikationsmodelUC2}, samt de samlede klassediagrammer for use case 1 og 2 i systemarkitekturen figur \ref{fig:CompleteClassDiagramPSoC0} og \ref{fig:CompleteClassDiagramPSoC1}. For at opretholde høj samhørighed, er der lavet en klasse for hver grænseflade. F.eks. indeholder "Nunchuck"-klassen al den software der skal til for at kommunikere med en nunchuck-enhed. 
