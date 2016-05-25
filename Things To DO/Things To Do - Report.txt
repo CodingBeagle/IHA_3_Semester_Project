@@ -1,11 +1,8 @@
--Lav resumé
--Lav abstract
+
 -Afrund systembeskrivelse
--Analyse
-   -Skriv motorvalg
 -Systemarkitektur
    -Opdater BDD fra dokumentation
-   -Ret blokbeskrivelse
+ 
    -Skriv tekst til overordnede sekvensdiagrammer
 -Test afsnit skal skrives
 -Review "Fremtidigt arbejde"
