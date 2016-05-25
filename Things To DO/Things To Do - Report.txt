@@ -5,6 +5,3 @@
  
    -Skriv tekst til overordnede sekvensdiagrammer
 -Test afsnit skal skrives
--Review "Fremtidigt arbejde"
--Skriv "resultater"
--Skriv "konklusion"
