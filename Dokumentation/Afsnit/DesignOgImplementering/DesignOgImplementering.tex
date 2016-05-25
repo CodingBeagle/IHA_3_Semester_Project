@@ -2,17 +2,109 @@
 
 \section{Software Design}
 
-\subsection{Devkit8000}
+\subsection{SPI Devkit 8000 - Candygun driver}
 
-\subsubsection{Candydriver}
-Candydriveren sørger for SPI-kommunikationen fra Devkit8000 til PSoC0. SPI-kommunikationen er implementeret med SPI bus nummer 1, SPI chip-select 0 og en hastighed på 1 MHz (et godt stykke under max på 20 MHz for en sikkerhedsskyld). Desuden starter clocken højt og data ændres på falling edge og aflæses på rising edge. Dermed bliver SPI Clock Mode 3. Derudover sendes der 8 bit pr transmission, hvilket passer med SPI-protokollen for projektet.\\
-For at kunne anvende driveren, når SPI er tilsluttet, er der oprettet et hotplugmodul, som fortæller kernen, at der er et SPI device, som matcher driveren. Det kan SPI-forbindelsen ikke selv gøre, som usb fx kan. Selve driveren er i candygun.c opbygget som en char driver. For at holde forskellige funktionaliteter adskilt er alle funktioner, der har med SPI at gøre, implementeret i filen candygun-spi-c. Så når der fx skal requestes en SPI ressource i init-funktionen i candygun.c, så anvender driveren en funktion fra candygun-spi.c til det. I probe-funktionen sættes bits\textunderscore per\textunderscore word til 8, da vi sender otte bit som nævnt tidligere. I exit-funktionen anvender candygun.c igen en funktion fra candygun-spi.c - denne gang til at frigive SPI ressourcen. I write-metoden gives der data med fra brugeren. I dette tilfælde udgøres brugeren af Interface driveren og dataet er en 8 bit kommando fra SPI-protokollen. Dog er dataet fra brugeren i første omgang læst ind som en charstreng. I write-metoden bliver det så lavet om til en int.  For at overføre dataet på en sikker måde anvendes funktionen copy\textunderscore from\textunderscore user() til at overføre data fra brugeren. Write-funktionen fra candygun.c anvender derefter en write-funktion fra candygun-spi.c, hvor den sender brugerinputtet med. I den spi-relaterede write-funktion bliver bruger inputtet lagt i transfer bufferen og der NULL bliver lagt i receive bufferen, og med spi\textunderscore sync-funktionen bliver det sendt. \\ 
-Ofte ville der en spi read-funktion først indeholde en write-del, som fortalte SPI-slaven, hvad der skulle læses over i bufferen. Det ville typisk efterfølges af et delay og så en read-del. Men i dette projekt skal der ofte afventes et brugerinput, som ikke kan styres af et fast delay, og der skal generelt sendes en aktiv kommando før der læses. Derfor er det besluttet at read-funktionen kun indeholder en read-del i transmissionen. Dermed skal write-funktionen altid aktivt anvendes inden der læses, da PSoC0 ellers ikke ved, hvad der skal gøres/lægges i bufferen.\\
+Candygun driveren sørger for SPI-kommunikationen fra Devkit8000 til PSoC0. Derved kan der sendes kommandoer og aflæses information fra PSoC0. Devkit 8000 fungerer som master og vil altid være den, der initierer en tranfer. 
+
+\subsubsection{Indstillinger for SPI}
+Indstilnger for SPI-kommunikationen ses i tabel \ref{SPItabel}. SPI-kommunikationen er implementeret med SPI bus nummer 1, SPI chip-select 0 og en hastighed på 1 MHz (et godt stykke under max på 20 MHz for en sikkerhedsskyld). Desuden starter clocken højt og data ændres på falling edge og aflæses på rising edge. Dermed bliver SPI Clock Mode 3. Derudover sendes der 8 bit pr transmission, hvilket passer med SPI-protokollen for projektet.\\
+
+\begin{table}[H]
+	\centering
+	\caption{Indstillinger for SPI}
+	\label{SPItabel}
+	\begin{tabular}{|l|l|}
+		\hline
+		\textbf{Indstillingsparameter} & \textbf{Værdi} \\ \hline
+		SPI bus nr.                    & 1              \\ \hline
+		SPI chip-select                & 0              \\ \hline
+		Hastighed                      & 1 MHz          \\ \hline
+		SPI Clock Mode                 & 3              \\ \hline
+		Bit per transmission           & 8              \\ \hline
+	\end{tabular}
+\end{table}
+
+
+\subsubsection{Opbygning af driver}
+Selve driveren er i candygun.c opbygget som en char driver. For at holde forskellige funktionaliteter adskilt er alle funktioner, der har med SPI at gøre, implementeret i filen candygun-spi-c. Så når der fx skal requestes en SPI ressource i init-funktionen i candygun.c, så anvender driveren en funktion fra candygun-spi.c til det. Et klassediagram, som giver et illustrativt overblik over driveren ses på figur \ref{fig:spiklasse}. I programmeringssproget c findes der ikke klasser, men selvom filerne i driveren ikke er opbygget som klasser, er de repræsenteret sådan i diagrammet for overskuelighedensskyld. De stiplede linjer i diagrammet indikerer at den ene klasse anvender den andens motoder, på samme måde som ved et bibliotek. spi.h, som også ses i diagrammet, er en indbygget del Linux, og er derfor ikke yderligere dokumenteret her. \\
+I probe-funktionen sættes bits\textunderscore per\textunderscore word til 8, da vi sender otte bit som nævnt tidligere. I exit-funktionen anvender candygun.c igen en funktion fra candygun-spi.c - denne gang til at frigive SPI ressourcen. 
+ 
+ \begin{figure}[H]
+ 	\centering
+ 	\includegraphics[width=\textwidth]{Afsnit/DesignOgImplementering/images/SPIklasse}
+ 	\caption{Klassediagram for SPI kommunikation på Devkit 8000}
+ 	\label{fig:spiklasse}
+ \end{figure}
+ 
+\subsubsection{Opbygning af write-metode}
+I write-metoden gives der data med fra brugeren. I dette tilfælde udgøres brugeren af Interface driveren og dataet er en 8 bit kommando fra SPI-protokollen. Dog er dataet fra brugeren i første omgang læst ind som en charstreng. I write-metoden bliver det så lavet om til en int.  For at overføre dataet på en sikker måde anvendes funktionen copy\textunderscore from\textunderscore user() til at overføre data fra brugeren. Write-funktionen fra candygun.c anvender derefter en write-funktion fra candygun-spi.c, hvor den sender brugerinputtet med. I den spi-relaterede write-funktion bliver bruger inputtet lagt i transfer bufferen og der NULL bliver lagt i receive bufferen, og med spi\textunderscore sync-funktionen bliver det sendt. På figur \ref{fig:spiwrite} ses et sekvensdiagram for writemetoden, med fokus på opbygningen af den besked, der skal sendes.\\
+
+ \begin{figure}[H]
+ 	\centering 
+ 	\includegraphics[width=1.25\textwidth, trim = {0 10cm 0 0}]{Afsnit/DesignOgImplementering/images/SPIsekvenscom}
+ 	\caption{Sekvensdiagram for SPI write kommunikation på Devkit 8000}
+ 	\label{fig:spiwrite}
+ \end{figure}
+
+\subsubsection{Opbygning af read-metode} 
+Ofte ville der en spi read-funktion først indeholde en write-del, som fortæller SPI-slaven, hvad der skal læses over i bufferen. Det ville typisk efterfølges af et delay og så en read-del. Men i dette projekt skal der ofte afventes et brugerinput, som ikke kan styres af et fast delay, og der skal generelt sendes en aktiv kommando før der læses. Derfor er det besluttet at read-funktionen kun indeholde en read-del i transmissionen. Dermed skal write-funktionen altid aktivt anvendes inden der læses, da PSoC0 ellers ikke ved, hvad der skal gøres/lægges i bufferen.
 Når funktionen har modtaget resultatet fra transmissionen returneres det til brugeren med funktionen copy\textunderscore to\textunderscore user(), som igen sørger for at overførslen af data foregår på en sikker måde.
+Et sekvensdiagram for read-funktionen ses på figur \ref{fig:spiread}. Igen er hovedformålet at forklare, hvordan en SPI-message er opbygget i denne driver.\\
+
+ \begin{figure}[H]
+ 	\centering 
+ 	\includegraphics[width=1.25\textwidth, trim = {0 11.6cm 0 0}]{Afsnit/DesignOgImplementering/images/SPIsekvensRead}
+ 	\caption{Sekvensdiagram for SPI read kommunikation på Devkit 8000}
+ 	\label{fig:spiread}
+ \end{figure}
+
+\subsubsection{Hotplug}
+For at kunne anvende driveren, når SPI er tilsluttet, er der oprettet et hotplugmodul, som fortæller kernen, at der er et SPI device, som matcher driveren. Det kan SPI-forbindelsen ikke selv gøre, som usb fx kan.
+
+\subsubsection{Metodebeskrivelser}
+
+\textit{\textbf{candygun.c:}} \\
+
+\noindent\textbf{static int \_\_init candygun\_cdrv\_init(void)} \\
+I initfunktionen bliver devicenumre allokeret dynamisk, og kernen informeres om cdev-strukturen. Desuden anvendes candygun\_spi\_init() fra candygun-spi.c til at requeste en spi ressource. \\
+
+\noindent\textbf{static void \_\_exit candygun\_cdrv\_exit(void)}\\
+Afregistrer device og klasse fra kernen. Anvender candygun\_spi\_exit() fra candygun-spi.c til at frigive SPI-ressource.\\
+
+\noindent\textbf{int candygun\_cdrv\_open(struct inode *inode, struct file *filep)} \\
+Kaldes når det kernemodul, der skal skrives til for at anvende driveren, åbnes. Tjekker om device-numrene passer. Printer en kernebesked om at modulet åbnes.\\
+
+\noindent\textbf{int candygun\_cdrv\_release(struct inode *inode, struct file *filep)} \\
+Kaldes når kernemodulet lukkes. Printer en kernebesked om at modulet lukkes.\\
+ 
+\noindent\textbf{ssize\_t candygun\_cdrv\_write(struct file *filep, const char \_\_user *ubuf, size\_t count, loff\_t *f\_pos)} \\
+Sørger for at klargøre en kommando fra userspace, og giver den med til funktionen candygun\_spi\_write(), som håndterer SPI-kommunikationen.\\
+
+\noindent\textbf{ssize\_t candygun\_cdrv\_read(struct file *filep, char \_\_user *ubuf, size\_t count, loff\_t *f\_pos)}
+Anvender candygun\_spi\_read(), som håndtere læsning ved SPI. Sørger derefter for at omdanne returværdien til en string og copiere den sikkert til userspace. \\
+
+\noindent\textit{\textbf{candygun-spi.c}} \\
+
+\noindent\textbf{int candygun\_spi\_init(void)} \\
+Requester en SPI-ressouce. \\
+
+\noindent\textbf{void candygun\_spi\_exit(void)} \\
+Frigiver SPI-ressource. \\
+
+\noindent\textbf{static int candygun\_spi\_probe(struct spi\_device *spi)} \\
+Probe køres når driveren bliver "insmod"'et i kernen, for at se om der er et SPI-device, der matcher modalias for driveren.\\
+
+\noindent\textbf{static int candygun\_remove(struct spi\_device *spi)} \\ 
+Fjerner SPI-device på chip-select.\\
+
+\noindent\textbf{int candygun\_spi\_write(struct spi\_device *spi, u8 addr, u8 data)} \\
+Håndterer opbyggelsen af en SPI-message, sætter receivebufferen til NULL, da der ikke skal læses, og anvender funktioner fra linux/spi/spi.h til at udføre SPI-transfer. \\
+
+\noindent\textbf{int candygun\_spi\_read(struct spi\_device *spi, u8* value)} \\
+Håndterer opbyggelsen af en SPI-message, sætter transferbufferen til NULL, da der ikke skal skrives, sætter en kerne buffer til receive, og anvender funktioner fra linux/spi/spi.h til at udføre SPI-transfer.  \\
 
 
-
-\subsubsection{Interfacedriver}
+\subsection{Interfacedriver}
 Interface driveren er bindeled mellem brugergrænsefladen og candydriveren. Interface driveren er implementeret i c++ og opbygget med klasserelationen arv. Den indeholder tre funktioner til use case 2. De håndterer test af de forskellige kommunikationsforbindelser i systemet. Der er en basisklasse, ICandyGun, som er abstrakt, da alle metoder er virtuelle. Derudover er der to afledte klasser, SimulCandyGun og RealCandyGun. SimulCandyGun simulerer svaret på funktionerne ved brug af rand()-funktionen. Den sikrer at brugergrænsefladen kan testes uden at være forbundet til det resterende system. RealCandyGun klassen implementerer de rigtig funktioner med forbindelse til det restende system, og anvender de nødvendige funktioner til at skrive til og læse fra et kernemodul. På figur \ref{fig:IDriverKlasseDiagram} ses klassediagrammet for arvehierarkiet i Interface Driveren. 
 
 \begin{figure}[H]
