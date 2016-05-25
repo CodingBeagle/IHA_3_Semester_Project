@@ -190,10 +190,12 @@ Selve driveren er i filen candygun.c opbygget som en char driver. For at holde f
 %I probe-funktionen sættes bits\textunderscore per\textunderscore word til 8, da vi sender otte bit som nævnt tidligere. I exit-funktionen anvender candygun.c igen en funktion fra candygun-spi.c - denne gang til at frigive SPI ressourcen. Når der fx skal requestes en SPI ressource i init-funktionen i candygun.c, så anvender driveren en funktion fra candygun-spi.c til det.
 % I write-metoden gives der data med fra brugeren. I dette tilfælde udgøres brugeren af Interface driveren og dataet er en 8 bit kommando fra SPI-protokollen. Dog er dataet fra brugeren i første omgang læst ind som en charstreng. I write-metoden bliver det så lavet om til en int.  For at overføre dataet på en sikker måde anvendes funktionen copy\textunderscore from\textunderscore user() til at overføre data fra brugeren. Write-funktionen fra candygun.c anvender derefter en write-funktion fra candygun-spi.c, hvor den sender brugerinputtet med. I den spi-relaterede write-funktion bliver bruger inputtet lagt i transfer bufferen og der NULL bliver lagt i receive bufferen, og med spi\textunderscore sync-funktionen bliver det sendt.\\ 
 Når der skal skrives og læses, anvendes read- og write-funktionerne. Ofte ville en spi read-funktion først indeholde en write-del, som fortalte SPI-slaven, hvad der skulle læses over i bufferen. Det ville typisk efterfølges af et delay og så en read-del. Men i dette projekt skal der ofte afventes et brugerinput, som ikke kan styres af et fast delay, og der er generelt et behov for at sende en aktiv kommando, før der læses. Derfor er det besluttet at read-funktionen kun indeholder en read-del i transmissionen. Dermed skal write-funktionen altid aktivt anvendes inden der læses, da PSoC0 ellers ikke ved, hvad der skal gøres/lægges i bufferen. De resterende metoder, som ses i klassediagrammet på figur \ref{fig:spiklasse}, er uddybet i dokumentationen \#ref.\\
-% Når funktionen har modtaget resultatet fra transmissionen returneres det til brugeren med funktionen copy\textunderscore to\textunderscore user(), som igen sørger for at overførslen af data foregår på en sikker måde.   
+% Når funktionen har modtaget resultatet fra transmissionen returneres det til brugeren med funktionen copy\textunderscore to\textunderscore user(), som igen sørger for at overførslen af data foregår på en sikker måde.
+   
+\subsection{Brugergrænseflade}
+I det følgende afsnit bliver delene i den overordenede brugergrænseflade beskrevet.
 
-
-\subsection{Interface Driver}
+\subsubsection{Interface Driver}
 Interface driveren fungerer som bindeled mellem brugergrænsefladen og candydriveren på Devkit8000. Den indeholder tre funktioner.
 
 \begin{figure}[H]
@@ -208,10 +210,10 @@ Hver af disse tre metoder tilgår /dev/candygun på DevKit8000.
 De skriver en unik værdi til filen, som SPI-driveren tilgår.
 Efter hver tilskrivning lukkes adgangen til filen. Herefter kaldes delay-metoden, så andre dele af systemet har tid til at skrive et svar til /dev/candygun. Herefter læser metoderne fra filen. Rækkefølgen for metodekaldende kan ses på figur \ref{fig:SystemTestSekvensDiagram}
 
- 
-\subsection{Brugergrænseflade}
-Usecase 2 styres via brugergrænsfladen fra Devkit8000.
-Dette afsnit beskriver brugergrænsefladens design. Figur \ref{fig:GUIPic} viser GUI'en for use case 2.
+\subsubsection{Systemtest GUI}
+\label{afsnit:sysGUI}
+Usecase 2 styres via Systemtest GUI'en fra Devkit8000.
+Dette afsnit beskriver Systemtest GUI'ens design. Figur \ref{fig:GUIPic} viser GUI'en for use case 2.
 
 \begin{figure}[H]
 	\centering
@@ -220,26 +222,59 @@ Dette afsnit beskriver brugergrænsefladens design. Figur \ref{fig:GUIPic} viser
 	\label{fig:GUIPic}
 \end{figure}
 
-Brugergrænsefladen er lavet med det indbyggede design framework i QT Creator 5.
-QT frameworket opretter "hovedvinduet" i brugergrænsefladen som en klasse. Knapperne tilføjes som private slots i klassen
-hvilket gør dem i stand til interagere i brugergrænsefladen. Når en knap er assignet til et slot i klassen, og der trykkes på den pågældende knap, bliver det tildelte signal broadcastet
-og slot-funktionen bliver kørt. Alle tre knapper i brugergrænsefladen er assignet signal-typen "clicked()".
+Systemtest GUI'en er lavet med det indbyggede design framework i QT Creator 5.
+QT frameworket opretter "hovedvinduet" i GUI'en som en klasse. Knapperne tilføjes som private slots i klassen
+hvilket gør dem i stand til interagere i GUI'en. Når en knap er assignet til et slot i klassen, og der trykkes på den pågældende knap, bliver det tildelte signal broadcastet
+og slot-funktionen bliver kørt. Alle tre knapper i GUI'en er assignet signal-typen "clicked()".
 
-Her vises en statemachine for brugergrænsefladens forløb igennem usecase 2.
+Her vises en statemachine for Systemtest GUI'ens forløb igennem usecase 2.
 
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=1.2\textwidth]{Afsnit/DesignOgImplementering/images/StateMachineUC2}
-	\caption{State machine for brugergrænsefladen for usecase 2}
+	\caption{State machine for Systemtest GUI}
 	\label{fig:StateMachineUC2}
 \end{figure}
 
-Statemachinens forløb beskrives i dokumentationen, \#RefDoku
+Statemachinens, figur \ref{fig:StateMachineUC2} forløb beskrives i dokumentationen, \#RefDoku
 
-Brugergrænsefladen for UC2 er en simpel test-konsol. Den består af 3 knapper og et konsol vindue. Brugergrænsefladen interfacer med SPI-protokollen, gennem vores interface driver. Den første knap, Start test, initierer UC2. Efterhånden som testen løbes igennem kaldes test funktionerne, og ved hjælp af if-conditions, bliver der tjekket på retur-værdierne fra interface-funktionerne. Hvis retur-værdien er true, skrives der en "--test successful" besked i konsol vinduet. og widgeten kører videre. Hvis retur-værdien er false, skrives der en "--test unsuccessful" i tekstvinduet og widgeten returnerer til idle tilstand. Når alle test er successful, skrives "System test successful, system is ready for use" til tekstvinduet, og widgeten returnerer til idle tilstand. Den anden knap, Clear, clearer konsollen til blank tilstand. Den tredje knap, Exit, lukker widgeten.
-Koblingen i brugergrænsefladen hænger udelukkende sammen med interfacedriveren. Knapperne kalder funktioner fra interfacedriveren, og ved ændring i disse funktioner, ville foresage ændringer i brugergrænsefladen.
+Systemtest GUI'en for UC2 er en simpel test-konsol. Den består af 3 knapper og et konsol vindue. GUI'en interfacer med SPI-protokollen, gennem vores interface driver. Den første knap, Start test, initierer UC2. Efterhånden som testen løbes igennem kaldes test funktionerne, og ved hjælp af if-conditions, bliver der tjekket på retur-værdierne fra interface-funktionerne. Hvis retur-værdien er true, skrives der en "--test successful" besked i konsol vinduet. og widgeten kører videre. Hvis retur-værdien er false, skrives der en "--test unsuccessful" i tekstvinduet og GUI'en returnerer til idle tilstand. Når alle test er successful, skrives "System test successful, system is ready for use" til konsol vinduet, og GUI'en returnerer til idle tilstand. Den anden knap, Clear, clearer konsollen til blank tilstand. Den tredje knap, Exit, lukker GUI'en.
+Koblingen i GUI'en hænger udelukkende sammen med interfacedriveren. Knapperne kalder funktioner fra interfacedriveren, og ved ændring i disse funktioner, ville foresage ændringer i GUI'en.
 
 \subsubsection{Demo GUI}
+
+I dette afsnit beskriver Demo GUI'en for usecase 1.
+Strukturen for denne GUI er lignende til Systemtest GUI'en.
+Denne demo er en repræsentation af hvad der kunne være en færdig implementeret
+GUI til usecase 1.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=1.2\textwidth]{Afsnit/DesignOgImplementering/images/DemoGUIClass}
+	\caption{Klassediagram for Demo GUI}
+	\label{fig:DemoGUIClass}
+\end{figure}
+
+Demo'en består af seks vinduer, hvert vindue har en tilhørende klasse, se figur \ref{fig:DemoGUIClass}.
+Hovedvinduet har klassen sourcewindow. Sourcewindow består af fire knapper,
+hvor tre af dem åbner nye vinduer og den fjerde lukker GUI'en.
+De tre vinduer der kan åbnes fra sourcewindow er: Gamechoice, Highscore, og System Test.
+Highscore vinduet består af tre knapper og et konsol vindue. System Test er Systemtest Gui'en
+implementeret i Demo GUI'en, se afsnit \ref{afsnit:sysGUI} for detajler.
+Gamechoice består af tre knapper. To af knapper åbner to nye vinduer og den tredje knap lukker vinduet
+og returnerer programmet til sourcewindow. De to vinduer åbnes er Single Player og Party Mode.
+Single player består af et konsol vindue og en exit-knap, Party mode består af to konsol vinduer og en exit-knap.
+
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=1.2\textwidth]{Afsnit/DesignOgImplementering/images/StateMachineDemoGUI}
+	\caption{State machine for Demo GUI}
+	\label{fig:StateMachineDemo}
+\end{figure}
+
+State Machinen, figur \ref{fig:StateMachineDemo}, forklarer, hvordan Demo GUI'ens vinduer skifter tilstand i forhold til event-triggers.
+\#RefDokuStatemachineforklaring
 
 \subsection{Nunchuck}
 Til styring af kanonen bruges en Wii-nunchuck. Følgende afsnit beskriver PSoC0's håndtering af data fra Wii-nunchuck.
