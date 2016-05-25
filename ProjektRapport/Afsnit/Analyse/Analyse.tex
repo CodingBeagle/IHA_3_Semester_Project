@@ -11,3 +11,15 @@ PSoC er en microcontroller der kan omprogrammeres via et medfølgende \textit{In
 
 \section{Wii-Nunchuck}
 Til brugerstyring af systemets kanon er en Wii-Nunchuck controller valgt. Denne controller er valgt, da den har gode egenskaber til styring af en kanon. Wii-Nunchucken understøtter desuden en af PSoC'ens kommunikationsprotokoller, så den nemt kan kommunikere med resten af systemet.
+
+\section{Motor}
+Der blev testet og stillet krav for hvad motoren skulle kunne for at den kunne bruges i dette projekt. 
+Kravene var som følger:
+	\begin{itemize}
+		\item  Skulle have en lave omdrejnings hastighed 
+\item	Skulle være en DC motor
+\item	Den skulle bruge over 8V, for at h-broen ville kunne funger med motoren (for ifølge multisim kunne den ikke klar en spænding under 8V)
+\item	Skulle gerne kunne trække noget
+\end{itemize}
+Efter nogen test og læsning i datablade, blev der fundet frem til en motor, EV3 Large motor, som overholdte alle kravene som den var blevet stillet for. Motoren bruge en spænding på 9V og den har en omdrejnings hastighed på 175rpm, læs mere om den i databladet\#ref datablad, hvilket gjord den drejet pænt rundt. 
+
