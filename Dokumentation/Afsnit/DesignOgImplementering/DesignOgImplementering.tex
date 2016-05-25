@@ -262,6 +262,8 @@ De efterfølgende afsnit vil beskrive klasserne og deres funktioner.
 	\end{adjustwidth}
 \end{figure}
 
+På figur \ref{figure:klassediagramPSoC0} ses det samlede klassediagram for klasserne som eksisterer på PSoC0 softwaren. Her kan det ses at der er en \textit{main} klasse. Denne indeholder programmets primære loop, som gentages indtil PSoC'en slukkes. I dette loop bliver der gjort brug af funktionaliteten fra klasserne \textit{SPICommunication}, \textit{I2CCommunication}, samt \textit{Nunchuck}. Disse klasser beskrives følgende.
+
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=\textwidth]{DesignOgImplementering/images/PSoC1KlassediagramOversigt.pdf}
@@ -269,7 +271,9 @@ De efterfølgende afsnit vil beskrive klasserne og deres funktioner.
 	\label{figure:klassediagramPSoC1}
 \end{figure}
 
-\subsection{SPI - PSoC}
+På figur \ref{figure:klassediagramPSoC1} ses det samlede klassediagram for klasserne som eksisterer på PSoC1 softwaren. Her kan det ses at der er en \textit{main} klasse. Denne indeholder programmets primære loop, som gentages indtil PSoC'en slukkes. I dette loop bliver der gjort brug af funktionaliteten fra klasserne \textit{I2CCommunication} og \textit{Nunchuck}. Disse klasser beskrives ligeledes følgende.
+
+\subsection{SPICommunication}
 I dette afsnit vil softwaren der specifikt omhandler SPI-kommunikationen mellem PSoC0 og DevKit8000 blive beskrevet. Dette gøres vha. et klassediagram og klassebeskrivelser
 
 \subsubsection{Klassediagram}
@@ -282,7 +286,9 @@ På figur \ref{figure:KlassediagramSPICommunication} ses klassediagrammet over S
 	\label{figure:KlassediagramSPICommunication}
 \end{figure}
 \subsubsection{Klassebeskrivelser}
-I dette afsnit vil klassens metoder og defines blive beskrevet.
+I dette afsnit vil klassens metoder og defines blive beskrevet. \newline
+
+\noindent Klassen \textit{SPICommunication} har til ansvar at gennemføre SPI-, I2C-, samt Nunchucktesten som bliver anmodet om af DevKit8000 under Use Case 2 - System Test. Dette gøres ved nedenstående metoder.
 \newline
 
 \noindent\textbf{void completeSPITest()} \newline
@@ -301,7 +307,7 @@ I forbindelse med SPI forbindelsen i systemet, skal der sættes nogle indstillin
 PSoC'en sættes som en slave, idét at det er Devkittet der aflæser og skriver til PSoC0.
 SCLK sættes til CPHA=1 og CPOL=1. Disse er valgt arbitrært, dog ud fra den forudsætning, at de skal stemme overens med indstillingerne på Devkittet, idét disse indstillinger beskriver hvornår databit aflæses/sættes i forhold til clock'en. 
 'Data Rate' sættes til 1Mbps, da dette er en sikker/stabil overførselshastighed. Igen skal denne indstilling være ens for PSoC og Devkit.
-Den sidste indstilling der sættes, er 'transfer' og 'read' buffer size. Disse er valgt til at være 8-bit, da projektets SPI kommunikationsprotokol ikke har brug for størrere datamængder. Igen skal denne indstilling være ens for både SPI-master og slave. 
+Den sidste indstilling der sættes, er 'transfer' og 'read' buffer size. Disse er valgt til at være 8-bit, da projektets SPI kommunikationsprotokol ikke har brug for størrere datamængder. Igen skal denne indstilling være ens for både SPI-master og slave.
 
 \subsection{I2CCommunication}
 I dette afsnit vil softwaren der omhandler I2C-kommunikation blive beskrevet. Dette inkluderer et klassediagram,  klassebeskrivelser og indstillingerne for I2C kommunikationen på PSoC'en.
