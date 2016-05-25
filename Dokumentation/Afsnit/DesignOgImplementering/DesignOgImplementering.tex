@@ -581,7 +581,7 @@ Detektoren skal kun sende et signal, når fotodioden ser lyset fra LED'en. Det e
 	\label{fig:detektortand}
 \end{figure}
 
-Båndpasfiltret er opbygget af et højpasfilter, et lavpasfilter og en operationsforstærker. Da PSoC'en har en indbygget operationsforstærker, anvendes denne. Højpasfilterets afskæringsfrekvens er beregnet på følgende måde: \\
+Båndpasfiltret er opbygget af et højpasfilter, et lavpasfilter og en operationsforstærker. Da PSoC'en har en indbygget operationsforstærker, anvendes denne. Software design og implementering af den ses under \ref{PSoC Software!!!!}. Højpasfilterets afskæringsfrekvens er beregnet på følgende måde: \\
 
 %%%%%Højpasfilter cutoff%%%%
 \begin{equation}
@@ -599,7 +599,9 @@ Og lavpasfilterets afskæringsfrekvens er beregnet på følgende måde: \\
 
 I begge beregninger gælder det, at R er filterets modstandsværdi og C er filterets kondensatorværdi. 
 
-Software design og implementering af den ses under \ref{PSoC Software!!!!}. Af hensyn til operationsforstærkeren, er der valgt en referencespænding på 0,5 V på den positive indgang. Det er opnået ved en spændingsdeler, for hvilken beregning ses herunder: 
+Da båndpasfilteret har en meget stor båndbredde kan det ikke undgås, at der slipper nogle DC-lyssignaler igennem alligevel. Kondensatoren C1 skal sørge for at frasortere de fleste af disse. Men da filteret virker som ønsket gør det ikke noget. 
+
+Af hensyn til operationsforstærkeren, er der valgt en referencespænding på 0,5 V på den positive indgang. Det er opnået ved en spændingsdeler, for hvilken beregning ses herunder: 
 
 %%%%Spændingsdeler reference%%%%%
 \begin{align}
@@ -607,11 +609,13 @@ Software design og implementering af den ses under \ref{PSoC Software!!!!}. Af h
 	\Rightarrow 0,5V &= 5V \cdot \frac{R_{2}}{18k\Omega + R_{2}} \\	
 	\Rightarrow R_{2}&=2k\Omega		\nonumber
 \end{align}
-\noindent hvor $U_{Ref}$ er den ønskede referencespænding, $U_{VCC}$ er forsyningsspændingen, $R_{1}$ ønskes at have en værdi på $18k\Omega$ og $R_{2}$ er den modstandsværdi, der ønskes beregnet. 
+\noindent hvor $U_{Ref}$ er den ønskede referencespænding, $U_{VCC}$ er forsyningsspændingen, $R_{1}$ ønskes at have en værdi på $18k\Omega$ og $R_{2}$ er den modstandsværdi, der ønskes beregnet. Kondensatoren C3 sikrer, at referencespændingen holdes på samme niveau hele tiden. 
 
-Der er negativ feedback på operationsforstærkeren, hvilket sikrer, at der opretholdes samme spænding, 0,5 V, på begge indgange i operationsforstærkeren. Når fotodioden kan se den røde LED, genererer den en strøm, som bliver omsat til en spænding i kredsløbet. Operationsforstærkeren vil opretholde 0,5 V på den negative indgang. Den vil derfor regulere udgangen for at ophæve de ændringer, som fotodioden skaber på den negative indgang. Udgangssignalet vil dermed afspejle det PWM-signal, som den røde LED sender.  
+Der er negativ feedback på operationsforstærkeren, hvilket sikrer, at der opretholdes samme spænding, 0,5 V, på begge indgange i operationsforstærkeren. Når fotodioden kan se den røde LED, genererer den en strøm, som bliver omsat til en spænding i kredsløbet. Operationsforstærkeren vil opretholde 0,5 V på den negative indgang. Den vil derfor regulere udgangen for at ophæve de ændringer, som fotodioden skaber på den negative indgang. Udgangssignalet vil dermed afspejle det PWM-signal, som den røde LED sender. 
 
-Når fotodioden kan se lyset fra den røde LED er signalet, som kommer fra udgangen af operationsforstærkeren, et firkantsignal med en frekvens på 10 kHz,. Når fotodioden ikke kan se det røde lys, er spændingen på udgangen 0,5 V. Det ønskes omdannet til et signal, der går højt, når PWM-signalet starter, og går lavt, når PWM-signalet er væk igen. For at opnå dette, blev der lavet en envelopedetector, som er opbygget af en diode, en modstand og en kondensator. Dioden sikrer, at skulle der komme negative spændinger, så vil de blive frasorteret. Kondensatoren er dimentioneret efter, at den bliver opladet på de første udsving fra firkantsignalet. Modstanden er dimentioneret, så spændingen ikke aflades mellem svingningerne på 10 kHz signalet. En simulering af dette kan ses på figur \ref{envdetsim}. 
+Når fotodioden kan se lyset fra den røde LED er signalet, som kommer fra udgangen af operationsforstærkeren, et firkantsignal med en frekvens på 10 kHz,. Når fotodioden ikke kan se det røde lys, er spændingen på udgangen 0,5 V. Det ønskes omdannet til et signal, der går højt, når PWM-signalet starter, og går lavt, når PWM-signalet er væk igen. For at opnå dette, blev der lavet en envelopedetector, som er opbygget af en diode, en modstand og en kondensator. Dioden sikrer, at skulle der komme negative spændinger, så vil de blive frasorteret. Da dioden er af typen Scottky har den et lavt spædningsfald over sig, hvilket gør, at der vil være større afvigelser end hvis der var anvendt en anden slags diode. 
+
+Kondensatoren er dimentioneret efter, at den bliver opladet på de første udsving fra firkantsignalet. Modstanden er dimentioneret, så spændingen ikke aflades mellem svingningerne på 10 kHz signalet. En simulering af dette kan ses på figur \ref{fig:envdetsim}. 
 
 \begin{figure}[H]
 	\centering
@@ -634,6 +638,8 @@ Herefter var det muligt at aflæse et tydeligt firkantsignal med en peak-to-peak
 
 Den røde LED er koblet direkte til et 0-5V, 10 kHz PWM-signal fra PSoC'en. Den kan godt klare sig uden en formodstand. 
 
+Der kunne overvejes at indsætte en kondensator fysisk tæt på systemet og parallelt med R1 og fotodioden. Denne ville sikre, at VCC-niveauet opretholdes, hvis der pludselig skete et fald i VCC. 
+
 \subsubsection{Motorstyring}
 Til at styre affyringsmekanismens motor er der bygget et kredsløb med en MOSFET af typen IRLZ44 som primære komponent. Denne skal fungere som en switch, da den skal sørge for, at motoren kun kører, når der bliver sendt PWM-signal ind i den. Kredsløbsdiagrammet kan ses på figur \ref{fig:affyringsmotor}. 
 
@@ -648,7 +654,7 @@ Der ønskes i dette tilfælde at kunne styre motorens hastighed. Derfor anvendes
 
 Dioden D1 er sat ind for at sikre motoren mod store spændingsspikes, der kan forekomme, når MOSFET'en bliver afbrudt. Dioden D2, der sidder fra source til drain, sikrer, at spikes genereret af motoren, når den slukkes, ikke brænder MOSFET'en af. 
 
-Modstanden R2 er en pull-down-modstand. Den hjælper altså til at trække de små spændinger til stel, når PWM-signalet er slukket. Når PWM-signalet er tændt, er den stor nok til, at strømmen ikke vil løbe til stel. 
+Modstanden R2 er en pull-down-modstand. Den hjælper altså til at trække de små spændinger til stel, når PWM-signalet er slukket. Når PWM-signalet er tændt, er den stor nok til, at strømmen ikke vil løbe til stel. Modstanden R1 skal sørge for, at der ikke kommer til at være en spænding på 9V på microprocessoren. Dette kunne ske, hvis der sker en kortvarig fejl i MOSFET'en. 
 
 \subsubsection{Kanon og platform}
 Selve kanonen og platformen, den står på, er bygget op af to træplader og LEGO. Den ene træplade kan dreje fra side til side, således at det er muligt at sigte i den horisontale retning. Opbygningen ses på figur \ref{fig:Horisontalmekanik}. Træpladen placeres på den øverste metalskive omkring skruen, så den drejer med rundt, når motoren roterer. Rotationen er opnået ved, at skruen kan dreje frit, men stadig er holdt lodret. Det store tandhjul er boret ud i midten, og der er indsat en møtrik, så den kan skrues på skruen. Forholdet mellem det store og det lille tandhjul gør at rotationshastigheden bliver gearet ned. Endeligt er motoren skruet fast til den nederste træplade, men i en højde, der gør at den kan drive det lille tandhjul, som er forbundet med gearkæden til det store tandhjul. 
@@ -680,4 +686,3 @@ Ligesom den vertikale styring er selve kanonen også bygget i LEGO. Den har et m
 
 
 
->>>>>>> 0a1d8918381267eb4e358ac91a97539c7fd97098
