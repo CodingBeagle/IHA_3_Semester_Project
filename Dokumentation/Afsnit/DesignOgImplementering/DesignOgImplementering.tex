@@ -452,13 +452,21 @@ Som det se på figur \ref{fig:hbro} er der sat en diode af typen IN5819 over fir
 			Grunden til, at R6 og R7(på figur \ref{fig:hbro}), er der, er for at sikre, at transistorernes Absolute Maximum Ratings omkring strømmen, som ikke må overstige 100mA ifølge databladet. (tjek lige om det er rigtig)
 		
 		\begin{displaymath}
-			R6=\frac {9V}{100mA} =90\Omega
+			R6=R7=\frac {9V}{100mA} =90\Omega
 		\end{displaymath}
 		Der blev valgt en modstand med en værdi på 100$\Omega$ i stedet, for at være på den sikre side. 
 		
 		\item R5 og R8 (jf. figur \ref{fig:hbro})\\
-		Grunden til at R5 og R8 er indsat i kredsløbet er, at der ifølge databladet kun kan løbe en strøm på omkring 30A igennem den N-MOSFET, der er brugt, Vgs er 10V. Da Vgs kun er sat til 5V, vil MOSFET'en altså ikke kunne klare en alt for stor strøm. Derfor er R5 og R8 sat ind for at forhindre, at MOSFET'en ikke brænder af. \ref{datablad!!!!!} \textbf{BEREGNING} 
-		%Hvilken N-MOSFET er det? Er det den der sidder foran P-MOSFET'en? 
+		Grunden til at R5 og R8 er indsat i kredsløbet er, at der ifølge databladet kun kan løbe en strøm på omkring 30A igennem N-MOSFET, hvis Vgs er på 10V. Da Vgs, i  dette projekt, kun er sat til 5V, vil MOSFET'en altså ikke kunne klare en alt for stor strøm. Derfor er R5 og R8 sat ind for at forhindre, at MOSFET'en ikke brænder af. \ref{datablad!!!!!}
+		
+		Der blev fundet en modstand ved at regn med at der 9V og at mosfet kun kan klar en strøm under 30A så der blev regnet med de 30 A selv om man vidste godt det ikke var det som den kunne klare, men der skulle en større modstand ind, men det var så man havde noget at gå ud fra 
+		\begin{displaymath}
+		R8=R5=\frac {9V}{30A} =0.3\Omega
+		\end{displaymath}
+		
+		
+		0.3 var alt for lille så der blev prøvet op end til der blev fundet en som passet, hvor det blev en på 10K så er man sikker på der ikke sker noget med mosfet’en 
+		
 		
 	\end{itemize}
 \end{itemize}
