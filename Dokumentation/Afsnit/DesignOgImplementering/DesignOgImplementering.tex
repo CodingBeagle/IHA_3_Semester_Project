@@ -553,19 +553,7 @@ For at kunne aflæse spændingen på potentiometeret, anvendes en 12-bit AD conv
 	
 \end{figure}
 
-\noindent På figur \ref{fig:ADC1} ses et eksempel over de første fem trin i en konvertering. Til dette projekt arbejdes der med en 12-bit AD converter, dermed ville denne konvertering forsætte 12 trin ned.  \newline
-
-\noindent \textbf{PSoC Indstillinger} \newline
-I forbindelse med begrænsning af motorens rotation er der nogle indstillinger der skal sættes. ADC'en skal indstilles til at gøre brug af en kanal i single mode, da der er ét inputsignal fra potentiometret og denne skal bestemmes i forhold til stel. For at styre motorens bevægelse i et interval er følgende algoritme implementeret.
-
-\begin{figure}[H]
-	\centering
-	\includegraphics[width=\textwidth]{DesignOgImplementering/images/rotationalgorithm}
-	\caption{Aktivitetsdiagram for rotationsbegrænsningsalgortimen}
-	\label{fig:rotation}
-\end{figure}
-
-\noindent På figur \ref{fig:rotation} ses et aktivitetsdiagram for algoritmen for rotationsbegrænsning. Der er fastsat to værdier for ydergrænser. Når motoren bevæger sig udover ydergrænserne, blokeres motoren for den givne retning indtil motoren er tilbage i intervallet. 
+\noindent På figur \ref{fig:ADC1} ses et eksempel over de første fem trin i en konvertering. Til dette projekt arbejdes der med en 12-bit AD converter, dermed ville denne konvertering forsætte 12 trin ned. 
 
 \subsection{Affyringsmekanisme}
 Affyringsmekanismen består af en motor; et motorstyringskredsløb; et detektorkredsløb, der skal detektere, at motoren kun kører en enkelt omgang, når der skydes; og en kanon, som er bygget op af noget mekanik og LEGO. 
