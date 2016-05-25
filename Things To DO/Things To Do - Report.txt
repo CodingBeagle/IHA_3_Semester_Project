@@ -1,2 +1,1 @@
--Systemarkitektur
-   -Skriv tekst til overordnede sekvensdiagrammer
+
