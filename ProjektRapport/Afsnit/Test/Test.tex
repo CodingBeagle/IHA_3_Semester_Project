@@ -1,2 +1,32 @@
 \chapter{Test}
-For at verificere systemets funktionaliteter for både hardware og software blev der udført modultests, integrationstests samt en endelig accepttest af de to use cases. I følgende afsnit vil fremgangsmåden for hver type test blive beskrevet, samt opsummerede resultater af udførte tests. 
+For at verificere systemets funktionaliteter for både hardware og software blev der udført modultests, integrationstests samt en endelig accepttest af de to use cases. Følgende tabel giver en oversigt over hvilke tests, der er blevet udført, samt en reference til hvor i dokumentationen testbeskrivelsen findes.
+
+\begin{table}[H]
+	\centering
+	\label{test}
+	\begin{tabular}{|l|l|}
+		\hline
+		\textbf{Test}      & \textbf{Reference} \\ \hline
+		Wii-Nunchuck        & 5.1.2              \\ \hline
+		SPI Protokol        & 5.1.3              \\ \hline
+		I2C Protokol        & 5.1.4              \\ \hline
+		Brugergrænseflade   & 5.1.5              \\ \hline
+		Rotationsdetektor   & 5.1.6              \\ \hline
+		H-bro               & 5.2.1              \\ \hline
+		Rotationsbegrænsing & 5.2.2              \\ \hline
+		Rotationsdetektor   & 5.2.3              \\ \hline
+		Integrationstest    & 5.3                \\ \hline
+		Accepttest          & 6                  \\ \hline
+		
+	\end{tabular}
+	\caption{Referencer til test afsnit}
+\end{table}
+
+\noindent \textbf{Modultest} \newline
+\noindent Ved modultests blev én funktionalitet testet isoleret. Det vil sige med så lidt påvirkning fra resten af systemet som muligt. Modultests blev udført før integrationstests, for at sikre individuel funktionalitet før sammensætning af alle komponenter. Modultests blev udført både for software- og hardwarekomponenter. \newline
+
+\noindent \textbf{Integrationstest} \newline
+\noindent Ved integrationstesten blev alle elemeter, der er inkluderet i use case 2, sammensat og systemet som helhed blev testet. Værdien af dette var, at alle hardware- og softwaremoduler som førhen kun var testet i isolation, blev testet i sammenhæng med andre moduler.  \newline
+
+\noindent \textbf{Accepttest} \newline
+\noindent I samarbejde med vejlederen er der foretaget en accepttest af prototypen. Værdien af dette var at test om alle de krav der blev stillet til produktet var overholdt.
