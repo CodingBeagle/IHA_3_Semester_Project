@@ -2,6 +2,5 @@
 -Afrund systembeskrivelse
 -Systemarkitektur
    -Opdater BDD fra dokumentation
- 
    -Skriv tekst til overordnede sekvensdiagrammer
 -Test afsnit skal skrives

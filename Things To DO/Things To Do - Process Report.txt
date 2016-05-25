@@ -1,6 +1,4 @@
 -Inkluder link to vores GitHub repository
 -Skriv Forord
 -Skriv Indledning
--Ret Scrum Master
--Ret Produkt Ejer
 -Skriv konklusion
