@@ -32,7 +32,7 @@ På figur \ref{figure:bddDiagram} ses BDD'et for systemet.
 	\end{adjustwidth}
 \end{figure}
 
-\noindent Her vises alle hardwareblokke fra domænemodellen (figur \ref{figure:domainModel}) med nødvændige indgange og udgange for de fysiske signaler. Yderligere ses det at flow specifikationer er defineret for de ikke-atomare forbindelser \textit{I2C} samt \textit{SPI}, da disse er busser bestående af flere forbindelser. Der henvises til \textbf{IBD AFSNIT} for en detaljeret model af de fysiske forbindelser mellem hardwareblokkende.
+\noindent På figur \ref{figure:bddDiagram} vises alle hardwareblokke fra domænemodellen (figur \ref{figure:domainModel}) med nødvændige indgange og udgange for de fysiske signaler. Yderligere ses det at flow specifikationer er defineret for de ikke-atomare forbindelser \textit{I2C} samt \textit{SPI}, da disse er busser bestående af flere forbindelser. Der henvises til \textbf{IBD AFSNIT} for en detaljeret model af de fysiske forbindelser mellem hardwareblokkende.
 
 \subsection{Blokbeskrivelse}
 Følgende afsnit indeholder en blokbeskrivelse samt en flowspecifikation for I2C og SPI. I flowspecifikationen beskrives I2C og SPI forbindelserne mere detaljeret fra en masters synsvinkel.  I blokbeskrivelsen beskrives hver enkel blok, så man har en ide om hvad hver blok består af, hvis de består af flere ting og så skal det give et overblik over hvad hver blok skal bruges til i systemet \newline \newline
@@ -74,13 +74,13 @@ På figur \ref{figure:ibdDiagram} ses IBD'et for systemet. Figuren viser hardwar
 \begin{figure}[H]
 	\begin{adjustwidth}{-3cm}{-\rightmargin}
 	\centering
-	\includegraphics[width=0.9\paperwidth]{SystemArkitektur/images/jgjgj}
+	\includegraphics[width=0.85\paperwidth]{SystemArkitektur/images/IBD_V4}
+	\end{adjustwidth}	
 	\caption{IBD af systemets hardware}
 	\label{figure:ibdDiagram}
-	\end{adjustwidth}	
 \end{figure}
 
-Her vises alle hardwareblokke med de fysiske forbindelser beskrevet i BDD'et (figur \ref{figure:bddDiagram}). 
+På figur \ref{fig:ibdDiagram} vises alle hardwareblokke med de fysiske forbindelser beskrevet i BDD'et (figur \ref{figure:bddDiagram}). 
 
 Det ses, at systemet bliver påvirket af tre eksterne signaler: \textit{touch}, \textit{input}, samt \textit{voltage}. \textit{touch} er input fra brugeren når der interageres med brugergrænsefladen. \textit{input} er brugerens interaktion med Wii-Nunchuk. \textit{voltage} er forsyningsspænding til systemet.
 
