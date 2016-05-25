@@ -554,7 +554,7 @@ Der er valgt at bruge en DC-motor i alle tre tilfælde. De to motorer skal bruge
 Til at styre de tre motorer er der bygget en H-bro, der skal bruges i tre eksemplarer. To af disse motorer skal kunne styre kanonen, så den ene gør at den kan køre op og ned, og den anden gør, at den kan køre fra side til side. Den tredje skal bruges til at styre affyringsmekanismen. 
 
 \subsubsection{H-bro}
-Der blev først designet en H-bro, som bestod af to N-MOSFET's af typen IRLZ44 og to P-MOSFET's af typen ZVP3306. Denne kan ses i bilaget. Det viste sig dog, at den P-MOSFET, der var brugt, var for svag til at kunne trække den strøm, som motoren skulle bruge, hvilket betød, at den blev brændt af. Derfor blev denne H-bro modificeret, så de to P-MOSFET's blev udskiftet med to MOSFET's af typen IRF9Z34N, der kan trække en større strøm. 
+Der blev først designet en H-bro, som bestod af to N-MOSFET's af typen IRLZ44(Bilag/Dokumentationrapport/IRLZ44) og to P-MOSFET's af typen ZVP3306A. Det viste sig dog, at den P-MOSFET, der var brugt, var for svag til at kunne trække den strøm, som motoren skulle bruge, hvilket betød, at den blev brændt af. Derfor blev denne H-bro modificeret, så de to P-MOSFET's blev udskiftet med to MOSFET's af typen IRF9Z34N(Bilag/Dokumentationrapport/irf9z34n p mosfet), der kan trække en større strøm. 
 
 \begin{figure}[H]
 	\centering
@@ -602,7 +602,7 @@ Til at styre motoren er der bygget en H-bro, som består af fire mosfet, hvor to
 
 \begin{itemize}
 \item MOSFET N-kanal \\
-	Der er i denne H-bro brugt en N-kanals-MOSFET af typen IRLZ44. Denne MOSFET skal bruges til at trække strømmen fra den tilsvarende P-MOSFET til stel, så motoren kan begynde at køre. Det sker, når der kommer 5V ind på gate-benet. 
+	Der er i denne H-bro brugt en N-kanals-MOSFET af typen IRLZ44(Bilag/Dokumentationrapport/IRLZ44). Denne MOSFET skal bruges til at trække strømmen fra den tilsvarende P-MOSFET til stel, så motoren kan begynde at køre. Det sker, når der kommer 5V ind på gate-benet. 
 	\\MOSFET'en fungerer på den måde, at når der kommer positiv spænding ind på gate-benet åbner den, så der kommer forbindelse til stel og når der kommmer 0V ind på dette lukker den igen. 
 	
 	\begin{figure}[H]
@@ -612,26 +612,26 @@ Til at styre motoren er der bygget en H-bro, som består af fire mosfet, hvor to
 		\label{fig:mosfetn}
 	\end{figure}
 	
-	På figur \ref{fig:mosfetn} ses det, at når der er en gate-to-source-spænding på 5V, vil der MOSFET'en kunne klare, at der løber en strøm på op til 100A i følge datablad \textbf{\#ref Reference til datablad}. Det vil altså ikke komme til at påvirke motoren, da denne kun kan trække en strøm på cirka 0,35A. 
+	På figur \ref{fig:mosfetn} ses det, at når der er en gate-to-source-spænding på 5V, vil der MOSFET'en kunne klare, at der løber en strøm på op til 100A i følge datablad(Bilag/Dokumentationrapport/IRLZ44). Det vil altså ikke komme til at påvirke motoren, da denne kun kan trække en strøm på cirka 0,35A. 
 	
 \item MOSFET P-kanal \\
-	Der er valgt at bruge en P-MOSFET af typen IRF9Z34N. Denne MOSFET skal bruges til at trække de 12V ned til motoren, så denne kan køre. Samtidig sørger den for, at de 12V ikke løber ned til motoren så længe, der ikke er negativ spænding på gate-benet. 
-	Denne type MOSFET kan trække en strøm på 6,7A ifølge databladet \textbf{\#ref Reference til datablad}. Det vil altså ikke komme til at påvirke motoren, da den kun kan trække en strøm på cirka 0,35A. 
+	Der er valgt at bruge en P-MOSFET af typen IRF9Z34N(Bilag/Dokumentationrapport/irf9z34n p mosfet). Denne MOSFET skal bruges til at trække de 12V ned til motoren, så denne kan køre. Samtidig sørger den for, at de 12V ikke løber ned til motoren så længe, der ikke er negativ spænding på gate-benet. 
+	Denne type MOSFET kan trække en strøm på 6,7A ifølge databladet (Bilag/Dokumentationrapport/irf9z34n p mosfet) \textbf{\#ref Reference til datablad}. Det vil altså ikke komme til at påvirke motoren, da den kun kan trække en strøm på cirka 0,35A. 
 	
 	For at der kan løbe spænding igennem IRF9Z34N, skal den have en negativ spænding for at åbne og en spænding på over 0V for at lukke. 
 	
 	\begin{figure}[H]
 		\centering
 		\includegraphics[width=\textwidth]{DesignOgImplementering/images/grafp}
-		\caption{Gate-to-Source Voltage REFERENCE TIL DATABLAD HER!!!!}
+		\caption{Gate-to-Source Voltage (Bilag/Dokumentationrapport/irf9z34n p mosfet)}
 		\label{fig:mosfetp}
 	\end{figure}
 	
-	På figuren \ref{fig:mosfetp} ses det, at når der er en gate-to-source-spænding på 5V, vil derr kunne løbe en strøm på omkring 5A igennem MOSFET'en, hvilket er mere end nok til at få motoren til at køre. 
+	På figuren \ref{fig:mosfetp} ses det, at når der er en gate-to-source-spænding på 5V, vil der kunne løbe en strøm på omkring 5A igennem MOSFET'en, hvilket er mere end nok til at få motoren til at køre. 
 \end{itemize}
 
 \item Dioder \\
-Som det se på figur \ref{fig:hbro} er der sat en diode af typen IN5819 over fire af MOSFET'ene (Q9, Q10, Q3 og Q4). Disse skal fungere som beskyttelse af MOSFET'en. Det, dioden gør, er, at den sikrer, at den spænding, som er tilbage i motoren, når der lukkes for MOSFET'en, ikke løber tilbage ind i MOSFET'en og brænder den af.
+Som det se på figur \ref{fig:hbro} er der sat en diode af typen IN5819(Bilag/Dokumentationrapport/1N5819) over fire af MOSFET'ene (Q9, Q10, Q3 og Q4). Disse skal fungere som beskyttelse af MOSFET'en. Det, dioden gør, er, at den sikrer, at den spænding, som er tilbage i motoren, når der lukkes for MOSFET'en, ikke løber tilbage ind i MOSFET'en og brænder den af.
 
 \item Modstande
 \begin{itemize}
@@ -641,7 +641,7 @@ Som det se på figur \ref{fig:hbro} er der sat en diode af typen IN5819 over fir
 	\item Andre modstande
 	\begin{itemize}
 		\item R6 og R7\\
-			Grunden til, at R6 og R7(på figur \ref{fig:hbro}), er der, er for at sikre, at transistorernes Absolute Maximum Ratings omkring strømmen, som ikke må overstige 100mA ifølge databladet. (tjek lige om det er rigtig)
+			Grunden til, at R6 og R7(på figur \ref{fig:hbro}), er der, er for at sikre, at transistorernes Absolute Maximum Ratings omkring strømmen, som ikke må overstige 100mA ifølge databladet(Bilag/Dokumentationrapport/BC557) og (Bilag/Dokumentationrapport/BC547)
 		
 		\begin{displaymath}
 			R6=R7=\frac {9V}{100mA} =90\Omega
@@ -649,7 +649,7 @@ Som det se på figur \ref{fig:hbro} er der sat en diode af typen IN5819 over fir
 		Der blev valgt en modstand med en værdi på 100$\Omega$ i stedet, for at være på den sikre side. 
 		
 		\item R5 og R8 (jf. figur \ref{fig:hbro})\\
-		Grunden til at R5 og R8 er indsat i kredsløbet er, at der ifølge databladet kun kan løbe en strøm på omkring 30A igennem N-MOSFET, hvis Vgs er på 10V. Da Vgs, i  dette projekt, kun er sat til 5V, vil MOSFET'en altså ikke kunne klare en alt for stor strøm. Derfor er R5 og R8 sat ind for at forhindre, at MOSFET'en ikke brænder af. \ref{datablad!!!!!}
+		Grunden til at R5 og R8 er indsat i kredsløbet er, at der ifølge databladet kun kan løbe en strøm på omkring 30A igennem N-MOSFET, hvis Vgs er på 10V. Da Vgs, i  dette projekt, kun er sat til 5V, vil MOSFET'en altså ikke kunne klare en alt for stor strøm. Derfor er R5 og R8 sat ind for at forhindre, at MOSFET'en ikke brænder af. (Bilag/Dokumentationrapport/IRLZ44)\ref{datablad!!!!!}
 		
 		Der blev fundet en modstand ved at regn med at der 9V og at mosfet kun kan klar en strøm under 30A så der blev regnet med de 30 A selv om man vidste godt det ikke var det som den kunne klare, men der skulle en større modstand ind, men det var så man havde noget at gå ud fra 
 		\begin{displaymath}
@@ -665,10 +665,10 @@ Som det se på figur \ref{fig:hbro} er der sat en diode af typen IN5819 over fir
 
 \item Transistorer
 \begin{itemize}
-	\item Q5 og Q7 (jf. figur \ref{fig:hbro})
+	\item Q5 og Q7(Bilag/Dokumentationrapport/BC557) (jf. figur \ref{fig:hbro})
 	Disse transistorer sidder i kredsløbet, fordi det tager tid for P-MOSFET'en at blive opladt helt og dermed åbne helt, på grund af kondensatoreffekten mellem benene på MOSFET'en.
 	
-	\item Q6 og Q8 (jf. figur \ref{fig:hbro})
+	\item Q6 og Q8(Bilag/Dokumentationrapport/BC547) (jf. figur \ref{fig:hbro})
 	Disse to transistorer sidder der for at hjælpe med at lukke P-MOSFET'en igen. Inden Q5 og Q7 blev sat ind tog det tid for at lukke P-MOSFET'en, men da de to blev sat ind, kunne de hjælpe til med at aflade MOSFET'en hurtigere. 
 \end{itemize}
 \end{itemize}
@@ -696,7 +696,7 @@ Platformen, som styres af motoren, må ikke kunne rotere 360 \(\deg\). Dette ses
 \noindent Det anvendte potentiometer har en størrelse på 47\(\ K\Omega\). Denne er lineær. Det vil sige at spændingen stiger proportionalt med modstanden. I potentiometeret findes en roterende kontakt, der danner en justerbar spændingsdeler. Når skaftet på potentiometret roteres ændres modstanden i de to variable modstande, \(\ R_{1}\) og  \(\ R_{2}\). På figur \ref{fig:potentiometer2} ses en konceptuel afbildning af de variable modstande i potentiometret, hvor der ses at udgangsspændingen er spændingen over \(\ R_{1}\). \newline
 
 \noindent \textbf{ADC} \newline
-For at kunne aflæse spændingen på potentiometeret, anvendes en 12-bit AD converter af typen Sequencing Successive Approximation ADC. En sequencing SAR ADC indeholder et sample-hold kredsløb. Kredsløbet holder på et indgangssignal indtil det næste signal registres på kredsløbets indgang. Dermed har converteren tid til at bestemme outputværdien. \newline \newline
+For at kunne aflæse spændingen på potentiometeret, anvendes en 12-bit AD converter(Bilag/Dokumentationrapport/ADC\_SAR\_SEQ\_P4\_v2\_30) af typen Sequencing Successive Approximation ADC. En sequencing SAR ADC indeholder et sample-hold kredsløb. Kredsløbet holder på et indgangssignal indtil det næste signal registres på kredsløbets indgang. Dermed har converteren tid til at bestemme outputværdien. \newline \newline
 \noindent ADC'en fungerer ved at midscale indstilles til halvdelen af referencespændingen. Inputsignalet sammenlignes med midscale, hvis inputsignalet er højere end midscaleværdien sættes MSB 1 og hvis signalet er lavere bliver denne sat til 0. Herefter bliver midscale værdien rekursivt sat til havdelen af intervallet, som inputsignalet ligger indenfor, og bittene ned til LSB bliver sat. Bittene der sættes, bliver gemt i et register. Når konverteringen er gennemført, kan værdien af inputsignalet aflæses i dette register. 
 
 \begin{figure}[H]
