@@ -299,7 +299,11 @@ På figur \ref{fig:SystemTestOverviewSequenceDiagram} ses et overordnet sekvensd
 	\label{fig:klasseidentifikationDevKit}
 \end{figure}
 
-Sekvensdiagrammet for Devkit 8000 ses på figur \ref{fig:sekvensDevkit}. Kontrolklassen, som er klassen der skal udføre Use Casen, kaldes Test Communication Protocol (TCP). Der er to boundaryklasser, da DevKit 8000 skal håndtere kommunikationen med en brugergrænseflade, samt en SPI bus. Som det fremkommer af diagrammet er det kontrolklassen, der sørger for, at de forskellige tests bliver sat i gang ved at kommunikere med PSoC0 over SPI bussen. Når en test er færdiggjort meldes resultatet ud til brugeren via GUI'en.
+På figur \ref{fig:klasseidentifikationDevKit} ses klasse identifikation for User Interface Software. Der er til User Interface Software for use case 2 identificeret tre klasser: \textit{Test Communication Protocol (TCP)}, \textit{SPI Interface}, og \textit{GUI}.
+
+\textit{TCP} er en controller. Denne klasse har til ansvar at eksekvere funktionalitet relevant til use case 2. \textit{SPI Interface} repræsenterer en grænseflade til systemets SPI bus. \textit{GUI} repræsenterer en grænseflade til systemets grænseflade.
+
+På figur \ref{fig:sekvensDevkit} ses et sekvensdiagram der viser klassernes interaktion. Som det fremkommer af diagrammet er det \textit{TCP} klassen, der sørger for, at de forskellige tests bliver sat i gang ved at kommunikere med PSoC0 over SPI bussen via \textit{SPI Interface} klassen. Når en test er færdiggjort meldes resultatet ud til brugeren via GUI'en.
 
 \begin{figure}[H]
 	\centering
@@ -308,7 +312,7 @@ Sekvensdiagrammet for Devkit 8000 ses på figur \ref{fig:sekvensDevkit}. Kontrol
 	\label{fig:sekvensDevkit}
 \end{figure}
 
-Ud fra sekvensdiagrammet for Devkit 8000 er der udledt metoder til klasserne. De udledte metoder ses i klassediagrammet på figur \ref{fig:klasseDevkit}. 
+Ud fra sekvensdiagrammet, figur \ref{fig:sekvensDevkit}, er der udledt metoder til klasserne. De udledte metoder ses i klassediagrammet på figur \ref{fig:klasseDevkit}. Her kan det ses at \textit{GUI} grænsefladen skal kunne starte system testen på \textit{TCP} klassen. \textit{TCP} klassen skal kunne starte SPI-, I2C-, og Nunchucktest via \textit{SPI Interface} grænsefladen. Yderligere skal \textit{TCP} klassen også kunne notificere \textit{GUI} grænsefladen når de test er færdiggjort.
 
 \begin{figure}[H]
 	\centering
@@ -327,7 +331,11 @@ Ud fra sekvensdiagrammet for Devkit 8000 er der udledt metoder til klasserne. De
 	\label{fig:klasseidentifikationPSoC}
 \end{figure}
 
-På figur \ref{fig:sekvensPSoC0SPITest}, \ref{fig:sekvensPSoC0I2CTest} og \ref{fig:sekvensPSoC0NunchuckTest} ses sekvensdiagrammer for PSoC0. Sekvensdiagrammerne er blevet opdelt i de 3 tests der gennemføres i use casen; SPI, I2C og Nunchuck kommunikations tests. Kontrolklassen er Test Communication Protocol, hvilket på figurerne er forkortet til TCP. Derudover er der tre boundaryklasser, da PSoC0 skal kommunikere både med Devkit 8000, Nunchucken og PSoC1.
+På figur \ref{fig:klasseidentifikationPSoC} ses klasse identifikation for Nunchuck Polling Software. Der er til Nunchuck Polling Software for use case 2 identificeret tre klasser: \textit{Test Communication Protocol (TCP)}, \textit{SPI Interface}, og \textit{I2C Interface}.
+
+\textit{TCP} er en controller. Denne klasse har til ansvar at eksekvere funktionalitet relevant til use case 2. \textit{SPI Interface} repræsenterer SPI grænsefladen til systemets SPI bus. \textit{I2C Interface} repræsenterer grænsefladen til systemets I2C bus.
+
+På figur \ref{fig:sekvensPSoC0SPITest}, \ref{fig:sekvensPSoC0I2CTest} og \ref{fig:sekvensPSoC0NunchuckTest} ses sekvensdiagrammer for Nunchuck Polling Software. Sekvensdiagrammerne er blevet opdelt i de 3 tests der gennemføres i use casen; SPI, I2C og Nunchuck kommunikations tests.
 
 \begin{figure}[H]
 	\centering
@@ -336,7 +344,7 @@ På figur \ref{fig:sekvensPSoC0SPITest}, \ref{fig:sekvensPSoC0I2CTest} og \ref{f
 	\label{fig:sekvensPSoC0SPITest}
 \end{figure}
 
-På figur \ref{fig:sekvensPSoC0SPITest} ses, at Devkittet sender en besked til kontrolklassen for at påbegynde SPI testen. Når testen er udført, svarer denne med en SPI OK og derved er SPI testen gennemført.
+På figur \ref{fig:sekvensPSoC0SPITest} ses, at Devkittet sender en besked til kontrolklassen via \textit{SPI Interface} for at påbegynde SPI testen. Efter et bestemt timeout interval, læser Devkittet resultatet af SPI testen, igen via \textit{SPI Interface} grænsefladen.
 
 \begin{figure}[H]
 	\centering
@@ -345,7 +353,7 @@ På figur \ref{fig:sekvensPSoC0SPITest} ses, at Devkittet sender en besked til k
 	\label{fig:sekvensPSoC0I2CTest}
 \end{figure}
 
-På figur \ref{fig:sekvensPSoC0I2CTest} ses, at Devkittet starter I2C testen, ved at sende en besked til kontrolklassen. Kontrolklassen anmoder herefter om svar via I2C nettet fra Nuchucken og PSoC1. Når disse enheder har svaret med et I2C OK er testen gennemført og der sendes besked til Devkittet med en I2C Test OK.
+På figur \ref{fig:sekvensPSoC0I2CTest} ses, at Devkittet starter I2C testen, ved at sende en besked til \textit{TCP} klassen. \textit{TCP} klassen anmoder herefter om et acknowledge fra slaverne, via \textit{I2C Interface} grænsefladen, fra Nuchucken og PSoC1. Når disse enheder har svaret med et I2C OK er testen gennemført. Efter et bestemt timeout interval, læser Devkittet resultatet af I2C testen, via \textit{I2C Interface} grænsefladen.
 
 \begin{figure}[H]
 	\centering
@@ -354,7 +362,7 @@ På figur \ref{fig:sekvensPSoC0I2CTest} ses, at Devkittet starter I2C testen, ve
 	\label{fig:sekvensPSoC0NunchuckTest}
 \end{figure}
 
-På figur \ref{fig:sekvensPSoC0NunchuckTest} ses sekvensdiagrammet for Wii-Nunchuck testen. Når der sker et tryk sender Nunchucken 'Z' knappens status til kontrolklassen. Herefter videresender kontrolklassen knappens status til Devkittet og derved er testen færdig.\newline
+På figur \ref{fig:sekvensPSoC0NunchuckTest} ses sekvensdiagrammet for Wii-Nunchuck testen. Devkittet sender en \textit{Start Nunchuck Test} besked til \textit{TCP} klassen, hvorefter testen startes. \textit{TCP} klassen anmoder om input data fra Nunchuck via \textit{I2C Interface} grænsefladen, hvorefter devkittet efter et bestemt timeout aflæser test resultatet.
 
 \begin{figure}[H]
 	\centering
@@ -363,7 +371,7 @@ På figur \ref{fig:sekvensPSoC0NunchuckTest} ses sekvensdiagrammet for Wii-Nunch
 	\label{fig:klassePSoC0}
 \end{figure}
 
-I klassediagrammet på figur \ref{fig:klassePSoC0} ses kontrolklassen og de tre boundaryklasser, som hører til PSoC0. I klasserne er der tilføjet metoder, som er udledt ud fra sekvensdiagrammerne. 
+ 
 
 % ---------------PSoC1 Applikationsmodel-----------------------------
 \subsubsection{Applikationsmodel for Motor Control Software}
