@@ -4,7 +4,6 @@
 -Tekst til klasse identifikationsdiagrammer for UC2
 -Mangler generelt tekst til figurer i applikationsmodel for UC2
 -Opdater tekst til samlede klassediagrammer (fra rapport)
--Ret sekvensdiagram for I2C protocol communication (execution blocks) og diagram navn
 -Færdiggør arkitektur til GUI
 -Opdater tekst til design og implementering - PSoC software
 -Færdiggør opsummering af modultest
