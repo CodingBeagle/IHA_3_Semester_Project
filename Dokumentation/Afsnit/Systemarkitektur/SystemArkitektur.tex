@@ -164,9 +164,16 @@ På tabel \ref{tabel:softwareAllocationDescription} er hvert allokeret software 
 	\label{tabel:softwareAllocationDescription}
 \end{table}
 
-\section{Use Case 1 - Spil Goofy Candy Gun 3000}
-\label{afsnit:applikationsmodelUC1}
+\section{Applikationsmodeller}
+Til arkitekturfasen er der gjort brug af applikationsmodeller som et analyseværktøj. Der er lavet en applikationsmodel for hver use case, for hvert software komponent identificeret i Software Allokeringsdiagrammet, tabel \ref{tabel:softwareAllocationDescription}. Hver applikationsmodel består af et \textit{Klasse Identifikations Diagram}, \textit{Sekvensdiagram} og \textit{Klassediagram}. Resultatet af hver applikationsmodel er et klassediagram der indeholder konceptuelle klasser med metoder relevant for den pågældende use case. \newline
+
+\noindent Med konceptuelle klasser menes der at de ikke nødvændigvis behøver at have et 1:1 forhold med de implementerede klasser. De konceptuelle klasser bruges som inspiration til de klasser og funktioner der muligvis skal modelleres i projektets problemdomæne. 
+
+\subsection{Use Case 1 - Spil Goofy Candy Gun 3000}
+
 Følgende afsnit præsenterer applikationsmodeller relevante til Use Case 1 - Spil Goofy Candy Gun 3000, fordelt over systemets CPU'er.
+
+På figur \ref{fig:WiiNunchuckSequenceDiagram} ses et overordnet sekvensdiagram for hvordan Nunchuck data bliver overført igennem systemet og påvirker motorer samt affyringsmekanismen.
 
 \begin{figure}[H]
 	\centering
@@ -175,7 +182,7 @@ Følgende afsnit præsenterer applikationsmodeller relevante til Use Case 1 - Sp
 	\label{fig:WiiNunchuckSequenceDiagram}
 \end{figure}
 
-\subsection{Applikationsmodel for Nunchuck Polling Software}
+\subsubsection{Applikationsmodel for Nunchuck Polling Software}
 
 \begin{figure}[H]
 	\centering
@@ -184,12 +191,20 @@ Følgende afsnit præsenterer applikationsmodeller relevante til Use Case 1 - Sp
 	\label{fig:klasseidentifikationUC1PSoC0}
 \end{figure}
 
+På figur \ref{fig:klasseidentifikationUC1PSoC0} ses klasse identifikation for Nunchuck Polling Software. Der er til Nunchuck Polling Software for Use Case 1 identificeret to klasser: \textit{UC1} samt \textit{I2C Interface}. \newline
+
+\noindent Klassen \textit{UC1} er en controller. Dette er klassen der har til ansvar at eksekvere funktionalitet relevant til use case 1. \textit{I2C Interface} er en boundary klasse der repræsenterer grænseflade til I2C bussen.
+
+Det kan på sekvensdiagrammet, figur \ref{fig:sekvensUC1PSoC0}, ses hvordan klasserne interagerer med hinanden. Her kan det ses at klassen \textit{UC1} aflæser Nunchuck input og herefter dekoder det, kalibrerer det, og sender det videre ud på I2C bussen hvor andre slaver kan gøre brug af dataen.
+
 \begin{figure}[H]
 	\centering
 	\includegraphics[scale=0.8]{Systemarkitektur/images/UC1PSoC0SequenceDiagram}
 	\caption{Sekvensdiagram for PSoC0}
 	\label{fig:sekvensUC1PSoC0}
 \end{figure}
+
+Figur \ref{fig:klasseUC1PSoC0} viser et endeligt klassediagram, hvor metoderne er udledt fra sekvensdiagrammet, figur \ref{fig:sekvensUC1PSoC0}. Her er det identificeret at controller klassen \textit{UC1} har to metoder til at kunne dekode og kalibrere Nunchuck data. \textit{UC1} gør brug af \textit{I2C Interface} som grænseflade til at sende dataen ud på I2C bussen.
 
 \begin{figure}[H]
 	\centering
@@ -198,7 +213,7 @@ Følgende afsnit præsenterer applikationsmodeller relevante til Use Case 1 - Sp
 	\label{fig:klasseUC1PSoC0}
 \end{figure}
 
-\subsection{Applikationsmodel for Motor Control Software}
+\subsubsection{Applikationsmodel for Motor Control Software}
 
 \begin{figure}[H]
 	\centering
@@ -207,12 +222,20 @@ Følgende afsnit præsenterer applikationsmodeller relevante til Use Case 1 - Sp
 	\label{fig:klasseidentifikationUC1PSoC1}
 \end{figure}
 
+På figur \ref{fig:klasseidentifikationUC1PSoC1} ses klasse identifikation for Motor Control Software. Der er til Motor Control Software for Use Case 1 identificeret fire klasser: \textit{UC1}, \textit{Motor Control}, \textit{I2C Interface} og \textit{PSoC2}. \newline
+
+\noindent \textit{UC1} er en controller. Denne klasse har til ansvar at eksekvere funktionalitet relevant til use case 1. \textit{Motor Control} repræsenterer grænsefladen til motorstyringen. \textit{I2C Interface} repræsenterer grænsefladen til I2C bussen. \textit{PSoC2} repræsenterer en grænseflade til PSoC2.
+
+På figur \ref{fig:sekvensUC1PSoC1} ses et sekvensdiagram af interaktionen mellem disse klasser. Her kan det ses at \textit{UC1} klassen læser input data fra Nunchuck og videresender det til motor styringen samt PSoC2, så farten af motoren kan regulares og affyringsmekanismen kan aktiveres.
+
 \begin{figure}[H]
 	\centering
 	\includegraphics[scale=0.8]{Systemarkitektur/images/UC1PSoC1SequenceDiagram}
 	\caption{Sekvensdiagram for PSoC1}
 	\label{fig:sekvensUC1PSoC1}
 \end{figure}
+
+På figur \ref{fig:klasseUC1PSoC1} ses et endeligt klassediagram, hvor metoderne er udledt fra sekvensdiagrammet, figur \ref{fig:sekvensUC1PSoC1}. Her er det identificeret at controller klassen \textit{UC1} har primært kommunikerer med grænsefladerne \textit{I2C Interface}, \textit{PSoC2} og \textit{Motor Control}. Her skal \textit{UC1} kunne læse Nunchuck input fra \textit{I2C Interface}. Yderligere skal den kunne regulere farten på \textit{Motor Control} og affyre affyringsmekanismen.
 
 \begin{figure}[H]
 	\centering
@@ -221,7 +244,7 @@ Følgende afsnit præsenterer applikationsmodeller relevante til Use Case 1 - Sp
 	\label{fig:klasseUC1PSoC1}
 \end{figure}
 
-\subsection{Applikationsmodel for Projectile Launcher Software}
+\subsubsection{Applikationsmodel for Projectile Launcher Software}
 
 \begin{figure}[H]
 	\centering
@@ -229,6 +252,8 @@ Følgende afsnit præsenterer applikationsmodeller relevante til Use Case 1 - Sp
 	\caption{Klasseidentifikation for PSoC2}
 	\label{fig:klasseidentifikationUC1PSoC2}
 \end{figure}
+
+På figur \ref{fig:klasseidentifikationUC1PSoC2} ses klasse identifikation for Projectile Launcher Software. Der er til Projectile Launcher Software for use case 1 identificeret tre klasser: \textit{UC1}, \textit{PSoC1}, 
 
 \begin{figure}[H]
 	\centering
@@ -245,8 +270,8 @@ Følgende afsnit præsenterer applikationsmodeller relevante til Use Case 1 - Sp
 \end{figure}
 
 \newpage
-\section{Use Case 2 - Test Kommunikationsprotokoller}
-\label{afsnit:applikationsmodelUC2}
+\subsection{Use Case 2 - Test Kommunikationsprotokoller}
+
 Følgende afsnit præsenterer applikationsmodeller relevante til Use Case 2 - Test Kommunikationsprotokoller, fordelt over systemets CPU'er.
 
 På figur \ref{fig:SystemTestOverviewSequenceDiagram} ses et overordnet sekvensdiagram for use casen. Her starter brugeren testen gennem brugergrænsefladen. Først bliver SPI bussen mellem DevKit8000 og PSoC0 testet. Herefter bliver I2C bussen testet ved at PSoC0 undersøger om de nødvændige I2C slaver (PSoC1 og Wii-Nunchuck) kan kommunikeres med. Til slut får brugeren en besked om at skulle trykke på en Wii-Nunchuck knap, hvorefter der bliver testet om knaptrykket skete eller ej.
@@ -259,7 +284,7 @@ På figur \ref{fig:SystemTestOverviewSequenceDiagram} ses et overordnet sekvensd
 \end{figure}
 
 % ---------------Devkit Applikationsmodel-----------------------------
-\subsection{Applikationsmodel for User Interface Software}
+\subsubsection{Applikationsmodel for User Interface Software}
 
 \begin{figure}[H]
 	\centering
@@ -287,7 +312,7 @@ Ud fra sekvensdiagrammet for Devkit 8000 er der udledt metoder til klasserne. De
 \end{figure}
 
 % ---------------PSoC0 Applikationsmodel-----------------------------
-\subsection{Applikationsmodel for Nunchuck Polling Software}
+\subsubsection{Applikationsmodel for Nunchuck Polling Software}
 
 \begin{figure}[H]
 	\centering
@@ -335,7 +360,7 @@ På figur \ref{fig:sekvensPSoC0NunchuckTest} ses sekvensdiagrammet for Wii-Nunch
 I klassediagrammet på figur \ref{fig:klassePSoC0} ses kontrolklassen og de tre boundaryklasser, som hører til PSoC0. I klasserne er der tilføjet metoder, som er udledt ud fra sekvensdiagrammerne. 
 
 % ---------------PSoC1 Applikationsmodel-----------------------------
-\subsection{Applikationsmodel for Motor Control Software}
+\subsubsection{Applikationsmodel for Motor Control Software}
 
 \begin{figure}[H]
 	\centering
