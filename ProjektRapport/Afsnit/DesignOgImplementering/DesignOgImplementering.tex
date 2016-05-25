@@ -222,7 +222,7 @@ Dette afsnit beskriver Systemtest GUI'ens design. Figur \ref{fig:GUIPic} viser G
 	\label{fig:GUIPic}
 \end{figure}
 
-Systemtest GUI'en er lavet med det indbyggede design framework i QT Creator 5.
+Systemtest GUI'en er lavet med det indbyggede design framework i QT Creator 5\cite{Website:QTCreator}, se dokumentation \#refDokuUdvikling.
 QT frameworket opretter "hovedvinduet" i GUI'en som en klasse. Knapperne tilføjes som private slots i klassen
 hvilket gør dem i stand til interagere i GUI'en. Når en knap er assignet til et slot i klassen, og der trykkes på den pågældende knap, bliver det tildelte signal broadcastet
 og slot-funktionen bliver kørt. Alle tre knapper i GUI'en er assignet signal-typen "clicked()".
@@ -236,7 +236,7 @@ Her vises en statemachine for Systemtest GUI'ens forløb igennem usecase 2.
 	\label{fig:StateMachineUC2}
 \end{figure}
 
-Statemachinens, figur \ref{fig:StateMachineUC2} forløb beskrives i dokumentationen, \#RefDoku
+Statemachinens, figur \ref{fig:StateMachineUC2}, forløb beskrives i dokumentationen, \#RefDoku
 
 Systemtest GUI'en for UC2 er en simpel test-konsol. Den består af 3 knapper og et konsol vindue. GUI'en interfacer med SPI-protokollen, gennem vores interface driver. Den første knap, Start test, initierer UC2. Efterhånden som testen løbes igennem kaldes test funktionerne, og ved hjælp af if-conditions, bliver der tjekket på retur-værdierne fra interface-funktionerne. Hvis retur-værdien er true, skrives der en "--test successful" besked i konsol vinduet. og widgeten kører videre. Hvis retur-værdien er false, skrives der en "--test unsuccessful" i tekstvinduet og GUI'en returnerer til idle tilstand. Når alle test er successful, skrives "System test successful, system is ready for use" til konsol vinduet, og GUI'en returnerer til idle tilstand. Den anden knap, Clear, clearer konsollen til blank tilstand. Den tredje knap, Exit, lukker GUI'en.
 Koblingen i GUI'en hænger udelukkende sammen med interfacedriveren. Knapperne kalder funktioner fra interfacedriveren, og ved ændring i disse funktioner, ville foresage ændringer i GUI'en.
