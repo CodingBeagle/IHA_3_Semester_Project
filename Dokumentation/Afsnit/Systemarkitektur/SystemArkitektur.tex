@@ -25,7 +25,10 @@ En mere detaljeret gennemgang af disse kommunikations protokoller kan findes i a
 
 % ---------------BDD--------------------------------------------------
 \section{BDD for Candygun 3000}
-På figur \ref{fig:BDD} ses et \textit{Block Definition Diagram (BDD)} hvor Candygun 3000 brudt ned i blokkene PSoC0, PSoC1 og Devkit 8000. Devkit 8000 er brugergrænsefladen, som brugeren kan interagere med via touchskærmen. Denne kommunikerer via SPI til PSoC0, som er SPI-slave. PSoC0 er forbundet til PSoC1, hvor kommunikeres via I2C og den fungerer som I2C-master. Udover bindeled mellem SPI og I2C kommunikationen har  PSoC0 ansvaret for Wii-nunchucken. PSoC1 står for ar aflæse og afkode input fra nunchucken, som også kommunikerer via I2C, og videresender dataene til PSoC1. PSoC1, som står for motorstyringen, som vil sige den tager dataene både fra wii nunchucken og fra potentiometeret  for at finde frem til den rigtige h bro som den skal åbne for. På figur \ref{fig:BDD} ses blokkenes associationer og deres porte.  
+På figur \ref{fig:BDD} ses et \textit{Block Definition Diagram (BDD)} 
+Figur \ref{fig:BDD} skal give et overblik over hvordan  relationerne mellem de forskellige hardwareblokke er. Så man får et overordnet billede af hvordan strukturen er for ” Candygun 3000”. For at læse hvad hver blok skal bruges til, henvises der til tabel \ref{blokbeskrivelse} (blokbeskrivelse). Der på BDD'et figur \ref{fig:BDD} med nødvændige indgange og udgange for de fysiske signaler. Yderligere ses det at flow specifikationer er defineret for de ikke-atomare forbindelser \textit{I2C} samt \textit{SPI}, da disse er busser bestående af flere forbindelser. Der henvises til \textbf{IBD AFSNIT} for en detaljeret model af de fysiske forbindelser mellem hardwareblokkende.
+
+
 
 \begin{figure}[H]
 	\centering

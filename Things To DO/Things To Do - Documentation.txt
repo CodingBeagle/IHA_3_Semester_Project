@@ -1,4 +1,4 @@
--Opdater tekst for BDD
+
 
 -Tekst til alle figurer i applikationsmodel for UC1
 -Tekst til klasse identifikationsdiagrammer for UC2
