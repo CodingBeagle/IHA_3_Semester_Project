@@ -316,11 +316,17 @@ Den primære idé bag valg af kommandotype metoden til I2C kommunikations protok
 
 En anden fordel ved kommandotype metoden er, at den er relativ simpel at implementere i kode, som vist ved pseudofunktionerne i figur \ref{fig:I2CProtokolEksempel}.
 
+
+\subsection{Interface driver}
+
+
+
+
 \subsection{Brugergrænseflade}
 Ved hjælp af en brugergrænseflade, kan systemtesten styres fra DevKit8000.
 Brugergrænsefladen er opbygget ud fra sekvensdiagrammet \ref{fig:SystemTestSekvensDiagram},
 ud fra dette kunne brugergrænsefladen skitseres som figur \ref{fig:GUISkitse}.
-Grænsefladen mellem DevKit8000 og PSoC0 er en SPI-bus som ses på figur \ref{afsnit:IBD}, og brugergrænsefladen er koblet til DevKit8000 ved hjælp af en interfacedriver.
+Grænsefladen mellem DevKit8000 og PSoC0 er en SPI-bus som ses på figur \ref{afsnit:IBD}, og brugergrænsefladen er koblet til DevKit8000 ved hjælp af interfacedriveren.
 Brugergrænsefladen skal sende startsekvensen til interfacedriveren, hvorefter dette sendes til PSoC0 og videre ud i systemet.
 Brugergrænsefladen skal aflæse svaret fra systemtesten og printe dette ud i en konsol.
 
@@ -332,6 +338,6 @@ Brugergrænsefladen skal aflæse svaret fra systemtesten og printe dette ud i en
 \end{figure}
 
 \subsubsection{Designvalg}
-Brugergrænsefladen er designet ud fra den sekventielle struktur i usecase 2 /Ref til doku eller?. Dette er løst ved hjælp af Event-Driven Programming.
-Denne model drives ved hjælp af bruger-triggered events, så som knaptryk. Knapperne vil blive tildelt forskellige funktionaliteter, der faciliterer systemtesten.
+Brugergrænsefladen er designet ud fra den sekventielle struktur i usecase 2 #Ref Dokumentation. Dette er løst ved hjælp af Event-Driven Programming.
+Denne model drives ved hjælp af events, som i dette tilfælde aktiveres af brugeren ved knaptryk. Knapperne vil blive tildelt forskellige funktionaliteter, der faciliterer systemtesten.
 Et alternativ kunne være trådbaseret design. Kompleksiteten i dette design ville være overvældende i forhold til den ønskede funktionalitet og blev derfor fravalgt.
