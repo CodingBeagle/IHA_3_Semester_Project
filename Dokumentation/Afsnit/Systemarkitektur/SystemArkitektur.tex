@@ -48,6 +48,12 @@ Følgende afsnit indeholder en blokbeskrivelse samt en flowspecifikation for I2C
 \noindent \textbf{PSoC0} \par
 \noindent \textit{PSoC0} er PSoC hardware der indeholder software til I2C og SPI kommunikationen og afkodning af Wii-Nunchuck data. PSoC0 fungerer som I2C master og SPI slave. Denne PSoC er bindeleddet mellem brugergrænsefladen og resten af systemets hardware.
 
+\noindent \textbf{PSoC2} \par
+\noindent \textit{PSoC2} denne blok står for at sende et signal til affyringsmekanismen om at den skal skyde og så skal den også holde styre på at der kun bliver skydt en gang.
+
+\noindent \textbf{Projectile Launcher} \par
+\noindent \textit{Projectile Launcher} den blok er vores affyringsmekanismen
+
 \noindent \textbf{MotorControl} \par
 \noindent \textit{MotorControl} blokken er Candy Gun 3000's motorerer, der anvendes til at bevæge kanonen i forskellige retninger. Denne blok består af Hbro blok og rotationsbegrænsnings blokken
 
@@ -101,7 +107,18 @@ I signalbeskrivelsen gælder det, at når et signal beskrives som 'højt' operer
 	& & wiiMaster & Type: I2C \newline Spændingsniveau: ?? \newline Hastighed: ?? \newline Beskrivelse: I2C bussen hvor der modtages data fra Nunchuck.\\ \cline{3-4}
 	& & motorMaster & Type: I2C \newline Spændingsniveau: 0-5V \newline Hastighed: 100kbit/sekund \newline Beskrivelse: I2C bussen hvor der sendes afkodet Nunchuck data til PSoC1.\\ \hline
 	PSoC1 & Modtager nunchuckinput fra PSoC0 og omsætter dataene til PWM signaler. & motorSlave & Type: I2C \newline Spændingsniveau: 0-5V \newline Hastighed: 100kbit/sekund \newline Beskrivelse: Indeholder formatteret Wii-Nunchuck data som omsættes til PWM-signal. \\ \cline{3-4} 
-	& & PWM & Type: PWM \newline Frekvens: 22kHz \newline PWM \%: 0-100\% \newline Spændingsniveau: 0-5V \newline Beskrivelse: PWM signal til styring af motorens hastighed. \\ \hline
+	&& ShootISR & Type: voltage \newline Spændingsniveau: 0-5V \newline Beskrivelse:  giv et højt signal når den skal skyde.\\ \cline{3-4}   
+	& & PWM & Type: PWM \newline Frekvens: 22kHz \newline PWM \%: 0-100\% \newline Spændingsniveau: 0-5V \newline Beskrivelse: PWM signal til styring af motorens hastighed. \\ \cline{3-4}
+	& & PotenOut1 & Type: voltage \newline Spændingsniveau: en spænding 0V-5V alt efter hvad potentiometer står på \newline Beskrivelse: den spænding viser hvor motoren står henne\\ \cline{3-4}
+	& & PotenOut2 & Type: voltage \newline Spændingsniveau: en spænding 0V-5V alt efter hvad potentiometer står på \newline Beskrivelse: den spænding viser hvor motoren står henne\\ \cline{3-4}
+	& & PWM1 & Type: PWM \newline Frekvens: 3MHz \newline PWM\%: 0-100\% \newline Spædingsniveau: 0-5V \newline Beskrivelse: PWM signal til styring af motorens hastighed. \\ \cline{3-4}
+	&& PWM2 & Type: PWM \newline Frekvens: 3MHz \newline PWM\%: 0-100\% \newline Spædingsniveau: 0-5V \newline Beskrivelse: PWM signal til styring af motorens hastighed. \\ \cline{3-4}
+	
+	
+	&& PWM3 & Type: PWM \newline Frekvens: 3MHz \newline PWM\%: 0-100\% \newline Spædingsniveau: 0-5V \newline Beskrivelse: PWM signal til styring af motorens hastighed. \\ \cline{3-4}
+	&& PWM4 & Type: PWM \newline Frekvens: 3MHz \newline PWM\%: 0-100\% \newline Spædingsniveau: 0-5V \newline Beskrivelse: PWM signal til styring af motorens hastighed. \\ \cline{3-4}
+	& & motorVoltage & Type: voltage \newline Spændingsniveau: 9V \newline Beskrivelse: Strømforsyning til motoren\\ \cline{3-4}
+	& & potentiometer & Type: voltage \newline Spændingsniveau: 5V \newline Beskrivelse: giver Rotationsbegrænsing 5V \\ \hline
 	MotorControl & Den enhed der skal bevæge kanonen & PWM1 & Type: PWM \newline Frekvens: 3MHz \newline PWM\%: 0-100\% \newline Spædingsniveau: 0-5V \newline Beskrivelse: PWM signal til styring af motorens hastighed. \\ \cline{3-4}
 	&& PWM2 & Type: PWM \newline Frekvens: 3MHz \newline PWM\%: 0-100\% \newline Spædingsniveau: 0-5V \newline Beskrivelse: PWM signal til styring af motorens hastighed. \\ \cline{3-4}
 
@@ -109,9 +126,12 @@ I signalbeskrivelsen gælder det, at når et signal beskrives som 'højt' operer
 	&& PWM3 & Type: PWM \newline Frekvens: 3MHz \newline PWM\%: 0-100\% \newline Spædingsniveau: 0-5V \newline Beskrivelse: PWM signal til styring af motorens hastighed. \\ \cline{3-4}
 	&& PWM4 & Type: PWM \newline Frekvens: 3MHz \newline PWM\%: 0-100\% \newline Spædingsniveau: 0-5V \newline Beskrivelse: PWM signal til styring af motorens hastighed. \\ \cline{3-4}
 	& & motorVoltage & Type: voltage \newline Spændingsniveau: 9V \newline Beskrivelse: Strømforsyning til motoren\\ \cline{3-4}
-	& & potentiometer & Type: voltage \newline Spændingsniveau: 5V \newline Beskrivelse: giver Rotationsbegrænsing 5V\\ \cline{3-4}
+	& & potentiometer & Type: voltage \newline Spændingsniveau: 5V \newline Beskrivelse: giver Rotationsbegrænsing 5V 
+	\\ \cline{3-4}
 	& & PotenOut1 & Type: voltage \newline Spændingsniveau: en spænding 0V-5V alt efter hvad potentiometer står på \newline Beskrivelse: den spænding viser hvor motoren står henne\\ \cline{3-4}
-	& & PotenOut2 & Type: voltage \newline Spændingsniveau: en spænding 0V-5V alt efter hvad potentiometer står på \newline Beskrivelse: den spænding viser hvor motoren står henne \\ \hline
+	& & PotenOut2 & Type: voltage \newline Spændingsniveau: en spænding 0V-5V alt efter hvad potentiometer står på \newline Beskrivelse: den spænding viser hvor motoren står henne
+	\\ \hline
+		Motor & Denne blok beskriver hvad motoren får. & motorvoltage & Type: voltage \newline Spændingsniveau: 0-5V  \newline Beskrivelse: giver spændning til motoren.(denne beskevelse glæder også for den anden motor) \\ \hline
 	Wii-nunchuck & Den fysiske controller som brugeren styrer kanonen med. & wiiSlave & Type: I2C \newline Spændingsniveau: 0-5V \newline Hastighed: 100kbit/sekund \newline Beskrivelse: Kommunikationslinje mellem PSoC1 og Wii-Nunchuck. \\ \cline{3-4}
 	& & userInput & Type: input \newline Beskrivelse: Brugerinput fra Wii-Nunchuck. \\ \hline
 	SPI & Denne blok beskriver den ikke-atomiske SPI forbindelse. & MOSI & Type: CMOS \newline Spændingsniveau: 0-5V \newline Hastighed: ?? \newline Beskrivelse: Binært data der sendes fra master til slave. \\ \cline{3-4}
@@ -120,6 +140,8 @@ I signalbeskrivelsen gælder det, at når et signal beskrives som 'højt' operer
 	& & SS & Type: CMOS \newline Spændingsniveau: 0-5V \newline Hastighed: ?? \newline  Beskrivelse: Slave-Select, som bruges til at bestemme hvilken slave der skal kommunikeres med. \\ \hline
 	I2C & Denne blok beskriver den ikke-atomiske I2C forbindelse. & SDA & Type: CMOS \newline Spændingsniveau: 0-5V \newline Hastighed: ?? \newline Beskrivelse: Databussen mellem I2C masteren og I2C slaver. \\ \cline{3-4}
 	& & SCL & Type: CMOS \newline Spændingsniveau: 0-5V \newline Hastighed: ?? \newline Beskrivelse: Clock signalet fra master til lyttende I2C slaver, som bruges til at synkronisere den serielle kommunikation. \\ \hline
+		PSoC2& Denne blok bindeledet mellem afyrningsmeknismen og PSoC1. & ShootISR & Type: voltage \newline Spændingsniveau: 0-5V \newline Beskrivelse:  giv et højt signal når den skal skyde.  \\ \hline
+		Projectile Launcher & Denne blok er vores afyrningsmeknismen. & PWM5 & Type: PWM \newline Spændingsniveau: 0-5V \newline Beskrivelse: giver signal til mosfet til at åbne så motoren køre en omgang. \\ \hline
 	\caption{Tabel med signalbeskrivelse}
 \end{longtable}
 
