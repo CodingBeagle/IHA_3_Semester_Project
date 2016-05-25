@@ -1,9 +1,5 @@
-
-
 -Tekst til alle figurer i applikationsmodel for UC1
 -Tekst til klasse identifikationsdiagrammer for UC2
 -Mangler generelt tekst til figurer i applikationsmodel for UC2
--Færdiggør arkitektur til GUI
--Opdater tekst til design og implementering - PSoC software
 -Færdiggør opsummering af modultest
 -Afrund modultest af Wii-Nunchuck
