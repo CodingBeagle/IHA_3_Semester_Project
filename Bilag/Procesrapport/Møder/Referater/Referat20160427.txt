@@ -1,0 +1,89 @@
+- Review (modtager)
+	- Sker næste uge
+- Review (give)
+	- Fredag. Start 8.30
+
+- Overvejelse omkring ekstra aktør
+	Hvis vi skal til at ændre i diagrammet, skal man til at ændre i fully dressed UC. 
+	Vi ser hvor meget arbejde der er i det og handler efter det.
+- Færdiggørelse af UC2
+	Done. GUI med start test, som kører SPI test, I2C test og nunchuck test. 
+	Der er lavet modultest med I2C og dokumentation til SPI, det skal bare skrives.
+- Integrations test, som tester kommunikationsprotokollerne og en med hardware.
+	Visuel test, med led'er. Skriv test case. Press efter fejl/ stresstest
+	Test case tabel eller skrift. Meget tung at læse, ikke prosa. 
+- Motor er skiftet ud til lego motor. 
+	Potentiometer på motor for at holde øje med hvor meget der drejes.
+	PSoC'ens ADC virker ikke, men har skrevet til Michael. Der er ikke komme svar endnu. Spørg PT.
+- Affyringsmekanisme mangler en klods. 
+	Worst case: 3D printet brik. 
+- Skriv som om det skal i rapporten
+	Tag ikke udpluk fra dokumentationen, men skriv målrettet efter en rapport. Dokumentation kommer efter
+
+- Review
+	Produktet virker ikke lige nu, men det har den gjort.
+	Mangler dokumentations afsnittene i Pivotal Tracker. 
+	De opgaver, der mangler, er tekst opgaver og ressource mangel (Print + klods)
+	Produkt mæssigt er vi godt med. 
+	Primær kommunikation er Facebook, der skrives stadig logbog.
+		Andre kører med en Facebook chat, og det er "logbogen"
+		Det er vigtigt at vi alle kommunikerer dagligt (forbedres)
+		Det er lidt spredt
+	Arbejdsdage
+		Mandag + fredag. Omkring 10 timer.
+- Scrumgame
+	Træning i scrum ved systematic
+	Kontrolleret forhold. Små opgaver
+	Hvordan virkede det og hvordan kan det overføres til projektet.
+- Eksamen
+	Man får lov til at fortælle lidt. Så bliver man afbrudt også kommer de specifikke ting
+	Man kommer over de lette spørgsmål hurtigt i en god eksamen også videre til process
+	Man skal kunne svare på lette fagtekniske spørgsmål. Hvis man ikke kan vil man få lettere spgsml => dårligere eksamen
+		Event baseret vs. tråd baseret system
+		Kobling i koden
+	Scrum mastere får scrum spørgsmål
+		Grunde til ændringer i process
+- Retrospective
+
+- Dokumentation
+	Hvilket sprog bruger vi når vi dokumenterer
+		Pas på med prosa. Sådan her er det. Det har vi lavet. Ingeniør prosa er andet end prosa.
+		Man må ikke sige at noget er større uden at sige at det er større end noget andet.
+		Man skal vurdere med fagtekniske termer
+		Analyserende, vurderende, konkluderende prosa er fint. 
+		Prioritere rapporten. Ikke ret i dokumentationen før man har et ordenligt afsnit  i rapporten.
+	- Hvilke informationer er relevante
+		Mindre prosa i SPI devkit. Lav en tegning og beskriv denne.
+			Visuelle signaler der sendes,
+			Liste over signaler og flowet
+- Rapporten generelt
+	Let præsentabel og hurtigt læst.
+	Konkrete løsninger i tabeller, ellers bliver det tungt at læse
+	Tabeller, diagrammer og tegninger 
+	OK med "forkert" SYSML notation, bare man kan udlede for det
+	- Ren C, men lave "klasse diagrammer" over funktionerne
+		Suppler med sekvensdiagrammer
+		Standard måden at implementere SPI på, man uddrager essensen af SPI
+	Rapport skal være en fornuftig længde
+		Wordcount er irrelevant, så længe mængden af tekst skal passe til antal af figurer
+		Letlæsligt => at rapporten må blive "længere"
+			Kommer til pointen
+			Små sætninger
+			Diagrammer
+	Fælles afsnit er fælles
+		Credit for implementering
+		Det er nok at der er P og S tabel, der er naturlig sammenhæng mellem implementering og dokumentering
+			Rundhåndet med S'er
+		Tabel lige efter forord eller forside
+- Størrelsen af næste sprint
+	- et stort sprint eller to små
+		Stadig have en intern deadline, hvor man skifter over til rapportskrivning
+		Om tre uger skal alt være færdigt, så skal der arbejdes på rapport.
+			Dedikeret uge til at skrive rapport
+- Review for næste sprint er accepttest
+
+
+- Næste møde: Onsdag 4/5 kl 8
+
+- Tenna er ny scrummaster
+,
