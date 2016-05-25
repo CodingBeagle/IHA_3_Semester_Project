@@ -309,6 +309,35 @@ SCLK sættes til CPHA=1 og CPOL=1. Disse er valgt arbitrært, dog ud fra den for
 'Data Rate' sættes til 1Mbps, da dette er en sikker/stabil overførselshastighed. Igen skal denne indstilling være ens for PSoC og Devkit.
 Den sidste indstilling der sættes, er 'transfer' og 'read' buffer size. Disse er valgt til at være 8-bit, da projektets SPI kommunikationsprotokol ikke har brug for størrere datamængder. Igen skal denne indstilling være ens for både SPI-master og slave.
 
+\subsubsection{Test Opstart Algoritme}
+
+På figur \ref{figure:TestStartAlgorithm} ses et aktivitetsdiagram for algoritmen som eksekverer de forskellige tests afhængig af den modtagne kommandotype fra SPI bussen.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\textwidth]{DesignOgImplementering/images/SPITestActivity}
+	\caption{Aktivitetsdiagram der viser algoritmen som bestemmer hvilket test der skal eksekveres afhængig af den modtagne kommandotype}
+	\label{figure:TestStartAlgorithm}
+\end{figure}
+
+På tabel \ref{table:SPIActivityVariables} ses en forklaring på variablerne der indgår i algoritmen.
+
+\begin{table}[H]
+	\centering
+	\begin{tabular}{|l|l|}
+		\hline
+		Variable         & Beskrivelse                                                                                                                                              \\ \hline
+		receivedBytes    & \begin{tabular}[c]{@{}l@{}}Denne variabel er et array som \\ indeholder modtagede bytes fra SPI bussen. \end{tabular}                              \\ \hline
+		totalReceivedBytes & \begin{tabular}[c]{@{}l@{}}Denne variabel indeholder antallet \\ af modtagede bytes fra SPI bussen.\end{tabular} \\ \hline
+		byteCounter & \begin{tabular}[c]{@{}l@{}}Denne variabel er en simpel \\ tæller til algoritmens for loop.\end{tabular} \\ \hline
+		commandType & \begin{tabular}[c]{@{}l@{}}Denne variabel indeholder kommandotypen \\ af den modtagede kommando.\end{tabular} \\ \hline
+	\end{tabular}
+	\caption{Variabler der indgår i aktivitetsdiagrammet figur \ref{figure:TestStartAlgorithm}}
+	\label{table:SPIActivityVariables}
+\end{table}
+
+Sekvensdiagrammet for algoritmen, figur \ref{figure:TestStartAlgorithm}, viser at algoritmen bliver eksekveret hver gang et SPI interrupt modtages. Et SPI interrupt opstår når nyt data fra SPI bussen er modtaget og klart til at blive læst fra bufferen på PSOC'en. Den første betydelige hændelse er at variablen \textit{totalReceivedBytes} bliver sat til antallet af modtagede bytes fra SPI bussen. Herefter køres et for loop igennem, hvor alle modtagede bytes fra PSOC'ens buffer bliver overført til variablen \textit{receivedBytes}. Til slut tjekkes den første af de modtagede bytes, da dette indeholder kommandotypen fra kommandoen modtaget på SPI bussen. Ud fra denne værdi bliver den korrekte test eksekveret.
+
 \subsection{I2CCommunication}
 I dette afsnit vil softwaren der omhandler I2C-kommunikation blive beskrevet. Dette inkluderer et klassediagram,  klassebeskrivelser og indstillingerne for I2C kommunikationen på PSoC'en.
 
