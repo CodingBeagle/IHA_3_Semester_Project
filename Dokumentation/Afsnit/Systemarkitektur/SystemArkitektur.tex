@@ -37,45 +37,31 @@ På figur \ref{fig:BDD} ses et \textit{Block Definition Diagram (BDD)} hvor Cand
 
 
 \subsection{Blokbeskrivelse}
-Følgende afsnit indeholder en blokbeskrivelse samt en flowspecifikation for I2C og SPI. I flowspecifikationen beskrives I2C og SPI forbindelserne mere detaljeret fra en masters synsvinkel.  I blokbeskrivelsen beskrives hver enkel blok, så man har en ide om hvad hver blok består af, hvis de består af flere ting og så skal det give et overblik over hvad hver blok skal bruges til i systemet \newline
-
-\noindent \textbf{DevKit 8000} \par
-\noindent \textit{DevKit 8000} er en embedded Linux platform med touch-skærm, der bruges til brugergrænsefladen for produktet. Brugeren interagerer med systemet og ser status for spillet via Devkit 8000. 
-
-\noindent \textbf{Wii-Nunchuck} \par
-\noindent \textit{Wii-Nunchuck} er controlleren som brugeren styrer kanonens retning med.
-
-\noindent \textbf{PSoC0} \par
-\noindent \textit{PSoC0} er PSoC hardware der indeholder software til I2C og SPI kommunikationen og afkodning af Wii-Nunchuck data. PSoC0 fungerer som I2C master og SPI slave. Denne PSoC er bindeleddet mellem brugergrænsefladen og resten af systemets hardware.
-
-\noindent \textbf{PSoC2} \par
-\noindent \textit{PSoC2} denne blok står for at sende et signal til affyringsmekanismen om at den skal skyde og så skal den også holde styre på at der kun bliver skydt en gang.
-
-\noindent \textbf{Projectile Launcher} \par
-\noindent \textit{Projectile Launcher} den blok er vores affyringsmekanismen
-
-\noindent \textbf{MotorControl} \par
-\noindent \textit{MotorControl} blokken er Candy Gun 3000's motorerer, der anvendes til at bevæge kanonen i forskellige retninger. Denne blok består af Hbro blok og rotationsbegrænsnings blokken
-
-\noindent \textbf{Motor} \par
-\noindent \textit{Motor} blokken er selv motoren 
-
-\noindent \textbf{Hbro} \par
-\noindent \textit{Hbro} blokken er vores h bro som bruges til at få mototren til at køre i begge retninger (glæder for begge h bro blokke)
-
-\noindent \textbf{rotationsbegrænsning} \par
-\noindent \textit{rotationsbegrænsning} blokken er til at styre at motoren ikke drejer 360 grader. Den består af potentiometer og ADC'en som sidder på PSoC'en (glæder for begge rotationsbegrænsning blokke)
-
-\noindent \textbf{PSoC1} \par
-\noindent \textit{PSoC1} er PSoC hardware der indeholder software til I2C kommunikatioon og styring af Candy Gun 3000's motorer. PSoC1 fungerer som I2C slave.
-
-
-\noindent \textbf{SPI (FlowSpecification)} \par
-\noindent \textit{SPI (FlowSpecification)} beskriver signalerne der indgår i \textit{SPI} kommunikation.
-
-\noindent \textbf{I2C (FlowSpecification)} \par
-\noindent \textit{I2C (FlowSpecification)} beskriver signalerne der indgår i \textit{I2C} kommunikation.
-% ---------------IBD--------------------------------------------------
+\begin{table}[H]
+	\centering
+	\begin{tabular}{|l|l|}
+		\hline
+		\textbf{Bloknavn}       & \textbf{Beskrivelse}                                                                                                                                                                                                                           \\ \hline
+		Devkit 8000             & \begin{tabular}[c]{@{}l@{}}
+			DevKit 8000 er en embedded Linux platform med touch-skærm, \\ der bruges tilbrugergrænsefladen for produktet. Brugeren inter- \\ agerer med systemet og ser status for spillet via Devkit 8000.                                                      \end{tabular} \\ \hline
+		Wii-Nunchuck            & \begin{tabular}[c]{@{}l@{}}Wii-Nunchuck er controlleren som brugeren styrer kanonens \\ retning med. \end{tabular} \\ \hline
+		PSoC0                   & \begin{tabular}[c]{@{}l@{}}PSoC0 er PSoC hardware der indeholder software til I2C og \\ SPI kommunikationen og afkodning af Wii-Nunchuck data. \\ PSoC0 fungerer som I2C masterog SPI slave. Denne PSoC er \\ bindeleddet mellem brugergrænsefladen og restenaf systemets \\ hardware. \end{tabular} \\ \hline
+		MotorControl                   & \begin{tabular}[c]{@{}l@{}}MotorControl blokken er Candy Gun 3000’s motorerer, der anvendes \\ til at bevæge kanonen. Denne blok består af H-bro blokken og \\ rotationsbegrænsnings blokken. \end{tabular} \\ \hline
+		Motor &
+		\begin{tabular}[c]{@{}l@{}}Motor er motorene der bruge til at bevæge platform og kanon. \end{tabular} \\ \hline
+		H-bro &
+		\begin{tabular}[c]{@{}l@{}}H-bro bruges til at styre mototrens rotationsretning \end{tabular} \\ \hline
+		Rotationsbegrænsning &
+		\begin{tabular}[c]{@{}l@{}}Rotationsbegrænsning er til at begrænse platformens rotation så \\ denne ikke kan dreje 360 grader. Den blok består af et potentiometer \\ og en ADC'en, som sidder internt på PSoC0  \end{tabular} \\ \hline
+		PSoC1                   & \begin{tabular}[c]{@{}l@{}}PSoC1 er PSoC hardware der indeholder software til I2C \\ kommunikation og styring af Candy Gun 3000’s motorer. \\ PSoC1 fungerer som I2C slave. \end{tabular} \\ \hline
+		SPI (FlowSpecification) &  \begin{tabular}[c]{@{}l@{}}SPI (FlowSpecification) beskriver signalerne der indgår i SPI \\ kommunikation. \end{tabular} \\ \hline
+		I2C (FlowSpecification) &  \begin{tabular}[c]{@{}l@{}}I2C (FlowSpecification) beskriver signalerne der indgår i I2C \\ kommunikation. \end{tabular} \\ \hline	
+		PSoC2  &  \begin{tabular}[c]{@{}l@{}}PSoC2 denne blok står for at sende et signal til\\ affyringsmekanismen om at den skal skyde og så skal den\\ også holde styre på at der kun bliver skydt en gang. \end{tabular} \\ \hline
+		Projectile Launcher  &  \begin{tabular}[c]{@{}l@{}}Projectile Launcher denne blok er vores affyringsmekanismen \end{tabular} \\ \hline
+	\end{tabular}
+	\label{blokbeskrivelse}
+	\caption{Blokbeskrivelse}
+\end{table} ---------------IBD--------------------------------------------------
 \section{IBD for Candygun 3000}
 På baggrund af BDD'et er der lavet et \textit{Internal Block Diagram (IBD)}. I IBD'et på figur \ref{fig:IBD} ses forbindelserne og portene mellem systemets blokke. Diagrammet viser grænsefladerne mellem blokkene og flowet i mellem disse. 
 
@@ -101,10 +87,10 @@ I signalbeskrivelsen gælder det, at når et signal beskrives som 'højt' operer
 \begin{longtable}{|>{\hspace{0pt}}p{3cm} | >{\hspace{0pt}}p{3cm} | p{2cm} | p{3cm} |}
 	\hline                                                                                                                                                         
 	\textbf{Blok-navn} & \textbf{Funktionsbeskrivelse} & \textbf{Signaler} & \textbf{Signalbeskrivelse} \\ \hline
-	Devkit 8000 & Fungerer som grænseflade mellem bruger og systemet samt SPI master. & masterSPI & Type: SPI \newline Spændingsniveau: 0-5V \newline Hastighed: ?? \newline Beskrivelse: SPI bussen hvori der sendes og modtages data.\\ \cline{3-4}
+	Devkit 8000 & Fungerer som grænseflade mellem bruger og systemet samt SPI master. & masterSPI & Type: SPI \newline Spændingsniveau: 0-5V \newline Hastighed: 1Mbps \newline Beskrivelse: SPI bussen hvori der sendes og modtages data.\\ \cline{3-4}
 	& & touch & Type: touch \newline Beskrivelse: Brugertryk på Devkit 8000 touchdisplay. \\ \hline
-	PSoC0 & Fungerer som I2C master for PSoC1 og Wii-Nunchuck samt SPI slave til Devkit 8000. & slaveSPI & Type: SPI \newline Spændingsniveau: 0-5V \newline Hastighed: ?? \newline Beskrivelse: SPI bussen hvori der sendes og modtages data.\\ \cline{3-4}
-	& & wiiMaster & Type: I2C \newline Spændingsniveau: ?? \newline Hastighed: ?? \newline Beskrivelse: I2C bussen hvor der modtages data fra Nunchuck.\\ \cline{3-4}
+	PSoC0 & Fungerer som I2C master for PSoC1 og Wii-Nunchuck samt SPI slave til Devkit 8000. & slaveSPI & Type: SPI \newline Spændingsniveau: 0-5V \newline Hastighed: 1Mbps \newline Beskrivelse: SPI bussen hvori der sendes og modtages data.\\ \cline{3-4}
+	& & wiiMaster & Type: I2C \newline Spændingsniveau: 0-5V\newline Hastighed: 100Kpbs \newline Beskrivelse: I2C bussen hvor der modtages data fra Nunchuck.\\ \cline{3-4}
 	& & motorMaster & Type: I2C \newline Spændingsniveau: 0-5V \newline Hastighed: 100kbit/sekund \newline Beskrivelse: I2C bussen hvor der sendes afkodet Nunchuck data til PSoC1.\\ \hline
 	PSoC1 & Modtager nunchuckinput fra PSoC0 og omsætter dataene til PWM signaler. & motorSlave & Type: I2C \newline Spændingsniveau: 0-5V \newline Hastighed: 100kbit/sekund \newline Beskrivelse: Indeholder formatteret Wii-Nunchuck data som omsættes til PWM-signal. \\ \cline{3-4} 
 	&& ShootISR & Type: voltage \newline Spændingsniveau: 0-5V \newline Beskrivelse:  giv et højt signal når den skal skyde.\\ \cline{3-4}   
@@ -121,8 +107,8 @@ I signalbeskrivelsen gælder det, at når et signal beskrives som 'højt' operer
 	& & potentiometer & Type: voltage \newline Spændingsniveau: 5V \newline Beskrivelse: giver Rotationsbegrænsing 5V \\ \hline
 	MotorControl & Den enhed der skal bevæge kanonen & PWM1 & Type: PWM \newline Frekvens: 3MHz \newline PWM\%: 0-100\% \newline Spædingsniveau: 0-5V \newline Beskrivelse: PWM signal til styring af motorens hastighed. \\ \cline{3-4}
 	&& PWM2 & Type: PWM \newline Frekvens: 3MHz \newline PWM\%: 0-100\% \newline Spædingsniveau: 0-5V \newline Beskrivelse: PWM signal til styring af motorens hastighed. \\ \cline{3-4}
-
-
+	
+	
 	&& PWM3 & Type: PWM \newline Frekvens: 3MHz \newline PWM\%: 0-100\% \newline Spædingsniveau: 0-5V \newline Beskrivelse: PWM signal til styring af motorens hastighed. \\ \cline{3-4}
 	&& PWM4 & Type: PWM \newline Frekvens: 3MHz \newline PWM\%: 0-100\% \newline Spædingsniveau: 0-5V \newline Beskrivelse: PWM signal til styring af motorens hastighed. \\ \cline{3-4}
 	& & motorVoltage & Type: voltage \newline Spændingsniveau: 9V \newline Beskrivelse: Strømforsyning til motoren\\ \cline{3-4}
@@ -131,19 +117,20 @@ I signalbeskrivelsen gælder det, at når et signal beskrives som 'højt' operer
 	& & PotenOut1 & Type: voltage \newline Spændingsniveau: en spænding 0V-5V alt efter hvad potentiometer står på \newline Beskrivelse: den spænding viser hvor motoren står henne\\ \cline{3-4}
 	& & PotenOut2 & Type: voltage \newline Spændingsniveau: en spænding 0V-5V alt efter hvad potentiometer står på \newline Beskrivelse: den spænding viser hvor motoren står henne
 	\\ \hline
-		Motor & Denne blok beskriver hvad motoren får. & motorvoltage & Type: voltage \newline Spændingsniveau: 0-5V  \newline Beskrivelse: giver spændning til motoren.(denne beskevelse glæder også for den anden motor) \\ \hline
+	Motor & Denne blok beskriver hvad motoren får. & motorvoltage & Type: voltage \newline Spændingsniveau: 0-5V  \newline Beskrivelse: giver spændning til motoren.(denne beskevelse glæder også for den anden motor) \\ \hline
 	Wii-nunchuck & Den fysiske controller som brugeren styrer kanonen med. & wiiSlave & Type: I2C \newline Spændingsniveau: 0-5V \newline Hastighed: 100kbit/sekund \newline Beskrivelse: Kommunikationslinje mellem PSoC1 og Wii-Nunchuck. \\ \cline{3-4}
 	& & userInput & Type: input \newline Beskrivelse: Brugerinput fra Wii-Nunchuck. \\ \hline
-	SPI & Denne blok beskriver den ikke-atomiske SPI forbindelse. & MOSI & Type: CMOS \newline Spændingsniveau: 0-5V \newline Hastighed: ?? \newline Beskrivelse: Binært data der sendes fra master til slave. \\ \cline{3-4}
-	& & MISO & Type: CMOS \newline Spændingsniveau: 0-5V \newline Hastighed: ?? \newline Beskrivelse: Binært data der sendes fra slave til master. \\ \cline{3-4}
-	& & SCLK & Type: CMOS \newline Spændingsniveau: 0-5V \newline Hastighed: ?? \newline Beskrivelse: Clock signalet fra master til slave, som bruges til at synkronisere den serielle kommunikation. \\ \cline{3-4}
-	& & SS & Type: CMOS \newline Spændingsniveau: 0-5V \newline Hastighed: ?? \newline  Beskrivelse: Slave-Select, som bruges til at bestemme hvilken slave der skal kommunikeres med. \\ \hline
-	I2C & Denne blok beskriver den ikke-atomiske I2C forbindelse. & SDA & Type: CMOS \newline Spændingsniveau: 0-5V \newline Hastighed: ?? \newline Beskrivelse: Databussen mellem I2C masteren og I2C slaver. \\ \cline{3-4}
-	& & SCL & Type: CMOS \newline Spændingsniveau: 0-5V \newline Hastighed: ?? \newline Beskrivelse: Clock signalet fra master til lyttende I2C slaver, som bruges til at synkronisere den serielle kommunikation. \\ \hline
-		PSoC2& Denne blok bindeledet mellem afyrningsmeknismen og PSoC1. & ShootISR & Type: voltage \newline Spændingsniveau: 0-5V \newline Beskrivelse:  giv et højt signal når den skal skyde.  \\ \hline
-		Projectile Launcher & Denne blok er vores afyrningsmeknismen. & PWM5 & Type: PWM \newline Spændingsniveau: 0-5V \newline Beskrivelse: giver signal til mosfet til at åbne så motoren køre en omgang. \\ \hline
+	SPI & Denne blok beskriver den ikke-atomiske SPI forbindelse. & MOSI & Type: CMOS \newline Spændingsniveau: 0-5V \newline Beskrivelse: Binært data der sendes fra master til slave. \\ \cline{3-4}
+	& & MISO & Type: CMOS \newline Spændingsniveau: 0-5V \newline Beskrivelse: Binært data der sendes fra slave til master. \\ \cline{3-4}
+	& & SCLK & Type: CMOS \newline Spændingsniveau: 0-5V \newline Hastighed: 1Mbps\newline Beskrivelse: Clock signalet fra master til slave, som bruges til at synkronisere den serielle kommunikation. \\ \cline{3-4}
+	& & SS & Type: CMOS \newline Spændingsniveau: 0-5V \newline  Beskrivelse: Slave-Select, som bruges til at bestemme hvilken slave der skal kommunikeres med. \\ \hline
+	I2C & Denne blok beskriver den ikke-atomiske I2C forbindelse. & SDA & Type: CMOS \newline Spændingsniveau: 0-5V \newline \newline Beskrivelse: Databussen mellem I2C masteren og I2C slaver. \\ \cline{3-4}
+	& & SCL & Type: CMOS \newline Spændingsniveau: 0-5V \newline Hastighed: 100kbps \newline Beskrivelse: Clock signalet fra master til lyttende I2C slaver, som bruges til at synkronisere den serielle kommunikation. \\ \hline
+	PSoC2& Denne blok bindeledet mellem afyrningsmeknismen og PSoC1. & ShootISR & Type: voltage \newline Spændingsniveau: 0-5V \newline Beskrivelse:  giv et højt signal når den skal skyde.  \\ \hline
+	Projectile Launcher & Denne blok er vores afyrningsmeknismen. & PWM5 & Type: PWM \newline Spændingsniveau: 0-5V \newline Beskrivelse: giver signal til mosfet til at åbne så motoren køre en omgang. \\ \hline
 	\caption{Tabel med signalbeskrivelse}
 \end{longtable}
+
 
 \section{Software Allokeringsdiagram}
 På figur \ref{fig:softwareAllocation} ses et software allokations diagram. Dette diagram danner et overblik over hvilke CPU'er der findes i systemet, og hvilken software der skal allokeres på disse. Følgende applikationsmodeller tager udgangspunkt i softwaren der allokeres i figuren.
