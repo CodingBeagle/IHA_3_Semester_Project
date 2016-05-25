@@ -1,7 +1,7 @@
 \chapter{Projektafgrænsning}
 \label{afsnit:Projektafgraensning}
 
-Ud fra MoSCoW-princippet er der udarbejdet en række krav efter prioriteringerne ’must have’, ’should have’, ’could have’ og ’won’t have’. Dette er for at gøre det tydeligt, hvad der er vigtigt, der bliver udviklet først, og hvad der godt kan vente til senere. Disse krav er som følger:
+Ud fra MoSCoW-princippet er der udarbejdet en række krav efter prioriteringerne \textit{must have}, \textit{should have}, \textit{could have} og \textit{won’t have}. Dette er for at gøre det tydeligt, hvilke dele af systemet der bliver udviklet først. Disse krav er som følger:
 \begin{itemize}
 	\item Produktet must have:
 	\begin{itemize}
@@ -29,8 +29,7 @@ Ud fra MoSCoW-princippet er der udarbejdet en række krav efter prioriteringerne
 	\end{itemize}
 \end{itemize}
 
-\noindent "Must Have" kravende har højst prioritering i projektet. Det vil altså sige, at kravene under punkterne ’should have’ og ’could have’ har lavere prioritet. For at kravene under punktet 'must have' er opfyldt, skal use case 2, \textit{Test Kommunikationsprotokoller} implementeres. Grunden til dette er, at use case 2 kræver at hardwareblokke er forbundet korrekt via busser, og at der er software allokeret som gør brug af kommunikationsprotokoller. Derfor blev prioriteringen i dette projekt, at use case 2 skulle implementeres til fulde, inden der kunne startes på at implementere use case 1. Det havde dog også høj prioritet at have et produkt, der fysisk kunne styres, samt skyde, hvilket betød, at selvom affyringsmekanismen ikke indgår i use case 2, blev det alligevel prioriteret højt at få implementeret denne i systemet.
-
+\noindent \textit{Must have} kravende har højst prioritering i projektet. Det vil altså sige, at kravene under punkterne \textit{should have} og \textit{could have} har lavere prioritet. For at kravene under punktet \textit{must have} er opfyldt, skal hardware for use case 1 samt hele use case 2 implementeres. Grunden til dette er, den grundlæggende kommunikation mellem udviklingsboardene er en essentiel del, idét kommunikationen er grundlaget for begge use cases.
 
 
 
