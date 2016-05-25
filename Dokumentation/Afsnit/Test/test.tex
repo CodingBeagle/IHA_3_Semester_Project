@@ -147,7 +147,7 @@ På figur \ref{fig:I2CProtocolReadNoInput} ses afmålingen af modtager-bufferen 
 
 Ud fra testen kan det konkluderes at implementeringen af I2C-protokollen fungerer efter hensigten.
 
-\subsection{Brugergrænseflade}
+\subsection{Systemtest GUI}
 DevKittet styres ved hjælp af en brugergrænseflade.
 Forløbet i brugergrænsefladen følger beskrivelsen af figur \ref{fig:stmGUI} i afsnit \ref{sec:stmDescrip}.
 
@@ -216,9 +216,11 @@ Som det ses på figur \ref{fig:GUIExit} lukkes programmet.
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=.5\textwidth]{Test/images/GUITest/TestExit.jpg}
-	\caption{Visuel respons af Exit-knap funktioalitet}
+	\caption{Visuel respons af Exit-knap funktionalitet}
 	\label{fig:GUIExit}
 \end{figure}
+
+Ud fra disse resultater af testene, fungerer dette modul efter hensigten.
 
 \subsection{Rotationsdetektor}
 TÍ tabel \ref{table:ADC_affyring_test} ses, at ADC'en virker som den skal. Den skal sende PWM-signal ud, når den får et signal, der er højere end 1500mV, og det gør den. 
