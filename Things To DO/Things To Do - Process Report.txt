@@ -1,4 +1,3 @@
--Inkluder link to vores GitHub repository
 -Skriv Forord
 -Skriv Indledning
 -Skriv konklusion
