@@ -812,8 +812,8 @@ Modstanden R2 er en pull-down-modstand. Den hjælper altså til at trække de sm
 Selve kanonen og platformen, den står på, er bygget op af to træplader og LEGO. Den ene træplade kan dreje fra side til side, således at det er muligt at sigte i den horisontale retning. Opbygningen ses på figur \ref{fig:Horisontalmekanik}. Træpladen placeres på den øverste metalskive omkring skruen, så den drejer med rundt, når motoren roterer. Rotationen er opnået ved, at skruen kan dreje frit, men stadig er holdt lodret. Det store tandhjul er boret ud i midten, og der er indsat en møtrik, så den kan skrues på skruen. Forholdet mellem det store og det mellemste tandhjul gør, at rotationshastigheden bliver gearet ned med et forhold på 1:0,6. Forholdet er fundet ved hjælp af følgende beregning: 
 
 \begin{align}
-	gearing=\frac{t_{m}}{t_{s}} \\ \nonumber
-	gearing=\frac{24}{40}=0,6
+	gearing&=\frac{t_{m}}{t_{s}} \\ \nonumber
+	gearing&=\frac{24}{40}=0,6
 \end{align}
 
 Her er $t_{m}$ antallet af tandhjul på det mellemste tandhjul og $t_{s}$ er antallet af tandhjul på det store tandhjul. 
@@ -838,12 +838,24 @@ Ligesom den vertikale styring er selve kanonen også bygget i LEGO. Den har et m
 	\label{fig:kanon}
 \end{figure}
 
+For at beregne hvor stor gearing der er mellem de forskellige tandhjul opstilles nogle beregninger. Her defineres $t_{s}$ til at være antallet af tænder på det store tandhjul, $t_{m}$ er antallet af tænder på det mellemste tandhjul og $t_{l}$ er antallet af tænder på det mindste tandhjul. På \ref{fig:kanonOppefra} ses, hvilke tandhjul der henvises til. 
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=1\textwidth]{Afsnit/DesignOgImplementering/images/kanonOppefra}
+	\caption{Kanon i LEGO set oppefra}
+	\label{fig:kanonOppefra}
+\end{figure}
+
 Forholdet mellem det mellem og lille tandhjul er fundet ved beregningen 
 
 \begin{align}
 	gearing&=\frac{t_{m}}{t_{l}} \\ \nonumber 
 	gearing&= \frac{24}{8} = 3
+	\label{gearMelLil}
 \end{align}
+
+I formel \ref{gearMelLil} er $t_{m}$ antallet af tænder på det mellemste tandhjul, og $t_{l}$ er antallet af tænder på det mindste tandhjuls tænder. 
 
 Forholdet mellem det store og det lille tandhjul er fundet ved beregningen 
 
@@ -851,6 +863,11 @@ Forholdet mellem det store og det lille tandhjul er fundet ved beregningen
 	gearing&= \frac{t_{s}}{t_{l}} \\ \nonumber 
 	gearing &= \frac{40}{8}=5
 \end{align}
+
+Her er 
+
+
+
 
 
 
