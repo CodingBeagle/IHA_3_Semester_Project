@@ -67,24 +67,6 @@ I2C Kommunikationsprotokollen beskrevet i afsnit \ref{afsnit:I2CProtokol} blev m
 
 \subsubsection{SPI Kommunikationsprotokol}
 
-\subsubsection{Rotationsdetektor}
-\begin{table}[H]
-	\centering
-	\begin{tabular}{|l|c|c|}
-		\hline
-		\textbf{Indgangssignal} & \textbf{Forventet PWM} & \textbf{Målt PWM} \\ \hline
-		0V                      & Ja                     & Ja                \\ \hline
-		1400mV                  & Ja                     & Ja                \\ \hline
-		1500mV                  & Ja                     & Ja                \\ \hline
-		1600mV                  & Nej                    & Ja                \\ \hline
-		2,2V                    & Nej                    & Ja                \\ \hline
-		2,3V                    & Nej                    & Nej               \\ \hline
-		5V                      & Nej                    & Nej               \\ \hline
-	\end{tabular}
-	\caption{Modultest af ADC}
-	\label{my-label}
-\end{table}
-
 \subsection{Modultest af Wii-Nunchuck}
 På PSoC0 er der software til aflæsning af Wii-Nunchuck input data. Følgende afsnit beskriver test af dette software.
 
@@ -300,6 +282,53 @@ Som det ses på figur \ref{fig:GUIExit} lukkes programmet.
 	\label{fig:GUIExit}
 \end{figure}
 
+\subsection{Rotationsdetektor}
+TÍ tabel \ref{table:ADC_affyring_test} ses, at ADC'en virker som den skal. Den skal sende PWM-signal ud, når den får et signal, der er højere end 1500mV, og det gør den. 
+
+\begin{table}[H]
+	\centering
+	\begin{tabular}{|l|c|c|}
+		\hline
+		\textbf{Indgangssignal} & \textbf{Forventet PWM}	& \textbf{Målt PWM} \\ \hline
+		0,5V					& Ja                     	& Ja                \\ \hline
+		1600mV					& Nej                    	& Ja                \\ \hline
+		5V 						& Nej						& Nej                \\ \hline
+	\end{tabular}
+	\caption{Modultest af ADC}
+	\label{table:ADC_affyring_test}
+\end{table}
+
+I det følgende ses screenshots fra modultesten af ADC'en brugt i affyringsmekanismen. 
+
+Det ses på figur \ref{fig:500mV}, at ADC'en udsender PWM-signal, når den får et indgangssignal på 0,5V. 
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\textwidth]{Test/images/AffyringTest/ADC/0,5V}
+	\caption{Modultest af ADC med et indgangssignal på 0,5V}
+	\label{fig:500mV}
+\end{figure}
+
+Det ses på figur \ref{fig:1600mV}, at ADC'en udsender PWM-signal, når den modtager et signal på 1,6V. 
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\textwidth]{Test/images/AffyringTest/ADC/1,6V}
+	\caption{Modultest af ADC med et indgangssignal på 1,6V}
+	\label{fig:1600mV}
+\end{figure}
+
+Det ses på \ref{fig:5V}, at ADC'en ikke udsender PWM-signal, når den får et indgangssignal på 5V. 
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\textwidth]{Test/images/AffyringTest/ADC/5V}
+	\caption{Modultest af ADC med et indgangssignal på 5V}
+	\label{fig:5V}
+\end{figure}
+
+Testen er vellykket, da det ses, at ADC'en stopper med at udsende PWM-signal, når den når en hvis grænse. 
+
 \section{Hardware}
 \subsection{H-bro} 
 
@@ -355,7 +384,7 @@ At når der blev trykket på knap 1b og 2b vil den anden kurv gå høj og den f�
 
 Man kan også på figur se at når den orange/blå går høj, så stiger den meget hurtig, grunden til den gør det var på grund af at, der er blevet sat de to transistor ind, får p mosfet, som gør at den bliver opladt hurtigere, end den ellers ville på grund af der sidder en form for kondensatorer inde i den mosfet, som skal have hjælp med at bliv opladt. Det hjælp kommer fra de transistor som er blevet sat ind før Mosfeten.  
 
-\subsection{detektor}
+\subsection{Detektor}
 
 \textbf{Formål}
 \\ Formålet med denne test er at vise at motoren ikke kan køre ud over to fast satte værdier.\\
@@ -369,16 +398,16 @@ Man kan også på figur se at når den orange/blå går høj, så stiger den meg
 
 
 \begin{itemize}
-	\item Rød firekant 1 er potentiometer
-	\item	Rød firekant 2 er h-broen på print
-	\item	Rød firekant 3 ”PSoC 1”
-	\item	Rød firekant 4 er wii nunchuck
-	\item	Rød firekant 5 er ”PSoC 0” hvor der 3 ledninger(lilla, blå og orange) som går til devkit 
-	\item Rød firekant 6 hvor der sidder pull up modstande til kommunikationen mellem ”PSoC 1” og ”PSoC 0”
-	\item	sort ledning går til ground 
-	\item	gul ledning er data mellem de forskellige module
-	\item grøn ledning er klokken
-	\item rød ledningen er spænding til h -bro
+	\item Rød firkant 1 er potentiometer
+	\item Rød firkant 2 er h-broen på print
+	\item Rød firkant 3 ”PSoC 1”
+	\item Rød firkant 4 er wii nunchuck
+	\item Rød firkant 5 er ”PSoC 0” hvor der 3 ledninger(lilla, blå og orange) som går til devkit 
+	\item Rød firkant 6 hvor der sidder pull up modstande til kommunikationen mellem ”PSoC 1” og ”PSoC 0”
+	\item Sort ledning går til ground 
+	\item Gul ledning er data mellem de forskellige moduler
+	\item Grøn ledning er clocken
+	\item Rød ledning er spænding til h-bro
 	
 \end{itemize}
 For at teste om motor kunne køre i begge retninger når den er i mellem 900mV og 2000mV og når den kommer over 2000mV eller under 900mV skal den ikke kunne køre i en af retningerne.
@@ -388,7 +417,7 @@ Første del af testen består i at tjekke om motoren kan kun køre mod venstre, 
 Andel del af testen består i at tjekke om motoren kunne køre begge vej, når potentiometeret er drejet til en værdi mellem 900mV og 2000mV. Hvor der blev set på hvilken værdi potentiometer gav og hvad ADC’en fik og en visueltest af om motoren kun kunne køre i begge retning.\\
 Tredje del består i at tjekke om motoren kan kun køre mod højre, når potentiometeret er drejet til en værdi over 2000mV. Hvor der blev set på hvilken værdi potentiometer gav og hvad ADC’en fik og en visueltest af om motoren kun kunne køre i den anden retning.\\
 \\
-\textbf{Forventet resultat }
+\textbf{Forventet resultat}
 \\Første del: at når der en værdi under 900mV bliver sendt ind, vil motoren kun kunne køre mod venstre.\\
 Anden del: at når der en værdi mellem 900mV og 2000mV bliver sendt ind, vil motoren kunne køre i begge retninger.\\
 Tredje del: at når der en værdi over 2000mV bliver sendt ind, vil motoren kun kunne køre mod højre.
@@ -443,6 +472,7 @@ Som forventet kunne motoren kun køre mod højre.
 \subsection{Rotationsdetektor}
 Der er udført en række modultests af rotationsdetektoren. Først er der en beskrivelse af testen, der skulle teste de forskellige dele i rotationsdetektorkredsløbet, både mens fotodioden modtager et lyssignal fra LED'en, og når den ikke gør. Herefter følger en beskrivelse af modultesten af det båndpasfilter, der indgår i rotationsdetektoren og til sidst er der en beskrivelse af modultesten af motorens PWM-signal. 
 
+\subsubsection{Test af relevante målepunkter på rotationsdetektor}
 På figur \ref{fig:målepunkter} ses, hvor der er målt for at teste rotationsdetektoren. 
 
 \begin{figure}[H]
@@ -452,7 +482,9 @@ På figur \ref{fig:målepunkter} ses, hvor der er målt for at teste rotationsde
 	\label{fig:målepunkter}
 \end{figure}
 
-I tabel \ref{dioderIkkeSe} ses resultaterne fra modultesten af rotationsdetektoren, når fotodioden ikke får noget lyssignal. Det ses, at det virtuelle nul fra spændingsdeleren ligger på 0,4V, og at forstærkeren fordobler signalet, hvilket var meningen. 
+\noindent \textbf{Fotodiode får ikke signal fra LED}
+
+\noindent I tabel \ref{dioderIkkeSe} ses resultaterne fra modultesten af rotationsdetektoren, når fotodioden ikke får noget lyssignal. Det ses, at det virtuelle nul fra spændingsdeleren ligger på 0,4V, og at forstærkeren fordobler signalet, hvilket var meningen. 
 
 \begin{table}[H]
 	\centering
@@ -469,7 +501,55 @@ I tabel \ref{dioderIkkeSe} ses resultaterne fra modultesten af rotationsdetektor
 	\label{dioderIkkeSe}
 \end{table}
 
-I tabel \ref{dioderSe} ses resultaterne fra modultesten af rotationsdetektoren, når fotodioden får lyssignal fra LED'en. Her ses det, at der igen er 0,4V, der hvor det var meningen, der skulle være 0,5V, så det er fint. Det ses også, at der er et PWM-signal på udgangen af PSoC'ens operationsforstærker og forstærkeren forstærker signalet, som ønsket. 
+I det følgende ses screenshots af resultater fra modultesten. 
+
+Det ses på figur \ref{fig:virt0IkkeSe}, at det virtuelle nulpunkt ligger på 0,4V. Det ligger lidt under det forventede, men det er en ubetydeligt lille forskel. 
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\textwidth]{Test/images/AffyringTest/IkkeSe/virtuelt_nul}
+	\caption{Modultest af det virtuelle nulpunkt i rotationsdetektorkredsløbet, hvor fotodioden ikke får signal fra LED'en}
+	\label{fig:virt0IkkeSe}
+\end{figure}
+
+På figur \ref{fig:spaendIkkeSe} ses det, at spændingsdeleren virker, da der er en referencespænding på 0,45V, og ønsket var, at den skulle være 0,5V. 
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\textwidth]{Test/images/AffyringTest/IkkeSe/spaendingsdeler}
+	\caption{Modultest af referencespændingen i rotationsdetektorkredsløbet, hvor fotodioden ikke får signal fra LED'en}
+	\label{fig:spaendIkkeSe}
+\end{figure}
+
+Det ses på figur \ref{udgangOpAmpIkkeSe}, at PSoC'ens operationsforstærkers udgang ligger på 0,4V, hvilket ligger meget tæt på den forventede værdi på 0,5V. Derfor er det vist, at operationsforstærkeren virker, når fotodioden ikke får signal fra LED'en. 
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\textwidth]{Test/images/AffyringTest/IkkeSe/udgang_opamp_psoc}
+	\caption{Modultest af udgangen på PSoC'ens operationsforstærkers udgang, hvor fotodioden ikke får signal fra LED'en}
+	\label{fig:udgangOpAmpIkkeSe}
+\end{figure}
+
+Det ses på figur \ref{envdetIkkeSe}, at envelopedetektoren virker, når fotodioden ikke får lyssignal, da der er målt en værdi på 0,4V, hvilket ligger meget tæt på de forventede 0,5V. 
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\textwidth]{Test/images/AffyringTest/IkkeSe/envelopedetektor}
+	\caption{Modultest af envelopedetektoren i rotationsdetekorkredsløbet, hvor fotodioden ikke får signal fra LED'en}
+	\label{fig:envdetIkkeSe}
+\end{figure}
+
+Det ses på figur \ref{udgangforstaerkerIkkeSe}, at forstærkeren virker, da der er målt 0,85V på udgangen, og den forventede værdi var 1V. De 0,15V er en ubetydelig lille forskel. 
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\textwidth]{Test/images/AffyringTest/IkkeSe/udgang_forstaerker}
+	\caption{Modultest af forstærkeren i rotationsdetekorkredsløbet, hvor fotodioden ikke får signal fra LED'en}
+	\label{fig:udgangforstaerkerIkkeSe}
+\end{figure}
+
+\noindent \textbf{Fotodiode får signal fra LED} \\
+\noindent I tabel \ref{dioderSe} ses resultaterne fra modultesten af rotationsdetektoren, når fotodioden får lyssignal fra LED'en. Her ses det, at der igen er 0,4V, der hvor det var meningen, der skulle være 0,5V, så det er fint. Det ses også, at der er et PWM-signal på udgangen af PSoC'ens operationsforstærker og forstærkeren forstærker signalet, som ønsket. 
 
 \begin{table}[H]
 	\centering
@@ -486,7 +566,55 @@ I tabel \ref{dioderSe} ses resultaterne fra modultesten af rotationsdetektoren, 
 	\label{dioderSe}
 \end{table}
 
-I tabel \ref{forstaerkerudgang} ses resultaterne fra modultesten af båndpasfilteret. 
+I det følgende ses screenshots af resultater fra modultesten. 
+
+På figur \ref{fig:virt0KanSe} ses, at det virtuelle nulpunkt virker, når fotodioden får signal fra LED'en, da spændningen ligger på 0,4V og den forventede værdi var 0,5V. 
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\textwidth]{Test/images/AffyringTest/KanSe/virtuelt_nul}
+	\caption{Modultest af det virtuelle nulpunkt, hvor fotodioden får signal fra LED'en}
+	\label{fig:virt0KanSe}
+\end{figure}
+
+Det ses på figur \ref{fig:spaendingsdelerKanSe}, at spændingsdeleren virker, da referencespændingen er målt til 0,45V og den forventede værdi var 0,5V. 
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\textwidth]{Test/images/AffyringTest/KanSe/spaendingsdeler}
+	\caption{Modultest af spændingsdeleren i rotationsdetektorkredsløbet, hvor fotodioden får signal fra LED'en}
+	\label{fig:spaendingsdelerKanSe}
+\end{figure}
+
+Det ses på figur \ref{fig:udgangOpAmpKanSe}, at udgangen på forstærkeren giver et PWM-signal, som ønsket. Det ligger dog kun på 4V, hvor den forventede værdi var på 5V. 
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\textwidth]{Test/images/AffyringTest/KanSe/udgang_opamp_psoc}
+	\caption{Modultest af udgangen på PSoC'ens operationsforstærker, hvor fotodioden får signal fra LED'en}
+	\label{fig:udgangOpAmpKanSe}
+\end{figure}
+
+Det ses på figur \ref{fig:envdetKanSe}, at envelopedetektoren virker, som den skal. Dens kondensator når at lade op til cirka 3,7V, hvorefter den ikke når at aflade, før der kommer en ny puls fra PWM-signalet. 
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\textwidth]{Test/images/AffyringTest/KanSe/envelopedetektor}
+	\caption{Modultest af rotationsdetektorens envelopedetektor, hvor fotodioden får signal fra LED'en}
+	\label{fig:envdetKanSe}
+\end{figure}
+
+På figur \ref{fig:forstaerkerudgangKanSe} ses det, at forstærkeren forstærker signalet, der kommer fra envelopedetektoren. Den fordobler det ikke, hvilket var meningen, men signalet forstærkes, og det var det, der var meningen. 
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\textwidth]{Test/images/AffyringTest/KanSe/forstaerkerudgang}
+	\caption{Modultest af udgang på forstærkeren i rotationsdetektorkredsløbet, hvor fotodioden får signal fra LED'en}
+	\label{fig:forstaerkerudgangKanSe}
+\end{figure}
+
+\noindent \textbf{Test af båndpasfilter} \\
+\noindent I tabel \ref{table:baandpasfiltertest} ses resultaterne fra modultesten af båndpasfilteret. Testen er foregået således, at værdier, der ligger tæt på afskæringsfrekvenserne, er testet. Derudover er centerværdien for filteret testet. Endelig er det testet om LED'en lyser, når der sendes en DC-værdi på 5V gennem filteret. 
 
 \begin{table}[H]
 	\centering
@@ -496,16 +624,62 @@ I tabel \ref{forstaerkerudgang} ses resultaterne fra modultesten af båndpasfilt
 		40kHz              & \multicolumn{1}{l|}{}    & 3V                  \\ \hline
 		29kHz              & \multicolumn{1}{l|}{}    & 3,9V                \\ \hline
 		10kHz              & \multicolumn{1}{l|}{}    & 4,7V                \\ \hline
-		10Hz               & \multicolumn{1}{l|}{}    & -                   \\ \hline
+		1Hz               & \multicolumn{1}{l|}{}    & -                   \\ \hline
 		5V (lyser LED?)    & Ja                       & Ja                  \\ \hline
 	\end{tabular}
-	\caption{Modultest af forstærkerudgangen}
-	\label{table:forstaerkerudgang}
+	\caption{Modultest af rotationsdetektorens båndpasfilter}
+	\label{table:baandpasfiltertest}
 \end{table}
 
-Afskæringsfrekvenserne for båndpasfilteret ligger på 15,9Hz og 31,2kHz, så hvis båndpasfilteret skulle være helt optimalt skulle alt, der ligger udenfor disse frekvenser dæmpes fuldstændig. Det ses dog i tabel \ref{forstaerkerudgang}, at det ikke helt er tilfældet. Ved 40kHz er signalet dæmpet til 3V, og ved 10kHz lader filteret alt gå igennem. Ved 10 Hz ses det, at signalet dæmpes, men der forekommer også mange spikes, som forstyrrer signalet. Derfor er der ikke indsat et tal i tabellen. 
+På figur \ref{fig:40kHz} ses det, at filteret dæmper spændingen til 3V, når der sendes en frekvens på 40kHz gennem det. Da 40kHz ligger forholdsvist tæt på lavpasfilterets afskæringsfrekvens på 31,2kHz, kunne der være valgt en højere frekvens at teste i stedet. 
 
-\section{Integrationtest - Use case 2}
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\textwidth]{Test/images/AffyringTest/BaandpasfilterTest/40kHz}
+	\caption{Modultest af båndpasfilter, hvor et signal med en frekvens på 40kHz sendes gennem filteret}
+	\label{fig:40kHz}
+\end{figure}
+
+Det ses på figur \ref{fig:29kHz}, at filteret dæmper spændingen til 3,9V, når der sendes en frekvens på 29 kHz gennem det. Da lavpasfilterets afskæringsfrekvens ligger på 31,2kHz, skulle filteret egentlig ikke dæmpe signalet her. 
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\textwidth]{Test/images/AffyringTest/BaandpasfilterTest/29kHz}
+	\caption{Modultest af båndpasfilter, hvor et signal med en frekvens på 29kHz sendes gennem filteret}
+	\label{fig:29kHz}
+\end{figure}
+
+Det ses på figur \ref{fig:10kHz}, at filteret ikke dæmper signalet ved 10kHz. Signalet ligger nemlig på 4,7V. 
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\textwidth]{Test/images/AffyringTest/BaandpasfilterTest/10kHz}
+	\caption{Modultest af båndpasfilter, hvor et signal med en frekvens på 10kHz sendes gennem filteret}
+	\label{fig:10kHz}
+\end{figure}
+
+Det ses på figur \ref{fig:1Hz}, at det er et atypisk signal, der kommer gennem filteret. 
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\textwidth]{Test/images/AffyringTest/BaandpasfilterTest/1Hz}
+	\caption{Modultest af båndpasfilter, hvor et signal med en frekvens på 1Hz sendes gennem filteret}
+	\label{fig:1Hz}
+\end{figure}
+
+Afskæringsfrekvenserne for båndpasfilteret ligger på 15,9Hz og 31,2kHz, så hvis båndpasfilteret skulle være helt optimalt skulle alt, der ligger udenfor disse frekvenser dæmpes fuldstændig. Det ses dog i tabel \ref{forstaerkerudgang}, at det ikke helt er tilfældet. Ved 40kHz er signalet dæmpet til 3V, og ved 10kHz lader filteret alt gå igennem. Ved 1Hz ses det, at signalet dæmpes, men der forekommer også mange spikes, som forstyrrer signalet. Derfor er der ikke indsat et tal i tabellen. \\
+
+\noindent \textbf{Test af LED's PWM-signal} \\
+\noindent LED'ens PWM-signal blev testet ved at måle med et oscilloskop på LED'ens indgang. Resultatet af denne test ses på \ref{fig:LED_indgang}. Det ses, at signalet ikke når helt op på 5V, men kun 4,7V, hvilket er det, der i testen af forstærkerudgangen på figur \ref{fig:10kHz} også er målt. Det ses også, at signalet har en frekvens på 9,59kHz, hvilket er tilnærmelsesvist det samme som for det indgående signal. 
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\textwidth]{Test/images/AffyringTest/LED_indgang}
+	\caption{Modultest af LED'ens PWM-signal}
+	\label{fig:LED_indgang}
+\end{figure}
+
+\section{Integrationstest - Use case 2}
 For at verificere at use case 2 fungerer når det sammensættes til en enkelt enhed, er der lavet en integrationstest. Testen er lavet ud fra et 'black-box' princip, hvilket vil sige, at der kun evalueres ud fra systemets funktionalitet, og ikke på den interne struktur.
 Testen udføres ved, at klikke på 'Start-test', og bagefter observeres udskriften på terminal-vinduet på brugergrænsefladen. På figur \ref{figure:IntegrationstestOpstilling} ses opstillingen for integrationstesten.
 
