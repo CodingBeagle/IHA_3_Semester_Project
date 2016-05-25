@@ -243,8 +243,33 @@ Denne metode venter på at slaveRead bufferen er blevet fyldt. Når dette er ske
 \subsubsection{I2C indstillinger på PSoC}
 I forbindelse med at have en I2C forbindelse på PSoC'en, er der et par indstillinger der skal sættes. Hver PSoC der gør brug af I2C, sættes til at være en "Multi-master-slave". Dette gøres for at alle I2C enheder kan gøre brug af "I2CCommunication" klassen, idét at denne indeholder funktioner for både master og slave. 
 En anden vigtig indstilling er I2C bussens 'Data Rate'. Denne er fra PSoC creators side sat til 100kbps som standard, hvilket er en passende hastighed for dette projekt.
-En hver enhed på I2C nettet skal også have en adresse. En tabel for adressefordelingen ses på tabel \ref{table:I2CAddress}
+En hver enhed på I2C nettet skal også have en adresse. En tabel for adressefordelingen ses på tabel \ref{table:I2CAddress}.
 
+\subsubsection{Send Data Algoritme}
+
+På figur \ref{figure:SendDataAlgorithm} ses et aktivitetsdiagram for algoritmen der sender bytes ud på I2C bussen.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\textwidth]{DesignOgImplementering/images/sendDataAlgorithm}
+	\caption{Sekvensdiagram der viser forløbet af \textit{sendData} metodens algoritme}
+	\label{figure:SendDataAlgorithm}
+\end{figure}
+
+Algoritmen starter når funktionen \textit{sendData} bliver eksekveret. Herefter bliver potentielt tidligere fejltilstande for I2C softwaren nulstillet. I2C Masteren forsøger herefter at starte en transaktion med den slave der er blevet angivet i funktionskaldet. Hvis slaven findes på I2C bussen, bliver kommandotypen sendt, efterfulgt af alle bytes angivet i funktionskaldets buffer.
+
+\subsubsection{Receive Data Algoritme}
+
+På figur \ref{figure:ReceiveDataAlgorithm} ses et aktivitetsdiagram for algoritmen der modtager bytes på I2C bussen.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[]{DesignOgImplementering/images/ReceiveDataAlgorithm}
+	\caption{Sekvensdiagram der viser forløbet af \textit{receiveData} metodens algoritme}
+	\label{figure:ReceiveDataAlgorithm}
+\end{figure}
+
+\noindent Algoritmen starter når funktionen \textit{receiveData} bliver eksekveret. Klienten der kalder funktionen angiver desuden en buffer ved navn \textit{receivedDataBuffer}. Denne buffer udfyldes med den modtagne I2C data. Det bliver tjekket om der er data klar til aflæsning på PSOC'ens I2C modtager buffer. Denne buffer er navngivet \textit{slaveDataBuffer} i aktivitetsdiagrammet. Hvis dette er tilfældet, bliver alle bytes fra \textit{slaveDataBuffer} overført til \textit{receivedDataBuffer}. På denne måde vil \textit{receivedDataBuffer} til slut indeholde alle bytes modtaget fra I2C bussen.
 
 \subsection{Nunchuck}
 I dette afsnit vil softwaren der specifikt omhandler kommunikationen mellem PSoC0 og Nunchucken blive beskrevet. Dette gøres vha. et klassediagram og klassebeskrivelser.
@@ -272,6 +297,35 @@ Denne metode sender et 0x00 til nunchuck'en, og derved beder nunchuck'en om at k
 Denne metode bruger PSoC Creator's I2C-API til at læse data fra nunchuck'en (data der blev klargjort fra NunchuckRequestData()). Disse data bliver derefter dekrypteret og gemt i "buffer", så de bliver tilgængelige uden for metodens scope. \newline
 
 I klassediagrammet er der en sektion kaldet "Defines". Disse Defines bruges i implementeringen til forskellige formål. \textit{PSoC0UnitAddress, PSoC1UnitAddres} og \textit{nunchuckUnitAddress} bruges til at definere adresserne for I2C-nettets slaver. \textit{NunchuckData, I2CTestRequest} og \textit{I2CTestACK} er kommando typer der bruges til at bestemme hvilken kommando type der er blevet sendt/modtaget, og hvor mange bytes der skal forventes at være gemt i databufferen (Se dokumentationen afsnit \textbf{INDSÆT REFERENCE TIL DOKUMENTATIONAFSNIT \#ref}) 
+
+\subsubsection{Nunchuck Read Data Algoritme}
+
+På figur \ref{figure:nunchuckReadDataAlgorithm} ses et aktivitetsdiagram for algoritmen der aflæser Nunchuck'ens tilstand ved at modtage dets bytes, for herefter at dekode og kalibrere dem, så værdierne kan bruges til styring og affyring af kanonen.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\textwidth]{DesignOgImplementering/images/nunchuckFlowActivity}
+	\caption{Sekvensdiagram der viser forløbet af \textit{NunchuckReadData} metodens algoritme}
+	\label{figure:nunchuckReadDataAlgorithm}
+\end{figure}
+
+På tabel \ref{table:nunchuckActivityVariables} ses variablerne der indgår i aktivitetsdiagrammet på figur \ref{figure:nunchuckReadDataAlgorithm}.
+
+\begin{table}[H]
+	\centering
+	\begin{tabular}{|l|l|}
+		\hline
+		Variable         & Beskrivelse                                                                                                                                              \\ \hline
+		HandShakeSent    & \begin{tabular}[c]{@{}l@{}}Denne variabel indikerer om\\ der er sendt et handshake til Nunchuck'en\\ eller ej.\end{tabular}                              \\ \hline
+		SendNunchuckData & \begin{tabular}[c]{@{}l@{}}Denne variabel indikerer om der er aflæst\\ data fra Nunchuck som kan videresendes\\ til PSoC1 for motorstyring.\end{tabular} \\ \hline
+	\end{tabular}
+	\caption{Variabler der indgår i aktivitetsdiagrammet figur \ref{figure:nunchuckReadDataAlgorithm}}
+	\label{table:nunchuckActivityVariables}
+\end{table}
+
+Algoritmen gentager sig selv indtil PSoC'en slukkes, så input fra Nunchuck'en konstant aflæses. Den grundlæggende idé er, at der først tjekkes på om et \textit{handshake} er sendt til Nunchuck'en eller ej, hvilket er et krav for at kunne aflæse data fra den. I tilfældet hvor det ikke er afsendt, vil algoritmen blive ved med at forsøge indtil dette lykkedes. Herefter vil algoritmen kontinuert aflæse data fra Nunchuk'en, dekode det og til sidst kalibrere det. Hvis der er en ukendt årsag ikke kan aflæses data, bliver \textit{handshakeSent} sat til false.
+
+Hvis der til slut er Nunchuck data at sende, vil denne data blive afsendt til PSoC1, og \textit{SendNunchuckData} sættes til false, så en aflæsning sker igen.
 
 \subsection{Rotationsbegrænsning}
 I forbindelse med begrænsning af motorens rotation er der nogle indstillinger der skal sættes. ADC'en skal indstilles til at gøre brug af en kanal i single mode, da der ét inputsignal fra potentiometret og denne skal bestemmes i forhold til stel. For at styre motorens bevægelse i et interval er følgende algoritme implementeret.
