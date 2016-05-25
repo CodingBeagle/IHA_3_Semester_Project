@@ -179,7 +179,7 @@ På figur \ref{fig:WiiNunchuckSequenceDiagram} ses et overordnet sekvensdiagram 
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=\textwidth]{Systemarkitektur/images/WiiNunchuckSequenceDiagram.png}
+	\includegraphics[width=\textwidth]{Systemarkitektur/images/SequenceDiagramUC1}
 	\caption{Overordnet sekvensdiagram for Wii-Nunchuck informations flow}
 	\label{fig:WiiNunchuckSequenceDiagram}
 \end{figure}
@@ -286,7 +286,7 @@ På figur \ref{fig:SystemTestOverviewSequenceDiagram} ses et overordnet sekvensd
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=\textwidth]{Systemarkitektur/images/OverordnetSekvensDiagramSystemTest}
+	\includegraphics[width=\textwidth]{Systemarkitektur/images/SequenceDiagramUC2}
 	\caption{Sekvensdiagram for Use Case 2 - Test Kommunikationsprotokoller}
 	\label{fig:SystemTestOverviewSequenceDiagram}
 \end{figure}
@@ -373,7 +373,7 @@ På figur \ref{fig:sekvensPSoC0NunchuckTest} ses sekvensdiagrammet for Wii-Nunch
 	\label{fig:klassePSoC0}
 \end{figure}
 
- 
+På figur \ref{fig:klassePSoC0} ses det endelige klassediagram, hvor metoderne er udledt af sekvensdiagrammet, figur \ref{fig:sekvensPSoC0NunchuckTest}. Her kan det ses at \textit{TCP} klassen skal kunne bede om tilbagemelding for I2C bussens slaver via \textit{I2C Interface} grænsefladen. \textit{SPI Interface} grænsefladen skal kunne starte de relevante tests for use casen, samt aflæse resultaterne.
 
 % ---------------PSoC1 Applikationsmodel-----------------------------
 \subsubsection{Applikationsmodel for Motor Control Software}
@@ -385,7 +385,12 @@ På figur \ref{fig:sekvensPSoC0NunchuckTest} ses sekvensdiagrammet for Wii-Nunch
 	\label{fig:klasseidentifikationPSoC1}
 \end{figure}
 
-Sekvensdiagrammet for PSoC1 ses på figur \ref{fig:sekvensPSoC1I2CTest}. Som forrig afsnit er kontrolklassen Test Communication Protocols, hvilket i diagrammet er forkortet til TCP. I dette tilfælde er der kun én boundaryklasse, da PSoC1, i denne use case, kun anvendes til I2C testen og derfor kun skal kommunikere med PSoC0. 
+På figur \ref{fig:klasseidentifikationPSoC1} ses klasse identifikation for Motor control Software. Der er til Motor Control Software for use case 2 identificeret to klasser: 
+\textit{Test Communication Protocol (TCP)} og \textit{I2C Interface}.
+
+\textit{TCP} er en controller. Denne klasse har til ansvar at eksekvere funktionalitet relevant til use case 2. \textit{I2C Interface} repræsenterer grænsefladen til systemets I2C bus.
+
+Sekvensdiagrammet for interaktion mellem de identificerede klasser ses på figur \ref{fig:sekvensPSoC1I2CTest}.
 
 \begin{figure}[H]
 	\centering
@@ -394,7 +399,7 @@ Sekvensdiagrammet for PSoC1 ses på figur \ref{fig:sekvensPSoC1I2CTest}. Som for
 	\label{fig:sekvensPSoC1I2CTest}
 \end{figure}
 
-På figur \ref{fig:sekvensPSoC1I2CTest} ses, at boundaryklassen, PSoC0, anmoder om respons fra kontrolklassen til at bekræfte om at I2C slaven kan kommunikeres med. Hvis dette er tilfældet sendes der I2C OK tilbage til boundaryklassen.  
+På figur \ref{fig:sekvensPSoC1I2CTest} ses det at \textit{I2C Interface} grænsefladen anmoder om respons fra \textit{TCP} klassen for at bekræfte om I2C slaven kan kommunikeres med. Hvis dette er tilfældet sendes der I2C OK tilbage til boundaryklassen.  
 
 \begin{figure}[H]
 	\centering
@@ -403,10 +408,10 @@ På figur \ref{fig:sekvensPSoC1I2CTest} ses, at boundaryklassen, PSoC0, anmoder 
 	\label{fig:klassePSoC1}
 \end{figure}
 
-Fra sekvensdiagrammet på figur \ref{fig:sekvensPSoC1I2CTest} udledes et klassediagram som ses foroven i figur \ref{fig:klassePSoC1}.
+Fra sekvensdiagrammet på figur \ref{fig:sekvensPSoC1I2CTest} udledes det endelige klassediagram som ses i figur \ref{fig:klassePSoC1}.
 
 \section{Samlede Klassediagrammer}
-På af de detaljerede applikationsmodeller for use case 1- og 2, er der udledt samlede klassediagrammer for hver individuel CPU i systemet. Disse er med til at identificere konceptuelle klasser og funktionaliter der skal overvejes i implementation og design af systemet, og har altså fungeret som et udgangspunkt til resten af udviklingsprocessen.\newline\noindent
+Fra de detaljerede applikationsmodeller for use case 1- og 2, er der udledt samlede klassediagrammer for hver individuel CPU i systemet. Disse er med til at identificere konceptuelle klasser og funktionaliter der skal overvejes i implementation og design af systemet, og har altså fungeret som et udgangspunkt til resten af udviklingsprocessen.\newline\noindent
 Figur \ref{fig:CompleteClassDiagramDevKit8000}, \ref{fig:CompleteClassDiagramPSoC0}, \ref{fig:CompleteClassDiagramPSoC1}, og \ref{fig:CompleteClassDiagramPSoC2} vises de samlede klassediagrammer for hver CPU.\newline\noindent
 For disse klassediagrammer er der konceptuelle klasser som gentager sig selv. Alle klassediagrammer har én klasse af typen \textit{controller}. Disse klasse indeholder alt funktionalitet der er nødvændig for at kunne implementere systemets Use Cases. Yderligere bliver klasserne \textit{I2C Interface} samt \textit{SPI Interface} gentaget. Disse repræsenterer klasser for de tilsvarende bustyper, I2C og SPI, og bruges af softwaren til at sende og modtage data på disse busser.\newline\noindent
 På figur \ref{fig:CompleteClassDiagramDevKit8000} ses det at DevKit8000 controlleren skal have funktionalitet til start af system test, i relation til Use Case 2. For at kunne udføre dette kommunikerer den med grænsefladen Graphical User Interface (\textit{GUI}), for at kunne vise resultater til brugeren. Desuden skal controlleren kommunikere med grænsefladen \textit{SPI Interface}, for at sende data ud til til resten af systemet via SPI bussen.
