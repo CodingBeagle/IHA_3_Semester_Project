@@ -1,3 +1,2 @@
 -Systemarkitektur
-   -Opdater BDD fra dokumentation
    -Skriv tekst til overordnede sekvensdiagrammer

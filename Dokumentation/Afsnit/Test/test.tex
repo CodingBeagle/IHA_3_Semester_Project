@@ -6,40 +6,37 @@ Ved modultests blev én funktionalitet testet isoleret. Det vil sige med så lid
 Til modultest af software er der gjort brug af white-box testing. Dette er gjort, da softwaren ligger tæt op ad hardwaren til kommunikationsbusserne, hvilket kræver teknisk viden om den interne struktur for både hardware og software.
 
 \subsection{Modultest af Wii-Nunchuck}
-På PSoC0 er der software til aflæsning af Wii-Nunchuck input data. Følgende afsnit beskriver test af dette software.
+På PSoC0 er der software til aflæsning af Wii-Nunchuck input data. Følgende afsnit beskriver test af dette software.\newline
 
-Aflæsning af Wii-Nunchuck sker i to skridt, som begge verificeres ved modul test. Først skal der sendes et \textit{Handshake} fra PSoC0 til Wii-Nunchuck for at initialisere data udveksling, og herefter sker data udveksling hver gang PSoC0 sender en anmodning om det. Disse to skridt modultestes her.
+\noindent Aflæsning af Wii-Nunchuck sker i to skridt, som begge verificeres ved modul test. Først skal der sendes et \textit{Handshake} fra PSoC0 til Wii-Nunchuck for at initialisere data udveksling, og herefter sker data udveksling hver gang PSoC0 sender en anmodning om det. Disse to skridt modultestes her.\newline
 
-\textbf{Test af Wii-Nunchuck Handshake}
 
-\textbf{Test af data udveksling mellem PSoC0 og Wii-Nunchuck} 
+\noindent PSoC0 blev programmeret til kontinuert aflæsning af Wii-Nunchuck. For at verificere data udveksling mellem PSoC0 og Wii-Nunchuck blev I2C bussen målt ved brug af Logic Analyzer fra Analog Discovery. \newline
 
-PSoC0 blev programmeret til kontinuert aflæsning af Wii-Nunchuck. For at verificere data udveksling mellem PSoC0 og Wii-Nunchuck blev I2C bussen målt ved brug af Logic Analyzer fra Analog Discovery.
+\noindent Data udveksling sker i to skridt. Først sender PSoC0 en byte med værdien 0 (0x00 i hexadecimal). Herefter sker den faktiske aflæsning, PSoC0 aflæser Wii-Nunchuck. Begge skridt testes her.
 
-Data udveksling sker i to skridt. Først sender PSoC0 en byte med værdien 0 (0x00 i hexadecimal). Herefter sker den faktiske aflæsning, PSoC0 aflæser Wii-Nunchuck. Begge skridt testes her.
 
-\textbf{Afsendelse af 0x00 byte}
-
-Den første forventede I2C besked er en \textit{0x00} byte fra PSoC0 for at starte en ny aflæsning. På figur \ref{fig:NunchuckWriteValues} ses aflæsningen af I2C bussen på tidspunktet hvor anmodningen til Wii-Nunchuck bliver udført. Dette er en tidslinje læst fra ventre til højre.
+\noindent\textbf{Test af Wii-Nunchuck Handshake}\newline
+\noindent Den første forventede I2C besked er en \textit{0x00} byte fra PSoC0 for at starte en ny aflæsning. På figur \ref{fig:NunchuckWriteValues} ses aflæsningen af I2C bussen på tidspunktet hvor anmodningen til Wii-Nunchuck bliver udført. Dette er en tidslinje læst fra ventre til højre.\newline
 
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=\textwidth]{Test/images/writerequest}
-	\caption{}
+	\caption{Aflæsning af I2C kommunikation mellem PSoC0 og Nunchuck}
 	\label{fig:NunchuckWriteValues}
 \end{figure}
 
-Det kan på figur \ref{fig:NunchuckWriteValues} ses at den første besked der måles er af typen "WR" (Write) til addressen 0x52 (Wii-Nunchuck I2C Slave Addressen). Hertil kommer et tilhørende \textit{ACK} (Acknowledge) fra Wii-Nunchuck. Til sidst sendes dataen Ox00 efterfulgt af at ACK fra Wii-Nunchuck. Til sidst afsluttes I2C transaktionen ved "Stop".
+\noindent Det kan på figur \ref{fig:NunchuckWriteValues} ses at den første besked der måles er af typen "WR" (Write) til addressen 0x52 (Wii-Nunchuck I2C Slave Addressen). Hertil kommer et tilhørende \textit{ACK} (Acknowledge) fra Wii-Nunchuck. Til sidst sendes dataen Ox00 efterfulgt af at ACK fra Wii-Nunchuck. Til sidst afsluttes I2C transaktionen ved "Stop".\newline
 
-Det kan altså konkluderes at målingen er i overensstemmelse med forventningen om at en 0x00 byte skal sendes til Wii-Nunchuck for opstart af dataudveksling.
+\noindent Det kan altså konkluderes at målingen er i overensstemmelse med forventningen om at en 0x00 byte skal sendes til Wii-Nunchuck for opstart af dataudveksling.\newline
 
-\textbf{Aflæsning af Wii-Nunchuck}
 
-Efter vellykket afsendelse af 0x00 byten sker den egentlige aflæsning af Wii-Nunchuk input dataen.
+\noindent\textbf{Aflæsning af Wii-Nunchuck}\newline
+\noindent Efter vellykket afsendelse af 0x00 byten sker den egentlige aflæsning af Wii-Nunchuk input dataen.\newline
 
-Her forventes en række beskeder indeholdende 
+\noindent Her forventes en række databytes i intervallerne beskrevet i bilag \#ref \cite{Nunchuck} \newline
 
-På figur \ref{fig:NunchuckReadValues} ses I2C beskederne der bliver udvekslet mellem PSoC0 og Wii-Nunchuck efter vellykket Wii-Nunchuck Handshake. 
+\noindent På figur \ref{fig:NunchuckReadValues} ses I2C beskederne der bliver udvekslet mellem PSoC0 og Wii-Nunchuck efter vellykket Wii-Nunchuck Handshake. \newline
 
 \begin{figure}[H]
 	\centering
@@ -47,6 +44,10 @@ På figur \ref{fig:NunchuckReadValues} ses I2C beskederne der bliver udvekslet m
 	\caption{Tidslinje af aflæste I2C beskeder af PSoC0 fra Wii-Nunchuck}
 	\label{fig:NunchuckReadValues}
 \end{figure}
+
+\noindent På figur \ref{fig:NunchuckReadValues} ses logic analyzerens aflæsning af returværdierne fra Nunchucken. Disse værdier blev alle aflæst til at stemme overens med det forventede resultat.\newline
+
+\noindent Ud fra disse to modultests, er det konkluderet at dette modul fungerer efter hensigten. \newline 
 
 \subsection{SPI Protokol}
 Devkittet kommunikerer over en SPI bus. Kommunikationen følger SPI kommunikations protokollen, som er beskrevet i afsnit \ref{afsnit:spiprotokol}. Dette afsnit beskriver test af denne protokol.
