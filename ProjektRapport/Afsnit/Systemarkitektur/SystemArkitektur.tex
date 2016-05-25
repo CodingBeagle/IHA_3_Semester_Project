@@ -82,7 +82,9 @@ På figur \ref{figure:ibdDiagram} ses IBD'et for systemet. Figuren viser hardwar
 
 Her vises alle hardwareblokke med de fysiske forbindelser beskrevet i BDD'et (figur \ref{figure:bddDiagram}). 
 
-Det ses at systemet bliver påvirket af tre eksterne signaler: \textit{touch}, \textit{input}, samt \textit{voltage}. \textit{touch} er input fra brugeren når der interageres med brugergrænsefladen. \textit{input} er brugerens interaktion med Wii-Nunchuk. \textit{voltage} er forsyningsspænding til systemet.
+Det ses, at systemet bliver påvirket af tre eksterne signaler: \textit{touch}, \textit{input}, samt \textit{voltage}. \textit{touch} er input fra brugeren når der interageres med brugergrænsefladen. \textit{input} er brugerens interaktion med Wii-Nunchuk. \textit{voltage} er forsyningsspænding til systemet.
+
+I tabel \ref{table:signalbeskrivelse} ses beskrivelser af alle signaler i systemet. For uddybende IBD'er over motorstyring og affyringsmekanisme ses \#ref{dokumentation, systemarkitektur, IBD'er}. 
 
 \newpage
 \subsection{Signalbeskrivelse}
@@ -128,9 +130,29 @@ Det ses at systemet bliver påvirket af tre eksterne signaler: \textit{touch}, \
 	& & SS & Type: CMOS \newline Spændingsniveau: 0-5V \newline  Beskrivelse: Slave-Select, som bruges til at bestemme hvilken slave der skal kommunikeres med. \\ \hline
 	I2C & Denne blok beskriver den ikke-atomiske I2C forbindelse. & SDA & Type: CMOS \newline Spændingsniveau: 0-5V \newline \newline Beskrivelse: Databussen mellem I2C masteren og I2C slaver. \\ \cline{3-4}
 	& & SCL & Type: CMOS \newline Spændingsniveau: 0-5V \newline Hastighed: 100kbps \newline Beskrivelse: Clock signalet fra master til lyttende I2C slaver, som bruges til at synkronisere den serielle kommunikation. \\ \hline
-	PSoC2& Denne blok bindeledet mellem afyrningsmeknismen og PSoC1. & ShootISR & Type: voltage \newline Spændingsniveau: 0-5V \newline Beskrivelse:  giv et højt signal når den skal skyde.  \\ \hline
-	Projectile Launcher & Denne blok er vores afyrningsmeknismen. & PWM5 & Type: PWM \newline Spændingsniveau: 0-5V \newline Beskrivelse: giver signal til mosfet til at åbne så motoren køre en omgang. \\ \hline
-	\caption{Tabel med signalbeskrivelse}
+	Projectile Launcher & Denne blok består blokkene PSoC2, Detector og Motor Control Shoot & shootISR & Type: Voltage \newline Spændingsniveau: 0-5V \newline \newline Beskrivelse: Giv et højt signal, når kanonen skal skyde. \\ \cline{3-4}
+	& & motorVoltage & Type: Voltage \newline Spændingsniveau: 9V \newline Beskrivelse: Strømforsyning til motor.  \\ \hline
+	
+	PSoC2 & Aflæser signaler fra rotationsdetektor og udsender PWM-signal til LED og Motor Shoot. & ADCin & Type: Voltage \newline Spændingsniveau: 0,5-5V \newline  \newline Beskrivelse: Rotationsdektors output som aflæses af ADC på PSoC2.  \\ \cline{3-4}
+	& & shootISR & Type: Voltage \newline Spændingsniveau: 0-5V \newline Beskrivelse: Giver et højt signal, når motoren skal skyde. \\ \cline{3-4}
+	& & opAmpP & Type: Voltage \newline Spændingsniveau: 0,5V \newline Beskrivelse: Referencespænding til operationsforstærkerens positive indgang. \\ \cline{3-4}
+	& & opAmpM & Type: Voltage \newline Spændingsniveau: 0,5V \newline Beskrivelse: Virtuelt nul. Den ligger altid på 0,5V pga. negativ feedback på operationsforstærkeren. \\ \cline{3-4}
+	& & opAmpOut & Type: Voltage \newline Spændingsniveau: 0,5-5V \newline Beskrivelse: Udgang på operationsforstærker i rotationsdetektorkredsløbet. \\ \cline{3-4}
+	& & PWMLED & Type: PWM \newline Spændingsniveau: 0-5V \newline Frekvens: 10kHz \newline PWM\%: 0-100\% \newline Beskrivelse: Udsender PWM-signal til LED'en i rotationsdetektorkredsløbet. \\ \cline{3-4}
+	& & PWMMotor & Type: PWM \newline Spændingsniveau: 0-5V \newline Frekvens: 33,33kHz \newline PWM\%: 0-100\% \newline Beskrivelse: Udsender PWM-signal til LED'en i rotationsdetektorkredsløbet. \\ \hline
+	
+	Detector & Rotationsdetektoren detekterer om der er skudt. & opAmpP & Type: Voltage \newline Spændingsniveau: 0,5V \newline Beskrivelse: Referencespænding til operationsforstærkerens positive indgang. \\ \cline{3-4}
+	& & opAmpM & Type: Voltage \newline Spændingsniveau: 0,5V \newline Beskrivelse: Virtuelt nul. Den ligger altid på 0,5V pga. negativ feedback på operationsforstærkeren. \\ \cline{3-4}
+	& & opAmpOut & Type: Voltage \newline Spændingsniveau: 0,5-5V \newline Beskrivelse: Udgang på operationsforstærker i rotationsdetektorkredsløbet. \\ \cline{3-4}
+	& & ADCin & Type: Voltage \newline Spændingsniveau: 0,5-5V \newline  \newline Beskrivelse: Rotationsdektors output som aflæses af ADC på PSoC2.  \\ \cline{3-4}
+	& & PWMLED & Type: PWM \newline Spændingsniveau: 0-5V \newline Frekvens: 10kHz \newline PWM\%: 0-100\% \newline Beskrivelse: Udsender PWM-signal til LED'en i rotationsdetektorkredsløbet. \\ \hline
+	
+	Motor Control Shoot & Denne blok styrer Motor Shoot til affyringsmekanismen. & PWMMotor & Type: PWM \newline Spændingsniveau: 0-5V \newline Frekvens: 33,33kHz \newline PWM\%: 0-100\% \newline Beskrivelse: Udsender PWM-signal til LED'en i rotationsdetektorkredsløbet. \\ \cline{3-4}
+	& & motorVoltage & Type: Voltage \newline Spændingsniveau: 9V \newline Beskrivelse: Strømforsyning til motor. \\ \hline 
+	
+	Motor Shoot & Denne blok er affyringsmekanismens motor. & motorVoltage & Type: Voltage \newline Spændingsniveau: 9V \newline Beskrivelse: Strømforsyning til motor. \\ \hline
+	\caption{Signalbeskrivelse}
+	\label{table:signalbeskrivelse}
 \end{longtable}
 
 
