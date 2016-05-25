@@ -253,7 +253,11 @@ På figur \ref{fig:klasseUC1PSoC1} ses et endeligt klassediagram, hvor metoderne
 	\label{fig:klasseidentifikationUC1PSoC2}
 \end{figure}
 
-På figur \ref{fig:klasseidentifikationUC1PSoC2} ses klasse identifikation for Projectile Launcher Software. Der er til Projectile Launcher Software for use case 1 identificeret tre klasser: \textit{UC1}, \textit{PSoC1}, 
+På figur \ref{fig:klasseidentifikationUC1PSoC2} ses klasse identifikation for Projectile Launcher Software. Der er til Projectile Launcher Software for use case 1 identificeret tre klasser: \textit{UC1}, \textit{PSoC1} og \textit{Projectile Launcher}.
+
+\textit{UC1} er en controller. Denne klasse har til ansvar at eksekvere funktionaliteten relevant til use case 1. \textit{PSoC1} repræsenterer en grænseflade til PSoC1. \textit{Projectile Launcher} repræsenterer en grænseflade til affyringsmekanismen.
+
+På figur \ref{fig:sekvensUC1PSoC2} ses et sekvensdiagram der viser klassernes interaktion. Her kan det ses at PSoC1 sender et signal til controlleren når der skal affyres et skud. Når dette signal er modtaget, bliver et aktiverings signal sendt ud til affyringsmekanismen.
 
 \begin{figure}[H]
 	\centering
@@ -261,6 +265,8 @@ På figur \ref{fig:klasseidentifikationUC1PSoC2} ses klasse identifikation for P
 	\caption{Sekvensdiagram for PSoC2}
 	\label{fig:sekvensUC1PSoC2}
 \end{figure}
+
+På figur \ref{fig:klasseUC1PSoC2} ses det endelige klassediagram, hvor metoderne er udledt fra sekvensdiagrammet, figur \ref{fig:sekvensUC1PSoC2}. Det kan her ses \textit{PSoC1} grænsefladen skal kunne sende en affyringsbesked til \textit{UC1}. \textit{UC1} skal derefter kunne aktivere affyringsmekanismen. 
 
 \begin{figure}[H]
 	\centering
