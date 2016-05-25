@@ -57,14 +57,16 @@ Figur \ref{fig:BDD} skal give et overblik over hvordan  relationerne mellem de f
 		Rotationsbegrænsning &
 		\begin{tabular}[c]{@{}l@{}}Rotationsbegrænsning er til at begrænse platformens rotation så \\ denne ikke kan dreje 360 grader. Den blok består af et potentiometer \\ og en ADC'en, som sidder internt på PSoC0  \end{tabular} \\ \hline
 		PSoC1                   & \begin{tabular}[c]{@{}l@{}}PSoC1 er PSoC hardware der indeholder software til I2C \\ kommunikation og styring af Candy Gun 3000’s motorer. \\ PSoC1 fungerer som I2C slave. \end{tabular} \\ \hline
+		Projectile Launcher  &  \begin{tabular}[c]{@{}l@{}}Projectile Launcher denne blok er vores affyringsmekanismen \end{tabular} \\ \hline
+		PSoC2  &  \begin{tabular}[c]{@{}l@{}}PSoC2 denne blok står for at sende et signal til\\ affyringsmekanismen om at den skal skyde og så skal den\\ også holde styre på at der kun bliver skydt en gang. \end{tabular} \\ \hline
 		SPI (FlowSpecification) &  \begin{tabular}[c]{@{}l@{}}SPI (FlowSpecification) beskriver signalerne der indgår i SPI \\ kommunikation. \end{tabular} \\ \hline
 		I2C (FlowSpecification) &  \begin{tabular}[c]{@{}l@{}}I2C (FlowSpecification) beskriver signalerne der indgår i I2C \\ kommunikation. \end{tabular} \\ \hline	
-		PSoC2  &  \begin{tabular}[c]{@{}l@{}}PSoC2 denne blok står for at sende et signal til\\ affyringsmekanismen om at den skal skyde og så skal den\\ også holde styre på at der kun bliver skydt en gang. \end{tabular} \\ \hline
-		Projectile Launcher  &  \begin{tabular}[c]{@{}l@{}}Projectile Launcher denne blok er vores affyringsmekanismen \end{tabular} \\ \hline
 	\end{tabular}
 	\label{blokbeskrivelse}
 	\caption{Blokbeskrivelse}
-\end{table} ---------------IBD--------------------------------------------------
+\end{table} 
+
+%---------------IBD--------------------------------------------------
 \section{IBD for Candygun 3000}
 På baggrund af BDD'et er der lavet et \textit{Internal Block Diagram (IBD)}. I IBD'et på figur \ref{fig:IBD} ses forbindelserne og portene mellem systemets blokke. Diagrammet viser grænsefladerne mellem blokkene og flowet i mellem disse. 
 
