@@ -1,21 +1,21 @@
 \chapter{Systemarkitektur}
-
-Dette afsnit præsenterer systemets arkitektur i en grad der gør det muligt at forstå sammensætningen mellem dets hardware og software komponenter.
+Dette afsnit præsenterer systemets arkitektur i en grad der gør det muligt at forstå sammensætningen mellem dets hardware og software komponenter. En mere detaljeret beskrivelse for systemarkitekturen, er dokumenteret i dokumentationen afsnit 3 - \textit{Systemarkitektur}
 
 \section{Domænemodel}
-
 På figur \ref{figure:domainModel} ses domænemodellen af systemet. Denne har til formål at præsentere forbindelserne mellem systemets komponenter, samt dets grænseflader.
 
 \begin{figure}[H]
-	\centering
-	\includegraphics[width=\textwidth]{SystemArkitektur/images/domainModel}
-	\caption{Systemets domænemodel}
-	\label{figure:domainModel}
+	\begin{adjustwidth}{-2cm}{-\rightmargin}
+		\centering
+		\includegraphics[width=0.75\paperwidth]{SystemArkitektur/images/domainModel}
+		\caption{Systemets domænemodel}
+		\label{figure:domainModel}
+	\end{adjustwidth}
 \end{figure}
 
-\noindent Her repræsenteres hardware som blokke forbundet med associeringer. Associeringerne viser grænsefladerne mellem de forbundne hardware komponenter (Enten \textit{SPI} eller \textit{I2C}), samt retningen af kommunikationen. Af modellen fremstår konceptuelle kommandoer for grænsefladerne, som beskriver deres nødvændige attributter. \newline
+\noindent Her repræsenteres hardware som blokke forbundet med associeringer. Associeringerne viser grænsefladerne mellem de forbundne hardware komponenter, samt retningen af kommunikationen. Af modellen fremstår konceptuelle kommandoer for grænsefladerne, som beskriver deres nødvendige attributter. \newline
 
-\noindent Domænemodellen er brugt til at udlede grænseflader for systemet, samt potentielle hardware- og softwarekomponenter. Hvad der er udledt af domænemodellen i forhold til grænseflader og komponenter, og hvordan dette bruges omdiskuteres i de følgende arkitektur afsnit.
+\noindent Domænemodellen er brugt til at udlede grænseflader for systemet, samt potentielle hardware- og softwarekomponenter. Hvad der er udledt af domænemodellen i forhold til grænseflader og komponenter, og hvordan dette bruges, omdiskuteres i de følgende arkitektur afsnit. Den fulde beskrivelse af domænemodellen ses i dokumentationen afsnit 3.1-\textit{Domænemodel} side \#ref
 
 \section{Hardware}
 
@@ -32,10 +32,10 @@ På figur \ref{figure:bddDiagram} ses BDD'et for systemet.
 	\end{adjustwidth}
 \end{figure}
 
-\noindent På figur \ref{figure:bddDiagram} vises alle hardwareblokke fra domænemodellen (figur \ref{figure:domainModel}) med nødvændige indgange og udgange for de fysiske signaler. Yderligere ses det at flow specifikationer er defineret for de ikke-atomare forbindelser \textit{I2C} samt \textit{SPI}, da disse er busser bestående af flere forbindelser. Der henvises til \textbf{IBD AFSNIT} for en detaljeret model af de fysiske forbindelser mellem hardwareblokkende.
+\noindent På figur \ref{figure:bddDiagram} vises alle hardwareblokke fra domænemodellen (figur \ref{figure:domainModel}) med nødvendige indgange og udgange for de fysiske signaler. Yderligere ses det at flow specifikationer er defineret for de ikke-atomare forbindelser \textit{I2C}\cite{i2cbus} \cite{I2C} og \textit{SPI} \cite{spibus}, da disse er busser bestående af flere forbindelser.
 
 \subsection{Blokbeskrivelse}
-Følgende afsnit indeholder en blokbeskrivelse samt en flowspecifikation for I2C og SPI. I flowspecifikationen beskrives I2C og SPI forbindelserne mere detaljeret fra en masters synsvinkel.  I blokbeskrivelsen beskrives hver enkel blok, så man har en ide om hvad hver blok består af, hvis de består af flere ting og så skal det give et overblik over hvad hver blok skal bruges til i systemet \newline \newline
+Følgende afsnit indeholder en blokbeskrivelse samt en flowspecifikation for I2C og SPI. I flowspecifikationen beskrives signalerne for I2C og SPI busserne.  I blokbeskrivelsen beskrives hver enkel blok, så man har en ide om hvad hver blok består af, hvis de består af flere ting og så skal det give et overblik over hvad hver blok skal bruges til i systemet \newline \newline
 
 \begin{table}[H]
 	\centering
@@ -45,7 +45,7 @@ Følgende afsnit indeholder en blokbeskrivelse samt en flowspecifikation for I2C
 		Devkit 8000             & \begin{tabular}[c]{@{}l@{}}
 		 DevKit 8000 er en embedded Linux platform med touch-skærm, \\ der bruges tilbrugergrænsefladen for produktet. Brugeren inter- \\ agerer med systemet og ser status for spillet via Devkit 8000.                                                      \end{tabular} \\ \hline
 		Wii-Nunchuck            & \begin{tabular}[c]{@{}l@{}}Wii-Nunchuck er controlleren som brugeren styrer kanonens \\ retning med. \end{tabular} \\ \hline
-		PSoC0                   & \begin{tabular}[c]{@{}l@{}}PSoC0 er PSoC hardware der indeholder software til I2C og \\ SPI kommunikationen og afkodning af Wii-Nunchuck data. \\ PSoC0 fungerer som I2C masterog SPI slave. Denne PSoC er \\ bindeleddet mellem brugergrænsefladen og restenaf systemets \\ hardware. \end{tabular} \\ \hline
+		PSoC0                   & \begin{tabular}[c]{@{}l@{}}PSoC0 er PSoC hardware der indeholder software til I2C og \\ SPI kommunikationen og afkodning af Wii-Nunchuck data. \\ PSoC0 fungerer som I2C master og SPI slave. Denne PSoC er \\ bindeleddet mellem brugergrænsefladen og restenaf systemets \\ hardware. \end{tabular} \\ \hline
 		MotorControl                   & \begin{tabular}[c]{@{}l@{}}MotorControl blokken er Candy Gun 3000’s motorerer, der anvendes \\ til at bevæge kanonen. Denne blok består af H-bro blokken og \\ rotationsbegrænsnings blokken. \end{tabular} \\ \hline
 		Motor &
 		\begin{tabular}[c]{@{}l@{}}Motor er motorene der bruge til at bevæge platform og kanon. \end{tabular} \\ \hline
@@ -54,8 +54,8 @@ Følgende afsnit indeholder en blokbeskrivelse samt en flowspecifikation for I2C
 		Rotationsbegrænsning &
 		\begin{tabular}[c]{@{}l@{}}Rotationsbegrænsning er til at begrænse platformens rotation så \\ denne ikke kan dreje 360 grader. Den blok består af et potentiometer \\ og en ADC'en, som sidder internt på PSoC0  \end{tabular} \\ \hline
 		PSoC1                   & \begin{tabular}[c]{@{}l@{}}PSoC1 er PSoC hardware der indeholder software til I2C \\ kommunikation og styring af Candy Gun 3000’s motorer. \\ PSoC1 fungerer som I2C slave. \end{tabular} \\ \hline
-		SPI (FlowSpecification) &  \begin{tabular}[c]{@{}l@{}}SPI (FlowSpecification) beskriver signalerne der indgår i SPI \\ kommunikation. \end{tabular} \\ \hline
-		I2C (FlowSpecification) &  \begin{tabular}[c]{@{}l@{}}I2C (FlowSpecification) beskriver signalerne der indgår i I2C \\ kommunikation. \end{tabular} \\ \hline	
+		SPI (FlowSpecification) &  \begin{tabular}[c]{@{}l@{}}SPI (FlowSpecification) beskriver signalerne der indgår i SPI \\ bussen. En fuld beskrivelse af bussen kan ses i dokumentationen \\ afsnit 3.7.1-\textit{SPI Protokol} side \#ref \end{tabular} \\ \hline
+		I2C (FlowSpecification) &  \begin{tabular}[c]{@{}l@{}}I2C (FlowSpecification) beskriver signalerne der indgår i I2C \\ bussen. En fuld beskrivelse af bussen kan ses i dokumentationen \\ afsnit 3.7.2-\textit{I2C Protokol} side \#ref \end{tabular} \\ \hline	
 		Projectile Launcher  &  \begin{tabular}[c]{@{}l@{}} Affyringsmekanismen indeholder PSoC2, Motor Control Shoot, \\ Motor Shoot og Rotation Detector og sørger dermed for \\ affyring af kanonen.  \end{tabular} \\ \hline
 		PSoC2  & \begin{tabular}[c]{@{}l@{}} PSoC2 indeholder en operationsforstærker til rotations-\\detektorkredsløbet, en ADC som aflæser rotationsdetektoren. \\ Derudover står den for at sende PWM-signaler til LED'en \\ i rotationsdetektoren og til motorstyringsblokken.   \end{tabular} \\ \hline
 		Motor Control Shoot  &  \begin{tabular}[c]{@{}l@{}} Denne blok står for at styre affyringsmekanismens motor.  \end{tabular} \\ \hline
@@ -63,7 +63,7 @@ Følgende afsnit indeholder en blokbeskrivelse samt en flowspecifikation for I2C
 		Rotation Detector  &  \begin{tabular}[c]{@{}l@{}} Rotationsdetekoren detekterer, at der er blevet affyret et stykke \\ slik og sender et signal til PSoC2 om dette. \end{tabular} \\ \hline
 	\end{tabular}
 	\label{blokbeskrivelse}
-	\caption{Blokbeskrivelse}
+	\caption{Blokbeskrivelse for BDD'et}
 \end{table}
 
 \subsection{IBD}
@@ -78,13 +78,11 @@ På figur \ref{figure:ibdDiagram} ses IBD'et for systemet. Figuren viser hardwar
 	\caption{IBD af systemets hardware}
 	\label{figure:ibdDiagram}
 	\end{adjustwidth}
-\end{figure}
+\end{figure} 
 
-På figur \ref{fig:ibdDiagram} vises alle hardwareblokke med de fysiske forbindelser beskrevet i BDD'et (figur \ref{figure:bddDiagram}). 
+\noindent Det ses, at systemet bliver påvirket af tre eksterne signaler: \textit{touch}, \textit{input}, samt \textit{voltage}. \textit{touch} er input fra brugeren når der interageres med brugergrænsefladen. \textit{input} er brugerens interaktion med Wii-Nunchuk. \textit{voltage} er forsyningsspænding til systemet.\newline
 
-Det ses, at systemet bliver påvirket af tre eksterne signaler: \textit{touch}, \textit{input}, samt \textit{voltage}. \textit{touch} er input fra brugeren når der interageres med brugergrænsefladen. \textit{input} er brugerens interaktion med Wii-Nunchuk. \textit{voltage} er forsyningsspænding til systemet.
-
-I tabel \ref{table:signalbeskrivelse} ses beskrivelser af alle signaler i systemet. For uddybende IBD'er over motorstyring og affyringsmekanisme ses \#ref{dokumentation, systemarkitektur, IBD'er}. 
+\noindent I tabel \ref{table:signalbeskrivelse} ses beskrivelser af alle signaler i systemet. Et mere detaljeret IBD for hardware enhederne \textit{Projectile Launcher} og \textit{Motor Control} kan ses i dokumentationen afsnit 3.3-\textit{IBD for Candy Gun 3000} side \#ref. 
 
 \newpage
 \subsection{Signalbeskrivelse}
@@ -161,7 +159,7 @@ I tabel \ref{table:signalbeskrivelse} ses beskrivelser af alle signaler i system
 \subsection{Software Allokering}
 \label{afsnit:SoftwareAllokering}
 
-Domænemodellen i figur \ref{figure:domainModel}, side \pageref{figure:domainModel}, præsenterer systemets hardwareblokke. På figur \ref{figure:allocationDiagram} ses et software allokeringsdiagram, som viser hvilke hardwareblokke der har softwaredele af systemet allokeret på sig. 
+Domænemodellen i figur \ref{figure:domainModel}, side \pageref{figure:domainModel}, præsenterer systemets hardwareblokke. På figur \ref{figure:allocationDiagram} ses et software allokeringsdiagram, som viser hvilke hardwareblokke hvorpå der er allokeret software. 
 
 \begin{figure}[H]
 	\centering
@@ -170,9 +168,9 @@ Domænemodellen i figur \ref{figure:domainModel}, side \pageref{figure:domainMod
 	\label{figure:allocationDiagram}
 \end{figure}
 
-Det kan her ses at systemet består af tre primære softwaredele: \textit{User Interface Software}, \textit{Nunchuck Polling Software}, \textit{Motor Control Software}. Disse er fordelt over de tre viste CPU'er.
+\noindent Det kan her ses at systemet består af tre primære softwaredele: \textit{User Interface Software}, \textit{Nunchuck Polling Software}, \textit{Motor Control Software}. Disse er fordelt over de fire viste CPU'er.\newline
 
-På tabel \ref{tabel:softwareAllocationDescription} er hvert allokeret software komponent beskrevet.
+\noindent På tabel \ref{tabel:softwareAllocationDescription} er hver allokeret software komponent beskrevet.
 
 \begin{table}[H]
 	\centering
@@ -196,7 +194,7 @@ På tabel \ref{tabel:softwareAllocationDescription} er hvert allokeret software 
 Dette afsnit har til formål at demonstrere sammenhængen mellem softwaren på CPU'erne og resten af systemet, samt at beskrive og identificere grænsefladerne brugt til kommunikation mellem dem. Yderligere vil klasseidentifikation også blive vist, hvor disse klasser vil specificeres i Design og Implementering.
 
 \subsubsection{Wii-Nunchuck Information Flow}
-En essentiel del af systemet er at kunne styre motoren ved brug af Wii-Nunchuck controlleren. På figur \ref{fig:WiiNunchuckSekvensDiagram} vises gennemløbet af Wii-Nunchuck input data fra Wii-Nunchuken til motoren, med de relevante CPU'er angivet. Her ses det at input data fra Wii-Nunchuck kontinuert bliver aflæst af PSoC0. Det bemærkes her at grænsefladen mellem PSoC0 og Wii-Nunchuck er en I2C bus. Efter at PSoC0 har aflæst input data'en, overføres den til PSoC1. Grænsefladen mellem disse to PSoCs er også en I2C bus. PSoC1 kan til slut oversætte modtaget input data til PWM signaler til motorstyring samt affyring.
+En essentiel del af use case 1, er at kunne styre motoren ved brug af Wii-Nunchuck controlleren. På figur \ref{fig:WiiNunchuckSekvensDiagram} vises gennemløbet af Wii-Nunchuck input data fra Wii-Nunchuken til motoren, med de relevante CPU'er angivet. Her ses det at input data fra Wii-Nunchuck kontinuert bliver aflæst af PSoC0. Det bemærkes her at grænsefladen mellem PSoC0 og Wii-Nunchuck er en I2C bus. Efter at PSoC0 har aflæst input data'en, overføres den til PSoC1. Grænsefladen mellem disse to PSoCs er også en I2C bus. PSoC1 kan til slut oversætte modtaget input data til PWM signaler til motorstyring samt affyring.
 
 \begin{figure}[H]
 	\centering
@@ -206,7 +204,7 @@ En essentiel del af systemet er at kunne styre motoren ved brug af Wii-Nunchuck 
 \end{figure}
 
 \subsubsection{Systemtest}
-Use Case 2 beskriver test af systemet før spillet startes. På figur \ref{fig:SystemTestSekvensDiagram} vises test sekvensen for en vellykket test. 
+Use case 2 beskriver test af systemet før spillet startes. På figur \ref{fig:SystemTestSekvensDiagram} vises test sekvensen for en vellykket test. 
 
 \begin{figure}[H]
 	\centering
@@ -215,24 +213,24 @@ Use Case 2 beskriver test af systemet før spillet startes. På figur \ref{fig:S
 	\label{fig:SystemTestSekvensDiagram}
 \end{figure}
 
-Kommunikationen mellem Devkit8000 og PSoC0 er initieret, og styret af, Devkittet. Da PSoC0 i dette design ikke har mulighed for at indikere, hvornår data er klar til aflæsning, skal Devkittet vente på en \textit{timeout}, før den aflæser data på PSoC0. Dette er muligt, fordi at system testen bliver afviklet sekventielt.
+\noindent Kommunikationen mellem Devkit 8000 og PSoC0 er initieret, og styret af, Devkit 8000. Da PSoC0 i dette design ikke har mulighed for at indikere, hvornår data er klar til aflæsning, skal Devkit 8000 vente på en \textit{timeout}, før den aflæser data på PSoC0. Dette er muligt, idét system testen bliver afviklet sekventielt.
 
 \subsection{Samlede Klassediagrammer}
-På baggrund af sekvensdiagrammerne i afsnit \ref{afsnit:informationFlow} samt de detaljerede applikationsmodeller analyseret i DOKUMENTATION \textbf{\#ref}, er der udledt samlede klassediagrammer for hver individuel CPU i systemet. Disse er med til at identificere konceptuelle klasser og funktionaliter der skal overvejes i implementation og design af systemet, og har altså fungeret som et udgangspunkt til resten af udviklingsprocessen.
+På baggrund af sekvensdiagrammerne i afsnit \ref{afsnit:informationFlow} samt de detaljerede applikationsmodeller beksrevet i dokumentationen, afsnit 3.5-\textit{Applikationsmodeller} side \#ref, er der udledt samlede klassediagrammer for hver individuel CPU i systemet. Disse er med til at identificere konceptuelle klasser og funktionaliter der skal overvejes i implementation og design af systemet, og har altså fungeret som et udgangspunkt til resten af udviklingsprocessen. \newline
 
-Figur \ref{fig:CompleteClassDiagramDevKit8000}, \ref{fig:CompleteClassDiagramPSoC0}, \ref{fig:CompleteClassDiagramPSoC1}, og \ref{fig:CompleteClassDiagramPSoC2} vises de samlede klassediagrammer for hver CPU.
+\noindent Figur \ref{fig:CompleteClassDiagramDevKit8000}, \ref{fig:CompleteClassDiagramPSoC0}, \ref{fig:CompleteClassDiagramPSoC1}, og \ref{fig:CompleteClassDiagramPSoC2} viser de samlede klassediagrammer for hver CPU.\newline
 
-For disse klassediagrammer er der konceptuelle klasser som gentager sig selv. Alle klassediagrammer har én klasse af typen \textit{controller}. Disse klasse indeholder alt funktionalitet der er nødvændig for at kunne implementere systemets Use Cases. Yderligere bliver klasserne \textit{I2C Interface} samt \textit{SPI Interface} gentaget. Disse repræsenterer klasser for de tilsvarende bustyper, I2C og SPI, og bruges af softwaren til at sende og modtage data på disse busser.
+\noindent For disse klassediagrammer er der konceptuelle klasser som gentager sig selv. Alle klassediagrammer har én klasse af typen \textit{controller}. Disse klasse indeholder alt funktionalitet der er nødvændig for at kunne implementere systemets Use Cases. Yderligere bliver klasserne \textit{I2C Interface} samt \textit{SPI Interface} gentaget. Disse repræsenterer klasser for de tilsvarende bustyper, I2C og SPI, og bruges af softwaren til at sende og modtage data på disse busser.\newline
 
-På figur \ref{fig:CompleteClassDiagramDevKit8000} ses det at DevKit8000 controlleren skal have funktionalitet til start af system test, i relation til Use Case 2. For at kunne udføre dette kommunikerer den med grænsefladen Graphical User Interface (\textit{GUI}), for at kunne vise resultater til brugeren. Desuden skal controlleren kommunikere med grænsefladen \textit{SPI Interface}, for at sende data ud til til resten af systemet via SPI bussen.
+\noindent På figur \ref{fig:CompleteClassDiagramDevKit8000} ses det at Devkit 8000 controlleren skal have funktionalitet til start af systemtest, i relation til use case 2. For at kunne udføre dette, kommunikerer den med grænsefladen Graphical User Interface (\textit{GUI}), for at kunne vise resultater til brugeren. Desuden skal controlleren kommunikere med grænsefladen \textit{SPI Interface}, for at sende data ud til resten af systemet via SPI bussen.
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=\textwidth] {Systemarkitektur/images/Devkitklassediagram.png}
-	\caption{Samlet Klassediagram for DevKit8000}
+	\includegraphics[width=\textwidth] {Systemarkitektur/images/CompleteClassDiagramDevKit8000}
+	\caption{Samlet Klassediagram for Devkit 8000}
 	\label{fig:CompleteClassDiagramDevKit8000}
 \end{figure}
 
-På figur \ref{fig:CompleteClassDiagramPSoC0} ses det at PSoC0 controlleren skal have funktionalitet til at starte tests af systemets busser. Yderligere skal den også kunne dekode og kalibrere data der kommer fra Nunchuck. I relation til disse funktionaliteter skal den kunne modtage og sende data på systemets I2C og SPI busser.
+\noindent På figur \ref{fig:CompleteClassDiagramPSoC0} ses det at PSoC0 controlleren skal have funktionalitet til at starte tests af systemets busser. Yderligere skal den også kunne aflæse, dekode og kalibrere data der kommer fra Nunchuck. I relation til disse funktionaliteter skal den kunne modtage og sende data på systemets I2C og SPI busser.
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=\textwidth] {Systemarkitektur/images/CompleteClassDiagramPSoC0}
@@ -240,7 +238,7 @@ På figur \ref{fig:CompleteClassDiagramPSoC0} ses det at PSoC0 controlleren skal
 	\label{fig:CompleteClassDiagramPSoC0}
 \end{figure}
 
-På figur \ref{fig:CompleteClassDiagramPSoC1} ses det at PSoC1 controlleren kommunikerer med grænsefladerne \textit{I2C Interface}, \textit{Motor Control} samt \textit{PSoC2}. Controlleren skal kunne regulere fart på systemets motorstyring, for at kunne styre kanonen. Desuden skal den kunne sende en affyringsbesked til \textit{PSoC2}. For at regulere fart og affyre kanonen, skal controlleren kunne aflæse Nunchucken's tilstand fra \textit{I2C Interface}.
+\noindent På figur \ref{fig:CompleteClassDiagramPSoC1} ses det at PSoC1 controlleren kommunikerer med grænsefladerne \textit{I2C Interface}, \textit{Motor Control} samt \textit{PSoC2}. Controlleren skal kunne regulere fart på systemets motorstyring, for at kunne styre kanonen. Desuden skal den kunne sende en affyringsbesked til \textit{PSoC2}. For at regulere fart og affyre kanonen, skal controlleren kunne aflæse Nunchucken's tilstand fra \textit{I2C Interface}.
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=\textwidth] {Systemarkitektur/images/CompleteClassDiagramPSoC1}
@@ -248,7 +246,7 @@ På figur \ref{fig:CompleteClassDiagramPSoC1} ses det at PSoC1 controlleren komm
 	\label{fig:CompleteClassDiagramPSoC1}
 \end{figure}
 
-På figur \ref{fig:CompleteClassDiagramPSoC2} ses det at PSoC2 skal have funktionalitet til at aktivere afskydning, som gøres ved at kommunikere med grænsefladen \textit{Projectile Launcher}. Afskydningen aktiveres af grænsefladen \textit{PSoC1}.
+\noindent På figur \ref{fig:CompleteClassDiagramPSoC2} ses det at PSoC2 skal have funktionalitet til at aktivere afskydning, som gøres ved at kommunikere med grænsefladen \textit{Projectile Launcher}. Afskydningen aktiveres af grænsefladen \textit{PSoC1}.
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=\textwidth] {Systemarkitektur/images/affyringKlassediagram.png}
@@ -257,9 +255,9 @@ På figur \ref{fig:CompleteClassDiagramPSoC2} ses det at PSoC2 skal have funktio
 \end{figure}
 
 \subsection{SPI Kommunikations Protokol}
-I afsnit \ref{afsnit:IBD} \textbf{IBD} ses på figur \ref{figure:ibdDiagram} at Devkit8000 og PSoC0 kommunikerer via en SPI bus. Kommunikationen foregår ved at der sendes kommandotyper imellem de to enheder, SPI-master og SPI-slave. På tabel \ref{tabel:spiKommandoType} ses en de anvendte kommandotyper samt en kort beskrivelse for hver af disse.
+I afsnit \ref{afsnit:IBD}-IBD, ses på figur \ref{figure:ibdDiagram} at Devkit 8000 og PSoC0 kommunikerer via en SPI bus. Kommunikationen foregår ved at der sendes kommandotyper imellem de to enheder, SPI-master og SPI-slave. På tabel \ref{tabel:spiKommandoType} ses en de anvendte kommandotyper samt en kort beskrivelse for hver af disse. En fuld beskrivelse af SPI-kommunikations protokollen kan ses i dokumentationen afsnit 3.7.1-\textit{SPI Protokol} side \#ref.\newline
 
-Der er til systemet valgt en SPI bus mellem DevKit8000 og PSoC0, da der i dette tilfælde kun er brug for en bus med god support for én master og én slave. En SPI Bus skalerer ikke godt med multiple slaver i forhold til SPI, da en SPI bus skal have en fysisk forbindelse for hvert enkel slave der tilkobles. Bussen er dog simpel at implementere, og hver derfor ideel for denne grænseflade.
+\noindent Der er til systemet valgt en SPI bus mellem Devkit 8000 og PSoC0, da der i dette tilfælde kun er brug for en bus med god support for én master og én slave. En SPI Bus skalerer ikke godt med multiple slaver i forhold til SPI, da en SPI bus skal have en fysisk forbindelse for hver enkelt slave der tilkobles. Bussen er dog simpel at implementere, og hver derfor ideel for denne grænseflade.
 
 \begin{table}[H]
 	\centering
@@ -285,10 +283,9 @@ Der er til systemet valgt en SPI bus mellem DevKit8000 og PSoC0, da der i dette 
 	\label{tabel:spiKommandoType}
 \end{table}
 
-Kommandotyperne er udledt fra det samlede klassediagram for DevKit8000, figur \ref{fig:CompleteClassDiagramDevKit8000}. På figuren kan det ses at \textit{DevKit8000 Controller} skal kunne starte tests for SPI, I2C, samt Nunchuck og aflæse resultatet af disse.  
+\noindent Kommandotyperne er udledt fra det samlede klassediagram for Devkit 8000, figur \ref{fig:CompleteClassDiagramDevKit8000}. På figuren kan det ses at \textit{Devkit 8000 Controller} skal kunne starte tests for SPI, I2C, samt Nunchuck og aflæse resultatet af disse. \newline
 
-Kommunikation på en SPI-bus foregår ved bit-shifting. Dette betyder at indholdet af masterens transfer buffer bliver skiftet over i slavens read buffer og omvendt. Kommunikationen foregår i fuld duplex, derfor skal der foretages to transmissioner for at aflæse data fra en SPI-slave. Dette skyldes at slaven skal vide hvilken data der skal klargøres i transfer-bufferen og klargøre denne buffer før masteren kan aflæse denne. Her skal der tages højde for at en længere proces skal gennemføres før slaven har klargjort transfer-buffern. Derfor skal masteren, efter at have sendt en kommandotype, vente et bestemt stykke tid før der at aflæses fra slavens transfer-buffer. Denne sekvens er illustreret med et sekvensdiagram på figur \ref{figure:SDSpiSlaveRead}.
-
+\noindent Kommunikation på en SPI-bus foregår ved bit-shifting. Dette betyder at indholdet af masterens transfer buffer bliver skiftet over i slavens read buffer og omvendt. Kommunikationen foregår i fuld duplex, derfor skal der foretages to transmissioner for at aflæse data fra en SPI-slave. Dette skyldes at slaven skal vide hvilken data der skal klargøres i transfer-bufferen og klargøre denne buffer før masteren kan aflæse denne. Her skal der tages højde for at en længere proces skal gennemføres før slaven har klargjort transfer-buffern. Derfor skal masteren, efter at have sendt en kommandotype, vente et bestemt stykke tid før der at aflæses fra slavens transfer-buffer. Denne sekvens er illustreret med et sekvensdiagram på figur \ref{figure:SDSpiSlaveRead}.
 \begin{figure}[H]
 	\centering
 	\includegraphics[]{Systemarkitektur/images/SDSpiSlaveRead}
@@ -297,17 +294,17 @@ Kommunikation på en SPI-bus foregår ved bit-shifting. Dette betyder at indhold
 \end{figure} 
 
 \subsubsection{Designvalg}
-SPI kommunikations protokollen er designet ud fra det grundlag at DevKit8000, som SPI master, skal læse tilstande fra SPI slaven ved brug af en timeout model. Ved timeout model menes der at DevKit8000 sender en kommandotype ud, venter et bestemt antal sekunder, og herefter læser værdien fra SPI slaven. Denne model er modelleret på figur \ref{figure:SDSpiSlaveRead}
+SPI kommunikations protokollen er designet ud fra det grundlag at Devkit 8000, som SPI master, skal læse tilstande fra SPI slaven ved brug af en timeout model. Ved timeout model menes der at Devkit 8000 sender en kommandotype ud, venter et bestemt antal sekunder, og herefter læser værdien fra SPI slaven. Denne model er modelleret på figur \ref{figure:SDSpiSlaveRead}.\newline
 
-Et alternativt design ville være at generere et interrupt til SPI masteren når slaven havde data der skulle læses. Til dette system blev timeout modellen dog valgt, da det hardwaremæssigt var simplere at implementere, samt at alt nødvændig funktionalitet kan implementeres med den valgte model.
+\noindent Et alternativt design ville være at generere et interrupt til SPI masteren når slaven havde data der skulle læses. Til dette system blev timeout modellen dog valgt, da det hardwaremæssigt var simplere at implementere, samt at alt nødvendig funktionalitet kan implementeres med den valgte model.
 
 \subsection{I2C Kommunikations Protokol}
 \label{afsnit:I2CProtokol}
-I afsnit \ref{afsnit:IBD} \textbf{IBD} ses på figur \ref{figure:ibdDiagram} at tre hardwareblokke kommunikerer via en I2C bus. Til denne I2C kommunikation er der defineret en protokol, som bestemmer hvordan modtaget data skal fortolkes. Denne protokol beskrives følgende.
+I afsnit \ref{afsnit:IBD}-\textit{IBD}, ses det på figur \ref{figure:ibdDiagram} at tre hardwareblokke kommunikerer via en I2C bus. Til denne I2C kommunikation er der defineret en protokol, som bestemmer hvordan modtaget data skal fortolkes. Denne protokol vil blive præsenteret her, men en fuld gennemgang kan findes i dokumentationen afsnit 3.7.2-\textit{I2C Protokol} side \#ref.\newline
 
-I2C bussen er brugt til disse forbindelser af to primære grunde. Først og fremmest er Nunchuck controlleren implementeret som en I2C Slave fra producentens side. Derfor skulle der gøres brug af en I2C bus i alle tilfælde. Yderligere skulle Nunchuken's input sendes videre til PSoC1, og I2C er en bus der skalerer godt med multiple enheder. Derfor var det naturligt at udvide I2C bussen mellem Nunchuck og PSoC0 med PSoC1.
+\noindent I2C bussen er brugt til disse forbindelser af to primære grunde. Først og fremmest er Nunchuck controlleren implementeret som en I2C Slave fra producentens side. Derfor skulle der gøres brug af en I2C bus i alle tilfælde, for at kommunikere med Nunchucken. Yderligere skulle Nunchuken's input sendes videre til PSoC1, og I2C er en bus der skalerer godt med multiple enheder \cite{i2cbus}. Derfor var det naturligt at udvide I2C bussen mellem Nunchuck og PSoC0, med PSoC1.\newline
 
-I2C gør brug af en indbygget protokol, der anvender adressering af hardware-enheder til identificering af hvilken enhed der kommunikeres med. Derfor har hardwareblokkene som indgår i I2C kommunikationen fået tildelt adresser. På tabel \ref{table:I2CAddress} ses adresserne tildelt systemets PSoCs.
+\noindent I2C gør brug af en predefineret protokol, der anvender adressering af hardware-enheder til identificering af, hvilken enhed der kommunikeres med. Derfor har hardwareblokkene som indgår i I2C kommunikationen fået tildelt adresser. På tabel \ref{table:I2CAddress} ses adresserne tildelt systemets PSoCs.
 
 \begin{table}[H]
 	\centering
@@ -324,9 +321,9 @@ I2C gør brug af en indbygget protokol, der anvender adressering af hardware-enh
 	\label{table:I2CAddress}
 \end{table}
 
-Da I2C dataudveksling sker bytevist, er kommunikations protokollen opbygget ved, at kommandoens type indikeres af den første modtagne byte. Herefter følger \textit{N}-antal bytes som er kommandoens tilhørende data. \textit{N} er et vilkårligt heltal og bruges i dette afsnit når der refereres til en mængde data-bytes der sendes med en kommandotype.
+\noindent Da I2C dataudveksling sker bytevist \cite{I2C}, er kommunikations protokollen opbygget ved, at kommandoens type indikeres af den første modtagne byte. Herefter følger \textit{N}-antal bytes som er kommandoens tilhørende data. \textit{N} er et vilkårligt heltal og bruges i dette afsnit når der refereres til en mængde data-bytes der sendes med en kommandotype.\newline
 
-På tabel \ref{table:I2CKommandoer} ses de definerede kommandotyper og det tilsvarende antal af bytes der sendes ved dataveksling.
+\noindent På tabel \ref{table:I2CKommandoer} ses de definerede kommandotyper og det tilsvarende antal af bytes der sendes ved dataveksling.
 
 \begin{table}[H]
 	\begin{adjustwidth}{-3cm}{-\rightmargin}
@@ -363,11 +360,6 @@ På figur \ref{fig:I2CProtokolEksempel} ses at afsenderen starter en I2C transak
 Den primære idé bag valg af kommandotype metoden til I2C kommunikations protokollen er først og fremmest så modtageren kan differentiere mellem flere handlinger i systemet. En anden vigtig grund er at man, ved kommandotyper, kan associere et dynamisk antal bytes til hver kommando. Dvs, hvis en modtager får en kommandotype \textit{A}, vil den vide at den efterfølgende skal læse 5 bytes, hvormiod at en kommandotype \textit{B} ville betyde at der kun skulle læses 2 bytes.
 
 En anden fordel ved kommandotype metoden er, at den er relativ simpel at implementere i kode, som vist ved pseudofunktionerne i figur \ref{fig:I2CProtokolEksempel}.
-
-
-\subsection{Interface driver}
-
-
 
 
 \subsection{Brugergrænseflade}
