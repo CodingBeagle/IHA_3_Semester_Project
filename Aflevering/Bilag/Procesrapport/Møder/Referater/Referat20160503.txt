@@ -1,0 +1,27 @@
+Review noter
+- Mikkel er super god til at fremlægge... Åbenbart ikke
+- UC til test
+	Virker underligt (Anbefaling fra vejleder)
+- SPI
+	DK poller?
+	Vi sender, venter og modtager
+	PSoC reagerer på kommandotypen, mens DK sleeper indtil der kommer svar
+- Masteren skal enten polle med interval eller slave skal have et interrupt når der kommer ny data
+- Undrer sig over
+	Motorstyring? Mikrostepping?
+	H-bro og motorstyring viser mere hardwarefærdigheder
+- UC2
+	Talte om dele a systemet som ikke var på tegningen
+- Udfordringerne med så mange ting på psoc0
+	PSoC0 og nunchuck kørerpå en I2C bus og en SPI bus
+	PSoC4 har kun 2 SCB'er
+- Kommentarer til process
+	Kan ikke anbefale Pivotal Tracker
+	Stå op møder har ikke fungeret optimalt
+	Problemer med tidsestimering og definering af opgaver
+		Overvej to dag hvor der laves standup møder
+		Halv fb og halv morgenmøder
+	Implementerer først og dokumenterer bagefter
+		 Michael synes at det er en sjov og baglæns måde vi har gjort det på
+		
+	
