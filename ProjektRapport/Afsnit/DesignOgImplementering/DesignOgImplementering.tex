@@ -101,25 +101,6 @@ Detektoren skal kun sende et signal, når fotodioden ser lyset fra LED'en. Det e
 	\label{fig:detektortand}
 \end{figure}
 
-Båndpasfiltret er opbygget af et højpasfilter, et lavpasfilter og en operationsforstærker. Da PSoC'en har en indbygget operationsforstærker, anvendes denne. Software design og implementering af den ses under PSoC Software!!!! Af hensyn til operationsforstærkeren, er der valgt en referencespænding på 0,5 V på den positive indgang. Det er opnået ved en spændingsdeler, for hvilken beregningen kan ses i dokumentationen !!!!. Der er negativ feedback på operationsforstærkeren, hvilket sikrer, at der opretholdes samme spænding, 0,5 V, på begge indgange i operationsforstærkeren. Når fotodioden kan se den røde LED, genererer den en strøm, som bliver omsat til en spænding i kredsløbet. Operationsforstærkeren vil opretholde 0,5 V på den negative indgang. Den vil derfor regulere udgangen for at ophæve de ændringer, som fotodioden skaber på den negative indgang. Udgangssignalet vil dermed afspejle det PWM-signal, som den røde LED sender.  
-
-Når fotodioden kan se lyset fra den røde LED er signalet, som kommer fra udgangen af operationsforstærkeren, et firkantsignal med en frekvens på 10 kHz,. Når fotodioden ikke kan se det røde lys, er spændingen på udgangen 0,5 V. Det ønskes omdannet til et signal, der går højt, når PWM-signalet starter, og går lavt, når PWM-signalet er væk igen. For at opnå dette, blev der lavet en envelopedetector, som er opbygget af en diode, en modstand og en kondensator. Dioden sikrer, at skulle der komme negative spændinger, så vil de blive frasorteret. Kondensatoren er dimentioneret efter, at den bliver opladet på de første udsving fra firkantsignalet. Modstanden er dimentioneret, så spændingen ikke aflades mellem svingningerne på 10 kHz signalet. En simulering af dette kan ses i dokumentationen !!!! 
-
-Outputtet, fra envelopedetektoren var dog noget lavt. Det lå mellem 1,5V og 2V. Derfor blev der indsat en ikke-inverterende forstærker for at fordoble signalet. Forstærkeren består af en opamp og to modstande. Derfor blev der opstillet følgende ligning \ref{reference til Tores bog}: 
-
-\begin{equation} 
-	U_{O}=(1+\frac{R_{2}}{R_{1}})*U_{P}
-\end{equation}
-
-Det vil altså sige, at hvis de to modstande, der sættes ind er ens, vil indgangssignalet blive fordoblet. Hvis der eksempelvis sendes 2V ind vil der være 4V på udgangen: 
-
-\begin{equation}
-	U_{O}=(1+\frac{10k\Omega}{10k\Omega})*2V
-\end{equation}
-
-Herefter var det muligt at aflæse et tydeligt firkantsignal med en peak-to-peak-værdi på 3,5V. 
-
-Den røde LED er koblet direkte til et 0-5 V, 10 kHz PWM signal fra PSoC'en. Den kan godt klare sig uden en formodstand. 
 
 \subsubsection{Motorstyring}
 Til at styre affyringsmekanismens motor er der bygget et kredsløb med en MOSFET som primære komponent. MOSFET'en skal sørge for, at motoren kun kører, når der bliver sendt PWM-signal ind i den. Kredsløbsdiagrammet kan ses på figur \ref{fig:affyringsmotor}. 
@@ -382,11 +363,3 @@ Affyringsmekanismen består udover hardware og mekanik også flere softwaredele,
 \end{figure}
 
 Når der modtages et interrupt fra PSoC1, startes motoren, hvilket bevirker at kanonen begynder affyringen. Spændingen fra resVolt, anvendes til at vurdere, om fotodioden kan se lyset fra den røde LED. Normalt indikerer det, at de kan se hinanden, at affyringen er færdig, og at motoren skal stoppes, men hvis de kan se hinanden på dette tidspunkt ved interruptets start, betyder det, at de, inden affyringen er startet, allerede er placeret, så de kan se hinanden. Hvis det er tilfældet køres det delay, der ses i "opt-boksen" på figur \ref{fig:aktivitetsdiagramDetektor}. Det sker for at sikre, at motoren er drejet, så de igen ikke kan se hinanden. Derefter aflæses spændingen fra resVolt igen - nu for at tjekke om affyringen er afsluttet. Aflæsningen gentages indtil fotodioden kan se den røde LED, og motoren dermed skal stoppes. Til sidst er der indsat et delay på 500 ms, så der går et halvt sekund, inden der igen kan skydes. Derved undgås det, at kanonen affyres med det samme igen, hvis triggeren ved en fejl ikke er sluppet.
-
-%For at affyringssekvensen kører, skal der modtages et interrupt. Det sker, når brugeren affyrer kanonen. PSoC????? sender et højt signal, som går ind på en inputpind på PSoC2, som så er programmeret til at trigge på rising edge og derved køre interruptrutinen. 
-%Det første der sker i interruptrutinen er, at ADC-værdien aflæses som en spænding i millivolt. Den lægges over i variablen "resVolt". Så startes motoren, derved begynder kanonen at affyre. PSoC'ens røde LED er som udgangspunkt tændt, når der ikke affyres, når interruptet kommer, slukkes den, og den grønne PSoC-LED tændes i stedet, for at indikere at interruptrutinen køres. 
-%Dernæst anvendes spændingen fra resVolt, der blev aflæst fra ADC'en så til at vurdere om fotodioden, kan se lyset fra den røde LED. Når de ikke kan se hinanden er spændingen 500 mV, og når de kan se hinanden er spædningen mellem 4000 og 5000 mV. Normalt indikerer det, at de kan se hinanden, at affyringen er færdig, og at motoren skal stoppes, men hvis de kan se hinanden på dette tidspunkt ved interruptets start, betyder det, at de, inden affyringen er startet, allerede er placeret så de kan se hinanden. Hvis det er tilfældet køres et delay på 30 ms, for at sikre at motoren er drejet, så de igen ikke kan se hinanden. Derefter aflæses spændingen ved ADC'en igen - nu for at tjekke om affyringen er afsluttet. Aflæsningen gentages indtil fotodioden kan se den røde LED, og motoren dermed skal stoppes. Affyringen sker på langt under et sekund, og det er derfor ikke problematisk med polling. Alternativt, hvis affyringen varede længere tid, kunne det have været implementeret med et interrupt, men i dette tilfælde kan det klares ved at tjekke ADC'en flere gange. 
-
-%Når motoren er stoppet, slukkes den grønne PSoC-LED, og der køres et delay på 500 ms, så der går et halvt sekund, inden der igen kan skydes. Derved undgås det, at kanonen affyres med det samme igen, hvis triggeren ved en fejl ikke er sluppet. Som det sidste tændes den røde PSoC LED, som indikator på, at kanonen igen er klar til at blive affyret. 
-
-%Både PWM-signalet til affyring af motoren og til generering af 10 kHz til den røde LED styres af PSoC2. De to PWM-blokke deles om en clock, der er sat til en frekvens på 2,5 MHz. PWM til den røde LED, har en periode på 250, dermed bliver PWM-signalet 10 kHz. Derudover er dutycyclen for LED'en 10 \%. PWM-signalet til motoren har en periode på 75, derved bliver frekvensen 33,33 kHz. En DC-motor skal gerne styres af et PWM-signal på over 20 kHz, for at rotere uden problemer. Dermed passer de 33,33 kHz godt. 
