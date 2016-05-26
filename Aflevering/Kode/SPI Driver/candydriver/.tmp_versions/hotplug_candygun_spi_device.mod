@@ -1,0 +1,2 @@
+/home/stud/Documents/IHA_3_Semester_Project/Software/SPI/candydriver/hotplug_candygun_spi_device.ko
+/home/stud/Documents/IHA_3_Semester_Project/Software/SPI/candydriver/hotplug_candygun_spi_device.o
