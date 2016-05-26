@@ -6,6 +6,8 @@ YAAAAAAAASSSSSSSS
 
 FUCK YASSSSSSSS
 
+I GOT IIIIT
+
 ![DavidisDumbHoe](http://images.mentalfloss.com/sites/default/files/styles/article_640x430/public/istock_000020098551_small.jpg)
 
 <!-- OLD DOOGIE PICS
