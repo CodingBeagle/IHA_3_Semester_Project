@@ -1,20 +1,12 @@
 \chapter{Konklusion}
 Formålet med dette projektforløb var at udvikle \textit{Goofy Candy Gun 3000} spillet, hvor 1 til 2 spillere dyster om at ramme et mål med projektiler affyret fra en slikkanon styret med en Wii-Nunchuck. \newline
 
-\noindent Som nævnt i Resultater, afsnit \ref{afsnit:resultater}, endte projektet med en delvis implementering af use case 1 og en fuldtimplementeret use case 2. \newline
+\noindent I indledningen af rapporten, blev Goofy Candygun 3000's funktionaliteter beskrevet, og igennem projektet er der blevet implementeret en række disse. Det er lykkedes at implementere en kanon, der kan styres af en Wii-nunchuck. Der er også blevet implementeret en brugergrænseflade, som brugeren kan interagere med i forbindelse med spillet. Brugergrænsefladen kan også starte en systemtest, der tester de interne kommunikationsprotokoller for systemet.\newline
 
-\noindent Til use case 1, blev der konstrueret en kanon, som kan styres af en Wii-Nunchuck. For at aflæse data fra Wii-Nunchuck og omsætte data til en bevægelse i motoren, er der blevet implementeret et netværk af PSoC udviklingboards, forbundet via en I2C-bus. Ifølge use case beskrivelsen, skulle der implementeres en brugergrænseflade til visning statistikker og point. Disse funktionaliteter er ikke implementeret, med der er udviklet en demonstrations GUI, der viser opsætningen, dog uden nogen reele funktionaliteter.  
-\noindent Derudover skal der foretages nogle kalibreringer for kanonens motorstyring og affyringmekanisme for at use case 1's krav er opfyldt til fulde.\newline 
+\noindent Fra IHA's side, var der stillet en række krav til, hvad produktet skulle indeholde. Den endelige prototype inkorporerer alle disse krav. I systemet er der implementeret flere forskellige sensorer. Der er en Wii-nunchuck, som opfanger input på Nunchuck controlleren. Der er også implementeret en rotationsdetektor, der bliver brugt i forbindelse med kanonens affyringsmekanisme. Til at begrænse kanonens drejning, er der blevet implementeret en sensor der kan detektere dette. Systemet inkorporerer også flere aktuatorer, i form af kanonens motorer.\newline
 
-\noindent For use case 2, er der implementeret en brugergrænseflade, hvor brugeren kan starte en systemtest og følge dennes fremskridt og resultater gennem testen. Brugergrænsefladen gør brug af en SPI-driver til Devkit8000, som mulliggør kommunikationen med PSoC netværket via en SPI-bus. Denne use case er, ifølge den udfyldte accepttest, færdig-implementeret, uden mangler. \newline
+\noindent Til projektet er der brugt en indlejret Linux platform i form af Devkit 8000. På denne er der implementeret en brugergrænseflade, hvor brugeren kan starte en systemtest.\newline
 
-\noindent For projektet, blev der foretaget en MOSCOW-analyse (se afsnit \ref{afsnit:Projektafgraensning} - Projektafgrænsning). I denne, blev mulige funktionaliteter prioriteret i en liste af \textit{must have}, \textit{could have}, \textit{should have} og \textit{won't have}. De højeste prioriterede funktionaliteter var:
+\noindent Til aflæsning og dekodning af Nunchucken er der gjort brug af en PSoC platform. \newline
 
-\begin{itemize}
-	\item En motor til styring af kanonen
-	\item En grafisk brugergrænseflade
-	\item En Wii-nunchuck til styring af motoren
-	\item En kanon med affyringsmekanisme
-	\item En system test til diagnosering af fejl
-\end{itemize}
-\noindent Igennem projektet er disse højest prioriterede funktionaliteter implementeret i forbindelse med use case 1 og 2. De resterene funktionaliteter, der har lavere prioritet, er ikke implementeret.
+\noindent Systemets funktionaliteter er prioriterede ved brug af en MoSCoW model. Alle funktionaliteterne der er prioriterede som \textit{must haves} er blevet implementeret. Funktionaliteterne under \textit{Should have} er ikke blevet fuldt implementeret, men der er dog opsat en brugergrænseflade der illustrerer mulighed for at se en lokal rangliste statistik, og vælge op til 2 spillere. Funktionaliterne under \textit{Could have} og \textit{Wont have} er ikke implementeret i dette projekt.
