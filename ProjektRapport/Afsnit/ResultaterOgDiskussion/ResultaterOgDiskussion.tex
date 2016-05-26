@@ -3,7 +3,7 @@
 \chapter{Resultater}
 \label{afsnit:resultater}
 
-Undervejs i projektet er der lavet modultests af de forskellige dele af produktet. Disse er alle gennemført med positivt resultat. Der er også foretaget integrationstest, som også blev godkendt. 
+Undervejs i projektet er der lavet modultests af de forskellige dele af produktet. Disse er alle gennemført med positivt resultat. Efter delene blev sat sammen, blev der også foretaget integrationstest, som også blev godkendt. 
 
 \noindent I slutningen af produktudviklingen blev der afviklet en accepttest i samarbejde med gruppens vejleder Gunvor Elisabeth Kirkelund. Den udfyldte accepttest kan ses i dokumentationen, afsnit 6 -\textit{Udfyldt Accepttest} side 124.
 
@@ -21,12 +21,14 @@ Undervejs i projektet er der lavet modultests af de forskellige dele af produkte
 	\label{table:UseCaseResults}
 \end{table}
 
-\noindent Det ses, at hele use case 2 er fuldt implementeret og use case 1 er delvist implementeret. I use case 1 er det muligt at indstille kanonen med Wii-nunchuck og at udløse denne, så den affyrer et stykke slik. Der er også udviklet en illustrativ brugergrænseflade. Denne er kun en demo, da kommunikationsprotokollerne ikke er implementeret. 
+\noindent Det ses, at hele use case 2 er fuldt implementeret og use case 1 er delvist implementeret. 
+Resultatet for accepttest af use case 1 viste, at det er muligt at indstille kanonen med Wii-nunchuck og at udløse denne. Dog blev slikket i højere grad dispenset fra kanonen end affyret, da slikket var for småt til magasinet. Dette skyldtes, at det havde været nødvendigt at sætte lav dutycycle for motoren, for at den ikke affyrede mere end et stykke ad gangen. Til use case 1, er der også udviklet en illustrativ brugergrænseflade. Denne er kun en demo, da kommunikationsprotokollerne til SPI og I2C for use case 1 ikke er implementeret. \\
+I use case 2 var det muligt at starte systemtesten ved at vælge "Start Test på GUI" på brugergrænsefladen. Det sås i accepttesten at brugergrænsefladen blev opdateret med resultater fra systemtesten af SPI, I2C og Wii-nunchuck. Fejlhåndtering blev også testet, og ved fejl i forbindelsen, blev der som forventet printet ud på brugergrænsefladen, at systemtesten for de forskellige kommunikationsprotokoller fejlede.
 
 
 %\noindent Jf. MoSCoW-analysen i afsnit \ref{afsnit:Projektafgraensning} skal det færdige produkt have en motor til styring af kanonen, en Wii-nunchuck til styring af motoren, en kanon med en affyringsmekanisme, en systemtest til diagnosticering af fejl og en grafisk brugergrænseflade. Det eneste, der ikke er implementeret, er den grafiske brugergrænseflade, som dog er implementeret med en demo. Dette gør, at der ikke er langt igen til at use case 1 er fuldt implementeret. 
 
 %Denne er kun implementeret som en demo. Der er ingen bagomliggende funktionalitet til at vise spillets statistikker eller administrering af player-modes. Der er en slikkanon, som kan styres med en Nunchuck, og affyringsmekanismen kan aktiveres. Dog mangles kalibrering af motor og affyringsmekanisme, da motoren ikke kan bære kanonens vægt, og slik ikke kan affyres med tilstrækkelig kraft. \newline
 
-\noindent Projektforløbet resulterede i en prototype hvor use case 1 og use case 2 er implementeret som beskrevet.
+\noindent Resultatet for projektforløbet er en prototype hvor use case 1 og use case 2 er implementeret som beskrevet ovenfor.
 
