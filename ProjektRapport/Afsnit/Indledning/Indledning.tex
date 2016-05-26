@@ -1,11 +1,10 @@
 \chapter{Indledning}
-Hensigten med dette projekt, er at udvikle spillet "Goofy Candygun 3000". Spillet går ud på at 1-2 spillere dyster om, at ramme et mål med slik, affyret fra en slikkanon, styret af en Wii-Nunchuck controller. For at finde inspiration til projektet, og idéer til implementering, blev der søgt efter lignende projekter på internettet. Det viste sig, at idéen med at skyde med slik, ikke er en original idé, da lignende projekter såsom "The Candy Canon" \cite{Website:CandyCanon} allerede findes. Til forskel fra The Candy Cannon og lignende projekter som affyrer projektiler uden et egentlig formål, vil der i dette projekt blive udviklet en kanon til brug i et spil. Kanonen affyres og styres af spillerne via en controller. Altså skal projektet ende med en kanon som indgår i et to personersspil, f.eks. til brug ved fester og andre sociale begivenheder.
-Målet med projektet, er at bygge en funktionelt prototype, samt at dokumentere dette med en projektrapport og dens dertilhørende dokumentation. 
+Hensigten med dette projekt, er at udvikle spillet "Goofy Candygun 3000". Spillet går ud på at 1-2 spillere dyster om, at ramme et mål med slik, affyret fra en slikkanon, styret af en Wii-Nunchuck controller. For at finde inspiration til projektet, og idéer til implementering, blev der søgt efter lignende projekter på internettet. Det viste sig, at idéen med at skyde med slik, ikke er en original idé, da lignende projekter såsom \textit{The Candy Cannon} \cite{CandyCannon} allerede findes. Til forskel fra The Candy Cannon og lignende projekter som affyrer projektiler uden et egentlig formål, vil der i dette projekt blive udviklet en kanon til brug i et spil. 
+Målet med projektet, er at bygge en funktionelt prototype, samt at dokumentere dette med en projektrapport og dens dertilhørende dokumentationdokument. 
 Det følgende afsnit beskriver, hvilke krav der stilles til projektet fra IHA's side.
 
 \section{Krav til produktet}
-Projektet tager udgangspunkt i projektoplægget for 3. Semester projektet, præsenteret af \textit{Ingeniørhøjskolen, Aarhus Universitet}. Til dette projekt er der ikke stillet krav til typen af produkt der skal udvikles, dog er der sat krav til hvad produket skal indeholde. Disse krav er som følger:
-
+Projektet tager udgangspunkt i projektoplægget for 3. Semester projektet, præsenteret af \textit{Ingeniørhøjskolen, Aarhus Universitet} (Bilag/Projektrapport/Semesterprojekt3Oplæg). Til dette projekt er der ikke stillet krav til typen af produkt der skal udvikles, dog er der sat krav til hvad produktet skal indeholde. Disse krav er som følger:
 
 \begin{itemize}
 	\item{Systemet \textit{skal} via sensorer/aktuatorer interagere med omverdenen}
@@ -14,14 +13,12 @@ Projektet tager udgangspunkt i projektoplægget for 3. Semester projektet, præs
 	\item{Systemet \textit{skal} anvende en indlejret Linux platform og en PSoC platform}
 \end{itemize}
 
-\noindent På baggrund af disse krav er der udarbejdet et produkt, der beskrives i afsnit \ref{afsnit:systembeskrivelse}. \newline
-
-\noindent I dette projekt bliver produktet opbygget som en prototype. Grundet dette er der i afsnit \ref{afsnit:analyse} beskrevet nogle grundlæggende hardwarekomponenter til realisering af denne prototype.
+\noindent I dette projekt bliver produktet opbygget som en prototype. Grundet dette er der i afsnit \ref{afsnit:analyse} beskrevet, og begrundet for, nogle grundlæggende hardwarekomponenter til realisering af denne prototype.
 
 
 \section{Systembeskrivelse}
 \label{afsnit:systembeskrivelse}
-I dette projekt blev skal der udvikles en slik kanon, som skal bruges i et nyt spil som kommer til at hedde \textit{Goofy Candygun 3000}. Denne slik kanon skal kunne skyde med slik, eksempelvis M\&M’s eller Skittles. Kanonen der affyrer slikket, skal styres af spillerne via en Wii-Nunchuck controller.  \newline
+I dette projekt blev skal der udvikles en slik kanon, som skal bruges i et nyt spil som kommer til at hedde \textit{Goofy Candygun 3000}. Denne slik kanon skal kunne skyde med slik, eksempelvis M\&M’s eller Skittles. Kanonen der affyrer slikket, skal styres af spillerne via en Wii-Nunchuck controller. Spillet vil have en brugergrænseflade, hvor brugeren kan vælge spiltype, og se statistikker og point for hvert spil. \newline
 
 \noindent Et typisk brugerscenarie er, at spillerne bestemmer antallet af skud for runden. Når dette er gjort, er spillet igang. Herefter går Wii-nunchucken på skift mellem spillerne for hvert skud. Dette fortsættes indtil skuddene er opbrugt. Vinderen er spilleren med flest point. Spillets statistikker vises løbende på brugergrænsefladen. Dette brugerscenarie er illustreret i det rige billede på figur \ref{fig:RigtBillede}.
 
@@ -45,6 +42,4 @@ Det endelige produkt omfatter:
 	\item {Muligheden for at flere spillere kan spille sammen}
 \end{itemize}
 
-
-%\section{Ansvarsområder}
-%I løbet af projektet vil projektgruppen blive opdelt i to hovedgrupper - 'hardware' og 'software'. Softwaregruppen vil desuden stå for grænsefladeprogrammering mellem software og hardware. Disse grupper vil have til ansvar at designe og implementere hhv. hardware og software til projektet. Hardwaregruppen vil bestå af de personer, der læser til elektroingeniør (Mikkel Nielsen og Pernille Kjeldgaard). Softwaregruppen vil bestå af de personer, der læser til IKT-ingeniør (Kasper Rieder, Michael Kloock, Tenna Rasmussen, Mia Konstmann og Daniel Jensen).
+\noindent Brugergrænsefladen vil blive implementeret på et Devkit 8000. Denne vil kommunikere med et netværk af PSoC udviklingsboards, der tager input fra en Wii-Nunchuck, og fortolker disse til signaler, for at styre kanonens motorer.
