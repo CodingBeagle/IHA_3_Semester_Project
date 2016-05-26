@@ -249,9 +249,7 @@ Denne State Machine giver en visuel repræsentation af skiften mellem GUI-vindue
 Se klassebeskrivelsen,\ref{afsnit:democlass} for detaljeret beskrivelse.
 
 \section{PSoC Software}
-På figur \ref{figure:klassediagramPSoC0} og \ref{figure:klassediagramPSoC1} ses de endelige klassediagrammer for PSoC0 og PSoC1. Disse klassediagrammer er designet ud fra applikationsmodellerne for use case 1 og 2 i afsnit \ref{afsnit:applikationsmodelUC1} og \ref{afsnit:applikationsmodelUC2}, samt de samlede klassediagrammer for use case 1 og 2 i systemarkitekturen figur \ref{fig:CompleteClassDiagramPSoC0} og \ref{fig:CompleteClassDiagramPSoC1}. For at opretholde høj samhørighed, er der lavet en klasse for hver grænseflade. F.eks. indeholder "Nunchuck"-klassen al den software der skal til for at kommunikere med en nunchuck-enhed. 
-
-De efterfølgende afsnit vil beskrive klasserne og deres funktioner.
+På figur \ref{figure:klassediagramPSoC0} og \ref{figure:klassediagramPSoC1} ses de endelige klassediagrammer for PSoC0 og PSoC1. Disse klassediagrammer er designet ud fra applikationsmodellerne for use case 1 og 2 i afsnit \ref{afsnit:applikationsmodelUC1} og \ref{afsnit:applikationsmodelUC2}, samt de samlede klassediagrammer for use case 1 og 2 i systemarkitekturen afsnit \ref{afsnit:samledeKlassediagrammer} figur \ref{fig:CompleteClassDiagramPSoC0} og \ref{fig:CompleteClassDiagramPSoC1}. For at opretholde høj samhørighed, er der lavet en klasse for hver grænseflade. Dette kan ses på figur \ref{figure:klassediagramPSoC0}, da separate klasser er oprettet for grænsefladerne \textit{SPI}, \textit{I2C}, samt \textit{Nunchuck} controlleren. De efterfølgende afsnit vil beskrive klasserne og deres funktioner.
 
 \begin{figure}[H]
 	\begin{adjustwidth}{-2cm}{-\rightmargin}
@@ -262,7 +260,7 @@ De efterfølgende afsnit vil beskrive klasserne og deres funktioner.
 	\end{adjustwidth}
 \end{figure}
 
-På figur \ref{figure:klassediagramPSoC0} ses det samlede klassediagram for klasserne som eksisterer på PSoC0 softwaren. Her kan det ses at der er en \textit{main} klasse. Denne indeholder programmets primære loop, som gentages indtil PSoC'en slukkes. I dette loop bliver der gjort brug af funktionaliteten fra klasserne \textit{SPICommunication}, \textit{I2CCommunication}, samt \textit{Nunchuck}. Disse klasser beskrives følgende.
+På figur \ref{figure:klassediagramPSoC0} ses det samlede klassediagram for klasserne som bruges til PSoC0 softwaren. Her kan det ses at der er en \textit{main} klasse. Denne indeholder programmets primære loop, som gentages indtil PSoC'en slukkes. I dette loop bliver der gjort brug af funktionaliteten fra klasserne \textit{SPICommunication}, \textit{I2CCommunication}, samt \textit{Nunchuck}. Disse klasser beskrives i afsnit \ref{afsnit:SPIcommunication}, \ref{afsnit:I2Ccommunication} og \ref{afsnit:nunchuckDI}.
 
 \begin{figure}[H]
 	\centering
@@ -271,10 +269,11 @@ På figur \ref{figure:klassediagramPSoC0} ses det samlede klassediagram for klas
 	\label{figure:klassediagramPSoC1}
 \end{figure}
 
-På figur \ref{figure:klassediagramPSoC1} ses det samlede klassediagram for klasserne som eksisterer på PSoC1 softwaren. Her kan det ses at der er en \textit{main} klasse. Denne indeholder programmets primære loop, som gentages indtil PSoC'en slukkes. I dette loop bliver der gjort brug af funktionaliteten fra klasserne \textit{I2CCommunication} og \textit{Nunchuck}. Disse klasser beskrives ligeledes følgende.
+På figur \ref{figure:klassediagramPSoC1} ses det samlede klassediagram for klasserne som eksisterer på PSoC1 softwaren. Her kan det ses at der er en \textit{main} klasse. Denne indeholder programmets primære loop, som gentages indtil PSoC'en slukkes. I dette loop bliver der gjort brug af funktionaliteten fra klasserne \textit{I2CCommunication} og \textit{Nunchuck}. Disse klasser beskrives ligeledes i afsnit \ref{afsnit:SPIcommunication} og \ref{afsnit:I2Ccommunication}.
 
 \subsection{SPICommunication}
-I dette afsnit vil softwaren der specifikt omhandler SPI-kommunikationen mellem PSoC0 og DevKit8000 blive beskrevet. Dette gøres vha. et klassediagram og klassebeskrivelser
+\label{afsnit:SPIcommunication}
+I dette afsnit vil softwaren der specifikt omhandler SPI kommunikationen mellem PSoC0 og Devkit 8000 blive beskrevet. Dette gøres med et klassediagram og klassebeskrivelser.
 
 \subsubsection{Klassediagram}
 På figur \ref{figure:KlassediagramSPICommunication} ses klassediagrammet over SPICommunication klassen.
@@ -282,14 +281,12 @@ På figur \ref{figure:KlassediagramSPICommunication} ses klassediagrammet over S
 \begin{figure}[H]
 	\centering
 	\includegraphics[]{DesignOgImplementering/images/SPICommunication}
-	\caption{Klassediagram over klassen SPICommunication}
+	\caption{Klassediagram over SPICommunication}
 	\label{figure:KlassediagramSPICommunication}
 \end{figure}
-\subsubsection{Klassebeskrivelser}
-I dette afsnit vil klassens metoder og defines blive beskrevet. \newline
 
-\noindent Klassen \textit{SPICommunication} har til ansvar at gennemføre SPI-, I2C-, samt Nunchucktesten som bliver anmodet om af DevKit8000 under Use Case 2 - System Test. Dette gøres ved nedenstående metoder.
-\newline
+\subsubsection{Klassebeskrivelser}
+Klassen \textit{SPICommunication} har til ansvar at gennemføre SPI-, I2C-, samt Nunchucktesten som bliver anmodet om af Devkit 8000 under use case 2. Dette gøres ved nedenstående metoder. \newline
 
 \noindent\textbf{void completeSPITest()} \newline
 Denne metode gemmer \textit{SPI\_OK} i PSoC'ens SPI-transfer buffer. \newline
@@ -298,29 +295,27 @@ Denne metode gemmer \textit{SPI\_OK} i PSoC'ens SPI-transfer buffer. \newline
 Denne metode gennemfører I2C-Testen. Dette gøres ved at der sendes en besked til alle enheder på I2C-nettet, og hvis der ikke registreres nogen fejl på denne besked, bliver \textit{I2C\_OK} gemt i PSoC'ens SPI-transfer buffer. Registreres der en fejl, bliver \textit{I2C\_FAIL} gemt i SPI-transfer buffer. \newline
 
 \noindent\textbf{void completeNunchuckTest(uint8* databuf)} \newline
-Denne metode gennemfører Nunchuck-testen. Dette gøres ved at der startes en timer på 6 sekunder. Hvis der sker et tryk på 'Z'-knappen på nunchucken indenfor disse 6 sekunder, vil \textit{NUNCHUCK\_OK} blive gemt i SPI-transfer bufferen. Hvis der ikke registreres nogen tryk inden for de 6 sekunder, er det \textit{NUNCHUCK\_FAIL} der gemmes.\newline
+\noindent Denne metode gennemfører Nunchuck-testen. Dette gøres ved at der startes en timer på 5 sekunder. Hvis der sker et tryk på 'Z'-knappen på nunchucken indenfor disse 5 sekunder, vil \textit{NUNCHUCK\_OK} blive gemt i SPI-transfer bufferen. Hvis der ikke registreres nogen tryk inden for de 5 sekunder, er det \textit{NUNCHUCK\_FAIL} der gemmes.\newline
 
-I klassediagrammet er der beskrevet en række "Defines". Disse defines bruges i klassen som unikke ID'er der indikerer om en test er gennemført OK eller om den er fejlet.
+\noindent I klassediagrammet er der beskrevet en række "Defines". Disse defines bruges i klassen som unikke ID'er der indikerer om en test er gennemført OK eller om den er fejlet.
 
 \subsubsection{SPI Indstillinger på PSoC}
-I forbindelse med SPI forbindelsen i systemet, skal der sættes nogle indstillinger på PSoC0, idét at denne kommunikerer med Devkittet via SPI. 
-PSoC'en sættes som en slave, idét at det er Devkittet der aflæser og skriver til PSoC0.
-SCLK sættes til CPHA=1 og CPOL=1. Disse er valgt arbitrært, dog ud fra den forudsætning, at de skal stemme overens med indstillingerne på Devkittet, idét disse indstillinger beskriver hvornår databit aflæses/sættes i forhold til clock'en. 
-'Data Rate' sættes til 1Mbps, da dette er en sikker/stabil overførselshastighed. Igen skal denne indstilling være ens for PSoC og Devkit.
-Den sidste indstilling der sættes, er 'transfer' og 'read' buffer size. Disse er valgt til at være 8-bit, da projektets SPI kommunikationsprotokol ikke har brug for størrere datamængder. Igen skal denne indstilling være ens for både SPI-master og slave.
+I forbindelse med SPI bussen skal der sættes nogle indstillinger på PSoC0, idét at denne kommunikerer med Devkit 8000 via SPI. 
+PSoC'en sættes til slave, idét at det er Devkit 8000 der aflæser og skriver til PSoC0.
+SCLK sættes til CPHA=1 og CPOL=1. Disse er valgt arbitrært, dog ud fra den forudsætning, at de skal stemme overens med indstillingerne på Devkit 8000, idét disse indstillinger beskriver hvornår databit aflæses eller sættes i forhold til clock'en. 
+\textit{Data Rate} sættes til 1Mbps, da dette er en stabil overførselshastighed. Denne indstilling skal være ens for PSoC og Devkit 8000. Den sidste indstilling der sættes, er \textit{transfer} og \textit{read} buffer size. Disse er valgt til at være 8-bit, da projektets SPI kommunikationsprotokol ikke har brug for størrer datamængder. Denne indstilling skal være ens for både SPI master og SPI slave.
 
 \subsubsection{Test Opstart Algoritme}
-
-På figur \ref{figure:TestStartAlgorithm} ses et aktivitetsdiagram for algoritmen som eksekverer de forskellige tests afhængig af den modtagne kommandotype fra SPI bussen.
+På figur \ref{figure:TestStartAlgorithm} ses et aktivitetsdiagram for algoritmen som eksekverer de forskellige tests afhængig af den modtagne kommandotype fra Devkit 8000.
 
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=\textwidth]{DesignOgImplementering/images/SPITestActivity}
-	\caption{Aktivitetsdiagram der viser algoritmen som bestemmer hvilket test der skal eksekveres afhængig af den modtagne kommandotype}
+	\caption{Aktivitetsdiagram der viser algoritmen som bestemmer hvilket test der skal eksekveres}
 	\label{figure:TestStartAlgorithm}
 \end{figure}
 
-På tabel \ref{table:SPIActivityVariables} ses en forklaring på variablerne der indgår i algoritmen.
+\noindent På tabel \ref{table:SPIActivityVariables} ses en forklaring af de variable der indgår i algoritmen.
 
 \begin{table}[H]
 	\centering
@@ -329,16 +324,17 @@ På tabel \ref{table:SPIActivityVariables} ses en forklaring på variablerne der
 		Variable         & Beskrivelse                                                                                                                                              \\ \hline
 		receivedBytes    & \begin{tabular}[c]{@{}l@{}}Denne variabel er et array som \\ indeholder modtagede bytes fra SPI bussen. \end{tabular}                              \\ \hline
 		totalReceivedBytes & \begin{tabular}[c]{@{}l@{}}Denne variabel indeholder antallet \\ af modtagede bytes fra SPI bussen.\end{tabular} \\ \hline
-		byteCounter & \begin{tabular}[c]{@{}l@{}}Denne variabel er en simpel \\ tæller til algoritmens for loop.\end{tabular} \\ \hline
+		byteCounter & \begin{tabular}[c]{@{}l@{}}Denne variabel er en tæller \\  til algoritmens for løkke.\end{tabular} \\ \hline
 		commandType & \begin{tabular}[c]{@{}l@{}}Denne variabel indeholder kommandotypen \\ af den modtagede kommando.\end{tabular} \\ \hline
 	\end{tabular}
-	\caption{Variabler der indgår i aktivitetsdiagrammet figur \ref{figure:TestStartAlgorithm}}
+	\caption{Variable der indgår i aktivitetsdiagrammet figur \ref{figure:TestStartAlgorithm}}
 	\label{table:SPIActivityVariables}
 \end{table}
 
-Sekvensdiagrammet for algoritmen, figur \ref{figure:TestStartAlgorithm}, viser at algoritmen bliver eksekveret hver gang et SPI interrupt modtages. Et SPI interrupt opstår når nyt data fra SPI bussen er modtaget og klart til at blive læst fra bufferen på PSOC'en. Den første betydelige hændelse er at variablen \textit{totalReceivedBytes} bliver sat til antallet af modtagede bytes fra SPI bussen. Herefter køres et for loop igennem, hvor alle modtagede bytes fra PSOC'ens buffer bliver overført til variablen \textit{receivedBytes}. Til slut tjekkes den første af de modtagede bytes, da dette indeholder kommandotypen fra kommandoen modtaget på SPI bussen. Ud fra denne værdi bliver den korrekte test eksekveret.
+\noindent Aktivitetsdiagrammet, figur \ref{figure:TestStartAlgorithm}, viser at algoritmen bliver eksekveret hver gang et SPI interrupt modtages. Et SPI interrupt opstår når nyt data fra SPI bussen er modtaget og klart til at blive læst fra bufferen på PSOC'en. Den første betydelige hændelse er at variablen \textit{totalReceivedBytes} bliver sat til antallet af modtagede bytes fra SPI bussen. Herefter køres en for løkke igennem, hvor alle modtagede bytes fra PSOC'ens buffer bliver overført til variablen \textit{receivedBytes}. Til slut tjekkes den første modtagede byte, da denne indeholder kommandotypen modtaget på SPI bussen. Ud fra denne værdi bliver den korrekte test eksekveret.
 
 \subsection{I2CCommunication}
+\label{afsnit:I2Ccommunication}
 I dette afsnit vil softwaren der omhandler I2C-kommunikation blive beskrevet. Dette inkluderer et klassediagram,  klassebeskrivelser og indstillingerne for I2C kommunikationen på PSoC'en.
 
 \subsubsection{Klassediagram}
@@ -354,48 +350,48 @@ På figur \ref{figure:klassediagramI2CCommunication} ses klassediagrammet for I2
 
 \subsubsection{Klassebeskrivelser}
 Som det ses på klassediagrammet figur \ref{figure:klassediagramI2CCommunication} indeholder klassen flere metoder. Disse metoder blive beskrevet her.\newline
+\noindent Klassen \textit{I2CCommunication} har til ansvar at skrive og læse data fra I2C bussen. \newline
 
 \noindent\textbf{void sendData(uint8 Address, uint8 commandType, uint8* buffer, uint8 buffersize)}\newline
-Denne metode sender, via PSoC Creators I2C-API, den data der ligger i "buffer" af kommandotypen "commandType" til slaven med adressen "Address". \newline
+Denne metode sender, via PSoC Creators I2C-API, den data der ligger i \textit{buffer} af kommandotypen \textit{commandType} til slaven med adressen \textit{Address}. \newline
 
 \noindent\textbf{void initReceiveData()} \newline 
-Denne metode initialiserer de to buffers (slaveWrite og slaveRead) der kræves på en I2C-slave, for at kunne gøre bruge af PSoC Creator's I2C-API. \newline
+\noindent Denne metode initialiserer de to buffers, \textit{slaveWrite} og \textit{slaveRead}, der kræves på en I2C-slave. Dette gøres ved brug af PSoC Creators I2C-API. \newline
 
 \noindent\textbf{void receiveData(uint8* buffer)}\newline
-Denne metode venter på at slaveRead bufferen er blevet fyldt. Når dette er sket, bliver slaveRead bufferen kopieret over i "buffer".
+\noindent Denne metode venter på at slaveRead bufferen er blevet fyldt. Når dette er sket, bliver slaveRead bufferen kopieret over i \textit{buffer}.
 
 \subsubsection{I2C indstillinger på PSoC}
-I forbindelse med at have en I2C forbindelse på PSoC'en, er der et par indstillinger der skal sættes. Hver PSoC der gør brug af I2C, sættes til at være en "Multi-master-slave". Dette gøres for at alle I2C enheder kan gøre brug af "I2CCommunication" klassen, idét at denne indeholder funktioner for både master og slave. 
-En anden vigtig indstilling er I2C bussens 'Data Rate'. Denne er fra PSoC creators side sat til 100kbps som standard, hvilket er en passende hastighed for dette projekt.
-En hver enhed på I2C nettet skal også have en adresse. En tabel for adressefordelingen ses på tabel \ref{table:I2CAddress}.
+I forbindelse med at have en I2C kommunikation på PSoC'en, er der et par indstillinger der skal sættes. Hver PSoC der gør brug af I2C, sættes til at være en \textit{Multi-master-slave}. Dette gøres for at alle I2C enheder kan gøre brug af \textit{I2CCommunication} klassen, idét at denne indeholder funktioner for både master og slave. 
+En anden vigtig indstilling er I2C bussens \textit{Data Rate}. Denne er sat til 100kbps.
+Enhver enhed på I2C nettet skal også have en adresse. Adressefordelingen ses i afsnit \ref{afsnit:I2CProtokol} på tabel \ref{table:I2CAddress}.
 
 \subsubsection{Send Data Algoritme}
-
-På figur \ref{figure:SendDataAlgorithm} ses et aktivitetsdiagram for algoritmen der sender bytes ud på I2C bussen.
+På figur \ref{figure:SendDataAlgorithm} ses et aktivitetsdiagram for algoritmen der sender databytes ud på I2C bussen.
 
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=\textwidth]{DesignOgImplementering/images/sendDataAlgorithm}
-	\caption{Sekvensdiagram der viser forløbet af \textit{sendData} metodens algoritme}
+	\caption{Aktivitetsdiagram over \textit{sendData} metodens algoritme}
 	\label{figure:SendDataAlgorithm}
 \end{figure}
 
-Algoritmen starter når funktionen \textit{sendData} bliver eksekveret. Herefter bliver potentielt tidligere fejltilstande for I2C softwaren nulstillet. I2C Masteren forsøger herefter at starte en transaktion med den slave der er blevet angivet i funktionskaldet. Hvis slaven findes på I2C bussen, bliver kommandotypen sendt, efterfulgt af alle bytes angivet i funktionskaldets buffer.
+\noindent Algoritmen starter når funktionen \textit{sendData} bliver eksekveret. Herefter bliver potentielt tidligere fejltilstande for I2C softwaren nulstillet. I2C Masteren forsøger herefter at starte en transaktion med den slave der er blevet angivet i funktionskaldet. Hvis slaven findes på I2C bussen, bliver kommandotypen sendt, efterfulgt af alle bytes angivet i funktionskaldets buffer.
 
 \subsubsection{Receive Data Algoritme}
-
 På figur \ref{figure:ReceiveDataAlgorithm} ses et aktivitetsdiagram for algoritmen der modtager bytes på I2C bussen.
 
 \begin{figure}[H]
 	\centering
 	\includegraphics[]{DesignOgImplementering/images/ReceiveDataAlgorithm}
-	\caption{Sekvensdiagram der viser forløbet af \textit{receiveData} metodens algoritme}
+	\caption{Aktivitetsdiagram over \textit{receiveData} metodens algoritme}
 	\label{figure:ReceiveDataAlgorithm}
 \end{figure}
 
 \noindent Algoritmen starter når funktionen \textit{receiveData} bliver eksekveret. Klienten der kalder funktionen angiver desuden en buffer ved navn \textit{receivedDataBuffer}. Denne buffer udfyldes med den modtagne I2C data. Det bliver tjekket om der er data klar til aflæsning på PSOC'ens I2C modtager buffer. Denne buffer er navngivet \textit{slaveDataBuffer} i aktivitetsdiagrammet. Hvis dette er tilfældet, bliver alle bytes fra \textit{slaveDataBuffer} overført til \textit{receivedDataBuffer}. På denne måde vil \textit{receivedDataBuffer} til slut indeholde alle bytes modtaget fra I2C bussen.
 
 \subsection{Nunchuck}
+\label{afsnit:nunchuckDI}
 I dette afsnit vil softwaren der specifikt omhandler kommunikationen mellem PSoC0 og Nunchucken blive beskrevet. Dette gøres vha. et klassediagram og klassebeskrivelser.
 
 \subsubsection{Klassediagram}
@@ -404,15 +400,17 @@ På figur \ref{figure:NunchuckKlassediagram} ses klassediagrammet for Nunchuck k
 \begin{figure}[H]
 	\centering
 	\includegraphics[]{DesignOgImplementering/images/nunchuck}
-	\caption{Klassediagram for klassen Nunchuck}
+	\caption{Klassediagram for Nunchuck klassen}
 	\label{figure:NunchuckKlassediagram}
 \end{figure}
 
 \subsubsection{Klassebeskrivelser}
-Metoderne fra klassediagrammet figur \ref{figure:NunchuckKlassediagram} vil blive beskrevet i dette afsnit.
+Metoderne fra klassediagrammet figur \ref{figure:NunchuckKlassediagram} vil blive beskrevet i dette afsnit. \newline
+
+\noindent Nunchuck klassen har til ansvar at læse data fra Wii-Nunchuck controlleren. For at aflæse og dekode data, er formler og andet information taget fra (Bilag/Dokumentation/WiiNunchuck.pdf). \newline
 
 \noindent\textbf{int NunchuckSendHandshake()}\newline
-Denne metode sender et "handshake" (Se dokumentationen afsnit \textbf{INSERT AFSNIT HER \#ref}) til Nunchuck enheden. Handshaket bruges til at "parre" PSoC'en med nunchucken. Metoden returnerer et '0' hvis der opstår en fejl. \newline
+Denne metode sender et \textit{handshake} til Nunchuck enheden. Handshaket bruges til at parre PSoC'en med nunchucken. Metoden returnerer et '0' hvis der opstår en fejl. \newline
 
 \noindent\textbf{int NunchuckRequestData()}\newline
 Denne metode sender et 0x00 til nunchuck'en, og derved beder nunchuck'en om at klargøre data til overførsel. Metoden returnerer et '0' hvis der opstår en fejl. \newline
@@ -420,7 +418,7 @@ Denne metode sender et 0x00 til nunchuck'en, og derved beder nunchuck'en om at k
 \noindent\textbf{int NunchuckreadData(uint8* buffer)}\newline
 Denne metode bruger PSoC Creator's I2C-API til at læse data fra nunchuck'en (data der blev klargjort fra NunchuckRequestData()). Disse data bliver derefter dekrypteret og gemt i "buffer", så de bliver tilgængelige uden for metodens scope. \newline
 
-I klassediagrammet er der en sektion kaldet "Defines". Disse Defines bruges i implementeringen til forskellige formål. \textit{PSoC0UnitAddress, PSoC1UnitAddres} og \textit{nunchuckUnitAddress} bruges til at definere adresserne for I2C-nettets slaver. \textit{NunchuckData, I2CTestRequest} og \textit{I2CTestACK} er kommando typer der bruges til at bestemme hvilken kommando type der er blevet sendt/modtaget, og hvor mange bytes der skal forventes at være gemt i databufferen (Se dokumentationen afsnit \textbf{INDSÆT REFERENCE TIL DOKUMENTATIONAFSNIT \#ref}) 
+\noindent I klassediagrammet er der en sektion kaldet \textit{Defines}. Disse Defines bruges i implementeringen til forskellige formål. \textit{PSoC0UnitAddress, PSoC1UnitAddres} og \textit{nunchuckUnitAddress} bruges til at definere adresserne for I2C-nettets slaver. \textit{NunchuckData, I2CTestRequest} og \textit{I2CTestACK} er kommando typer der bruges til at bestemme hvilken kommando type der er blevet sendt/modtaget, og hvor mange bytes der skal forventes at være gemt i databufferen. Se dokumentationen afsnit \ref{afsnit:I2CProtokol} tabel \ref{table:I2CKommandoer}.
 
 \subsubsection{Nunchuck Read Data Algoritme}
 
@@ -429,7 +427,7 @@ På figur \ref{figure:nunchuckReadDataAlgorithm} ses et aktivitetsdiagram for al
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=\textwidth]{DesignOgImplementering/images/nunchuckFlowActivity}
-	\caption{Sekvensdiagram der viser forløbet af \textit{NunchuckReadData} metodens algoritme}
+	\caption{Aktivitetsdiagram over \textit{NunchuckReadData} metodens algoritme}
 	\label{figure:nunchuckReadDataAlgorithm}
 \end{figure}
 
@@ -443,16 +441,16 @@ På tabel \ref{table:nunchuckActivityVariables} ses variablerne der indgår i ak
 		HandShakeSent    & \begin{tabular}[c]{@{}l@{}}Denne variabel indikerer om\\ der er sendt et handshake til Nunchuck'en\\ eller ej.\end{tabular}                              \\ \hline
 		SendNunchuckData & \begin{tabular}[c]{@{}l@{}}Denne variabel indikerer om der er aflæst\\ data fra Nunchuck som kan videresendes\\ til PSoC1 for motorstyring.\end{tabular} \\ \hline
 	\end{tabular}
-	\caption{Variabler der indgår i aktivitetsdiagrammet figur \ref{figure:nunchuckReadDataAlgorithm}}
+	\caption{Variable der indgår i aktivitetsdiagrammet figur \ref{figure:nunchuckReadDataAlgorithm}}
 	\label{table:nunchuckActivityVariables}
 \end{table}
 
-Algoritmen gentager sig selv indtil PSoC'en slukkes, så input fra Nunchuck'en konstant aflæses. Den grundlæggende idé er, at der først tjekkes på om et \textit{handshake} er sendt til Nunchuck'en eller ej, hvilket er et krav for at kunne aflæse data fra den. I tilfældet hvor det ikke er afsendt, vil algoritmen blive ved med at forsøge indtil dette lykkedes. Herefter vil algoritmen kontinuert aflæse data fra Nunchuk'en, dekode det og til sidst kalibrere det. Hvis der er en ukendt årsag ikke kan aflæses data, bliver \textit{handshakeSent} sat til false.
+Algoritmen gentager sig selv indtil PSoC'en slukkes, så input fra Nunchuck'en konstant aflæses. Den grundlæggende idé er, at der først tjekkes på om et \textit{handshake} er sendt til Nunchuck'en eller ej, hvilket er et krav for at kunne aflæse data fra den. I tilfældet hvor det ikke er afsendt, vil algoritmen blive ved med at forsøge indtil dette lykkedes. Herefter vil algoritmen kontinuert aflæse data fra Nunchuk'en, dekode det og til sidst kalibrere det. Hvis der er en ukendt årsag ikke kan aflæses data, bliver \textit{handshakeSent} sat til false. \newline
 
-Hvis der til slut er Nunchuck data at sende, vil denne data blive afsendt til PSoC1, og \textit{SendNunchuckData} sættes til false, så en aflæsning sker igen.
+\noindent Hvis der til slut er Nunchuck data at sende, vil denne data blive afsendt til PSoC1, og \textit{SendNunchuckData} sættes til false, så en aflæsning sker igen.
 
 \subsection{Rotationsbegrænsning}
-I forbindelse med begrænsning af motorens rotation er der nogle indstillinger der skal sættes. ADC'en skal indstilles til at gøre brug af en kanal i single mode, da der ét inputsignal fra potentiometret og denne skal bestemmes i forhold til stel. For at styre motorens bevægelse i et interval er følgende algoritme implementeret.
+I forbindelse med begrænsning af motorens rotation er der nogle indstillinger der skal sættes, se afsnit \ref{afsnit:rotationsbegraensning}. ADC'en skal indstilles til at gøre brug af en kanal i single mode, da der ét inputsignal fra potentiometret og denne skal bestemmes i forhold til stel. For at styre motorens bevægelse i et interval er følgende algoritme implementeret.
 
 \begin{figure}[H]
 	\centering
@@ -465,7 +463,7 @@ I forbindelse med begrænsning af motorens rotation er der nogle indstillinger d
 \noindent På figur \ref{fig:rotation} ses et aktivitetsdiagram for algoritmen for rotationsbegrænsning. Der er fastsat to værdier for ydergrænser. Når motoren bevæger sig udover ydergrænserne, blokeres motoren for den givne retning indtil motoren er tilbage i intervallet. 
 
 \subsection{Motorstyring}
-Til styring af motorene gøres der brug af fire PWM blokke, to til styring af X-aksen og to til styring af Y-aksen. Disse PWM blokke er indstillet med en clock frekvens på 3MHz. Til styring af motorene er følgende algoritme implementeret. 
+Til styring af motorene gøres der brug af fire PWM blokke, to til styring af X-aksen og to til styring af Y-aksen, se afsnit \ref{afsnit:H-bro}. Disse PWM blokke er indstillet med en clock frekvens på 3MHz. Til styring af motorene er følgende algoritme implementeret. 
 \begin{figure}[H]
 	\centering
 	\includegraphics[scale=0.8]{DesignOgImplementering/images/motorcontrolalgorithm}
@@ -475,53 +473,22 @@ Til styring af motorene gøres der brug af fire PWM blokke, to til styring af X-
 
 \noindent På figur \ref{fig:motorstyringal} ses aktivitetsdiagrammet for motorstyringsalgoritmen. Der ses at retningensignalerne bestemmes ud fra Wii-Nunchuck'ens inputværdier fra X- og Y-aksen.
 
-\section{Afkodning af Wii-Nunchuck Data Bytes}
-Aflæste bytes fra Wii-Nunchuck - indeholdende tilstanden af knapperne og det analoge stick - er kodet når de oprindeligt modtages via I2C bussen. Disse bytes skal altså afkodes før deres værdier er brugbare. Afkodningen af hver byte sker ved brug af følgende formel:
-
-\textit{AfkodetByte = (AflæstByte XOR 0x17) + 0x17}
-
-Fra formlen kan det ses at den aflæste byte skal \textit{XOR}'s (Exclusive Or) med værdien 0x17, hvorefter dette resultat skal adderes med værdien 0x17.
-
-\section{Kalibrering af Wii-Nunchuck Analog Stick}
-De afkodede bytes for Wii-Nunchuck's analoge stick har definerede standardværdier for dets forskellige fysiske positioner. Disse værdier findes i tabel \ref{tabel:WiiNunchuckStickPositioner}
-
-\begin{table}[H]
-	\centering
-	\begin{tabular}{|l|l|}
-		\hline
-		X-akse helt til venstre & 0x1E \\ \hline
-		X-akse helt til højre   & 0xE1 \\ \hline
-		X-akse centreret        & 0x7E \\ \hline
-		Y-akse centreret        & 0x7B \\ \hline
-		Y-akse helt frem        & 0x1D \\ \hline
-		Y-akse helt tilbage     & 0xDF \\ \hline
-	\end{tabular}
-	\caption{Standardværdier for fysiske positioner af Wii-Nunchuck's analoge stick}
-	\label{tabel:WiiNunchuckStickPositioner}
-\end{table}
-
-I praksis skal de afkodede værdier for det analoge stick kalibreres, da slør pga. brug gør at de ideale værdier ikke rammes. 
-
-I projektet er de afkodede værdier for det analoge stick kalibreret med værdien -15 (0x0F i hexadecimal), altså ser den endelige formel for afkodning samt kalibrering således ud:
-
-\textit{AfkodetByte = (AflæstByte XOR 0x17) + 0x17 - 0x0F}
-
-
 % % % % % % % % % % % % PSoC2 % % % % % % % % % % % % % % % % % % % % % % % %
-\subsection{PSoC2 - Affyringsmekanisme}
-
+\subsection{Affyringsmekanisme}
+\label{afsnit:affyringsmekanisme}
 PSoC2 anvendes til styring af affyringsmekanismen. Til rotationsdetektorens operationsforstærker er der anvendt en, der er indbygget i PSoC'en. Derudover styres bl.a. interrupt og PWM-signaler i forbindelse med affyringsmekanismen ved hjælp af PSoC2. Desuden aflæses spændingen fra rotationsdetektoren af en SAR ADC, som også findes på PSoC2. Til at håndtere affyringen er der opstillet en kodesekvens, som køres ved modtagelse af et interrupt. Et sekvensdiagram for afviklingen af koden i interruptet ses på figur \ref{fig:aktivitetsdiagramDetektor}. \\
 
- \begin{figure}[H]
- 	\centering
- 	\includegraphics[width=1\textwidth]{Afsnit/DesignOgImplementering/images/PSoC2sekvens.png}
- 	\caption{Sekvensdiagram for PSoC2 software ved affyring af kanonen} 
- 	\label{fig:aktivitetsdiagramDetektor}
- \end{figure}
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=1\textwidth]{Afsnit/DesignOgImplementering/images/PSoC2sekvens.png}
+	\caption{Sekvensdiagram for PSoC2 software ved affyring af kanonen} 
+	\label{fig:aktivitetsdiagramDetektor}
+\end{figure}
 
-For at affyringssekvensen initieres, skal der modtages et interrupt. Det sker, når brugeren affyrer kanonen, og PSoC1 sender et højt signal, som går ind på en inputpind på PSoC2, som så er programmeret til at trigge på rising edge og derved køre interruptrutinen. \\
-Det første der sker i interruptrutinen er, at ADC-værdien aflæses som en spænding i millivolt. Blokken til ADC'en, som er anvendt i koden ses på figur \ref{fig:PSoC2blokke}, og hvilke porte på PSoC2, de er forbundet til ses på figur \ref{fig:PSoC2ports}. Spændingen fra ADC'en lægges over i variablen "resVolt". Så startes motoren, derved begynder kanonen at affyre. PSoC'ens røde LED er af debugginghensyn som udgangspunkt tændt, når der ikke affyres, når interruptet kommer, slukkes den, og den grønne PSoC-LED tændes i stedet, for til debugging at indikere, at interruptrutinen køres.
- 
+\noindent For at affyringssekvensen initieres, skal der modtages et interrupt. Det sker, når brugeren affyrer kanonen, og PSoC1 sender et højt signal, som går ind på en inputpind på PSoC2, som så er programmeret til at trigge på rising edge og derved køre interruptrutinen. \newline
+
+\noindent Det første der sker i interruptrutinen er, at ADC-værdien aflæses som en spænding i millivolt. Blokken til ADC'en, som er anvendt i koden ses på figur \ref{fig:PSoC2blokke}, og hvilke porte på PSoC2, de er forbundet til ses på figur \ref{fig:PSoC2ports}. Spændingen fra ADC'en lægges over i variablen "resVolt". Så startes motoren, derved begynder kanonen at affyre. PSoC'ens røde LED er af debugginghensyn som udgangspunkt tændt, når der ikke affyres, når interruptet kommer, slukkes den, og den grønne PSoC-LED tændes i stedet, for til debugging at indikere, at interruptrutinen køres.
+
 
 \begin{figure}[H]
 	\centering
@@ -531,7 +498,7 @@ Det første der sker i interruptrutinen er, at ADC-værdien aflæses som en spæ
 \end{figure}
 
 
-Dernæst anvendes spændingen fra resVolt, der blev aflæst fra ADC'en så til at vurdere om fotodioden, kan se lyset fra den røde LED. Når de ikke kan se hinanden er spændingen 500 mV, og når de kan se hinanden er spædningen mellem 4000 og 5000 mV. Normalt indikerer det, at de kan se hinanden, at affyringen er færdig, og at motoren skal stoppes, men hvis de kan se hinanden på dette tidspunkt ved interruptets start, betyder det, at de, inden affyringen er startet, allerede er placeret så de kan se hinanden. Hvis det er tilfældet køres et delay på 30 ms, for at sikre at motoren er drejet, så de igen ikke kan se hinanden. Derefter aflæses spændingen ved ADC'en igen - nu for at tjekke om affyringen er afsluttet. 
+\noindent Dernæst anvendes spændingen fra resVolt, der blev aflæst fra ADC'en så til at vurdere om fotodioden, kan se lyset fra den røde LED. Når de ikke kan se hinanden er spændingen 500 mV, og når de kan se hinanden er spædningen mellem 4000 og 5000 mV. Normalt indikerer det, at de kan se hinanden, at affyringen er færdig, og at motoren skal stoppes, men hvis de kan se hinanden på dette tidspunkt ved interruptets start, betyder det, at de, inden affyringen er startet, allerede er placeret så de kan se hinanden. Hvis det er tilfældet køres et delay på 30 ms, for at sikre at motoren er drejet, så de igen ikke kan se hinanden. Derefter aflæses spændingen ved ADC'en igen - nu for at tjekke om affyringen er afsluttet. 
 
 \begin{figure}[H]
 	\centering
@@ -540,9 +507,11 @@ Dernæst anvendes spændingen fra resVolt, der blev aflæst fra ADC'en så til a
 	\label{fig:PSoC2ports}
 \end{figure}
 
-\noindent Aflæsningen gentages indtil fotodioden kan se den røde LED, og motoren dermed skal stoppes. Affyringen sker på langt under et sekund, og det er derfor ikke problematisk med polling. Alternativt, hvis affyringen varede længere tid, kunne det have været implementeret med et interrupt, men i dette tilfælde kan det klares ved at tjekke ADC'en flere gange. \\
-Når motoren er stoppet, slukkes den grønne debugging PSoC-LED, og der køres et delay på 500 ms, så der går et halvt sekund, inden der igen kan skydes. Derved undgås det, at kanonen affyres med det samme igen, hvis triggeren ved en fejl ikke er sluppet. Som det sidste tændes den røde PSoC LED, som ved debugging indikerer, at kanonen igen er klar til at blive affyret. \\
-Både PWM-signalet til affyring af motoren og til generering af 10 kHz til den røde LED styres af PSoC2. De to PWM-blokke deles om en clock, der er sat til en frekvens på 2,5 MHz. Forbindelsen mellem clock'en og PWM-blokkene ses på figur \ref{fig:PSoC2blokke}, og hvilke porte PWM-blokkenes udgange er forbundet til ses på figur \ref{fig:PSoC2ports}. PWM til den røde LED, har en periode på 250, dermed bliver PWM-signalet 10 kHz, som det også ses af ligning \ref{eq:yndlingsligning}.
+\noindent Aflæsningen gentages indtil fotodioden kan se den røde LED, og motoren dermed skal stoppes. Affyringen sker på langt under et sekund, og det er derfor ikke problematisk med polling. Alternativt, hvis affyringen varede længere tid, kunne det have været implementeret med et interrupt, men i dette tilfælde kan det klares ved at tjekke ADC'en flere gange. \newline
+
+\noindent Når motoren er stoppet, slukkes den grønne debugging PSoC-LED, og der køres et delay på 500 ms, så der går et halvt sekund, inden der igen kan skydes. Derved undgås det, at kanonen affyres med det samme igen, hvis triggeren ved en fejl ikke er sluppet. Som det sidste tændes den røde PSoC LED, som ved debugging indikerer, at kanonen igen er klar til at blive affyret. \newline
+
+\noindent Både PWM-signalet til affyring af motoren og til generering af 10 kHz til den røde LED styres af PSoC2. De to PWM-blokke deles om en clock, der er sat til en frekvens på 2,5 MHz. Forbindelsen mellem clock'en og PWM-blokkene ses på figur \ref{fig:PSoC2blokke}, og hvilke porte PWM-blokkenes udgange er forbundet til ses på figur \ref{fig:PSoC2ports}. PWM til den røde LED, har en periode på 250, dermed bliver PWM-signalet 10 kHz, som det også ses af ligning \ref{eq:yndlingsligning}.
 
 \begin{align}
 f_{LED} = \frac{f_{clock}}{periode_{LED}} \label{eq:yndlingsligning}
@@ -570,6 +539,35 @@ f_{LED} = \frac{2,5 MHz}{75}\nonumber
 f_{LED} = 33,33 kHz \nonumber
 \end{align}
 
+\section{Afkodning af Wii-Nunchuck Data Bytes}
+Aflæste bytes fra Wii-Nunchuck - indeholdende tilstanden af knapperne og det analoge stick - er kodet når de oprindeligt modtages via I2C bussen. Disse bytes skal altså afkodes før deres værdier er brugbare. Afkodningen af hver byte sker ved brug af følgende formel (Bilag/Dokumentation/WiiNunchuck.pdf): \newline
+\noindent \textit{AfkodetByte = (AflæstByte XOR 0x17) + 0x17} \newline
+
+\noindent Fra formlen kan det ses at den aflæste byte skal \textit{XOR}'s med værdien 0x17, hvorefter dette resultat skal adderes med værdien 0x17.
+
+\section{Kalibrering af Wii-Nunchuck Analog Stick}
+De afkodede bytes for Wii-Nunchuck's analoge stick har definerede standardværdier for dets forskellige fysiske positioner. (Bilag/Dokumentation/WiiNunchuck.pdf) Disse værdier findes i tabel \ref{tabel:WiiNunchuckStickPositioner}
+
+\begin{table}[H]
+	\centering
+	\begin{tabular}{|l|l|}
+		\hline
+		X-akse helt til venstre & 0x1E \\ \hline
+		X-akse helt til højre   & 0xE1 \\ \hline
+		X-akse centreret        & 0x7E \\ \hline
+		Y-akse centreret        & 0x7B \\ \hline
+		Y-akse helt frem        & 0x1D \\ \hline
+		Y-akse helt tilbage     & 0xDF \\ \hline
+	\end{tabular}
+	\caption{Standardværdier for fysiske positioner af Wii-Nunchuck's analoge stick}
+	\label{tabel:WiiNunchuckStickPositioner}
+\end{table}
+
+\noindent I praksis skal de afkodede værdier for det analoge stick kalibreres, da slør pga. brug gør at de ideale værdier ikke rammes. \newline
+
+\noindent I projektet er de afkodede værdier for det analoge stick kalibreret med værdien -15 (0x0F i hexadecimal), altså ser den endelige formel for afkodning samt kalibrering således ud: \newline
+
+\noindent \textit{AfkodetByte = (AflæstByte XOR 0x17) + 0x17 - 0x0F}
 
 \section{Hardwaredesign}
 På baggrund af BDD'et er der fundet følgende hardwareblokke, der skal udarbejdes: 
@@ -583,18 +581,23 @@ På baggrund af BDD'et er der fundet følgende hardwareblokke, der skal udarbejd
 Disse beskrives i de følgende afsnit. 
 
 \subsection{Motor}
-Der er valgt at bruge en DC-motor i alle tre tilfælde. De to motorer skal bruges til at styre kanonen i to retninger, og den sidste skal bruges i affyringsmekanismen. 
+Der er valgt at bruge en DC-motor i alle tre tilfælde \cite{legoMotor}. De to motorer skal bruges til at styre kanonen i to akser, og den sidste skal bruges i affyringsmekanismen. 
 
 \subsection{Motorstyring}
-Til at styre de tre motorer er der bygget en H-bro, der skal bruges i tre eksemplarer. To af disse motorer skal kunne styre kanonen, så den ene gør at den kan køre op og ned, og den anden gør, at den kan køre fra side til side. Den tredje skal bruges til at styre affyringsmekanismen. 
+Motorstyringen skal sørge for at kanonen kan styres i de vertikale og horizontale
+akser samt begrænse platformens rotation. Til at bevæge kanonen bruges to
+DC motorer, en til hver akse. Disse motorers rotationsretning styres med en
+H-bro. For at sikre at platformen ikke kan roteres 360 grader, er der udviklet
+en rotationsbegrænsning.
 
 \subsubsection{H-bro}
-Der blev først designet en H-bro, som bestod af to N-MOSFET's af typen IRLZ44(Bilag/Dokumentationrapport/IRLZ44) og to P-MOSFET's af typen ZVP3306A. Det viste sig dog, at den P-MOSFET, der var brugt, var for svag til at kunne trække den strøm, som motoren skulle bruge, hvilket betød, at den blev brændt af. Derfor blev denne H-bro modificeret, så de to P-MOSFET's blev udskiftet med to MOSFET's af typen IRF9Z34N(Bilag/Dokumentationrapport/irf9z34n p mosfet), der kan trække en større strøm. 
+\label{afsnit:H-bro}
+Der blev først designet en H-bro, som bestod af to N-MOSFET's af typen IRLZ44(Bilag/Dokumentation/IRLZ44.pdf) og to P-MOSFET's af typen ZVP3306A. Det viste sig dog, at den P-MOSFET, der var brugt, ikke kunne klare strøm, som motoren skulle bruge, hvilket betød, at den blev brændt af. Derfor blev denne H-bro modificeret, så de to P-MOSFET's blev udskiftet med to MOSFET's af typen IRF9Z34N(Bilag/Dokumentation/irf9z34n p mosfet.pdf), der kan trække en større strøm. 
 
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=\textwidth]{DesignOgImplementering/images/H-bro}
-	\caption{Kredsløb for H-bro}
+	\caption{Multisim kredsløb for H-bro}
 	\label{fig:hbro}
 	\end{figure}
 
@@ -603,7 +606,6 @@ Der blev først designet en H-bro, som bestod af to N-MOSFET's af typen IRLZ44(B
 	\begin{tabular}{|l|l|l}
 		\cline{1-2}
 		Betegnelse 	& Komponent 	          	 &  \\ \cline{1-2}
-		VCC        	& 5V                         &  \\ \cline{1-2}
 		Q1   		& IRLZ44 (MOSFET N-kanal)   &  \\ \cline{1-2}
 		Q2   		& IRLZ44 (MOSFET N-kanal)   &  \\ \cline{1-2}
 		Q3   		& IRLZ44 (MOSFET N-kanal)   &  \\ \cline{1-2}
@@ -633,40 +635,40 @@ Der blev først designet en H-bro, som bestod af to N-MOSFET's af typen IRLZ44(B
 
 \begin{itemize}
 \item MOSFET'er \\
-Til at styre motoren er der bygget en H-bro, som består af fire mosfet, hvor to af dem er af typen IRF9Z34N (mosfet P-channel, som er Q9 og Q10 på figur \ref{fig:hbro}) og de to andre mosfet er af typen IRLZ44 (mosfet N-Channel, som er Q3 og Q4 på figur\ref{fig:hbro}). Det er valgt at bruge mosfet for at kunne styre H-broen, da det ved denne er muligt at lukke og åbne for spændingen, og de bliver styret af spænding, i forhold til transistorer, som bliver styret af strøm. 
+Til at styre motoren er der bygget en H-bro, som består af fire mosfet, hvor to af dem er af typen IRF9Z34N (mosfet P-channel, som er Q9 og Q10 på figur \ref{fig:hbro}) og de to andre mosfet er af typen IRLZ44 (mosfet N-Channel, som er Q3 og Q4 på figur \ref{fig:hbro}). Det er valgt at bruge mosfet for at kunne styre H-broen, da det ved denne er muligt at lukke og åbne for spændingen, og de bliver styret af spænding, i forhold til transistorer, som bliver styret af strøm. 
 
 \begin{itemize}
 \item MOSFET N-kanal \\
-	Der er i denne H-bro brugt en N-kanals-MOSFET af typen IRLZ44(Bilag/Dokumentationrapport/IRLZ44). Denne MOSFET skal bruges til at trække strømmen fra den tilsvarende P-MOSFET til stel, så motoren kan begynde at køre. Det sker, når der kommer 5V ind på gate-benet. 
+	Der er i denne H-bro brugt en N-kanals-MOSFET af typen IRLZ44 (Bilag/Dokumentation/IRLZ44.pdf). Denne MOSFET skal bruges til at trække spændingen fra den tilsvarende P-MOSFET til stel, så motoren kan begynde at køre. Det sker, når der kommer 5V ind på gate-benet. 
 	\\MOSFET'en fungerer på den måde, at når der kommer positiv spænding ind på gate-benet åbner den, så der kommer forbindelse til stel og når der kommmer 0V ind på dette lukker den igen. 
 	
 	\begin{figure}[H]
 		\centering
 		\includegraphics[width=\textwidth]{DesignOgImplementering/images/grafn}
-		\caption{Gate-to-Source Voltage REFERENCE TIL DATABLAD HER!!!!}
+		\caption{Gate-to-Source Voltage(Bilag/Dokumentation/IRLZ44.pdf)}
 		\label{fig:mosfetn}
 	\end{figure}
 	
-	På figur \ref{fig:mosfetn} ses det, at når der er en gate-to-source-spænding på 5V, vil der MOSFET'en kunne klare, at der løber en strøm på op til 100A i følge datablad(Bilag/Dokumentationrapport/IRLZ44). Det vil altså ikke komme til at påvirke motoren, da denne kun kan trække en strøm på cirka 0,35A. 
+	På figur \ref{fig:mosfetn} ses det, at når der er en gate-to-source-spænding på 5V, vil der MOSFET'en kunne klare, at der løber en strøm på op til 100A i følge datablad(Bilag/Dokumentation/IRLZ44.pdf). Det vil altså ikke komme til at påvirke motoren, da denne kun kan trække en strøm på cirka 60mA. 
 	
 \item MOSFET P-kanal \\
-	Der er valgt at bruge en P-MOSFET af typen IRF9Z34N(Bilag/Dokumentationrapport/irf9z34n p mosfet). Denne MOSFET skal bruges til at trække de 12V ned til motoren, så denne kan køre. Samtidig sørger den for, at de 12V ikke løber ned til motoren så længe, der ikke er negativ spænding på gate-benet. 
-	Denne type MOSFET kan trække en strøm på 6,7A ifølge databladet (Bilag/Dokumentationrapport/irf9z34n p mosfet) \textbf{\#ref Reference til datablad}. Det vil altså ikke komme til at påvirke motoren, da den kun kan trække en strøm på cirka 0,35A. 
+	Der er valgt at bruge en P-MOSFET af typen IRF9Z34N (Bilag/Dokumentation/irf9z34n p mosfet.pdf). Denne MOSFET skal bruges til at trække de 9V ned til motoren, så denne kan køre. Samtidig sørger den for, at de 9V ikke løber ned til motoren så længe, der ikke er negativ spænding på gate-benet. 
+	Denne type MOSFET kan trække en strøm på 6,7A ifølge databladet (Bilag/Dokumentation/irf9z34n p mosfet.pdf). Det vil altså ikke komme til at påvirke motoren, da den kun kan trække en strøm på cirka 60mA. 
 	
 	For at der kan løbe spænding igennem IRF9Z34N, skal den have en negativ spænding for at åbne og en spænding på over 0V for at lukke. 
 	
 	\begin{figure}[H]
 		\centering
 		\includegraphics[width=\textwidth]{DesignOgImplementering/images/grafp}
-		\caption{Gate-to-Source Voltage (Bilag/Dokumentationrapport/irf9z34n p mosfet)}
+		\caption{Gate-to-Source Voltage (Bilag/Dokumentation/irf9z34n p mosfet.pdf)}
 		\label{fig:mosfetp}
 	\end{figure}
 	
-	På figuren \ref{fig:mosfetp} ses det, at når der er en gate-to-source-spænding på 5V, vil der kunne løbe en strøm på omkring 5A igennem MOSFET'en, hvilket er mere end nok til at få motoren til at køre. 
+	\noindent På figuren \ref{fig:mosfetp} ses det, at når der er en gate-to-source-spænding på 5V, vil der kunne løbe en strøm på omkring 5A igennem MOSFET'en, hvilket er mere end nok til at få motoren til at køre. 
 \end{itemize}
 
 \item Dioder \\
-Som det se på figur \ref{fig:hbro} er der sat en diode af typen IN5819(Bilag/Dokumentationrapport/1N5819) over fire af MOSFET'ene (Q9, Q10, Q3 og Q4). Disse skal fungere som beskyttelse af MOSFET'en. Det, dioden gør, er, at den sikrer, at den spænding, som er tilbage i motoren, når der lukkes for MOSFET'en, ikke løber tilbage ind i MOSFET'en og brænder den af.
+Som det se på figur \ref{fig:hbro} er der sat en diode af typen IN5819 (Bilag/Dokumentation/1N5819.pdf) over fire af MOSFET'ene (Q9, Q10, Q3 og Q4). Disse skal fungere som beskyttelse af MOSFET'en. Det, dioden gør, er, at den sikrer, at den spænding, som er tilbage i motoren, når der lukkes for MOSFET'en, ikke løber tilbage ind i MOSFET'en og brænder den af.
 
 \item Modstande
 \begin{itemize}
@@ -676,7 +678,7 @@ Som det se på figur \ref{fig:hbro} er der sat en diode af typen IN5819(Bilag/Do
 	\item Andre modstande
 	\begin{itemize}
 		\item R6 og R7\\
-			Grunden til, at R6 og R7(på figur \ref{fig:hbro}), er der, er for at sikre, at transistorernes Absolute Maximum Ratings omkring strømmen, som ikke må overstige 100mA ifølge databladet(Bilag/Dokumentationrapport/BC557) og (Bilag/Dokumentationrapport/BC547)
+			Grunden til, at R6 og R7(på figur \ref{fig:hbro}), er der, er for at sikre, at transistorernes Absolute Maximum Ratings omkring strømmen, som ikke må overstige 100mA ifølge databladet (Bilag/Dokumentation/BC557.pdf) og (Bilag/Dokumentation/BC547.pdf)
 		
 		\begin{displaymath}
 			R6=R7=\frac {9V}{100mA} =90\Omega
@@ -684,7 +686,7 @@ Som det se på figur \ref{fig:hbro} er der sat en diode af typen IN5819(Bilag/Do
 		Der blev valgt en modstand med en værdi på 100$\Omega$ i stedet, for at være på den sikre side. 
 		
 		\item R5 og R8 (jf. figur \ref{fig:hbro})\\
-		Grunden til at R5 og R8 er indsat i kredsløbet er, at der ifølge databladet kun kan løbe en strøm på omkring 30A igennem N-MOSFET, hvis Vgs er på 10V. Da Vgs, i  dette projekt, kun er sat til 5V, vil MOSFET'en altså ikke kunne klare en alt for stor strøm. Derfor er R5 og R8 sat ind for at forhindre, at MOSFET'en ikke brænder af. (Bilag/Dokumentationrapport/IRLZ44)\ref{datablad!!!!!}
+		Grunden til at R5 og R8 er indsat i kredsløbet er, at der ifølge databladet kun kan løbe en strøm på omkring 30A igennem N-MOSFET, hvis Vgs er på 10V. Da Vgs, i  dette projekt, kun er sat til 5V, vil MOSFET'en altså ikke kunne klare en alt for stor strøm. Derfor er R5 og R8 sat ind for at forhindre, at MOSFET'en ikke brænder af. (Bilag/Dokumentation/IRLZ44.pdf).
 		
 		Der blev fundet en modstand ved at regn med at der 9V og at mosfet kun kan klar en strøm under 30A så der blev regnet med de 30 A selv om man vidste godt det ikke var det som den kunne klare, men der skulle en større modstand ind, men det var så man havde noget at gå ud fra 
 		\begin{displaymath}
@@ -700,16 +702,17 @@ Som det se på figur \ref{fig:hbro} er der sat en diode af typen IN5819(Bilag/Do
 
 \item Transistorer
 \begin{itemize}
-	\item Q5 og Q7(Bilag/Dokumentationrapport/BC557) (jf. figur \ref{fig:hbro})
+	\item Q5 og Q7(Bilag/Dokumentation/BC557.pdf) (jf. figur \ref{fig:hbro})
 	Disse transistorer sidder i kredsløbet, fordi det tager tid for P-MOSFET'en at blive opladt helt og dermed åbne helt, på grund af kondensatoreffekten mellem benene på MOSFET'en.
 	
-	\item Q6 og Q8(Bilag/Dokumentationrapport/BC547) (jf. figur \ref{fig:hbro})
+	\item Q6 og Q8(Bilag/Dokumentation/BC547.pdf) (jf. figur \ref{fig:hbro})
 	Disse to transistorer sidder der for at hjælpe med at lukke P-MOSFET'en igen. Inden Q5 og Q7 blev sat ind tog det tid for at lukke P-MOSFET'en, men da de to blev sat ind, kunne de hjælpe til med at aflade MOSFET'en hurtigere. 
 \end{itemize}
 \end{itemize}
 
 \subsubsection{Rotationsbegrænsning}
-Platformen, som styres af motoren, må ikke kunne rotere 360 \(\deg\). Dette ses kravspecifikationen \textbf{\#ref Reference til kravspecikation (ikke-funktionelle krav)}. For at begrænse motorens bevægelse, anvendes et potentiometer samt en ADC. Når motoren bevæger sig, ændres potentiometerets modstandsværdi, og dermed ændres spændingsniveauet. På figur \ref{fig:opstillingADC} ses den endelige opstilling af rotationsbegrænsningen.
+\label{afsnit:rotationsbegraensning}
+Platformen, som styres af motoren, må ikke kunne rotere 360 grader. Dette ses i ikke funktionelle krav, afsnit \ref{afsnit:ikkeFunkKrav}. For at begrænse motorens bevægelse, anvendes et potentiometer samt en ADC. Når motoren bevæger sig, ændres potentiometerets modstandsværdi, og dermed ændres spændingsniveauet. På figur \ref{fig:opstillingADC} ses den endelige opstilling af rotationsbegrænsningen.
 
 \begin{figure}[H]
 	\centering
@@ -731,7 +734,7 @@ Platformen, som styres af motoren, må ikke kunne rotere 360 \(\deg\). Dette ses
 \noindent Det anvendte potentiometer har en størrelse på 47\(\ K\Omega\). Denne er lineær. Det vil sige at spændingen stiger proportionalt med modstanden. I potentiometeret findes en roterende kontakt, der danner en justerbar spændingsdeler. Når skaftet på potentiometret roteres ændres modstanden i de to variable modstande, \(\ R_{1}\) og  \(\ R_{2}\). På figur \ref{fig:potentiometer2} ses en konceptuel afbildning af de variable modstande i potentiometret, hvor der ses at udgangsspændingen er spændingen over \(\ R_{1}\). \newline
 
 \noindent \textbf{ADC} \newline
-For at kunne aflæse spændingen på potentiometeret, anvendes en 12-bit AD converter(Bilag/Dokumentationrapport/ADC\_SAR\_SEQ\_P4\_v2\_30) af typen Sequencing Successive Approximation ADC. En sequencing SAR ADC indeholder et sample-hold kredsløb. Kredsløbet holder på et indgangssignal indtil det næste signal registres på kredsløbets indgang. Dermed har converteren tid til at bestemme outputværdien. \newline \newline
+For at kunne aflæse spændingen på potentiometeret, anvendes en 12-bit AD converter(Bilag/Dokumentation/ADC\_SAR\_SEQ\_P4\_v2\_30.pdf) af typen Sequencing Successive Approximation ADC. En sequencing SAR ADC indeholder et sample-hold kredsløb. Kredsløbet holder på et indgangssignal indtil det næste signal registres på kredsløbets indgang. Dermed har converteren tid til at bestemme outputværdien. \newline \newline
 \noindent ADC'en fungerer ved at midscale indstilles til halvdelen af referencespændingen. Inputsignalet sammenlignes med midscale, hvis inputsignalet er højere end midscaleværdien sættes MSB 1 og hvis signalet er lavere bliver denne sat til 0. Herefter bliver midscale værdien rekursivt sat til havdelen af intervallet, som inputsignalet ligger indenfor, og bittene ned til LSB bliver sat. Bittene der sættes, bliver gemt i et register. Når konverteringen er gennemført, kan værdien af inputsignalet aflæses i dette register. 
 
 \begin{figure}[H]
@@ -757,9 +760,9 @@ Når kanonen affyres, styres det af motoren, og som mekanikken er opbygget, er d
 	\label{fig:detektor}
 \end{figure}
 
-Den røde LED og fotodioden anbringes på affyringsmekanismen, som det ses på figur \ref{fig:detektor}. De vender ind mod hinanden, men er adskilt af papskiven. Papskiven er forbundet til motorens rotation, og hver gang et af papskivens hakker roterer forbi dioderne, kan de se hinanden. Fotodioden sender derefter et signal, som kan bruges til at stoppe motoren. Hvert hak passer med, at der er blevet affyret et skud.  
+\noindent Den røde LED og fotodioden anbringes på affyringsmekanismen, som det ses på figur \ref{fig:detektor}. De vender ind mod hinanden, men er adskilt af papskiven. Papskiven er forbundet til motorens rotation, og hver gang et af papskivens hakker roterer forbi dioderne, kan de se hinanden. Fotodioden sender derefter et signal, som kan bruges til at stoppe motoren. Hvert hak passer med, at der er blevet affyret et skud.  \newline
 
-Detektoren skal kun sende et signal, når fotodioden ser lyset fra LED'en. Det er derfor vigtigt, at den ikke bliver forstyrret af dagslys og andre lyskilder. For at sikre dette, styres den røde LED af et PWM-signal, så LED'en blinker med en frekvens på 10 kHz. Detektoren opbygges tilsvarende af et båndpasfilter, med en centerfrekvens på 10 kHz, som sorterer andre frekvensområder og DC-signaler fra. 10 kHz er rigeligt højt, til at det for øjet ikke er synligt at LED'en blinker. Samtidig er det ikke for højt til, at en almindelig operationsforstærker kan håndtere det. På figur \ref*{fig:detektortand} ses et kredsløbsdiagram for detektoren og LED'en.
+\noindent Detektoren skal kun sende et signal, når fotodioden ser lyset fra LED'en. Det er derfor vigtigt, at den ikke bliver forstyrret af dagslys og andre lyskilder. For at sikre dette, styres den røde LED af et PWM-signal, så LED'en blinker med en frekvens på 10 kHz. Detektoren opbygges tilsvarende af et båndpasfilter, med en centerfrekvens på 10 kHz, som sorterer andre frekvensområder og DC-signaler fra. 10 kHz er rigeligt højt, til at det for øjet ikke er synligt at LED'en blinker. Samtidig er det ikke for højt til, at en almindelig operationsforstærker kan håndtere det. På figur \ref*{fig:detektortand} ses et kredsløbsdiagram for detektoren og LED'en.
 
 \begin{figure}[H]
 	\centering
@@ -768,7 +771,7 @@ Detektoren skal kun sende et signal, når fotodioden ser lyset fra LED'en. Det e
 	\label{fig:detektortand}
 \end{figure}
 
-Båndpasfiltret er opbygget af et højpasfilter, et lavpasfilter og en operationsforstærker. Da PSoC'en har en indbygget operationsforstærker, anvendes denne. Software design og implementering af den ses under \ref{PSoC Software!!!!}. Højpasfilterets afskæringsfrekvens er beregnet på følgende måde: \\
+\noindent Båndpasfiltret er opbygget af et højpasfilter, et lavpasfilter og en operationsforstærker. Da PSoC'en har en indbygget operationsforstærker, anvendes denne. Software design og implementering af den ses under afsnit \ref{afsnit:affyringsmekanisme}. Højpasfilterets afskæringsfrekvens er beregnet på følgende måde: \\
 
 %%%%%Højpasfilter cutoff%%%%
 \begin{equation}
@@ -784,11 +787,11 @@ Og lavpasfilterets afskæringsfrekvens er beregnet på følgende måde: \\
 	\label{cutofflavpas}
 \end{equation} \\
 
-I begge beregninger gælder det, at R er filterets modstandsværdi og C er filterets kondensatorværdi. 
+I begge beregninger gælder det, at R er filterets modstandsværdi og C er filterets kondensatorværdi. \newline
 
-Da båndpasfilteret har en meget stor båndbredde kan det ikke undgås, at der slipper nogle DC-lyssignaler igennem alligevel. Kondensatoren C1 skal sørge for at frasortere de fleste af disse. Men da filteret virker som ønsket gør det ikke noget. 
+\noindent Da båndpasfilteret har en meget stor båndbredde kan det ikke undgås, at der slipper nogle DC-lyssignaler igennem alligevel. Kondensatoren C1 skal sørge for at frasortere de fleste af disse. Men da filteret virker som ønsket gør det ikke noget. \newline
 
-Af hensyn til operationsforstærkeren, er der valgt en referencespænding på 0,5 V på den positive indgang. Det er opnået ved en spændingsdeler, for hvilken beregning ses herunder: 
+\noindent Af hensyn til operationsforstærkeren, er der valgt en referencespænding på 0,5 V på den positive indgang. Det er opnået ved en spændingsdeler, for hvilken beregning ses herunder: 
 
 %%%%Spændingsdeler reference%%%%%
 \begin{align}
@@ -796,13 +799,13 @@ Af hensyn til operationsforstærkeren, er der valgt en referencespænding på 0,
 	\Rightarrow 0,5V &= 5V \cdot \frac{R_{2}}{18k\Omega + R_{2}} \\	
 	\Rightarrow R_{2}&=2k\Omega		\nonumber
 \end{align}
-\noindent hvor $U_{Ref}$ er den ønskede referencespænding, $U_{VCC}$ er forsyningsspændingen, $R_{1}$ ønskes at have en værdi på $18k\Omega$ og $R_{2}$ er den modstandsværdi, der ønskes beregnet. Kondensatoren C3 sikrer, at referencespændingen holdes på samme niveau hele tiden. 
+\noindent hvor $U_{Ref}$ er den ønskede referencespænding, $U_{VCC}$ er forsyningsspændingen, $R_{1}$ ønskes at have en værdi på $18k\Omega$ og $R_{2}$ er den modstandsværdi, der ønskes beregnet. Kondensatoren C3 sikrer, at referencespændingen holdes på samme niveau hele tiden. \newline
 
-Der er negativ feedback på operationsforstærkeren, hvilket sikrer, at der opretholdes samme spænding, 0,5 V, på begge indgange i operationsforstærkeren. Når fotodioden kan se den røde LED, genererer den en strøm, som bliver omsat til en spænding i kredsløbet. Operationsforstærkeren vil opretholde 0,5 V på den negative indgang. Den vil derfor regulere udgangen for at ophæve de ændringer, som fotodioden skaber på den negative indgang. Udgangssignalet vil dermed afspejle det PWM-signal, som den røde LED sender. 
+\noindent Der er negativ feedback på operationsforstærkeren, hvilket sikrer, at der opretholdes samme spænding, 0,5 V, på begge indgange i operationsforstærkeren. Når fotodioden kan se den røde LED, genererer den en strøm, som bliver omsat til en spænding i kredsløbet. Operationsforstærkeren vil opretholde 0,5 V på den negative indgang. Den vil derfor regulere udgangen for at ophæve de ændringer, som fotodioden skaber på den negative indgang. Udgangssignalet vil dermed afspejle det PWM-signal, som den røde LED sender. \newline
 
-Når fotodioden kan se lyset fra den røde LED er signalet, som kommer fra udgangen af operationsforstærkeren, et firkantsignal med en frekvens på 10 kHz,. Når fotodioden ikke kan se det røde lys, er spændingen på udgangen 0,5 V. Det ønskes omdannet til et signal, der går højt, når PWM-signalet starter, og går lavt, når PWM-signalet er væk igen. For at opnå dette, blev der lavet en envelopedetector, som er opbygget af en diode, en modstand og en kondensator. Dioden sikrer, at skulle der komme negative spændinger, så vil de blive frasorteret. Da dioden er af typen Scottky har den et lavt spædningsfald over sig, hvilket gør, at der vil være større afvigelser end hvis der var anvendt en anden slags diode. 
+\noindent Når fotodioden kan se lyset fra den røde LED er signalet, som kommer fra udgangen af operationsforstærkeren, et firkantsignal med en frekvens på 10 kHz,. Når fotodioden ikke kan se det røde lys, er spændingen på udgangen 0,5 V. Det ønskes omdannet til et signal, der går højt, når PWM-signalet starter, og går lavt, når PWM-signalet er væk igen. For at opnå dette, blev der lavet en envelopedetector, som er opbygget af en diode, en modstand og en kondensator. Dioden sikrer, at skulle der komme negative spændinger, så vil de blive frasorteret. Da dioden er af typen Scottky har den et lavt spædningsfald over sig, hvilket gør, at der vil være større afvigelser end hvis der var anvendt en anden slags diode. \newline
 
-Kondensatoren er dimentioneret efter, at den bliver opladet på de første udsving fra firkantsignalet. Modstanden er dimentioneret, så spændingen ikke aflades mellem svingningerne på 10 kHz signalet. En simulering af dette kan ses på figur \ref{fig:envdetsim}. 
+\noindent Kondensatoren er dimentioneret efter, at den bliver opladet på de første udsving fra firkantsignalet. Modstanden er dimentioneret, så spændingen ikke aflades mellem svingningerne på 10 kHz signalet. En simulering af dette kan ses på figur \ref{fig:envdetsim}. 
 
 \begin{figure}[H]
 	\centering

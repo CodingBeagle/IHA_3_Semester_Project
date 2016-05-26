@@ -211,7 +211,7 @@ Til arkitekturfasen er der gjort brug af applikationsmodeller som et analysevær
 \noindent Med konceptuelle klasser menes der at de ikke nødvændigvis behøver at have et 1:1 forhold med de implementerede klasser. De konceptuelle klasser bruges som inspiration til de klasser og funktioner der muligvis skal modelleres i projektets problemdomæne. 
 
 \subsection{Use Case 1 - Spil Goofy Candy Gun 3000}
-
+\label{afsnit:applikationsmodelUC1}
 Følgende afsnit præsenterer applikationsmodeller relevante til Use Case 1 - Spil Goofy Candy Gun 3000, fordelt over systemets CPU'er.
 
 På figur \ref{fig:WiiNunchuckSequenceDiagram} ses et overordnet sekvensdiagram for hvordan Nunchuck data bliver overført igennem systemet og påvirker motorer samt affyringsmekanismen.
@@ -318,6 +318,7 @@ På figur \ref{fig:klasseUC1PSoC2} ses det endelige klassediagram, hvor metodern
 
 \newpage
 \subsection{Use Case 2 - Test Kommunikationsprotokoller}
+\label{afsnit:applikationsmodelUC2}
 
 Følgende afsnit præsenterer applikationsmodeller relevante til Use Case 2 - Test Kommunikationsprotokoller, fordelt over systemets CPU'er.
 
@@ -450,6 +451,7 @@ På figur \ref{fig:sekvensPSoC1I2CTest} ses det at \textit{I2C Interface} græns
 Fra sekvensdiagrammet på figur \ref{fig:sekvensPSoC1I2CTest} udledes det endelige klassediagram som ses i figur \ref{fig:klassePSoC1}.
 
 \section{Samlede Klassediagrammer}
+\label{afsnit:samledeKlassediagrammer}
 Fra de detaljerede applikationsmodeller for use case 1- og 2, er der udledt samlede klassediagrammer for hver individuel CPU i systemet. Disse er med til at identificere konceptuelle klasser og funktionaliter der skal overvejes i implementation og design af systemet, og har altså fungeret som et udgangspunkt til resten af udviklingsprocessen.\newline\noindent
 Figur \ref{fig:CompleteClassDiagramDevKit8000}, \ref{fig:CompleteClassDiagramPSoC0}, \ref{fig:CompleteClassDiagramPSoC1}, og \ref{fig:CompleteClassDiagramPSoC2} vises de samlede klassediagrammer for hver CPU.\newline\noindent
 For disse klassediagrammer er der konceptuelle klasser som gentager sig selv. Alle klassediagrammer har én klasse af typen \textit{controller}. Disse klasse indeholder alt funktionalitet der er nødvændig for at kunne implementere systemets Use Cases. Yderligere bliver klasserne \textit{I2C Interface} samt \textit{SPI Interface} gentaget. Disse repræsenterer klasser for de tilsvarende bustyper, I2C og SPI, og bruges af softwaren til at sende og modtage data på disse busser.\newline\noindent
