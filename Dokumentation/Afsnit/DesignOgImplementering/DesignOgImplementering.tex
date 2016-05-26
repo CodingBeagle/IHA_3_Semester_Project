@@ -119,16 +119,16 @@ Interface driveren er bindeled mellem brugergrænsefladen og candydriveren. Inte
 
 \paragraph{Klassebeskrivelse} \mbox{} \\
 
-\textbf{bool SPITest()}
+bool SPITest():
 Denne metode initierer SPI-test ved at skrive SPI-kommandoen "241" til "dev/candygun", som er den node, der oprettes af Candydriveren. Dernæst indeholder funktionen et delay på 1 sek, for at give SPI-testen tid til at blive udført. Til sidst læser funktionen fra "dev/candygun" og tjekker om den får den korrekte returværdi, "209". Ved korrekt returværdi returnerer funktionen true. Ved fejl returnerer funktionen false.      
 
-\textbf{bool I2CTest()}
+bool I2CTest():
 Denne metode initierer I2C-test ved at skrive I2C-kommandoen "242" til "dev/candygun", som er den node, der oprettes af Candydriveren. Dernæst indeholder funktionen et delay på 1 sek, for at give I2C-testen tid til at blive udført. Til sidst læser funktionen fra "dev/candygun" og tjekker om den får den korrekte returværdi, "210". Ved korrekt returværdi returnerer funktionen true. Ved fejl returnerer funktionen false.
 
-\textbf{bool nunchuckTest()}	
+bool nunchuckTest():	
 Denne metode initierer nunchuck-test ved at skrive nunchuck-kommandoen "251" til "dev/candygun", som er den node, der oprettes af Candydriveren. Metoden tjekker "dev/candygun" efter 6 sekunder, om der er trykket på nunchuckknappen. Det ses ved den korrekte returværdi, "211". Ved korrekt returværdi returnerer funktionen true.
 
-\textbf{static void delay(int ms)}
+static void delay(int ms):
 Denne metode initierer et delay. Det valgte antal ms bliver lagt til det interne systemur. Når systemuret når til det sammenlagte tidspunkt, fortsættes programmet.
 
 \subsubsection{Systemtest GUI}
