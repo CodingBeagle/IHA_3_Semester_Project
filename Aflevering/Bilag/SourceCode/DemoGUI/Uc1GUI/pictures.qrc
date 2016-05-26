@@ -1,0 +1,8 @@
+<RCC>
+    <qresource prefix="/new/prefix1">
+        <file>SinglePlayerGoofy.png</file>
+        <file>TwoGunGoofy.png</file>
+        <file>background.jpg</file>
+        <file>../../Pictures/Goofybackground.jpeg</file>
+    </qresource>
+</RCC>

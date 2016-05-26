@@ -1,2 +1,0 @@
-#!/bin/bash
-scp hotplug_candygun_spi_device.ko candygunmod.ko root@10.9.8.2:/home/root/ 

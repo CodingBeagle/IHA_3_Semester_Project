@@ -1,1 +1,0 @@
-cmd_/home/stud/Documents/IHA_3_Semester_Project/Software/SPI/candydriver/candygunmod.o := arm-poky-linux-gnueabi-ld -EL    -r -o /home/stud/Documents/IHA_3_Semester_Project/Software/SPI/candydriver/candygunmod.o /home/stud/Documents/IHA_3_Semester_Project/Software/SPI/candydriver/candygun.o /home/stud/Documents/IHA_3_Semester_Project/Software/SPI/candydriver/candygun-spi.o 

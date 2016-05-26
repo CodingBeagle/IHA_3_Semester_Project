@@ -1,5 +1,0 @@
-\\BADBOY93\Users\Daniel\Documents\IHA_3_Semester_Project\Software\I2C Net\RealPSoC1\PSoC1\RealPSoC1\PSoC1.cydsn\PSoC1.cyprj|d47d8057-241e-49c8-b885-feff422fbfaa
-C:\Program Files (x86)\Cypress\PSoC Creator\3.3\PSoC Creator\psoc\content\default\CyAnnotationLibrary\CyAnnotationLibrary.cylib\CyAnnotationLibrary.cyprj|1abf84fc-221f-41a7-8d19-b221686b27a4
-C:\Program Files (x86)\Cypress\PSoC Creator\3.3\PSoC Creator\psoc\content\cycomponentlibraryupdates\CyComponentLibraryUpdates.cylib\CyComponentLibraryUpdates.cyprj|3f9ba040-14ec-4479-96f1-89470125cb9b
-C:\Program Files (x86)\Cypress\PSoC Creator\3.3\PSoC Creator\psoc\content\cycomponentlibrary\CyComponentLibrary.cylib\CyComponentLibrary.cyprj|e172bd50-f1ff-4688-9e03-fd6aab84a23e
-C:\Program Files (x86)\Cypress\PSoC Creator\3.3\PSoC Creator\psoc\content\cyprimitives\CyPrimitives.cylib\CyPrimitives.cyprj|dbc1063d-3bf6-4d7b-9b3c-573c88e4c923
