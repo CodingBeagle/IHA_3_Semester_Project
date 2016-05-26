@@ -61,7 +61,7 @@ I tabel \ref{hbrotabel} ses relevante komponentværdier for H-broen. En fyldestg
 \noindent For en fyldestgørende beskrivelse af H-broen, ses afsnit 4.5.2-\textit{Motorstyring side \#ref}. 
 
 \subsubsection{Rotationsbegrænsning}
-Platformen, som styres af motoren, må ikke kunne rotere 360 \(\deg\). Dette ses kravspecifikationen \textbf{\#ref Reference til kravspecikation (ikke-funktionelle krav)}. For at begrænse motorens bevægelse, anvendes et potentiometer samt en ADC. Når motoren bevæger sig, ændres potentiometerets modstandsværdi, og dermed ændres spændingsniveauet. På figur \ref{fig:opstillingADC} ses den endelige opstilling af rotationsbegrænsningen.
+Platformen, som styres af motoren, må ikke kunne rotere 360 \(\deg\). Dette ses kravspecifikationen \textbf{\#ref Reference til kravspecikation (ikke-funktionelle krav)}. For at begrænse motorens bevægelse, anvendes et potentiometer samt en ADC. Når motoren bevæger sig, ændres potentiometerets modstandsværdi, og dermed ændres spændingsniveauet. På figur \ref{fig:opstillingADC} ses den endelige opstilling af rotationsbegrænsningen. For mere information se dokumentationen afsnit 4.5.2-\textit{Motorstyring - Rotationsbegrænsning \#ref}
 
 \begin{figure}[H]
 	\centering
@@ -138,14 +138,10 @@ Selve kanonen og platformen den står på er bygget op af to træplader og LEGO.
  
 
 \section{Software}
-<<<<<<< dfe2329c690bdc6cbd2fe6d769088a383e23f241
-Dette afsnit indeholder designet for software komponenter og implementeringen af disse design.
-=======
 Følgende afsnit beskriver softwareimplementeringer relateret til kommunikation mellem systemets hardwareblokke.
->>>>>>> 0e275b3a63cf6e555881f7a73aa1be4d928052d0
 
 \subsection{SPI - Devkit8000}
-Candygun-driveren sørger for SPI-kommunikationen fra Devkit8000 til PSoC0. Driveren er skrevet i c, hvilket er typisk for drivere til linuxplatforme. I forbindelse med design og implementering af SPI, er der nogle indstillinger, der skal vælges. Disse indstilligner ses på tabel \ref{SPItabel}. Yderligere uddybning af de forskellige indstillinger kan ses i dokumentationen \#ref 
+Candygun-driveren sørger for SPI-kommunikationen fra Devkit8000 til PSoC0. Driveren er skrevet i c, hvilket er typisk for drivere til linuxplatforme. I forbindelse med design og implementering af SPI, er der nogle indstillinger, der skal vælges. Disse indstilligner ses på tabel \ref{SPItabel}. Yderligere uddybning af de forskellige indstillinger kan ses i dokumentationen afsnit 4.1.1-\textit{SPI Devkit 8000 - Candygun Driver \#ref} 
 
 \begin{table}[H]
 	\centering
@@ -198,7 +194,7 @@ Use case 2 styres via Systemtest GUI'en fra Devkit 8000. Dette afsnit beskriver 
 	\label{fig:GUIPic}
 \end{figure}
 
-\noindent Systemtest GUI'en er lavet med det indbyggede design framework i QT Creator 5\cite{Website:QTCreator}, se dokumentationen afsnit 7.1-\textit{QY Creator \#ref}.
+\noindent Systemtest GUI'en er lavet med det indbyggede design framework i QT Creator 5\cite{Website:QTCreator}, se dokumentationen afsnit 7.1-\textit{QT Creator \#ref}.
 QT frameworket opretter "hovedvinduet" i GUI'en som en klasse. Knapperne tilføjes som private slots i klassen hvilket gør dem i stand til interagere i GUI'en. Når en knap er assignet til et slot i klassen, og der trykkes på den pågældende knap, bliver det tildelte signal broadcastet og slot-funktionen bliver kørt. Alle tre knapper i GUI'en er assignet signal-typen "clicked()". \newline 
 
 \noindent Her vises en statemachine for Systemtest GUI'ens forløb igennem usecase 2.
