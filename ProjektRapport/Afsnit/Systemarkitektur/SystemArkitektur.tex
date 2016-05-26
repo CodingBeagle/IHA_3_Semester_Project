@@ -205,7 +205,7 @@ En essentiel del af systemet er at kunne styre motoren ved brug af Wii-Nunchuck 
 	\label{fig:WiiNunchuckSekvensDiagram}
 \end{figure}
 
-\subsubsection{System Test}
+\subsubsection{Systemtest}
 Use Case 2 beskriver test af systemet før spillet startes. På figur \ref{fig:SystemTestSekvensDiagram} vises test sekvensen for en vellykket test. 
 
 \begin{figure}[H]
@@ -227,7 +227,7 @@ For disse klassediagrammer er der konceptuelle klasser som gentager sig selv. Al
 På figur \ref{fig:CompleteClassDiagramDevKit8000} ses det at DevKit8000 controlleren skal have funktionalitet til start af system test, i relation til Use Case 2. For at kunne udføre dette kommunikerer den med grænsefladen Graphical User Interface (\textit{GUI}), for at kunne vise resultater til brugeren. Desuden skal controlleren kommunikere med grænsefladen \textit{SPI Interface}, for at sende data ud til til resten af systemet via SPI bussen.
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=\textwidth] {Systemarkitektur/images/CompleteClassDiagramDevKit8000}
+	\includegraphics[width=\textwidth] {Systemarkitektur/images/Devkitklassediagram.png}
 	\caption{Samlet Klassediagram for DevKit8000}
 	\label{fig:CompleteClassDiagramDevKit8000}
 \end{figure}
@@ -251,7 +251,7 @@ På figur \ref{fig:CompleteClassDiagramPSoC1} ses det at PSoC1 controlleren komm
 På figur \ref{fig:CompleteClassDiagramPSoC2} ses det at PSoC2 skal have funktionalitet til at aktivere afskydning, som gøres ved at kommunikere med grænsefladen \textit{Projectile Launcher}. Afskydningen aktiveres af grænsefladen \textit{PSoC1}.
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=\textwidth] {Systemarkitektur/images/CompleteClassDiagramPSoC2}
+	\includegraphics[width=\textwidth] {Systemarkitektur/images/affyringKlassediagram.png}
 	\caption{Samlet Klassediagram for PSoC2}
 	\label{fig:CompleteClassDiagramPSoC2}
 \end{figure}
