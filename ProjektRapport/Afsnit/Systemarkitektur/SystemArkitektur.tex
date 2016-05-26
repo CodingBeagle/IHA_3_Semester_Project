@@ -341,33 +341,32 @@ I afsnit \ref{afsnit:IBD}-\textit{IBD}, ses det på figur \ref{figure:ibdDiagram
 	\end{adjustwidth}
 \end{table}
 
-Kommandotyperne er primært udledt fra det samlede klassediagram for PSoC1, figur \ref{fig:CompleteClassDiagramPSoC1}. På figuren kan det ses at \textit{PSoC1 Controller} skal kunne aflæse input tilstand fra I2C Interface. På det samlede klassediagram for PSoC0, figur \ref{fig:CompleteClassDiagramPSoC0}, kan det også ses at PSoC0 Controller skal kunne udføre tilsvarende handling på I2C Interface. Denne funktionalitet er overført til kommandotypen \textit{NunchuckData}.
+\noindent Kommandotyperne er primært udledt fra det samlede klassediagram for PSoC1, figur \ref{fig:CompleteClassDiagramPSoC1}. På figuren kan det ses at \textit{PSoC1 Controller} skal kunne aflæse input tilstand fra I2C Interface. På det samlede klassediagram for PSoC0, figur \ref{fig:CompleteClassDiagramPSoC0}, kan det også ses at PSoC0 Controller skal kunne udføre tilsvarende handling på I2C Interface. Denne funktionalitet er overført til kommandotypen \textit{NunchuckData}.\newline
 
-Kolonnerne \textit{Binær Værdi} og \textit{Hex Værdi} i tabel \ref{table:I2CKommandoer} viser kommandotypens unikke tal-ID i både binær- og hexadecimalform. Denne værdi sendes som den første byte, for at identificere kommandotypen.
+\noindent Kolonnerne \textit{Binær Værdi} og \textit{Hex Værdi} i tabel \ref{table:I2CKommandoer} viser kommandotypens unikke tal-ID i både binær- og hexadecimalform. Denne værdi sendes som den første byte, for at identificere kommandotypen.\newline
 
-Kommandoens type definerer antallet af databytes modtageren skal forvente og hvordan disse skal fortolkes. På figur \ref{fig:I2CProtokolEksempel} ses et sekvensdiagram der, med pseudo-kommandoer, demonstrerer forløbet mellem en I2C afsender og modtager ved brug af kommunikations protokollen.
+\noindent Kommandoens type definerer antallet af databytes modtageren skal forvente og hvordan disse skal fortolkes. På figur \ref{fig:I2CProtokolEksempel} ses et sekvensdiagram der, med pseudo-kommandoer, demonstrerer forløbet mellem en I2C afsender og modtager ved brug af kommunikations protokollen.
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=\textwidth] {Systemarkitektur/images/I2CProtocol}
+	\includegraphics[width=\textwidth] {Systemarkitektur/images/I2CProtocol.pdf}
 	\caption{Eksempel af I2C Protokol Forløb}
 	\label{fig:I2CProtokolEksempel}
 \end{figure}
 
-På figur \ref{fig:I2CProtokolEksempel} ses at afsenderen starter en I2C transaktion, hvorefter typen af kommando sendes som den første byte. Efterfølgende sendes \textit{N} antal bytes, afhængig af hvor meget data den givne kommandotype har brug for at sende. Efter en afsluttet I2C transaktion læser I2C modtageren typen af kommando, hvor den herefter tolker \textit{N} antal modtagne bytes afhængig af den modtagne kommandotype.
+\noindent På figur \ref{fig:I2CProtokolEksempel} ses at afsenderen starter en I2C transaktion, hvorefter typen af kommando sendes som den første byte. Efterfølgende sendes \textit{N} antal bytes, afhængig af hvor meget data den givne kommandotype har brug for at sende. Efter en afsluttet I2C transaktion læser I2C modtageren typen af kommando, hvor den herefter tolker \textit{N} antal modtagne bytes afhængig af den modtagne kommandotype.
 
 \subsubsection{Designvalg}
-Den primære idé bag valg af kommandotype metoden til I2C kommunikations protokollen er først og fremmest så modtageren kan differentiere mellem flere handlinger i systemet. En anden vigtig grund er at man, ved kommandotyper, kan associere et dynamisk antal bytes til hver kommando. Dvs, hvis en modtager får en kommandotype \textit{A}, vil den vide at den efterfølgende skal læse 5 bytes, hvormiod at en kommandotype \textit{B} ville betyde at der kun skulle læses 2 bytes.
+Den primære idé bag valget af kommandotype metoden til I2C kommunikations protokollen er først og fremmest så modtageren kan differentiere mellem flere handlinger i systemet. En anden vigtig grund er at man, ved kommandotyper, kan associere et dynamisk antal bytes til hver kommando. Dvs, hvis en modtager får en kommandotype \textit{A}, vil den vide at den efterfølgende skal læse 5 bytes, hvormiod at en kommandotype \textit{B} ville betyde at der kun skulle læses 2 bytes.\newline
 
-En anden fordel ved kommandotype metoden er, at den er relativ simpel at implementere i kode, som vist ved pseudofunktionerne i figur \ref{fig:I2CProtokolEksempel}.
-
+\noindent En anden fordel ved kommandotype metoden er, at den er relativ simpel at implementere i kode, som vist ved pseudofunktionerne i figur \ref{fig:I2CProtokolEksempel}.
 
 \subsection{Brugergrænseflade}
-Ved hjælp af en brugergrænseflade, kan systemtesten styres fra DevKit8000.
+Ved hjælp af en brugergrænseflade, kan systemtesten styres fra Devkit 8000.
 Brugergrænsefladen er opbygget ud fra sekvensdiagrammet \ref{fig:SystemTestSekvensDiagram},
 ud fra dette kunne brugergrænsefladen skitseres som figur \ref{fig:GUISkitse}.
-Grænsefladen mellem DevKit8000 og PSoC0 er en SPI-bus som ses på figur \ref{afsnit:IBD}, og brugergrænsefladen er koblet til DevKit8000 ved hjælp af interfacedriveren.
-Brugergrænsefladen skal sende startsekvensen til interfacedriveren, hvorefter dette sendes til PSoC0 og videre ud i systemet.
+Grænsefladen mellem Devkit 8000 og PSoC0 er en SPI-bus som ses på figur \ref{afsnit:IBD}, og brugergrænsefladen er koblet til Devkit 8000 ved hjælp af interfacedriveren.
+Brugergrænsefladen skal sende startsekvensen til interfacedriveren, hvorefter dette sendes til PSoC0 og videre ud i systemet, som beskrevet i sekvensdiagrammet figur \ref{fig:SystemTestSekvensDiagram}.
 Brugergrænsefladen skal aflæse svaret fra systemtesten og printe dette ud i en konsol.
 
 \begin{figure}[H]
@@ -378,6 +377,6 @@ Brugergrænsefladen skal aflæse svaret fra systemtesten og printe dette ud i en
 \end{figure}
 
 \subsubsection{Designvalg}
-Brugergrænsefladen er designet ud fra den sekventielle struktur i usecase 2 \#Ref Dokumentation. Dette er løst ved hjælp af Event-Driven Programming.
+Brugergrænsefladen er designet ud fra den sekventielle struktur i use case 2, hvilken er beskrevet i afsnit \ref{afsnit:usecasebeskrivelseUC2} og i dokumentationen afsnit 3.5.2-\textit{Use case 2 - Test kommunikationsprotokoller} side \#ref. Dette er løst ved hjælp af Event-Driven Programming.
 Denne model drives ved hjælp af events, som i dette tilfælde aktiveres af brugeren ved knaptryk. Knapperne vil blive tildelt forskellige funktionaliteter, der faciliterer systemtesten.
 Et alternativ kunne være trådbaseret design. Kompleksiteten i dette design ville være overvældende i forhold til den ønskede funktionalitet og blev derfor fravalgt.
