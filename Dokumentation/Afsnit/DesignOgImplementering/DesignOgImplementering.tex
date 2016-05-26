@@ -1,13 +1,14 @@
 \chapter{Design og implementering}
 
 \section{Software Design}
+Dette afsnit indeholder designet for software komponenter og implementeringen af disse design.
 
 \subsection{SPI Devkit 8000 - Candygun driver}
 
 Candygun driveren sørger for SPI-kommunikationen fra Devkit8000 til PSoC0. Derved kan der sendes kommandoer og aflæses information fra PSoC0. Devkit 8000 fungerer som master og vil altid være den, der initierer en tranfer. 
 
 \subsubsection{Indstillinger for SPI}
-Indstilnger for SPI-kommunikationen ses i tabel \ref{SPItabel}. SPI-kommunikationen er implementeret med SPI bus nummer 1, SPI chip-select 0 og en hastighed på 1 MHz (et godt stykke under max på 20 MHz for en sikkerhedsskyld). Desuden starter clocken højt og data ændres på falling edge og aflæses på rising edge. Dermed bliver SPI Clock Mode 3. Derudover sendes der 8 bit pr transmission, hvilket passer med SPI-protokollen for projektet.\\
+Indstillinger for SPI-kommunikationen ses i tabel \ref{SPItabel}. SPI-kommunikationen er implementeret med SPI bus nummer 1, SPI chip-select 0 og en hastighed på 1 MHz (et godt stykke under max på 20 MHz for en sikkerhedsskyld). Desuden starter clocken højt og data ændres på falling edge og aflæses på rising edge. Dermed bliver SPI Clock Mode 3. Derudover sendes der 8 bit pr transmission, hvilket passer med SPI-protokollen for projektet.\\
 
 \begin{table}[H]
 	\centering
@@ -112,23 +113,25 @@ Interface driveren er bindeled mellem brugergrænsefladen og candydriveren. Inte
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=\textwidth]{DesignOgImplementering/images/InterfacedriverKlassediagram}
+	\includegraphics[width=0.5\textwidth]{DesignOgImplementering/images/InterfacedriverKlassediagram}
 	\caption{Klassediagram for Interface driveren på Devkit8000}
 	\label{fig:InterfacedriverKlassediagram}
 \end{figure}
 
 \paragraph{Klassebeskrivelse} \mbox{} \\
 
-bool SPITest():
-Denne metode initierer SPI-test ved at skrive SPI-kommandoen "241" til "dev/candygun", som er den node, der oprettes af Candydriveren. Dernæst indeholder funktionen et delay på 1 sek, for at give SPI-testen tid til at blive udført. Til sidst læser funktionen fra "dev/candygun" og tjekker om den får den korrekte returværdi, "209". Ved korrekt returværdi returnerer funktionen true. Ved fejl returnerer funktionen false.      
+bool SPITest():\newline
 
-bool I2CTest():
-Denne metode initierer I2C-test ved at skrive I2C-kommandoen "242" til "dev/candygun", som er den node, der oprettes af Candydriveren. Dernæst indeholder funktionen et delay på 1 sek, for at give I2C-testen tid til at blive udført. Til sidst læser funktionen fra "dev/candygun" og tjekker om den får den korrekte returværdi, "210". Ved korrekt returværdi returnerer funktionen true. Ved fejl returnerer funktionen false.
+\noindent Denne metode initierer SPI-test ved at skrive SPI-kommandoen "241" til "dev/candygun", som er den node, der oprettes af Candydriveren. Dernæst indeholder funktionen et delay på 1 sek, for at give SPI-testen tid til at blive udført. Til sidst læser funktionen fra "dev/candygun" og tjekker om den får den korrekte returværdi, "209". Ved korrekt returværdi returnerer funktionen true. Ved fejl returnerer funktionen false.      
 
-bool nunchuckTest():	
-Denne metode initierer nunchuck-test ved at skrive nunchuck-kommandoen "251" til "dev/candygun", som er den node, der oprettes af Candydriveren. Metoden tjekker "dev/candygun" efter 6 sekunder, om der er trykket på nunchuckknappen. Det ses ved den korrekte returværdi, "211". Ved korrekt returværdi returnerer funktionen true.
+bool I2CTest():\newline
 
-static void delay(int ms):
+\noindent Denne metode initierer I2C-test ved at skrive I2C-kommandoen "242" til "dev/candygun", som er den node, der oprettes af Candydriveren. Dernæst indeholder funktionen et delay på 1 sek, for at give I2C-testen tid til at blive udført. Til sidst læser funktionen fra "dev/candygun" og tjekker om den får den korrekte returværdi, "210". Ved korrekt returværdi returnerer funktionen true. Ved fejl returnerer funktionen false.\newline
+
+\noindent bool nunchuckTest():	
+Denne metode initierer nunchuck-test ved at skrive nunchuck-kommandoen "251" til "dev/candygun", som er den node, der oprettes af Candydriveren. Metoden tjekker "dev/candygun" efter 6 sekunder, om der er trykket på nunchuckknappen. Det ses ved den korrekte returværdi, "211". Ved korrekt returværdi returnerer funktionen true.\newline
+
+\noindent static void delay(int ms):
 Denne metode initierer et delay. Det valgte antal ms bliver lagt til det interne systemur. Når systemuret når til det sammenlagte tidspunkt, fortsættes programmet.
 
 \subsubsection{Systemtest GUI}
