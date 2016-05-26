@@ -221,11 +221,11 @@ Use case 2 beskriver test af systemet før spillet startes. På figur \ref{fig:S
 \label{afsnit:samledeKlasser}
 På baggrund af sekvensdiagrammerne i afsnit \ref{afsnit:informationFlow} samt de detaljerede applikationsmodeller beksrevet i dokumentationen, afsnit 3.5-\textit{Applikationsmodeller} side 25, er der udledt samlede klassediagrammer for hver individuel CPU i systemet. Disse er med til at identificere konceptuelle klasser og funktionaliter, der skal overvejes i implementation og design af systemet og har altså fungeret som et udgangspunkt for resten af udviklingsprocessen. \newline
 
-\noindent Figur \ref{fig:CompleteClassDiagramDevKit8000}, \ref{fig:CompleteClassDiagramPSoC0}, \ref{fig:CompleteClassDiagramPSoC1}, og \ref{fig:CompleteClassDiagramPSoC2} viser de samlede klassediagrammer for hver CPU.\newline
+\noindent Figur \ref{fig:CompleteClassDiagramDevKit8000}, \ref{fig:CompleteClassDiagramPSoC0}, \ref{fig:CompleteClassDiagramPSoC1} og \ref{fig:CompleteClassDiagramPSoC2} viser de samlede klassediagrammer for hver CPU.\newline
 
 \noindent For disse klassediagrammer er der konceptuelle klasser, som går igen på flere diagrammer. Alle klassediagrammer har én klasse af typen \textit{controller}. Disse klasser indeholder al funktionalitet, der er nødvendig for at kunne implementere systemets use cases. Derudover går klasserne \textit{I2C Interface} og \textit{SPI Interface} også igen på flere diagrammer. Disse repræsenterer klasser for de tilsvarende bustyper, I2C og SPI, og bruges af softwaren til at sende og modtage data på disse busser.\newline
 
-\noindent På figur \ref{fig:CompleteClassDiagramDevKit8000} ses det at Devkit 8000 controlleren skal have funktionalitet til start af systemtest, i relation til use case 2. For at kunne udføre dette, kommunikerer den med grænsefladen Graphical User Interface (\textit{GUI}), for at kunne vise resultater til brugeren. Desuden skal controlleren kommunikere med grænsefladen \textit{SPI Interface}, for at sende data ud til resten af systemet via SPI bussen.
+\noindent På figur \ref{fig:CompleteClassDiagramDevKit8000} ses det, at Devkit 8000 controllerklassen skal have funktionalitet til start af systemtest i relation til use case 2. For at kunne udføre dette, kommunikerer den med grænsefladen Graphical User Interface (\textit{GUI}), og kan dermed vise resultater til brugeren. Desuden skal controlleren kommunikere med grænsefladen \textit{SPI Interface} for at sende data ud til resten af systemet via SPI bussen.
 
 \begin{figure}[H]
 	\centering
@@ -234,7 +234,7 @@ På baggrund af sekvensdiagrammerne i afsnit \ref{afsnit:informationFlow} samt d
 	\label{fig:CompleteClassDiagramDevKit8000}
 \end{figure}
 
-\noindent På figur \ref{fig:CompleteClassDiagramPSoC0} ses det at PSoC0 controlleren skal have funktionalitet til at starte tests af systemets busser. Yderligere skal den også kunne aflæse, dekode og kalibrere data der kommer fra Nunchuck. I relation til disse funktionaliteter skal den kunne modtage og sende data på systemets I2C og SPI busser.
+\noindent På figur \ref{fig:CompleteClassDiagramPSoC0} ses det, at PSoC0 controlleren skal have funktionalitet til at starte tests af systemets busser. Yderligere skal den også kunne aflæse, dekode og kalibrere data, der kommer fra Nunchuck. I relation til disse funktionaliteter skal den kunne modtage og sende data på systemets I2C og SPI busser.
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=\textwidth] {Systemarkitektur/images/CompleteClassDiagramPSoC0}
@@ -242,7 +242,8 @@ På baggrund af sekvensdiagrammerne i afsnit \ref{afsnit:informationFlow} samt d
 	\label{fig:CompleteClassDiagramPSoC0}
 \end{figure}
 
-\noindent På figur \ref{fig:CompleteClassDiagramPSoC1} ses det at PSoC1 controlleren kommunikerer med grænsefladerne \textit{I2C Interface}, \textit{Motor Control} samt \textit{PSoC2}. Controlleren skal kunne regulere fart på systemets motorstyring, for at kunne styre kanonen. Desuden skal den kunne sende en affyringsbesked til \textit{PSoC2}. For at regulere fart og affyre kanonen, skal controlleren kunne aflæse Nunchucken's tilstand fra \textit{I2C Interface}.
+\noindent På figur \ref{fig:CompleteClassDiagramPSoC1} ses det, at PSoC1 controlleren kommunikerer med grænsefladerne \textit{I2C Interface}, \textit{Motor Control} samt \textit{PSoC2}. Controlleren skal kunne regulere hastighed på systemets motorstyring for at kunne styre kanonen. Desuden skal den kunne sende en affyringsbesked til \textit{PSoC2}. For at regulere hastighed og affyre kanonen, skal controlleren kunne aflæse Nunchucken's tilstand fra \textit{I2C Interface}.
+
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=\textwidth] {Systemarkitektur/images/CompleteClassDiagramPSoC1}
@@ -250,7 +251,7 @@ På baggrund af sekvensdiagrammerne i afsnit \ref{afsnit:informationFlow} samt d
 	\label{fig:CompleteClassDiagramPSoC1}
 \end{figure}
 
-\noindent På figur \ref{fig:CompleteClassDiagramPSoC2} ses det at PSoC2 skal have funktionalitet til at aktivere afskydning, som gøres ved at kommunikere med grænsefladen \textit{Projectile Launcher}. Afskydningen aktiveres af grænsefladen \textit{PSoC1}.
+\noindent På figur \ref{fig:CompleteClassDiagramPSoC2} ses det, at PSoC2 skal have funktionalitet til at aktivere afskydning, som gøres ved at kommunikere med grænsefladen \textit{Projectile Launcher}. Afskydningen aktiveres af grænsefladen \textit{PSoC1}.
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=\textwidth] {Systemarkitektur/images/affyringKlassediagram.png}
@@ -261,7 +262,7 @@ På baggrund af sekvensdiagrammerne i afsnit \ref{afsnit:informationFlow} samt d
 \subsection{SPI Kommunikations Protokol}
 I afsnit \ref{afsnit:IBD}-IBD, ses på figur \ref{figure:ibdDiagram} at Devkit 8000 og PSoC0 kommunikerer via en SPI bus. Kommunikationen foregår ved at der sendes kommandotyper imellem de to enheder, SPI-master og SPI-slave. På tabel \ref{tabel:spiKommandoType} ses en de anvendte kommandotyper samt en kort beskrivelse for hver af disse. En fuld beskrivelse af SPI-kommunikations protokollen kan ses i dokumentationen afsnit 3.7.1-\textit{SPI Protokol} side 44.\newline
 
-\noindent Der er til systemet valgt en SPI bus mellem Devkit 8000 og PSoC0, da der i dette tilfælde kun er brug for en bus med god support for én master og én slave. En SPI Bus skalerer ikke godt med multiple slaver i forhold til SPI, da en SPI bus skal have en fysisk forbindelse for hver enkelt slave der tilkobles. Bussen er dog simpel at implementere, og hver derfor ideel for denne grænseflade.
+\noindent Der er til systemet valgt en SPI bus mellem Devkit 8000 og PSoC0, da der i dette tilfælde kun er brug for en bus med god support for én master og én slave. En SPI bus skalerer ikke godt med flere slaver i forhold til SPI, da en SPI bus skal have en fysisk forbindelse for hver enkelt slave, der tilkobles. Bussen er dog at implementere og er derfor ideel for denne grænseflade.
 
 \begin{table}[H]
 	\centering
@@ -287,9 +288,10 @@ I afsnit \ref{afsnit:IBD}-IBD, ses på figur \ref{figure:ibdDiagram} at Devkit 8
 	\label{tabel:spiKommandoType}
 \end{table}
 
-\noindent Kommandotyperne er udledt fra det samlede klassediagram for Devkit 8000, figur \ref{fig:CompleteClassDiagramDevKit8000}. På figuren kan det ses at \textit{Devkit 8000 Controller} skal kunne starte tests for SPI, I2C, samt Nunchuck og aflæse resultatet af disse. \newline
+\noindent Kommandotyperne er udledt fra det samlede klassediagram for Devkit 8000, figur \ref{fig:CompleteClassDiagramDevKit8000}. På figuren kan det ses, at \textit{Devkit 8000 Controller} skal kunne starte tests for SPI, I2C samt Nunchuck og aflæse resultatet af disse. \newline
 
-\noindent Kommunikation på en SPI-bus foregår ved bit-shifting. Dette betyder at indholdet af masterens transfer buffer bliver skiftet over i slavens read buffer og omvendt. Kommunikationen foregår i fuld duplex, derfor skal der foretages to transmissioner for at aflæse data fra en SPI-slave. Dette skyldes at slaven skal vide hvilken data der skal klargøres i transfer-bufferen og klargøre denne buffer før masteren kan aflæse denne. Her skal der tages højde for at en længere proces skal gennemføres før slaven har klargjort transfer-buffern. Derfor skal masteren, efter at have sendt en kommandotype, vente et bestemt stykke tid før der at aflæses fra slavens transfer-buffer. Denne sekvens er illustreret med et sekvensdiagram på figur \ref{figure:SDSpiSlaveRead}.
+\noindent Kommunikation på en SPI-bus foregår ved bit-shifting. Dette betyder, at indholdet af masterens transfer buffer bliver skiftet over i slavens read buffer og omvendt. Kommunikationen foregår i fuld duplex, og derfor skal der foretages to transmissioner for at aflæse data fra en SPI-slave. Dette skyldes, at slaven skal vide hvilke data, der skal klargøres i transfer-bufferen og klargøre denne buffer før masteren kan aflæse denne. Her skal der tages højde for, at en længere proces skal gennemføres før slaven har klargjort transfer-bufferen. Derfor skal masteren efter at have sendt en kommandotype vente et bestemt stykke tid, før der aflæses fra slavens transfer-buffer. Denne sekvens er illustreret med et sekvensdiagram på figur \ref{figure:SDSpiSlaveRead}.
+
 \begin{figure}[H]
 	\centering
 	\includegraphics[]{Systemarkitektur/images/SDSpiSlaveRead}
@@ -298,9 +300,9 @@ I afsnit \ref{afsnit:IBD}-IBD, ses på figur \ref{figure:ibdDiagram} at Devkit 8
 \end{figure} 
 
 \subsubsection{Designvalg}
-SPI kommunikations protokollen er designet ud fra det grundlag at Devkit 8000, som SPI master, skal læse tilstande fra SPI slaven ved brug af en timeout model. Ved timeout model menes der at Devkit 8000 sender en kommandotype ud, venter et bestemt antal sekunder, og herefter læser værdien fra SPI slaven. Denne model er modelleret på figur \ref{figure:SDSpiSlaveRead}.\newline
+SPI kommunikationsprotokollen er designet ud fra det grundlag, at Devkit 8000 som SPI master skal læse tilstande fra SPI slaven ved brug af en timeout model. Ved timeout model menes der, at Devkit 8000 sender en kommandotype ud, venter et bestemt antal sekunder, og herefter læser værdien fra SPI slaven. Denne model er modelleret på figur \ref{figure:SDSpiSlaveRead}.\newline
 
-\noindent Et alternativt design ville være at generere et interrupt til SPI masteren når slaven havde data der skulle læses. Til dette system blev timeout modellen dog valgt, da det hardwaremæssigt var simplere at implementere, samt at alt nødvendig funktionalitet kan implementeres med den valgte model.
+\noindent Et alternativt design ville være at generere et interrupt til SPI masteren når slaven havde data der skulle læses. Til dette system blev timeout modellen dog valgt, da det hardwaremæssigt var simplere at implementere, samt at al nødvendig funktionalitet kan implementeres med den valgte model.
 
 \subsection{I2C Kommunikations Protokol}
 \label{afsnit:I2CProtokol}
@@ -325,9 +327,9 @@ I afsnit \ref{afsnit:IBD}-\textit{IBD}, ses det på figur \ref{figure:ibdDiagram
 	\label{table:I2CAddress}
 \end{table}
 
-\noindent Da I2C dataudveksling sker bytevist \cite{I2C}, er kommunikations protokollen opbygget ved, at kommandoens type indikeres af den første modtagne byte. Herefter følger \textit{N}-antal bytes som er kommandoens tilhørende data. \textit{N} er et vilkårligt heltal og bruges i dette afsnit når der refereres til en mængde data-bytes der sendes med en kommandotype.\newline
+\noindent Da I2C dataudveksling sker bytevist \cite{I2C}, er kommunikationsprotokollen opbygget ved, at kommandoens type indikeres af den første modtagne byte. Herefter følger \textit{N} antal bytes, som er kommandoens tilhørende data. \textit{N} er et vilkårligt heltal og bruges i dette afsnit, når der refereres til en mængde databytes, der sendes med en kommandotype.\newline
 
-\noindent På tabel \ref{table:I2CKommandoer} ses de definerede kommandotyper og det tilsvarende antal af bytes der sendes ved dataveksling.
+\noindent På tabel \ref{table:I2CKommandoer} ses de definerede kommandotyper, og det tilsvarende antal bytes, der sendes ved dataveksling.
 
 \begin{table}[H]
 	\begin{adjustwidth}{-3cm}{-\rightmargin}
@@ -345,11 +347,11 @@ I afsnit \ref{afsnit:IBD}-\textit{IBD}, ses det på figur \ref{figure:ibdDiagram
 	\end{adjustwidth}
 \end{table}
 
-\noindent Kommandotyperne er primært udledt fra det samlede klassediagram for PSoC1, figur \ref{fig:CompleteClassDiagramPSoC1}. På figuren kan det ses at \textit{PSoC1 Controller} skal kunne aflæse input tilstand fra I2C Interface. På det samlede klassediagram for PSoC0, figur \ref{fig:CompleteClassDiagramPSoC0}, kan det også ses at PSoC0 Controller skal kunne udføre tilsvarende handling på I2C Interface. Denne funktionalitet er overført til kommandotypen \textit{NunchuckData}.\newline
+\noindent Kommandotyperne er primært udledt fra det samlede klassediagram for PSoC1, som ses på figur \ref{fig:CompleteClassDiagramPSoC1}. På figuren kan det ses, at \textit{PSoC1 Controller} skal kunne aflæse inputtilstand fra \textit{I2C Interface}. På det samlede klassediagram for PSoC0, figur \ref{fig:CompleteClassDiagramPSoC0}, kan det også ses, at \textit{PSoC0 Controller} skal kunne udføre tilsvarende handling på \textit{I2C Interface}. Denne funktionalitet er overført til kommandotypen \textit{NunchuckData}.\newline
 
-\noindent Kolonnerne \textit{Binær Værdi} og \textit{Hex Værdi} i tabel \ref{table:I2CKommandoer} viser kommandotypens unikke tal-ID i både binær- og hexadecimalform. Denne værdi sendes som den første byte, for at identificere kommandotypen.\newline
+\noindent Kolonnerne \textit{Binær Værdi} og \textit{Hex Værdi} i tabel \ref{table:I2CKommandoer} viser kommandotypens unikke tal-ID i både binær- og hexadecimalform. Denne værdi sendes som den første byte for at identificere kommandotypen.\newline
 
-\noindent Kommandoens type definerer antallet af databytes modtageren skal forvente og hvordan disse skal fortolkes. På figur \ref{fig:I2CProtokolEksempel} ses et sekvensdiagram der, med pseudo-kommandoer, demonstrerer forløbet mellem en I2C afsender og modtager ved brug af kommunikations protokollen.
+\noindent Kommandoens type definerer antallet af databytes modtageren skal forvente, og hvordan disse skal fortolkes. På figur \ref{fig:I2CProtokolEksempel} ses et sekvensdiagram der med pseudo-kommandoer demonstrerer forløbet mellem en I2C afsender og modtager ved brug af kommunikationsprotokollen.
 
 \begin{figure}[H]
 	\centering
@@ -358,17 +360,16 @@ I afsnit \ref{afsnit:IBD}-\textit{IBD}, ses det på figur \ref{figure:ibdDiagram
 	\label{fig:I2CProtokolEksempel}
 \end{figure}
 
-\noindent På figur \ref{fig:I2CProtokolEksempel} ses at afsenderen starter en I2C transaktion, hvorefter typen af kommando sendes som den første byte. Efterfølgende sendes \textit{N} antal bytes, afhængig af hvor meget data den givne kommandotype har brug for at sende. Efter en afsluttet I2C transaktion læser I2C modtageren typen af kommando, hvor den herefter tolker \textit{N} antal modtagne bytes afhængig af den modtagne kommandotype.
+\noindent På figur \ref{fig:I2CProtokolEksempel} ses, at afsenderen starter en I2C transaktion, hvorefter kommandotypen sendes som den første byte. Efterfølgende sendes \textit{N} antal bytes, afhængig af, hvor meget data den givne kommandotype har brug for at sende. Efter en afsluttet I2C transaktion læser I2C modtageren typen af kommando, hvor den herefter tolker \textit{N} antal modtagne bytes afhængig af den modtagne kommandotype.
 
 \subsubsection{Designvalg}
-Den primære idé bag valget af kommandotype metoden til I2C kommunikations protokollen er først og fremmest så modtageren kan differentiere mellem flere handlinger i systemet. En anden vigtig grund er at man, ved kommandotyper, kan associere et dynamisk antal bytes til hver kommando. Dvs, hvis en modtager får en kommandotype \textit{A}, vil den vide at den efterfølgende skal læse 5 bytes, hvormiod at en kommandotype \textit{B} ville betyde at der kun skulle læses 2 bytes.\newline
+Den primære idé bag valget af kommandotypemetoden til I2C-kommunikationsprotokollen er først og fremmest at give  mulighed for, at modtageren kan differentiere mellem flere handlinger i systemet. En anden vigtig grund er, at der ved kommandotyper kan associeres et dynamisk antal bytes til hver kommando. Det vil sige, at hvis en modtager får en kommandotype \textit{A}, vil den vide, at der efterfølgende skal læses 5 bytes, hvormiod at en kommandotype \textit{B} ville betyde, at der kun skulle læses 2 bytes.\newline
 
-\noindent En anden fordel ved kommandotype metoden er, at den er relativ simpel at implementere i kode, som vist ved pseudofunktionerne i figur \ref{fig:I2CProtokolEksempel}.
+\noindent En anden fordel ved kommandotypemetoden er, at den er relativt simpel at implementere i kode som vist ved pseudofunktionerne i figur \ref{fig:I2CProtokolEksempel}.
 
 \subsection{Brugergrænseflade}
 Ved hjælp af en brugergrænseflade, kan systemtesten styres fra Devkit 8000.
-Brugergrænsefladen er opbygget ud fra sekvensdiagrammet \ref{fig:SystemTestSekvensDiagram},
-ud fra dette kunne brugergrænsefladen skitseres som figur \ref{fig:GUISkitse}.
+Brugergrænsefladen er opbygget ud fra sekvensdiagrammet på figur \ref{fig:SystemTestSekvensDiagram}, og ud fra dette kunne brugergrænsefladen skitseres som på figur \ref{fig:GUISkitse}.
 Grænsefladen mellem Devkit 8000 og PSoC0 er en SPI-bus som ses på figur \ref{afsnit:IBD}, og brugergrænsefladen er koblet til Devkit 8000 ved hjælp af interfacedriveren.
 Brugergrænsefladen skal sende startsekvensen til interfacedriveren, hvorefter dette sendes til PSoC0 og videre ud i systemet, som beskrevet i sekvensdiagrammet figur \ref{fig:SystemTestSekvensDiagram}.
 Brugergrænsefladen skal aflæse svaret fra systemtesten og printe dette ud i en konsol.
