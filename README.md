@@ -4,6 +4,7 @@ Having a hard time today? Have a fluffy, and keep the goal in mind!: <br/>
 
 YAAAAAAAASSSSSSSS
 
+FUCK YASSSSSSSS
 
 ![DavidisDumbHoe](http://images.mentalfloss.com/sites/default/files/styles/article_640x430/public/istock_000020098551_small.jpg)
 
