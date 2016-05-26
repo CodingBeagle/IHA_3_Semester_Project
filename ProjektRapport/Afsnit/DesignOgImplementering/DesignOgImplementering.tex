@@ -17,7 +17,7 @@ H-broen er en del af motorblokken på BDD'et \ref{afsnit:BDD}. Denne har til opg
 		\label{fig:hbro}
 \end{figure}
 
-I tabel \ref{hbrotabel} ses relevante komponentværdier for H-broen. En fyldestgørende oversigt over disse ses i dokumentationen afsnit 4.5.2-\textit{Motorstyring}, \textit{Tabel 12, side \#ref}.
+I tabel \ref{hbrotabel} ses relevante komponentværdier for H-broen. En fyldestgørende oversigt over disse ses i dokumentationen afsnit 4.5.2-\textit{Motorstyring}, \textit{Tabel 12, side 78}.
 
 \begin{table}[H]
 	\centering
@@ -58,10 +58,10 @@ I tabel \ref{hbrotabel} ses relevante komponentværdier for H-broen. En fyldestg
 
 \noindent De fire dioder, der er indsat i kredsløbet, skal fungere som beskyttelse af de fire MOSFET's. Det, de gør, er, at de sikrer, at den spænding, som er tilbage i motoren, når der lukkes for MOSFET'ene, ikke løber tilbage ind i mosfetene og brænder dem af.\newline 
 
-\noindent For en fyldestgørende beskrivelse af H-broen, ses afsnit 4.5.2-\textit{Motorstyring side \#ref}. 
+\noindent For en fyldestgørende beskrivelse af H-broen, ses afsnit 4.5.2-\textit{Motorstyring side 78}. 
 
 \subsubsection{Rotationsbegrænsning}
-Platformen, som styres af motoren, må ikke kunne rotere 360 \(\deg\). Dette ses kravspecifikationen \textbf{\#ref Reference til kravspecikation (ikke-funktionelle krav)}. For at begrænse motorens bevægelse, anvendes et potentiometer samt en ADC. Når motoren bevæger sig, ændres potentiometerets modstandsværdi, og dermed ændres spændingsniveauet. På figur \ref{fig:opstillingADC} ses den endelige opstilling af rotationsbegrænsningen. For mere information se dokumentationen afsnit 4.5.2-\textit{Motorstyring - Rotationsbegrænsning \#ref}
+Platformen, som styres af motoren, må ikke kunne rotere 360 \(\deg\). Dette ses kravspecifikationen i dokumentationen afsnit 2.3-\textit{Ikke-funktionelle krav side 10}. For at begrænse motorens bevægelse, anvendes et potentiometer samt en ADC. Når motoren bevæger sig, ændres potentiometerets modstandsværdi, og dermed ændres spændingsniveauet. På figur \ref{fig:opstillingADC} ses den endelige opstilling af rotationsbegrænsningen. For mere information se dokumentationen afsnit 4.5.2-\textit{Motorstyring - Rotationsbegrænsning side 83}
 
 \begin{figure}[H]
 	\centering
@@ -141,7 +141,7 @@ Selve kanonen og platformen den står på er bygget op af to træplader og LEGO.
 Følgende afsnit beskriver softwareimplementeringer relateret til kommunikation mellem systemets hardwareblokke.
 
 \subsection{SPI - Devkit8000}
-Candygun-driveren sørger for SPI-kommunikationen fra Devkit8000 til PSoC0. Driveren er skrevet i c, hvilket er typisk for drivere til linuxplatforme. I forbindelse med design og implementering af SPI, er der nogle indstillinger, der skal vælges. Disse indstilligner ses på tabel \ref{SPItabel}. Yderligere uddybning af de forskellige indstillinger kan ses i dokumentationen afsnit 4.1.1-\textit{SPI Devkit 8000 - Candygun Driver \#ref} 
+Candygun-driveren sørger for SPI-kommunikationen fra Devkit8000 til PSoC0. Driveren er skrevet i c, hvilket er typisk for drivere til linuxplatforme. I forbindelse med design og implementering af SPI, er der nogle indstillinger, der skal vælges. Disse indstilligner ses på tabel \ref{SPItabel}. Yderligere uddybning af de forskellige indstillinger kan ses i dokumentationen afsnit 4.1.1-\textit{SPI Devkit 8000 - Candygun Driver side 50} 
 
 \begin{table}[H]
 	\centering
@@ -194,7 +194,7 @@ Use case 2 styres via Systemtest GUI'en fra Devkit 8000. Dette afsnit beskriver 
 	\label{fig:GUIPic}
 \end{figure}
 
-\noindent Systemtest GUI'en er lavet med det indbyggede design framework i QT Creator 5\cite{Website:QTCreator}, se dokumentationen afsnit 7.1-\textit{QT Creator \#ref}.
+\noindent Systemtest GUI'en er lavet med det indbyggede design framework i QT Creator 5\cite{Website:QTCreator}, se dokumentationen afsnit 7.1-\textit{QT Creator side 128}.
 QT frameworket opretter "hovedvinduet" i GUI'en som en klasse. Knapperne tilføjes som private slots i klassen hvilket gør dem i stand til interagere i GUI'en. Når en knap er assignet til et slot i klassen, og der trykkes på den pågældende knap, bliver det tildelte signal broadcastet og slot-funktionen bliver kørt. Alle tre knapper i GUI'en er assignet signal-typen "clicked()". \newline 
 
 \noindent Her vises en statemachine for Systemtest GUI'ens forløb igennem usecase 2.
@@ -206,7 +206,7 @@ QT frameworket opretter "hovedvinduet" i GUI'en som en klasse. Knapperne tilføj
 	\label{fig:StateMachineUC2}
 \end{figure}
 
-\noindent Statemaskinens, figur \ref{fig:StateMachineUC2}, forløb beskrives i dokumentationen, afsnit 4.1.2-\textit{Brugergrænseflade, Figur 48 \#ref} 
+\noindent Statemaskinens, figur \ref{fig:StateMachineUC2}, forløb beskrives i dokumentationen, afsnit 4.1.2-\textit{Brugergrænseflade, Figur 48 side 60}. 
 
 \noindent Systemtest GUI'en for UC2 er en simpel test-konsol. Den består af 3 knapper og et konsol vindue. GUI'en interfacer med SPI-protokollen, gennem vores interface driver. Den første knap, Start test, initierer UC2. Efterhånden som testen løbes igennem kaldes test funktionerne, og ved hjælp af if-conditions, bliver der tjekket på retur-værdierne fra interface-funktionerne. Hvis retur-værdien er true, skrives der en "--test successful" besked i konsol vinduet. og widgeten kører videre. Hvis retur-værdien er false, skrives der en "--test unsuccessful" i tekstvinduet og GUI'en returnerer til idle tilstand. Når alle test er successful, skrives "System test successful, system is ready for use" til konsol vinduet, og GUI'en returnerer til idle tilstand. Den anden knap, Clear, clearer konsollen til blank tilstand. Den tredje knap, Exit, lukker GUI'en. \newline
 \noindent Koblingen i GUI'en hænger udelukkende sammen med interfacedriveren. Knapperne kalder funktioner fra interfacedriveren, og ved ændring i disse funktioner, ville foresage ændringer i GUI'en. 
@@ -231,7 +231,7 @@ I dette afsnit beskriver Demo GUI'en for usecase 1. Strukturen for denne GUI er 
 	\label{fig:StateMachineDemo}
 \end{figure}
 
-\noindent Statemaskinen, figur \ref{fig:StateMachineDemo}, forklarer, hvordan Demo GUI'ens vinduer skifter tilstand i forhold til event-triggers. Se dokumentationen afsnit 4.1.2-\textit{Brugergrænseflade \#ref} 
+\noindent Statemaskinen, figur \ref{fig:StateMachineDemo}, forklarer, hvordan Demo GUI'ens vinduer skifter tilstand i forhold til event-triggers. Se dokumentationen afsnit 4.1.2-\textit{Brugergrænseflade side 54} 
 
 
 \subsection{Nunchuck}
@@ -269,7 +269,7 @@ De afkodede bytes for Wii-Nunchuck's analoge stick har definerede standardværdi
 \noindent \textit{AfkodetByte = (AflæstByte XOR 0x17) + 0x17 - 0x0F} \newline 
 
 \subsection{PSoC Software}
-På figur \ref{figure:klassediagramPSoC0} og \ref{figure:klassediagramPSoC1} ses de endelige klassediagrammer for PSoC0 og PSoC1. Disse klassediagrammer er designet ud fra applikationsmodellerne i dokumentationen afsnit 3.5-\textit{Applikationsmodeller \#ref} og de samlede klassediagrammer for UC1- og 2 i systemarkitekturen figur \ref{fig:CompleteClassDiagramPSoC0} og \ref{fig:CompleteClassDiagramPSoC1}. For at opretholde høj samhørighed, er der lavet en klasse for hver grænseflade. F.eks. indeholder Nunchuck klassen al den software der skal til for at kommunikere med en nunchuck-enhed. \newline 
+På figur \ref{figure:klassediagramPSoC0} og \ref{figure:klassediagramPSoC1} ses de endelige klassediagrammer for PSoC0 og PSoC1. Disse klassediagrammer er designet ud fra applikationsmodellerne i dokumentationen afsnit 3.5-\textit{Applikationsmodeller side 25} og de samlede klassediagrammer for UC1- og 2 i systemarkitekturen figur \ref{fig:CompleteClassDiagramPSoC0} og \ref{fig:CompleteClassDiagramPSoC1}. For at opretholde høj samhørighed, er der lavet en klasse for hver grænseflade. F.eks. indeholder Nunchuck klassen al den software der skal til for at kommunikere med en nunchuck-enhed. \newline 
 
 \noindent De efterfølgende afsnit vil beskrive klasserne og deres funktioner. 
 
@@ -282,7 +282,7 @@ På figur \ref{figure:klassediagramPSoC0} og \ref{figure:klassediagramPSoC1} ses
 	\end{adjustwidth}
 \end{figure}
 
-\noindent På figur \ref{figure:klassediagramPSoC0} ses det samlede klassediagram for klasserne som bruges til PSoC0 softwaren. Her kan det ses at der er en \textit{main} klasse. Denne indeholder programmets primære loop, som gentages indtil PSoC'en slukkes. I dette loop bliver der gjort brug af funktionaliteten fra klasserne \textit{SPICommunication}, \textit{I2CCommunication}, samt \textit{Nunchuck}. Disse klasser beskrives i afsnit \textit{I2CCommunication}, \textit{SPICommunication} og \textit{Nunchuck}. For mere detaljerede klasse- samt algoritmebeskrivelser ses dokumentation afsnit 4.2-\textit{PSoC Software \#ref}
+\noindent På figur \ref{figure:klassediagramPSoC0} ses det samlede klassediagram for klasserne som bruges til PSoC0 softwaren. Her kan det ses at der er en \textit{main} klasse. Denne indeholder programmets primære loop, som gentages indtil PSoC'en slukkes. I dette loop bliver der gjort brug af funktionaliteten fra klasserne \textit{SPICommunication}, \textit{I2CCommunication}, samt \textit{Nunchuck}. Disse klasser beskrives i afsnit \textit{I2CCommunication}, \textit{SPICommunication} og \textit{Nunchuck}. For mere detaljerede klasse- samt algoritmebeskrivelser ses dokumentation afsnit 4.2-\textit{PSoC Software side 60}
 
 \begin{figure}[H]
 	\centering
@@ -291,7 +291,7 @@ På figur \ref{figure:klassediagramPSoC0} og \ref{figure:klassediagramPSoC1} ses
 	\label{figure:klassediagramPSoC1}
 \end{figure}
 
-\noindent På figur \ref{figure:klassediagramPSoC1} ses det samlede klassediagram for klasserne som eksisterer på PSoC1 softwaren. Her kan det ses at der er en \textit{main} klasse. Denne indeholder programmets primære loop, som gentages indtil PSoC'en slukkes. I dette loop bliver der gjort brug af funktionaliteten fra klasserne \textit{I2CCommunication} og \textit{Nunchuck}. Disse klasser beskrives ligeledes i afsnit \textit{SPIcommunication} og \textit{I2Ccommunication}. For mere detaljerede klasse- samt algoritmebeskrivelser ses dokumentation afsnit 4.2-\textit{PSoC Software \#ref}.
+\noindent På figur \ref{figure:klassediagramPSoC1} ses det samlede klassediagram for klasserne som eksisterer på PSoC1 softwaren. Her kan det ses at der er en \textit{main} klasse. Denne indeholder programmets primære loop, som gentages indtil PSoC'en slukkes. I dette loop bliver der gjort brug af funktionaliteten fra klasserne \textit{I2CCommunication} og \textit{Nunchuck}. Disse klasser beskrives ligeledes i afsnit \textit{SPIcommunication} og \textit{I2Ccommunication}. For mere detaljerede klasse- samt algoritmebeskrivelser ses dokumentation afsnit 4.2-\textit{PSoC Software side 60}.
 
 \subsubsection{I2CCommunication}
 \label{afsnit:I2Ccommunication}
@@ -304,7 +304,7 @@ I systemarkitekturen, afsnit \ref{afsnit:samledeKlasser}, på figur \ref{fig:Com
 	\label{figure:klassediagramI2CCommunication}
 \end{figure}
 
-\noindent Den fulde klassebeskrivelse for I2CCommunication klassen kan findes i dokumentationen, afsnit 4.2.2-\textit{I2CCommunication \#ref}.
+\noindent Den fulde klassebeskrivelse for I2CCommunication klassen kan findes i dokumentationen, afsnit 4.2.2-\textit{I2CCommunication side 66}.
 
 \subsubsection{Nunchuck}
 \label{afsnit:nunchuckDI}
@@ -317,7 +317,7 @@ Nunchuck klassen er seperat fra I2CCommunication klassen, på trods af at kommun
 	\label{figure:NunchuckKlassediagram}
 \end{figure}
 
-\noindent Den fulde klassebeskrivelse for Nunchuck klassen og dens metoder kan ses i dokumentationen, afsnit 4.2.3-\textit{I2CCommunication \#ref}.
+\noindent Den fulde klassebeskrivelse for Nunchuck klassen og dens metoder kan ses i dokumentationen, afsnit 4.2.3-\textit{I2CCommunication side 69}.
 
 \subsubsection{SPICommunication}
 \label{afsnit:SPIcommunication}
@@ -330,11 +330,11 @@ I dette afsnit vil softwaren der specifikt omhandler SPI-kommunikationen mellem 
 	\label{figure:KlassediagramSPICommunication}
 \end{figure}
 
-En detaljeret klassebeskrivelse for SPICommunication klassen kan findes i dokumentationen, afsnit 4.2.1-\textit{SPICommunication \#ref}.
+En detaljeret klassebeskrivelse for SPICommunication klassen kan findes i dokumentationen, afsnit 4.2.1-\textit{SPICommunication side 62}.
 
 \subsection{Affyringsmekanisme}
  
-\noindent Affyringsmekanismen består udover hardware og mekanik også flere softwaredele, som er programmeret på PSoC2. Til rotationsdetektorens operationsforstærker er der anvendt en, der er indbygget i PSoC'en. Derudover styres bl.a. interrupt og PWM-signaler i forbindelse med affyringsmekanismen ved hjælp af PSoC2. Desuden aflæses spændingen fra rotationsdetektoren af en SAR ADC, som også findes på PSoC2. For at se hvor de forskellige pins er ført ud til på PSoC2, og yderligere uddybning af indstillingerne for de forskellige blokke henvises til dokumentationen, afsnit 4.2.6-\textit{Affyringsmekanisme \#ref}. I forbindelse med affyringen af kanonen køres en kodesekvens. Et sekvensdiagram for afviklingen af koden ses på figur \ref{fig:aktivitetsdiagramDetektor}.
+\noindent Affyringsmekanismen består udover hardware og mekanik også flere softwaredele, som er programmeret på PSoC2. Til rotationsdetektorens operationsforstærker er der anvendt en, der er indbygget i PSoC'en. Derudover styres bl.a. interrupt og PWM-signaler i forbindelse med affyringsmekanismen ved hjælp af PSoC2. Desuden aflæses spændingen fra rotationsdetektoren af en SAR ADC, som også findes på PSoC2. For at se hvor de forskellige pins er ført ud til på PSoC2, og yderligere uddybning af indstillingerne for de forskellige blokke henvises til dokumentationen, afsnit 4.2.6-\textit{Affyringsmekanisme side 73}. I forbindelse med affyringen af kanonen køres en kodesekvens. Et sekvensdiagram for afviklingen af koden ses på figur \ref{fig:aktivitetsdiagramDetektor}.
  
 \begin{figure}[H]
 	\centering

@@ -15,7 +15,7 @@ På figur \ref{figure:domainModel} ses domænemodellen for systemet. Denne har t
 
 \noindent Her repræsenteres hardware som blokke forbundet med associationer. Associationerne viser grænsefladerne mellem de forbundne hardware komponenter samt retningen af kommunikationen. Af modellen fremstår konceptuelle kommandoer for grænsefladerne, som beskriver deres nødvendige attributter. \newline
 
-\noindent Domænemodellen er brugt til at udlede grænseflader for systemet samt potentielle hardware- og softwarekomponenter. Hvad der er udledt af domænemodellen i forhold til grænseflader og komponenter, og hvordan dette bruges, præsenteres i de følgende arkitekturafsnit. Den fulde beskrivelse af domænemodellen ses i dokumentationen afsnit 3.1-\textit{Domænemodel} side \#ref
+\noindent Domænemodellen er brugt til at udlede grænseflader for systemet samt potentielle hardware- og softwarekomponenter. Hvad der er udledt af domænemodellen i forhold til grænseflader og komponenter, og hvordan dette bruges, præsenteres i de følgende arkitekturafsnit. Den fulde beskrivelse af domænemodellen ses i dokumentationen afsnit 3.1-\textit{Domænemodel} side 11.
 
 \section{Hardware}
 
@@ -54,8 +54,8 @@ Følgende afsnit indeholder en blokbeskrivelse samt en flowspecifikation for I2C
 		Rotationsbegrænsning &
 		\begin{tabular}[c]{@{}l@{}}Rotationsbegrænsning er til at begrænse platformens rotation så \\ den ikke kan dreje 360 grader. Den blok består af et potentiometer \\ og en ADC, som sidder internt på PSoC0.  \end{tabular} \\ \hline
 		PSoC1                   & \begin{tabular}[c]{@{}l@{}}PSoC1 indeholder software til I2C- \\ kommunikation og styring af Candy Gun 3000’s motorer. \\ PSoC1 fungerer som I2C slave. \end{tabular} \\ \hline
-		SPI (FlowSpecification) &  \begin{tabular}[c]{@{}l@{}}SPI (FlowSpecification) beskriver signalerne der indgår i SPI \\ bussen. En fuld beskrivelse af bussen kan ses i dokumentationen \\ afsnit 3.7.1-\textit{SPI Protokol} side \#ref \end{tabular} \\ \hline
-		I2C (FlowSpecification) &  \begin{tabular}[c]{@{}l@{}}I2C (FlowSpecification) beskriver signalerne der indgår i I2C \\ bussen. En fuld beskrivelse af bussen kan ses i dokumentationen \\ afsnit 3.7.2-\textit{I2C Protokol} side \#ref \end{tabular} \\ \hline	
+		SPI (FlowSpecification) &  \begin{tabular}[c]{@{}l@{}}SPI (FlowSpecification) beskriver signalerne der indgår i SPI \\ bussen. En fuld beskrivelse af bussen kan ses i dokumentationen \\ afsnit 3.7.1-\textit{SPI Protokol} side 44 \end{tabular} \\ \hline
+		I2C (FlowSpecification) &  \begin{tabular}[c]{@{}l@{}}I2C (FlowSpecification) beskriver signalerne der indgår i I2C \\ bussen. En fuld beskrivelse af bussen kan ses i dokumentationen \\ afsnit 3.7.2-\textit{I2C Protokol} side 46 \end{tabular} \\ \hline	
 		Projectile Launcher  &  \begin{tabular}[c]{@{}l@{}} Affyringsmekanismen indeholder PSoC2, Motor Control Shoot, \\ Motor Shoot og Rotation Detector og sørger dermed for \\ affyring af kanonen.  \end{tabular} \\ \hline
 		PSoC2  & \begin{tabular}[c]{@{}l@{}} PSoC2 indeholder en operationsforstærker til rotations-\\detektorkredsløbet og en ADC som aflæser rotationsdetektoren. \\ Derudover står den for at sende PWM-signaler til LED'en \\ i rotationsdetektoren og til motorstyringsblokken.   \end{tabular} \\ \hline
 		Motor Control Shoot  &  \begin{tabular}[c]{@{}l@{}} Denne blok står for at styre affyringsmekanismens motor.  \end{tabular} \\ \hline
@@ -82,7 +82,7 @@ På figur \ref{figure:ibdDiagram} ses IBD'et for systemet. Figuren viser hardwar
 
 \noindent Det ses, at systemet bliver påvirket af tre eksterne signaler: \textit{touch}, \textit{userinput}, samt \textit{motorVoltage}. \textit{touch} er input fra brugeren, når der interageres med brugergrænsefladen. \textit{userinput} er brugerens interaktion med Wii-Nunchuk. \textit{motorVoltage} er forsyningsspænding til systemet.\newline
 
-\noindent I tabel \ref{table:signalbeskrivelse} ses beskrivelser af alle signaler i systemet. Et mere detaljeret IBD for hardwareenhederne \textit{Projectile Launcher} og \textit{Motor Control} kan ses i dokumentationen afsnit 3.3 - \textit{IBD for Candy Gun 3000} side \#ref. 
+\noindent I tabel \ref{table:signalbeskrivelse} ses beskrivelser af alle signaler i systemet. Et mere detaljeret IBD for hardwareenhederne \textit{Projectile Launcher} og \textit{Motor Control} kan ses i dokumentationen afsnit 3.3 - \textit{IBD for Candy Gun 3000} side 13. 
 
 \newpage
 \subsection{Signalbeskrivelse}
@@ -219,7 +219,7 @@ Use case 2 beskriver test af systemet før spillet startes. På figur \ref{fig:S
 
 \subsection{Samlede Klassediagrammer}
 \label{afsnit:samledeKlasser}
-På baggrund af sekvensdiagrammerne i afsnit \ref{afsnit:informationFlow} samt de detaljerede applikationsmodeller beksrevet i dokumentationen, afsnit 3.5-\textit{Applikationsmodeller} side \#ref, er der udledt samlede klassediagrammer for hver individuel CPU i systemet. Disse er med til at identificere konceptuelle klasser og funktionaliter, der skal overvejes i implementation og design af systemet og har altså fungeret som et udgangspunkt for resten af udviklingsprocessen. \newline
+På baggrund af sekvensdiagrammerne i afsnit \ref{afsnit:informationFlow} samt de detaljerede applikationsmodeller beksrevet i dokumentationen, afsnit 3.5-\textit{Applikationsmodeller} side 25, er der udledt samlede klassediagrammer for hver individuel CPU i systemet. Disse er med til at identificere konceptuelle klasser og funktionaliter, der skal overvejes i implementation og design af systemet og har altså fungeret som et udgangspunkt for resten af udviklingsprocessen. \newline
 
 \noindent Figur \ref{fig:CompleteClassDiagramDevKit8000}, \ref{fig:CompleteClassDiagramPSoC0}, \ref{fig:CompleteClassDiagramPSoC1}, og \ref{fig:CompleteClassDiagramPSoC2} viser de samlede klassediagrammer for hver CPU.\newline
 
@@ -259,7 +259,7 @@ På baggrund af sekvensdiagrammerne i afsnit \ref{afsnit:informationFlow} samt d
 \end{figure}
 
 \subsection{SPI Kommunikations Protokol}
-I afsnit \ref{afsnit:IBD}-IBD, ses på figur \ref{figure:ibdDiagram} at Devkit 8000 og PSoC0 kommunikerer via en SPI bus. Kommunikationen foregår ved at der sendes kommandotyper imellem de to enheder, SPI-master og SPI-slave. På tabel \ref{tabel:spiKommandoType} ses en de anvendte kommandotyper samt en kort beskrivelse for hver af disse. En fuld beskrivelse af SPI-kommunikations protokollen kan ses i dokumentationen afsnit 3.7.1-\textit{SPI Protokol} side \#ref.\newline
+I afsnit \ref{afsnit:IBD}-IBD, ses på figur \ref{figure:ibdDiagram} at Devkit 8000 og PSoC0 kommunikerer via en SPI bus. Kommunikationen foregår ved at der sendes kommandotyper imellem de to enheder, SPI-master og SPI-slave. På tabel \ref{tabel:spiKommandoType} ses en de anvendte kommandotyper samt en kort beskrivelse for hver af disse. En fuld beskrivelse af SPI-kommunikations protokollen kan ses i dokumentationen afsnit 3.7.1-\textit{SPI Protokol} side 44.\newline
 
 \noindent Der er til systemet valgt en SPI bus mellem Devkit 8000 og PSoC0, da der i dette tilfælde kun er brug for en bus med god support for én master og én slave. En SPI Bus skalerer ikke godt med multiple slaver i forhold til SPI, da en SPI bus skal have en fysisk forbindelse for hver enkelt slave der tilkobles. Bussen er dog simpel at implementere, og hver derfor ideel for denne grænseflade.
 
@@ -304,7 +304,7 @@ SPI kommunikations protokollen er designet ud fra det grundlag at Devkit 8000, s
 
 \subsection{I2C Kommunikations Protokol}
 \label{afsnit:I2CProtokol}
-I afsnit \ref{afsnit:IBD}-\textit{IBD}, ses det på figur \ref{figure:ibdDiagram} at tre hardwareblokke kommunikerer via en I2C bus. Til denne I2C kommunikation er der defineret en protokol, som bestemmer hvordan modtaget data skal fortolkes. Denne protokol vil blive præsenteret her, men en fuld gennemgang kan findes i dokumentationen afsnit 3.7.2-\textit{I2C Protokol} side \#ref.\newline
+I afsnit \ref{afsnit:IBD}-\textit{IBD}, ses det på figur \ref{figure:ibdDiagram} at tre hardwareblokke kommunikerer via en I2C bus. Til denne I2C kommunikation er der defineret en protokol, som bestemmer hvordan modtaget data skal fortolkes. Denne protokol vil blive præsenteret her, men en fuld gennemgang kan findes i dokumentationen afsnit 3.7.2-\textit{I2C Protokol} side 46.\newline
 
 \noindent I2C bussen er brugt til disse forbindelser af to primære grunde. Først og fremmest er Nunchuck controlleren implementeret som en I2C Slave fra producentens side. Derfor skulle der gøres brug af en I2C bus i alle tilfælde, for at kommunikere med Nunchucken. Yderligere skulle Nunchuken's input sendes videre til PSoC1, og I2C er en bus der skalerer godt med multiple enheder \cite{i2cbus}. Derfor var det naturligt at udvide I2C bussen mellem Nunchuck og PSoC0, med PSoC1.\newline
 
@@ -381,6 +381,6 @@ Brugergrænsefladen skal aflæse svaret fra systemtesten og printe dette ud i en
 \end{figure}
 
 \subsubsection{Designvalg}
-Brugergrænsefladen er designet ud fra den sekventielle struktur i use case 2, hvilken er beskrevet i afsnit \ref{afsnit:usecasebeskrivelseUC2} og i dokumentationen afsnit 3.5.2-\textit{Use case 2 - Test kommunikationsprotokoller} side \#ref. Dette er løst ved hjælp af Event-Driven Programming.
+Brugergrænsefladen er designet ud fra den sekventielle struktur i use case 2, hvilken er beskrevet i afsnit \ref{afsnit:usecasebeskrivelseUC2} og i dokumentationen afsnit 3.5.2-\textit{Use case 2 - Test kommunikationsprotokoller} side 32. Dette er løst ved hjælp af Event-Driven Programming.
 Denne model drives ved hjælp af events, som i dette tilfælde aktiveres af brugeren ved knaptryk. Knapperne vil blive tildelt forskellige funktionaliteter, der faciliterer systemtesten.
 Et alternativ kunne være trådbaseret design. Kompleksiteten i dette design ville være overvældende i forhold til den ønskede funktionalitet og blev derfor fravalgt.
