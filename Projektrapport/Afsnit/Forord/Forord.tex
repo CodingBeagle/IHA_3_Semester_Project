@@ -3,6 +3,8 @@ I denne rapport vil produktet Goofy Candygun 3000 blive beskrevet. Goofy Candygu
 
 \noindent Gruppen, der har udviklet Goofy Candygun 3000, består af følgende syv personer: Kasper Rieder, Daniel Vestergaard Jensen, Mikkel Nielsen, Tenna Rasmussen, Michael Kloock, Mia Konstmann og Pernille Kjeldgaard. Gruppens vejleder er Gunvor Kirkelund. Rapporten skal afleveres fredag d. 27. maj 2016 og skal bedømmes ved en mundtlig en eksamen d. 22. juni 2016. Produktet dokumenteres foruden denne rapport med en procesrapport, et dokumentationsdokument og diverse bilag. \newline
 
+\noindent Følgende denne rapport er en procesrapport der beskriver gruppens brug af udviklingsmodellen scrum\cite{scrum}. Derudover beskriver procesrapporten udviklingsforløbet af projektet samt de værktøjer der er blevet anvendt til at fremme processen. \newline
+
 \noindent På tabel \ref{ansvarsomraader} ses opdelingen af ansvarsområder mellem projektgruppens medlemmer. Her bruges bogstavet \textit{P} til at angive \textit{primært} ansvar, hvor bogstavet \textit{S} angiver \textit{sekundært} ansvar.
 
 \begin{table}[H]
@@ -33,11 +35,7 @@ I denne rapport vil produktet Goofy Candygun 3000 blive beskrevet. Goofy Candygu
 		\rowcolor[HTML]{CBCEFB} 
 		\multicolumn{2}{l|}{\cellcolor[HTML]{CBCEFB}Rotationsbegrænsning}       &     &     &    &    &     &    &     \\ \cline{3-9} 
 		& PSoC Software                                   &     & P   & P  & S  &     &    &     \\ \cline{3-9} 
-		\rowcolor[HTML]{CBCEFB} 
-		\multicolumn{2}{l|}{\cellcolor[HTML]{CBCEFB}Use Case 2}                 &     &     &    &    &     &    &     \\ \cline{3-9} 
-		& Implementering                                  & P   & S   &    & P  &     &    &     \\ \cline{3-9} 
-		&                                                 &     &     &    &    &     &    &     \\ \cline{3-9} 
-		\rowcolor[HTML]{CBCEFB} 
+		\rowcolor[HTML]{CBCEFB}
 		\multicolumn{2}{l|}{\cellcolor[HTML]{CBCEFB}Motorstyring}               &     &     &    &    &     &    &     \\ \cline{3-9} 
 		& H-bro                                           &     &     & P  &    &     &    & P    \\ \cline{3-9} 
 		& Ultiboard Design                                &     &     & P  &    &     &    & P    \\ \cline{3-9} 
@@ -55,17 +53,32 @@ I denne rapport vil produktet Goofy Candygun 3000 blive beskrevet. Goofy Candygu
 
 
 \section{Læsevejledning}
-Produktet, der beskrives i denne rapport, indeholder et netværk af PSoC4 udviklingsboards. For at kunne skelne mellem disse PSoC's er de blevet nummeret efter deres placering i forhold til Devkit 8000. Dermed er numrene efter PSoC ikke en indikation af, hvilken PSoC version der bruges, da der kun arbejdes med PSoC4 chippen under dette projektforløb. Tabel \ref{PSoCNavngivning} giver en beskrivelse af ansvaret for hver PSoC samt deres navngivning.
+
+\textbf{PSoC Navngivning} \newline
+
+\noindent Produktet, der beskrives i denne rapport, indeholder et netværk af PSoC4 udviklingsboards. For at kunne skelne mellem disse PSoC's er de blevet nummeret efter deres placering i forhold til Devkit 8000. Dermed er numrene efter PSoC ikke en indikation af, hvilken PSoC version der bruges, da der kun arbejdes med PSoC4 chippen under dette projektforløb. Tabel \ref{PSoCNavngivning} giver en beskrivelse af ansvaret for hver PSoC samt deres navngivning. \newline 
 
 \begin{table}[H]
 	\centering
-	\label{PSoCNavngivning}
 	\begin{tabular}{|l|l|}
 		\hline
 		\textbf{Navn} & \textbf{Beskrivelse}                                                    \\ \hline
 		PSoC0         & Bindeled mellem Devkit 8000 og I2C netværket samt Wii-Nunchuck software \\ \hline
-		PSoC1         & Software til motorstyring samt software til affyringsmekanisme          \\ \hline
+		PSoC1         & Software til motorstyring \\ \hline
 		PSoC2         & Software til affyringsmekanisme                                         \\ \hline
 	\end{tabular}
 	\caption{Navngivning for PSoC4 udviklingsboards}
+	\label{PSoCNavngivning}
 \end{table}
+
+\noindent \textbf{Bilag} \newline
+
+\noindent Når der refereres til bilag bruges følgende konvention: \newline
+\noindent (Bilag/Mappe/Undermappe/Filnavn) \newline
+
+\noindent Som et eksempel gives: \newline
+\noindent \textit{"For flere detaljer se (Bilag/Dokumentation/WiiNunchuck.pdf)"}. \newline
+
+\noindent Her findes filen \textit{WiiNunchuck.pdf} så i mappen \textit{Bilag}, under mappen \textit{Dokumentation}.
+
+
