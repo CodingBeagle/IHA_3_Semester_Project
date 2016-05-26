@@ -1,19 +1,19 @@
 \chapter{Modultest}
 \label{afsnit:modulTest}
-Ved modultests blev én funktionalitet testet isoleret. Det vil sige med så lidt påvirkning fra resten af systemet som muligt. Modultests blev udført før integrationstests, for at sikre individuel funktionalitet før sammensætning af alle komponenter. Modultests blev udført både for software-komponenter og hardware-komponenter.
+Ved modultests blev én funktionalitet testet isoleret. Det vil sige med så lidt påvirkning fra resten af systemet som muligt. Modultests blev udført før integrationstests, for at sikre individuel funktionalitet før sammensætning af alle komponenter. Modultests blev udført både for software- og hardware-komponenter.
 
 \section{Software}
 Til modultest af software er der gjort brug af white-box testing. Dette er gjort, da softwaren ligger tæt op ad hardwaren til kommunikationsbusserne, hvilket kræver teknisk viden om den interne struktur for både hardware og software.
 
 \subsection{Modultest af Wii-Nunchuck}
-På PSoC0 er der software til aflæsning af Wii-Nunchuck input data. Følgende afsnit beskriver test af dette software.\newline
+På PSoC0 er der software til aflæsning af Wii-Nunchuck input data (Bilag/Dokumentation/WiiNunchuck.pdf). Følgende afsnit beskriver test af dette software.\newline
 
 \noindent Aflæsning af Wii-Nunchuck sker i to skridt, som begge verificeres ved modul test. Først skal der sendes et \textit{Handshake} fra PSoC0 til Wii-Nunchuck for at initialisere data udveksling, og herefter sker data udveksling hver gang PSoC0 sender en anmodning om det. Disse to skridt modultestes her.\newline
 
 
 \noindent PSoC0 blev programmeret til kontinuert aflæsning af Wii-Nunchuck. For at verificere data udveksling mellem PSoC0 og Wii-Nunchuck blev I2C bussen målt ved brug af Logic Analyzer fra Analog Discovery. \newline
 
-\noindent Data udveksling sker i to skridt. Først sender PSoC0 en byte med værdien 0 (0x00 i hexadecimal). Herefter sker den faktiske aflæsning, PSoC0 aflæser Wii-Nunchuck. Begge skridt testes her.
+\noindent Data udveksling sker i to skridt. Først sender PSoC0 en byte med værdien 0 (0x00 i hexadecimal). Herefter sker den faktiske aflæsning, PSoC0 aflæser Wii-Nunchuck. Begge skridt testes her. \newline
 
 
 \noindent\textbf{Test af Wii-Nunchuck Handshake}\newline
@@ -50,11 +50,12 @@ På PSoC0 er der software til aflæsning af Wii-Nunchuck input data. Følgende a
 \noindent Ud fra disse to modultests, er det konkluderet at dette modul fungerer efter hensigten. \newline 
 
 \subsection{SPI Protokol}
-Devkittet kommunikerer over en SPI bus. Kommunikationen følger SPI kommunikations protokollen, som er beskrevet i afsnit \ref{afsnit:spiprotokol}. Dette afsnit beskriver test af denne protokol.
+Devkit 8000 kommunikerer over en SPI bus. Kommunikationen følger SPI kommunikations protokollen, som er beskrevet i afsnit \ref{afsnit:spiprotokol}. Dette afsnit beskriver test af denne protokol.
 
 \subsubsection{SPI Bus Test}
-Test af SPI bussen udføres i to dele. Første del af testen udføres ved at sende kommandotypen for start af SPI test i terminalen, og derefter verificere den sendte data vha. Analog Discovery. Den anden del af testen, er at aflæse returbeskeden på bussen med Analog Discovery. Målet med denne test, er at læse kommandotypen "SPI\_OK", der indikerer en successful aflæsning af SPI-slaven.  På figur \ref{figure:SpiTestSetup} ses test opsætningen. Devkit8000, PSoC0s SPI-bus og Analog Discovery  er forbundet til hinanden igennem fumlebrættet. PSoC0 og PSoC1's I2C-forbindelser forbindes til nunchucken igennem fumlebrættet, adskilt fra SPI-forbindelserne.
+Test af SPI bussen udføres i to dele. Første del af testen udføres ved at sende kommandotypen for start af SPI test i terminalen, og derefter verificere den sendte data vha. Analog Discovery. Den anden del af testen, er at aflæse returbeskeden på bussen med Analog Discovery. Målet med denne test, er at læse kommandotypen "SPI\_OK", der indikerer en successful aflæsning af SPI-slaven.  På figur \ref{figure:SpiTestSetup} ses test opsætningen. Devkit 8000, PSoCs, SPI-bus og Analog Discovery  er forbundet igennem fumlebrættet. PSoC0 og PSoC1's I2C-bus forbindes til nunchucken igennem fumlebrættet, adskilt fra SPI-forbindelserne. \newline
 
+\noindent SPI kommandotyper kan ses i afsnit \ref{afsnit:spiprotokol}, tabel \ref{tabel:spiKommandoType}.
 
 \begin{figure}[H]
 	\centering
@@ -63,8 +64,7 @@ Test af SPI bussen udføres i to dele. Første del af testen udføres ved at sen
 	\label{figure:SpiTestSetup}
 \end{figure}
 
-
-I testen afsendes SPI test kommandotypen, som har værdien 0xF1 jf. tabel \ref{tabel:spiKommandoType}. For at verificere, at kommandotypen er sendt ud på SPI-bussen korrekt, blev Analog Discovery's 'Logic Analyzer' brugt til at aflæse SPI-bussen. Det var forventet at 0xF1 blev aflæst på bussen. Det afmålte resultat stemte overens med det forventede. Målingen ses på figur \ref{fig:SPItestkommandotype}. 
+\noindent I testen afsendes SPI test kommandotypen, som har værdien 0xF1 jf. tabel \ref{tabel:spiKommandoType}. For at verificere, at kommandotypen er sendt ud på SPI-bussen korrekt, blev Analog Discovery's 'Logic Analyzer' brugt til at aflæse SPI-bussen. Det var forventet at 0xF1 blev aflæst på bussen. Det afmålte resultat stemte overens med det forventede. Målingen ses på figur \ref{fig:SPItestkommandotype}. 
 
 \begin{figure}[H]
 	\centering
@@ -73,7 +73,7 @@ I testen afsendes SPI test kommandotypen, som har værdien 0xF1 jf. tabel \ref{t
 	\label{fig:SPItestkommandotype}
 \end{figure}
 
-Hvis SPI-kommunikationen fungerer korrekt, er det forventet at der aflæses 0xD1 på SPI-bussen, da dette betyder 'SPI\_OK' jf. tabel \ref{tabel:spiKommandoType}. Måling af returbeskeden ses på figur \ref{fig:SPItestSPIOK}.
+\noindent Hvis SPI-kommunikationen fungerer korrekt, er det forventet at der aflæses 0xD1 på SPI-bussen, da dette betyder 'SPI\_OK' jf. tabel \ref{tabel:spiKommandoType}. Måling af returbeskeden ses på figur \ref{fig:SPItestSPIOK}.
 
 \begin{figure}[H]
 	\centering
@@ -82,14 +82,12 @@ Hvis SPI-kommunikationen fungerer korrekt, er det forventet at der aflæses 0xD1
 	\label{fig:SPItestSPIOK}
 \end{figure}
 
-På figur \ref{fig:SPItestSPIOK} ses at returbeskeden har den forventede værdi 0xD1, som indikerer at SPI bus testens første del er gennemført uden fejl.
+\noindent På figur \ref{fig:SPItestSPIOK} ses at returbeskeden har den forventede værdi 0xD1, som indikerer at SPI bus testens første del er gennemført uden fejl. \newline
 
-Ud fra testenes resultater kan det konkluderes at implementeringen af SPI protokollen fungerer efter hensigten.
-
-
+\noindent Ud fra testenes resultater kan det konkluderes at implementeringen af SPI protokollen fungerer efter hensigten.
 
 \subsection{I2C Protokol}
-PSoC0 og PSoC1 kommunikerer over en I2C bus via I2C protokollen beskrevet i afsnit \ref{afsnit:I2CProtokol}. Dette afsnit beskriver test af denne protokol. Følgende test tager udgangspunkt i kommandotypen \textit{NunchuckData} beskrevet i tabel \ref{table:I2CKommandoer}).
+PSoC0 og PSoC1 kommunikerer via I2C protokollen beskrevet i afsnit \ref{afsnit:I2CProtokol}. Dette afsnit beskriver test af denne protokol. Følgende test tager udgangspunkt i kommandotypen \textit{NunchuckData} beskrevet i tabel \ref{table:I2CKommandoer}, i afsnit \ref{afsnit:I2CProtokol}.
 
 \subsubsection{Test af NunchuckData kommandotype} 
 
@@ -97,11 +95,9 @@ Testen blev udført i to dele. I første del måles I2C bussen ved brug af Analo
 
 \subsubsection{NunchuckData kommandotype test del 1}
 
-I testen afsendes, som nævnt i afsnittets indledning, kommandotypen NunchuckData. Som vist i tabel \ref{table:I2CKommandoer} har denne kommandotype ID'et 0xA2, hvor de efterfølgende 3 data bytes indeholder input dataen fra Wii-Nunchuck.
+I testen afsendes, som nævnt i afsnittets indledning, kommandotypen NunchuckData. Som vist i tabel \ref{table:I2CKommandoer}, afsnit \ref{afsnit:I2CProtokol} har denne kommandotype ID'et 0xA2, hvor de efterfølgende 3 data bytes indeholder input dataen fra Wii-Nunchuck. \newline
 
-Det forventede resultat af målingen er at første byte er kommandoentypens ID, som har værdien 0x2A. Kommandoens data - de efterfølgende bytes - verificeres først i anden del, disse indgår altså ikke i følgende måling. 
-
-Målingen ses på figur \ref{fig:NunchuckDataCommand}.
+\noindent Det forventede resultat af målingen er at første byte er kommandoentypens ID, som har værdien 0x2A. Kommandoens data - de efterfølgende bytes - verificeres først i anden del, disse indgår altså ikke i følgende måling. Målingen ses på figur \ref{fig:NunchuckDataCommand}.
 
 \begin{figure}[H]
 	\centering
@@ -110,47 +106,46 @@ Målingen ses på figur \ref{fig:NunchuckDataCommand}.
 	\label{fig:NunchuckDataCommand}
 \end{figure}
 
-Det kan ses på figur \ref{fig:NunchuckDataCommand} at I2C overførslen starter med en I2C \textit{write}, som får et successfuldt acknowledge fra slaven PSoC1. Herefter kan det ses at den næste byte der sendes har værdien 0x2A. Denne byte er kommandoentypens ID, og er altså som forventet 0x2A.
+\noindent Det kan ses på figur \ref{fig:NunchuckDataCommand} at I2C overførslen starter med en I2C \textit{write}, som får et successfuldt acknowledge fra slaven PSoC1. Herefter kan det ses at den næste byte der sendes har værdien 0x2A. Denne byte er kommandoentypens ID, og er altså som forventet 0x2A. \newline
 
-Det kan altså verificeres at kommandoen overføres via I2C bussen. Dataens integritet er dog ikke inkluderet i denne del, og testes i del 2.
+\noindent Det kan altså verificeres at kommandoen overføres via I2C bussen. Dataens integritet er dog ikke inkluderet i denne del, og testes i del 2.
 
 \subsubsection{NunchuckData kommandotype test del 2}
-For at verificere integriteten af den data der sendes mellem PSoC0 og PSoC1, bruges PSoC Creators indbyggede debugger. Igen er det kommandotypen NunchuckData der sendes mellem de to enheder, hvor de medfølgende data bytes fortolkes.
+For at verificere integriteten af den data der sendes mellem PSoC0 og PSoC1, bruges PSoC Creators indbyggede debugger. Igen er det kommandotypen NunchuckData der sendes mellem de to enheder, hvor de medfølgende data bytes fortolkes. \newline
 
-Testen gennemføres ved at fortolke den modtagne data tre gange, hvor nunchucken er i forskellige tilstande (hvilken retning det analoge stik er trykket) i hver test. Værdierne sammenlignes de forventede standardværdier som ses i tabellen på side 3 i \cite[I2C Interface with Wii Nunchuck]{Nunchuck}. Da testene kun er fokuserede på, hvilken retning den analoge stick er presset, er det altså kun receivedDataBuffer[1] (den analoge stick x-akse) og receivedDataBuffer[2] (den analoge pinds y-akse) der er relevante for testen. Når den analoge stick er presset til venstre, forventes det ifølge tabel \ref{tabel:WiiNunchuckStickPositioner} at receivedDataBuffer[1] er lig 0x1E og receivedDataBuffer[2] er 0x7B. Når den analoge stick er presset op, forventes det at receivedDataBuffer[1] er 0x7E og receivedDataBuffer[2] er 0xDF. Når der ikke er noget input på Nunchucken forventes det at receivedDataBuffer[1] er 0x7E og receivedDataBuffer[2] er 0x7B. Målingerne for testene kan ses på figur \ref{fig:I2CProtocolReadNoInput}, \ref{fig:I2CProtocolReadLeftAnalog} og \ref{fig:I2CProtocolReadUpAnalog}.
+\noindent Testen gennemføres ved at fortolke den modtagne data tre gange, hvor nunchucken er i forskellige tilstande (hvilken retning det analoge stik er trykket) i hver test. Værdierne sammenlignes de forventede standardværdier som ses i tabellen på side 3 i (Bilag/Dokumentation/WiiNunchuck.pdf). Da testene kun er fokuserede på, hvilken retning den analoge stick er presset, er det altså kun receivedDataBuffer[1] (den analoge stick x-akse) og receivedDataBuffer[2] (den analoge pinds y-akse) der er relevante for testen. Når den analoge stick er presset til venstre, forventes det ifølge tabel \ref{tabel:WiiNunchuckStickPositioner} i afsnit \ref{afsnit:nunchuckCalibration} at receivedDataBuffer[1] er lig 0x1E og receivedDataBuffer[2] er 0x7B. Når den analoge stick er presset op, forventes det at receivedDataBuffer[1] er 0x7E og receivedDataBuffer[2] er 0xDF. Når der ikke er noget input på Nunchucken forventes det at receivedDataBuffer[1] er 0x7E og receivedDataBuffer[2] er 0x7B. Målingerne for testene kan ses på figur \ref{fig:I2CProtocolReadNoInput}, \ref{fig:I2CProtocolReadLeftAnalog} og \ref{fig:I2CProtocolReadUpAnalog}.
 
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=.5\textwidth]{Test/images/I2CProtocolReadNoInput.png}
-	\caption{Afmåling af modtager-buffer på PSoC1 efter at have modtaget "NunchuckData" kommando typen. Intet input på Nunchuck'en}
+	\caption{Aflæst Nunchuck data i modtager-buffer. Intet input på Nunchuck'en}
 	\label{fig:I2CProtocolReadNoInput}
 \end{figure}
 
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=.5\textwidth]{Test/images/I2CProtocolReadLeftAnalog.png}
-	\caption{Afmåling af modtager-buffer på PSoC1 efter at have modtaget "NunchuckData" kommando typen. Den analoge stick er presset til venstre på Nunchuck'en}
+	\caption{Aflæst Nunchuck data i modtager-buffer. Den analoge stick er presset til venstre på Nunchuck'en}
 	\label{fig:I2CProtocolReadLeftAnalog}
 \end{figure}
 
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=.5\textwidth]{Test/images/I2CProtocolReadUpAnalog.png}
-	\caption{Afmåling af modtager-buffer på PSoC1 efter at have modtaget "NunchuckData" kommando typen. Den analoge stick er presset frem på Nunchuck'en}
+	\caption{Aflæst Nunchuck data i modtager-buffer. Den analoge stick er presset frem på Nunchuck'en}
 	\label{fig:I2CProtocolReadUpAnalog}
 \end{figure}
 
-På figur \ref{fig:I2CProtocolReadLeftAnalog} ses afmålingen af modtager-bufferen når Nunchuckens analoge stick er presset helt til venstre. ReceivedDataBuffer[1] blev aflæst til 0x1E og receivedDataBuffer[2] blev aflæst til 0x7C. ReceivedDataBuffer[1] stemmer overens med forventningerne. ReceivedDataBuffer[2] har en lille afvigelse (oversat til decimaltal blev der målt 124, hvor der forventes 123). Denne afvigelse kan skyldes, at det analoge stick ikke blev presset direkte til venstre, men at den også er blevet presset en smule frem under målingen.
+\noindent På figur \ref{fig:I2CProtocolReadLeftAnalog} ses afmålingen af modtager-bufferen når Nunchuckens analoge stick er presset helt til venstre. ReceivedDataBuffer[1] blev aflæst til 0x1E og receivedDataBuffer[2] blev aflæst til 0x7C. ReceivedDataBuffer[1] stemmer overens med forventningerne. ReceivedDataBuffer[2] har en lille afvigelse (oversat til decimaltal blev der målt 124, hvor der forventes 123). Denne afvigelse kan skyldes, at det analoge stick ikke blev presset direkte til venstre, men at den også er blevet presset en smule frem under målingen. \newline
 
-På figur \ref{fig:I2CProtocolReadUpAnalog} ses afmålingen af modtager-bufferen når Nunchuckens analoge stick er presset frem. ReceivedDataBuffer[1] blev aflæst til 0x82, hvor det var forventet 0x7E. Dette er en afvigelse fra de forventede resultater med 4, og kan skyldes at det analoge stick ikke var helt centreret idét den blev presset frem under målingen. ReceivedDataBuffer[2] blev aflæst til 0xDF, hvilket stemmer overens med de forventede målinger.
+\noindent På figur \ref{fig:I2CProtocolReadUpAnalog} ses afmålingen af modtager-bufferen når Nunchuckens analoge stick er presset frem. ReceivedDataBuffer[1] blev aflæst til 0x82, hvor det var forventet 0x7E. Dette er en afvigelse fra de forventede resultater med 4, og kan skyldes at det analoge stick ikke var helt centreret idét den blev presset frem under målingen. ReceivedDataBuffer[2] blev aflæst til 0xDF, hvilket stemmer overens med de forventede målinger. \newline
 
-På figur \ref{fig:I2CProtocolReadNoInput} ses afmålingen af modtager-bufferen når der ikke er noget brugerinput på nunchuckens analoge stick. ReceivedDataBuffer[1] blev aflæst til 0x7F, hvor det forventede resultat var 0x7E. Denne afvigelse kan skyldes at det analoge stick ikke stod helt i midten under målingen (Det analoge stick er lidt "løs" og kan defor godt finde hvile i en position der ikke er fuldt centreret). ReceivedDataBuffer[2] blev aflæst til 0x7D, hvor det forventede resultat var 0x7B. Igen kan denne afvigelse skyldes at det analoge stick ikke var i centrum under målingen.
+\noindent På figur \ref{fig:I2CProtocolReadNoInput} ses afmålingen af modtager-bufferen når der ikke er noget brugerinput på nunchuckens analoge stick. ReceivedDataBuffer[1] blev aflæst til 0x7F, hvor det forventede resultat var 0x7E. Denne afvigelse kan skyldes at det analoge stick ikke stod helt i midten under målingen (Det analoge stick er lidt "løs" og kan defor godt finde hvile i en position der ikke er fuldt centreret). ReceivedDataBuffer[2] blev aflæst til 0x7D, hvor det forventede resultat var 0x7B. Igen kan denne afvigelse skyldes at det analoge stick ikke var i centrum under målingen. \newline
 
-Ud fra testen kan det konkluderes at implementeringen af I2C-protokollen fungerer efter hensigten.
+\noindent Ud fra testen kan det konkluderes at implementeringen af I2C-protokollen fungerer efter hensigten.
 
 \subsection{Systemtest GUI}
-DevKittet styres ved hjælp af en brugergrænseflade.
-Forløbet i brugergrænsefladen følger beskrivelsen af figur \ref{fig:stmGUI} i afsnit \ref{sec:stmDescrip}.
+Devkit 8000 styres ved hjælp af en brugergrænseflade. I dette afsnit udføres en modultest af brugergrænsefladen ved at observere beskeder udskrevet til dens terminal.
 
 \begin{figure}[H]
 	\centering
@@ -159,14 +154,13 @@ Forløbet i brugergrænsefladen følger beskrivelsen af figur \ref{fig:stmGUI} i
 	\label{fig:GUISetup}
 \end{figure}
 
-\noindent Test af brugergrænsefladen udføres i tre dele og resultater registreres visuelt. Den første del af testen udføres ved tryk på Start Test-knappen, derefter verificeres det i konsol vinduet at knappen har den ønskede funktionalitet. Den anden del udføres ved tryk på Clear-knappen. Målet ved denne del er at konsol vinduet cleares.
-Sidste del af testen udføres ved tryk på Exit-knappen. Målet ved denne del er at programmet lukkes på DevKittet.
+\noindent Test af brugergrænsefladen udføres i tre dele og resultater registreres visuelt. Den første del af testen udføres ved tryk på Start Test-knappen, derefter verificeres det i konsol vinduet at stystemtesten udføres. Den anden del udføres ved tryk på Clear-knappen. Målet ved denne del er at konsol vinduet cleares. Sidste del af testen udføres ved tryk på Exit-knappen. Målet ved denne del er at programmet lukkes på DevKittet.
 
 
 \subsubsection{Start Test-knap Test}
 I testen trykkes der på knappen "Start Test", og knappens funktion køres i programmet.\newline
  
-\noindent\textbf{Forventet resultat:}\newline
+\noindent\textbf{Forventet resultat}\newline
 \noindent Konsol printer følgende:\newline
 Starting System test\newline
 Starting SPI Test\newline
@@ -178,40 +172,40 @@ Please press the Z button within 6 seconds\newline
 Nunchuck Test Successful
 \noindent Programmet returnerer til idle-tilstand og konsol vinduet bliver ikke clearet.\newline
 
-\noindent\textbf{Visuelt resultat:}\newline
+\noindent\textbf{Visuelt resultat}\newline
 Som det ses på figur \ref{fig:GUIPrint} bliver det forventet resultat opnået, og konsollen printer som forventet.
 Programmet er returneret til idle-tilstand og teksten er ikke blevet clearet. 
 
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=.5\textwidth]{Test/images/GUITest/TestPrint.jpg}
-	\caption{Visuel respons af Start Test-knap funktioalitet}
+	\caption{Visuel respons af Start Test-knap funktionalitet}
 	\label{fig:GUIPrint}
 \end{figure}
 
 \subsubsection{Clear-knap Test}
 I testen trykkes der på knappen "Clear", og knappens funktion køres i programmet.\newline
 
-\noindent\textbf{Forventet resultat:}\newline
+\noindent\textbf{Forventet resultat}\newline
 Konsol vinduet, hvor i der er skrevet resultatet fra forrige test, bliver clearet. Programmet returnerer til idle-tilstand.\newline
 
-\noindent\textbf{Visuelt resultat:}\newline
+\noindent\textbf{Visuelt resultat}\newline
 \noindent Som det ses på figur \ref{fig:GUIClear} bliver konsol vinduet clearet og programmet returnerer til idle-tilstand.\newline
 
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=.5\textwidth]{Test/images/GUITest/TestClear.jpg}
-	\caption{Visuel respons af Clear-knap funktioalitet}
+	\caption{Visuel respons af Clear-knap funktionalitet}
 	\label{fig:GUIClear}
 \end{figure}
 
 \subsubsection{Exit-knap Test}
 I testen trykkes der på knappen "Exit", og knappens funktion køres i programmet.\newline
 
-\noindent\textbf{Forventet resultat:}\newline
+\noindent\textbf{Forventet resultat}\newline
 \noindent Programmet lukkes.\newline
 
-\noindent\textbf{Visuelt resultat:}\newline
+\noindent\textbf{Visuelt resultat}\newline
 Som det ses på figur \ref{fig:GUIExit} lukkes programmet.
 
 \begin{figure}[H]
@@ -221,7 +215,7 @@ Som det ses på figur \ref{fig:GUIExit} lukkes programmet.
 	\label{fig:GUIExit}
 \end{figure}
 
-Ud fra disse resultater af testene, fungerer dette modul efter hensigten.
+Ud fra disse resultater af testene, fungerer brugergrænsefladen efter hensigten.
 
 \subsection{Rotationsdetektor}
 TÍ tabel \ref{table:ADC_affyring_test} ses, at ADC'en virker som den skal. Den skal sende PWM-signal ud, når den får et signal, der er højere end 1500mV, og det gør den. 
@@ -239,9 +233,9 @@ TÍ tabel \ref{table:ADC_affyring_test} ses, at ADC'en virker som den skal. Den 
 	\label{table:ADC_affyring_test}
 \end{table}
 
-I det følgende ses screenshots fra modultesten af ADC'en brugt i affyringsmekanismen. 
+\noindent I det følgende ses screenshots fra modultesten af ADC'en brugt i affyringsmekanismen. \newline
 
-Det ses på figur \ref{fig:500mV}, at ADC'en udsender PWM-signal, når den får et indgangssignal på 0,5V. 
+\noindent Det ses på figur \ref{fig:500mV}, at ADC'en udsender PWM-signal, når den får et indgangssignal på 0,5V. 
 
 \begin{figure}[H]
 	\centering
@@ -250,7 +244,7 @@ Det ses på figur \ref{fig:500mV}, at ADC'en udsender PWM-signal, når den får 
 	\label{fig:500mV}
 \end{figure}
 
-Det ses på figur \ref{fig:1600mV}, at ADC'en udsender PWM-signal, når den modtager et signal på 1,6V. 
+\noindent Det ses på figur \ref{fig:1600mV}, at ADC'en udsender PWM-signal, når den modtager et signal på 1,6V. 
 
 \begin{figure}[H]
 	\centering
@@ -259,7 +253,7 @@ Det ses på figur \ref{fig:1600mV}, at ADC'en udsender PWM-signal, når den modt
 	\label{fig:1600mV}
 \end{figure}
 
-Det ses på \ref{fig:5V}, at ADC'en ikke udsender PWM-signal, når den får et indgangssignal på 5V. 
+\noindent Det ses på \ref{fig:5V}, at ADC'en ikke udsender PWM-signal, når den får et indgangssignal på 5V. 
 
 \begin{figure}[H]
 	\centering
@@ -268,12 +262,12 @@ Det ses på \ref{fig:5V}, at ADC'en ikke udsender PWM-signal, når den får et i
 	\label{fig:5V}
 \end{figure}
 
-Testen er vellykket, da det ses, at ADC'en stopper med at udsende PWM-signal, når den når en hvis grænse. 
+\noindent Testen er vellykket, da det ses, at ADC'en stopper med at udsende PWM-signal, når den når en hvis grænse. 
 
 \section{Hardware}
 \subsection{H-bro}
 \textbf{Formål} \newline
-Formålet med denne test er at vise at en motor kan styres i begge retninger med H-broen.\newline
+\noindent Formålet med denne test er at vise at en motor kan styres i begge retninger med H-broen.\newline
 
 \noindent \textbf{Opstilling}
 
@@ -327,9 +321,9 @@ I første del af modultesten forventes det at når 1a og 2a blev nedtrykket vil 
 	
 \end{figure}
 
-Ved anden del af modultesten nedtrykkes 1b og 2b. På figur \ref{figure:hbroo} ses resultatet af dette. Det observeres at knappene nedtrykkes får det orange retningssignal forbindelse til stel og stiger til 9V, samt at det blå retningssignal falder til 0V. Dermed er det bevist at motoren kan styres vi H-broen i venstre omdrejningsretning. 
+\noindent Ved anden del af modultesten nedtrykkes 1b og 2b. På figur \ref{figure:hbroo} ses resultatet af dette. Det observeres at knappene nedtrykkes får det orange retningssignal forbindelse til stel og stiger til 9V, samt at det blå retningssignal falder til 0V. Dermed er det bevist at motoren kan styres vi H-broen i venstre omdrejningsretning. \newline
 
-Ud fra disse to test kan det konkluderes at en motor kan styres i begge omdrejningsretninger via H-broen. Fra figurene \ref{figure:hbrob} og \ref{figure:hbroo} kan det også observeres at der ikke fremkommer støj, når retningssignalerne stiger til 9V, dermed vil der ikke være forstyrrende elementer der kommer til at påvirke styringen af motoren.
+\noindent Ud fra disse to test kan det konkluderes at en motor kan styres i begge omdrejningsretninger via H-broen. Fra figurene \ref{figure:hbrob} og \ref{figure:hbroo} kan det også observeres at der ikke fremkommer støj, når retningssignalerne stiger til 9V, dermed vil der ikke være forstyrrende elementer der kommer til at påvirke styringen af motoren. \newline
 
 
 \subsection{Rotationsbegrænsning}
@@ -365,9 +359,9 @@ Ud fra disse to test kan det konkluderes at en motor kan styres i begge omdrejni
 	\caption{Elementer i testopstillingen}
 \end{table}
 
-Test af rotationsbegrænsning blev udført i tre dele. I første del testes om motoren kan styres i begge retninger når outputspændingen fra potentiometret ligger mellem 915mV og 2000mV. I anden del testes der for at retningssignalet til venstre blokeres når potentiometerets outputspænding overstiger 2000mV. I tredje del testes der for at retningssignalet til højre blokeres når potentiometerets outputspænding falder under 915mV. 
+\noindent Test af rotationsbegrænsning blev udført i tre dele. I første del testes om motoren kan styres i begge retninger når outputspændingen fra potentiometret ligger mellem 915mV og 2000mV. I anden del testes der for at retningssignalet til venstre blokeres når potentiometerets outputspænding overstiger 2000mV. I tredje del testes der for at retningssignalet til højre blokeres når potentiometerets outputspænding falder under 915mV. \newline
 
-Til at monitorere outputspændingen fra potentiometeret er et Analog Discovery tilsluttet til dens udgange gennem et fumlebræt. Til at for at aflæse værdier fra AD converteren sættes PSoC1 i debug mode. Resultater verficeres visuelt. \newline
+\noindent Til at monitorere outputspændingen fra potentiometeret er et Analog Discovery tilsluttet til dens udgange gennem et fumlebræt. Til at for at aflæse værdier fra AD converteren sættes PSoC1 i debug mode. Resultater verficeres visuelt. \newline
 
 \noindent \textbf{Forventet resultat} \newline
 Første del: Potentiometeret indstilles til midterposition. Det observeres at motoren kan roteres i begge retninger. \newline
@@ -435,9 +429,9 @@ Da den faktiske spænding fra potentiometeret 4904mV stemmer det faktiske result
 \begin{equation}
 187mV * 1.515 = 280.5mV
 \end{equation}
-Da den faktiske spænding fra potentiometeret 260mV stemmer det faktiske resultat overens med det forventede resultat. Det observeres at motoren kun kan styres til venstre.
+Da den faktiske spænding fra potentiometeret 260mV stemmer det faktiske resultat overens med det forventede resultat. Det observeres at motoren kun kan styres til venstre. \newline
 
-Ud fra disse tre deltests kan det konkluderes at rotationsbegrænsningen fungerer efter hensigten.
+\noindent Ud fra disse tre deltests kan det konkluderes at rotationsbegrænsningen fungerer efter hensigten.
 
 
 \subsection{Rotationsdetektor}
@@ -472,9 +466,9 @@ På figur \ref{fig:målepunkter} ses, hvor der er målt for at teste rotationsde
 	\label{dioderIkkeSe}
 \end{table}
 
-I det følgende ses screenshots af resultater fra modultesten. 
+\noindent I det følgende ses screenshots af resultater fra modultesten. 
 
-Det ses på figur \ref{fig:virt0IkkeSe}, at det virtuelle nulpunkt ligger på 0,4V. Det ligger lidt under det forventede, men det er en ubetydeligt lille forskel. 
+\noindent Det ses på figur \ref{fig:virt0IkkeSe}, at det virtuelle nulpunkt ligger på 0,4V. Det ligger lidt under det forventede, men det er en ubetydeligt lille forskel. 
 
 \begin{figure}[H]
 	\centering
@@ -483,7 +477,7 @@ Det ses på figur \ref{fig:virt0IkkeSe}, at det virtuelle nulpunkt ligger på 0,
 	\label{fig:virt0IkkeSe}
 \end{figure}
 
-På figur \ref{fig:spaendIkkeSe} ses det, at spændingsdeleren virker, da der er en referencespænding på 0,45V, og ønsket var, at den skulle være 0,5V. 
+\noindent På figur \ref{fig:spaendIkkeSe} ses det, at spændingsdeleren virker, da der er en referencespænding på 0,45V, og ønsket var, at den skulle være 0,5V. 
 
 \begin{figure}[H]
 	\centering
@@ -492,7 +486,7 @@ På figur \ref{fig:spaendIkkeSe} ses det, at spændingsdeleren virker, da der er
 	\label{fig:spaendIkkeSe}
 \end{figure}
 
-Det ses på figur \ref{udgangOpAmpIkkeSe}, at PSoC'ens operationsforstærkers udgang ligger på 0,4V, hvilket ligger meget tæt på den forventede værdi på 0,5V. Derfor er det vist, at operationsforstærkeren virker, når fotodioden ikke får signal fra LED'en. 
+\noindent Det ses på figur \ref{fig:spaendIkkeSe}, at PSoC'ens operationsforstærkers udgang ligger på 0,4V, hvilket ligger meget tæt på den forventede værdi på 0,5V. Derfor er det vist, at operationsforstærkeren virker, når fotodioden ikke får signal fra LED'en. 
 
 \begin{figure}[H]
 	\centering
@@ -501,7 +495,7 @@ Det ses på figur \ref{udgangOpAmpIkkeSe}, at PSoC'ens operationsforstærkers ud
 	\label{fig:udgangOpAmpIkkeSe}
 \end{figure}
 
-Det ses på figur \ref{envdetIkkeSe}, at envelopedetektoren virker, når fotodioden ikke får lyssignal, da der er målt en værdi på 0,4V, hvilket ligger meget tæt på de forventede 0,5V. 
+\noindent Det ses på figur \ref{fig:udgangOpAmpIkkeSe}, at envelopedetektoren virker, når fotodioden ikke får lyssignal, da der er målt en værdi på 0,4V, hvilket ligger meget tæt på de forventede 0,5V. 
 
 \begin{figure}[H]
 	\centering
@@ -510,7 +504,7 @@ Det ses på figur \ref{envdetIkkeSe}, at envelopedetektoren virker, når fotodio
 	\label{fig:envdetIkkeSe}
 \end{figure}
 
-Det ses på figur \ref{udgangforstaerkerIkkeSe}, at forstærkeren virker, da der er målt 0,85V på udgangen, og den forventede værdi var 1V. De 0,15V er en ubetydelig lille forskel. 
+\noindent Det ses på figur \ref{fig:envdetIkkeSe}, at forstærkeren virker, da der er målt 0,85V på udgangen, og den forventede værdi var 1V. De 0,15V er en ubetydelig lille forskel. 
 
 \begin{figure}[H]
 	\centering
@@ -537,9 +531,9 @@ Det ses på figur \ref{udgangforstaerkerIkkeSe}, at forstærkeren virker, da der
 	\label{dioderSe}
 \end{table}
 
-I det følgende ses screenshots af resultater fra modultesten. 
+\noindent I det følgende ses screenshots af resultater fra modultesten. 
 
-På figur \ref{fig:virt0KanSe} ses, at det virtuelle nulpunkt virker, når fotodioden får signal fra LED'en, da spændningen ligger på 0,4V og den forventede værdi var 0,5V. 
+\noindent På figur \ref{fig:virt0KanSe} ses, at det virtuelle nulpunkt virker, når fotodioden får signal fra LED'en, da spændningen ligger på 0,4V og den forventede værdi var 0,5V. 
 
 \begin{figure}[H]
 	\centering
@@ -548,7 +542,7 @@ På figur \ref{fig:virt0KanSe} ses, at det virtuelle nulpunkt virker, når fotod
 	\label{fig:virt0KanSe}
 \end{figure}
 
-Det ses på figur \ref{fig:spaendingsdelerKanSe}, at spændingsdeleren virker, da referencespændingen er målt til 0,45V og den forventede værdi var 0,5V. 
+\noindent Det ses på figur \ref{fig:spaendingsdelerKanSe}, at spændingsdeleren virker, da referencespændingen er målt til 0,45V og den forventede værdi var 0,5V. 
 
 \begin{figure}[H]
 	\centering
@@ -557,7 +551,7 @@ Det ses på figur \ref{fig:spaendingsdelerKanSe}, at spændingsdeleren virker, d
 	\label{fig:spaendingsdelerKanSe}
 \end{figure}
 
-Det ses på figur \ref{fig:udgangOpAmpKanSe}, at udgangen på forstærkeren giver et PWM-signal, som ønsket. Det ligger dog kun på 4V, hvor den forventede værdi var på 5V. 
+\noindent Det ses på figur \ref{fig:udgangOpAmpKanSe}, at udgangen på forstærkeren giver et PWM-signal, som ønsket. Det ligger dog kun på 4V, hvor den forventede værdi var på 5V. 
 
 \begin{figure}[H]
 	\centering
@@ -566,7 +560,7 @@ Det ses på figur \ref{fig:udgangOpAmpKanSe}, at udgangen på forstærkeren give
 	\label{fig:udgangOpAmpKanSe}
 \end{figure}
 
-Det ses på figur \ref{fig:envdetKanSe}, at envelopedetektoren virker, som den skal. Dens kondensator når at lade op til cirka 3,7V, hvorefter den ikke når at aflade, før der kommer en ny puls fra PWM-signalet. 
+\noindent Det ses på figur \ref{fig:envdetKanSe}, at envelopedetektoren virker, som den skal. Dens kondensator når at lade op til cirka 3,7V, hvorefter den ikke når at aflade, før der kommer en ny puls fra PWM-signalet. 
 
 \begin{figure}[H]
 	\centering
@@ -575,7 +569,7 @@ Det ses på figur \ref{fig:envdetKanSe}, at envelopedetektoren virker, som den s
 	\label{fig:envdetKanSe}
 \end{figure}
 
-På figur \ref{fig:forstaerkerudgangKanSe} ses det, at forstærkeren forstærker signalet, der kommer fra envelopedetektoren. Den fordobler det ikke, hvilket var meningen, men signalet forstærkes, og det var det, der var meningen. 
+\noindent På figur \ref{fig:forstaerkerudgangKanSe} ses det, at forstærkeren forstærker signalet, der kommer fra envelopedetektoren. Den fordobler det ikke, hvilket var meningen, men signalet forstærkes, og det var det, der var meningen. 
 
 \begin{figure}[H]
 	\centering
@@ -602,7 +596,7 @@ På figur \ref{fig:forstaerkerudgangKanSe} ses det, at forstærkeren forstærker
 	\label{table:baandpasfiltertest}
 \end{table}
 
-På figur \ref{fig:40kHz} ses det, at filteret dæmper spændingen til 3V, når der sendes en frekvens på 40kHz gennem det. Da 40kHz ligger forholdsvist tæt på lavpasfilterets afskæringsfrekvens på 31,2kHz, kunne der være valgt en højere frekvens at teste i stedet. 
+\noindent På figur \ref{fig:40kHz} ses det, at filteret dæmper spændingen til 3V, når der sendes en frekvens på 40kHz gennem det. Da 40kHz ligger forholdsvist tæt på lavpasfilterets afskæringsfrekvens på 31,2kHz, kunne der være valgt en højere frekvens at teste i stedet. 
 
 \begin{figure}[H]
 	\centering
@@ -611,7 +605,7 @@ På figur \ref{fig:40kHz} ses det, at filteret dæmper spændingen til 3V, når 
 	\label{fig:40kHz}
 \end{figure}
 
-Det ses på figur \ref{fig:29kHz}, at filteret dæmper spændingen til 3,9V, når der sendes en frekvens på 29 kHz gennem det. Da lavpasfilterets afskæringsfrekvens ligger på 31,2kHz, skulle filteret egentlig ikke dæmpe signalet her. 
+\noindent Det ses på figur \ref{fig:29kHz}, at filteret dæmper spændingen til 3,9V, når der sendes en frekvens på 29 kHz gennem det. Da lavpasfilterets afskæringsfrekvens ligger på 31,2kHz, skulle filteret egentlig ikke dæmpe signalet her. 
 
 \begin{figure}[H]
 	\centering
@@ -620,7 +614,7 @@ Det ses på figur \ref{fig:29kHz}, at filteret dæmper spændingen til 3,9V, nå
 	\label{fig:29kHz}
 \end{figure}
 
-Det ses på figur \ref{fig:10kHz}, at filteret ikke dæmper signalet ved 10kHz. Signalet ligger nemlig på 4,7V. 
+\noindent Det ses på figur \ref{fig:10kHz}, at filteret ikke dæmper signalet ved 10kHz. Signalet ligger nemlig på 4,7V. 
 
 \begin{figure}[H]
 	\centering
@@ -629,7 +623,7 @@ Det ses på figur \ref{fig:10kHz}, at filteret ikke dæmper signalet ved 10kHz. 
 	\label{fig:10kHz}
 \end{figure}
 
-Det ses på figur \ref{fig:1Hz}, at det er et atypisk signal, der kommer gennem filteret. 
+\noindent Det ses på figur \ref{fig:1Hz}, at det er et atypisk signal, der kommer gennem filteret. 
 
 \begin{figure}[H]
 	\centering
@@ -638,7 +632,7 @@ Det ses på figur \ref{fig:1Hz}, at det er et atypisk signal, der kommer gennem 
 	\label{fig:1Hz}
 \end{figure}
 
-Afskæringsfrekvenserne for båndpasfilteret ligger på 15,9Hz og 31,2kHz, så hvis båndpasfilteret skulle være helt optimalt skulle alt, der ligger udenfor disse frekvenser dæmpes fuldstændig. Det ses dog i tabel \ref{forstaerkerudgang}, at det ikke helt er tilfældet. Ved 40kHz er signalet dæmpet til 3V, og ved 10kHz lader filteret alt gå igennem. Ved 1Hz ses det, at signalet dæmpes, men der forekommer også mange spikes, som forstyrrer signalet. Derfor er der ikke indsat et tal i tabellen. \\
+\noindent Afskæringsfrekvenserne for båndpasfilteret ligger på 15,9Hz og 31,2kHz, så hvis båndpasfilteret skulle være helt optimalt skulle alt, der ligger udenfor disse frekvenser dæmpes fuldstændig. Det ses dog i tabel \ref{forstaerkerudgang}, at det ikke helt er tilfældet. Ved 40kHz er signalet dæmpet til 3V, og ved 10kHz lader filteret alt gå igennem. Ved 1Hz ses det, at signalet dæmpes, men der forekommer også mange spikes, som forstyrrer signalet. Derfor er der ikke indsat et tal i tabellen. \\
 
 \noindent \textbf{Test af LED's PWM-signal} \\
 \noindent LED'ens PWM-signal blev testet ved at måle med et oscilloskop på LED'ens indgang. Resultatet af denne test ses på \ref{fig:LED_indgang}. Det ses, at signalet ikke når helt op på 5V, men kun 4,7V, hvilket er det, der i testen af forstærkerudgangen på figur \ref{fig:10kHz} også er målt. Det ses også, at signalet har en frekvens på 9,59kHz, hvilket er tilnærmelsesvist det samme som for det indgående signal. 
@@ -651,8 +645,7 @@ Afskæringsfrekvenserne for båndpasfilteret ligger på 15,9Hz og 31,2kHz, så h
 \end{figure}
 
 \section{Integrationstest - Use case 2}
-For at verificere at use case 2 fungerer når det sammensættes til en enkelt enhed, er der lavet en integrationstest. Testen er lavet ud fra et 'black-box' princip, hvilket vil sige, at der kun evalueres ud fra systemets funktionalitet, og ikke på den interne struktur.
-Testen udføres ved, at klikke på 'Start-test', og bagefter observeres udskriften på terminal-vinduet på brugergrænsefladen. På figur \ref{figure:IntegrationstestOpstilling} ses opstillingen for integrationstesten.
+For at verificere at use case 2 fungerer når det sammensættes til en enkelt enhed, er der lavet en integrationstest. Testen er lavet ud fra et 'black-box' princip, hvilket vil sige, at der kun evalueres ud fra systemets funktionalitet, og ikke på den interne struktur. Testen udføres ved, at klikke på 'Start-test', og bagefter observeres udskriften på terminal-vinduet på brugergrænsefladen. På figur \ref{figure:IntegrationstestOpstilling} ses opstillingen for integrationstesten.
 
 \begin{figure}[H]
 	\includegraphics[width=\textwidth]{Test/images/IntegrationstestProtokoller/opstilling}
@@ -660,9 +653,9 @@ Testen udføres ved, at klikke på 'Start-test', og bagefter observeres udskrift
 	\label{figure:IntegrationstestOpstilling}
 \end{figure}
 
-Opstillingen viser, at Nunchuck'en og de to PSoC's er forbundet til samme I2C-netværk via fumlebrættet. PSoC0(PSoC'en til højre) er også forbundet til DevKit8000 via SPI, ledt igennem fumlebrættet. På Devkittet ses brugergrænsefladen, hvor testen initieres ved at klikke på "Start test". Brugergrænsefladen har også et terminalvindue, hvor testens status bliver udprintet.
+\noindent Opstillingen viser, at Nunchuck'en og de to PSoC's er forbundet til samme I2C-netværk via fumlebrættet. PSoC0(PSoC'en til højre) er også forbundet til DevKit8000 via SPI, ledt igennem fumlebrættet. På Devkittet ses brugergrænsefladen, hvor testen initieres ved at klikke på "Start test". Brugergrænsefladen har også et terminalvindue, hvor testens status bliver udprintet. \newline 
 
-Selve testen gennemføres, ved at der klikkes "Start test" på brugergrænsefladen, og derefter følges evt. instruktioner der vises på brugergrænsefladen. Det forventes, at efter testen, vil brugergrænsefladen fortælle, at testen blev gennemført uden fejl, og systemet er klar til brug. Figur \ref{figure:integrationstestresult} viser brugergrænsefladen efter endt system test.
+\noindent Selve testen gennemføres, ved at der klikkes "Start test" på brugergrænsefladen, og derefter følges evt. instruktioner der vises på brugergrænsefladen. Det forventes, at efter testen, vil brugergrænsefladen fortælle, at testen blev gennemført uden fejl, og systemet er klar til brug. Figur \ref{figure:integrationstestresult} viser brugergrænsefladen efter endt system test. \newline 
 
 \begin{figure}[H]
 	\centering
@@ -671,7 +664,9 @@ Selve testen gennemføres, ved at der klikkes "Start test" på brugergrænseflad
 	\label{figure:integrationstestresult}
 \end{figure}
 
-Som det ses, er resultatet af testen som forventet, og testen er gennemført. Under testen bliver brugeren bedt om at trykke på nunchucken's 'z' knap. Hvis brugeren ikke klikker på knappen indenfor det angivne stykke tid, forventes det at testen vil fejle. Figur \ref{figure:integrationstestresult1} viser netop dette.
+\noindent Som det ses, er resultatet af testen som forventet, og testen er gennemført. Under testen bliver brugeren bedt om at trykke på nunchucken's 'z' knap. \newline 
+
+\noindent Hvis brugeren ikke klikker på knappen indenfor det angivne stykke tid, forventes det at testen vil fejle. Figur \ref{figure:integrationstestresult1} viser netop dette.
 
 
 \begin{figure}[H]
@@ -681,4 +676,4 @@ Som det ses, er resultatet af testen som forventet, og testen er gennemført. Un
 	\label{figure:integrationstestresult1}
 \end{figure}
 
-Som det ses, fejlede testen, hvilket stemte overens med det forventede resultat. Derved kan det konkluderes at systemet opfører sig som forventet.
+\noindent Som det ses, fejlede testen, hvilket stemte overens med det forventede resultat. Derved kan det konkluderes at systemet opfører sig som forventet.

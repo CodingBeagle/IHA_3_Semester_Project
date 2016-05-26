@@ -1,14 +1,12 @@
 \chapter{Udviklingsværktøjer}
-
+Under udarbejdelsen af Goofy Candygun 3000 er der blevet gjort brug af forskellige udviklingsværktøjer. De anvendte værktøjer beskrives i følgende afsnit.
 \section{QT Creator}
-QT Creator \cite{QTCreator} er blevet brugt til at designe brugergrænsefladerne.
-QT's design widget suite/API er blevet brugt som den primære del af QT frameworket. Det fungerede godt til at designe en EDP-baseret grænseflade. Frameworket's indbyggede beskedsystem passede godt til vores design.
+QT Creator \cite{QTCreator} er blevet brugt til at designe brugergrænsefladerne. QT's design widget suite/API er blevet brugt som den primære del af QT frameworket. Det fungerede godt til at designe en EDP-baseret grænseflade. Frameworket's indbyggede beskedsystem passede godt til vores design. \newline 
 
-En knap er assignet til et slot i brugergrænseflade-klassen, og når der trykkes på den pågældende knap, bliver det assignede signal broadcastet, og slot-funktionen bliver kørt.
-Design suiten simplificerer selve programmeringen af grænsefladen. Det skjuler mange af funktioner under kølerhjelmen.
+\noindent En knap er assignet til et slot i brugergrænseflade-klassen, og når der trykkes på den pågældende knap, bliver det assignede signal broadcastet, og slot-funktionen bliver kørt. Design suiten simplificerer selve programmeringen af grænsefladen. Det skjuler mange af funktioner under kølerhjelmen. 
 
 \section{PSoC Creator}
-Der er blevet anvendt værktøjet PSoC Creator til at udvikle softwaren til PSoC. Det er smart, da PSoC Creator har en blok for hver komponent der findes i PSoC'en. Disse blokke kan trækkes ind i Topdesignet, hvor det så er muligt at udarbejde designet for det PSoC-program, der ønskes. Desuden findes der i PSoC Creator datablade, hvor alle funktioner for de forskellige PSoC-blokke er beskrevet samt der er en beskrivelse af, hvilken funktion selve blokken har.
+Der er blevet anvendt værktøjet PSoC Creator til at udvikle softwaren til PSoC \cite{PSoC}. Det er smart, da PSoC Creator har en blok for hver komponent der findes i PSoC'en. Disse blokke kan trækkes ind i Topdesignet, hvor det så er muligt at udarbejde designet for det PSoC-program, der ønskes. Desuden findes der i PSoC Creator datablade, hvor alle funktioner for de forskellige PSoC-blokke er beskrevet samt der er en beskrivelse af, hvilken funktion selve blokken har.
 
 \section{Analog Discovery}
-Analog Discovery er et USB oscilloskop der er brugt hyppigt til udviklingen af systemet. Det er anvendt til modultest, hvor værdier for systemets I2C og SPI busser, samt kredsløb, skal verificeres for korrekt funktionalitet.
+Analog Discovery er et USB oscilloskop der er brugt hyppigt til udviklingen af systemet \cite{Analog}. Det er anvendt til modultest, hvor værdier for systemets I2C og SPI busser, samt kredsløb, skal verificeres for korrekt funktionalitet.

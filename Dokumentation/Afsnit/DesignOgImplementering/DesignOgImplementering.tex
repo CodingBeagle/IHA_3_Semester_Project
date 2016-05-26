@@ -546,6 +546,7 @@ Aflæste bytes fra Wii-Nunchuck - indeholdende tilstanden af knapperne og det an
 \noindent Fra formlen kan det ses at den aflæste byte skal \textit{XOR}'s med værdien 0x17, hvorefter dette resultat skal adderes med værdien 0x17.
 
 \section{Kalibrering af Wii-Nunchuck Analog Stick}
+\label{afsnit:nunchuckCalibration}
 De afkodede bytes for Wii-Nunchuck's analoge stick har definerede standardværdier for dets forskellige fysiske positioner. (Bilag/Dokumentation/WiiNunchuck.pdf) Disse værdier findes i tabel \ref{tabel:WiiNunchuckStickPositioner}
 
 \begin{table}[H]
@@ -814,9 +815,9 @@ I begge beregninger gælder det, at R er filterets modstandsværdi og C er filte
 	\label{fig:envdetsim}
 \end{figure}
 
-På simuleringen ses det, at envelopedetektoren virker, da det fremgår, at kondensatoren ikke når at aflade, inden der kommer en ny puls fra PWM-signalet. Derudover ses det også, at den når at lade op inden den første puls fra PWM-signalet kommer. Det betyder, at det signal der kommer ud ligger på cirka 4,3V. 
+\noindent På simuleringen ses det, at envelopedetektoren virker, da det fremgår, at kondensatoren ikke når at aflade, inden der kommer en ny puls fra PWM-signalet. Derudover ses det også, at den når at lade op inden den første puls fra PWM-signalet kommer. Det betyder, at det signal der kommer ud ligger på cirka 4,3V. \newline
 
-Outputtet fra envelopedetektoren var dog noget lavt. HEJ. Det lå mellem 1,5V og 2V. Derfor blev der indsat en ikke-inverterende forstærker for at fordoble signalet. Forstærkeren består af en opamp og to modstande. For at eftervise, at signalet fordobles, hvis de to modstande i forstærkerkredsløbet er ens, blev følgende beregning foretaget: \ref{reference til Tores bog}: 
+\noindent Outputtet fra envelopedetektoren var dog noget lavt. HEJ. Det lå mellem 1,5V og 2V. Derfor blev der indsat en ikke-inverterende forstærker for at fordoble signalet. Forstærkeren består af en opamp og to modstande. For at eftervise, at signalet fordobles, hvis de to modstande i forstærkerkredsløbet er ens, blev følgende beregning foretaget (Bilag/Dokumentation/Analogteknik.pdf): 
 
 %%%%%Spændingsdeler, forstærker%%%%%%%%%%
 \begin{align}
@@ -824,11 +825,11 @@ U_{O}&=(1+\frac{R_{2}}{R_{1}}) \cdot U_{P} \\ 	\nonumber
 \Rightarrow U_{O}&=(1+\frac{10k\Omega}{10k\Omega}) \cdot 2V = 4V \\	\nonumber 
 \end{align}
 
-Herefter var det muligt at aflæse et tydeligt firkantsignal med en peak-to-peak-værdi på 3,5V. 
+\noindent Herefter var det muligt at aflæse et tydeligt firkantsignal med en peak-to-peak-værdi på 3,5V. \newline
 
-Den røde LED er koblet direkte til et 0-5V, 10 kHz PWM-signal fra PSoC'en. Den kan godt klare sig uden en formodstand. 
+\noindent Den røde LED er koblet direkte til et 0-5V, 10 kHz PWM-signal fra PSoC'en. Den kan godt klare sig uden en formodstand. \newline
 
-Der kunne overvejes at indsætte en kondensator fysisk tæt på systemet og parallelt med R1 og fotodioden. Denne ville sikre, at VCC-niveauet opretholdes, hvis der pludselig skete et fald i VCC. 
+\noindent Der kunne overvejes at indsætte en kondensator fysisk tæt på systemet og parallelt med R1 og fotodioden. Denne ville sikre, at VCC-niveauet opretholdes, hvis der pludselig skete et fald i VCC. 
 
 \subsubsection{Motorstyring}
 Til at styre affyringsmekanismens motor er der bygget et kredsløb med en MOSFET af typen IRLZ44 som primære komponent. Denne skal fungere som en switch, da den skal sørge for, at motoren kun kører, når der bliver sendt PWM-signal ind i den. Kredsløbsdiagrammet kan ses på figur \ref{fig:affyringsmotor}. 
@@ -840,11 +841,11 @@ Til at styre affyringsmekanismens motor er der bygget et kredsløb med en MOSFET
 	\label{fig:affyringsmotor}
 \end{figure}
 
-Der ønskes i dette tilfælde at kunne styre motorens hastighed. Derfor anvendes et PWM-signal, som sendes ind på gatebenet og styrer motoren. Hastigheden kan så styres ved hjælp af PWM-signalets dutycycle. Hvis ikke MOSFET'en var der, ville motoren køre med fuld hastighed hele tiden, hvilket i dette tilfælde ikke ville være optimalt. 
+\noindent Der ønskes i dette tilfælde at kunne styre motorens hastighed. Derfor anvendes et PWM-signal, som sendes ind på gatebenet og styrer motoren. Hastigheden kan så styres ved hjælp af PWM-signalets dutycycle. Hvis ikke MOSFET'en var der, ville motoren køre med fuld hastighed hele tiden, hvilket i dette tilfælde ikke ville være optimalt. \newline
 
-Dioden D1 er sat ind for at sikre motoren mod store spændingsspikes, der kan forekomme, når MOSFET'en bliver afbrudt. Dioden D2, der sidder fra source til drain, sikrer, at spikes genereret af motoren, når den slukkes, ikke brænder MOSFET'en af. 
+\noindent Dioden D1 er sat ind for at sikre motoren mod store spændingsspikes, der kan forekomme, når MOSFET'en bliver afbrudt. Dioden D2, der sidder fra source til drain, sikrer, at spikes genereret af motoren, når den slukkes, ikke brænder MOSFET'en af. \newline
 
-Modstanden R2 er en pull-down-modstand. Den hjælper altså til at trække de små spændinger til stel, når PWM-signalet er slukket. Når PWM-signalet er tændt, er den stor nok til, at strømmen ikke vil løbe til stel. Modstanden R1 skal sørge for, at der ikke kommer til at være en spænding på 9V på microprocessoren. Dette kunne ske, hvis der sker en kortvarig fejl i MOSFET'en. 
+\noindent Modstanden R2 er en pull-down-modstand. Den hjælper altså til at trække de små spændinger til stel, når PWM-signalet er slukket. Når PWM-signalet er tændt, er den stor nok til, at strømmen ikke vil løbe til stel. Modstanden R1 skal sørge for, at der ikke kommer til at være en spænding på 9V på microprocessoren. Dette kunne ske, hvis der sker en kortvarig fejl i MOSFET'en. 
 
 \subsubsection{Kanon og platform}
 Selve kanonen og platformen, den står på, er bygget op af to træplader og LEGO. Den ene træplade kan dreje fra side til side, således at det er muligt at sigte i den horisontale retning. Opbygningen ses på figur \ref{fig:Horisontalmekanik}. Træpladen placeres på den øverste metalskive omkring skruen, så den drejer med rundt, når motoren roterer. Rotationen er opnået ved, at skruen kan dreje frit, men stadig er holdt lodret. Det store tandhjul er boret ud i midten, og der er indsat en møtrik, så den kan skrues på skruen. Forholdet mellem det store og det mellemste tandhjul gør, at rotationshastigheden bliver gearet ned med et forhold på 1:0,6. Forholdet er fundet ved hjælp af følgende beregning: 
@@ -854,9 +855,9 @@ Selve kanonen og platformen, den står på, er bygget op af to træplader og LEG
 	gearing&=\frac{24}{40}=0,6
 \end{align}
 
-Her er $t_{m}$ antallet af tandhjul på det mellemste tandhjul og $t_{s}$ er antallet af tandhjul på det store tandhjul. 
+\noindent Her er $t_{m}$ antallet af tandhjul på det mellemste tandhjul og $t_{s}$ er antallet af tandhjul på det store tandhjul. \newline 
 
-Endeligt er motoren skruet fast til den nederste træplade, men i en højde, der gør, at den kan drive det lille tandhjul, som er forbundet med gearkæden til det store tandhjul. 
+\noindent Endeligt er motoren skruet fast til den nederste træplade, men i en højde, der gør, at den kan drive det lille tandhjul, som er forbundet med gearkæden til det store tandhjul. 
 
 \begin{figure}[H]
 	\centering
@@ -865,9 +866,9 @@ Endeligt er motoren skruet fast til den nederste træplade, men i en højde, der
 	\label{fig:Horisontalmekanik}
 \end{figure}
 
-Mekanikken for den vertikale retning er bygget af LEGO. Et billede af opbygningen ses på figur \ref{fig:kanon}. Styringen af den vertikale bevægelse bliver håndteret af den vertikale motor, som ses på figur \ref{fig:kanon}. Motoren er forbundet til tandhjulene til vertikal styring. Der er ét tandhjul på hver side af motoren. De er begge bygget sammen med resten af kanonen. Når motoren drejer, bliver tandhjulene og hele kanonen vippet fremover eller bagover. 
+\noindent Mekanikken for den vertikale retning er bygget af LEGO. Et billede af opbygningen ses på figur \ref{fig:kanon}. Styringen af den vertikale bevægelse bliver håndteret af den vertikale motor, som ses på figur \ref{fig:kanon}. Motoren er forbundet til tandhjulene til vertikal styring. Der er ét tandhjul på hver side af motoren. De er begge bygget sammen med resten af kanonen. Når motoren drejer, bliver tandhjulene og hele kanonen vippet fremover eller bagover. \newline
 
-Ligesom den vertikale styring er selve kanonen også bygget i LEGO. Den har et magasin, som det fremgår af figur \ref{fig:kanon}. Der kan kommes slik i magasinet, som så bliver affyret. Affyringen styres af den anden motor på figur \ref{fig:kanon}. Når affyringsmotoren drejer bliver to større tandhjul roteret. De to tandhjul er desuden forbundet til to små tandhjul, som er 5 gange så små. Med denne gearing roterer de små tandhjul 5 gange så hurtigt. De små tandhjul er forbundet til to mellem størrelse tandhjul, som drejer med dem rundt. Tandhjulene i mellemstørrelse styrer affyringen ved at omdanne den roterende bevægelse til en vandret bevægelse frem og tilbage, som affyrer kanonen.
+\noindent Ligesom den vertikale styring er selve kanonen også bygget i LEGO. Den har et magasin, som det fremgår af figur \ref{fig:kanon}. Der kan kommes slik i magasinet, som så bliver affyret. Affyringen styres af den anden motor på figur \ref{fig:kanon}. Når affyringsmotoren drejer bliver to større tandhjul roteret. De to tandhjul er desuden forbundet til to små tandhjul, som er 5 gange så små. Med denne gearing roterer de små tandhjul 5 gange så hurtigt. De små tandhjul er forbundet til to mellem størrelse tandhjul, som drejer med dem rundt. Tandhjulene i mellemstørrelse styrer affyringen ved at omdanne den roterende bevægelse til en vandret bevægelse frem og tilbage, som affyrer kanonen.
 
 \begin{figure}[H]
 	\centering
@@ -876,7 +877,7 @@ Ligesom den vertikale styring er selve kanonen også bygget i LEGO. Den har et m
 	\label{fig:kanon}
 \end{figure}
 
-For at beregne hvor stor gearing der er mellem de forskellige tandhjul opstilles nogle beregninger. Her defineres $t_{s}$ til at være antallet af tænder på det store tandhjul, $t_{m}$ er antallet af tænder på det mellemste tandhjul og $t_{l}$ er antallet af tænder på det mindste tandhjul. På figur \ref{fig:kanonOppefra} ses, hvilke tandhjul der henvises til. 
+\noindent For at beregne hvor stor gearing der er mellem de forskellige tandhjul opstilles nogle beregninger. Her defineres $t_{s}$ til at være antallet af tænder på det store tandhjul, $t_{m}$ er antallet af tænder på det mellemste tandhjul og $t_{l}$ er antallet af tænder på det mindste tandhjul. På figur \ref{fig:kanonOppefra} ses, hvilke tandhjul der henvises til. 
 
 \begin{figure}[H]
 	\centering
@@ -886,14 +887,14 @@ For at beregne hvor stor gearing der er mellem de forskellige tandhjul opstilles
 \end{figure}
 
 
-Forholdet mellem det store og det lille tandhjul er fundet ved beregningen 
+\noindent Forholdet mellem det store og det lille tandhjul er fundet ved beregningen 
 
 \begin{align}
 	gearing&= \frac{t_{s}}{t_{l}} \\ \nonumber 
 	gearing &= \frac{40}{8}=5
 \end{align}
 
-Med denne gearing, får kanonen mulighed for at skyde 5 gange så kraftigt, som den ville have gjort uden gearing. 
+\noindent Med denne gearing, får kanonen mulighed for at skyde 5 gange så kraftigt, som den ville have gjort uden gearing. 
 
 
 
