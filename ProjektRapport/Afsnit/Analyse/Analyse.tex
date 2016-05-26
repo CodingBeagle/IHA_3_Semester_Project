@@ -1,25 +1,27 @@
 \chapter{Analyse}
 \label{afsnit:analyse}
-Til projektets prototype er der brugt nogle grundlæggende hardwarekomponenter til realisering af systemets arkitektur. Disse hardwarekomponenter vil blive præsenteret følgende.
+Til projektets prototype er der brugt nogle grundlæggende hardwarekomponenter til realisering af systemets arkitektur. Disse hardwarekomponenter vil blive præsenteret i det følgende.
 
 \section{Devkit 8000}
 Devkit 8000 (Bilag/Projektrapport/Devkit8000) er en indlejret linux platform med et tilkoblet 4.3 tommer touch-display. Denne indlejrede linux platform blev valgt, da den allerede fra start understøtter interfacing med et touch-display. Dette kan bruges til systemets brugergrænseflade. Devkit 8000 understøtter desuden de serielle kommunikationsbusser SPI og I2C, hvilket er typiske busser der bliver brugt til kommunikation med sensorer og aktuatorer. \newline 
-\noindent Devkit 8000 platformen er også brugt i forbindelse med undervisning på IHA, hvilket betyder at gruppen allerede har erfaring med software udvikling til denne platfrom.
+\noindent Devkit 8000 platformen er også brugt i forbindelse med undervisning på IHA, hvilket betyder, at gruppen allerede har erfaring med software udvikling til denne platfrom.
 
 \section{Programmable System-on-Chip (PSoC)}
-PSoC \cite{psoc} er en microcontroller der kan programmeres via et medfølgende \textit{Integrated Development Environment} (IDE). PSoC'en understøtter multiple \textit{Seriel Communication Busses} (SCB), hvilket gør denne microcontroller ideel til dette system, da der skal kommunikeres med forskellige kommunikationsbusser, såsom SPI og I2C.
+PSoC \cite{psoc} er en microcontroller, der kan programmeres via et medfølgende \textit{Integrated Development Environment} (IDE). PSoC'en understøtter multiple \textit{Seriel Communication Busses} (SCB), hvilket gør denne microcontroller ideel til dette system, da der skal kommunikeres med forskellige kommunikationsbusser, såsom SPI og I2C.
 
 \section{Wii-Nunchuck}
 Til brugerstyring af systemets kanon er en Wii-Nunchuck controller \cite{nunchuck} valgt. Denne controller er valgt, da den har gode egenskaber til styring af en kanon. Wii-Nunchucken understøtter desuden en af PSoC'ens kommunikationsprotokoller, så den nemt kan sættes op, til at kommunikere med resten af systemet.
 
 \section{Motor}
-Der blev testet og stillet krav for hvad motoren skulle kunne for at den kunne bruges i dette projekt. 
-Kravene var som følger:
+Der er testet og stillet krav for hvad motoren skal kunne for, at den kan bruges i dette projekt. 
+Kravene er som følger:
 	\begin{itemize}
-		\item	Motoren skulle være en DC motor
-		\item   Denne skulle have en lav omdrejningshastighed
-		\item	Denne skulle have trækkraft nok til at kunne rotere kanonen
-		\item	For at denne kunne fungere i motoren, skulle den forsynes 8V eller mere 
-		\subitem Ifølge Multisim virker H-broen ikke med spænding under 8V
+		\item	Motoren skal være en DC motor
+		\item   Den skal have en lav omdrejningshastighed
+		\item	Den skal have trækkraft nok til at kunne rotere kanonen
+		\item	For at den kan fungere i systemet, skal den forsynes med 8V eller mere.
+		\begin{itemize}
+			\item Ifølge Multisim virker H-broen ikke med spænding under 8V
+		\end{itemize}
 	\end{itemize}
-Efter nogle test med forskellige motorer blev der fundet frem til at en EV3 Large motor \cite{legoMotor} overholdte alle kravene som var blevet stillet. Motoren forsynes med en spænding på 9V og har en omdrejningshastighed på 175rpm hvilket gør motorens rotationer er langsommere, så den kan styres lettere. For mere information omkring motoren henvises der til databladet kilde \cite{legoMotor}
+Efter nogle tests med forskellige motorer, er der fundet frem til, at en EV3 Large motor \cite{legoMotor} overholder alle krav, som er stillet. Motoren forsynes med en spænding på 9V og har en omdrejningshastighed på 175rpm, hvilket gør motorens rotationer er langsommere, så den kan styres lettere. For mere information omkring motoren henvises der til databladet kilde \cite{legoMotor}
